@@ -401,16 +401,32 @@ Pattern.prototype.__runHooks = function (hookName, data = false) {
  *
  * @private
  * @param {string} partName - Name of the part to check
- * @return {bool} hidden - true if the part is hidden, or false if not
+ * @return {boolean} hidden - true if the part is hidden, or false if not
  */
 Pattern.prototype.__isPartHidden = function (partName) {
-  const partHidden = this.parts?.[this.activeSet]?.[partName]?.hidden || false
+  let partForcedVisible = false
   if (Array.isArray(this.settings[this.activeSet || 0].only)) {
-    if (this.settings[this.activeSet || 0].only.includes(partName)) return partHidden
+    // force "only" parts to be always visible
+    if (this.settings[this.activeSet || 0].only.includes(partName)) partForcedVisible = true
   }
-  if (this.config.partHide?.[partName]) return true
 
-  return partHidden
+  if (!partForcedVisible && this.config.partHide?.[partName]) {
+    // hide parts hidden by pattern config (i.e. those only used as dependencies)
+    // (unless they are explicitly listed in "only")
+    return true
+  }
+
+  if (!this.parts) {
+    // might not be initialized in some test cases
+    return false
+  }
+
+  // a part is hidden iff it is hidden in all stacks
+  for (const stack of this.parts) {
+    if (!stack[partName]?.hidden) return false
+  }
+
+  return true
 }
 
 /**
@@ -418,13 +434,17 @@ Pattern.prototype.__isPartHidden = function (partName) {
  *
  * @private
  * @param {string} stackName - Name of the stack to check
- * @return {bool} hidden - true if the part is hidden, or false if not
+ * @return {boolean} hidden - true if the part is hidden, or false if not
  */
 Pattern.prototype.__isStackHidden = function (stackName) {
   if (!this.stacks[stackName]) return true
-  const parts = this.stacks[stackName].getPartNames()
-  for (const partName of parts) {
-    if (!this.__isPartHidden(partName)) return false
+
+  // a stack is hidden iff all parts inside it are hidden
+  const parts = this.stacks[stackName].getPartList()
+  for (const part of parts) {
+    if (!part.hidden) {
+      return false
+    }
   }
 
   return true
