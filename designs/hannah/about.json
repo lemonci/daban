@@ -1,0 +1,20 @@
+{
+  "id": "hannah",
+  "code": "Jonathan Haas",
+  "design": "Jonathan Haas",
+  "description": "A FreeSewing pattern for a hoodie",
+  "name": "Hannah Hoodie",
+  "difficulty": 3,
+  "tags": [
+    "tops"
+  ],
+  "techniques": [
+    "curved-seam",
+    "ribbing",
+    "flat-sleeve",
+    "raglan-sleeve"
+  ],
+  "version": "4.8.0",
+  "pkg": "@freesewing/hannah",
+  "collection": true
+}

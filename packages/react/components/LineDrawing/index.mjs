@@ -49,7 +49,9 @@ import { Skully, SkullyFront /*, SkullyBack*/ } from './skully.mjs'
 import { Sophie, SophieFront, SophieBack } from './sophie.mjs'
 import { Sven, SvenFront } from './sven.mjs'
 import { Teagan, TeaganFront, TeaganBack } from './teagan.mjs'
+import { Tina, TinaFront, TinaBack } from './tina.mjs'
 import { Titan, TitanFront } from './titan.mjs'
+import { Toni, ToniFront, ToniBack } from './toni.mjs'
 import { Trayvon, TrayvonFront } from './trayvon.mjs'
 import { Tristan, TristanFront, TristanBack } from './tristan.mjs'
 import { Uma, UmaFront, UmaBack } from './uma.mjs'
@@ -117,7 +119,9 @@ export const lineDrawingsFront = {
   sven: SvenFront,
   sophie: SophieFront,
   teagan: TeaganFront,
+  tina: TinaFront,
   titan: TitanFront,
+  toni: ToniFront,
   trayvon: TrayvonFront,
   tristan: TristanFront,
   uma: UmaFront,
@@ -168,6 +172,8 @@ export const lineDrawingsBack = {
   /* skully: SkullyBack, */
   sophie: SophieBack,
   teagan: TeaganBack,
+  tina: TinaBack,
+  toni: ToniBack,
   tristan: TristanBack,
   uma: UmaBack,
   umbra: UmbraBack,
@@ -234,7 +240,9 @@ export const lineDrawings = {
   sophie: Sophie,
   sven: Sven,
   teagan: Teagan,
+  tina: Tina,
   titan: Titan,
+  toni: Toni,
   trayvon: Trayvon,
   tristan: Tristan,
   uma: Uma,
@@ -430,9 +438,17 @@ export {
   Teagan,
   TeaganFront,
   TeaganBack,
+  // Tina
+  Tina,
+  TinaFront,
+  TinaBack,
   //Titan
   Titan,
   TitanFront,
+  // Toni,
+  Toni,
+  ToniFront,
+  ToniBack,
   //Trayvon
   Trayvon,
   TrayvonFront,

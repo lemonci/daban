@@ -12,6 +12,7 @@ import {
   round,
   __addNonEnumProp,
   __asNumber,
+  __stringify,
   beamIntersectsCurve,
   beamIntersectsLine,
   projectPointOntoLine,
@@ -76,12 +77,12 @@ Path.prototype.addClass = function (className = false) {
 /**
  * A chainable way to add text to a Path
  *
- * @param {string} text - The text to add to the Path
+ * @param {string|string[]} text - The text to add to the Path
  * @param {string} className - The CSS classes to apply to the text
  * @return {Path} this - The Path instance
  */
 Path.prototype.addText = function (text = '', className = false) {
-  this.attributes.add('data-text', `${text}`)
+  this.attributes.add('data-text', __stringify(text))
   if (className) this.attributes.add('data-text-class', className)
 
   return this

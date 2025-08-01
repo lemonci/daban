@@ -22,6 +22,7 @@ import { Diana as diana } from '@freesewing/diana'
 import { Florence as florence } from '@freesewing/florence'
 import { Florent as florent } from '@freesewing/florent'
 import { Gozer as gozer } from '@freesewing/gozer'
+import { Hannah as hannah } from '@freesewing/hannah'
 import { Hi as hi } from '@freesewing/hi'
 import { Holmes as holmes } from '@freesewing/holmes'
 import { Hortensia as hortensia } from '@freesewing/hortensia'
@@ -60,7 +61,9 @@ import { Sven as sven } from '@freesewing/sven'
 import { Tamiko as tamiko } from '@freesewing/tamiko'
 import { Teagan as teagan } from '@freesewing/teagan'
 import { Tiberius as tiberius } from '@freesewing/tiberius'
+import { Tina as tina } from '@freesewing/tina'
 import { Titan as titan } from '@freesewing/titan'
+import { Toni as toni } from '@freesewing/toni'
 import { Trayvon as trayvon } from '@freesewing/trayvon'
 import { Tristan as tristan } from '@freesewing/tristan'
 import { Uma as uma } from '@freesewing/uma'
@@ -99,6 +102,7 @@ export const designs = {
   florence,
   florent,
   gozer,
+  hannah,
   hi,
   holmes,
   hortensia,
@@ -137,7 +141,9 @@ export const designs = {
   tamiko,
   teagan,
   tiberius,
+  tina,
   titan,
+  toni,
   trayvon,
   tristan,
   uma,

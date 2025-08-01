@@ -22,6 +22,7 @@ import { i18n as diana } from '@freesewing/diana'
 import { i18n as florence } from '@freesewing/florence'
 import { i18n as florent } from '@freesewing/florent'
 import { i18n as gozer } from '@freesewing/gozer'
+import { i18n as hannah } from '@freesewing/hannah'
 import { i18n as hi } from '@freesewing/hi'
 import { i18n as holmes } from '@freesewing/holmes'
 import { i18n as hortensia } from '@freesewing/hortensia'
@@ -60,7 +61,9 @@ import { i18n as sven } from '@freesewing/sven'
 import { i18n as tamiko } from '@freesewing/tamiko'
 import { i18n as teagan } from '@freesewing/teagan'
 import { i18n as tiberius } from '@freesewing/tiberius'
+import { i18n as tina } from '@freesewing/tina'
 import { i18n as titan } from '@freesewing/titan'
+import { i18n as toni } from '@freesewing/toni'
 import { i18n as trayvon } from '@freesewing/trayvon'
 import { i18n as tristan } from '@freesewing/tristan'
 import { i18n as uma } from '@freesewing/uma'
@@ -97,6 +100,7 @@ export const i18n = {
   florence,
   florent,
   gozer,
+  hannah,
   hi,
   holmes,
   hortensia,
@@ -135,7 +139,9 @@ export const i18n = {
   tamiko,
   teagan,
   tiberius,
+  tina,
   titan,
+  toni,
   trayvon,
   tristan,
   uma,

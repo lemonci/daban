@@ -1,0 +1,21 @@
+{
+  "id": "tina",
+  "code": "Jonathan Haas",
+  "design": "Jonathan Haas",
+  "description": "A FreeSewing pattern for a fake wrap top",
+  "name": "Tina Top",
+  "difficulty": 3,
+  "tags": [
+    "tops"
+  ],
+  "techniques": [
+    "curved-seam",
+    "ribbing",
+    "hem",
+    "flat-sleeve",
+    "knit-band"
+  ],
+  "version": "4.8.0",
+  "pkg": "@freesewing/tina",
+  "collection": true
+}

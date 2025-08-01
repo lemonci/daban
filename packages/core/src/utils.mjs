@@ -872,6 +872,23 @@ export function __asNumber(value, param, method, log) {
 }
 
 /**
+ * Ensures the given parameter is either a plain string or an array of strings
+ * @private
+ * @param str object to convert to string or array of strings
+ * @return {string|string[]} The string or array of strings
+ */
+export function __stringify(str) {
+  // Check the easy case first
+  if (typeof str === 'string') return str
+  if (Array.isArray(str)) {
+    // Recursively stringify all elements if we have an array
+    return str.map((s) => __stringify(s))
+  }
+  // otherwise convert to a string
+  return `${str}`
+}
+
+/**
  * Checks whether the paramater passed to it is a valid coordinate (x and y attribute)
  *
  * @private

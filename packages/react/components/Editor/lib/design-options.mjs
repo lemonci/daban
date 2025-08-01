@@ -58,6 +58,7 @@ export function menuDesignOptionsStructure(design, options, settings, asFullList
           ? 'conditional'
           : option.menu(settings, mergeOptions(settings, options))
       if (option.menu) {
+        console.log(option.name, '->', option.menu)
         // Handle nested groups that don't have any direct children
         if (option.menu.includes('.')) {
           let menuPath = []

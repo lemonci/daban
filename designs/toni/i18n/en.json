@@ -1,0 +1,234 @@
+{
+  "t": "Toni Top",
+  "d": "A FreeSewing pattern for a fitted top",
+  "p": {
+    "base": "Base",
+    "front": "Front",
+    "back": "Back",
+    "sleeve": "Sleeve",
+    "waistband": "Waistband",
+    "cuff": "Cuff"
+  },
+  "s": {
+    "cutCuff.t": "The cuff is not shown",
+    "cutCuff.d": "The **Cuff** (6) is a rectangular piece of ribbing fabric {{{ w }}} wide and {{{ l }}} long.",
+    "cutWaistband.t": "The waistband is not shown",
+    "cutWaistband.d": "The **Waistband** (5) is a rectangular piece of ribbing fabric {{{ w }}} wide and {{{ l }}} long.",
+    "largeShoulderWidth.t": "Shoulder Width larger than anticipated",
+    "largeShoulderWidth.d": "The pattern was not able to generate an optimal armhole shape using the given measurements and options.\n\nPlease be aware that the generated pattern may not be correct.\n\nPlease retake your measurements and verify that they are correct.",
+    "lowArmpit.t": "Armpit lower than anticipated",
+    "lowArmpit.d": "The armpit location we calculated was lower than expected. Please verify your measurements, especially hps-to-waist-back and waist-to-armpit.\n\nThis can result in a bad fit or exposed bust area.",
+    "highArmpit.t": "Armpit higher than anticipated",
+    "highArmpit.d": "The armpit location we calculated was higher than expected. Please verify your measurements, especially hps-to-waist-back and waist-to-armpit.\n\nYou may have problems fitting your arm through the armhole",
+    "neckFittingFailed.t": "Could not fit neck",
+    "neckFittingFailed.d": "The pattern was not able to make the neck opening large enough to match the requested neck opening circumference of {{{ circ }}}.",
+    "hipsFittingFailed.t": "Could not fit hips",
+    "hipsFittingFailed.d": "The pattern was not able to get an optimal side seam shape to fit your waist and hips measurements at the same time using the given measurements and options.\n\nThis is likely because your waist-to-hips measurement is small and the difference between the waist and hips measurements is large.\n\nPlease retake your measurements and verify that they are correct.\n\nIf this doesn't help, increase the waist ease option to make more room for fitting the hips."
+  },
+  "o": {
+    "draftForHighBust": {
+      "t": "Bust adjustment",
+      "d": "If the pattern should be drafted with a full bust adjustment (FBA). This will result in a more fitted garment for people with breasts."
+    },
+    "draftForHighBustYes": {
+      "t": "Draft with bust adjustment",
+      "d": "Suggested for most people with breasts."
+    },
+    "draftForHighBustNo": {
+      "t": "Draft without bust adjustment",
+      "d": "Drafts a pattern using the chest measurement only."
+    },
+    "s3Collar": {
+      "t": "Shoulder seam shift: neck side",
+      "d": "Increase this option to shift the shoulder seam forward on the neck side. Decreasing it shifts it backwards."
+    },
+    "neckWidth": {
+      "t": "Neck width",
+      "d": "Make the neck opening deep and narrow, or wide and shallow."
+    },
+    "construction": {
+      "t": "Construction",
+      "d": "Sets the type of the top (t-shirt, raglan, sleeveless, etc.)"
+    },
+    "construction.set-in": {
+      "t": "Set-in sleeves",
+      "d": "Standard T-Shirt sleeves"
+    },
+    "construction.dolman": {
+      "t": "Dolman sleeves",
+      "d": "Dolman-style sleeves"
+    },
+    "construction.raglan": {
+      "t": "Raglan sleeves",
+      "d": "Raglan-style sleeves"
+    },
+    "construction.sleeveless": {
+      "t": "No sleeves",
+      "d": "Sleeveless top"
+    },
+    "construction.racerback": {
+      "t": "Racerback",
+      "d": "Racerback sleeveless top"
+    },
+    "fitWaist": {
+      "t": "Waist fitting",
+      "d": "If and how to fit the waist"
+    } ,
+    "fitWaist.side": {
+      "t": "Side seam",
+      "d": "Fit the waist using the side seams"
+    } ,
+    "fitWaist.dart": {
+      "t": "Darts",
+      "d": "Fit the waist using darts"
+    } ,
+    "fitWaist.off": {
+      "t": "Off",
+      "d": "Do not fit the waist"
+    },
+    "neckBasedOn": {
+      "t": "Neck opening based on",
+      "d": "Which measurement to use for the neck opening"
+    },
+    "neckBasedOn.neck": {
+      "t": "Neck",
+      "d": "Ensure the neck fits through the neck opening"
+    },
+    "neckBasedOn.head": {
+      "t": "Head",
+      "d": "Ensure the head fits through the neck opening"
+    },
+    "neckBasedOn.waist": {
+      "t": "Waist",
+      "d": "Ensure the waist fits through the neck opening"
+    },
+    "neckBasedOn.seat": {
+      "t": "Seat",
+      "d": "Ensure the seat fits through the neck opening"
+    },
+    "sleeveLength": {
+      "t": "Sleeve length",
+      "d": "The length of the sleeve as a percentage of the distance from the shoulder to the wrist"
+    },
+    "dolmanSleeveLength": {
+      "t": "Sleeve length (Dolman)",
+      "d": "The length of the sleeve as a percentage of the distance from the shoulder to the wrist"
+    },
+    "sleevelessOpeningSize": {
+      "t": "Arm opening size",
+      "d": "The size of the arm opening for sleeveless designs"
+    },
+    "sleevelessOpeningPitchBack": {
+      "t": "Arm opening pitch (back)",
+      "d": "The curve on the back of the arm opening for sleeveless designs"
+    },
+     "sleevelessOpeningPitchFront": {
+      "t": "Arm opening pitch (front)",
+      "d": "The curve on the front of the arm opening for sleeveless designs"
+    },
+    "neckOpeningSize": {
+      "t": "Neck opening size",
+      "d": "Determines the circumference of the neck opening"
+    },
+    "fitWaistDartPct": {
+      "t": "Waist fitting dart percentage",
+      "d": "How much of the waist should be fitted using the dart"
+    },
+    "wristEase": {
+      "t": "Wrist ease",
+      "d": "The amount of ease at your wrist"
+    },
+    "chestEase": {
+      "t": "Chest ease",
+      "d": "The amount of ease at your upper body"
+    },
+    "waistEase": {
+      "t": "Waist ease",
+      "d": "The amount of ease at your waist"
+    },
+    "seatEase": {
+      "t": "Seat ease",
+      "d": "The amount of ease at your seat"
+    },
+    "extraBustEase": {
+      "t": "Extra bust ease",
+      "d": "Extra amount of ease to consider when drafting the full bust adjustment. This is added on top of the chest ease and will add extra compression to the bust when negative."
+    },
+    "sleeveWidth": {
+      "t": "Sleeve width",
+      "d": "The width of the sleeve opening"
+    },
+    "lengthBelowWaist": {
+      "t": "Length",
+      "d": "The length of the top, measured from the waist down"
+    },
+    "raglanAngleFront": {
+      "t": "Raglan angle (front)",
+      "d": "The angle of the raglan front seam"
+    },
+    "raglanAngleBack": {
+      "t": "Raglan angle (back)",
+      "d": "The angle of the raglan back seam"
+    },
+    "raglanOffsetFront": {
+      "t": "Raglan offset (front)",
+      "d": "The offset of the raglan front seam"
+    },
+    "raglanOffsetBack": {
+      "t": "Raglan offset (back)",
+      "d": "The offset of the raglan back seam"
+    },
+    "backNeckCutout": {
+      "t": "Back neck depth",
+      "d": "The depth of the back neck relative to the front"
+    },
+    "hemAllowance": {
+      "t": "Hem allowance",
+      "d": "The size of the hem allowance as a percentage of the seam allowance"
+    },
+    "holeAllowance": {
+      "t": "Opening seam allowance",
+      "d": "The size of the seam allowance for neck, arm openings as a percentage of the seam allowance"
+    },
+    "shoulderAngle": {
+      "t": "Neck opening shoulder angle",
+      "d": "At which angle the neck opening goes over your shoulder"
+    },
+    "straightHem": {
+      "t": "Straight hem",
+      "d": "If the bottom hem should be kept straight or in an A-line shape"
+    },
+    "straightHemYes": {
+      "t": "Straight hem",
+      "d": "Keep the hem straight."
+    },
+    "straightHemNo": {
+      "t": "Curved hem",
+      "d": "Flare out the hem in an A-line shape"
+    },
+    "ribbingHeight": {
+      "t": "Ribbing height",
+      "d": "Width of the ribbing, set to 0 to disable"
+    },
+    "ribbingStretch": {
+      "t": "Ribbing stretch",
+      "d": "How much the ribbing is stretched relative to the main fabric"
+    },
+    "frontNeckOpening": {
+      "t": "Front neck opening shape",
+      "d": "Change the shape of the front neck opening"
+    },
+    "dart": {
+      "t": "Bust dart",
+      "d": "Enable or disable a bust dart on the front part"
+    },
+    "dartYes": {
+      "t": "Automatic",
+      "d": "Construct a dart for large busts"
+    },
+    "dartNo": {
+      "t": "Disabled",
+      "d": "Skip creating a dart"
+    }
+  }
+}

@@ -1,0 +1,48 @@
+{
+  "t": "Hannah",
+  "d": "A description for Hannah",
+  "s": {
+    "overlap": "Overlap"
+  },
+  "p": {
+    "hood": "Hood"
+  },
+  "o": {
+    "hoodHeight": {
+      "t": "Hood height",
+      "d": "How high the hood is"
+    },
+     "hoodDepth": {
+      "t": "Hood depth",
+      "d": "How deep the hood is"
+    },
+     "hoodCutback": {
+      "t": "Hood cutback",
+      "d": "How open the hood is at the front"
+    },
+     "hoodShape": {
+      "t": "Hood shape",
+      "d": "How the hood joins the main body"
+    },
+     "hoodOverlap": {
+      "t": "Hood overlap",
+      "d": "How much the hood overlaps at the front"
+    },
+    "neckBasedOn.neck": {
+      "t": "Neck",
+      "d": "Ensure the neck fits through the neck opening"
+    },
+    "neckBasedOn.head": {
+      "t": "Head",
+      "d": "Ensure the head fits through the neck opening"
+    },
+    "neckBasedOn.waist": {
+      "t": "Waist",
+      "d": "Ensure the waist fits through the neck opening"
+    },
+    "neckBasedOn.seat": {
+      "t": "Seat",
+      "d": "Ensure the seat fits through the neck opening"
+    }
+  }
+}

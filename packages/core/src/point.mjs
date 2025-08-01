@@ -1,5 +1,5 @@
 import { Attributes } from './attributes.mjs'
-import { __asNumber, __isCoord, rad2deg, deg2rad } from './utils.mjs'
+import { __asNumber, __isCoord, rad2deg, deg2rad, __stringify } from './utils.mjs'
 
 //////////////////////////////////////////////
 //               CONSTRUCTOR                //
@@ -40,12 +40,12 @@ Point.prototype.addCircle = function (radius = false, className = false) {
 /**
  * A chainable way to add text to a Point
  *
- * @param {string} text - The text to add to the Point
+ * @param {string|string[]} text - The text to add to the Point
  * @param {string} className - The CSS classes to apply to the text
  * @return {Point} this - The Point instance
  */
 Point.prototype.addText = function (text = '', className = false) {
-  this.attributes.add('data-text', `${text}`)
+  this.attributes.add('data-text', __stringify(text))
   if (className) this.attributes.add('data-text-class', className)
 
   return this.__check()
