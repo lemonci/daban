@@ -1,0 +1,61 @@
+---
+title: Path.measureAlong()
+---
+
+The `Path.measureAlong()` method returns the offset of the given point on this path, as if you measured along this path until
+you've reached the given point.
+
+:::note
+This method returns (approximately) the same value as `this.split(p)[0].length()` would.
+
+However, this method is likely faster and you need less handling of special cases. E.g., if the
+given point is identical to the start of this path, then this method would simply return `0`,
+whereas `this.split(p)[0]` would be `null`, requiring you to handle that edge case.
+:::
+
+This returns `null` if the given point doesn't lie on this path.
+
+:::tip
+This method can also be used as an efficient way to check if a
+point lies on a path.
+:::
+
+## Signature
+
+```js
+number|null path.measureAlong(Point point)
+```
+
+## Example
+
+<Example caption="Example of the Path.measureAlong() method">
+
+```js
+;({ Point, points, Path, paths, snippets, Snippet, part, units, getId }) => {
+  points.from = new Point(130, 130)
+  points.cp1 = new Point(180, 150)
+  points.cp2 = new Point(100, 210)
+  points.to = new Point(220, 200)
+  points.lineTo = new Point(250, 100)
+
+  paths.demo = new Path()
+    .move(points.from)
+    .curve(points.cp1, points.cp2, points.to)
+    .line(points.lineTo)
+    .setClass('contrast stroke-xl')
+
+  for (let i of [0.1, 0.25, 0.5, 0.75, 0.9]) {
+    var id = getId()
+    points[id] = paths.demo.shiftFractionAlong(i)
+    snippets[id] = new Snippet('notch', points[id])
+
+    let distance = paths.demo.measureAlong(points[id])
+
+    points[id].addText(units(distance))
+  }
+
+  return part
+}
+```
+
+</Example>

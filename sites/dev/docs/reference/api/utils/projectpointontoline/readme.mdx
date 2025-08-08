@@ -1,0 +1,52 @@
+---
+title: utils.projectPointOntoLine()
+---
+
+The `utils.projectPointOntoLine()` function finds the closest point to `p` on the line between `from` and `to`.
+
+:::note
+The line between the given point and the returned point will always be either perpendicular to the line or go to an endpoint.
+:::
+
+## Signature
+
+```js
+Point utils.projectPointOntoLine(
+  Point p,
+  Point from,
+  Point to
+)
+```
+
+## Example
+
+<Example caption="A Utils.projectPointOntoLine() example">
+
+```js
+;({ Point, points, Path, paths, Snippet, snippets, getId, utils, part }) => {
+  points.from = new Point(130, 130)
+  points.to = new Point(220, 200)
+
+  // create a few random points
+  const scatter = []
+  for (let i = 1; i < 6; i++) {
+    for (let j = 1; j < 27; j++) {
+      if ((i * 111 + j * 37) % 7 == 0) {
+        scatter.push(new Point(i * 60, j * 10))
+      }
+    }
+  }
+  let snippet
+  for (let point of scatter) {
+    snippets[getId()] = new Snippet('notch', point)
+    paths[getId()] = new Path()
+      .move(point)
+      .line(utils.projectPointOntoLine(point, points.from, points.to))
+      .setClass('mark')
+  }
+  paths.line = new Path().move(points.from).line(points.to).setClass('contrast stroke-xl')
+  return part
+}
+```
+
+</Example>

@@ -1067,3 +1067,46 @@ export function getTransformedBounds(boundsObj, transforms = false) {
     bottomRight: transformedBr,
   }
 }
+
+/**
+ * Finds the closest point to p on the line between from and to
+ * @param {Point} p  test point
+ * @param {Point} from start point of the line
+ * @param {Point} to end point of the line
+ * @return {Point} closest point on the line compared to `p`, will always exist
+ */
+export function projectPointOntoLine(p, from, to) {
+  // Vector from l1 to l2
+  const dx = to.x - from.x
+  const dy = to.y - from.y
+  const lenSq = dx * dx + dy * dy
+  if (lenSq === 0) return from.copy() // l1 and l2 are the same point
+
+  // Vector from l1 to p
+  const t = ((p.x - from.x) * dx + (p.y - from.y) * dy) / lenSq
+
+  // Clamp t to [0, 1] to stay between the endpoints of the line
+  const tClamped = Math.max(0, Math.min(1, t))
+
+  return new Point(from.x + tClamped * dx, from.y + tClamped * dy)
+}
+
+/**
+ * Finds the closest point to `p` on the Bézier curve given by `from`, `to` and both control points
+ * @param {Point} p test point
+ * @param {Point} from start point of the Bézier curve
+ * @param {Point} cp1 first control point of the Bézier curve
+ * @param {Point} cp2 second control point of the Bézier curve
+ * @param {Point} to end point of the Bézier curve
+ * @return {Point} closest point on the curve compared to `p`, will always exist
+ */
+export function projectPointOntoCurve(p, from, cp1, cp2, to) {
+  let curve = new Bezier(
+    { x: from.x, y: from.y },
+    { x: cp1.x, y: cp1.y },
+    { x: cp2.x, y: cp2.y },
+    { x: to.x, y: to.y }
+  )
+  const result = curve.project({ x: p.x, y: p.y })
+  return new Point(result.x, result.y)
+}

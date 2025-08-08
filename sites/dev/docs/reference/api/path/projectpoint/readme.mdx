@@ -1,0 +1,56 @@
+---
+title: Path.projectPoint()
+---
+
+The `Path.projectPoint()` function calculates and returns the point on this path that is closest to the given point.
+If multiple points have the same distance, which of these nearest points is chosen is not defined.
+
+:::note
+The line between the given point and the returned point will always be either perpendicular to the path or go to a corner or an endpoint.
+:::
+
+## Signature
+
+```js
+Point Path.projectPoint(
+  Point p,
+)
+```
+
+## Example
+
+<Example caption="A Path.projectPoint() example">
+
+```js
+;({ Point, points, Path, paths, Snippet, snippets, getId, utils, part }) => {
+  points.from = new Point(130, 130)
+  points.cp1 = new Point(180, 150)
+  points.cp2 = new Point(100, 210)
+  points.to = new Point(220, 200)
+  points.lineTo = new Point(250, 100)
+
+  paths.path = new Path()
+    .move(points.from)
+    .curve(points.cp1, points.cp2, points.to)
+    .line(points.lineTo)
+    .setClass('contrast stroke-xl')
+
+  // create a few random points
+  const scatter = []
+  for (let i = 1; i < 6; i++) {
+    for (let j = 1; j < 27; j++) {
+      if ((i * 111 + j * 37) % 7 == 0) {
+        scatter.push(new Point(i * 60, j * 10))
+      }
+    }
+  }
+  let snippet
+  for (let point of scatter) {
+    snippets[getId()] = new Snippet('notch', point)
+    paths[getId()] = new Path().move(point).line(paths.path.projectPoint(point)).setClass('mark')
+  }
+  return part
+}
+```
+
+</Example>
