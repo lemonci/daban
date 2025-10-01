@@ -3,7 +3,7 @@ import { shape } from './shape.mjs'
 export const leg = {
   name: 'lumina.leg',
   from: shape,
-  draft: ({ sa, points, Path, paths, Snippet, snippets, macro, store, part }) => {
+  draft: ({ sa, points, Path, paths, Snippet, snippets, macro, store, complete, part }) => {
     paths.front = paths.front.reverse().unhide().addText('front', 'note center').setClass('hidden')
     paths.frontSplit.unhide().addText('front', 'note center').setClass('hidden')
     paths.back.unhide().addText('back', 'note center').setClass('hidden')
@@ -55,6 +55,14 @@ export const leg = {
     snippets.back1 = new Snippet('notch', paths.backSplit.shiftFractionAlong(0.25))
     snippets.back2 = new Snippet('notch', paths.backSplit.shiftFractionAlong(0.5))
     snippets.back3 = new Snippet('notch', paths.backSplit.shiftFractionAlong(0.75))
+
+    if (complete) {
+      paths.frontWaistband = paths.frontWaistband.unhide().addText('waistband', 'note center')
+      paths.backWaistband = paths.backWaistband
+        .unhide()
+        .reverse()
+        .addText('waistband', 'note center')
+    }
 
     const middleBottom = points.frontSplitHem.shiftFractionTowards(points.backSplitHem, 0.5)
     middleBottom.x = 0
