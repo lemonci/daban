@@ -7,8 +7,8 @@ toc_max_heading_level: 5
 
 import Backinsidedartlength from '@site/docs/docs/designs/sarah/options/backinsidedartlength/readme.mdx'
 import Backoutsidedartlength from '@site/docs/docs/designs/sarah/options/backoutsidedartlength/readme.mdx'
-import Cutbackonfold from '@site/docs/docs/designs/sarah/options/cutbackonfold/readme.mdx'
-import Cutfrontonfold from '@site/docs/docs/designs/sarah/options/cutfrontonfold/readme.mdx'
+import Centerbackseam from '@site/docs/docs/designs/sarah/options/centerbackseam/readme.mdx'
+import Centerfrontseam from '@site/docs/docs/designs/sarah/options/centerfrontseam/readme.mdx'
 import Extraseatease from '@site/docs/docs/designs/sarah/options/extraseatease/readme.mdx'
 import Extrawaistease from '@site/docs/docs/designs/sarah/options/extrawaistease/readme.mdx'
 import Frontdartlength from '@site/docs/docs/designs/sarah/options/frontdartlength/readme.mdx'
@@ -33,52 +33,42 @@ import Waistrise from '@site/docs/docs/designs/sarah/options/waistrise/readme.md
 <Hem />
 
 ## Fit {#fit}
-### Seat Ease {#seatease}
+### Extra Seat Ease {#extraseatease}
 
-**Ease added to seat measurement**
+**Ease added to seat measurement to account for fabric stretch and closure style.**
 - Type: **Percentage**
-- Default: **6.25%**
-- Minimum: **0%**
+- Default: **0%**
+- Minimum: **-20%**
 - Maximum: **20%**
 
-<Seatease />
+<Extraseatease />
 
-### Back Waist Ease {#waisteaseback}
+### Extra Waist Ease {#extrawaistease}
 
-**Ease added to back waistline.**
+**Ease added to waistline**
 - Type: **Percentage**
-- Default: **17%**
-- Minimum: **0%**
-- Maximum: **30%**
-
-<Waisteaseback />
-
-### Front Waist Ease {#waisteasefront}
-
-**Ease added to front waistline**
-- Type: **Percentage**
-- Default: **10%**
-- Minimum: **0%**
+- Default: **0%**
+- Minimum: **-20%**
 - Maximum: **20%**
 
-<Waisteasefront />
+<Extrawaistease />
 
 ## Style {#style}
-### Cut Back On Fold {#cutbackonfold}
+### Center Back Seam {#centerbackseam}
 
-**Disable to add seam at center back.**
+**Disable for single center back piece.**
 - Type: **Boolean**
-- Default: **true**
+- Default: **false**
 
-<Cutbackonfold />
+<Centerbackseam />
 
-### Cut Front On Fold {#cutfrontonfold}
+### Center Front Seam {#centerfrontseam}
 
-**Disable to add seam at center front.**
+**Create seam in center front (e.g., for zipper).**
 - Type: **Boolean**
-- Default: **true**
+- Default: **false**
 
-<Cutfrontonfold />
+<Centerfrontseam />
 
 ### Length {#length}
 
@@ -121,26 +111,6 @@ import Waistrise from '@site/docs/docs/designs/sarah/options/waistrise/readme.md
 
 <Backoutsidedartlength />
 
-### Extra Seat Ease {#extraseatease}
-
-**Ease added to seat measurement to account for fabric stretch and closure style.**
-- Type: **Percentage**
-- Default: **0%**
-- Minimum: **-20%**
-- Maximum: **20%**
-
-<Extraseatease />
-
-### Extra Waist Ease {#extrawaistease}
-
-**Ease added to waistline**
-- Type: **Percentage**
-- Default: **0%**
-- Minimum: **-20%**
-- Maximum: **20%**
-
-<Extrawaistease />
-
 ### Front Dart Length {#frontdartlength}
 
 **Length of darts on front**
@@ -151,6 +121,16 @@ import Waistrise from '@site/docs/docs/designs/sarah/options/waistrise/readme.md
 
 <Frontdartlength />
 
+### Seat Ease {#seatease}
+
+**Ease added to seat measurement**
+- Type: **Percentage**
+- Default: **6.25%**
+- Minimum: **0%**
+- Maximum: **20%**
+
+<Seatease />
+
 ### Side Seam Curve Offset {#sideseamcurveoffset}
 
 **Offset from line between side seat and front/back side top to shape hip/seat curve**
@@ -160,6 +140,26 @@ import Waistrise from '@site/docs/docs/designs/sarah/options/waistrise/readme.md
 - Maximum: **5%**
 
 <Sideseamcurveoffset />
+
+### Back Waist Ease {#waisteaseback}
+
+**Ease added to back waistline.**
+- Type: **Percentage**
+- Default: **17%**
+- Minimum: **0%**
+- Maximum: **30%**
+
+<Waisteaseback />
+
+### Front Waist Ease {#waisteasefront}
+
+**Ease added to front waistline**
+- Type: **Percentage**
+- Default: **10%**
+- Minimum: **0%**
+- Maximum: **20%**
+
+<Waisteasefront />
 
 ### Waist Rise {#waistrise}
 

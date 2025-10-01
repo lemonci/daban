@@ -32,7 +32,7 @@
 
 # @freesewing/sarah
 
-A FreeSewing pattern for a basic skirt block pattern (natural waist) based on Aldrich
+A FreeSewing pattern for a basic skirt block pattern based on Aldrich
 
 
 

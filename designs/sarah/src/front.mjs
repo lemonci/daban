@@ -3,36 +3,31 @@ import { pathUtilsPlugin } from '@freesewing/plugin-path-utils'
 
 export const front = {
   name: 'sarah.front',
-  measurements: ['waist', 'seat', 'waistToSeat', 'waistToFloor'],
-  optionalMeasurements: [],
-  options: {},
   plugins: [pathUtilsPlugin],
   from: base,
-  draft: (params) => {
-    const {
-      store,
-      sa,
-      measurements,
-      options,
-      Point,
-      points,
-      Path,
-      paths,
-      Snippet,
-      snippets,
-      macro,
-      part,
-      complete,
-      paperless,
-    } = params
-
+  draft: ({
+    points,
+    Point,
+    Path,
+    paths,
+    options,
+    sa,
+    macro,
+    part,
+    store,
+    snippets,
+    Snippet,
+    complete,
+    paperless,
+    expand,
+  }) => {
     const paperlessOffset = options.paperlessOffset
     paths.sideFront = new Path()
       .move(points.sfTop)
       .curve(points.sfhTCp, points.sfhTCp, points.sfhCpC)
       .curve(points.sfhBCp, points.sfhBCp, points.sideSeat)
       .line(points.sideBottom)
-      .hide()
+    paths.frontBottom = new Path().move(points.sideBottom).line(points.cfBottom)
 
     paths.centerFront = new Path().move(points.cfBottom).line(points.cfTop).hide()
 
@@ -41,37 +36,64 @@ export const front = {
       .curve(points.cftCp, points.fdrCp, points.frontDartRight)
       .noop('frontDart')
       .curve(points.fdlCp, points.sftCp, points.sfTop)
-      .hide()
 
     if (complete) {
-      paths.frontTop = paths.frontTopNoDart
-        .clone()
-        .insop(
-          'frontDart',
-          new Path()
-            .move(points.frontDartRight)
-            .line(points.frontDartBottom)
-            .line(points.frontDartLeft)
-        )
+      paths.frontTop = paths.frontTopNoDart.insop(
+        'frontDart',
+        new Path()
+          .move(points.frontDartRight)
+          .line(points.frontDartBottom)
+          .line(points.frontDartLeft)
+      )
+      paths.helpers = new Path()
+        .move(points.frontDartRight)
+        .line(points.frontDartLeft)
+        .setClass('mark dashed')
+      paths.frontTopNoDart.hide()
     } else {
       paths.frontTop = paths.frontTopNoDart
         .clone()
         .insop('frontDart', new Path().move(points.frontDartRight).line(points.frontDartLeft))
     }
 
-    paths.frontTopSa = new Path().move(points.cfTop).line(points.sfTop).hide()
-
-    paths.fabric = paths.sideFront.clone().join(paths.centerFront).join(paths.frontTop)
-
-    if (options.cutFrontOnFold) {
-      store.cutlist.addCut({ cut: 1, onFold: true })
-      macro('cutOnFold', {
-        from: points.cfTop,
-        to: points.cfBottom,
-        grainline: true,
-        offset: -paperlessOffset,
+    if (expand && !options.centerFrontSeam) {
+      macro('mirror', {
+        mirror: [paths.centerFront.start(), paths.centerFront.end()],
+        clone: true,
+        paths: ['frontTop', 'helpers', 'sideFront', 'frontTopNoDart', 'frontBottom'],
       })
+      paths.frontTop = paths.mirroredFrontTop.reverse().join(paths.frontTop)
+      paths.mirroredSideFront = paths.mirroredSideFront.reverse()
+      paths.frontTopNoDart = paths.mirroredFrontTopNoDart
+        .reverse()
+        .join(paths.frontTopNoDart)
+        .hide()
+      paths.frontBottom = paths.frontBottom.join(paths.mirroredFrontBottom.reverse())
     } else {
+      paths.centerFront.unhide()
+    }
+
+    if (sa) {
+      const hem = store.get('sarah.hem')
+      paths.frontHem = macro('hem', {
+        class: 'fabric',
+        path2: expand ? 'mirroredSideFront' : 'centerFront',
+        path1: 'sideFront',
+        hemWidth: hem,
+        offset2: expand ? null : 0,
+      })
+
+      paths.frontSa = macro('sa', {
+        paths: [
+          'sideFront',
+          { p: 'frontHem', offset: 0 },
+          expand ? 'mirroredSideFront' : null,
+          'frontTopNoDart',
+        ],
+      })
+    }
+
+    if (options.centerFrontSeam) {
       points.gftop = points.cfTop.shift(0, -options.paperlessOffset)
       points.gfbottom = points.cfBottom.shift(0, -options.paperlessOffset)
       macro('grainline', {
@@ -80,6 +102,14 @@ export const front = {
         grainline: true,
       })
       store.cutlist.addCut({ cut: 2, onFold: false })
+    } else {
+      store.cutlist.addCut({ cut: 1, onFold: !expand })
+      macro(expand ? 'grainline' : 'cutOnFold', {
+        from: points.cfTop,
+        to: points.cfBottom,
+        grainline: true,
+        offset: -paperlessOffset,
+      })
     }
 
     macro('vd', {
@@ -139,39 +169,6 @@ export const front = {
       from: points.sideBottom,
       y: points.sideBottom.y + paperlessOffset,
     })
-
-    if (sa) {
-      const hem = store.get('sarah.hem')
-      if (options.cutFrontOnFold) {
-        paths.hem = macro('hem', {
-          class: 'fabric',
-          path2: 'centerFront',
-          path1: 'sideFront',
-          hemWidth: hem,
-          offset2: 0,
-        }).hide()
-
-        paths.sa = macro('sa', {
-          paths: [
-            'sideFront',
-            { p: 'hem', offset: 0 },
-            { p: 'centerFront', offset: 0 },
-            'frontTopSa',
-          ],
-        })
-      } else {
-        paths.hem = macro('hem', {
-          class: 'fabric',
-          path2: 'centerFront',
-          path1: 'sideFront',
-          hemWidth: hem,
-        }).hide()
-
-        paths.sa = macro('sa', {
-          paths: ['sideFront', { p: 'hem', offset: 0 }, 'centerFront', 'frontTopSa'],
-        })
-      }
-    }
 
     points.title = points.cfSeat
       .shiftFractionTowards(points.sideSeat, 0.5)
