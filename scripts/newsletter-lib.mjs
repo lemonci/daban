@@ -57,6 +57,10 @@ const getSubscribers = async (test = true) => {
 const send = async (test = true) => {
   const us = 'FreeSewing <info@freesewing.org>'
   const template = fs.readFileSync(`${cwd}/../config/templates/newsletter.html`, 'utf8')
+  const edition = fs.readFileSync(
+    `${cwd}/../sites/org/newsletter/${process.env.NL_EDITION}/index.mdx`,
+    'utf8'
+  )
   const subscribers = await getSubscribers(test)
 
   // Oh AWS your APIs are such a clusterfuck
@@ -65,18 +69,7 @@ const send = async (test = true) => {
   let i = 1
   for (const lang in subscribers) {
     let l = 1
-    let edition
-    try {
-      edition = await axios.get(
-        `https://raw.githubusercontent.com/freesewing/freesewing/refs/heads/develop/sites/org/newsletter/${process.env.NL_EDITION}/index.mdx`,
-        'utf8'
-      )
-    } catch (err) {
-      console.log(err)
-      process.exit()
-    }
-    const text = edition.data
-    const content = await asHtml(text)
+    const content = await asHtml(edition)
 
     subscribers[lang].sort()
     let subs = subscribers[lang].length
@@ -100,7 +93,7 @@ const send = async (test = true) => {
               Body: {
                 Text: {
                   Charset: 'utf-8',
-                  Data: text,
+                  Data: edition,
                 },
                 Html: {
                   Charset: 'utf-8',
