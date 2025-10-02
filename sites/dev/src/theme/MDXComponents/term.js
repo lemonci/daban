@@ -1,1 +1,0 @@
-../../../../org/src/theme/MDXComponents/term.js

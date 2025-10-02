@@ -8,7 +8,6 @@ import {
 } from '../../../scripts/fs.mjs'
 import path from 'path'
 import matter from 'gray-matter'
-import yaml from 'js-yaml'
 
 const prefix = 'packages/react'
 const cdir = ['prebuild', 'jsdoc', 'react', 'components']

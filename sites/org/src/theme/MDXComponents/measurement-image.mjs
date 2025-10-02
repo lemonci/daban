@@ -4,7 +4,7 @@ import TabItem from '@theme/TabItem'
 import { images as sarahImages } from './sarah/index.mjs'
 import { images as timImages } from './tim/index.mjs'
 import { useLocation } from '@docusaurus/router'
-import measurements from '../../../../../i18n/measurements.yaml'
+import { measurements } from '@freesewing/i18n'
 
 // Measurements shown seated
 const seated = ['crotchdepth']
