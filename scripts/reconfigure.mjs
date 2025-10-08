@@ -203,7 +203,7 @@ await writeFile(
   })
 )
 
-// i18n/designs.mjs is similar to the collection i18n.mjs, but contains all designs, even those not in a collection
+// packages/i18n/designs.mjs is similar to the collection i18n.mjs, but contains all designs, even those not in a collection
 const completeDesignImports = Object.keys(repo.software.designs)
   .map((name) => `import { i18n as ${name} } from '@freesewing/${name}'`)
   .join('\n')
@@ -211,7 +211,7 @@ const completeDesignMap = Object.keys(repo.software.designs)
   .map((name) => `  ${name}: ${name}.en,`)
   .join('\n')
 await writeFile(
-  ['i18n', 'designs.mjs'],
+  ['packages', 'i18n', 'src', 'designs.mjs'],
   mustache.render(repo.templates.i18n, {
     imports: completeDesignImports,
     designs: completeDesignMap,
