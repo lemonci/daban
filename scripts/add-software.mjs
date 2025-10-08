@@ -14,9 +14,8 @@ import prompts from 'prompts'
 import chalk from 'chalk'
 import { banner } from './banner.mjs'
 import { execSync } from 'child_process'
-import languages from '../config/languages.json' assert { type: 'json' }
 import { getDesigns, getPlugins } from './software.mjs'
-import conf from '../lerna.json' assert { type: 'json' }
+import conf from '../lerna.json' with { type: 'json' }
 const { version } = conf
 
 const designs = await getDesigns()
