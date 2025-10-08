@@ -10,7 +10,7 @@
     "deploy": "wrangler pages deploy --branch=preview",
     "deploy:prod": "wrangler pages deploy --branch=production",
     "clear": "docusaurus clear",
-    "prebuild": "node scripts/prebuild-step1.mjs && node scripts/prebuild-step2.mjs && node scripts/prebuild-step3.mjs && node scripts/prebuild-step4.mjs",
+    "prebuild": "find docs/designs/ ! -name 'index.mdx' -type f -exec rm {} + && node scripts/prebuild-step1.mjs && node scripts/prebuild-step2.mjs && node scripts/prebuild-step3.mjs && node scripts/prebuild-step4.mjs",
     "predev": "npm run prebuild",
     "prestart": "npm run prebuild",
     "serve": "docusaurus serve",
