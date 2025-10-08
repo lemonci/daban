@@ -3,15 +3,15 @@
   "version": "4.3.0",
   "description": "A FreeSewing pattern for a bow tie",
   "author": "woutervdub (https://github.com/woutervdub)",
-  "homepage": "https://freesewing.org/",
-  "repository": "github:freesewing/freesewing",
+  "homepage": "https://freesewing.eu/",
+  "repository": "codeberg:freesewing/freesewing",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/freesewing/freesewing/issues"
+    "url": "https://codeberg.org/freesewing/freesewing/issues"
   },
   "funding": {
     "type": "individual",
-    "url": "https://freesewing.org/patrons/join"
+    "url": "https://freesewing.eu/patrons/join"
   },
   "keywords": [
     "freesewing",

@@ -2,16 +2,16 @@
   "name": "@freesewing/core",
   "version": "4.3.0",
   "description": "A library for creating made-to-measure sewing patterns",
-  "author": "Joost De Cock <joost@joost.at> (https://github.com/joostdecock)",
-  "homepage": "https://freesewing.org/",
-  "repository": "github:freesewing/freesewing",
+  "author": "Joost De Cock <joost@joost.at> (https://codeberg.org/joostdecock)",
+  "homepage": "https://freesewing.eu/",
+  "repository": "codeberg:freesewing/freesewing",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/freesewing/freesewing/issues"
+    "url": "https://codeberg.org/freesewing/freesewing/issues"
   },
   "funding": {
     "type": "individual",
-    "url": "https://freesewing.org/patrons/join"
+    "url": "https://freesewing.eu/patrons/join"
   },
   "keywords": [
     "freesewing",

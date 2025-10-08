@@ -16,13 +16,7 @@ title="Code quality on DeepScan"
 ><img 
 src="https://deepscan.io/api/teams/2114/projects/2993/branches/23256/badge/grade.svg" 
 alt="DeepScan grade"
-></a> <a
-href="https://codeberg.org/freesewing/freesewing/issues?q=is%3Aissue+is%3Aopen"
-title="Open issues"
-><img 
-src="https://img.shields.io/github/issues/freesewing/freesewing.svg?label=Issues"
-alt="Open issues"/>
-</a> <a 
+></a> <a 
 href="#contributors-"
 title="All Contributors"
 ><img 
@@ -132,8 +126,8 @@ For [Support](https://freesewing.eu/support), please use the [forum](https://for
 
 ## License: MIT 🤓
 
-© [Joost De Cock](https://github.com/joostdecock).  
-See [the license file](https://github.com/freesewing/freesewing/blob/develop/LICENSE) for details.
+© [Joost De Cock](https://codeberg.org/joostdecock).  
+See [the license file](https://codeberg.org/freesewing/freesewing/blob/develop/LICENSE) for details.
 
 
 ## Contributors ✨
