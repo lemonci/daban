@@ -55,9 +55,12 @@ import Separatebuttonplacket from '@site/docs/docs/designs/simon/options/separat
 import Separatebuttonholeplacket from '@site/docs/docs/designs/simon/options/separatebuttonholeplacket/readme.mdx'
 import Shoulderease from '@site/docs/docs/designs/simon/options/shoulderease/readme.mdx'
 import Shoulderslopereduction from '@site/docs/docs/designs/simon/options/shoulderslopereduction/readme.mdx'
+import Sleevehemshort from '@site/docs/docs/designs/simon/options/sleevehemshort/readme.mdx'
 import Sleevelengthbonus from '@site/docs/docs/designs/simon/options/sleevelengthbonus/readme.mdx'
+import Sleevelengthshort from '@site/docs/docs/designs/simon/options/sleevelengthshort/readme.mdx'
 import Sleeveplacketlength from '@site/docs/docs/designs/simon/options/sleeveplacketlength/readme.mdx'
 import Sleeveplacketwidth from '@site/docs/docs/designs/simon/options/sleeveplacketwidth/readme.mdx'
+import Sleevestyle from '@site/docs/docs/designs/simon/options/sleevestyle/readme.mdx'
 import Sleevewidthguarantee from '@site/docs/docs/designs/simon/options/sleevewidthguarantee/readme.mdx'
 import Sleevecapbackfactorx from '@site/docs/docs/designs/simon/options/sleevecapbackfactorx/readme.mdx'
 import Sleevecapbackfactory from '@site/docs/docs/designs/simon/options/sleevecapbackfactory/readme.mdx'
@@ -104,6 +107,119 @@ import Yokeheight from '@site/docs/docs/designs/simon/options/yokeheight/readme.
   - seamless
 
 <Buttonholeplacketstyle />
+
+### Cuff narrow button {#barrelcuffnarrowbutton}
+
+**Whether to include a button to tie the cuffs more narrow. This option is only relevant for barrel cuffs.**
+- Type: **Boolean**
+- Default: **true**
+
+<Barrelcuffnarrowbutton />
+
+### Cuff button rows {#cuffbuttonrows}
+
+**Whether to draft a single or double row of cuff buttons. This option is only relevant for barrel cuffs.**
+- Type: **Percentage**
+- Default: **undefined**
+- Minimum: **1**
+- Maximum: **2**
+
+<Cuffbuttonrows />
+
+### Cuff drape {#cuffdrape}
+
+**The amount by which the sleeve is wider than the cuff where the are joined.**
+- Type: **Percentage**
+- Default: **5%**
+- Minimum: **0%**
+- Maximum: **10%**
+
+<Cuffdrape />
+
+### Cuff length {#cufflength}
+
+**The length of the cuffs.**
+- Type: **Percentage**
+- Default: **10%**
+- Minimum: **3%**
+- Maximum: **15%**
+
+<Cufflength />
+
+### Cuff style {#cuffstyle}
+
+**What style of cuffs do you prefer?**
+- Type: **List**
+- Default: **angledBarrelCuff**
+- options:
+  - roundedBarrelCuff
+  - angledBarrelCuff
+  - straightBarrelCuff
+  - roundedFrenchCuff
+  - angledFrenchCuff
+  - straightFrenchCuff
+
+<Cuffstyle />
+
+### Sleeve placket length {#sleeveplacketlength}
+
+**The length of the sleeve placket.**
+- Type: **Percentage**
+- Default: **25%**
+- Minimum: **15%**
+- Maximum: **35%**
+
+<Sleeveplacketlength />
+
+### Sleeve placket width {#sleeveplacketwidth}
+
+**The width of the sleeve placket.**
+- Type: **Percentage**
+- Default: **13%**
+- Minimum: **8%**
+- Maximum: **18%**
+
+<Sleeveplacketwidth />
+
+### Sleeve hem length {#sleevehemshort}
+
+**Length of the hem**
+- Type: **Percentage**
+- Default: **4%**
+- Minimum: **1%**
+- Maximum: **20%**
+
+<Sleevehemshort />
+
+### Sleeve length {#sleevelengthshort}
+
+**Length of the short sleeves**
+- Type: **Percentage**
+- Default: **40%**
+- Minimum: **20%**
+- Maximum: **100%**
+
+<Sleevelengthshort />
+
+### Cuff ease {#cuffease}
+
+**The amount of ease at your wrist.**
+- Type: **Percentage**
+- Default: **20%**
+- Minimum: **10%**
+- Maximum: **40%**
+
+<Cuffease />
+
+### Sleeve length bonus {#sleevelengthbonus}
+
+**The amount to lengthen the sleeve. A negative value will shorten it.**
+- Type: **Percentage**
+- Default: **3.5%**
+- Minimum: **-40%**
+- Maximum: **10%**
+
+<Sleevelengthbonus />
 
 ### Draft for high bust {#draftforhighbust}
 
@@ -164,16 +280,6 @@ import Yokeheight from '@site/docs/docs/designs/simon/options/yokeheight/readme.
 
 <Collarease />
 
-### Cuff ease {#cuffease}
-
-**The amount of ease at your wrist.**
-- Type: **Percentage**
-- Default: **20%**
-- Minimum: **10%**
-- Maximum: **40%**
-
-<Cuffease />
-
 ### Hips ease {#hipsease}
 
 **Controls the amount of ease at the hips.**
@@ -213,16 +319,6 @@ import Yokeheight from '@site/docs/docs/designs/simon/options/yokeheight/readme.
 - Maximum: **15%**
 
 <Shoulderease />
-
-### Sleeve length bonus {#sleevelengthbonus}
-
-**The amount to lengthen the sleeve. A negative value will shorten it.**
-- Type: **Percentage**
-- Default: **3.5%**
-- Minimum: **-40%**
-- Maximum: **10%**
-
-<Sleevelengthbonus />
 
 ### Waist ease {#waistease}
 
@@ -296,6 +392,17 @@ import Yokeheight from '@site/docs/docs/designs/simon/options/yokeheight/readme.
 - Maximum: **100%**
 
 <S3collar />
+
+### Sleeve style {#sleevestyle}
+
+**Would you like long or short sleeves?**
+- Type: **List**
+- Default: **long**
+- options:
+  - short
+  - long
+
+<Sleevestyle />
 
 ### Split yoke {#splityoke}
 
@@ -480,80 +587,6 @@ import Yokeheight from '@site/docs/docs/designs/simon/options/yokeheight/readme.
 - Maximum: **200%**
 
 <Collarwidth />
-
-### Cuffs {#cuffs}
-#### Cuff narrow button {#barrelcuffnarrowbutton}
-
-**Whether to include a button to tie the cuffs more narrow. This option is only relevant for barrel cuffs.**
-- Type: **Boolean**
-- Default: **true**
-
-<Barrelcuffnarrowbutton />
-
-#### Cuff button rows {#cuffbuttonrows}
-
-**Whether to draft a single or double row of cuff buttons. This option is only relevant for barrel cuffs.**
-- Type: **Percentage**
-- Default: **undefined**
-- Minimum: **1**
-- Maximum: **2**
-
-<Cuffbuttonrows />
-
-#### Cuff drape {#cuffdrape}
-
-**The amount by which the sleeve is wider than the cuff where the are joined.**
-- Type: **Percentage**
-- Default: **5%**
-- Minimum: **0%**
-- Maximum: **10%**
-
-<Cuffdrape />
-
-#### Cuff length {#cufflength}
-
-**The length of the cuffs.**
-- Type: **Percentage**
-- Default: **10%**
-- Minimum: **3%**
-- Maximum: **15%**
-
-<Cufflength />
-
-#### Cuff style {#cuffstyle}
-
-**What style of cuffs do you prefer?**
-- Type: **List**
-- Default: **angledBarrelCuff**
-- options:
-  - roundedBarrelCuff
-  - angledBarrelCuff
-  - straightBarrelCuff
-  - roundedFrenchCuff
-  - angledFrenchCuff
-  - straightFrenchCuff
-
-<Cuffstyle />
-
-#### Sleeve placket length {#sleeveplacketlength}
-
-**The length of the sleeve placket.**
-- Type: **Percentage**
-- Default: **25%**
-- Minimum: **15%**
-- Maximum: **35%**
-
-<Sleeveplacketlength />
-
-#### Sleeve placket width {#sleeveplacketwidth}
-
-**The width of the sleeve placket.**
-- Type: **Percentage**
-- Default: **13%**
-- Minimum: **8%**
-- Maximum: **18%**
-
-<Sleeveplacketwidth />
 
 ## Advanced {#advanced}
 ### Across back factor {#acrossbackfactor}

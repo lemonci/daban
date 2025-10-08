@@ -12,9 +12,14 @@ import {
   cuffEase,
   cuffLength,
   cuffStyle,
+  sleeveStyle,
 } from './options.mjs'
 
 const simonCuff = (params) => {
+  if (params.options.sleeveStyle === 'short') {
+    return params.part.hide()
+  }
+
   switch (params.options.cuffStyle) {
     case 'roundedBarrelCuff':
       return draftRoundedBarrelCuff(params)
@@ -41,6 +46,7 @@ export const cuff = {
     cuffEase,
     cuffLength,
     cuffStyle,
+    sleeveStyle,
   },
   draft: simonCuff,
 }

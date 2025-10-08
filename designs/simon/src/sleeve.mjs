@@ -8,7 +8,10 @@ import {
   cuffLength,
   cuffStyle,
   sleeveLengthBonus,
+  sleeveLengthShort,
+  sleeveHemShort,
   sleevePlacketLength,
+  sleeveStyle,
 } from './options.mjs'
 
 function simonSleeve({
@@ -24,8 +27,11 @@ function simonSleeve({
   snippets,
   Snippet,
   store,
+  utils,
   part,
 }) {
+  let pleats = 0
+
   // Update the back armhole notch because the one from Brian is not correct
   points.backNotch = paths.sleevecap.reverse().shiftAlong(store.get('backArmholeToArmholePitch'))
 
@@ -35,7 +41,6 @@ function simonSleeve({
   macro('rmscalebox')
 
   // Determine the sleeve length
-  const len = measurements.shoulderToWrist * (1 + options.sleeveLengthBonus)
   paths.sleevecap = new Path()
     .move(points.bicepsRight)
     ._curve(points.capQ1Cp1, points.capQ1)
@@ -45,64 +50,130 @@ function simonSleeve({
     .curve_(points.capQ4Cp2, points.bicepsLeft)
     .hide()
   points.top = new Point(0, paths.sleevecap.edge('top').y)
-  points.bottom = points.top.shift(-90, len)
 
-  // Sleeve width depends on cuff style
-  let width = measurements.wrist * (1 + options.cuffEase + options.cuffOverlap)
-  if (
-    options.cuffStyle === 'straightFrenchCuff' ||
-    options.cuffStyle === 'roundedFrenchCuff' ||
-    options.cuffStyle === 'angledFrenchCuff'
-  )
-    width = measurements.wrist * (1 + options.cuffEase + options.cuffOverlap * 1.5)
-  const cuffLength = measurements.shoulderToWrist * options.cuffLength
-  points.wristRight = points.bottom.shift(0, width / 2).shift(90, cuffLength)
-  points.wristLeft = points.wristRight.flipX()
+  if (options.sleeveStyle === 'short') {
+    const len = Math.max(
+      measurements.shoulderToWrist * options.sleeveLengthShort,
+      points.bicepsLeft.y - points.top.y,
+      points.bicepsLeft.y - points.top.y + measurements.shoulderToWrist * options.sleeveHemShort
+    )
 
-  points.cuffMid = new Point(0, points.wristLeft.y)
-  points.cuffLeftMid = points.cuffMid.shiftFractionTowards(points.wristLeft, 0.5)
-  points.cuffRightMid = points.cuffMid.shiftFractionTowards(points.wristRight, 0.5)
-  points.cuffLeftCusp = points.cuffLeftMid.shift(90, width / 50)
-  points.cuffRightCusp = points.cuffRightMid.shift(-90, width / 50)
-  points.cuffLeftCuspCp1 = points.cuffLeftCusp.shift(180, width / 10)
-  points.cuffLeftCuspCp2 = points.cuffLeftCusp.shift(0, width / 10)
-  points.cuffRightCuspCp1 = points.cuffRightCusp.shift(180, width / 10)
-  points.cuffRightCuspCp2 = points.cuffRightCusp.shift(0, width / 10)
+    points.bottom = points.top.shift(-90, measurements.shoulderToWrist)
+    points.shortSleeveHem = points.top.shift(-90, len)
+    points.wristRightShort = points.bottom.shift(0, measurements.wrist * 0.6)
+    points.wristLeftShort = points.wristRightShort.flipX()
 
-  // Cuff pleats
-  const drape = options.cuffDrape * measurements.shoulderToWrist
-  let pleats = 0
-  const pleatLength = measurements.shoulderToWrist * 0.15
-  if (drape > 0) {
-    const shiftRight = [
-      'cuffRightCuspCp1',
-      'cuffRightCusp',
-      'cuffRightCuspCp2',
-      'wristRight',
-      'cuffRightMid',
-    ]
-    const shiftLeft = ['cuffLeftCuspCp1', 'cuffLeftCusp', 'cuffLeftCuspCp2', 'wristLeft']
-    if (drape > 20) pleats = 2
-    else pleats = 1
-    for (const id of shiftRight) points[id] = points[id].shift(0, drape / (2 * pleats))
-    for (const id of shiftLeft) points[id] = points[id].shift(180, drape / (2 * pleats))
-    points.cuffPleat1Fold = points.cuffMid.shift(0, drape / (2 * pleats))
-    points.cuffPleat1Edge = points.cuffMid.shift(0, drape / pleats)
-    points.cuffMidTop = points.cuffMid.shift(90, pleatLength)
-    points.cuffPleat1FoldTop = points.cuffPleat1Fold.shift(90, pleatLength)
-    points.cuffPleat1EdgeTop = points.cuffPleat1Edge.shift(90, pleatLength)
-    if (pleats === 2) {
-      const moreRight = ['cuffRightCuspCp2', 'wristRight']
-      const shift = shiftRight.concat(shiftLeft)
-      for (const id of shift) {
-        if (moreRight.indexOf(id) === -1) points[id] = points[id].shift(180, drape / 4)
-        else points[id] = points[id].shift(0, drape / 4)
+    const hemY = Math.max(points.shortSleeveHem.y, points.bicepsLeft.y)
+
+    points.wristLeft = utils.beamIntersectsY(points.wristLeftShort, points.bicepsLeft, hemY)
+    points.wristRight = utils.beamIntersectsY(points.wristRightShort, points.bicepsRight, hemY)
+
+    points.foldShortLeft = utils.beamIntersectsY(
+      points.wristLeftShort,
+      points.bicepsLeft,
+      hemY - measurements.shoulderToWrist * options.sleeveHemShort
+    )
+    points.foldShortRight = points.foldShortLeft.flipX()
+    points.foldShortLeft = points.foldShortLeft.flipY(points.wristLeft)
+    points.foldShortRight = points.foldShortRight.flipY(points.wristRight)
+
+    points.cuffMid = points.foldShortLeft.shiftFractionTowards(points.foldShortRight, 0.5)
+
+    if (complete) {
+      paths.shortSleeveHemFold = new Path()
+        .move(points.wristLeft)
+        .line(points.wristRight)
+        .addClass('note help')
+    }
+  } else {
+    const len = measurements.shoulderToWrist * (1 + options.sleeveLengthBonus)
+    points.bottom = points.top.shift(-90, len)
+
+    // Sleeve width depends on cuff style
+    let width = measurements.wrist * (1 + options.cuffEase + options.cuffOverlap)
+    if (
+      options.cuffStyle === 'straightFrenchCuff' ||
+      options.cuffStyle === 'roundedFrenchCuff' ||
+      options.cuffStyle === 'angledFrenchCuff'
+    )
+      width = measurements.wrist * (1 + options.cuffEase + options.cuffOverlap * 1.5)
+    const cuffLength = measurements.shoulderToWrist * options.cuffLength
+    points.wristRight = points.bottom.shift(0, width / 2).shift(90, cuffLength)
+    points.wristLeft = points.wristRight.flipX()
+
+    points.cuffMid = new Point(0, points.wristLeft.y)
+    points.cuffLeftMid = points.cuffMid.shiftFractionTowards(points.wristLeft, 0.5)
+    points.cuffRightMid = points.cuffMid.shiftFractionTowards(points.wristRight, 0.5)
+    points.cuffLeftCusp = points.cuffLeftMid.shift(90, width / 50)
+    points.cuffRightCusp = points.cuffRightMid.shift(-90, width / 50)
+    points.cuffLeftCuspCp1 = points.cuffLeftCusp.shift(180, width / 10)
+    points.cuffLeftCuspCp2 = points.cuffLeftCusp.shift(0, width / 10)
+    points.cuffRightCuspCp1 = points.cuffRightCusp.shift(180, width / 10)
+    points.cuffRightCuspCp2 = points.cuffRightCusp.shift(0, width / 10)
+
+    // Cuff pleats
+    const drape = options.cuffDrape * measurements.shoulderToWrist
+    const pleatLength = measurements.shoulderToWrist * 0.15
+    if (drape > 0) {
+      const shiftRight = [
+        'cuffRightCuspCp1',
+        'cuffRightCusp',
+        'cuffRightCuspCp2',
+        'wristRight',
+        'cuffRightMid',
+      ]
+      const shiftLeft = ['cuffLeftCuspCp1', 'cuffLeftCusp', 'cuffLeftCuspCp2', 'wristLeft']
+      if (drape > 20) pleats = 2
+      else pleats = 1
+      for (const id of shiftRight) points[id] = points[id].shift(0, drape / (2 * pleats))
+      for (const id of shiftLeft) points[id] = points[id].shift(180, drape / (2 * pleats))
+      points.cuffPleat1Fold = points.cuffMid.shift(0, drape / (2 * pleats))
+      points.cuffPleat1Edge = points.cuffMid.shift(0, drape / pleats)
+      points.cuffMidTop = points.cuffMid.shift(90, pleatLength)
+      points.cuffPleat1FoldTop = points.cuffPleat1Fold.shift(90, pleatLength)
+      points.cuffPleat1EdgeTop = points.cuffPleat1Edge.shift(90, pleatLength)
+      if (pleats === 2) {
+        const moreRight = ['cuffRightCuspCp2', 'wristRight']
+        const shift = shiftRight.concat(shiftLeft)
+        for (const id of shift) {
+          if (moreRight.indexOf(id) === -1) points[id] = points[id].shift(180, drape / 4)
+          else points[id] = points[id].shift(0, drape / 4)
+        }
+        points.cuffPleat2Fold = points.cuffRightCusp.shift(0, drape / 4)
+        points.cuffPleat2Edge = points.cuffRightCusp.shift(0, drape / 2)
+        points.cuffPleat2FoldTop = points.cuffPleat2Fold.shift(90, pleatLength)
+        points.cuffPleat2EdgeTop = points.cuffPleat2Edge.shift(90, pleatLength)
+        points.cuffPleat2Top = points.cuffRightCusp.shift(90, pleatLength)
       }
-      points.cuffPleat2Fold = points.cuffRightCusp.shift(0, drape / 4)
-      points.cuffPleat2Edge = points.cuffRightCusp.shift(0, drape / 2)
-      points.cuffPleat2FoldTop = points.cuffPleat2Fold.shift(90, pleatLength)
-      points.cuffPleat2EdgeTop = points.cuffPleat2Edge.shift(90, pleatLength)
-      points.cuffPleat2Top = points.cuffRightCusp.shift(90, pleatLength)
+    }
+    if (complete) {
+      points.placketEnd = points.cuffLeftCusp.shift(
+        90,
+        options.sleevePlacketLength * measurements.shoulderToWrist
+      )
+      paths.placketCut = new Path()
+        .move(points.cuffLeftCusp)
+        .line(points.placketEnd)
+        .attr('class', 'fabric')
+      if (pleats > 0) {
+        paths.pleats = new Path()
+          .move(points.cuffMid)
+          .line(points.cuffMidTop)
+          .move(points.cuffPleat1Fold)
+          .line(points.cuffPleat1FoldTop)
+          .move(points.cuffPleat1Edge)
+          .line(points.cuffPleat1EdgeTop)
+        if (pleats === 2) {
+          paths.pleats
+            .move(points.cuffRightCusp)
+            .line(points.cuffPleat2Top)
+            .move(points.cuffPleat2Fold)
+            .line(points.cuffPleat2FoldTop)
+            .move(points.cuffPleat2Edge)
+            .line(points.cuffPleat2EdgeTop)
+        }
+        paths.pleats.attr('class', 'dotted')
+      }
     }
   }
 
@@ -119,17 +190,24 @@ function simonSleeve({
   paths.saBase = new Path().move(points.bicepsLeft).line(points.wristLeft)
   paths.saBase.hide()
 
-  paths.cuffBase = new Path()
-    .move(points.wristLeft)
-    ._curve(points.cuffLeftCuspCp1, points.cuffLeftCusp)
-  if (pleats > 0) {
-    paths.cuffBase.curve_(points.cuffLeftCuspCp2, points.cuffMid).line(points.cuffPleat1Edge)
+  if (options.sleeveStyle === 'short') {
+    paths.cuffBase = new Path()
+      .move(points.wristLeft)
+      .line(points.foldShortLeft)
+      .line(points.foldShortRight)
+    paths.frenchBase = new Path().move(points.foldShortRight).join(paths.frenchBase)
+  } else {
+    paths.cuffBase = new Path()
+      .move(points.wristLeft)
+      ._curve(points.cuffLeftCuspCp1, points.cuffLeftCusp)
+    if (pleats > 0) {
+      paths.cuffBase.curve_(points.cuffLeftCuspCp2, points.cuffMid).line(points.cuffPleat1Edge)
+    }
+    paths.cuffBase._curve(points.cuffRightCuspCp1, points.cuffRightCusp)
+    if (pleats === 2) paths.cuffBase.line(points.cuffPleat2Edge)
+    paths.cuffBase.curve_(points.cuffRightCuspCp2, points.wristRight)
+    paths.cuffBase.hide()
   }
-  paths.cuffBase._curve(points.cuffRightCuspCp1, points.cuffRightCusp)
-  if (pleats === 2) paths.cuffBase.line(points.cuffPleat2Edge)
-  paths.cuffBase.curve_(points.cuffRightCuspCp2, points.wristRight)
-  paths.cuffBase.hide()
-
   paths.seam = paths.frenchBase
     .clone()
     .line(points.wristLeft)
@@ -151,36 +229,6 @@ function simonSleeve({
       classes: 'text-sm fill-note center',
       dy: 7,
     })
-  }
-
-  if (complete) {
-    points.placketEnd = points.cuffLeftCusp.shift(
-      90,
-      options.sleevePlacketLength * measurements.shoulderToWrist
-    )
-    paths.placketCut = new Path()
-      .move(points.cuffLeftCusp)
-      .line(points.placketEnd)
-      .attr('class', 'fabric')
-    if (pleats > 0) {
-      paths.pleats = new Path()
-        .move(points.cuffMid)
-        .line(points.cuffMidTop)
-        .move(points.cuffPleat1Fold)
-        .line(points.cuffPleat1FoldTop)
-        .move(points.cuffPleat1Edge)
-        .line(points.cuffPleat1EdgeTop)
-      if (pleats === 2) {
-        paths.pleats
-          .move(points.cuffRightCusp)
-          .line(points.cuffPleat2Top)
-          .move(points.cuffPleat2Fold)
-          .line(points.cuffPleat2FoldTop)
-          .move(points.cuffPleat2Edge)
-          .line(points.cuffPleat2EdgeTop)
-      }
-      paths.pleats.attr('class', 'dotted')
-    }
   }
 
   /*
@@ -261,13 +309,6 @@ function simonSleeve({
     to: points.backNotch,
     x: points.bicepsLeft.x - 15 - sa,
   })
-  if (complete)
-    macro('vd', {
-      id: 'hCut',
-      from: points.cuffLeftCusp,
-      to: points.placketEnd,
-      x: points.placketEnd.x - 15,
-    })
   macro('vd', {
     id: 'hSleevecap',
     from: points.bicepsRight,
@@ -278,22 +319,44 @@ function simonSleeve({
     id: 'wCuff',
     from: points.wristLeft,
     to: points.wristRight,
-    y: points.wristLeft.y + 15 + sa,
+    y: points.wristLeft.y + 15 + (options.sleeveStyle === 'short' ? 0 : sa),
   })
-  if (pleats > 0)
+  if (options.sleeveStyle === 'short') {
     macro('hd', {
-      id: 'wPleat',
-      from: points.cuffMidTop,
-      to: points.cuffPleat1EdgeTop,
-      y: points.cuffMidTop.y - 15,
+      id: 'hFold',
+      from: points.foldShortLeft,
+      to: points.foldShortRight,
+      y: points.foldShortLeft.y + 15 + sa,
     })
-  if (pleats === 2)
-    macro('hd', {
-      id: 'wPleat2',
-      from: points.cuffPleat2Top,
-      to: points.cuffPleat2EdgeTop,
-      y: points.cuffPleat2Top.y - 15,
+    macro('vd', {
+      id: 'vFold',
+      from: points.foldShortLeft,
+      to: points.wristLeft,
+      x: points.foldShortLeft.x - 15 - sa,
     })
+  } else {
+    if (complete)
+      macro('vd', {
+        id: 'hCut',
+        from: points.cuffLeftCusp,
+        to: points.placketEnd,
+        x: points.placketEnd.x - 15,
+      })
+    if (pleats > 0)
+      macro('hd', {
+        id: 'wPleat',
+        from: points.cuffMidTop,
+        to: points.cuffPleat1EdgeTop,
+        y: points.cuffMidTop.y - 15,
+      })
+    if (pleats === 2)
+      macro('hd', {
+        id: 'wPleat2',
+        from: points.cuffPleat2Top,
+        to: points.cuffPleat2EdgeTop,
+        y: points.cuffPleat2Top.y - 15,
+      })
+  }
 
   return part
 }
@@ -310,7 +373,10 @@ export const sleeve = {
     cuffLength,
     cuffStyle,
     sleeveLengthBonus,
+    sleeveLengthShort,
+    sleeveHemShort,
     sleevePlacketLength,
+    sleeveStyle,
   },
   draft: simonSleeve,
 }

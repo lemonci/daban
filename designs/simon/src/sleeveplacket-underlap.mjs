@@ -16,6 +16,10 @@ function simonSleevePlacketUnderlap({
   store,
   part,
 }) {
+  if (options.sleeveStyle === 'short') {
+    return part.hide()
+  }
+
   const width = Math.min(store.get('sleevePlacketWidth') / 2, 10)
   const length = measurements.shoulderToWrist * options.sleevePlacketLength
 
