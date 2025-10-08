@@ -1,8 +1,9 @@
-import { base } from './base.mjs'
+import { addHorizontalLines, base } from './base.mjs'
 
 export const front = {
   name: 'umbra.front',
   from: base,
+  hide: { from: true },
   draft: draftUmbraFront,
 }
 
@@ -57,6 +58,9 @@ function draftUmbraFront({
     paths.seam = paths.seamBase.clone().close()
   }
   paths.seam.unhide().addClass('fabric')
+
+  addHorizontalLines(part, paths.seam)
+
   if (sa) {
     paths.saBase = new Path()
       .move(points.cfBackGussetBulge)
@@ -77,17 +81,17 @@ function draftUmbraFront({
         clone: true,
       })
       paths.saBase = paths.saBase.join(paths.mirroredSaBase.reverse()).close().hide()
-      paths.sa = paths.saBase.offset(sa).setClass('fabric sa').unhide()
+      paths.sa = macro('sa', { paths: ['saBase'] })
     } else {
-      paths.sa = paths.saBase
-        .offset(sa)
-        .reverse()
-        .line(new Point(0, points.cfBackGussetBulge.y))
-        .line(points.cfBulgeSplit)
-        .reverse()
-        .line(points.cfWaistbandDipFront)
-        .setClass('fabric sa')
-        .unhide()
+      paths.sa = macro('sa', {
+        paths: [
+          'saBase',
+          null,
+          store.get('bulge')
+            ? { p: new Path().move(points.cfBulgeSplit).line(points.cfGusset), offset: 0 }
+            : null,
+        ],
+      })
     }
   }
   store.cutlist.setCut({ cut: 1, from: 'fabric', onFold: !expand })

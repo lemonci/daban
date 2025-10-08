@@ -1,4 +1,5 @@
 import { stretchToScale } from '@freesewing/core'
+import { pathUtilsPlugin } from '@freesewing/plugin-path-utils'
 
 function draftUmbraBase({
   options,
@@ -171,7 +172,14 @@ function draftUmbraBase({
   /*
    * Flip front side waistband positions to back
    */
-  for (const flip of ['cfWaist', 'cfWaistband', 'sideWaistbandBase', 'sideLegBase']) {
+  for (const flip of [
+    'cfWaist',
+    'cfHips',
+    'cfSeat',
+    'cfWaistband',
+    'sideWaistbandBase',
+    'sideLegBase',
+  ]) {
     points[`${flip}Back`] = points[flip].flipY(points.cfMiddle)
   }
 
@@ -636,10 +644,57 @@ function draftUmbraBase({
     },
   })
 
+  if (store.get('bulge')) {
+    paths.seamBase = new Path()
+      .move(points.cfBulgeSplit)
+      .curve(points.bulgeCpBottom, points.cfGussetBulgeCp, points.cfGussetBulge)
+      .line(points.cfBackGussetBulge)
+  } else {
+    paths.seamBase = new Path().move(points.cfBackGussetBulge)
+  }
+  paths.seamBase = paths.seamBase
+    .line(points.backGussetSplitBulge)
+    .join(paths.elasticLegFront)
+    .line(points.sideWaistbandFront)
+    .curve(points.cfWaistbandDipCp1Front, points.cfWaistbandDipCp2Front, points.cfWaistbandDipFront)
+    .join(paths.back)
+
   /*
    * Hide this part, others will extend it
    */
   return part
+}
+
+function addHorizontalLine(part, outline, name, point) {
+  let { points, paths, Path, macro } = part.shorthand()
+  const intersections = outline.intersectsY(points[point].y)
+  if (intersections.length === 2) {
+    let a = intersections[0]
+    let b = intersections[1]
+    if (a.x > b.x) {
+      ;[a, b] = [b, a]
+    }
+
+    paths[point] = new Path().move(a).line(b).attr('class', 'contrast help')
+    macro('banner', {
+      id: point + 'Line',
+      classes: 'center contrast help',
+      path: paths[point],
+      text: 'umbra:' + name,
+    })
+  }
+}
+
+export function addHorizontalLines(part, outline) {
+  if (!part.shorthand().complete) {
+    return
+  }
+  addHorizontalLine(part, outline, 'waist', 'cfWaist')
+  addHorizontalLine(part, outline, 'hips', 'cfHips')
+  addHorizontalLine(part, outline, 'seat', 'cfSeat')
+  addHorizontalLine(part, outline, 'waist', 'cfWaistBack')
+  addHorizontalLine(part, outline, 'hips', 'cfHipsBack')
+  addHorizontalLine(part, outline, 'seat', 'cfSeatBack')
 }
 
 export const base = {
@@ -816,4 +871,5 @@ export const base = {
   },
   draft: draftUmbraBase,
   hide: { self: true },
+  plugins: [pathUtilsPlugin],
 }
