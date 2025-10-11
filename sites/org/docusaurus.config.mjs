@@ -202,6 +202,14 @@ const config = {
     ],
   ],
   themeConfig: {
+    announcementBar: {
+      id: 'stampede_notice',
+      content:
+        'We are currently under heavy load, which is causing issues. Check back in a week or so.',
+      backgroundColor: '#663399',
+      textColor: '#ffffff',
+      isCloseable: false,
+    },
     colorMode: {
       // Do not be tempted to change these
       disableSwitch: true,
