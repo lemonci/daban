@@ -1,0 +1,20 @@
+{
+  "id": "sasha",
+  "code": "Anna Puk",
+  "design": "Anna Puk",
+  "description": "A FreeSewing pattern for a skater dress with princess seams and pockets",
+  "name": "Sasha skater dress",
+  "difficulty": 3,
+  "tags": [
+    "dresses"
+  ],
+  "techniques": [
+    "curved-seam",
+    "princess-seam",
+    "hem",
+    "bias-tape"
+  ],
+  "version": "4.2.0",
+  "pkg": "@freesewing/sasha",
+  "collection": true
+}
