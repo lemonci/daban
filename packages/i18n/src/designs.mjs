@@ -53,7 +53,6 @@ import { i18n as rendertest } from '@freesewing/rendertest'
 import { i18n as sabrina } from '@freesewing/sabrina'
 import { i18n as sandy } from '@freesewing/sandy'
 import { i18n as sarah } from '@freesewing/sarah'
-import { i18n as sasha } from '@freesewing/sasha'
 import { i18n as shelly } from '@freesewing/shelly'
 import { i18n as shin } from '@freesewing/shin'
 import { i18n as simon } from '@freesewing/simon'
@@ -126,7 +125,6 @@ export const designs = {
   sabrina: sabrina.en,
   sandy: sandy.en,
   sarah: sarah.en,
-  sasha: sasha.en,
   shelly: shelly.en,
   shin: shin.en,
   simon: simon.en,
