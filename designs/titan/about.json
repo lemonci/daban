@@ -12,6 +12,7 @@
     "blocks",
     "bottoms"
   ],
+  "block": true,
   "techniques": [],
   "version": "4.3.0",
   "pkg": "@freesewing/titan",

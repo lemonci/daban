@@ -5,6 +5,7 @@
   "description": "A FreeSewing pattern for a princess seam bodice block",
   "design": "Wouter Van Wageningen",
   "difficulty": 3,
+  "block": true,
   "tags": [
     "blocks",
     "tops"

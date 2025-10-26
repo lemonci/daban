@@ -16,6 +16,7 @@
     "block",
     "dart"
   ],
+  "block": true,
   "version": "4.3.0",
   "pkg": "@freesewing/sarah",
   "collection": true

@@ -13,6 +13,7 @@
     "block",
     "flat-sleeve"
   ],
+  "block": true,
   "version": "4.3.0",
   "pkg": "@freesewing/brian",
   "collection": true
