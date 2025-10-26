@@ -473,7 +473,7 @@ export const Set = ({ id, publicOnly = false, Link = false }) => {
           update={setFilter}
           label="Filter by design"
           current={filter}
-          firstOption={<option value="">Clear filter</option>}
+          firstOption={<option value="">(No filter)</option>}
         />
       </div>
       {filterMeasurements().map((m) => (

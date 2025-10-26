@@ -440,7 +440,7 @@ export const EmailInput = ({
  * @param {object} props - All component props
  * @param {boolean} [props.box = false] - Set this to true to render a boxed fieldset
  * @param {number} props.current - The current value, to manage the state of this input
- * @param {string} [props.firstOption = false] - An optional first option to add to the select
+ * @param {object} [props.firstOption = false] - An optional first option to add to the select
  * @param {string|function} [props.help = false] - An optional URL/method to link/show help or docs
  * @param {string} [props.id = 'design'] - Id of the HTML element to link the fieldset labels
  * @param {string} [props.label = false] - The (top-left) label
@@ -485,7 +485,13 @@ export const DesignInput = ({
         onChange={(evt) => update(evt.target.value)}
         value={current}
       >
-        {firstOption ? <option disabled={true}>{firstOption}</option> : null}
+        {firstOption ? (
+          typeof firstOption === 'string' ? (
+            <option disabled={true}>{firstOption}</option>
+          ) : (
+            firstOption
+          )
+        ) : null}
         {collection.map((design) => (
           <option key={design} value={design}>
             {capitalize(design)}
