@@ -11,7 +11,7 @@
   </a><a
   href="#contributors-"
   title="All Contributors"
-  ><img src="https://img.shields.io/badge/all_contributors-131-pink.svg"
+  ><img src="https://img.shields.io/badge/all_contributors-132-pink.svg"
   alt="All Contributors"/>
   </a></p><p align='center'><a
   href="https://forum.freesewing.org"

@@ -1,6 +1,12 @@
 # Change log for: @freesewing/umbra
 
 
+## 4.4.0 (2025-11-06)
+
+### Added
+
+ - Integrate path-utils plugin (#579)
+
 ## 3.0.0 (2023-09-30)
 
 ### Changed

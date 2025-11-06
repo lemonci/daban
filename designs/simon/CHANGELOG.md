@@ -1,6 +1,12 @@
 # Change log for: @freesewing/simon
 
 
+## 4.4.0 (2025-11-06)
+
+### Added
+
+ - Add a short sleeves option (#581)
+
 ## 4.3.0 (2025-09-26)
 
 ### Added

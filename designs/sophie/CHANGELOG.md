@@ -1,6 +1,12 @@
 # Change log for: @freesewing/sophie
 
 
+## 4.4.0 (2025-11-06)
+
+### Added
+
+ - Initial release of Sophie, a slip dress design
+
 ## 3.0.0 (2023-09-30)
 
 ### Changed
