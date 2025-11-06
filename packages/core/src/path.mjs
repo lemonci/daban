@@ -1585,9 +1585,13 @@ function __pathOffset(path, distance, log) {
         const segment = __asPath(bezier, path.log)
         if (segment) offset.push(segment)
       }
-    } else if (op.type === 'close') closed = true
+    } else if (op.type === 'close') {
+      let segment = __offsetLine(current, start, distance, path.log)
+      if (segment) offset.push(segment)
+      closed = true
+    }
     if (op.to) current = op.to
-    if (!start) start = current
+    if (!start || op.type === 'move') start = current
   }
 
   let result
