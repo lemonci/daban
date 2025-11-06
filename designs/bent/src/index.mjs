@@ -1,31 +1,17 @@
 import { Design, mergeI18n } from '@freesewing/core'
 import about from '../about.json' with { type: 'json' }
 import { front, back, i18n as brianI18n } from '@freesewing/brian'
-import { sleeve } from './sleeve.mjs'
-import { topSleeve } from './topsleeve.mjs'
-import { underSleeve } from './undersleeve.mjs'
+import { underSleeve2 as underSleeve, topSleeve2 as topSleeve } from '@freesewing/partlib'
 import { i18n as bentI18n } from '../i18n/index.mjs'
 
 // Create new design
 const Bent = new Design({
   data: about,
-  parts: [front, back, sleeve, topSleeve, underSleeve],
+  parts: [front, back, topSleeve, underSleeve],
 })
 
 // Merge translations
-const i18n = mergeI18n([brianI18n, bentI18n], {
-  o: {
-    keep: [
-      ...Object.keys(sleeve.options),
-      'legacyArmholeDepthNo',
-      'legacyArmholeDepthYes',
-      'draftForHighBustNo',
-      'draftForHighBustYes',
-      'legacyArmholeDepthNo',
-      'legacyArmholeDepthYes',
-    ],
-  },
-})
+const i18n = mergeI18n([brianI18n, bentI18n])
 
 // Named exports
-export { front, back, sleeve, topSleeve, underSleeve, Bent, i18n, about }
+export { Bent, i18n, about }
