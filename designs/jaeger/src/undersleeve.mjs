@@ -1,4 +1,4 @@
-import { underSleeve as bentUnderSleeve } from '@freesewing/bent'
+import { underSleeve2 } from '@freesewing/partlib'
 import { sleeveVentLength, sleeveVentWidth } from './options.mjs'
 import { hidePresets } from '@freesewing/core'
 
@@ -222,7 +222,7 @@ function jaegerUnderSleeve({
 
 export const underSleeve = {
   name: 'jaeger.underSleeve',
-  from: bentUnderSleeve,
+  from: underSleeve2,
   options: { sleeveVentLength, sleeveVentWidth },
   hide: hidePresets.HIDE_TREE,
   draft: jaegerUnderSleeve,
