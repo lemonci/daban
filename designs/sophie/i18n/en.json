@@ -1,0 +1,69 @@
+{
+  "t": "Sophie Slip Dress",
+  "d": "Sophie is a slip dress with a gathered bust.",
+  "p": {
+    "cup": "cup",
+    "backStrap": "back strap",
+    "backPanel": "back panel",
+    "frontPanel": "front panel"
+  },
+  "s": { },
+  "o": { 
+    "strapWidth": {
+      "t": "Strap Width",
+      "d": "How wide do you want your shoulder straps?"
+    },
+    "necklineCoverage": {
+      "t": "Neckline Coverage",
+      "d": "How far up the neckline will be covered"
+    },
+    "backCoverage": {
+      "t": "Back Coverage",
+      "d": "Controls how far up the back will be covered"
+    },
+    "sideCornerDrop": {
+      "t": "Side Corner Drop",
+      "d": "How far down the cups go on the side between the underbust and the waist"
+    },
+    "lengthBonus": {
+      "t": "Length Bonus",
+      "d": "This controls the length of the dress as a percentage of the natural waist to knee measurement"
+    },
+    "bottomWidthBonus": {
+      "t": "Bottom Width Bonus",
+      "d": "How much room will there be around the legs at the bottom of the dress"
+    },
+    "armholeDrop": {
+      "t": "Armhole Drop",
+      "d": "How much to lower the armhole"
+    },
+    "armholeWidthFront": {
+      "t": "Armhole Width Front",
+      "d": "How far the armhole will extend toward the center of the chest"
+    },
+    "armholeWidthBack": {
+      "t": "Armhole Width Back",
+      "d": "How far the armhole will extend toward the center of the back"
+    },
+    "bustEase": {
+      "t": "Bust Ease",
+      "d": "How much room do you want around the bust?"
+    },
+    "underbustEase": {
+      "t": "Underbust Ease",
+      "d": "How much room do you want around the underbust?"
+    },
+    "waistEase": {
+      "t": "Waist Ease",
+      "d": "How much room do you want around the waist?"
+    },
+    "hipsEase": {
+      "t": "Hips Ease",
+      "d": "How much room do you want around the hips?"
+    },
+    "seatEase": {
+      "t": "Seat Ease",
+      "d": "How much room do you want around the seat?"
+    }
+  }
+}
