@@ -1,4 +1,4 @@
-import { underSleeve as bentUnderSleeve } from '@freesewing/bent'
+import { underSleeve2 } from '@freesewing/partlib'
 import { front as bentFront } from '@freesewing/bent'
 import { pctBasedOn } from '@freesewing/core'
 
@@ -173,7 +173,7 @@ function draftCarltonUnderSleeve({
 
 export const underSleeve = {
   name: 'carlton.underSleeve',
-  from: bentUnderSleeve,
+  from: underSleeve2,
   after: bentFront,
   hide: {
     from: true,

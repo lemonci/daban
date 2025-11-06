@@ -1,4 +1,4 @@
-import { topSleeve as bentTopSleeve } from '@freesewing/bent'
+import { topSleeve2 } from '@freesewing/partlib'
 import { front as bentFront } from '@freesewing/bent'
 import { front } from './front.mjs'
 import { back } from './back.mjs'
@@ -236,7 +236,7 @@ function draftCarltonTopSleeve({
 
 export const topSleeve = {
   name: 'carlton.topSleeve',
-  from: bentTopSleeve,
+  from: topSleeve2,
   after: [bentFront, front, back],
   hide: {
     from: true,

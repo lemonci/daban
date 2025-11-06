@@ -1,6 +1,6 @@
 import { Design, mergeI18n } from '@freesewing/core'
 import about from '../about.json' with { type: 'json' }
-import { i18n as brianI18n, Brian, sleevecap as brianSleevecap } from '@freesewing/brian'
+import { i18n as brianI18n, Brian } from '@freesewing/brian'
 import { i18n as carltonI18n } from '../i18n/index.mjs'
 // Parts
 import { front } from './front.mjs'
@@ -62,7 +62,7 @@ const i18n = mergeI18n([brianI18n, carltonI18n], {
       'draftForHighBustNo',
       'draftForHighBustYes',
     ],
-    drop: Object.keys(brianSleevecap.options).filter((o) => o !== 'sleevecapEase'),
+    //drop: Object.keys(brianSleevecap.options).filter((o) => o !== 'sleevecapEase'),
   },
 })
 
