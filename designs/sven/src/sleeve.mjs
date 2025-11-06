@@ -1,4 +1,4 @@
-import { sleeve as brianSleeve } from '@freesewing/brian'
+import { sleeve1 } from '@freesewing/partlib'
 import { ribbing, front, back } from './frontback.mjs'
 import { hidePresets, pctBasedOn } from '@freesewing/core'
 
@@ -78,12 +78,13 @@ function svenSleeve({ store, sa, points, paths, Path, macro, options, part }) {
 
 export const sleeve = {
   name: 'sven.sleeve',
-  from: brianSleeve,
+  from: sleeve1,
   hide: hidePresets.HIDE_TREE,
   after: [front, back],
   options: {
     ribbing,
     cuffEase: { pct: 20, min: 0, max: 200, ...pctBasedOn('wrist'), menu: 'fit' },
+    partlibFitSleeve1: true,
   },
   draft: svenSleeve,
 }
