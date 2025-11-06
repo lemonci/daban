@@ -6,7 +6,6 @@ import { front } from './front.mjs'
 import { sleeve } from './sleeve.mjs'
 // Re-export skeleton parts so peope can re-use them
 import { base } from './base.mjs'
-import { sleevecap } from './sleevecap.mjs'
 
 // Setup our new design
 const Brian = new Design({
@@ -15,4 +14,4 @@ const Brian = new Design({
 })
 
 // Named exports
-export { back, front, sleeve, base, sleevecap, Brian, i18n, about }
+export { back, front, base, Brian, i18n, about }
