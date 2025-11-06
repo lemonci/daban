@@ -260,10 +260,16 @@ export const sleeve1 = {
     macro('scalebox', { at: points.scalebox })
 
     // Notches
-    points.frontNotch = paths.sleevecap.shiftAlong(store.get('frontArmholeToArmholePitch'))
-    points.backNotch = paths.sleevecap.reverse().shiftAlong(store.get('backArmholeToArmholePitch'))
-    snippets.frontNotch = new Snippet('notch', points.frontNotch)
-    snippets.backNotch = new Snippet('bnotch', points.backNotch)
+    if (store.get('frontArmholeToArmholePitch')) {
+      points.frontNotch = paths.sleevecap.shiftAlong(store.get('frontArmholeToArmholePitch'))
+      snippets.frontNotch = new Snippet('notch', points.frontNotch)
+    }
+    if (store.get('backArmholeToArmholePitch')) {
+      points.backNotch = paths.sleevecap
+        .reverse()
+        .shiftAlong(store.get('backArmholeToArmholePitch'))
+      snippets.backNotch = new Snippet('bnotch', points.backNotch)
+    }
 
     // Dimensions
     macro('vd', {
