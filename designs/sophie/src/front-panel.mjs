@@ -56,7 +56,6 @@ export const frontPanel = {
      * Add paperless if enabled
      */
 
-    console.log(JSON.stringify(points))
     //vertical distances
     if (paperless) {
       macro('vd', {

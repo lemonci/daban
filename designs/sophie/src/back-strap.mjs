@@ -32,8 +32,6 @@ export const backStrap = {
     const underbust = store.get('underbust')
     const cornerWidth = store.get('cornerWidth')
 
-    console.log('underbust', underbust / 4)
-    console.log('cornerwidth', cornerWidth)
     /*
      * Create the points
      */
