@@ -1,10 +1,7 @@
-import { sleeve as brianSleeve } from '@freesewing/brian'
+import { sleeve1 } from '@freesewing/partlib'
 import { hidePresets } from '@freesewing/core'
 
 function yuriSleeve({ Path, points, paths, sa, part }) {
-  // This sleeve is identical to Brian, but has more hem allowance
-  // Which is kinda hard to patch in so we re-create the paths
-
   // Paths
   paths.saBase = new Path()
     .move(points.wristRight)
@@ -35,7 +32,11 @@ function yuriSleeve({ Path, points, paths, sa, part }) {
 
 export const sleeve = {
   name: 'yuri.sleeve',
-  from: brianSleeve,
+  from: sleeve1,
   hide: hidePresets.HIDE_TREE,
   draft: yuriSleeve,
+  options: {
+    ...sleeve1.options,
+    partlibFitSleeve1: true,
+  },
 }
