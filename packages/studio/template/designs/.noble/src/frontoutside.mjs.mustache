@@ -1,0 +1,11 @@
+import { frontOutside as nobleFrontOutside } from '@freesewing/noble'
+
+export const frontOutside = {
+  from: nobleFrontOutside,
+  name: '{{ name }}.frontOutside',
+  hide: { from: true },
+  options: {},
+  draft: ({ part }) => {
+    return part
+  },
+}

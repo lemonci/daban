@@ -1,0 +1,12 @@
+import { front as bibiFront } from '@freesewing/bibi'
+
+export const front = {
+  from: bibiFront,
+  name: '{{ name }}.front',
+  hide: { from: true },
+  measurements: [],
+  options: {},
+  draft: ({ part }) => {
+    return part
+  },
+}

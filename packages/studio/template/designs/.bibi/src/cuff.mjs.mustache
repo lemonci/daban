@@ -1,0 +1,11 @@
+import { cuff as bibiCuff } from '@freesewing/bibi'
+
+export const cuff = {
+  from: bibiCuff,
+  name: '{{ name }}.cuff',
+  hide: { from: true },
+  options: {},
+  draft: ({ part }) => {
+    return part
+  },
+}

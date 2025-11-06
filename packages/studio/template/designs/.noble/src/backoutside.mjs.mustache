@@ -1,0 +1,11 @@
+import { backOutside as nobleBackOutside } from '@freesewing/noble'
+
+export const backOutside = {
+  from: nobleBackOutside,
+  name: '{{ name }}.backOutside',
+  hide: { from: true },
+  options: {},
+  draft: ({ part }) => {
+    return part
+  },
+}
