@@ -1,12 +1,8 @@
-import { sleevecap as brianSleeveCap } from '@freesewing/brian'
-import { hidePresets } from '@freesewing/core'
 import { cuff } from './cuff.mjs'
 
 export const sleeve = {
   name: 'bibi.sleeve',
-  from: brianSleeveCap,
-  after: cuff,
-  hide: hidePresets.HIDE_TREE,
+  from: cuff,
   options: {
     sleeveLength: {
       pct: 20,
@@ -35,6 +31,9 @@ function bibiSleeve({
   part,
   utils,
 }) {
+  for (const path of Object.keys(paths)) {
+    paths[path].hide()
+  }
   points.sleeveTip = paths.sleevecap.edge('top')
   points.sleeveTop = new Point(0, points.sleeveTip.y) // Always in center
 

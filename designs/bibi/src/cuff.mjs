@@ -1,11 +1,17 @@
-import { sleevecap as brianSleeveCap } from '@freesewing/brian'
+import { sleeve1 } from '@freesewing/partlib'
+import { front, back } from '@freesewing/brian'
 import { hidePresets, pctBasedOn } from '@freesewing/core'
 import { draftRibbing } from './shared.mjs'
 
 export const cuff = {
   name: 'bibi.cuff',
-  from: brianSleeveCap,
-  hide: hidePresets.HIDE_TREE,
+  from: sleeve1,
+  after: [front, back],
+  hide: {
+    from: true,
+    inherited: true,
+    after: true,
+  },
 
   options: {
     // Brian overrides, placed here as this is the first loaded part that inherits from brian base
@@ -70,7 +76,16 @@ export const cuff = {
   draft: bibiCuff,
 }
 
-function bibiCuff({ part, store, measurements, options, paths, points, Point, macro }) {
+function bibiCuff({ part, store, measurements, options, paths, points, snippets, Point, macro }) {
+  macro('rmtitle')
+  macro('rmscalebox')
+  for (const path of Object.keys(paths)) {
+    paths[path].hide()
+  }
+  for (const key of Object.keys(snippets)) {
+    delete snippets[key]
+  }
+
   store.set(
     'ribbingHeight',
     (measurements.hpsToWaistBack + measurements.waistToHips) * options.ribbingHeight
