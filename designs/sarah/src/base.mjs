@@ -74,21 +74,9 @@ export function pctWaistlineToFloor() {
   }
 }
 
-function draftBase({
-  Path,
-  Point,
-  paths,
-  points,
-  measurements,
-  options,
-  part,
-  store,
-  sa,
-  expand,
-  hidden,
-}) {
+function draftBase({ Path, Point, paths, points, measurements, options, part, store, sa, expand }) {
   // since this is a block, only notify about expand if this is the current part
-  if (!(hidden || (options.centerFrontSeam && options.centerBackSeam))) {
+  if (options.showExpandNotification && !(options.centerFrontSeam && options.centerBackSeam)) {
     if (expand) {
       store.flag.preset('expandIsOn')
     } else {
@@ -252,6 +240,7 @@ export const base = {
   measurements: ['waist', 'seat', 'waistToSeat', 'waistToFloor', 'hips', 'waistToHips'],
   options: {
     paperlessOffset: 15,
+    showExpandNotification: true,
     centerFrontSeam: {
       bool: false,
       menu: 'style',
