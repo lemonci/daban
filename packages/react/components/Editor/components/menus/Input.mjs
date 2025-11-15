@@ -271,6 +271,7 @@ export const MenuSliderInput = ({
               min,
               max,
               state,
+              Design,
             }}
           />
         </div>
@@ -328,7 +329,7 @@ export const MenuSliderInput = ({
 }
 
 export const MenuEditOption = (props) => {
-  const { config, handleChange } = props
+  const { config, handleChange, Design } = props
   const { settings = {} } = props.state // Guard against undefined settings
   const type = designOptionType(config)
 
@@ -342,9 +343,21 @@ export const MenuEditOption = (props) => {
     (validVal, units) => {
       if (validVal !== null && validVal !== false) {
         if (type === 'pct' && units === 'cm')
-          return handleChange(config.fromAbs(Number(validVal) * 1000, settings))
+          return handleChange(
+            config.fromAbs(
+              Number(validVal) * 1000,
+              settings,
+              mergeOptions(settings, Design.patternConfig.options)
+            )
+          )
         if (type === 'pct' && units === 'inch')
-          return handleChange(config.fromAbs(Number(validVal) * 2540, settings))
+          return handleChange(
+            config.fromAbs(
+              Number(validVal) * 2540,
+              settings,
+              mergeOptions(settings, Design.patternConfig.options)
+            )
+          )
         return handleChange(validVal)
       }
     },
@@ -355,7 +368,6 @@ export const MenuEditOption = (props) => {
     if (abs) setUnits(defaultConfig.menuOptionEditLabels[type])
     else setUnits(settings.units === 'imperial' ? 'inch' : 'cm')
     setAbs(!abs)
-    console.log('in toogg;e')
   }
 
   if (!['pct', 'count', 'deg', 'mm'].includes(type))
@@ -367,16 +379,24 @@ export const MenuEditOption = (props) => {
         <label className="tw:daisy-label-text">
           <em>Enter a custom value</em>
         </label>
-        {type === 'pct' && typeof config.fromAbs === 'function' ? (
-          <label className="tw:daisy-label-text">
-            <KeyVal k="units" val={units} onClick={toggleInputUnits} color="secondary" />
-          </label>
-        ) : null}
       </div>
-      <label className="tw:daisy-input-group tw:daisy-input-group-sm tw:flex tw:flex-row tw:items-end tw:gap-2 tw:-mt-4">
+      <label className="tw:daisy-input-group tw:daisy-input-group-sm tw:flex tw:flex-row tw:items-center tw:gap-2 tw:-mt-4">
         <NumberInput value={manualEdit} update={setManualEdit} />
+        {type === 'pct' && typeof config.fromAbs === 'function' ? (
+          <button
+            className="tw:daisy-btn tw:daisy-btn-square tw:mt-2 tw:flex tw:items-center tw:justify-center"
+            onClick={toggleInputUnits}
+          >
+            <label className={'tw:daisy-swap ' + (units === '%' ? '' : 'tw:daisy-swap-active')}>
+              <span className="tw:daisy-swap-off">%</span>
+              <span className="tw:daisy-swap-on">
+                {settings.units === 'imperial' ? 'inch' : 'cm'}
+              </span>
+            </label>
+          </button>
+        ) : null}
         <button
-          className="tw:daisy-btn tw:daisy-btn-secondary tw:mt-4"
+          className="tw:daisy-btn tw:daisy-btn-secondary tw:mt-2"
           onClick={() => onUpdate(manualEdit, units)}
         >
           <ApplyIcon />
