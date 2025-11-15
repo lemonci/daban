@@ -175,7 +175,10 @@ const title = function (config, { Point, points, scale, locale, store, part, log
           if (onFold)
             notes.push(onBias ? 'plugin-annotations:onFoldAndBias' : 'plugin-annotations:onFold')
           else if (onBias) notes.push('plugin-annotations:onBias')
-          notes.push('plugin-annotations:from', 'plugin-annotations:' + material)
+          notes.push(
+            'plugin-annotations:from',
+            (material.includes(':') ? '' : 'plugin-annotations:') + material
+          )
           /*
            * Force a line break between materials
            */
