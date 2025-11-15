@@ -65,7 +65,7 @@ sites/org/src/lib/designinfo.mjs
 sites/org/src/lib/designs.mjs
 sites/org/src/lib/designinfo.mjs
 sites/org/src/lib/i18n.mjs
-sites/org/docs/designs/*/options/readme.mdx
+sites/org/docs/docs/designs/*/options/readme.mdx
 sites/org/authors.json
 sites/org/showcase-tags.mjs
 sites/org/design-examples.mjs

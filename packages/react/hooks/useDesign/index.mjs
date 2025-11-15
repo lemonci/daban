@@ -38,6 +38,7 @@ import { Onyx as onyx } from '@freesewing/onyx'
 import { Opal as opal } from '@freesewing/opal'
 import { Otis as otis } from '@freesewing/otis'
 import { Paco as paco } from '@freesewing/paco'
+import { Partlib as partlib } from '@freesewing/partlib'
 import { Penelope as penelope } from '@freesewing/penelope'
 import { Percy as percy } from '@freesewing/percy'
 import { Sabrina as sabrina } from '@freesewing/sabrina'
@@ -48,6 +49,7 @@ import { Shin as shin } from '@freesewing/shin'
 import { Simon as simon } from '@freesewing/simon'
 import { Simone as simone } from '@freesewing/simone'
 import { Skully as skully } from '@freesewing/skully'
+import { Sophie as sophie } from '@freesewing/sophie'
 import { Sunny as sunny } from '@freesewing/sunny'
 import { Sven as sven } from '@freesewing/sven'
 import { Tamiko as tamiko } from '@freesewing/tamiko'
@@ -104,6 +106,7 @@ export const designs = {
   opal,
   otis,
   paco,
+  partlib,
   penelope,
   percy,
   sabrina,
@@ -114,6 +117,7 @@ export const designs = {
   simon,
   simone,
   skully,
+  sophie,
   sunny,
   sven,
   tamiko,

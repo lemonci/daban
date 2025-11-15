@@ -175,6 +175,8 @@ if (!SITEBUILD) {
 
 // Step 6: Generate collection package and hook dynamic files
 const collection = Object.keys(repo.software.collection)
+
+// Generate collection index.mjs
 const designImports = collection
   .map((name) => `import { ${capitalize(name)} as ${name} } from '@freesewing/${name}'`)
   .join('\n')
@@ -185,6 +187,8 @@ await writeFile(
     collection: collection.join(',\n  '),
   })
 )
+
+// Generate collection i18n.mjs
 const collectionI18n = collection
   .map((name) => `import { i18n as ${name} } from '@freesewing/${name}'`)
   .join('\n')
@@ -195,6 +199,8 @@ await writeFile(
     collection: collection.join(',\n  '),
   })
 )
+
+// Generate useDesign hook
 await writeFile(
   ['packages', 'react', 'hooks', 'useDesign', 'index.mjs'],
   mustache.render(repo.templates.collection.hook, {
@@ -203,7 +209,7 @@ await writeFile(
   })
 )
 
-// i18n/designs.mjs is similar to the collection i18n.mjs, but contains all designs, even those not in a collection
+// packages/i18n/designs.mjs is similar to the collection i18n.mjs, but contains all designs, even those not in a collection
 const completeDesignImports = Object.keys(repo.software.designs)
   .map((name) => `import { i18n as ${name} } from '@freesewing/${name}'`)
   .join('\n')
@@ -211,7 +217,7 @@ const completeDesignMap = Object.keys(repo.software.designs)
   .map((name) => `  ${name}: ${name}.en,`)
   .join('\n')
 await writeFile(
-  ['i18n', 'designs.mjs'],
+  ['packages', 'i18n', 'src', 'designs.mjs'],
   mustache.render(repo.templates.i18n, {
     imports: completeDesignImports,
     designs: completeDesignMap,
@@ -343,6 +349,14 @@ function packageJson(pkg, type, about) {
   pkgConf.dependencies = dependencies('_', pkg, type)
   pkgConf.devDependencies = dependencies('dev', pkg, type)
   pkgConf.peerDependencies = dependencies('peer', pkg, type)
+  if (pkg === 'collection') {
+    let strings = Object.keys(repo.software.collection)
+    const collectionDeps = strings.reduce((acc, name) => {
+      acc[`@freesewing/${name}`] = version
+      return acc
+    }, {})
+    pkgConf.dependencies = { ...pkgConf.dependencies, ...collectionDeps }
+  }
   if (typeof repo.exceptions.packageJson[pkg] !== 'undefined') {
     pkgConf = {
       ...pkgConf,

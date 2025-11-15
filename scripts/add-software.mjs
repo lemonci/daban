@@ -14,7 +14,6 @@ import prompts from 'prompts'
 import chalk from 'chalk'
 import { banner } from './banner.mjs'
 import { execSync } from 'child_process'
-import languages from '../config/languages.json' with { type: 'json' }
 import { getDesigns, getPlugins } from './software.mjs'
 import conf from '../lerna.json' with { type: 'json' }
 const { version } = conf
@@ -106,10 +105,12 @@ export const getInput = async () => {
         message: ' What template would you like to start from?',
         choices: [
           { title: 'Create a design from scratch', value: 'base' },
-          { title: 'Extend the Brian block (flat-sleeve block for menswear)', value: 'brian' },
-          { title: 'Extend the Bent block (two-part-sleeve block for menswear)', value: 'bent' },
           { title: 'Extend the Bella block (womenswear bodice block)', value: 'bella' },
+          { title: 'Extend the Bent block (two-part-sleeve block for menswear)', value: 'bent' },
+          { title: 'Extend the Bibi block (knit top body block)', value: 'bibi' },
           { title: 'Extend the Breanna block (womenswear bodice block)', value: 'breanna' },
+          { title: 'Extend the Brian block (flat-sleeve block for menswear)', value: 'brian' },
+          { title: 'Extend the Noble block (princess seam bodice block)', value: 'noble' },
           { title: 'Extend the Sarah block (unisex skirt block)', value: 'sarah' },
           { title: 'Extend the Titan block (unisex trouser block)', value: 'titan' },
         ],

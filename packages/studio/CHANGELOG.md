@@ -1,6 +1,13 @@
 # Change log for: @freesewing/studio
 
 
+## 4.4.0 (2025-11-06)
+
+### Added
+
+ - Add Bibi design template
+ - Add Noble design template
+
 ## 4.0.3 (2025-06-09)
 
 ### Added

@@ -1,8 +1,9 @@
-import { base } from './base.mjs'
+import { addHorizontalLines, base } from './base.mjs'
 
 export const back = {
   name: 'umbra.back',
   from: base,
+  hide: { from: true },
   draft: draftUmbraBack,
 }
 
@@ -23,10 +24,18 @@ function draftUmbraBack({
   macro,
   part,
 }) {
+  paths.seamBase.hide()
+
   /*
    * We'll use this list later
    */
   const toFlip = [
+    'cfWaist',
+    'cfHips',
+    'cfSeat',
+    'cfWaistBack',
+    'cfHipsBack',
+    'cfSeatBack',
     'cfWaistbandDipCp1Back',
     'cfWaistbandDipCp2Back',
     'sideWaistbandBack',
@@ -77,7 +86,7 @@ function draftUmbraBack({
     paths.mirroredBack.hide()
     paths.mirroredMirroredBack.hide()
 
-    if (sa) paths.sa = paths.seam.offset(sa * -1).addClass('fabric sa')
+    if (sa) paths.sa = macro('sa', { paths: [paths.seam.reverse()] })
 
     /*
      * Set the cutlist info
@@ -122,12 +131,10 @@ function draftUmbraBack({
       .unhide()
       .addClass('fabric')
 
+    addHorizontalLines(part, paths.seam)
+
     if (sa) {
-      paths.sa = new Path()
-        .move(points.cfBackGusset)
-        .join(paths.saBase.offset(sa))
-        .line(paths.saBase.end())
-        .addClass('fabric sa')
+      paths.sa = macro('sa', { paths: [paths.saBase, null] })
     }
 
     /*
@@ -138,11 +145,19 @@ function draftUmbraBack({
     /*
      * Add cut on fold indicator
      */
-    macro('cutonfold', {
-      from: points.cfWaistbandDipBack,
-      to: points.cfBackGusset,
-      grainline: true,
-    })
+    if (options.flipBack) {
+      macro('cutonfold', {
+        from: points.cfWaistbandDipBack,
+        to: points.cfBackGusset,
+        grainline: true,
+      })
+    } else {
+      macro('cutonfold', {
+        from: points.cfBackGusset,
+        to: points.cfWaistbandDipBack,
+        grainline: true,
+      })
+    }
   }
 
   /*

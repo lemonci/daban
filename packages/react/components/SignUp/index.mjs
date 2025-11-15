@@ -209,7 +209,7 @@ export const SignUpConfirmation = () => {
   if (!id || !check)
     return (
       <>
-        <h1>One moment pleae</h1>
+        <h1>One moment please</h1>
         <Spinner className="tw:w-8 tw:h-8 tw:m-auto tw:animate-spin" />
       </>
     )

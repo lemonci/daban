@@ -144,7 +144,7 @@ Point.prototype.flipX = function (that = false) {
   this.__check()
   if (that) {
     if (that instanceof Point !== true)
-      this.log.warn('Called `Point.rotate(deg,that)` but `that` is not a `Point` object')
+      this.log.warn('Called `Point.flipX(that)` but `that` is not a `Point` object')
     that.__check()
   }
   if (that === false || that.x === 0) return new Point(this.x * -1, this.y).__withLog(this.log)

@@ -16,7 +16,8 @@
     "dart",
     "block"
   ],
-  "version": "4.3.0",
+  "block": true,
+  "version": "4.4.0",
   "pkg": "@freesewing/bella",
   "collection": true
 }

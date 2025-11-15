@@ -99,6 +99,7 @@ function mmOption(option) {
 
 const designPageTemplate = (design) => `---
 title: ${i18n[design].en.t}
+description: ${i18n[design].en.d}
 ---
 
 {/* This page is auto-generated. Manual changes will be lost. */}

@@ -1,6 +1,12 @@
 # Change log for: @freesewing/lumina
 
 
+## 4.4.0 (2025-11-06)
+
+### Added
+
+ - Add seam markings (#571)
+
 ## 3.2.0 (2024-02-11)
 
 ### Added

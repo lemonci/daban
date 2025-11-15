@@ -1,0 +1,11 @@
+import { frontPoints as nobleFrontPoints } from '@freesewing/noble'
+
+export const frontPoints = {
+  from: nobleFrontPoints,
+  name: '{{ name }}.frontPoints',
+  hide: { from: true },
+  options: {},
+  draft: ({ part }) => {
+    return part
+  },
+}

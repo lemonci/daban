@@ -1,0 +1,11 @@
+import { neckBinding as bibiNeckBinding } from '@freesewing/bibi'
+
+export const neckBinding = {
+  from: bibiNeckBinding,
+  name: '{{ name }}.neckBinding',
+  hide: { from: true },
+  options: {},
+  draft: ({ part }) => {
+    return part
+  },
+}

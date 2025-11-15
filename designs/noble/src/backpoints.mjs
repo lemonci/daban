@@ -30,7 +30,10 @@ export const backPoints = {
 
       points.shoulderDart = armholePath.shiftFractionAlong(options.armholeDartPosition)
     }
-    const aUp = points.dartTip.angle(points.shoulderDart)
+    let aUp = points.dartTip.angle(points.shoulderDart)
+    if (aUp > 180) {
+      aUp = 360 - aUp
+    }
     const aDown = points.dartBottomRight.angle(points.dartTip)
     const aDiff = Math.abs(aUp - aDown)
 

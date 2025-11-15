@@ -1,4 +1,5 @@
 // Dependencies
+import Admonition from '@theme/Admonition'
 import {
   about,
   collection,
@@ -367,6 +368,20 @@ export const DesignInfo = ({ Link = false, design = false, noDocsLink = false })
 
   return (
     <>
+      {about[design].block ? (
+        <div>
+          <Admonition type="warning" title={`${design} is a block, not a pattern`}>
+            <p>
+              A block is a basic shape on which other patterns are based. They are sometimes also
+              called slopers, although purists will argue that a block and a sloper are different
+              things.
+            </p>
+            <p>
+              Blocks are typically not made as-is but rather serve as a basis for other patterns.
+            </p>
+          </Admonition>
+        </div>
+      ) : null}
       <div className="tw:lg:hidden">{buttons}</div>
       <div className={`tw:grid tw:grid-cols-1 tw:lg:grid-cols-2 tw:gap-2`}>
         <div className="tw:relative">

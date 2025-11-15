@@ -1,0 +1,22 @@
+import { Design, mergeI18n } from '@freesewing/core'
+import { i18n as nobleI18n } from '@freesewing/noble'
+import { i18n as {{ name }}I18n } from '../i18n/index.mjs'
+import { frontInside } from './frontinside.mjs'
+import { frontOutside } from './frontoutside.mjs'
+import { frontPoints } from './frontpoints.mjs'
+import { backInside } from './backinside.mjs'
+import { backOutside } from './backoutside.mjs'
+import { backPoints } from './backpoints.mjs'
+import about from '../about.json' with { type: 'json' }
+
+// Setup our new design
+const {{ Name }} = new Design({
+  data: about,
+  parts: [frontInside, frontOutside, frontPoints, backInside, backOutside, backPoints],
+})
+
+// Merge translations
+const i18n = mergeI18n([nobleI18n, {{ name }}I18n])
+
+// Named exports
+export { frontInside, frontOutside, frontPoints, backInside, backOutside, backPoints, {{ Name }}, i18n, about }

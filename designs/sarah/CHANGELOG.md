@@ -1,6 +1,12 @@
 # Change log for: @freesewing/sarah
 
 
+## 4.4.0 (2025-11-06)
+
+### Fixed
+
+ - Fix cut-on-fold/grainline annotations to adhere to the expand setting (#527)
+
 ## 4.2.0 (2025-08-16)
 
 ### Added

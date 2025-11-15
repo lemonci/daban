@@ -1,6 +1,13 @@
 # Change log for: @freesewing/noble
 
 
+## 4.4.0 (2025-11-06)
+
+### Fixed
+
+ - Fix front armhole issue (#176)
+ - Fix back dart issue (#583)
+
 ## 4.3.0 (2025-09-26)
 
 ### Added

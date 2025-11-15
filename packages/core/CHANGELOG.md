@@ -1,6 +1,12 @@
 # Change log for: @freesewing/core
 
 
+## 4.4.0 (2025-11-06)
+
+### Fixed
+
+ - Handle edge cases for closing paths during offset calculation (#612)
+
 ## 4.3.0 (2025-09-26)
 
 ### Fixed

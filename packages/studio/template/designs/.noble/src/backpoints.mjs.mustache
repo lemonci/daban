@@ -1,0 +1,11 @@
+import { backPoints as nobleBackPoints } from '@freesewing/noble'
+
+export const backPoints = {
+  from: nobleBackPoints,
+  name: '{{ name }}.backPoints',
+  hide: { from: true },
+  options: {},
+  draft: ({ part }) => {
+    return part
+  },
+}

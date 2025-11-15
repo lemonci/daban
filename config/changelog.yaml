@@ -1,6 +1,34 @@
 Unreleased:
   Added:
 
+4.4.0:
+  date: 2025-11-06
+
+  Added:
+    lumina:
+      - Add seam markings (#571)
+    simon:
+      - Add a short sleeves option (#581)
+    sophie:
+      - Initial release of Sophie, a slip dress design
+    studio:
+      - Add Bibi design template
+      - Add Noble design template
+    umbra:
+      - Integrate path-utils plugin (#579)
+
+
+  Fixed:
+    core:
+      - Handle edge cases for closing paths during offset calculation (#612)
+    hi:
+      - Double the size of the eye (#613)
+    noble:
+      - Fix front armhole issue (#176)
+      - Fix back dart issue (#583)
+    sarah:
+      - Fix cut-on-fold/grainline annotations to adhere to the expand setting (#527)
+
 4.3.0:
   date: 2025-09-26
 

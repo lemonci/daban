@@ -17,7 +17,7 @@ The `toAbs` property should hold a function with the following
 signature:
 
 ```js
-function toAbs(percentage, settings, mergeOptions) {
+function toAbs(percentage, settings, mergedOptions) {
   // return value in millimeter here
 }
 ```
@@ -38,7 +38,7 @@ result depends on several options.
 
 In our example above, let's say that the `chestEase` option is
 a simple percentage of the `chest` measurement. Our option
-configuration could like like this:
+configuration could look like this:
 
 ```js
 chestEase: {

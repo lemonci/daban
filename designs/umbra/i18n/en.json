@@ -8,6 +8,9 @@
     "base": "Base"
   },
   "s": {
+    "seat": "Seat",
+    "hips": "Hips",
+    "waist": "Waist",
     "legElasticLength.t": "You need 2x {{{ length }}} elastic to finish the legs (optional)",
     "legElasticLength.d": "If you want to add elastic to your legs, you need two times {{{ length }}}.",
     "legMeasure": "Leg elastic: 2x ",
@@ -16,18 +19,8 @@
     "waistbandMeasure": "Waistband elastic: ",
     "minStretch.t": "You need fabric with a minimum stretch of {{ pct }}",
     "minStretch.d": "Your waistband and fabric needs a minimum stretch of {{ pct }} so that you can comfortably fit through the waistband opening.",
-    "flipBackYes.t": "Flip upright",
-    "flipBackYes.d": "Flips the back part, which is constructed upside down, to an upright orientation",
-    "flipBackNo.t": "Keep upside down",
-    "flipBackNo.d": "Keeps the back part in its original orientation, which might help in the pattern inspector view",
-    "pockets.none.t": "No Pockets",
-    "pockets.none.d": "Create the design without any pockets (default)",
-    "pockets.inside.t": "Inside Pockets",
-    "pockets.inside.d": "Create two secret pockets on the insides and a center front pouch",
-    "pockets.zipper.t": "Front pockets with zippers",
-    "pockets.zipper.d": "Create two front pockets with zippers",
     "foldLining": "Fold lining",
-    "pocketSeam": "Pocket seam",
+    "pocketseam": "Pocket seam",
     "zipper": "Zipper"
   },
   "o": {
@@ -111,13 +104,33 @@
       "t": "Back exposure",
       "d": "Controls the amount of exposed skin on the back"
     },
-    "minFabricWidth":{
+    "minFabricWidth": {
       "t": "Minimum fabric width",
       "d": "Controls the minimum width of the thong strip and side band. Does not have an effect if the back exposure and the leg rise is low."
     },
     "flipBack": {
       "t": "Flip back",
       "d": "Determines if the back part should be rendered upside down"
+    },
+    "flipBackYes": {
+    "t": "Flip upright",
+    "d": "Flips the back part, which is constructed upside down, to an upright orientation"
+  },
+    "flipBackNo": {
+      "t": "Keep upside down",
+      "d": "Keeps the back part in its original orientation, which might help in the pattern inspector view"
+    },
+    "pockets.none": {
+    "t": "No Pockets",
+    "d": "Create the design without any pockets (default)"
+    },
+    "pockets.inside": {
+    "t": "Inside Pockets",
+    "d": "Create two secret pockets on the insides and a center front pouch"
+    },
+    "pockets.zipper": {
+    "t": "Front pockets with zippers",
+    "d": "Create two front pockets with zippers"
     }
   }
 }

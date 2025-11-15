@@ -1,0 +1,11 @@
+import { armholeBinding as bibiArmholeBinding } from '@freesewing/bibi'
+
+export const armholeBinding = {
+  from: bibiArmholeBinding,
+  name: '{{ name }}.armholeBinding',
+  hide: { from: true },
+  options: {},
+  draft: ({ part }) => {
+    return part
+  },
+}

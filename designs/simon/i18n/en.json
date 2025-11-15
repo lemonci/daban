@@ -274,6 +274,14 @@
       "t": "Separate the button placket",
       "d": "Draft a pattern where the button placket is separated from the front, allowing one to use a different fabric or grain for the button placket"
     },
+    "sleeveHemShort": {
+      "t": "Sleeve hem length",
+      "d": "Length of the hem"
+    },
+    "sleeveLengthShort": {
+      "t": "Sleeve length",
+      "d": "Length of the short sleeves"
+    },
     "sleevePlacketLength": {
       "t": "Sleeve placket length",
       "d": "The length of the sleeve placket."
@@ -281,6 +289,18 @@
     "sleevePlacketWidth": {
       "t": "Sleeve placket width",
       "d": "The width of the sleeve placket."
+    },
+    "sleeveStyle": {
+      "t": "Sleeve style",
+      "d": "Would you like long or short sleeves?"
+    },
+    "sleeveStyle.long": {
+      "t": "Long sleeves",
+      "d": "Normal long sleeves with all the cuff options"
+    },
+    "sleeveStyle.short": {
+      "t": "Short sleeves",
+      "d": "Short sleeves for the summer"
     },
     "splitYoke": {
       "t": "Split yoke",

@@ -1,0 +1,11 @@
+import { waistband as bibiWaistband } from '@freesewing/bibi'
+
+export const waistband = {
+  from: bibiWaistband,
+  name: '{{ name }}.waistband',
+  hide: { from: true },
+  options: {},
+  draft: ({ part }) => {
+    return part
+  },
+}

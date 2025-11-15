@@ -166,8 +166,11 @@ export const frontPoints = {
     points.armholeOutsidePitch = armholePathOutside.ops[1].to.clone()
     points.armholeOutsidePitchCp2 = armholePathOutside.ops[1].cp2.clone()
     if (armholePathOutside.ops.length == 2) {
-      points.armholeOutsidePitchCp1 = points.armhole.clone()
-      points.armholeCp2 = points.armhole.clone()
+      // Fix for issue 176:
+      // points.armholeOutsidePitchCp1 = points.armhole.clone()
+      // points.armholeCp2 = points.armhole.clone()
+      points.armholeOutsidePitchCp1 = armholePathOutside.ops[1].cp1.clone()
+      points.armholeCp2 = armholePathOutside.ops[1].cp2.clone()
     } else {
       points.armholeOutsidePitchCp1 = armholePathOutside.ops[2].cp1.clone()
       points.armholeCp2 = armholePathOutside.ops[2].cp2.clone()

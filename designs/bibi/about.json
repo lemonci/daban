@@ -14,7 +14,8 @@
     "hem",
     "flat-sleeve"
   ],
-  "version": "4.3.0",
+  "block": true,
+  "version": "4.4.0",
   "pkg": "@freesewing/bibi",
   "collection": true
 }

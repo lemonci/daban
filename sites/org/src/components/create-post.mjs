@@ -53,17 +53,18 @@ const dataAsMd = ({ title, author, caption, intro, designs, body }, type) => {
   let md = `---
 title: "${title}"
 caption: "${caption}"
-date: ${yyyymmdd()}
+date: ${yyyymmdd(false, '-')}
 intro: "${intro}"
-author: ${author}`
+authors: [ "${author}" ]`
   if (type === 'showcase')
     md += `
-designs: [${designs.map((design) => `"${design}"`).join(', ')}]`
+tags: [${designs.map((design) => `"${design}"`).join(', ')}]`
   md += `
 ---
 
-${body}
+<!-- truncate -->
 
+${body}
 `
 
   return md

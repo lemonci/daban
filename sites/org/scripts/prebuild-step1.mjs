@@ -2,15 +2,11 @@ import fs from 'fs'
 import path from 'path'
 import yaml from 'yaml'
 import { about as designInfo } from '../../../packages/collection/src/index.mjs'
-import { designs as designTranslations } from '../../../i18n/designs.mjs'
-import { measurements as measurementsTranslations } from '@freesewing/i18n'
-
-/*
- * Load translations as there's no YAML loader
- * We are loading this sync because NodeJS 20 does not support
- * top-level await out of the box
- */
-const optionGroupTranslations = loadYaml('../../i18n/optiongroups.yaml')
+import {
+  designs as designTranslations,
+  measurements as measurementsTranslations,
+  optiongroups as optionGroupTranslations,
+} from '@freesewing/i18n'
 
 /*
  * Write these translations as JS to disk

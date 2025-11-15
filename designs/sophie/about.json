@@ -1,0 +1,13 @@
+{
+  "id": "sophie",
+  "code": "JenBarb_",
+  "design": "JenBarb_",
+  "description": "A FreeSewing pattern for a slip dress with a gathered bust",
+  "name": "Sophie Slip Dress",
+  "difficulty": 2,
+  "tags": [],
+  "techniques": [],
+  "version": "4.4.0",
+  "pkg": "@freesewing/sophie",
+  "collection": true
+}

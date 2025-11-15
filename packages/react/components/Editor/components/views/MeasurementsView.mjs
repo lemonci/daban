@@ -67,8 +67,11 @@ export const MeasurementsView = ({
     else update.notifySuccess(`We have all measurements to draft ${capitalize(design)}`)
   }, [state.view, update])
 
-  const loadMeasurements = (set) => {
-    update.settings(['measurements'], designMeasurements(Design, set.measies))
+  const loadMeasurements = (set, fromPublicRoute = false) => {
+    update.settings(
+      ['measurements'],
+      designMeasurements(Design, fromPublicRoute ? set.measurements : set.measies)
+    )
     update.settings(['units'], set.imperial ? 'imperial' : 'metric')
     // Save the measurement set name to pattern settings
     if (set.nameEn)
@@ -236,7 +239,7 @@ const LoadMeasurementsSetById = ({ loadMeasurements, update }) => {
         />
         <button
           className="tw:daisy-btn tw:daisy-btn-primary"
-          onClick={() => loadMeasurementsSet(id, backend, loadMeasurements, update)}
+          onClick={() => loadPublicMeasurementsSet(id, backend, loadMeasurements, update)}
         >
           Load set
         </button>
@@ -245,14 +248,14 @@ const LoadMeasurementsSetById = ({ loadMeasurements, update }) => {
   )
 }
 
-async function loadMeasurementsSet(id, backend, loadMeasurements, update) {
+async function loadPublicMeasurementsSet(id, backend, loadMeasurements, update) {
   update.startLoading('getset', {
     msg: 'Loading measurements set from the FreeSewing backend',
     icon: 'spinner',
   })
-  const result = await backend.getSet(id)
-  if (result[0] === 200 && result[1].set) {
-    loadMeasurements(result[1].set)
+  const result = await backend.getPublicSet(id)
+  if (result[0] === 200 && result[1].measurements) {
+    loadMeasurements(result[1], true)
     update.clearLoading()
     update.notifySuccess(
       <div className="tw:flex tw:flex-row tw:items-center tw:justify-between tw:w-full tw:flex-wrap tw:gap-2">

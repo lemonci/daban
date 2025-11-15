@@ -22,10 +22,10 @@ By default, the `sa` setting is `false` and seam allowance is not included.
 ## Example
 
 ```js
-import { Aaron } from "@freesewing/aaron"
+import { Aaron } from '@freesewing/aaron'
 
 const pattern = new Aaron({
-  sa: 10
+  sa: 10,
 })
 ```
 
@@ -37,5 +37,8 @@ Instead, it is up to the pattern designer to have the design check
 for the `sa` setting and include the appropriate seam allowance lines
 on the pattern when `sa` is set to a non-zero numeric value.
 
-The `sa` setting is automatically set to `0` to disable seam allowance if
-[settings.complete](/reference/settings/complete) is `false`.
+Previous versions of FreeSewing were setting `sa` automatically to `0` to disable seam allowance if
+[settings.complete](/reference/settings/complete) is `false`. This doesn't apply anymore.
+
+We recommend only showing the part outline and the seam allowance when `sa` is nonzero and `complete`
+is `false`. This is what will usually happen anyway if you don't add any special code to handle this case.
