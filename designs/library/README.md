@@ -1,12 +1,12 @@
 <p align='center'><a
-  href="https://www.npmjs.com/package/@freesewing/partlib"
-  title="@freesewing/partlib on NPM"
-  ><img src="https://img.shields.io/npm/v/@freesewing/partlib.svg"
-  alt="@freesewing/partlib on NPM"/>
+  href="https://www.npmjs.com/package/@freesewing/library"
+  title="@freesewing/library on NPM"
+  ><img src="https://img.shields.io/npm/v/@freesewing/library.svg"
+  alt="@freesewing/library on NPM"/>
   </a><a
   href="https://opensource.org/licenses/MIT"
   title="License: MIT"
-  ><img src="https://img.shields.io/npm/l/@freesewing/partlib.svg?label=License"
+  ><img src="https://img.shields.io/npm/l/@freesewing/library.svg?label=License"
   alt="License: MIT"/>
   </a><a
   href="#contributors-"
@@ -30,7 +30,7 @@
   alt="Become a FreeSewing Patron"/>
   </a></p>
 
-# @freesewing/partlib
+# @freesewing/library
 
 A FreeSewing design that bundles reuseable parts
 
@@ -50,7 +50,7 @@ hardship, then you should [join us and become a patron](https://freesewing.eu/pa
 
 This repository is the FreeSewing *monorepo* holding all FreeSewing's websites, documentation, designs, plugins, and other NPM packages.
 
-This folder holds: @freesewing/partlib
+This folder holds: @freesewing/library
 
 If you're not entirely sure what to do or how to start, type this command:
 

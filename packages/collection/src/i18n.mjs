@@ -28,6 +28,7 @@ import { i18n as hugo } from '@freesewing/hugo'
 import { i18n as jaeger } from '@freesewing/jaeger'
 import { i18n as jane } from '@freesewing/jane'
 import { i18n as jett } from '@freesewing/jett'
+import { i18n as library } from '@freesewing/library'
 import { i18n as lily } from '@freesewing/lily'
 import { i18n as lucy } from '@freesewing/lucy'
 import { i18n as lumina } from '@freesewing/lumina'
@@ -39,7 +40,6 @@ import { i18n as onyx } from '@freesewing/onyx'
 import { i18n as opal } from '@freesewing/opal'
 import { i18n as otis } from '@freesewing/otis'
 import { i18n as paco } from '@freesewing/paco'
-import { i18n as partlib } from '@freesewing/partlib'
 import { i18n as penelope } from '@freesewing/penelope'
 import { i18n as percy } from '@freesewing/percy'
 import { i18n as sabrina } from '@freesewing/sabrina'
@@ -99,6 +99,7 @@ export const i18n = {
   jaeger,
   jane,
   jett,
+  library,
   lily,
   lucy,
   lumina,
@@ -110,7 +111,6 @@ export const i18n = {
   opal,
   otis,
   paco,
-  partlib,
   penelope,
   percy,
   sabrina,

@@ -28,6 +28,7 @@ import { Hugo as hugo } from '@freesewing/hugo'
 import { Jaeger as jaeger } from '@freesewing/jaeger'
 import { Jane as jane } from '@freesewing/jane'
 import { Jett as jett } from '@freesewing/jett'
+import { Library as library } from '@freesewing/library'
 import { Lily as lily } from '@freesewing/lily'
 import { Lucy as lucy } from '@freesewing/lucy'
 import { Lumina as lumina } from '@freesewing/lumina'
@@ -39,7 +40,6 @@ import { Onyx as onyx } from '@freesewing/onyx'
 import { Opal as opal } from '@freesewing/opal'
 import { Otis as otis } from '@freesewing/otis'
 import { Paco as paco } from '@freesewing/paco'
-import { Partlib as partlib } from '@freesewing/partlib'
 import { Penelope as penelope } from '@freesewing/penelope'
 import { Percy as percy } from '@freesewing/percy'
 import { Sabrina as sabrina } from '@freesewing/sabrina'
@@ -103,6 +103,7 @@ export const designs = {
   jaeger,
   jane,
   jett,
+  library,
   lily,
   lucy,
   lumina,
@@ -114,7 +115,6 @@ export const designs = {
   opal,
   otis,
   paco,
-  partlib,
   penelope,
   percy,
   sabrina,

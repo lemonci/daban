@@ -39,7 +39,7 @@
   },
   "peerDependencies": {
     "@freesewing/core": "4.4.0",
-    "@freesewing/partlib": "4.4.0",
+    "@freesewing/library": "4.4.0",
     "@freesewing/plugin-bust": "4.4.0"
   },
   "dependencies": {},
