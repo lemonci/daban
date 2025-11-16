@@ -1,6 +1,6 @@
-import { sleeve2, dimensions } from './sleeve-2.mjs'
+import { twoPartSleeve, dimensions } from './shared.mjs'
 
-function draftUnderSleeve2({ macro, Path, points, paths, snippets, Snippet, sa, store, part }) {
+function draftUndersleeve({ macro, Path, points, paths, snippets, Snippet, sa, store, part }) {
   // Extract seamline from sleeve
   delete paths.ts
   paths.seam = paths.us.clone().attr('class', 'fabric', true)
@@ -60,8 +60,9 @@ function draftUnderSleeve2({ macro, Path, points, paths, snippets, Snippet, sa, 
   return part
 }
 
-export const underSleeve2 = {
-  name: 'partlib.underSleeve2',
-  from: sleeve2,
-  draft: draftUnderSleeve2,
+export const undersleeve = {
+  name: 'library.undersleeve',
+  from: twoPartSleeve,
+  draft: draftUndersleeve,
+  options: twoPartSleeve.options,
 }

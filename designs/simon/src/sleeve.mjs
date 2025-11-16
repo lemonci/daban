@@ -1,5 +1,5 @@
 import { front } from './front.mjs'
-import { sleeve1 } from '@freesewing/partlib'
+import { sleeve as librarySleeve } from '@freesewing/library'
 import { hidePresets } from '@freesewing/core'
 import {
   cuffOverlap,
@@ -363,7 +363,7 @@ function simonSleeve({
 
 export const sleeve = {
   name: 'simon.sleeve',
-  from: sleeve1,
+  from: librarySleeve,
   after: front,
   hide: hidePresets.HIDE_TREE,
   options: {
@@ -377,7 +377,7 @@ export const sleeve = {
     sleeveHemShort,
     sleevePlacketLength,
     sleeveStyle,
-    partlibFitSleeve1: true,
+    libraryFitSleeve: true,
   },
   draft: simonSleeve,
 }

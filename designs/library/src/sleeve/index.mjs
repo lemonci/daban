@@ -144,8 +144,9 @@ function draftSleevecap(part, run) {
 }
 
 const menu = 'advanced.sleevecap'
-export const sleeve1 = {
-  name: 'partlib.sleeve1',
+export const sleeve = {
+  name: 'library.sleeve',
+  measurements: ['biceps', 'shoulderToWrist', 'wrist'],
   options: {
     sleevecapEase: { pct: 0, min: 0, max: 10, menu },
     sleevecapTopFactorX: { pct: 50, min: 25, max: 75, menu },
@@ -169,7 +170,6 @@ export const sleeve1 = {
     sleeveLengthBonus: { pct: 0, min: -40, max: 10, menu: 'style' },
     sleeveWidthGuarantee: { pct: 90, min: 25, max: 100, menu: 'advanced' },
   },
-  optionalMeasurements: ['shoulderToWrist', 'wrist'],
   draft: ({
     store,
     sa,
@@ -195,7 +195,7 @@ export const sleeve1 = {
       sleevecapAdjust(store)
       run++
       log.debug(`Fitting sleevecap. Run ${run}: delta is ${units(delta)}`)
-    } while (options.partlibFitSleeve1 === true && run < 50 && Math.abs(sleevecapDelta(store)) > 2)
+    } while (options.libraryFitSleeve === true && run < 50 && Math.abs(sleevecapDelta(store)) > 2)
 
     // Paths
     paths.sleevecap.attr('class', 'fabric')

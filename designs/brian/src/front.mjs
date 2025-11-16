@@ -3,6 +3,7 @@ import { back } from './back.mjs'
 
 export const front = {
   from: back,
+  options: back.options,
   name: 'brian.front',
   draft: ({
     store,

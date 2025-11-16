@@ -1,4 +1,4 @@
-import { sleeve1 } from '@freesewing/partlib'
+import { sleeve as librarySleeve } from '@freesewing/library'
 import { hidePresets } from '@freesewing/core'
 
 function yuriSleeve({ Path, points, paths, sa, part }) {
@@ -32,11 +32,11 @@ function yuriSleeve({ Path, points, paths, sa, part }) {
 
 export const sleeve = {
   name: 'yuri.sleeve',
-  from: sleeve1,
+  from: librarySleeve,
   hide: hidePresets.HIDE_TREE,
   draft: yuriSleeve,
   options: {
-    ...sleeve1.options,
-    partlibFitSleeve1: true,
+    ...librarySleeve.options,
+    libraryFitSleeve: true,
   },
 }

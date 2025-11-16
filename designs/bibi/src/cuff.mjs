@@ -1,11 +1,11 @@
-import { sleeve1 } from '@freesewing/partlib'
+import { sleeve } from '@freesewing/library'
 import { front, back } from '@freesewing/brian'
 import { hidePresets, pctBasedOn } from '@freesewing/core'
 import { draftRibbing } from './shared.mjs'
 
 export const cuff = {
   name: 'bibi.cuff',
-  from: sleeve1,
+  from: sleeve,
   after: [front, back],
   hide: {
     from: true,
@@ -17,7 +17,7 @@ export const cuff = {
     // Brian overrides, placed here as this is the first loaded part that inherits from brian base
     s3Collar: 0,
     s3Armhole: 0,
-    brianFitSleeve: true,
+    libraryFitSleeve: true,
     brianFitCollar: false,
     bicepsEase: { pct: 5, min: 0, max: 50, ...pctBasedOn('biceps'), menu: 'fit' },
     collarEase: 0,

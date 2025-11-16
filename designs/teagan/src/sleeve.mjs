@@ -1,4 +1,4 @@
-import { sleeve1 } from '@freesewing/partlib'
+import { sleeve as librarySleeve } from '@freesewing/library'
 import { back } from './back.mjs'
 
 function teaganSleeve({
@@ -105,13 +105,13 @@ function teaganSleeve({
 
 export const sleeve = {
   name: 'teagan.sleeve',
-  from: sleeve1,
+  from: librarySleeve,
   after: back,
   hide: { from: true },
   options: {
-    ...sleeve1.options,
+    ...librarySleeve.options,
     sleeveEase: { pct: 15, min: 5, max: 35, menu: 'style' },
-    partlibFitSleeve1: true,
+    libraryFitSleeve: true,
   },
   draft: teaganSleeve,
 }

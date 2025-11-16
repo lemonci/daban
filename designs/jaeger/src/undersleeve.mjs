@@ -1,8 +1,8 @@
-import { underSleeve2 } from '@freesewing/partlib'
+import { undersleeve as libraryUndersleeve } from '@freesewing/library'
 import { sleeveVentLength, sleeveVentWidth } from './options.mjs'
 import { hidePresets } from '@freesewing/core'
 
-function jaegerUnderSleeve({
+function jaegerUndersleeve({
   sa,
   utils,
   points,
@@ -123,7 +123,7 @@ function jaegerUnderSleeve({
   macro('title', {
     at: points.title,
     nr: 5,
-    title: 'underSleeve',
+    title: 'undersleeve',
   })
 
   // Grainline
@@ -220,10 +220,10 @@ function jaegerUnderSleeve({
   return part
 }
 
-export const underSleeve = {
-  name: 'jaeger.underSleeve',
-  from: underSleeve2,
+export const undersleeve = {
+  name: 'jaeger.undersleeve',
+  from: libraryUndersleeve,
   options: { sleeveVentLength, sleeveVentWidth },
   hide: hidePresets.HIDE_TREE,
-  draft: jaegerUnderSleeve,
+  draft: jaegerUndersleeve,
 }

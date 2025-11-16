@@ -28,7 +28,6 @@ import { Hugo as hugo } from '@freesewing/hugo'
 import { Jaeger as jaeger } from '@freesewing/jaeger'
 import { Jane as jane } from '@freesewing/jane'
 import { Jett as jett } from '@freesewing/jett'
-import { Library as library } from '@freesewing/library'
 import { Lily as lily } from '@freesewing/lily'
 import { Lucy as lucy } from '@freesewing/lucy'
 import { Lumina as lumina } from '@freesewing/lumina'
@@ -103,7 +102,6 @@ export const designs = {
   jaeger,
   jane,
   jett,
-  library,
   lily,
   lucy,
   lumina,

@@ -12,8 +12,8 @@ import { pocket } from './pocket.mjs'
 import { pocketLining } from './pocketlining.mjs'
 import { chestPocketWelt } from './chestpocketwelt.mjs'
 import { chestPocketBag } from './chestpocketbag.mjs'
-import { topSleeve } from './topsleeve.mjs'
-import { underSleeve } from './undersleeve.mjs'
+import { topsleeve } from './topsleeve.mjs'
+import { undersleeve } from './undersleeve.mjs'
 import { innerPocketBag } from './innerpocketbag.mjs'
 import { innerPocketWelt } from './innerpocketwelt.mjs'
 import { chestPiece } from './chest-piece.mjs'
@@ -37,8 +37,8 @@ const Jaeger = new Design({
     pocketLining,
     chestPocketWelt,
     chestPocketBag,
-    topSleeve,
-    underSleeve,
+    topsleeve,
+    undersleeve,
     innerPocketBag,
     innerPocketWelt,
   ],
@@ -62,8 +62,8 @@ export {
   pocketLining,
   chestPocketWelt,
   chestPocketBag,
-  topSleeve,
-  underSleeve,
+  topsleeve,
+  undersleeve,
   innerPocketBag,
   innerPocketWelt,
   Jaeger,

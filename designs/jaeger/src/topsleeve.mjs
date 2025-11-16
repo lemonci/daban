@@ -1,8 +1,8 @@
-import { topSleeve2 } from '@freesewing/partlib'
+import { topsleeve as libraryTopsleeve } from '@freesewing/library'
 import { sleeveVentLength, sleeveVentWidth } from './options.mjs'
 import { hidePresets } from '@freesewing/core'
 
-function jaegerTopSleeve({
+function jaegerTopsleeve({
   sa,
   store,
   utils,
@@ -128,7 +128,7 @@ function jaegerTopSleeve({
   macro('title', {
     at: points.title,
     nr: 4,
-    title: 'topSleeve',
+    title: 'topsleeve',
   })
 
   // Grainline
@@ -242,10 +242,10 @@ function jaegerTopSleeve({
   return part
 }
 
-export const topSleeve = {
-  name: 'jaeger.topSleeve',
-  from: topSleeve2,
+export const topsleeve = {
+  name: 'jaeger.topsleeve',
+  from: libraryTopsleeve,
   hide: hidePresets.HIDE_TREE,
   options: { sleeveVentLength, sleeveVentWidth },
-  draft: jaegerTopSleeve,
+  draft: jaegerTopsleeve,
 }

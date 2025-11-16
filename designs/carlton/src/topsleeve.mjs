@@ -1,10 +1,10 @@
-import { topSleeve2 } from '@freesewing/partlib'
-import { front as bentFront } from '@freesewing/bent'
+import { topsleeve as libraryTopsleeve } from '@freesewing/library'
+import { front as brianFront } from '@freesewing/brian'
 import { front } from './front.mjs'
 import { back } from './back.mjs'
 import { pctBasedOn } from '@freesewing/core'
 
-function draftCarltonTopSleeve({
+function draftCarltonTopsleeve({
   sa,
   store,
   complete,
@@ -234,10 +234,10 @@ function draftCarltonTopSleeve({
   return part
 }
 
-export const topSleeve = {
-  name: 'carlton.topSleeve',
-  from: topSleeve2,
-  after: [bentFront, front, back],
+export const topsleeve = {
+  name: 'carlton.topsleeve',
+  from: libraryTopsleeve,
+  after: [brianFront, front, back],
   hide: {
     from: true,
     inherited: true,
@@ -245,8 +245,8 @@ export const topSleeve = {
   measurements: ['shoulderToWrist'],
   options: {
     cuffLength: { pct: 15, min: 10, max: 20, menu: 'style' },
-    // The remainder of options are for Bent sleeves.
-    brianFitSleeve: true,
+    // The remainder of options are for the library topsleeve
+    libraryFitSleeve: true,
     brianFitCollar: true,
     collarFactor: 4.8,
     chestShapingMax: 5,
@@ -268,5 +268,5 @@ export const topSleeve = {
     sleevecapHeight: { pct: 45, min: 40, max: 60, menu: 'advanced' },
     sleevecapEase: { pct: 1, min: 0, max: 10, menu: 'advanced' },
   },
-  draft: draftCarltonTopSleeve,
+  draft: draftCarltonTopsleeve,
 }

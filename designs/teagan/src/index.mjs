@@ -13,9 +13,7 @@ const Teagan = new Design({
 })
 
 // Merge translations
-const i18n = mergeI18n([brianI18n, teaganI18n], {
-  o: { drop: ['sleeveLengthBonus'] },
-})
+const i18n = mergeI18n([brianI18n, teaganI18n])
 
 // Named exports
 export { back, front, sleeve, Teagan, i18n, about }

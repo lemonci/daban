@@ -201,7 +201,7 @@ export const front = {
   options: {
     // Constants
     collarFactor: 5,
-    brianFitSleeve: true,
+    libraryFitSleeve: true,
     brianFitCollar: true,
     collarEase: 0,
     backNeckCutout: 0.05,
@@ -278,7 +278,7 @@ export const back = {
   options: {
     // Constants
     collarFactor: 5,
-    brianFitSleeve: true,
+    libraryFitSleeve: true,
     brianFitCollar: true,
     collarEase: 0,
     backNeckCutout: 0.05,

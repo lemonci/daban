@@ -1,8 +1,8 @@
-import { underSleeve2 } from '@freesewing/partlib'
-import { front as bentFront } from '@freesewing/bent'
+import { undersleeve as libraryUndersleeve } from '@freesewing/library'
+import { front as brianFront } from '@freesewing/brian'
 import { pctBasedOn } from '@freesewing/core'
 
-function draftCarltonUnderSleeve({
+function draftCarltonUndersleeve({
   sa,
   store,
   complete,
@@ -171,10 +171,10 @@ function draftCarltonUnderSleeve({
   return part
 }
 
-export const underSleeve = {
-  name: 'carlton.underSleeve',
-  from: underSleeve2,
-  after: bentFront,
+export const undersleeve = {
+  name: 'carlton.undersleeve',
+  from: libraryUndersleeve,
+  after: brianFront,
   hide: {
     from: true,
     after: true,
@@ -183,8 +183,8 @@ export const underSleeve = {
   measurements: ['shoulderToWrist'],
   options: {
     cuffLength: { pct: 15, min: 10, max: 20, menu: 'style' },
-    // The remainder of options are for Bent sleeves.
-    brianFitSleeve: true,
+    // The remainder of options are for the library sleeve.
+    libraryFitSleeve: true,
     brianFitCollar: true,
     collarFactor: 4.8,
     chestShapingMax: 5,
@@ -206,5 +206,5 @@ export const underSleeve = {
     sleevecapHeight: { pct: 45, min: 40, max: 60, menu: 'advanced' },
     sleevecapEase: { pct: 1, min: 0, max: 10, menu: 'advanced' },
   },
-  draft: draftCarltonUnderSleeve,
+  draft: draftCarltonUndersleeve,
 }

@@ -1,9 +1,9 @@
-import { sleeve as bentSleeve } from '@freesewing/bent'
+import { twoPartSleeve } from '@freesewing/library'
 import { front } from './front.mjs'
 
 export const sleeve = {
   name: 'devon.sleeve',
-  from: bentSleeve,
+  from: twoPartSleeve,
   after: front,
   hide: {
     self: true,

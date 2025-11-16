@@ -1,4 +1,4 @@
-import { sleeve1 } from '@freesewing/partlib'
+import { sleeve as librarySleeve } from '@freesewing/library'
 import { back } from './back.mjs'
 import { hidePresets } from '@freesewing/core'
 
@@ -87,12 +87,12 @@ function draftHueySleeve({ Point, Path, points, paths, store, options, sa, macro
 
 export const sleeve = {
   name: 'huey.sleeve',
-  from: sleeve1,
+  from: librarySleeve,
   after: back,
   draft: draftHueySleeve,
   hide: hidePresets.HIDE_TREE,
   options: {
-    ...sleeve1.options,
-    partlibFitSleeve1: true,
+    ...librarySleeve.options,
+    libraryFitSleeve: true,
   },
 }

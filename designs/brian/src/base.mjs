@@ -18,7 +18,7 @@ export const base = {
   optionalMeasurements: ['highBust'],
   options: {
     // Static
-    brianFitSleeve: true,
+    libraryFitSleeve: true,
     brianFitCollar: true,
     collarFactor: 4.8,
     // Fit

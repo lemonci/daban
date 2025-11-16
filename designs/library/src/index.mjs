@@ -1,15 +1,15 @@
 import { Design } from '@freesewing/core'
 import about from '../about.json' with { type: 'json' }
-import { sleeve1 } from './sleeve-1.mjs'
-import { underSleeve2 } from './undersleeve-2.mjs'
-import { topSleeve2 } from './topsleeve-2.mjs'
 import { i18n } from '../i18n/index.mjs'
+// Parts
+import { sleeve } from './sleeve/index.mjs'
+import { topsleeve, undersleeve, twoPartSleeve } from './two-part-sleeve/index.mjs'
 
 // Setup our new design
-const Partlib = new Design({
+const Library = new Design({
   data: about,
-  parts: [sleeve1, underSleeve2, topSleeve2],
+  parts: [sleeve, topsleeve, undersleeve, twoPartSleeve],
 })
 
 // Named exports
-export { sleeve1, underSleeve2, topSleeve2, Partlib, i18n, about }
+export { sleeve, topsleeve, undersleeve, twoPartSleeve, Library, i18n, about }

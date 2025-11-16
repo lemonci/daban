@@ -172,8 +172,8 @@ function draftTwoPartSleeve({ Path, paths, points, store, options, part }) {
   return part
 }
 
-export const sleeve2 = {
-  name: 'partlib.sleeve2',
+export const twoPartSleeve = {
+  name: 'library.twoPartSleeve',
   hide: { self: true },
   measurements: ['shoulderToElbow', 'shoulderToWrist', 'wrist'],
   options: {
