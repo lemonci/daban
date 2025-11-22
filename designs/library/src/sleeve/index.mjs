@@ -25,11 +25,10 @@ function draftSleevecap(part, run) {
   // Sleeve center axis
   points.centerBiceps = new Point(0, 0)
   /*
-   * We used to do this based on armholdDepthFactor, but that is now legacy
-   * so instead we use measurements
+   * We used to do this based on armholeDepthFactor,
+   * but that is now legacy so instead we use measurements
    */
   if (options.legacyArmholeDepth) {
-    console.log('legacy')
     points.centerCap = points.centerBiceps.shift(
       90,
       options.sleevecapTopFactorY *
@@ -39,7 +38,6 @@ function draftSleevecap(part, run) {
           store.get('sleeveFactor'))
     )
   } else {
-    console.log('new', options.armholeDepth)
     points.centerCap = points.centerBiceps.shift(
       90,
       options.sleevecapTopFactorY *
