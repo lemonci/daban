@@ -68,11 +68,12 @@ const loadUser = async (id) => {
   let result
   try {
     result = await fetch(`https://backend.freesewing.eu/users/${id}`)
+    if (result) result = await result.json()
   } catch (err) {
     console.warn(`Failed to load user with id ${id}`, err)
   }
 
-  if (result) return await result.json()
+  return result
 }
 
 async function prebuild() {
