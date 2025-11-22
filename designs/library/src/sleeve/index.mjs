@@ -24,14 +24,36 @@ function draftSleevecap(part, run) {
   let { store, measurements, options, Point, points, Path, paths } = part.shorthand()
   // Sleeve center axis
   points.centerBiceps = new Point(0, 0)
-  points.centerCap = points.centerBiceps.shift(
-    90,
-    options.sleevecapTopFactorY *
-      (measurements.biceps *
-        (1 + options.bicepsEase) *
-        options.armholeDepthFactor *
-        store.get('sleeveFactor'))
-  )
+  /*
+   * We used to do this based on armholdDepthFactor, but that is now legacy
+   * so instead we use measurements
+   */
+  if (options.legacyArmholeDepth) {
+    console.log('legacy')
+    points.centerCap = points.centerBiceps.shift(
+      90,
+      options.sleevecapTopFactorY *
+        (measurements.biceps *
+          (1 + options.bicepsEase) *
+          options.armholeDepthFactor *
+          store.get('sleeveFactor'))
+    )
+  } else {
+    console.log('new', options.armholeDepth)
+    points.centerCap = points.centerBiceps.shift(
+      90,
+      options.sleevecapTopFactorY *
+        (measurements.hpsToWaistBack - measurements.waistToArmpit) *
+        /*
+         * We are multiplying by 0.5 here to allow
+         * the armholeDept option to remain similar values
+         * after fixing #651
+         */
+        (1 + options.armholeDepth) *
+        0.5 *
+        store.get('sleeveFactor')
+    )
+  }
 
   // Left and right biceps points, limit impact of sleeveFactor to 25%
   let halfWidth = (measurements.biceps * (1 + options.bicepsEase)) / 2
