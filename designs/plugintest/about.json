@@ -1,6 +1,6 @@
 {
   "id": "plugintest",
   "description": "A FreeSewing pattern to test (y)our plugins",
-  "version": "4.4.0",
+  "version": "4.4.1",
   "collection": false
 }

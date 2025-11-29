@@ -10,7 +10,6 @@ import { i18n as benjamin } from '@freesewing/benjamin'
 import { i18n as bent } from '@freesewing/bent'
 import { i18n as bibi } from '@freesewing/bibi'
 import { i18n as bob } from '@freesewing/bob'
-import { i18n as bonny } from '@freesewing/bonny'
 import { i18n as breanna } from '@freesewing/breanna'
 import { i18n as brian } from '@freesewing/brian'
 import { i18n as bruce } from '@freesewing/bruce'
@@ -21,7 +20,6 @@ import { i18n as charlie } from '@freesewing/charlie'
 import { i18n as cornelius } from '@freesewing/cornelius'
 import { i18n as devon } from '@freesewing/devon'
 import { i18n as diana } from '@freesewing/diana'
-import { i18n as examples } from '@freesewing/examples'
 import { i18n as florence } from '@freesewing/florence'
 import { i18n as florent } from '@freesewing/florent'
 import { i18n as gozer } from '@freesewing/gozer'
@@ -33,7 +31,6 @@ import { i18n as hugo } from '@freesewing/hugo'
 import { i18n as jaeger } from '@freesewing/jaeger'
 import { i18n as jane } from '@freesewing/jane'
 import { i18n as jett } from '@freesewing/jett'
-import { i18n as legend } from '@freesewing/legend'
 import { i18n as lily } from '@freesewing/lily'
 import { i18n as lucy } from '@freesewing/lucy'
 import { i18n as lumina } from '@freesewing/lumina'
@@ -83,7 +80,6 @@ export const designs = {
   bent: bent.en,
   bibi: bibi.en,
   bob: bob.en,
-  bonny: bonny.en,
   breanna: breanna.en,
   brian: brian.en,
   bruce: bruce.en,
@@ -94,7 +90,6 @@ export const designs = {
   cornelius: cornelius.en,
   devon: devon.en,
   diana: diana.en,
-  examples: examples.en,
   florence: florence.en,
   florent: florent.en,
   gozer: gozer.en,
@@ -106,7 +101,6 @@ export const designs = {
   jaeger: jaeger.en,
   jane: jane.en,
   jett: jett.en,
-  legend: legend.en,
   lily: lily.en,
   lucy: lucy.en,
   lumina: lumina.en,

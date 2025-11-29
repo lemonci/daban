@@ -1,6 +1,13 @@
 # Change log for: @freesewing/react
 
 
+## 4.4.1 (2025-11-29)
+
+### Added
+
+ - Added linedrawing for Sarah
+ - Improved absolute option selection (#657)
+
 ## 4.3.0 (2025-09-26)
 
 ### Added

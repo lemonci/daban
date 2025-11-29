@@ -4,6 +4,119 @@
 ## Unreleased
 
 
+## 4.4.1 (2025-11-29)
+
+### sarah
+
+#### Fixed
+
+ - E
+ - x
+ - p
+ - a
+ - n
+ - d
+ -  
+ - n
+ - o
+ - t
+ - i
+ - f
+ - i
+ - c
+ - a
+ - t
+ - i
+ - o
+ - n
+ -  
+ - s
+ - u
+ - p
+ - p
+ - o
+ - r
+ - t
+ -  
+ - (
+ - #
+ - 6
+ - 4
+ - 6
+ - )
+
+### plugin-annotations
+
+#### Fixed
+
+ - W
+ - o
+ - r
+ - k
+ - j
+ - a
+ - r
+ - o
+ - u
+ - n
+ - d
+ -  
+ - f
+ - o
+ - r
+ -  
+ - i
+ - 1
+ - 8
+ - n
+ -  
+ - w
+ - i
+ - t
+ - h
+ -  
+ - n
+ - a
+ - m
+ - e
+ - s
+ - p
+ - a
+ - c
+ - e
+ - d
+ -  
+ - m
+ - a
+ - t
+ - e
+ - r
+ - i
+ - a
+ - l
+ - s
+ -  
+ - (
+ - #
+ - 6
+ - 5
+ - 2
+ - )
+
+### core
+
+#### Added
+
+ - Added point projection methods for paths and curves
+
+### react
+
+#### Added
+
+ - Added linedrawing for Sarah
+ - Improved absolute option selection (#657)
+
+
 ## 4.4.0 (2025-11-06)
 
 ### hi
