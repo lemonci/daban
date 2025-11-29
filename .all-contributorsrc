@@ -837,17 +837,10 @@
       "contributions": ["code"]
     },
     {
-      "login": "ArcticCoder",
-      "name": "Vili Sinervä",
-      "avatar_url": "https://avatars.githubusercontent.com/u/39151688?v=4",
-      "profile": "https://github.com/ArcticCoder",
-      "contributions": ["code"]
-    },
-    {
       "login": "VSinerva",
       "name": "Vili Sinervä",
       "avatar_url": "https://avatars.githubusercontent.com/u/39151688?v=4",
-      "profile": "https://github.com/VSinerva",
+      "profile": "https://forgejo.sinerva.eu/VSinerva",
       "contributions": ["code"]
     },
     {
