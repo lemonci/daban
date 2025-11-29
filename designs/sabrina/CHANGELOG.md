@@ -1,6 +1,12 @@
 # Change log for: @freesewing/sabrina
 
 
+## 4.4.3 (2025-11-29)
+
+### Fixed
+
+ - Add missing @freesewing/plugin-path-utils dependency
+
 ## 4.3.0 (2025-09-26)
 
 ### Changed

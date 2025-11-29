@@ -1,6 +1,12 @@
 # Change log for: @freesewing/sunny
 
 
+## 4.4.3 (2025-11-29)
+
+### Fixed
+
+ - Add missing @freesewing/plugin-path-utils dependency
+
 ## 4.2.0 (2025-08-16)
 
 ### Added

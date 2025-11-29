@@ -184,7 +184,7 @@ await writeFile(
   ['packages', 'collection', 'src', 'index.mjs'],
   mustache.render(repo.templates.collection.pkg, {
     designImports,
-    collection: collection.join(',\n  '),
+    collection: collection.join(',\n  ') + ',',
   })
 )
 
@@ -196,7 +196,7 @@ await writeFile(
   ['packages', 'collection', 'src', 'i18n.mjs'],
   mustache.render(repo.templates.collection.i18n, {
     collectionI18n,
-    collection: collection.join(',\n  '),
+    collection: collection.join(',\n  ') + ',',
   })
 )
 
@@ -205,20 +205,20 @@ await writeFile(
   ['packages', 'react', 'hooks', 'useDesign', 'index.mjs'],
   mustache.render(repo.templates.collection.hook, {
     designImports,
-    collection: collection.join(',\n  '),
+    collection: collection.join(',\n  ') + ',',
   })
 )
 
 // Step 7: Generate dependency-free i18n package
 async function bundleDesignTranslations() {
   const strings = {}
-  for (const design of Object.keys(repo.software.designs)) {
+  for (const design of Object.keys(repo.software.designs).sort()) {
     strings[design] = (await import(`${root}/designs/${design}/src/index.mjs`)).i18n.en
   }
   await writeFile(
     ['packages', 'i18n', 'src', 'designs.mjs'],
     `// This file is auto-generated. Manual changes will be lost
-export const designs = ${JSON.stringify(strings)}`
+export const designs = ${JSON.stringify(strings, null, 2)}`
   )
 }
 await bundleDesignTranslations()

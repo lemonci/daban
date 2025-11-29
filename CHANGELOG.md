@@ -4,6 +4,33 @@
 ## Unreleased
 
 
+## 4.4.3 (2025-11-29)
+
+### sabrina
+
+#### Fixed
+
+ - Add missing @freesewing/plugin-path-utils dependency
+
+### sarah
+
+#### Fixed
+
+ - Add missing @freesewing/plugin-path-utils dependency
+
+### sunny
+
+#### Fixed
+
+ - Add missing @freesewing/plugin-path-utils dependency
+
+### react
+
+#### Fixed
+
+ - Add missing @freesewing/bonny dependency
+
+
 ## 4.4.2 (2025-11-29)
 
 ### i18n

@@ -42,14 +42,26 @@ export const designs = {
         t: 'Armhole depth factor (legacy)',
         d: 'Controls the depth of the armhole. Higher values make a deeper armhole. This option only applies to the legacy (v2) way of calculating the armhole depth.',
       },
-      backNeckCutout: { t: 'Back neck cutout', d: 'How deep the neck is cut out at the back' },
+      backNeckCutout: {
+        t: 'Back neck cutout',
+        d: 'How deep the neck is cut out at the back',
+      },
       bicepsEase: {
         t: 'Biceps ease',
         d: 'The amount of ease at your upper arm. Note that while we try to respect this, fitting the sleeve to the armhole takes precedence over respecting the exact amount of ease.',
       },
-      collarEase: { t: 'Collar ease', d: 'The amount of ease around your neck' },
-      chestEase: { t: 'Chest ease', d: 'The amount of ease at your chest.' },
-      cuffEase: { t: 'Cuff ease', d: 'The amount of ease at your wrist.' },
+      collarEase: {
+        t: 'Collar ease',
+        d: 'The amount of ease around your neck',
+      },
+      chestEase: {
+        t: 'Chest ease',
+        d: 'The amount of ease at your chest.',
+      },
+      cuffEase: {
+        t: 'Cuff ease',
+        d: 'The amount of ease at your wrist.',
+      },
       draftForHighBust: {
         t: 'Draft for high bust',
         d: 'Draft the pattern using the high bust measurement if it is available, instead of using the chest measurement. This can result in a more fitted garment for people with breasts. (Please note that no additional adjustments or shaping is performed. Further manual adjustments may be needed for those with a larger difference between high bust and chest measurements.)',
@@ -106,7 +118,10 @@ export const designs = {
         t: 'Back armhole shape',
         d: 'Determines the shape/bend of the back of the armholes.',
       },
-      hipsEase: { t: 'Hips ease', d: 'The amount of ease at your hips.' },
+      hipsEase: {
+        t: 'Hips ease',
+        d: 'The amount of ease at your hips.',
+      },
       knitBindingWidth: {
         t: 'Knit binding width',
         d: 'Controls the width of the knit binding as a percentage of the chosen seam allowance, or 1cm if no seam allowance is used.',
@@ -115,19 +130,32 @@ export const designs = {
         t: 'Neckline shape',
         d: 'Determines the shape/bend of the neckline at the front.',
       },
-      necklineDrop: { t: 'Neckline drop', d: 'The amount the neck is cutout at the front.' },
+      necklineDrop: {
+        t: 'Neckline drop',
+        d: 'The amount the neck is cutout at the front.',
+      },
       shoulderStrapPlacement: {
         t: 'Shoulderstrap placement',
         d: 'Determines whether the shoulder strap is placed closer to the neck (lower numbers) or the shoulder (higher numbers).',
       },
-      shoulderStrapWidth: { t: 'Shoulderstrap width', d: 'The width of the shoulder straps.' },
-      stretchFactor: { t: 'Stretch', d: 'Determines the horizontal negative ease.' },
+      shoulderStrapWidth: {
+        t: 'Shoulderstrap width',
+        d: 'The width of the shoulder straps.',
+      },
+      stretchFactor: {
+        t: 'Stretch',
+        d: 'Determines the horizontal negative ease.',
+      },
     },
   },
   albert: {
     t: 'Albert apron',
     d: 'Albert is an apron.',
-    p: { front: 'Front', pocket: 'Pocket', strap: 'Strap' },
+    p: {
+      front: 'Front',
+      pocket: 'Pocket',
+      strap: 'Strap',
+    },
     s: {
       attachStrap: 'Attach strap',
       'cutPocket.t': 'The pocket is not currently shown',
@@ -139,12 +167,30 @@ export const designs = {
       foldHere: 'Fold here',
     },
     o: {
-      backOpening: { t: 'Back opening', d: 'Controls the opening at the back of the apron' },
-      chestDepth: { t: 'Strap length', d: 'Controls the length of the straps' },
-      lengthBonus: { t: 'Length bonus', d: 'Controls the length of the apron' },
-      bibLength: { t: 'Bib length', d: 'Controls the length of the bib' },
-      bibWidth: { t: 'Bib width', d: 'Controls the width of the bib' },
-      strapWidth: { t: 'Strap width', d: 'Controls the width of the strap' },
+      backOpening: {
+        t: 'Back opening',
+        d: 'Controls the opening at the back of the apron',
+      },
+      chestDepth: {
+        t: 'Strap length',
+        d: 'Controls the length of the straps',
+      },
+      lengthBonus: {
+        t: 'Length bonus',
+        d: 'Controls the length of the apron',
+      },
+      bibLength: {
+        t: 'Bib length',
+        d: 'Controls the length of the bib',
+      },
+      bibWidth: {
+        t: 'Bib width',
+        d: 'Controls the width of the bib',
+      },
+      strapWidth: {
+        t: 'Strap width',
+        d: 'Controls the width of the strap',
+      },
     },
   },
   bee: {
@@ -198,15 +244,30 @@ export const designs = {
         t: 'Back dart height (Bella)',
         d: 'Controls the back dart height in the underlying Bella block Bee is based on',
       },
-      bustDartLength: { t: 'Bust dart length', d: 'Controls the length of the bust dart' },
-      waistDartLength: { t: 'Waist dart length', d: 'Controls the length of the waist dart' },
-      bustDartCurve: { t: 'Bust dart curve', d: 'Controls the curvature of the bust dart' },
-      bustDartAngle: { t: 'Bust dart angle', d: 'The angle of the bust dart' },
+      bustDartLength: {
+        t: 'Bust dart length',
+        d: 'Controls the length of the bust dart',
+      },
+      waistDartLength: {
+        t: 'Waist dart length',
+        d: 'Controls the length of the waist dart',
+      },
+      bustDartCurve: {
+        t: 'Bust dart curve',
+        d: 'Controls the curvature of the bust dart',
+      },
+      bustDartAngle: {
+        t: 'Bust dart angle',
+        d: 'The angle of the bust dart',
+      },
       bustDartMinimumFabric: {
         t: 'Bust dart minimum fabric',
         d: 'The minimum amount of side seam above and below the bust dart',
       },
-      waistDartCurve: { t: 'Waist dart curve', d: 'Controls the curvature of the waist dart' },
+      waistDartCurve: {
+        t: 'Waist dart curve',
+        d: 'Controls the curvature of the waist dart',
+      },
       armholeDepth: {
         t: 'Armhole depth (Bella)',
         d: 'Controls the armhole depth in the underlying Bella block Bee is based on',
@@ -235,7 +296,10 @@ export const designs = {
         t: 'Back neck cutout',
         d: 'Controls how deep the neck opening is scooped out at at the back',
       },
-      backHemSlope: { t: 'Back hem slope', d: 'Controls the slope of the hem at the back' },
+      backHemSlope: {
+        t: 'Back hem slope',
+        d: 'Controls the slope of the hem at the back',
+      },
       frontShoulderWidth: {
         t: 'Front shoulder width (Bella)',
         d: 'Controls the front shoulder width in the underlying Bella block Bee is based on',
@@ -244,20 +308,50 @@ export const designs = {
         t: 'High bust width (Bella)',
         d: 'Controls the high bust width in the underlying Bella block Bee is based on',
       },
-      topDepth: { t: 'Top Depth', d: 'Controls how far the bikini cup extends upwards' },
-      bottomCupDepth: { t: 'Bottom depth', d: 'Controls how far the bikini cup extends downwards' },
-      sideDepth: { t: 'Side depth', d: 'Controls how far the bikini cup extends towards the side' },
-      sideCurve: { t: 'Side curve', d: 'Controls the curvature of the side of the bikini cup' },
-      frontCurve: { t: 'Front curve', d: 'Controls the curvature of the front of the bikini cup' },
+      topDepth: {
+        t: 'Top Depth',
+        d: 'Controls how far the bikini cup extends upwards',
+      },
+      bottomCupDepth: {
+        t: 'Bottom depth',
+        d: 'Controls how far the bikini cup extends downwards',
+      },
+      sideDepth: {
+        t: 'Side depth',
+        d: 'Controls how far the bikini cup extends towards the side',
+      },
+      sideCurve: {
+        t: 'Side curve',
+        d: 'Controls the curvature of the side of the bikini cup',
+      },
+      frontCurve: {
+        t: 'Front curve',
+        d: 'Controls the curvature of the front of the bikini cup',
+      },
       bellaGuide: {
         t: 'Show Bella outline',
         d: 'Do you want the pattern to show the outline of the Bella block Bee is based on?',
       },
-      bellaGuideYes: { t: 'Show Bella', d: 'Shows the outline of the Bella block' },
-      bellaGuideNo: { t: 'Do not show Bella', d: 'Only shows the final Bee pattern' },
-      ties: { t: 'Ties', d: 'Whether to includes ties on the pattern' },
-      tiesYes: { t: 'With ties', d: 'Draft a pattern including ties' },
-      tiesNo: { t: 'Without ties', d: 'Draft a pattern without ties' },
+      bellaGuideYes: {
+        t: 'Show Bella',
+        d: 'Shows the outline of the Bella block',
+      },
+      bellaGuideNo: {
+        t: 'Do not show Bella',
+        d: 'Only shows the final Bee pattern',
+      },
+      ties: {
+        t: 'Ties',
+        d: 'Whether to includes ties on the pattern',
+      },
+      tiesYes: {
+        t: 'With ties',
+        d: 'Draft a pattern including ties',
+      },
+      tiesNo: {
+        t: 'Without ties',
+        d: 'Draft a pattern without ties',
+      },
       bandTieWidth: {
         t: 'Band (chest) tie width',
         d: 'Controls the width of the ties around your chest',
@@ -282,7 +376,10 @@ export const designs = {
         t: 'Duo-coloured neck ties',
         d: 'Enable this option to generate a pattern for bands using two neck tie colours instead of one',
       },
-      neckTieWidth: { t: 'Neck tie width', d: 'Controls the width of the ties around your chest' },
+      neckTieWidth: {
+        t: 'Neck tie width',
+        d: 'Controls the width of the ties around your chest',
+      },
       neckTieLength: {
         t: 'Neck tie length',
         d: 'Controls the length of the ties around your chest',
@@ -295,12 +392,18 @@ export const designs = {
         t: 'Use cross back ties',
         d: 'Generate a pattern for ties that cross your back',
       },
-      crossBackTiesNo: { t: 'Use regular ties', d: 'Generate a pattern for the default ties' },
+      crossBackTiesNo: {
+        t: 'Use regular ties',
+        d: 'Generate a pattern for the default ties',
+      },
       bandLength: {
         t: 'Band Length (Cross back ties)',
         d: 'Controls the length of the band around your chest for the cross back ties variation of Bee',
       },
-      reversible: { t: 'Reversible', d: 'Whether you want to make a fully reversible Bee or not' },
+      reversible: {
+        t: 'Reversible',
+        d: 'Whether you want to make a fully reversible Bee or not',
+      },
       reversibleYes: {
         t: 'Make it reversible',
         d: 'Create a Bee that you can wear with both sides out, possibly using different fabrics',
@@ -314,7 +417,10 @@ export const designs = {
   bella: {
     t: 'Bella body block',
     d: 'Bella is a basic body block for people with breasts.',
-    p: { back: 'Back', frontSideDart: 'Front' },
+    p: {
+      back: 'Back',
+      frontSideDart: 'Front',
+    },
     s: {
       'cbSeamBustBelowWaist.t': 'Bust height compromised at center back',
       'cbSeamBustBelowWaist.d':
@@ -331,7 +437,10 @@ export const designs = {
         t: 'Chest ease',
         d: 'Controls the amount of ease at the fullest part of your chest',
       },
-      waistEase: { t: 'Waist ease', d: 'Controls the amount of ease at your waist' },
+      waistEase: {
+        t: 'Waist ease',
+        d: 'Controls the amount of ease at your waist',
+      },
       bustSpanEase: {
         t: 'Bust span ease',
         d: 'Controls the amount of (horizontal) ease added to your bust span when locating the bust point.',
@@ -344,17 +453,38 @@ export const designs = {
         t: 'Full chest ease reduction',
         d: 'Allows you to independently reduce the ease around the chest to make it fit tight(er) in that area',
       },
-      backDartHeight: { t: 'Back dart height', d: 'Controls the height of the back dart' },
-      bustDartLength: { t: 'Bust dart length', d: 'Controls the length of the bust dart' },
-      waistDartLength: { t: 'Waist dart length', d: 'Controls the length of the waist dart' },
-      bustDartCurve: { t: 'Bust dart curve', d: 'Controls the curvature of the bust dart' },
-      bustDartAngle: { t: 'Bust dart angle', d: 'The angle of the bust dart' },
+      backDartHeight: {
+        t: 'Back dart height',
+        d: 'Controls the height of the back dart',
+      },
+      bustDartLength: {
+        t: 'Bust dart length',
+        d: 'Controls the length of the bust dart',
+      },
+      waistDartLength: {
+        t: 'Waist dart length',
+        d: 'Controls the length of the waist dart',
+      },
+      bustDartCurve: {
+        t: 'Bust dart curve',
+        d: 'Controls the curvature of the bust dart',
+      },
+      bustDartAngle: {
+        t: 'Bust dart angle',
+        d: 'The angle of the bust dart',
+      },
       bustDartMinimumFabric: {
         t: 'Bust dart minimum fabric',
         d: 'The minimum amount of side seam above and below the bust dart',
       },
-      waistDartCurve: { t: 'Waist dart curve', d: 'Controls the curvature of the waist dart' },
-      armholeDepth: { t: 'Armhole depth', d: 'Controls the depth of the armhole' },
+      waistDartCurve: {
+        t: 'Waist dart curve',
+        d: 'Controls the curvature of the waist dart',
+      },
+      armholeDepth: {
+        t: 'Armhole depth',
+        d: 'Controls the depth of the armhole',
+      },
       backArmholeSlant: {
         t: 'Back armhole slant',
         d: 'Slightly rotates the armhole around its pitch point',
@@ -379,7 +509,10 @@ export const designs = {
         t: 'Back neck cutout',
         d: 'Controls how deep the neck opening is scooped out at at the back',
       },
-      backHemSlope: { t: 'Back hem slope', d: 'Controls the slope of the hem at the back' },
+      backHemSlope: {
+        t: 'Back hem slope',
+        d: 'Controls the slope of the hem at the back',
+      },
       frontShoulderWidth: {
         t: 'Front shoulder width',
         d: 'Controls the narrowness of the front shoulders relative to the back',
@@ -393,7 +526,13 @@ export const designs = {
   benjamin: {
     t: 'Benjamin bow tie',
     d: 'Benjamin is a bow tie pattern with four different shape options.',
-    p: { base: 'Base', bow1: 'Bow', bow2: 'Bow', bow3: 'Bow', collarBand: 'Collar band' },
+    p: {
+      base: 'Base',
+      bow1: 'Bow',
+      bow2: 'Bow',
+      bow3: 'Bow',
+      collarBand: 'Collar band',
+    },
     s: {
       cutRibbon: 'Cut the adjustment ribbon:',
       'cutCollarBandFlag.t': 'The collar band is not shown',
@@ -413,20 +552,62 @@ export const designs = {
         t: 'Exclude adjustment ribbon',
         d: 'Generate a pattern without an adjustment ribbon included',
       },
-      bandLength: { t: 'Band length', d: 'Length of the band' },
-      tipWidth: { t: 'Tip width', d: 'Width of the tips' },
-      knotWidth: { t: 'Knot width', d: 'Width of the knot' },
-      bowLength: { t: 'Bow length', d: 'Length of the bow (when knotted)' },
-      bowStyle: { t: 'Bow style', d: 'Style of the bow' },
-      'bowStyle.diamond': { t: 'Diamond', d: 'Use a diamond-shaped bow style' },
-      'bowStyle.butterfly': { t: 'Butterfly', d: 'Use a butterfly bow style' },
-      'bowStyle.square': { t: 'Square', d: 'Use a square bow style' },
-      'bowStyle.widesquare': { t: 'Wide square', d: 'Use a wide square bow style' },
-      endStyle: { t: 'End style', d: 'Style of the bow ends' },
-      'endStyle.straight': { t: 'Straight', d: 'Use a straight style for the bow ends' },
-      'endStyle.pointed': { t: 'Pointed', d: 'Use a pointy style for the bow ends' },
-      'endStyle.rounded': { t: 'Rounded', d: 'Use a rounded style for the bow ends' },
-      collarEase: { t: 'Collar ease', d: 'The amount of ease at your neck' },
+      bandLength: {
+        t: 'Band length',
+        d: 'Length of the band',
+      },
+      tipWidth: {
+        t: 'Tip width',
+        d: 'Width of the tips',
+      },
+      knotWidth: {
+        t: 'Knot width',
+        d: 'Width of the knot',
+      },
+      bowLength: {
+        t: 'Bow length',
+        d: 'Length of the bow (when knotted)',
+      },
+      bowStyle: {
+        t: 'Bow style',
+        d: 'Style of the bow',
+      },
+      'bowStyle.diamond': {
+        t: 'Diamond',
+        d: 'Use a diamond-shaped bow style',
+      },
+      'bowStyle.butterfly': {
+        t: 'Butterfly',
+        d: 'Use a butterfly bow style',
+      },
+      'bowStyle.square': {
+        t: 'Square',
+        d: 'Use a square bow style',
+      },
+      'bowStyle.widesquare': {
+        t: 'Wide square',
+        d: 'Use a wide square bow style',
+      },
+      endStyle: {
+        t: 'End style',
+        d: 'Style of the bow ends',
+      },
+      'endStyle.straight': {
+        t: 'Straight',
+        d: 'Use a straight style for the bow ends',
+      },
+      'endStyle.pointed': {
+        t: 'Pointed',
+        d: 'Use a pointy style for the bow ends',
+      },
+      'endStyle.rounded': {
+        t: 'Rounded',
+        d: 'Use a rounded style for the bow ends',
+      },
+      collarEase: {
+        t: 'Collar ease',
+        d: 'The amount of ease at your neck',
+      },
       collarBandHeight: {
         t: 'Collar band height',
         d: 'The height (width if you will) of the collar band',
@@ -465,14 +646,26 @@ export const designs = {
         t: 'Armhole depth factor (legacy)',
         d: 'Controls the depth of the armhole. Higher values make a deeper armhole. This option only applies to the legacy (v2) way of calculating the armhole depth.',
       },
-      backNeckCutout: { t: 'Back neck cutout', d: 'How deep the neck is cut out at the back' },
+      backNeckCutout: {
+        t: 'Back neck cutout',
+        d: 'How deep the neck is cut out at the back',
+      },
       bicepsEase: {
         t: 'Biceps ease',
         d: 'The amount of ease at your upper arm. Note that while we try to respect this, fitting the sleeve to the armhole takes precedence over respecting the exact amount of ease.',
       },
-      collarEase: { t: 'Collar ease', d: 'The amount of ease around your neck' },
-      chestEase: { t: 'Chest ease', d: 'The amount of ease at your chest.' },
-      cuffEase: { t: 'Cuff ease', d: 'The amount of ease at your wrist.' },
+      collarEase: {
+        t: 'Collar ease',
+        d: 'The amount of ease around your neck',
+      },
+      chestEase: {
+        t: 'Chest ease',
+        d: 'The amount of ease at your chest.',
+      },
+      cuffEase: {
+        t: 'Cuff ease',
+        d: 'The amount of ease at your wrist.',
+      },
       draftForHighBust: {
         t: 'Draft for high bust',
         d: 'Draft the pattern using the high bust measurement if it is available, instead of using the chest measurement. This can result in a more fitted garment for people with breasts. (Please note that no additional adjustments or shaping is performed. Further manual adjustments may be needed for those with a larger difference between high bust and chest measurements.)',
@@ -529,8 +722,14 @@ export const designs = {
         t: 'Sleevecap ease',
         d: 'The amount by which the sleevecap seam is longer than the armhole seam.',
       },
-      sleeveBend: { t: 'Sleeve bend', d: 'Controls the bend of the sleeve at the elbow.' },
-      sleevecapHeight: { t: 'Sleevecap height', d: 'Controls the height of the sleevecap.' },
+      sleeveBend: {
+        t: 'Sleeve bend',
+        d: 'Controls the bend of the sleeve at the elbow.',
+      },
+      sleevecapHeight: {
+        t: 'Sleevecap height',
+        d: 'Controls the height of the sleevecap.',
+      },
     },
   },
   bibi: {
@@ -620,9 +819,18 @@ export const designs = {
         t: 'Biceps ease',
         d: 'The amount of ease at your upper arm. Note that while we try to respect this, fitting the sleeve to the armhole takes precedence over respecting the exact amount of ease.',
       },
-      collarEase: { t: 'Collar ease', d: 'The amount of ease around your neck' },
-      chestEase: { t: 'Chest ease', d: 'The amount of ease at your chest.' },
-      cuffEase: { t: 'Sleeve fullness', d: 'Controls how wide the sleeves are.' },
+      collarEase: {
+        t: 'Collar ease',
+        d: 'The amount of ease around your neck',
+      },
+      chestEase: {
+        t: 'Chest ease',
+        d: 'The amount of ease at your chest.',
+      },
+      cuffEase: {
+        t: 'Sleeve fullness',
+        d: 'Controls how wide the sleeves are.',
+      },
       draftForHighBust: {
         t: 'Bust adjustment',
         d: 'If the pattern should be drafted with a basic full bust adjustment (FBA). This will result in a more fitted garment for people with breasts.',
@@ -751,7 +959,10 @@ export const designs = {
         t: 'Sleeve width guarantee',
         d: 'Controls how much of the sleeve width will be guaranteed. This determines how much we can alter the sleeve width to fit the sleeve in the armhole.',
       },
-      sleeveLength: { t: 'Sleeve length', d: 'Controls the length of your sleeves' },
+      sleeveLength: {
+        t: 'Sleeve length',
+        d: 'Controls the length of your sleeves',
+      },
       necklineBend: {
         t: 'Front neckline curvature',
         d: 'Controls the curvature of the front neckline.',
@@ -764,14 +975,26 @@ export const designs = {
         t: 'Front neckline depth',
         d: 'Controls how deep the neck opening plunges down at the front.',
       },
-      necklineWidth: { t: 'Neckline width', d: 'Controls the width of the neck opening.' },
-      fitWaist: { t: 'Fit the waist', d: 'Whether or not to fit the waist.' },
+      necklineWidth: {
+        t: 'Neckline width',
+        d: 'Controls the width of the neck opening.',
+      },
+      fitWaist: {
+        t: 'Fit the waist',
+        d: 'Whether or not to fit the waist.',
+      },
       waistEase: {
         t: 'Waist ease',
         d: 'Ease at the waist (only applies when the waist is fitted).',
       },
-      hipsEase: { t: 'Hips ease', d: 'Ease at the hips.' },
-      seatEase: { t: 'Seat ease', d: 'Ease at the seat.' },
+      hipsEase: {
+        t: 'Hips ease',
+        d: 'Ease at the hips.',
+      },
+      seatEase: {
+        t: 'Seat ease',
+        d: 'Ease at the seat.',
+      },
       bustEase: {
         t: 'Bust ease',
         d: 'Ease at the bust. Only applies when bust adjustment is enabled.',
@@ -780,8 +1003,14 @@ export const designs = {
         t: 'Flare',
         d: 'How much fabric to use at the bottom hem of the design. Only applies when the design goes below the waist.',
       },
-      dart: { t: 'Allow bust dart', d: 'Allow creating a bust dart if this is necessary' },
-      sleeves: { t: 'Sleeves', d: 'Draft the pattern with sleeves' },
+      dart: {
+        t: 'Allow bust dart',
+        d: 'Allow creating a bust dart if this is necessary',
+      },
+      sleeves: {
+        t: 'Sleeves',
+        d: 'Draft the pattern with sleeves',
+      },
       strapWidth: {
         t: 'Strap width',
         d: 'How wide the shoulder straps are. Only applies when sleeves are disabled.',
@@ -802,9 +1031,18 @@ export const designs = {
         t: 'Length',
         d: 'Which measurement line to use for the bottom hem. You can do fine adjustments using the bonus length option.',
       },
-      useWaistRibbing: { t: 'Waistband ribbing', d: 'Include ribbing on the waistband' },
-      useCuffRibbing: { t: 'Cuff ribbing', d: 'Include ribbing on the sleeve' },
-      ribbingHeight: { t: 'Ribbing height', d: 'Controls the height of the ribbing' },
+      useWaistRibbing: {
+        t: 'Waistband ribbing',
+        d: 'Include ribbing on the waistband',
+      },
+      useCuffRibbing: {
+        t: 'Cuff ribbing',
+        d: 'Include ribbing on the sleeve',
+      },
+      ribbingHeight: {
+        t: 'Ribbing height',
+        d: 'Controls the height of the ribbing',
+      },
       ribbingStretch: {
         t: 'Ribbing stretch',
         d: 'Use this to adapt the pattern to how stretchy the ribbing that you are using is.',
@@ -834,7 +1072,9 @@ export const designs = {
   bob: {
     t: 'Bob the bib',
     d: 'This is the bib that you can create by following our design tutorial',
-    p: { bib: 'Bib' },
+    p: {
+      bib: 'Bib',
+    },
     s: {
       'biasTapeLength.t': 'Bias tape: {{{ l }}}',
       'biasTapeLength.d':
@@ -848,9 +1088,18 @@ export const designs = {
         t: 'Neck opening',
         d: 'Controls the size of the neck opening relative to the bib size',
       },
-      widthRatio: { t: 'Width', d: 'Controls the width of the bib' },
-      lengthRatio: { t: 'Length', d: 'Controls the length of the bib' },
-      headSize: { t: 'Head size', d: 'The head circumference you want the bib to accommodate' },
+      widthRatio: {
+        t: 'Width',
+        d: 'Controls the width of the bib',
+      },
+      lengthRatio: {
+        t: 'Length',
+        d: 'Controls the length of the bib',
+      },
+      headSize: {
+        t: 'Head size',
+        d: 'The head circumference you want the bib to accommodate',
+      },
     },
   },
   bonny: {
@@ -957,14 +1206,26 @@ export const designs = {
         t: 'Armhole depth factor',
         d: 'Controls the depth of the armhole. Higher values make a deeper armhole.',
       },
-      backNeckCutout: { t: 'Back neck cutout', d: 'How deep the neck is cut out at the back' },
+      backNeckCutout: {
+        t: 'Back neck cutout',
+        d: 'How deep the neck is cut out at the back',
+      },
       bicepsEase: {
         t: 'Biceps ease',
         d: 'The amount of ease at your upper arm. Note that while we try to respect this, fitting the sleeve to the armhole takes precedence over respecting the exact amount of ease.',
       },
-      collarEase: { t: 'Collar ease', d: 'The amount of ease around your neck' },
-      chestEase: { t: 'Chest ease', d: 'The amount of ease at your chest.' },
-      cuffEase: { t: 'Cuff ease', d: 'The amount of ease at your wrist.' },
+      collarEase: {
+        t: 'Collar ease',
+        d: 'The amount of ease around your neck',
+      },
+      chestEase: {
+        t: 'Chest ease',
+        d: 'The amount of ease at your chest.',
+      },
+      cuffEase: {
+        t: 'Cuff ease',
+        d: 'The amount of ease at your wrist.',
+      },
       frontArmholeDeeper: {
         t: 'Front armhole extra cutout',
         d: 'How much do you want the front armhole to be cut out deeper than the back.',
@@ -981,9 +1242,18 @@ export const designs = {
         t: 'Do not draft a shoulder dart',
         d: 'Drafts a pattern without shoulder darts',
       },
-      shoulderDartYes: { t: 'Draft a shoulder dart', d: 'Drafts a pattern with shoulder darts' },
-      shoulderDartSize: { t: 'Shoulder dart size', d: 'The size of the shoulder dart' },
-      shoulderDartLength: { t: 'Shoulder dart length', d: 'The length of the shoulder dart' },
+      shoulderDartYes: {
+        t: 'Draft a shoulder dart',
+        d: 'Drafts a pattern with shoulder darts',
+      },
+      shoulderDartSize: {
+        t: 'Shoulder dart size',
+        d: 'The size of the shoulder dart',
+      },
+      shoulderDartLength: {
+        t: 'Shoulder dart length',
+        d: 'The length of the shoulder dart',
+      },
       shoulderEase: {
         t: 'Shoulder ease',
         d: 'The amount of ease at your shoulder. This increases the shoulder to shoulder distance to accommodate additional layers or thickness.',
@@ -1076,17 +1346,38 @@ export const designs = {
         t: 'Waist dart',
         d: 'Whether or not to include a dart at the waist to round the back',
       },
-      waistDartNo: { t: 'Do not draft a waist dart', d: 'Drafts a pattern without waist darts' },
-      waistDartYes: { t: 'Draft a waist dart', d: 'Drafts a pattern with waist darts' },
-      waistDartSize: { t: 'Waist dart size', d: 'The size of the waist dart' },
-      waistDartLength: { t: 'Waist dart length', d: 'The length of the waist dart' },
+      waistDartNo: {
+        t: 'Do not draft a waist dart',
+        d: 'Drafts a pattern without waist darts',
+      },
+      waistDartYes: {
+        t: 'Draft a waist dart',
+        d: 'Drafts a pattern with waist darts',
+      },
+      waistDartSize: {
+        t: 'Waist dart size',
+        d: 'The size of the waist dart',
+      },
+      waistDartLength: {
+        t: 'Waist dart length',
+        d: 'The length of the waist dart',
+      },
       verticalEase: {
         t: 'Vertical ease',
         d: 'The amount of ease to distribute along the length of the garment',
       },
-      waistEase: { t: 'Waist ease', d: 'The amount of ease at the waist' },
-      primaryBustDart: { t: 'Bust dart', d: 'Where to place the bust dart to shape the chest' },
-      primaryBustDartLength: { t: 'Bust dart length', d: 'The length of the bust dart' },
+      waistEase: {
+        t: 'Waist ease',
+        d: 'The amount of ease at the waist',
+      },
+      primaryBustDart: {
+        t: 'Bust dart',
+        d: 'Where to place the bust dart to shape the chest',
+      },
+      primaryBustDartLength: {
+        t: 'Bust dart length',
+        d: 'The length of the bust dart',
+      },
       secondaryBustDart: {
         t: 'Secondary bust dart',
         d: 'Optionally include a secondary bust dart to distribute the shaping of the chest',
@@ -1104,7 +1395,13 @@ export const designs = {
   brian: {
     t: 'Brian body block',
     d: 'Brian is a basic body block for people without breasts.',
-    p: { back: 'Back', front: 'Front', base: 'Base', sleevecap: 'Sleevecap', sleeve: 'Sleeve' },
+    p: {
+      back: 'Back',
+      front: 'Front',
+      base: 'Base',
+      sleevecap: 'Sleevecap',
+      sleeve: 'Sleeve',
+    },
     s: {
       'largeShoulderWidth.t': 'Shoulder Width larger than anticipated',
       'largeShoulderWidth.d':
@@ -1125,14 +1422,26 @@ export const designs = {
         t: 'Armhole depth factor (legacy)',
         d: 'Controls the depth of the armhole. Higher values make a deeper armhole. This option only applies to the legacy (v2) way of calculating the armhole depth.',
       },
-      backNeckCutout: { t: 'Back neck cutout', d: 'How deep the neck is cut out at the back' },
+      backNeckCutout: {
+        t: 'Back neck cutout',
+        d: 'How deep the neck is cut out at the back',
+      },
       bicepsEase: {
         t: 'Biceps ease',
         d: 'The amount of ease at your upper arm. Note that while we try to respect this, fitting the sleeve to the armhole takes precedence over respecting the exact amount of ease.',
       },
-      collarEase: { t: 'Collar ease', d: 'The amount of ease around your neck' },
-      chestEase: { t: 'Chest ease', d: 'The amount of ease at your chest.' },
-      cuffEase: { t: 'Cuff ease', d: 'The amount of ease at your wrist.' },
+      collarEase: {
+        t: 'Collar ease',
+        d: 'The amount of ease around your neck',
+      },
+      chestEase: {
+        t: 'Chest ease',
+        d: 'The amount of ease at your chest.',
+      },
+      cuffEase: {
+        t: 'Cuff ease',
+        d: 'The amount of ease at your wrist.',
+      },
       draftForHighBust: {
         t: 'Draft for high bust',
         d: 'Draft the pattern using the high bust measurement if it is available, instead of using the chest measurement. This can result in a more fitted garment for people with breasts. (Please note that no additional adjustments or shaping is performed. Further manual adjustments may be needed for those with a larger difference between high bust and chest measurements.)',
@@ -1270,18 +1579,38 @@ export const designs = {
   bruce: {
     t: 'Bruce boxer briefs',
     d: 'Bruce are comfortable yet stylish boxer briefs.',
-    p: { back: 'Back', front: 'Front', inset: 'Inset', side: 'Side' },
+    p: {
+      back: 'Back',
+      front: 'Front',
+      inset: 'Inset',
+      side: 'Side',
+    },
     s: {},
     o: {
-      bulge: { t: 'Bulge', d: 'Increase angle to create more room in the front pouch.' },
-      legBonus: { t: 'Leg length bonus', d: 'Extra length to add to the legs.' },
-      rise: { t: 'Rise', d: 'Amount to raise the waist. A negative value will lower it.' },
-      stretch: { t: 'Stretch', d: 'The amount of negative ease.' },
+      bulge: {
+        t: 'Bulge',
+        d: 'Increase angle to create more room in the front pouch.',
+      },
+      legBonus: {
+        t: 'Leg length bonus',
+        d: 'Extra length to add to the legs.',
+      },
+      rise: {
+        t: 'Rise',
+        d: 'Amount to raise the waist. A negative value will lower it.',
+      },
+      stretch: {
+        t: 'Stretch',
+        d: 'The amount of negative ease.',
+      },
       legStretch: {
         t: 'Leg stretch',
         d: 'For best results, you want to fit your legs a bit more snugly — say no to gaping.',
       },
-      backRise: { t: 'Back rise', d: 'Percentage by which the waist will be raised at the back.' },
+      backRise: {
+        t: 'Back rise',
+        d: 'Percentage by which the waist will be raised at the back.',
+      },
     },
   },
   carlita: {
@@ -1361,14 +1690,26 @@ export const designs = {
         t: 'Armhole depth factor (legacy)',
         d: 'Controls the depth of the armhole. Higher values make a deeper armhole. This option only applies to the legacy (v2) way of calculating the armhole depth.',
       },
-      backNeckCutout: { t: 'Back neck cutout', d: 'How deep the neck is cut out at the back' },
+      backNeckCutout: {
+        t: 'Back neck cutout',
+        d: 'How deep the neck is cut out at the back',
+      },
       bicepsEase: {
         t: 'Biceps ease',
         d: 'The amount of ease at your upper arm. Note that while we try to respect this, fitting the sleeve to the armhole takes precedence over respecting the exact amount of ease.',
       },
-      collarEase: { t: 'Collar ease', d: 'The amount of ease around your neck' },
-      chestEase: { t: 'Chest ease', d: 'The amount of ease at your chest.' },
-      cuffEase: { t: 'Cuff ease', d: 'The amount of ease at your wrist.' },
+      collarEase: {
+        t: 'Collar ease',
+        d: 'The amount of ease around your neck',
+      },
+      chestEase: {
+        t: 'Chest ease',
+        d: 'The amount of ease at your chest.',
+      },
+      cuffEase: {
+        t: 'Cuff ease',
+        d: 'The amount of ease at your wrist.',
+      },
       draftForHighBust: {
         t: 'Draft for high bust',
         d: 'Draft the pattern using the high bust measurement if it is available, instead of using the chest measurement. This can result in a more fitted garment for people with breasts. (Please note that no additional adjustments or shaping is performed. Further manual adjustments may be needed for those with a larger difference between high bust and chest measurements.)',
@@ -1421,8 +1762,14 @@ export const designs = {
         t: 'Sleeve length bonus',
         d: 'The amount to lengthen the sleeve. A negative value will shorten it.',
       },
-      sleevecapEase: { t: 'Sleevecap ease', d: 'Controls the amount of sleevecap ease.' },
-      seatEase: { t: 'Seat ease', d: 'Amount of ease around your bum' },
+      sleevecapEase: {
+        t: 'Sleevecap ease',
+        d: 'Controls the amount of sleevecap ease.',
+      },
+      seatEase: {
+        t: 'Seat ease',
+        d: 'Amount of ease around your bum',
+      },
       pocketPlacementHorizontal: {
         t: 'Horizontal pocket placement',
         d: 'The (horizontal) location of the pockets',
@@ -1431,52 +1778,106 @@ export const designs = {
         t: 'Vertical pocket placement',
         d: 'The (vertical) location of the pockets',
       },
-      collarHeight: { t: 'Collar height', d: 'Height of the collar' },
-      length: { t: 'Length', d: 'Total length' },
+      collarHeight: {
+        t: 'Collar height',
+        d: 'Height of the collar',
+      },
+      length: {
+        t: 'Length',
+        d: 'Total length',
+      },
       pocketFlapRadius: {
         t: 'Pocket flap radius',
         d: 'The amount by which the pocket flap is rounded',
       },
-      pocketRadius: { t: 'Pocket radius', d: 'The amount by which the pocket is rounded' },
-      chestPocketHeight: { t: 'Chest pocket height', d: 'Height of the chest pocket' },
-      beltWidth: { t: 'Belt width', d: 'Width of the belt' },
+      pocketRadius: {
+        t: 'Pocket radius',
+        d: 'The amount by which the pocket is rounded',
+      },
+      chestPocketHeight: {
+        t: 'Chest pocket height',
+        d: 'Height of the chest pocket',
+      },
+      beltWidth: {
+        t: 'Belt width',
+        d: 'Width of the belt',
+      },
       buttonSpacingHorizontal: {
         t: 'Horizontal button spacing',
         d: 'Horizontal spacing of the buttons, also determines the front closure overlap',
       },
-      lapelReduction: { t: 'Lapel reduction', d: 'Controls how much the lapel tip goes inwards.' },
+      lapelReduction: {
+        t: 'Lapel reduction',
+        d: 'Controls how much the lapel tip goes inwards.',
+      },
       frontOverlap: {
         t: 'Front overlap',
         d: 'Controls how much the right and left front of the garment overlap at the center front.',
       },
-      pocketHeight: { t: 'Pocket height', d: 'Controls the height of the front pockets' },
-      pocketWidth: { t: 'Pocket width', d: 'Controls the width of the front pockets' },
+      pocketHeight: {
+        t: 'Pocket height',
+        d: 'Controls the height of the front pockets',
+      },
+      pocketWidth: {
+        t: 'Pocket width',
+        d: 'Controls the width of the front pockets',
+      },
       chestPocketPlacement: {
         t: 'Chest pocket placement',
         d: 'Controls the location of the chest pocket.',
       },
-      chestPocketAngle: { t: 'Chest pocket angle', d: 'Controls the slant of the chest pocket.' },
-      chestPocketWidth: { t: 'Chest pocket width', d: 'Controls the width of the chest pocket.' },
+      chestPocketAngle: {
+        t: 'Chest pocket angle',
+        d: 'Controls the slant of the chest pocket.',
+      },
+      chestPocketWidth: {
+        t: 'Chest pocket width',
+        d: 'Controls the width of the chest pocket.',
+      },
       innerPocketPlacement: {
         t: 'Inner pocket placement',
         d: 'Controls the location of the inner pocket.',
       },
-      innerPocketDepth: { t: 'Inner pocket depth', d: 'Controls the depth of the inner pocket.' },
-      innerPocketWidth: { t: 'Inner pocket width', d: 'Controls the width of the inner pocket.' },
+      innerPocketDepth: {
+        t: 'Inner pocket depth',
+        d: 'Controls the depth of the inner pocket.',
+      },
+      innerPocketWidth: {
+        t: 'Inner pocket width',
+        d: 'Controls the width of the inner pocket.',
+      },
       innerPocketWeltHeight: {
         t: 'Inner pocket welt height',
         d: 'Controls the height of the inner pocket welts.',
       },
-      sleeveBend: { t: 'Sleeve bend', d: 'The angle of the sleeve at the elbow.' },
-      sleevecapHeight: { t: 'Sleevecap height', d: 'Controls the height of the sleevecap.' },
-      cuffLength: { t: 'Cuff length', d: 'Controls the length (height if you wish) of the cuffs.' },
+      sleeveBend: {
+        t: 'Sleeve bend',
+        d: 'The angle of the sleeve at the elbow.',
+      },
+      sleevecapHeight: {
+        t: 'Sleevecap height',
+        d: 'Controls the height of the sleevecap.',
+      },
+      cuffLength: {
+        t: 'Cuff length',
+        d: 'Controls the length (height if you wish) of the cuffs.',
+      },
       collarFlare: {
         t: 'Collar flare',
         d: 'Controls the flare of the collar by altering the fall length (between the neck and the tips) of the collar.',
       },
-      collarSpread: { t: 'Collar spread', d: 'Controls how close the collar lies to the neck.' },
-      waistEase: { t: 'Waist ease', d: 'Controls the amount of ease at your waist.' },
-      contour: { t: 'Contour', d: 'Controls how sharply the princess seam is contoured.' },
+      collarSpread: {
+        t: 'Collar spread',
+        d: 'Controls how close the collar lies to the neck.',
+      },
+      waistEase: {
+        t: 'Waist ease',
+        d: 'Controls the amount of ease at your waist.',
+      },
+      contour: {
+        t: 'Contour',
+        d: 'Controls how sharply the princess seam is contoured.',
+      },
     },
   },
   carlton: {
@@ -1555,14 +1956,26 @@ export const designs = {
         t: 'Armhole depth factor (legacy)',
         d: 'Controls the depth of the armhole. Higher values make a deeper armhole. This option only applies to the legacy (v2) way of calculating the armhole depth.',
       },
-      backNeckCutout: { t: 'Back neck cutout', d: 'How deep the neck is cut out at the back' },
+      backNeckCutout: {
+        t: 'Back neck cutout',
+        d: 'How deep the neck is cut out at the back',
+      },
       bicepsEase: {
         t: 'Biceps ease',
         d: 'The amount of ease at your upper arm. Note that while we try to respect this, fitting the sleeve to the armhole takes precedence over respecting the exact amount of ease.',
       },
-      collarEase: { t: 'Collar ease', d: 'The amount of ease around your neck' },
-      chestEase: { t: 'Chest ease', d: 'The amount of ease at your chest.' },
-      cuffEase: { t: 'Cuff ease', d: 'The amount of ease at your wrist.' },
+      collarEase: {
+        t: 'Collar ease',
+        d: 'The amount of ease around your neck',
+      },
+      chestEase: {
+        t: 'Chest ease',
+        d: 'The amount of ease at your chest.',
+      },
+      cuffEase: {
+        t: 'Cuff ease',
+        d: 'The amount of ease at your wrist.',
+      },
       draftForHighBust: {
         t: 'Draft for high bust',
         d: 'Draft the pattern using the high bust measurement if it is available, instead of using the chest measurement. This can result in a more fitted garment for people with breasts. (Please note that no additional adjustments or shaping is performed. Further manual adjustments may be needed for those with a larger difference between high bust and chest measurements.)',
@@ -1615,8 +2028,14 @@ export const designs = {
         t: 'Sleeve length bonus',
         d: 'The amount to lengthen the sleeve. A negative value will shorten it.',
       },
-      sleevecapEase: { t: 'Sleevecap ease', d: 'Controls the amount of sleevecap ease.' },
-      seatEase: { t: 'Seat ease', d: 'Amount of ease around your bum' },
+      sleevecapEase: {
+        t: 'Sleevecap ease',
+        d: 'Controls the amount of sleevecap ease.',
+      },
+      seatEase: {
+        t: 'Seat ease',
+        d: 'Amount of ease around your bum',
+      },
       pocketPlacementHorizontal: {
         t: 'Horizontal pocket placement',
         d: 'The (horizontal) location of the pockets',
@@ -1625,51 +2044,102 @@ export const designs = {
         t: 'Vertical pocket placement',
         d: 'The (vertical) location of the pockets',
       },
-      collarHeight: { t: 'Collar height', d: 'Height of the collar' },
-      length: { t: 'Length', d: 'Total length' },
+      collarHeight: {
+        t: 'Collar height',
+        d: 'Height of the collar',
+      },
+      length: {
+        t: 'Length',
+        d: 'Total length',
+      },
       pocketFlapRadius: {
         t: 'Pocket flap radius',
         d: 'The amount by which the pocket flap is rounded',
       },
-      pocketRadius: { t: 'Pocket radius', d: 'The amount by which the pocket is rounded' },
-      chestPocketHeight: { t: 'Chest pocket height', d: 'Height of the chest pocket' },
-      beltWidth: { t: 'Belt width', d: 'Width of the belt' },
+      pocketRadius: {
+        t: 'Pocket radius',
+        d: 'The amount by which the pocket is rounded',
+      },
+      chestPocketHeight: {
+        t: 'Chest pocket height',
+        d: 'Height of the chest pocket',
+      },
+      beltWidth: {
+        t: 'Belt width',
+        d: 'Width of the belt',
+      },
       buttonSpacingHorizontal: {
         t: 'Horizontal button spacing',
         d: 'Horizontal spacing of the buttons, also determines the front closure overlap',
       },
-      lapelReduction: { t: 'Lapel reduction', d: 'Controls how much the lapel tip goes inwards.' },
+      lapelReduction: {
+        t: 'Lapel reduction',
+        d: 'Controls how much the lapel tip goes inwards.',
+      },
       frontOverlap: {
         t: 'Front overlap',
         d: 'Controls how much the right and left front of the garment overlap at the center front.',
       },
-      pocketHeight: { t: 'Pocket height', d: 'Controls the height of the front pockets' },
-      pocketWidth: { t: 'Pocket width', d: 'Controls the width of the front pockets' },
+      pocketHeight: {
+        t: 'Pocket height',
+        d: 'Controls the height of the front pockets',
+      },
+      pocketWidth: {
+        t: 'Pocket width',
+        d: 'Controls the width of the front pockets',
+      },
       chestPocketPlacement: {
         t: 'Chest pocket placement',
         d: 'Controls the location of the chest pocket.',
       },
-      chestPocketAngle: { t: 'Chest pocket angle', d: 'Controls the slant of the chest pocket.' },
-      chestPocketWidth: { t: 'Chest pocket width', d: 'Controls the width of the chest pocket.' },
+      chestPocketAngle: {
+        t: 'Chest pocket angle',
+        d: 'Controls the slant of the chest pocket.',
+      },
+      chestPocketWidth: {
+        t: 'Chest pocket width',
+        d: 'Controls the width of the chest pocket.',
+      },
       innerPocketPlacement: {
         t: 'Inner pocket placement',
         d: 'Controls the location of the inner pocket.',
       },
-      innerPocketDepth: { t: 'Inner pocket depth', d: 'Controls the depth of the inner pocket.' },
-      innerPocketWidth: { t: 'Inner pocket width', d: 'Controls the width of the inner pocket.' },
+      innerPocketDepth: {
+        t: 'Inner pocket depth',
+        d: 'Controls the depth of the inner pocket.',
+      },
+      innerPocketWidth: {
+        t: 'Inner pocket width',
+        d: 'Controls the width of the inner pocket.',
+      },
       innerPocketWeltHeight: {
         t: 'Inner pocket welt height',
         d: 'Controls the height of the inner pocket welts.',
       },
-      sleeveBend: { t: 'Sleeve bend', d: 'The angle of the sleeve at the elbow.' },
-      sleevecapHeight: { t: 'Sleevecap height', d: 'Controls the height of the sleevecap.' },
-      cuffLength: { t: 'Cuff length', d: 'Controls the length (height if you wish) of the cuffs.' },
+      sleeveBend: {
+        t: 'Sleeve bend',
+        d: 'The angle of the sleeve at the elbow.',
+      },
+      sleevecapHeight: {
+        t: 'Sleevecap height',
+        d: 'Controls the height of the sleevecap.',
+      },
+      cuffLength: {
+        t: 'Cuff length',
+        d: 'Controls the length (height if you wish) of the cuffs.',
+      },
       collarFlare: {
         t: 'Collar flare',
         d: 'Controls the flare of the collar by altering the fall length (between the neck and the tips) of the collar.',
       },
-      collarSpread: { t: 'Collar spread', d: 'Controls how close the collar lies to the neck.' },
-      waistEase: { t: 'Waist ease', d: 'Controls the amount of ease at your waist.' },
+      collarSpread: {
+        t: 'Collar spread',
+        d: 'Controls how close the collar lies to the neck.',
+      },
+      waistEase: {
+        t: 'Waist ease',
+        d: 'Controls the amount of ease at your waist.',
+      },
     },
   },
   cathrin: {
@@ -1687,19 +2157,30 @@ export const designs = {
       panel6: 'Panel 6',
       panels: 'Panels',
     },
-    s: { waistLine: 'waist line' },
+    s: {
+      waistLine: 'waist line',
+    },
     o: {
       panels: {
         t: 'Number of panels',
         d: 'The number of panels to draft. More panels are better to fit a curvier model.',
       },
-      'panels.11': { t: '11 Panels', d: 'Draft a pattern for a corset with 11 panels.' },
-      'panels.13': { t: '13 Panels', d: 'Draft a pattern for a corset with 13 panels.' },
+      'panels.11': {
+        t: '11 Panels',
+        d: 'Draft a pattern for a corset with 11 panels.',
+      },
+      'panels.13': {
+        t: '13 Panels',
+        d: 'Draft a pattern for a corset with 13 panels.',
+      },
       waistReduction: {
         t: 'Waist reduction',
         d: 'The amount by which you want the corset to pinch your waist.',
       },
-      backOpening: { t: 'Back opening', d: 'Opening at the center back closure.' },
+      backOpening: {
+        t: 'Back opening',
+        d: 'Opening at the center back closure.',
+      },
       backRise: {
         t: 'Back rise',
         d: 'How much the back panels rise from your arms to your center back.',
@@ -1716,7 +2197,10 @@ export const designs = {
         t: 'Front drop',
         d: 'How much the front panels lower from your hips towards your center front.',
       },
-      hipRise: { t: 'Hip rise', d: 'How much the side panels rise on your hips.' },
+      hipRise: {
+        t: 'Hip rise',
+        d: 'How much the side panels rise on your hips.',
+      },
     },
   },
   charlie: {
@@ -1761,13 +2245,22 @@ export const designs = {
       waistbandCurved: 'Curved waistband',
     },
     o: {
-      kneeEase: { t: 'Knee ease', d: 'Controls the amount of ease at the knee' },
+      kneeEase: {
+        t: 'Knee ease',
+        d: 'Controls the amount of ease at the knee',
+      },
       waistHeight: {
         t: 'Waist height',
         d: 'Controls the height of the waist, 100% = waist height, 0% = hip height',
       },
-      lengthBonus: { t: 'Length bonus', d: 'Controls the length of the trousers' },
-      crotchDrop: { t: 'Crotch drop', d: 'Lowers the crotch for a more relaxed fit' },
+      lengthBonus: {
+        t: 'Length bonus',
+        d: 'Controls the length of the trousers',
+      },
+      crotchDrop: {
+        t: 'Crotch drop',
+        d: 'Lowers the crotch for a more relaxed fit',
+      },
       fitKnee: {
         t: 'Fit the knee',
         d: 'Fits the legs from based on the knee circumference, rather than seat circumference',
@@ -1788,8 +2281,14 @@ export const designs = {
         t: 'Start of the cross seam curve',
         d: 'Controls how far into the cross seam we start to curve',
       },
-      crossSeamCurveBend: { t: 'Cross seam bend', d: 'Controls the curvature of the cross seam' },
-      crossSeamCurveAngle: { t: 'Cross seam angle', d: 'Controls the angle of the cross seam' },
+      crossSeamCurveBend: {
+        t: 'Cross seam bend',
+        d: 'Controls the curvature of the cross seam',
+      },
+      crossSeamCurveAngle: {
+        t: 'Cross seam angle',
+        d: 'Controls the angle of the cross seam',
+      },
       crotchSeamCurveStart: {
         t: 'Start of the crotch seam curve',
         d: 'Controls how far into the crotch seam we start to curve',
@@ -1798,14 +2297,26 @@ export const designs = {
         t: 'Crotch seam bend',
         d: 'Controls the curvature of the crotch seam',
       },
-      crotchSeamCurveAngle: { t: 'Crotch seam angle', d: 'Controls the angle of the crotch seam' },
-      seatEase: { t: 'Seat ease', d: 'Controls the amount of ease at your seat' },
+      crotchSeamCurveAngle: {
+        t: 'Crotch seam angle',
+        d: 'Controls the angle of the crotch seam',
+      },
+      seatEase: {
+        t: 'Seat ease',
+        d: 'Controls the amount of ease at your seat',
+      },
       waistBalance: {
         t: 'Waist balance',
         d: 'Controls the horizontal position of the waist relative to the seat',
       },
-      waistbandWidth: { t: 'Waistband width', d: 'The width of the waistband' },
-      waistEase: { t: 'Waist ease', d: 'Controls the amount of ease at your waist' },
+      waistbandWidth: {
+        t: 'Waistband width',
+        d: 'The width of the waistband',
+      },
+      waistEase: {
+        t: 'Waist ease',
+        d: 'Controls the amount of ease at your waist',
+      },
       waistAngle: {
         t: 'Waistband angle',
         d: 'Change the angle of the waistband when viewed from the side',
@@ -1814,8 +2325,14 @@ export const designs = {
         t: 'Use waistband angle for',
         d: 'Apply the waistband angle to the front, back or both',
       },
-      'useWaistAngleFor.both': { t: 'Both', d: 'Apply the waistband angle to the front and back' },
-      'useWaistAngleFor.backOnly': { t: 'Back', d: 'Apply the waistband angle only to the back' },
+      'useWaistAngleFor.both': {
+        t: 'Both',
+        d: 'Apply the waistband angle to the front and back',
+      },
+      'useWaistAngleFor.backOnly': {
+        t: 'Back',
+        d: 'Apply the waistband angle only to the back',
+      },
       'useWaistAngleFor.frontOnly': {
         t: 'Front',
         d: 'Apply the waistband angle only to the front',
@@ -1832,8 +2349,14 @@ export const designs = {
         t: 'Back pocket vertical placement',
         d: 'Controls the vertical placement of the back pocket',
       },
-      backPocketWidth: { t: 'Back pocket width', d: 'Controls the width of the back pocket' },
-      backPocketDepth: { t: 'Back pocket depth', d: 'Controls the depth of the back pocket' },
+      backPocketWidth: {
+        t: 'Back pocket width',
+        d: 'Controls the width of the back pocket',
+      },
+      backPocketDepth: {
+        t: 'Back pocket depth',
+        d: 'Controls the depth of the back pocket',
+      },
       backPocketFacing: {
         t: 'Back pocket facing',
         d: 'Controls whether or not to include facing on the back pockets',
@@ -1874,11 +2397,26 @@ export const designs = {
         t: 'Front pocket facing',
         d: 'Controls how far the pocket facing extends into the pocket bag',
       },
-      beltLoops: { t: 'Belt loops', d: 'Controls the amount of belt loops' },
-      flyCurve: { t: 'Fly curve', d: 'Controls the curvature of the fly J-seam' },
-      flyLength: { t: 'Fly length', d: 'Controls the length of the fly' },
-      flyWidth: { t: 'Fly width', d: 'Controls how far the J-seam of offset from the fly edge' },
-      waistbandCurve: { t: 'Waistband Curve', d: 'Controls how curved the waistband is.' },
+      beltLoops: {
+        t: 'Belt loops',
+        d: 'Controls the amount of belt loops',
+      },
+      flyCurve: {
+        t: 'Fly curve',
+        d: 'Controls the curvature of the fly J-seam',
+      },
+      flyLength: {
+        t: 'Fly length',
+        d: 'Controls the length of the fly',
+      },
+      flyWidth: {
+        t: 'Fly width',
+        d: 'Controls how far the J-seam of offset from the fly edge',
+      },
+      waistbandCurve: {
+        t: 'Waistband Curve',
+        d: 'Controls how curved the waistband is.',
+      },
     },
   },
   cornelius: {
@@ -1904,8 +2442,14 @@ export const designs = {
         'The **waist band** is a strip of fabric {{{ width }}} wide and {{{ length }}} long.',
     },
     o: {
-      bandBelowKnee: { t: 'Cuff below knee', d: 'Controls the cuff distance from the knee' },
-      cuffStyle: { t: 'Cuff style', d: 'Style of the leg cuff' },
+      bandBelowKnee: {
+        t: 'Cuff below knee',
+        d: 'Controls the cuff distance from the knee',
+      },
+      cuffStyle: {
+        t: 'Cuff style',
+        d: 'Style of the leg cuff',
+      },
       'cuffStyle.traditional': {
         t: 'Traditional cuff style',
         d: 'A single buttoned curved band with a pointed edge',
@@ -1918,8 +2462,14 @@ export const designs = {
         t: 'Keystone cuff style',
         d: 'A slightly curved band that is wider than the others using 3 buttons rather than 1. This one is based of off the one in the Keystone Draft this pattern is based on.',
       },
-      cuffWidth: { t: 'Cuff width', d: 'Width of the leg cuff' },
-      flyWidth: { t: 'Fly Guard width', d: 'Width of the fly guard' },
+      cuffWidth: {
+        t: 'Cuff width',
+        d: 'Width of the leg cuff',
+      },
+      flyWidth: {
+        t: 'Fly Guard width',
+        d: 'Width of the fly guard',
+      },
       fullness: {
         t: 'Fullness of the legs',
         d: 'Influences the ease on the legs for a looser style',
@@ -1928,12 +2478,18 @@ export const designs = {
         t: 'Cuff length',
         d: 'Controls the tightness of the cuff as compared to the knee',
       },
-      ventLength: { t: 'Vent length', d: 'Controls the length of the vent between knee and cuff' },
+      ventLength: {
+        t: 'Vent length',
+        d: 'Controls the length of the vent between knee and cuff',
+      },
       waistbandBelowWaist: {
         t: 'Lower waistband',
         d: 'Percentage to move the waistband below the actual waist',
       },
-      waistReduction: { t: 'Waist reduction', d: 'Percentage to reduce the waistband' },
+      waistReduction: {
+        t: 'Waist reduction',
+        d: 'Percentage to reduce the waistband',
+      },
     },
   },
   devon: {
@@ -2011,16 +2567,34 @@ export const designs = {
         t: 'Armhole depth factor (legacy)',
         d: 'Controls the depth of the armhole. Higher values make a deeper armhole. This option only applies to the legacy (v2) way of calculating the armhole depth.',
       },
-      backNeckCutout: { t: 'Back neck cutout', d: 'How deep the neck is cut out at the back' },
+      backNeckCutout: {
+        t: 'Back neck cutout',
+        d: 'How deep the neck is cut out at the back',
+      },
       bicepsEase: {
         t: 'Biceps ease',
         d: 'The amount of ease at your upper arm. Note that while we try to respect this, fitting the sleeve to the armhole takes precedence over respecting the exact amount of ease.',
       },
-      collarEase: { t: 'Collar ease', d: 'The amount of ease around your neck' },
-      chestEase: { t: 'Chest ease', d: 'The amount of ease at your chest.' },
-      cuffEase: { t: 'Cuff ease', d: 'The amount of ease at your wrist.' },
-      cuffWidth: { t: 'Cuff width', d: 'The width of the cuff.' },
-      hemEase: { t: 'Hem ease', d: 'The amount of ease at the hem.' },
+      collarEase: {
+        t: 'Collar ease',
+        d: 'The amount of ease around your neck',
+      },
+      chestEase: {
+        t: 'Chest ease',
+        d: 'The amount of ease at your chest.',
+      },
+      cuffEase: {
+        t: 'Cuff ease',
+        d: 'The amount of ease at your wrist.',
+      },
+      cuffWidth: {
+        t: 'Cuff width',
+        d: 'The width of the cuff.',
+      },
+      hemEase: {
+        t: 'Hem ease',
+        d: 'The amount of ease at the hem.',
+      },
       frontArmholeDeeper: {
         t: 'Front armhole extra cutout',
         d: 'How much do you want the front armhole to be cut out deeper than the back.',
@@ -2037,7 +2611,10 @@ export const designs = {
         t: 'Calculate armhole depth the legacy (v2) way',
         d: 'Uses the biceps measurement to locate the bottom of the armhole',
       },
-      frontPocket: { t: 'Front pocket', d: 'Enable this option to create a front pocket' },
+      frontPocket: {
+        t: 'Front pocket',
+        d: 'Enable this option to create a front pocket',
+      },
       frontPocketNo: {
         t: 'Do not create a front pocket',
         d: 'Leave out the front pocket in the panel seam',
@@ -2050,7 +2627,10 @@ export const designs = {
         t: 'Length bonus',
         d: 'The amount to lengthen the garment. A negative value will shorten it.',
       },
-      neckDrop: { t: 'Neck drop', d: 'The amount the front of the neck will drop.' },
+      neckDrop: {
+        t: 'Neck drop',
+        d: 'The amount the front of the neck will drop.',
+      },
       shoulderEase: {
         t: 'Shoulder ease',
         d: 'The amount of ease at your shoulder. This increases the shoulder to shoulder distance to accommodate additional layers or thickness.',
@@ -2067,12 +2647,18 @@ export const designs = {
         t: 'Sleeve length bonus',
         d: 'The amount to lengthen the sleeve. A negative value will shorten it.',
       },
-      sleeveBend: { t: 'Sleeve bend', d: 'The angle of the sleeve at the elbow.' },
+      sleeveBend: {
+        t: 'Sleeve bend',
+        d: 'The angle of the sleeve at the elbow.',
+      },
       sleevecapEase: {
         t: 'Sleevecap ease',
         d: 'The amount by which the sleevecap seam is longer than the armhole seam.',
       },
-      sleevecapHeight: { t: 'Sleevecap height', d: 'Controls the height of the sleevecap.' },
+      sleevecapHeight: {
+        t: 'Sleevecap height',
+        d: 'Controls the height of the sleevecap.',
+      },
       sleevecapTopFactorX: {
         t: 'Sleevecap top X',
         d: 'Controls the horizontal location of the sleevecap top.',
@@ -2149,7 +2735,10 @@ export const designs = {
         t: 'Sleeve width guarantee',
         d: 'Controls how much of the sleeve width will be guaranteed. This determines how much we can alter the sleeve width to fit the sleeve in the armhole.',
       },
-      waistbandWidth: { t: 'Waistband width', d: 'The width of the waistband.' },
+      waistbandWidth: {
+        t: 'Waistband width',
+        d: 'The width of the waistband.',
+      },
       yokeDrop: {
         t: 'Yoke drop',
         d: 'How far the yoke will drop down. Percentage of back neck-to-waist.',
@@ -2166,7 +2755,13 @@ export const designs = {
       waistLine: 'Waist Line',
       chestLine: 'Chest Line',
     },
-    p: { back: 'Back', front: 'Front', base: 'Base', sleevecap: 'Sleevecap', sleeve: 'Sleeve' },
+    p: {
+      back: 'Back',
+      front: 'Front',
+      base: 'Base',
+      sleevecap: 'Sleevecap',
+      sleeve: 'Sleeve',
+    },
     o: {
       acrossBackFactor: {
         t: 'Across back factor',
@@ -2180,14 +2775,26 @@ export const designs = {
         t: 'Armhole depth factor (legacy)',
         d: 'Controls the depth of the armhole. Higher values make a deeper armhole. This option only applies to the legacy (v2) way of calculating the armhole depth.',
       },
-      backNeckCutout: { t: 'Back neck cutout', d: 'How deep the neck is cut out at the back' },
+      backNeckCutout: {
+        t: 'Back neck cutout',
+        d: 'How deep the neck is cut out at the back',
+      },
       bicepsEase: {
         t: 'Biceps ease',
         d: 'The amount of ease at your upper arm. Note that while we try to respect this, fitting the sleeve to the armhole takes precedence over respecting the exact amount of ease.',
       },
-      collarEase: { t: 'Collar ease', d: 'The amount of ease around your neck' },
-      chestEase: { t: 'Chest ease', d: 'The amount of ease at your chest.' },
-      cuffEase: { t: 'Cuff ease', d: 'The amount of ease at your wrist.' },
+      collarEase: {
+        t: 'Collar ease',
+        d: 'The amount of ease around your neck',
+      },
+      chestEase: {
+        t: 'Chest ease',
+        d: 'The amount of ease at your chest.',
+      },
+      cuffEase: {
+        t: 'Cuff ease',
+        d: 'The amount of ease at your wrist.',
+      },
       draftForHighBust: {
         t: 'Draft for high bust',
         d: 'Draft the pattern using the high bust measurement if it is available, instead of using the chest measurement. This can result in a more fitted garment for people with breasts. (Please note that no additional adjustments or shaping is performed. Further manual adjustments may be needed for those with a larger difference between high bust and chest measurements.)',
@@ -2324,9 +2931,18 @@ export const designs = {
         t: 'Shoulder seam length',
         d: 'Controls the length of the shoulder seam',
       },
-      drapeAngle: { t: 'Drape angle', d: 'Controls the amount of drape' },
-      hipsEase: { t: 'Hips ease', d: 'Controls the amount of ease at your hips' },
-      waistEase: { t: 'Waist ease', d: 'Controls the amount of ease at your waist' },
+      drapeAngle: {
+        t: 'Drape angle',
+        d: 'Controls the amount of drape',
+      },
+      hipsEase: {
+        t: 'Hips ease',
+        d: 'Controls the amount of ease at your hips',
+      },
+      waistEase: {
+        t: 'Waist ease',
+        d: 'Controls the amount of ease at your waist',
+      },
     },
   },
   examples: {
@@ -2339,12 +2955,23 @@ export const designs = {
   florence: {
     t: 'Florence face mask',
     d: 'Florence is a face mask.',
-    p: { mask: 'Mask' },
+    p: {
+      mask: 'Mask',
+    },
     s: {},
     o: {
-      height: { t: 'Height', d: 'Controls the height of the face mask' },
-      length: { t: 'Length', d: 'Controls the length of the face mask' },
-      curve: { t: 'Curve', d: 'Controls the curvature of the upper edge of the face mask' },
+      height: {
+        t: 'Height',
+        d: 'Controls the height of the face mask',
+      },
+      length: {
+        t: 'Length',
+        d: 'Controls the length of the face mask',
+      },
+      curve: {
+        t: 'Curve',
+        d: 'Controls the curvature of the upper edge of the face mask',
+      },
     },
   },
   florent: {
@@ -2358,12 +2985,19 @@ export const designs = {
       top: 'Top',
     },
     s: {},
-    o: { headEase: { t: 'Head ease', d: 'The amount of ease around your head' } },
+    o: {
+      headEase: {
+        t: 'Head ease',
+        d: 'The amount of ease around your head',
+      },
+    },
   },
   gozer: {
     t: 'Gozer',
     d: 'A FreeSewing pattern for a Halloween costume',
-    p: { ghost: 'ghost' },
+    p: {
+      ghost: 'ghost',
+    },
     s: {
       'partialPart.t': 'The main part is only partially shown.',
       'partialPart.d': 'The actual part is a circle with a radius of {{{ radius }}}.',
@@ -2386,40 +3020,86 @@ export const designs = {
     },
     s: {},
     o: {
-      hungry: { t: 'Hungry', d: 'Changes the belly shape to convey if Hi has just eaten' },
-      nosePointiness: { t: 'Nose pointiness', d: "Controls how pointy Hi's nose is" },
-      aggressive: { t: 'Aggressive', d: 'Give Hi pointy teeth, or not' },
-      aggressiveNo: { t: 'Friendly', d: 'Hi will have rounded teeth' },
-      aggressiveYes: { t: 'Aggressive', d: 'Hi will have pointy teeth' },
-      size: { t: 'Size', d: 'Sharks come in all sizes, and so does Hi' },
+      hungry: {
+        t: 'Hungry',
+        d: 'Changes the belly shape to convey if Hi has just eaten',
+      },
+      nosePointiness: {
+        t: 'Nose pointiness',
+        d: "Controls how pointy Hi's nose is",
+      },
+      aggressive: {
+        t: 'Aggressive',
+        d: 'Give Hi pointy teeth, or not',
+      },
+      aggressiveNo: {
+        t: 'Friendly',
+        d: 'Hi will have rounded teeth',
+      },
+      aggressiveYes: {
+        t: 'Aggressive',
+        d: 'Hi will have pointy teeth',
+      },
+      size: {
+        t: 'Size',
+        d: 'Sharks come in all sizes, and so does Hi',
+      },
     },
   },
   holmes: {
     t: 'Holmes deerstalker hat',
     d: 'For Sherlock Holmes cosplay or just a cute hat.',
-    p: { ear: 'Ear', crown: 'Crown', visor: 'Visor' },
+    p: {
+      ear: 'Ear',
+      crown: 'Crown',
+      visor: 'Visor',
+    },
     s: {},
     o: {
-      headEase: { t: 'Head ease', d: 'The amount of ease around your head.' },
-      lengthRatio: { t: 'Length ratio', d: 'Controls the length of the crown and ear flaps' },
-      gores: { t: 'Number of gores', d: 'The number of gores used to construct the crown' },
+      headEase: {
+        t: 'Head ease',
+        d: 'The amount of ease around your head.',
+      },
+      lengthRatio: {
+        t: 'Length ratio',
+        d: 'Controls the length of the crown and ear flaps',
+      },
+      gores: {
+        t: 'Number of gores',
+        d: 'The number of gores used to construct the crown',
+      },
       visorAngle: {
         t: 'Visor angle',
         d: 'The arc angle used to draft the inner curve of the visor',
       },
-      visorWidth: { t: 'Visor width', d: 'Controls the width of the visor' },
+      visorWidth: {
+        t: 'Visor width',
+        d: 'Controls the width of the visor',
+      },
       earLength: {
         t: 'Ear flap length',
         d: 'Controls the length of the ear flaps independently from the crown pieces',
       },
-      earWidth: { t: 'Ear flap width', d: 'Controls the width of the ear flaps' },
+      earWidth: {
+        t: 'Ear flap width',
+        d: 'Controls the width of the ear flaps',
+      },
       buttonhole: {
         t: 'Buttonhole guide',
         d: 'Adds a buttonhole to the ear flap to help you draft the buttonhole ear flap variant',
       },
-      buttonholeNo: { t: 'No buttonhole guide', d: 'Do not place a buttonhole on the ear flap' },
-      buttonholeYes: { t: 'With buttonhole guide', d: 'Do place a buttonhole on the ear flap' },
-      visorLength: { t: 'Visor length', d: 'Controls the length of the visor' },
+      buttonholeNo: {
+        t: 'No buttonhole guide',
+        d: 'Do not place a buttonhole on the ear flap',
+      },
+      buttonholeYes: {
+        t: 'With buttonhole guide',
+        d: 'Do place a buttonhole on the ear flap',
+      },
+      visorLength: {
+        t: 'Visor length',
+        d: 'Controls the length of the visor',
+      },
     },
   },
   hortensia: {
@@ -2458,24 +3138,54 @@ export const designs = {
       zipperSize: 'Standard zipper size',
     },
     o: {
-      size: { t: 'Size', d: 'Controls the overall size of the handbag' },
-      zipperSize: { t: 'Zipper size', d: 'Which size of zipper to use' },
-      'zipperSize.#3': { t: '#3 zipper size', d: '#3 zippers have teeth that are 3mm wide' },
-      'zipperSize.#4': { t: '#4 zipper size', d: '#4 zippers have teeth that are 4mm wide.' },
+      size: {
+        t: 'Size',
+        d: 'Controls the overall size of the handbag',
+      },
+      zipperSize: {
+        t: 'Zipper size',
+        d: 'Which size of zipper to use',
+      },
+      'zipperSize.#3': {
+        t: '#3 zipper size',
+        d: '#3 zippers have teeth that are 3mm wide',
+      },
+      'zipperSize.#4': {
+        t: '#4 zipper size',
+        d: '#4 zippers have teeth that are 4mm wide.',
+      },
       'zipperSize.#4.5': {
         t: '#4.5 zipper size',
         d: '#4.5 zippers have teeth that are 4.5mm wide.',
       },
-      'zipperSize.#5': { t: '#5 zipper size', d: '#5 zippers have teeth that are 5mm wide.' },
-      'zipperSize.#6': { t: '#6 zipper size', d: '#6 zippers have teeth that are 6mm wide.' },
-      'zipperSize.#8': { t: '#8 zipper size', d: '#8 zippers have teeth that are 8mm wide.' },
-      'zipperSize.#10': { t: '#10 zipper size', d: '#10 zippers have teeth that are 10mm wide.' },
+      'zipperSize.#5': {
+        t: '#5 zipper size',
+        d: '#5 zippers have teeth that are 5mm wide.',
+      },
+      'zipperSize.#6': {
+        t: '#6 zipper size',
+        d: '#6 zippers have teeth that are 6mm wide.',
+      },
+      'zipperSize.#8': {
+        t: '#8 zipper size',
+        d: '#8 zippers have teeth that are 8mm wide.',
+      },
+      'zipperSize.#10': {
+        t: '#10 zipper size',
+        d: '#10 zippers have teeth that are 10mm wide.',
+      },
       'zipperSize.invisible': {
         t: 'Invisible zipper',
         d: 'An invisible zipper is a zipper that can be inserted in such a way that the teeth do not show.',
       },
-      strapLength: { t: 'Strap length', d: 'Controls the length of the strap' },
-      handleWidth: { t: 'Handle width', d: 'Controls the width of the handle' },
+      strapLength: {
+        t: 'Strap length',
+        d: 'Controls the length of the strap',
+      },
+      handleWidth: {
+        t: 'Handle width',
+        d: 'Controls the width of the handle',
+      },
     },
   },
   huey: {
@@ -2528,14 +3238,26 @@ export const designs = {
         t: 'Armhole depth factor (legacy)',
         d: 'Controls the depth of the armhole. Higher values make a deeper armhole. This option only applies to the legacy (v2) way of calculating the armhole depth.',
       },
-      backNeckCutout: { t: 'Back neck cutout', d: 'How deep the neck is cut out at the back' },
+      backNeckCutout: {
+        t: 'Back neck cutout',
+        d: 'How deep the neck is cut out at the back',
+      },
       bicepsEase: {
         t: 'Biceps ease',
         d: 'The amount of ease at your upper arm. Note that while we try to respect this, fitting the sleeve to the armhole takes precedence over respecting the exact amount of ease.',
       },
-      collarEase: { t: 'Collar ease', d: 'The amount of ease around your neck' },
-      chestEase: { t: 'Chest ease', d: 'The amount of ease at your chest.' },
-      cuffEase: { t: 'Cuff ease', d: 'The amount of ease at your wrist.' },
+      collarEase: {
+        t: 'Collar ease',
+        d: 'The amount of ease around your neck',
+      },
+      chestEase: {
+        t: 'Chest ease',
+        d: 'The amount of ease at your chest.',
+      },
+      cuffEase: {
+        t: 'Cuff ease',
+        d: 'The amount of ease at your wrist.',
+      },
       draftForHighBust: {
         t: 'Draft for high bust',
         d: 'Draft the pattern using the high bust measurement if it is available, instead of using the chest measurement. This can result in a more fitted garment for people with breasts. (Please note that no additional adjustments or shaping is performed. Further manual adjustments may be needed for those with a larger difference between high bust and chest measurements.)',
@@ -2668,25 +3390,58 @@ export const designs = {
         t: 'Sleeve width guarantee',
         d: 'Controls how much of the sleeve width will be guaranteed. This determines how much we can alter the sleeve width to fit the sleeve in the armhole.',
       },
-      pocket: { t: 'Pocket', d: 'Whether to include a front pocket or not' },
-      pocketHeight: { t: 'Pocket height', d: 'Controls the height of the pocket' },
-      pocketOpening: { t: 'Pocket opening', d: 'Controls the opening size of the pocket' },
-      hoodHeight: { t: 'Hood height', d: 'Controls the height of the hood' },
-      hoodCutback: { t: 'Hood cutback', d: 'Controls how far the hood opening is cut back' },
+      pocket: {
+        t: 'Pocket',
+        d: 'Whether to include a front pocket or not',
+      },
+      pocketHeight: {
+        t: 'Pocket height',
+        d: 'Controls the height of the pocket',
+      },
+      pocketOpening: {
+        t: 'Pocket opening',
+        d: 'Controls the opening size of the pocket',
+      },
+      hoodHeight: {
+        t: 'Hood height',
+        d: 'Controls the height of the hood',
+      },
+      hoodCutback: {
+        t: 'Hood cutback',
+        d: 'Controls how far the hood opening is cut back',
+      },
       hoodClosure: {
         t: 'Hood closure',
         d: 'Controls how much of the hood is part of the front closure',
       },
-      hoodDepth: { t: 'Hood depth', d: 'Controls the depth of the hood' },
-      hoodAngle: { t: 'Hood angle', d: 'Controls the angle at which the hood is attached' },
-      ribbing: { t: 'Ribbing', d: 'Whether or not to include ribbing on the pattern.' },
-      ribbingHeight: { t: 'Ribbing height', d: 'Controls the height of the ribbing' },
+      hoodDepth: {
+        t: 'Hood depth',
+        d: 'Controls the depth of the hood',
+      },
+      hoodAngle: {
+        t: 'Hood angle',
+        d: 'Controls the angle at which the hood is attached',
+      },
+      ribbing: {
+        t: 'Ribbing',
+        d: 'Whether or not to include ribbing on the pattern.',
+      },
+      ribbingHeight: {
+        t: 'Ribbing height',
+        d: 'Controls the height of the ribbing',
+      },
       ribbingStretch: {
         t: 'Ribbing stretch',
         d: 'Use this to adapt the pattern to how stretchy the ribbing that you are using is.',
       },
-      hipsEase: { t: 'Hips ease', d: 'Controls the amount of ease at the hips' },
-      pocketWidth: { t: 'Pocket width', d: 'Controls the width of the pocket' },
+      hipsEase: {
+        t: 'Hips ease',
+        d: 'Controls the amount of ease at the hips',
+      },
+      pocketWidth: {
+        t: 'Pocket width',
+        d: 'Controls the width of the pocket',
+      },
     },
   },
   hugo: {
@@ -2744,14 +3499,26 @@ export const designs = {
         t: 'Armhole depth factor (legacy)',
         d: 'Controls the depth of the armhole. Higher values make a deeper armhole. This option only applies to the legacy (v2) way of calculating the armhole depth.',
       },
-      backNeckCutout: { t: 'Back neck cutout', d: 'How deep the neck is cut out at the back' },
+      backNeckCutout: {
+        t: 'Back neck cutout',
+        d: 'How deep the neck is cut out at the back',
+      },
       bicepsEase: {
         t: 'Biceps ease',
         d: 'The amount of ease at your upper arm. Note that while we try to respect this, fitting the sleeve to the armhole takes precedence over respecting the exact amount of ease.',
       },
-      collarEase: { t: 'Collar ease', d: 'The amount of ease around your neck' },
-      chestEase: { t: 'Chest ease', d: 'The amount of ease at your chest.' },
-      cuffEase: { t: 'Cuff ease', d: 'The amount of ease at your wrist.' },
+      collarEase: {
+        t: 'Collar ease',
+        d: 'The amount of ease around your neck',
+      },
+      chestEase: {
+        t: 'Chest ease',
+        d: 'The amount of ease at your chest.',
+      },
+      cuffEase: {
+        t: 'Cuff ease',
+        d: 'The amount of ease at your wrist.',
+      },
       draftForHighBust: {
         t: 'Draft for high bust',
         d: 'Draft the pattern using the high bust measurement if it is available, instead of using the chest measurement. This can result in a more fitted garment for people with breasts. (Please note that no additional adjustments or shaping is performed. Further manual adjustments may be needed for those with a larger difference between high bust and chest measurements.)',
@@ -2884,13 +3651,22 @@ export const designs = {
         t: 'Sleeve width guarantee',
         d: 'Controls how much of the sleeve width will be guaranteed. This determines how much we can alter the sleeve width to fit the sleeve in the armhole.',
       },
-      ribbingHeight: { t: 'Ribbing height', d: 'Controls the height of the ribbing' },
+      ribbingHeight: {
+        t: 'Ribbing height',
+        d: 'Controls the height of the ribbing',
+      },
       ribbingStretch: {
         t: 'Ribbing stretch',
         d: 'Use this to adapt the pattern to how stretchy the ribbing that you are using is.',
       },
-      pocketWidth: { t: 'Pocket width', d: 'Determined the width of the pocket.' },
-      hipsEase: { t: 'Hips ease', d: 'The amount of ease at your hips.' },
+      pocketWidth: {
+        t: 'Pocket width',
+        d: 'Determined the width of the pocket.',
+      },
+      hipsEase: {
+        t: 'Hips ease',
+        d: 'The amount of ease at your hips.',
+      },
     },
   },
   jaeger: {
@@ -2956,14 +3732,26 @@ export const designs = {
         t: 'Armhole depth factor (legacy)',
         d: 'Controls the depth of the armhole. Higher values make a deeper armhole. This option only applies to the legacy (v2) way of calculating the armhole depth.',
       },
-      backNeckCutout: { t: 'Back neck cutout', d: 'How deep the neck is cut out at the back' },
+      backNeckCutout: {
+        t: 'Back neck cutout',
+        d: 'How deep the neck is cut out at the back',
+      },
       bicepsEase: {
         t: 'Biceps ease',
         d: 'The amount of ease at your upper arm. Note that while we try to respect this, fitting the sleeve to the armhole takes precedence over respecting the exact amount of ease.',
       },
-      collarEase: { t: 'Collar ease', d: 'The amount of ease around your neck' },
-      chestEase: { t: 'Chest ease', d: 'The amount of ease at your chest.' },
-      cuffEase: { t: 'Cuff ease', d: 'The amount of ease at your wrist.' },
+      collarEase: {
+        t: 'Collar ease',
+        d: 'The amount of ease around your neck',
+      },
+      chestEase: {
+        t: 'Chest ease',
+        d: 'The amount of ease at your chest.',
+      },
+      cuffEase: {
+        t: 'Cuff ease',
+        d: 'The amount of ease at your wrist.',
+      },
       draftForHighBust: {
         t: 'Draft for high bust',
         d: 'Draft the pattern using the high bust measurement if it is available, instead of using the chest measurement. This can result in a more fitted garment for people with breasts. (Please note that no additional adjustments or shaping is performed. Further manual adjustments may be needed for those with a larger difference between high bust and chest measurements.)',
@@ -3020,19 +3808,34 @@ export const designs = {
         t: 'Sleevecap ease',
         d: 'The amount by which the sleevecap seam is longer than the armhole seam.',
       },
-      sleeveBend: { t: 'Sleeve bend', d: 'Controls the bend of the sleeve at the elbow.' },
-      sleevecapHeight: { t: 'Sleevecap height', d: 'Controls the height of the sleevecap.' },
+      sleeveBend: {
+        t: 'Sleeve bend',
+        d: 'Controls the bend of the sleeve at the elbow.',
+      },
+      sleevecapHeight: {
+        t: 'Sleevecap height',
+        d: 'Controls the height of the sleevecap.',
+      },
       centerBackDart: {
         t: 'Center back dart',
         d: 'Dart at the center back of your neck to accommodate a rounded back',
       },
-      sleeveVentLength: { t: 'Sleeve vent length', d: 'Length of the sleeve vent' },
-      sleeveVentWidth: { t: 'Sleeve vent width', d: 'Width of the sleeve vent' },
+      sleeveVentLength: {
+        t: 'Sleeve vent length',
+        d: 'Length of the sleeve vent',
+      },
+      sleeveVentWidth: {
+        t: 'Sleeve vent width',
+        d: 'Width of the sleeve vent',
+      },
       chestShaping: {
         t: 'Chest shaping',
         d: 'Amount of shaping to accommodate for the chest curve',
       },
-      frontDartPlacement: { t: 'Front dart placement', d: 'Location of the front darts' },
+      frontDartPlacement: {
+        t: 'Front dart placement',
+        d: 'Location of the front darts',
+      },
       frontOverlap: {
         t: 'Front overlap',
         d: 'How far the fabric extends beyond the closing buttons',
@@ -3041,24 +3844,54 @@ export const designs = {
         t: 'Side/Front placement',
         d: 'The location of the side/front boundary',
       },
-      chestPocketDepth: { t: 'Chest pocket depth', d: 'The depth of the chest pocket' },
-      chestPocketWidth: { t: 'Chest pocket width', d: 'The width of the chest pocket' },
-      chestPocketPlacement: { t: 'Chest pocket placement', d: 'The location of the chest pocket' },
+      chestPocketDepth: {
+        t: 'Chest pocket depth',
+        d: 'The depth of the chest pocket',
+      },
+      chestPocketWidth: {
+        t: 'Chest pocket width',
+        d: 'The width of the chest pocket',
+      },
+      chestPocketPlacement: {
+        t: 'Chest pocket placement',
+        d: 'The location of the chest pocket',
+      },
       chestPocketAngle: {
         t: 'Chest pocket angle',
         d: 'The angle under which the chest pocket is placed',
       },
-      chestPocketWeltSize: { t: 'Chest pocket welt size', d: 'The size of the chest pocket welt' },
-      frontPocketPlacement: { t: 'Front pocket placement', d: 'Location of the front pocket' },
-      frontPocketWidth: { t: 'Front pocket width', d: 'The width of the front pocket' },
-      frontPocketDepth: { t: 'Front pocket depth', d: 'The depth of the front pocket' },
+      chestPocketWeltSize: {
+        t: 'Chest pocket welt size',
+        d: 'The size of the chest pocket welt',
+      },
+      frontPocketPlacement: {
+        t: 'Front pocket placement',
+        d: 'Location of the front pocket',
+      },
+      frontPocketWidth: {
+        t: 'Front pocket width',
+        d: 'The width of the front pocket',
+      },
+      frontPocketDepth: {
+        t: 'Front pocket depth',
+        d: 'The depth of the front pocket',
+      },
       frontPocketRadius: {
         t: 'Front pocket radius',
         d: 'The radius by which the front pocket is rounded',
       },
-      innerPocketPlacement: { t: 'Inner pocket placement', d: 'The location of the inner pocket' },
-      innerPocketWidth: { t: 'Inner pocket width', d: 'The width of the inner pocket' },
-      innerPocketDepth: { t: 'Inner pocket depth', d: 'The depth of the inner pocket' },
+      innerPocketPlacement: {
+        t: 'Inner pocket placement',
+        d: 'The location of the inner pocket',
+      },
+      innerPocketWidth: {
+        t: 'Inner pocket width',
+        d: 'The width of the inner pocket',
+      },
+      innerPocketDepth: {
+        t: 'Inner pocket depth',
+        d: 'The depth of the inner pocket',
+      },
       innerPocketWeltHeight: {
         t: 'Inner pocket welt height',
         d: 'The height of the inner pocket welt',
@@ -3071,9 +3904,18 @@ export const designs = {
         t: 'Center front hem drop',
         d: 'The amount by which the hem is lowered towards the center front',
       },
-      backVent: { t: 'Back vent', d: 'The amount of back vents' },
-      backVentLength: { t: 'Back vent length', d: 'The length of the back vent(s)' },
-      buttonLength: { t: 'Button length', d: 'The distance over which buttons are spread' },
+      backVent: {
+        t: 'Back vent',
+        d: 'The amount of back vents',
+      },
+      backVentLength: {
+        t: 'Back vent length',
+        d: 'The length of the back vent(s)',
+      },
+      buttonLength: {
+        t: 'Button length',
+        d: 'The distance over which buttons are spread',
+      },
       frontCutawayAngle: {
         t: 'Front cutaway angle',
         d: 'The angle under which the front is cut away towards the hem',
@@ -3094,10 +3936,22 @@ export const designs = {
         t: 'Lapel start',
         d: 'Location where the center front goes over into the lapels',
       },
-      lapelReduction: { t: 'Lapel reduction', d: 'How much the tip of the lapels turns inwards' },
-      collarHeight: { t: 'Collar height', d: 'Height of the collar' },
-      collarNotchDepth: { t: 'Collar notch depth', d: 'Depth of the collar notch' },
-      collarNotchAngle: { t: 'Collar notch angle', d: 'Angle of the collar notch' },
+      lapelReduction: {
+        t: 'Lapel reduction',
+        d: 'How much the tip of the lapels turns inwards',
+      },
+      collarHeight: {
+        t: 'Collar height',
+        d: 'Height of the collar',
+      },
+      collarNotchDepth: {
+        t: 'Collar notch depth',
+        d: 'Depth of the collar notch',
+      },
+      collarNotchAngle: {
+        t: 'Collar notch angle',
+        d: 'Angle of the collar notch',
+      },
       collarNotchReturn: {
         t: 'Collar notch return',
         d: 'How much the collar returns from the notch, in comparison to the lapel',
@@ -3106,13 +3960,34 @@ export const designs = {
         t: 'Roll-line collar height',
         d: 'How much the roll-line hugs the neck',
       },
-      hemRadius: { t: 'Hem radius', d: 'The amount by which the hem is rounded' },
-      hipsEase: { t: 'Hips ease', d: 'Controls the amount of ease at your hips' },
-      waistEase: { t: 'Waist ease', d: 'Controls the amount of ease at your waist' },
-      buttons: { t: 'Number of buttons', d: 'Controls the amount of buttons' },
-      'buttons.1': { t: 'One button', d: 'Draft a pattern with only one single button' },
-      'buttons.2': { t: 'Two buttons', d: 'Draft a pattern with two buttons' },
-      'buttons.3': { t: 'Three buttons', d: 'Draft a pattern with three buttons' },
+      hemRadius: {
+        t: 'Hem radius',
+        d: 'The amount by which the hem is rounded',
+      },
+      hipsEase: {
+        t: 'Hips ease',
+        d: 'Controls the amount of ease at your hips',
+      },
+      waistEase: {
+        t: 'Waist ease',
+        d: 'Controls the amount of ease at your waist',
+      },
+      buttons: {
+        t: 'Number of buttons',
+        d: 'Controls the amount of buttons',
+      },
+      'buttons.1': {
+        t: 'One button',
+        d: 'Draft a pattern with only one single button',
+      },
+      'buttons.2': {
+        t: 'Two buttons',
+        d: 'Draft a pattern with two buttons',
+      },
+      'buttons.3': {
+        t: 'Three buttons',
+        d: 'Draft a pattern with three buttons',
+      },
       collarRoll: {
         t: 'Collar roll',
         d: 'Controls the amount of roll in the collar; how much the topcollar is higher than the undercollar.',
@@ -3122,17 +3997,45 @@ export const designs = {
   jane: {
     t: "Jane 1790's shift",
     d: 'A FreeSewing pattern for a 1790s shift',
-    p: { body: 'Body', sleeve: 'Sleeve', gusset: 'Gusset' },
+    p: {
+      body: 'Body',
+      sleeve: 'Sleeve',
+      gusset: 'Gusset',
+    },
     s: {},
     o: {
-      bodyEase: { t: 'Body Ease', d: 'Controls ease in the width of the body' },
-      neckDepthFront: { t: 'Neckline Depth Front', d: 'Controls depth of the front neckline' },
-      neckDepthBack: { t: 'Neckline Depth Back', d: 'Controls depth of the back neckline' },
-      neckWidth: { t: 'Neckline Width', d: 'Controls the width of the neckline' },
-      shiftLength: { t: 'Shift Length', d: 'Controls the length of the shift' },
-      gussetSize: { t: 'Gusset Size', d: 'Controls the size of the gusset' },
-      bicepsEase: { t: 'Biceps Ease', d: 'Controls the ease in the sleeve' },
-      sleeveLength: { t: 'Sleeve Length', d: 'Controls the additional length added to the sleeve' },
+      bodyEase: {
+        t: 'Body Ease',
+        d: 'Controls ease in the width of the body',
+      },
+      neckDepthFront: {
+        t: 'Neckline Depth Front',
+        d: 'Controls depth of the front neckline',
+      },
+      neckDepthBack: {
+        t: 'Neckline Depth Back',
+        d: 'Controls depth of the back neckline',
+      },
+      neckWidth: {
+        t: 'Neckline Width',
+        d: 'Controls the width of the neckline',
+      },
+      shiftLength: {
+        t: 'Shift Length',
+        d: 'Controls the length of the shift',
+      },
+      gussetSize: {
+        t: 'Gusset Size',
+        d: 'Controls the size of the gusset',
+      },
+      bicepsEase: {
+        t: 'Biceps Ease',
+        d: 'Controls the ease in the sleeve',
+      },
+      sleeveLength: {
+        t: 'Sleeve Length',
+        d: 'Controls the additional length added to the sleeve',
+      },
     },
   },
   jett: {
@@ -3178,14 +4081,26 @@ export const designs = {
         t: 'Armhole depth factor (legacy)',
         d: 'Controls the depth of the armhole. Higher values make a deeper armhole. This option only applies to the legacy (v2) way of calculating the armhole depth.',
       },
-      backNeckCutout: { t: 'Back neck cutout', d: 'How deep the neck is cut out at the back' },
+      backNeckCutout: {
+        t: 'Back neck cutout',
+        d: 'How deep the neck is cut out at the back',
+      },
       bicepsEase: {
         t: 'Biceps ease',
         d: 'The amount of ease at your upper arm. Note that while we try to respect this, fitting the sleeve to the armhole takes precedence over respecting the exact amount of ease.',
       },
-      collarEase: { t: 'Collar ease', d: 'The amount of ease around your neck' },
-      chestEase: { t: 'Chest ease', d: 'The amount of ease at your chest.' },
-      cuffEase: { t: 'Cuff ease', d: 'The amount of ease at your wrist.' },
+      collarEase: {
+        t: 'Collar ease',
+        d: 'The amount of ease around your neck',
+      },
+      chestEase: {
+        t: 'Chest ease',
+        d: 'The amount of ease at your chest.',
+      },
+      cuffEase: {
+        t: 'Cuff ease',
+        d: 'The amount of ease at your wrist.',
+      },
       draftForHighBust: {
         t: 'Draft for high bust',
         d: 'Draft the pattern using the high bust measurement if it is available, instead of using the chest measurement. This can result in a more fitted garment for people with breasts. (Please note that no additional adjustments or shaping is performed. Further manual adjustments may be needed for those with a larger difference between high bust and chest measurements.)',
@@ -3318,8 +4233,14 @@ export const designs = {
         t: 'Sleeve width guarantee',
         d: 'Controls how much of the sleeve width will be guaranteed. This determines how much we can alter the sleeve width to fit the sleeve in the armhole.',
       },
-      hipsEase: { t: 'Hips ease', d: 'The amount of ease at your hips' },
-      ribbingHeight: { t: 'Ribbing height', d: 'Controls the height of the ribbing' },
+      hipsEase: {
+        t: 'Hips ease',
+        d: 'The amount of ease at your hips',
+      },
+      ribbingHeight: {
+        t: 'Ribbing height',
+        d: 'Controls the height of the ribbing',
+      },
       ribbingStretch: {
         t: 'Ribbing stretch',
         d: 'Use this to adapt the pattern to how stretchy the ribbing that you are using is.',
@@ -3328,8 +4249,14 @@ export const designs = {
         t: 'Bust dart (EXPERIMENTAL)',
         d: "Draft the pattern with a full bust adjustment and a bust dart. This only takes effect if Draft for High Bust is true.\nThis option isn't guaranteed to preserve the armhole or side seam lengths. Proceed with caution.",
       },
-      bustDartNo: { t: 'No', d: "Don't use a bust dart" },
-      bustDartYes: { t: 'Yes', d: 'Use a bust dart' },
+      bustDartNo: {
+        t: 'No',
+        d: "Don't use a bust dart",
+      },
+      bustDartYes: {
+        t: 'Yes',
+        d: 'Use a bust dart',
+      },
       fullBustEase: {
         t: 'Full bust ease',
         d: 'Allows you to independently control the ease in the bust adjustment without affecting the armscye',
@@ -3346,8 +4273,14 @@ export const designs = {
         t: 'Dart legs truing',
         d: 'This option tweaks the side seam to keep the bust dart legs the same length.',
       },
-      dartLegsTruingYes: { t: 'Yes', d: 'Adjust the dart leg lengths' },
-      dartLegsTruingNo: { t: 'No', d: "Don't adjust the dart leg lengths" },
+      dartLegsTruingYes: {
+        t: 'Yes',
+        d: 'Adjust the dart leg lengths',
+      },
+      dartLegsTruingNo: {
+        t: 'No',
+        d: "Don't adjust the dart leg lengths",
+      },
       bustDartPercentage: {
         t: 'FBA adjustment percentage',
         d: 'How much of the effect of the FBA to use.',
@@ -3360,8 +4293,12 @@ export const designs = {
         t: 'Ribbing',
         d: 'Whether to generate a waistband and cuffs made of stretchy ribbing',
       },
-      ribbingYes: { t: 'Yes' },
-      ribbingNo: { t: 'No' },
+      ribbingYes: {
+        t: 'Yes',
+      },
+      ribbingNo: {
+        t: 'No',
+      },
       ribbingEndsPercentage: {
         t: 'Waistband extension percentage',
         d: 'How wide to make the button placket extension at the ends of the waistband',
@@ -3370,8 +4307,14 @@ export const designs = {
         t: 'Neck shift forward',
         d: "Cut the neck lower in the front than Brian's default neckline, by this percentage of the neck measurement",
       },
-      yokesplit: { t: 'Yoke height', d: 'How tall to make the yoke' },
-      ribbedCollarWidth: { t: 'Ribbed collar width', d: 'How wide to make the ribbed collar' },
+      yokesplit: {
+        t: 'Yoke height',
+        d: 'How tall to make the yoke',
+      },
+      ribbedCollarWidth: {
+        t: 'Ribbed collar width',
+        d: 'How wide to make the ribbed collar',
+      },
       ribbedCollarCurve: {
         t: 'Ribbed collar curve',
         d: 'How far the ends of the ribbed collar curve',
@@ -3384,8 +4327,12 @@ export const designs = {
         t: 'Yoke',
         d: "Whether to draft the back panel with a yoke across the shoulders. The yoke does no extra shaping right now, so this doesn't affect the fit.",
       },
-      yokeYes: { t: 'Yes' },
-      yokeNo: { t: 'No' },
+      yokeYes: {
+        t: 'Yes',
+      },
+      yokeNo: {
+        t: 'No',
+      },
       placketwidth: {
         t: 'Placket width',
         d: 'How wide to make the button placket, as a percentage of the chest measurement',
@@ -3394,9 +4341,16 @@ export const designs = {
         t: 'Use full belly adjustment',
         d: 'This widens the front piece to account for a waist wider than the hip measurement. To use this, make sure to take the waist measurement at the fullest part of your belly',
       },
-      useBellyAdjustmentYes: { t: 'Yes' },
-      useBellyAdjustmentNo: { t: 'No' },
-      'bustDart.None': { t: 'None', d: 'No full bust adjustment' },
+      useBellyAdjustmentYes: {
+        t: 'Yes',
+      },
+      useBellyAdjustmentNo: {
+        t: 'No',
+      },
+      'bustDart.None': {
+        t: 'None',
+        d: 'No full bust adjustment',
+      },
       armCutAngle: {
         t: 'Armhole cut angle',
         d: 'This applies only to the rotation-based implementation. Tweak this if the armhole looks wrong.',
@@ -3405,13 +4359,34 @@ export const designs = {
         t: 'Front welt pockets',
         d: 'Determines whether to draft the pattern with diagonal welt pockets on the front',
       },
-      frontWeltPocketsYes: { t: 'Yes', d: 'Draft with pockets' },
-      frontWeltPocketsNo: { t: 'No', d: 'Draft without pockets' },
-      pocketBottomX: { t: 'Pocket bottom X', d: 'Horizontal position of the bottom of the pocket' },
-      pocketBottomY: { t: 'Pocket bottom Y', d: 'Vertical position of the bottom of the pocket' },
-      pocketTopX: { t: 'Pocket top X', d: 'Horizontal position of the top of the pocket' },
-      pocketTopY: { t: 'Pocket top Y', d: 'Vertical position of the top of the pocket' },
-      pocketWeltWidth: { t: 'Pocket welt width', d: 'How wide to make the pocket welt piece' },
+      frontWeltPocketsYes: {
+        t: 'Yes',
+        d: 'Draft with pockets',
+      },
+      frontWeltPocketsNo: {
+        t: 'No',
+        d: 'Draft without pockets',
+      },
+      pocketBottomX: {
+        t: 'Pocket bottom X',
+        d: 'Horizontal position of the bottom of the pocket',
+      },
+      pocketBottomY: {
+        t: 'Pocket bottom Y',
+        d: 'Vertical position of the bottom of the pocket',
+      },
+      pocketTopX: {
+        t: 'Pocket top X',
+        d: 'Horizontal position of the top of the pocket',
+      },
+      pocketTopY: {
+        t: 'Pocket top Y',
+        d: 'Vertical position of the top of the pocket',
+      },
+      pocketWeltWidth: {
+        t: 'Pocket welt width',
+        d: 'How wide to make the pocket welt piece',
+      },
     },
   },
   legend: {
@@ -3424,7 +4399,11 @@ export const designs = {
   lily: {
     t: 'Lily Leggings',
     d: 'A FreeSewing pattern for basic leggings',
-    p: { back: 'Back', front: 'Front', waistband: 'Waistband' },
+    p: {
+      back: 'Back',
+      front: 'Front',
+      waistband: 'Waistband',
+    },
     s: {
       'adjustEase.t': 'Adjust ease settings to match fabric stretch',
       'adjustEase.d':
@@ -3444,20 +4423,38 @@ export const designs = {
         t: 'Show measurement guides',
         d: 'Show measurement guides for horizontal measures',
       },
-      waistEase: { t: 'Waist ease', d: 'Controls the amount of ease at your waist' },
-      seatEase: { t: 'Seat ease', d: 'Controls the amount of ease at your seat' },
-      kneeEase: { t: 'Knee ease', d: 'Controls the amount of ease at the knee' },
+      waistEase: {
+        t: 'Waist ease',
+        d: 'Controls the amount of ease at your waist',
+      },
+      seatEase: {
+        t: 'Seat ease',
+        d: 'Controls the amount of ease at your seat',
+      },
+      kneeEase: {
+        t: 'Knee ease',
+        d: 'Controls the amount of ease at the knee',
+      },
       waistHeight: {
         t: 'Waist height',
         d: 'Controls the height of the waist, 100% = waist height, 0% = hip height',
       },
-      crotchDrop: { t: 'Crotch drop', d: 'Lowers the crotch for a more relaxed fit' },
+      crotchDrop: {
+        t: 'Crotch drop',
+        d: 'Lowers the crotch for a more relaxed fit',
+      },
       crossSeamCurveStart: {
         t: 'Start of the cross seam curve',
         d: 'Controls how far into the cross seam we start to curve',
       },
-      crossSeamCurveBend: { t: 'Cross seam bend', d: 'Controls the curvature of the cross seam' },
-      crossSeamCurveAngle: { t: 'Cross seam angle', d: 'Controls the angle of the cross seam' },
+      crossSeamCurveBend: {
+        t: 'Cross seam bend',
+        d: 'Controls the curvature of the cross seam',
+      },
+      crossSeamCurveAngle: {
+        t: 'Cross seam angle',
+        d: 'Controls the angle of the cross seam',
+      },
       crotchSeamCurveStart: {
         t: 'Start of the crotch seam curve',
         d: 'Controls how far into the crotch seam we start to curve',
@@ -3466,12 +4463,18 @@ export const designs = {
         t: 'Crotch seam bend',
         d: 'Controls the curvature of the crotch seam',
       },
-      crotchSeamCurveAngle: { t: 'Crotch seam angle', d: 'Controls the angle of the crotch seam' },
+      crotchSeamCurveAngle: {
+        t: 'Crotch seam angle',
+        d: 'Controls the angle of the crotch seam',
+      },
       grainlinePosition: {
         t: 'Grainline position',
         d: 'Controls the horizontal position of the leg relative to the seat',
       },
-      waistbandWidth: { t: 'Waistband width', d: 'The width of the waistband' },
+      waistbandWidth: {
+        t: 'Waistband width',
+        d: 'The width of the waistband',
+      },
       waistAngle: {
         t: 'Waistband angle',
         d: 'Change the angle of the waistband when viewed from the side',
@@ -3480,8 +4483,14 @@ export const designs = {
         t: 'Use waistband angle for',
         d: 'Apply the waistband angle to the front, back or both',
       },
-      'useWaistAngleFor.both': { t: 'Both', d: 'Apply the waistband angle to the front and back' },
-      'useWaistAngleFor.backOnly': { t: 'Back', d: 'Apply the waistband angle only to the back' },
+      'useWaistAngleFor.both': {
+        t: 'Both',
+        d: 'Apply the waistband angle to the front and back',
+      },
+      'useWaistAngleFor.backOnly': {
+        t: 'Back',
+        d: 'Apply the waistband angle only to the back',
+      },
       'useWaistAngleFor.frontOnly': {
         t: 'Front',
         d: 'Apply the waistband angle only to the front',
@@ -3491,12 +4500,23 @@ export const designs = {
   lucy: {
     t: 'Lucy tie-on pocket',
     d: 'Lucy is a historical pocket that you can tie around your waist.',
-    p: { pocket: 'Pocket' },
+    p: {
+      pocket: 'Pocket',
+    },
     s: {},
     o: {
-      width: { t: 'Width', d: 'Width of the pocket' },
-      length: { t: 'Length', d: 'Length (depth) of the pocket' },
-      edge: { t: 'Taper', d: 'Controls how much the pocket opening tapers inwards' },
+      width: {
+        t: 'Width',
+        d: 'Width of the pocket',
+      },
+      length: {
+        t: 'Length',
+        d: 'Length (depth) of the pocket',
+      },
+      edge: {
+        t: 'Taper',
+        d: 'Controls how much the pocket opening tapers inwards',
+      },
     },
   },
   lumina: {
@@ -3531,10 +4551,22 @@ export const designs = {
         t: 'Waist lowering',
         d: 'Lowering of the waist. This is a percentage of the Waist-To-Hips measurement.',
       },
-      waistband: { t: 'Waistband', d: 'Add a separate waistband to the design.' },
-      waistbandYes: { t: 'With a Waistband', d: 'Add a separate waistband.' },
-      waistbandNo: { t: 'Without a Waistband', d: 'Do not add a separate waistband.' },
-      lowerwaistbandback: { t: 'Waistband Lowering', d: 'Lower the waistband in the back.' },
+      waistband: {
+        t: 'Waistband',
+        d: 'Add a separate waistband to the design.',
+      },
+      waistbandYes: {
+        t: 'With a Waistband',
+        d: 'Add a separate waistband.',
+      },
+      waistbandNo: {
+        t: 'Without a Waistband',
+        d: 'Do not add a separate waistband.',
+      },
+      lowerwaistbandback: {
+        t: 'Waistband Lowering',
+        d: 'Lower the waistband in the back.',
+      },
       lowerwaistbandbackYes: {
         t: 'Lower the Waistband',
         d: "Lower the waistband in the back, creating a 'V' shape.",
@@ -3551,15 +4583,30 @@ export const designs = {
         t: 'Waist circumference reduction',
         d: 'The amount by which the waist should be reduced. This is a percentage of the waist circumference. Only available when the waistband option is selected. Look in the Messages from the designer for the exact size.',
       },
-      pocket: { t: 'Pocket', d: 'Add pockets' },
-      pocketYes: { t: 'Add pockets', d: 'Add pockets in the side panel' },
-      pocketNo: { t: 'No pockets', d: 'Pockets are not added' },
+      pocket: {
+        t: 'Pocket',
+        d: 'Add pockets',
+      },
+      pocketYes: {
+        t: 'Add pockets',
+        d: 'Add pockets in the side panel',
+      },
+      pocketNo: {
+        t: 'No pockets',
+        d: 'Pockets are not added',
+      },
       pocketdepth: {
         t: 'Pocket depth',
         d: 'Depth (height) of the pocket. This is a percentage of the Waist-To-Seat measurement.',
       },
-      fixedsidepanel: { t: 'Fixed-width side panel', d: 'Fixed-width, or shaped side panel' },
-      fixedsidepanelYes: { t: 'Fixed side panel', d: 'Create a fixed-width side panel' },
+      fixedsidepanel: {
+        t: 'Fixed-width side panel',
+        d: 'Fixed-width, or shaped side panel',
+      },
+      fixedsidepanelYes: {
+        t: 'Fixed side panel',
+        d: 'Create a fixed-width side panel',
+      },
       fixedsidepanelNo: {
         t: 'Shaped side panel',
         d: 'Create a shaped side panel, consisting of a percentage of the leg circumference',
@@ -3577,7 +4624,12 @@ export const designs = {
   lumira: {
     t: 'Lumira leggings',
     d: 'A FreeSewing pattern for a pair of leggings',
-    p: { shape: 'Shape', leg: 'Leg', gusset: 'Gusset', waistband: 'Waistband' },
+    p: {
+      shape: 'Shape',
+      leg: 'Leg',
+      gusset: 'Gusset',
+      waistband: 'Waistband',
+    },
     s: {
       bulgeToLarge:
         'The value for the bulge is too large, and this cannot be made to fit. It is adjusted accordingly.',
@@ -3589,21 +4641,54 @@ export const designs = {
       couldNotReduceWaist: 'Could not reduce the waist',
     },
     o: {
-      waistband: { t: 'Waistband', d: 'Add a separate waistband to the design' },
-      waistbandYes: { t: 'With a Waistband', d: 'Add a separate waistband' },
-      waistbandNo: { t: 'Without a Waistband', d: 'Do not add a separate waistband' },
-      backgusset: { t: 'Back Gusset', d: 'Add a circular gusset in the back' },
-      backgussetYes: { t: 'Add a back gusset', d: 'Back gusset with option to butt lift added' },
-      backgussetNo: { t: 'No circular back gusset', d: 'Simple center gusset' },
+      waistband: {
+        t: 'Waistband',
+        d: 'Add a separate waistband to the design',
+      },
+      waistbandYes: {
+        t: 'With a Waistband',
+        d: 'Add a separate waistband',
+      },
+      waistbandNo: {
+        t: 'Without a Waistband',
+        d: 'Do not add a separate waistband',
+      },
+      backgusset: {
+        t: 'Back Gusset',
+        d: 'Add a circular gusset in the back',
+      },
+      backgussetYes: {
+        t: 'Add a back gusset',
+        d: 'Back gusset with option to butt lift added',
+      },
+      backgussetNo: {
+        t: 'No circular back gusset',
+        d: 'Simple center gusset',
+      },
       cyclingchamois: {
         t: 'Cycling Chamois',
         d: 'Allow for a chamois to be added. This sets some of the percentages, and automatically enables certain features',
       },
-      cyclingchamoisYes: { t: 'Add Cycling Chamois', d: 'Support for a chamois has been added' },
-      cyclingchamoisNo: { t: 'No Cycling Chamois', d: 'All settings can be individually set' },
-      frontbulge: { t: 'Front bulge', d: 'Add a bulge in the front' },
-      frontbulgeYes: { t: 'Add a front bulge', d: 'Add a bulge in the front' },
-      frontbulgeNo: { t: 'No front bulge', d: 'Simple seam in the front' },
+      cyclingchamoisYes: {
+        t: 'Add Cycling Chamois',
+        d: 'Support for a chamois has been added',
+      },
+      cyclingchamoisNo: {
+        t: 'No Cycling Chamois',
+        d: 'All settings can be individually set',
+      },
+      frontbulge: {
+        t: 'Front bulge',
+        d: 'Add a bulge in the front',
+      },
+      frontbulgeYes: {
+        t: 'Add a front bulge',
+        d: 'Add a bulge in the front',
+      },
+      frontbulgeNo: {
+        t: 'No front bulge',
+        d: 'Simple seam in the front',
+      },
       ease: {
         t: 'Ease',
         d: 'This controls the amount of ease. Since this is a pattern for leggings that is normally made of stretch fabric, the ease is negative, meaning the fabric is stretched around the body.',
@@ -3649,20 +4734,43 @@ export const designs = {
   lunetius: {
     t: 'Lunetius Lacerna',
     d: 'Lunetius is a lacerna, a historical Roman cloak',
-    p: { lacerna: 'Lacerna' },
+    p: {
+      lacerna: 'Lacerna',
+    },
     s: {},
     o: {
-      lengthRatio: { t: 'Length ratio', d: 'Controls the length of the garment' },
-      widthRatio: { t: 'Width ratio', d: 'Controls the width of the garment' },
-      length: { t: 'Length', d: 'Choose from the different length styles' },
-      'length.toHips': { t: 'To the hips', d: 'Draft a lacerna that ends at the hips' },
+      lengthRatio: {
+        t: 'Length ratio',
+        d: 'Controls the length of the garment',
+      },
+      widthRatio: {
+        t: 'Width ratio',
+        d: 'Controls the width of the garment',
+      },
+      length: {
+        t: 'Length',
+        d: 'Choose from the different length styles',
+      },
+      'length.toHips': {
+        t: 'To the hips',
+        d: 'Draft a lacerna that ends at the hips',
+      },
       'length.toUpperLeg': {
         t: 'To the upper leg',
         d: 'Draft a lacerna that ends at the upper leg or thigh',
       },
-      'length.toKnee': { t: 'To the knee', d: 'Draft a lacerna that ends at the knee' },
-      'length.toBelowKnee': { t: 'Below the knee', d: 'Draft a lacerna ends below the knee' },
-      'length.toFloor': { t: 'To the floor', d: 'Draft a full-length lacerna down to the floor' },
+      'length.toKnee': {
+        t: 'To the knee',
+        d: 'Draft a lacerna that ends at the knee',
+      },
+      'length.toBelowKnee': {
+        t: 'Below the knee',
+        d: 'Draft a lacerna ends below the knee',
+      },
+      'length.toFloor': {
+        t: 'To the floor',
+        d: 'Draft a full-length lacerna down to the floor',
+      },
     },
   },
   magde: {
@@ -3683,11 +4791,26 @@ export const designs = {
     },
     s: {},
     o: {
-      size: { t: 'Size', d: 'FIXME: Provide description for this option' },
-      taperRatio: { t: 'Taper ratio', d: 'FIXME: Provide description for this option' },
-      flapHeightRatio: { t: 'Flap height', d: 'FIXME: Provide description for this option' },
-      openingRatio: { t: 'Opening ratio', d: 'FIXME: Provide description for this option' },
-      onePieceLid: { t: 'One piece lid', d: 'FIXME: Provide description for this option' },
+      size: {
+        t: 'Size',
+        d: 'FIXME: Provide description for this option',
+      },
+      taperRatio: {
+        t: 'Taper ratio',
+        d: 'FIXME: Provide description for this option',
+      },
+      flapHeightRatio: {
+        t: 'Flap height',
+        d: 'FIXME: Provide description for this option',
+      },
+      openingRatio: {
+        t: 'Opening ratio',
+        d: 'FIXME: Provide description for this option',
+      },
+      onePieceLid: {
+        t: 'One piece lid',
+        d: 'FIXME: Provide description for this option',
+      },
       useCommonWebbingSizes: {
         t: 'Use common webbing size',
         d: 'FIXME: Provide description for this option',
@@ -3721,15 +4844,30 @@ export const designs = {
         t: 'Dart position at the shoulder',
         d: 'This moves the prince(ss) seam to the shoulder',
       },
-      chestEase: { t: 'Chest ease', d: 'Controls the amount of ease at the chest' },
-      waistEase: { t: 'Waist ease', d: 'Controls the amount of ease at the waist' },
-      bustSpanEase: { t: 'Bust span ease', d: 'Controls the amount of ease along the bust span' },
+      chestEase: {
+        t: 'Chest ease',
+        d: 'Controls the amount of ease at the chest',
+      },
+      waistEase: {
+        t: 'Waist ease',
+        d: 'Controls the amount of ease at the waist',
+      },
+      bustSpanEase: {
+        t: 'Bust span ease',
+        d: 'Controls the amount of ease along the bust span',
+      },
       waistdartposition: {
         t: 'Waist dart position',
         d: "Controls the position of the waist 'dart', moving it to the center (negative) or side (positive)",
       },
-      backDartHeight: { t: 'Controls the height of the back dart', d: 'Back dart height' },
-      waistDartLength: { t: 'Waist dart length', d: 'Controls the length of the waist dart' },
+      backDartHeight: {
+        t: 'Controls the height of the back dart',
+        d: 'Back dart height',
+      },
+      waistDartLength: {
+        t: 'Waist dart length',
+        d: 'Controls the length of the waist dart',
+      },
       shoulderDartCurvature: {
         t: 'Shoulder dart curvature',
         d: 'Controls the curvature of the upper part of the shoulder dart',
@@ -3738,12 +4876,18 @@ export const designs = {
         t: 'Shoulder dart position',
         d: 'Controls the position of the shoulder dart',
       },
-      upperDartLength: { t: 'Upper dart length', d: 'Controls the length of the upper dart' },
+      upperDartLength: {
+        t: 'Upper dart length',
+        d: 'Controls the length of the upper dart',
+      },
       armholeDartPosition: {
         t: 'Armhole dart position',
         d: 'Controls the position of the armhole dart',
       },
-      armholeDepth: { t: 'Armhole depth', d: 'Controls the depth of the armhole' },
+      armholeDepth: {
+        t: 'Armhole depth',
+        d: 'Controls the depth of the armhole',
+      },
       armholeDartCurved: {
         t: 'Princess Seam Curviness',
         d: 'Controls the curvature of the princess seam',
@@ -3788,12 +4932,18 @@ export const designs = {
         t: 'Back neck cutout',
         d: 'Controls how deep the neck is cutout in the back',
       },
-      backHemSlope: { t: 'Back hem slope', d: 'Controls the slope of the back hem' },
+      backHemSlope: {
+        t: 'Back hem slope',
+        d: 'Controls the slope of the back hem',
+      },
       frontShoulderWidth: {
         t: 'Front shoulder width',
         d: 'Controls how much width is added to the shoulder in the front',
       },
-      highBustWidth: { t: 'High bust width', d: 'Controls the width of the high bust' },
+      highBustWidth: {
+        t: 'High bust width',
+        d: 'Controls the width of the high bust',
+      },
       shoulderToShoulderEase: {
         t: 'Shoulder to shoulder ease',
         d: 'Controls the amount of ease along the shoulder to shoulder measurement',
@@ -3841,15 +4991,42 @@ export const designs = {
         'The **Squid eyebrow** is a rectangular piece of fabric {{{ width }}} wide and {{{ length }}} long.',
     },
     o: {
-      size: { t: 'Size', d: 'Controls the overall size (value shown is the size of the head)' },
-      type: { t: 'Type', d: 'Allows you to choose one of the variants of this design' },
-      'type.octoplushy': { t: 'Octoplushy', d: 'Draft the octoplushy variant' },
-      'type.octopus': { t: 'Octopus', d: 'Draft the octopus variant' },
-      'type.squid': { t: 'Squid', d: 'Draft the squid variant' },
-      armWidth: { t: 'Arm width', d: 'Controls the width of the arms' },
-      armLength: { t: 'Arm length', d: 'Controls the length of the arms' },
-      neckWidth: { t: 'Neck width', d: 'Determines the width at the neck' },
-      armTaper: { t: 'Arm tapering', d: 'Controls the amount by which the arms taper' },
+      size: {
+        t: 'Size',
+        d: 'Controls the overall size (value shown is the size of the head)',
+      },
+      type: {
+        t: 'Type',
+        d: 'Allows you to choose one of the variants of this design',
+      },
+      'type.octoplushy': {
+        t: 'Octoplushy',
+        d: 'Draft the octoplushy variant',
+      },
+      'type.octopus': {
+        t: 'Octopus',
+        d: 'Draft the octopus variant',
+      },
+      'type.squid': {
+        t: 'Squid',
+        d: 'Draft the squid variant',
+      },
+      armWidth: {
+        t: 'Arm width',
+        d: 'Controls the width of the arms',
+      },
+      armLength: {
+        t: 'Arm length',
+        d: 'Controls the length of the arms',
+      },
+      neckWidth: {
+        t: 'Neck width',
+        d: 'Determines the width at the neck',
+      },
+      armTaper: {
+        t: 'Arm tapering',
+        d: 'Controls the amount by which the arms taper',
+      },
       bottomTopArmRatio: {
         t: 'Bottom/Top arm ratio',
         d: 'Changes the ratio between the fabric on the top of the arms versus that on the bottom of the arms',
@@ -3903,7 +5080,10 @@ export const designs = {
         t: 'Neckband length',
         d: 'Controls how long the neckband is, as a percentage of the circumference of the neckline.',
       },
-      neckbandWidth: { t: 'Neckband width', d: 'Controls how wide the finished neckband will be.' },
+      neckbandWidth: {
+        t: 'Neckband width',
+        d: 'Controls how wide the finished neckband will be.',
+      },
       hoodHem: {
         t: 'Hood hem',
         d: 'Sets the hem allowance along the front of the hood, as a multiple of the seam allowance.',
@@ -3912,8 +5092,14 @@ export const designs = {
         t: 'Sleeve Ribbing',
         d: 'Choose whether to make ribbed knit cuffs for the sleeves or to use a hem.',
       },
-      sleeveRibbingNo: { t: 'Hem', d: 'Finish the sleeves with a hem.' },
-      sleeveRibbingYes: { t: 'Ribbing', d: 'Finish the sleeves with a piece of ribbing.' },
+      sleeveRibbingNo: {
+        t: 'Hem',
+        d: 'Finish the sleeves with a hem.',
+      },
+      sleeveRibbingYes: {
+        t: 'Ribbing',
+        d: 'Finish the sleeves with a piece of ribbing.',
+      },
       sleeveRibbingLength: {
         t: 'Sleeve Ribbing Length',
         d: 'Controls how long the ribbing around the sleeve is, as a percentage of the sleeve circumference.',
@@ -3930,8 +5116,14 @@ export const designs = {
         t: 'Leg Ribbing',
         d: 'Choose whether to make ribbed knit cuffs for the legs or to use a hem.',
       },
-      legRibbingNo: { t: 'Hem', d: 'Finish the legs with a hem.' },
-      legRibbingYes: { t: 'Ribbing', d: 'Finish the legs with a piece of ribbing.' },
+      legRibbingNo: {
+        t: 'Hem',
+        d: 'Finish the legs with a hem.',
+      },
+      legRibbingYes: {
+        t: 'Ribbing',
+        d: 'Finish the legs with a piece of ribbing.',
+      },
       legRibbingLength: {
         t: 'Leg Ribbing Length',
         d: 'Controls how long the ribbing around the leg is, as a percentage of the leg circumference.',
@@ -3948,19 +5140,34 @@ export const designs = {
         t: 'Back on fold',
         d: 'Enable this option to make the back out of a single piece, or disable to make it out of two mirrored pieces joined by a seam. It is recommended to disable this if placing a back zipper, and enable it otherwise.',
       },
-      backOnFoldNo: { t: 'Cut separate', d: 'Cut two separate mirrored back pieces' },
-      backOnFoldYes: { t: 'Cut on fold', d: 'Cut the back as a single piece, on the fold' },
+      backOnFoldNo: {
+        t: 'Cut separate',
+        d: 'Cut two separate mirrored back pieces',
+      },
+      backOnFoldYes: {
+        t: 'Cut on fold',
+        d: 'Cut the back as a single piece, on the fold',
+      },
       frontOnFold: {
         t: 'Front on fold',
         d: 'Enable this option to make the front out of a single piece, or disable to make it out of two mirrored pieces joined by a seam. It is recommended to disable this if placing a front zipper, and enable it otherwise.',
       },
-      frontOnFoldNo: { t: 'Cut separate', d: 'Cut two separate mirrored front pieces' },
-      frontOnFoldYes: { t: 'Cut on fold', d: 'Cut the back as a single piece, on the fold' },
+      frontOnFoldNo: {
+        t: 'Cut separate',
+        d: 'Cut two separate mirrored front pieces',
+      },
+      frontOnFoldYes: {
+        t: 'Cut on fold',
+        d: 'Cut the back as a single piece, on the fold',
+      },
       zipperLength: {
         t: 'Zipper length',
         d: 'The length of the zipper, as a percentage of the vertical trunk. It is recommended that you match this length (shown below in cm/in) to the length of the actual zipper, measured from lower stop to upper stop.',
       },
-      zipperGuardWidth: { t: 'Zipper guard width', d: 'How wide to make the zipper guard.' },
+      zipperGuardWidth: {
+        t: 'Zipper guard width',
+        d: 'How wide to make the zipper guard.',
+      },
       neckGuardLength: {
         t: 'Neck guard length',
         d: 'How far to have the zipper guard extend past the top of the zipper.',
@@ -3973,7 +5180,10 @@ export const designs = {
         t: 'Skirt waistband',
         d: 'Sets the width of the waistband along the top of the skirt, as a multiple of the seam allowance.',
       },
-      hoodHeight: { t: 'Hood height', d: 'Controls how tall the hood will be.' },
+      hoodHeight: {
+        t: 'Hood height',
+        d: 'Controls how tall the hood will be.',
+      },
       hoodDepth: {
         t: 'Hood depth',
         d: 'Controls how much room will be in the hood around the back of the head.',
@@ -3986,13 +5196,22 @@ export const designs = {
         t: 'Outseam ease',
         d: 'Controls how far down the garment the waist, hips, seat, and upper leg points on the outseam will be.',
       },
-      chestEase: { t: 'Chest ease', d: 'Controls how wide the garment will be around the chest.' },
-      waistEase: { t: 'Waist ease', d: 'Controls how wide the garment will be around the chest.' },
+      chestEase: {
+        t: 'Chest ease',
+        d: 'Controls how wide the garment will be around the chest.',
+      },
+      waistEase: {
+        t: 'Waist ease',
+        d: 'Controls how wide the garment will be around the chest.',
+      },
       hipsEase: {
         t: 'Hips ease',
         d: 'Controls how wide the garment will be at the bottom hem. This option is only used if the straight sides option is disabled.',
       },
-      seatEase: { t: 'Seat ease', d: 'Controls how wide the seat is.' },
+      seatEase: {
+        t: 'Seat ease',
+        d: 'Controls how wide the seat is.',
+      },
       armpitEase: {
         t: 'Armpit ease',
         d: 'Gives more room in the armpit by shifting the sleeve down the body.',
@@ -4005,12 +5224,18 @@ export const designs = {
         t: 'Upper leg ease',
         d: 'Controls how wide the garment will be around the upper legs.',
       },
-      legHemEase: { t: 'Leg hem ease', d: 'Controls how wide the bottom of the legs will be.' },
+      legHemEase: {
+        t: 'Leg hem ease',
+        d: 'Controls how wide the bottom of the legs will be.',
+      },
       neckBalance: {
         t: 'Neck position',
         d: 'Controls where the neck hole is placed on the garment.',
       },
-      neckEase: { t: 'Neck ease', d: 'Controls how large the neck hole is.' },
+      neckEase: {
+        t: 'Neck ease',
+        d: 'Controls how large the neck hole is.',
+      },
       sleeveEase: {
         t: 'Sleeve ease',
         d: 'Affects how wide the sleeve is at the armhole on all garments, and has some affect on the width at the hem of short sleeved garments.',
@@ -4019,21 +5244,42 @@ export const designs = {
         t: 'Wrist ease',
         d: 'Affects how wide the end of the sleeve is on sleeves that extend past the biceps. The effect is greater on longer sleeves.',
       },
-      zipperPosition: { t: 'Zipper Position', d: 'Select where to place the zipper.' },
-      'zipperPosition.front': { t: 'Front', d: 'Place the zipper on the front.' },
-      'zipperPosition.back': { t: 'Back', d: 'Place the zipper on the back.' },
-      'zipperPosition.none': { t: 'None', d: 'Do not use a zipper.' },
+      zipperPosition: {
+        t: 'Zipper Position',
+        d: 'Select where to place the zipper.',
+      },
+      'zipperPosition.front': {
+        t: 'Front',
+        d: 'Place the zipper on the front.',
+      },
+      'zipperPosition.back': {
+        t: 'Back',
+        d: 'Place the zipper on the back.',
+      },
+      'zipperPosition.none': {
+        t: 'None',
+        d: 'Do not use a zipper.',
+      },
       neckStyle: {
         t: 'Neck style',
         d: 'Select whether you want to add a hood to the garment, or finish the neck with a neckband.',
       },
-      'neckStyle.neckband': { t: 'Neckband', d: 'Finish the neck with a neckband.' },
-      'neckStyle.hood': { t: 'Hood', d: 'Generate a hood for the garment.' },
+      'neckStyle.neckband': {
+        t: 'Neckband',
+        d: 'Finish the neck with a neckband.',
+      },
+      'neckStyle.hood': {
+        t: 'Hood',
+        d: 'Generate a hood for the garment.',
+      },
       sleeveLength: {
         t: 'Sleeve length',
         d: 'Controls how long the sleeves of the garment will be.',
       },
-      legLength: { t: 'Leg length', d: 'Controls how long the legs of the garment will be.' },
+      legLength: {
+        t: 'Leg length',
+        d: 'Controls how long the legs of the garment will be.',
+      },
       hoodFrontPieceSize: {
         t: 'Hood front piece size',
         d: 'Controls if a front piece will be used, and how wide the front piece of the hood will be.',
@@ -4050,8 +5296,14 @@ export const designs = {
         t: 'Skirt',
         d: 'Select whether or not you want to add a simple gathered skirt around the waist of the garment.',
       },
-      skirtNo: { t: 'Nothing', d: 'A skirt will not be generated.' },
-      skirtYes: { t: 'Skirt', d: 'A skirt will be generated.' },
+      skirtNo: {
+        t: 'Nothing',
+        d: 'A skirt will not be generated.',
+      },
+      skirtYes: {
+        t: 'Skirt',
+        d: 'A skirt will be generated.',
+      },
       skirtLength: {
         t: 'Skirt length',
         d: 'Controls the length of the skirt, as a percentage of the waist to upper leg measurement.',
@@ -4107,12 +5359,18 @@ export const designs = {
         t: 'Leg hem allowance',
         d: 'Sets how wide the hems around the legs are, as a percent of the seam allowance.',
       },
-      waistEase: { t: 'Waist ease', d: 'Controls how wide the garment will be around the waist.' },
+      waistEase: {
+        t: 'Waist ease',
+        d: 'Controls how wide the garment will be around the waist.',
+      },
       waistBalance: {
         t: 'Waist balance',
         d: 'Controls how much of the waist is part of the front piece and how much is part of the back piece.',
       },
-      seatEase: { t: 'Seat ease', d: 'Controls how wide the garment will be around the seat.' },
+      seatEase: {
+        t: 'Seat ease',
+        d: 'Controls how wide the garment will be around the seat.',
+      },
       seatBalance: {
         t: 'Seat balance',
         d: 'Controls how much of the seat is part of the front piece and how much is part of the back piece.',
@@ -4125,7 +5383,10 @@ export const designs = {
         t: 'Leg hem ease',
         d: 'Controls how much ease there is at the bottom of the legs.',
       },
-      legLength: { t: 'Leg length', d: 'Controls how long the legs of the garment will be.' },
+      legLength: {
+        t: 'Leg length',
+        d: 'Controls how long the legs of the garment will be.',
+      },
       crossSeamCurveStart: {
         t: 'Cross seam curve start',
         d: 'Controls where the cross seam starts curving on the back.',
@@ -4154,8 +5415,14 @@ export const designs = {
         t: 'Crotch fork balance',
         d: 'Controls how far back/forward the crotch fork is placed.',
       },
-      crotchEase: { t: 'Crotch ease', d: 'Controls horizontal ease at the crotch fork.' },
-      crotchDrop: { t: 'Crotch drop', d: 'Controls vertical ease at the crotch fork.' },
+      crotchEase: {
+        t: 'Crotch ease',
+        d: 'Controls horizontal ease at the crotch fork.',
+      },
+      crotchDrop: {
+        t: 'Crotch drop',
+        d: 'Controls vertical ease at the crotch fork.',
+      },
       legBalance: {
         t: 'Leg balance',
         d: 'Positive values move more of the fabric to the back piece, negative values to the front piece.',
@@ -4168,7 +5435,10 @@ export const designs = {
         t: 'Outseam height',
         d: 'Controls how far up past the waist the outseam extends, and thus how far up the front and back bibs separate.',
       },
-      waistbandWidth: { t: 'Waistband width', d: 'Controls how wide the front waistband is.' },
+      waistbandWidth: {
+        t: 'Waistband width',
+        d: 'Controls how wide the front waistband is.',
+      },
       waistbandLayers: {
         t: 'Waistband layers',
         d: 'Sets how many layers the front waistband is folded into.',
@@ -4205,14 +5475,26 @@ export const designs = {
         t: 'Waist drop',
         d: 'Places extra fabric in the center of the waist, to help the garment better wrap around the belly.',
       },
-      bibHeight: { t: 'Bib height', d: 'Controls how tall the front bib is.' },
-      bibWidth: { t: 'Bib width', d: 'Controls how wide the top of the front bib is.' },
+      bibHeight: {
+        t: 'Bib height',
+        d: 'Controls how tall the front bib is.',
+      },
+      bibWidth: {
+        t: 'Bib width',
+        d: 'Controls how wide the top of the front bib is.',
+      },
       bibPocketOnFold: {
         t: 'Bib pocket on fold',
         d: 'Toggles whether to draft the bib pocket pattern on-the-fold, or as a full pattern piece.',
       },
-      bibPocketOnFoldNo: { t: 'Full piece', d: 'Draft the bib pocket as a full pattern piece.' },
-      bibPocketOnFoldYes: { t: 'On-the-fold', d: 'Draft the bib pocket on-the-fold.' },
+      bibPocketOnFoldNo: {
+        t: 'Full piece',
+        d: 'Draft the bib pocket as a full pattern piece.',
+      },
+      bibPocketOnFoldYes: {
+        t: 'On-the-fold',
+        d: 'Draft the bib pocket on-the-fold.',
+      },
       bibPlacketWidth: {
         t: 'Bib placket width',
         d: 'Controls how wide to make the placket at the top of the front bib.',
@@ -4221,7 +5503,10 @@ export const designs = {
         t: 'Bib placket layers',
         d: 'Sets how many layers of fabric are used for the placket at the top of the front bib.',
       },
-      pocketBib: { t: 'Bib pocket', d: 'Toggles whether to include a bib pocket in the pattern.' },
+      pocketBib: {
+        t: 'Bib pocket',
+        d: 'Toggles whether to include a bib pocket in the pattern.',
+      },
       pocketBibVerticalPosition: {
         t: 'Bib pocket vertical position',
         d: 'Controls where the bib pocket is located on the bib vertically.',
@@ -4234,7 +5519,10 @@ export const designs = {
         t: 'Bib pocket width',
         d: 'Controls how wide the top of the bib pocket is.',
       },
-      pocketBibHeight: { t: 'Bib pocket height', d: 'Controls how tall the bib pocket is.' },
+      pocketBibHeight: {
+        t: 'Bib pocket height',
+        d: 'Controls how tall the bib pocket is.',
+      },
       pocketBibFeatureWidth: {
         t: 'Bib pocket feature width',
         d: 'The exact effect of this option varies based on the selected bib pocket style.',
@@ -4271,8 +5559,14 @@ export const designs = {
         t: 'Back bib hexagon side height',
         d: 'Controls how tall the left and right sides of the hexagon formed by the straps crossing are.',
       },
-      strapLength: { t: 'Strap length', d: 'Controls how long the straps are.' },
-      strapWidth: { t: 'Strap width', d: 'Controls how wide the straps are.' },
+      strapLength: {
+        t: 'Strap length',
+        d: 'Controls how long the straps are.',
+      },
+      strapWidth: {
+        t: 'Strap width',
+        d: 'Controls how wide the straps are.',
+      },
       strapPosition: {
         t: 'Strap position',
         d: 'Controls where the straps are positioned with respect to the hexagon.',
@@ -4297,8 +5591,14 @@ export const designs = {
         t: 'Back pocket vertical position',
         d: 'Controls where the back pockets are vertically.',
       },
-      pocketBackWidth: { t: 'Back pocket width', d: 'Controls how wide the back pockets are.' },
-      pocketBackHeight: { t: 'Back pocket height', d: 'Controls how tall the back pockets are.' },
+      pocketBackWidth: {
+        t: 'Back pocket width',
+        d: 'Controls how wide the back pockets are.',
+      },
+      pocketBackHeight: {
+        t: 'Back pocket height',
+        d: 'Controls how tall the back pockets are.',
+      },
       pocketBackCornerWidth: {
         t: 'Back pocket corner width',
         d: 'Controls how wide the bottom-left and bottom-right corners of the back pocket are.',
@@ -4343,7 +5643,10 @@ export const designs = {
         t: 'Hammer loop',
         d: 'Toggles whether to include a hammer loop under the left back pocket.',
       },
-      hammerLoopWidth: { t: 'Hammer loop width', d: 'How wide to make the hammer loop.' },
+      hammerLoopWidth: {
+        t: 'Hammer loop width',
+        d: 'How wide to make the hammer loop.',
+      },
       hammerLoopCornerX: {
         t: 'Hammer loop corner horizontal position',
         d: 'Controls where the hammer loop curves towards. Used for calculating its length.',
@@ -4398,11 +5701,26 @@ export const designs = {
         t: 'Binding',
         d: 'Binding determines the size of the binding for the neck and leg openings.',
       },
-      ease: { t: 'Ease', d: 'The ease is a percentage of the waist measurement. Default is 14%' },
-      hem: { t: 'Hem', d: 'Hem determines the size of the hem on the sleeves.' },
-      sleeveType: { t: 'Sleeve Type', d: 'Otis can be made with short or long sleeves.' },
-      'sleeveType.long': { t: 'Long Sleeve', d: 'Long sleeves, to the wrist.' },
-      'sleeveType.short': { t: 'Short Sleeve', d: 'Short sleeves, to the biceps.' },
+      ease: {
+        t: 'Ease',
+        d: 'The ease is a percentage of the waist measurement. Default is 14%',
+      },
+      hem: {
+        t: 'Hem',
+        d: 'Hem determines the size of the hem on the sleeves.',
+      },
+      sleeveType: {
+        t: 'Sleeve Type',
+        d: 'Otis can be made with short or long sleeves.',
+      },
+      'sleeveType.long': {
+        t: 'Long Sleeve',
+        d: 'Long sleeves, to the wrist.',
+      },
+      'sleeveType.short': {
+        t: 'Short Sleeve',
+        d: 'Short sleeves, to the biceps.',
+      },
       snapPlacket: {
         t: 'Snap Placket',
         d: 'This option controls the depth of the placket that holds the snaps. ',
@@ -4452,13 +5770,22 @@ export const designs = {
       waistband: 'Waistband',
     },
     o: {
-      kneeEase: { t: 'Knee ease', d: 'Controls the amount of ease at the knee' },
+      kneeEase: {
+        t: 'Knee ease',
+        d: 'Controls the amount of ease at the knee',
+      },
       waistHeight: {
         t: 'Waist height',
         d: 'Controls the height of the waist, 100% = waist height, 0% = hip height',
       },
-      lengthBonus: { t: 'Length bonus', d: 'Controls the length of the trousers' },
-      crotchDrop: { t: 'Crotch drop', d: 'Lowers the crotch for a more relaxed fit' },
+      lengthBonus: {
+        t: 'Length bonus',
+        d: 'Controls the length of the trousers',
+      },
+      crotchDrop: {
+        t: 'Crotch drop',
+        d: 'Lowers the crotch for a more relaxed fit',
+      },
       fitKnee: {
         t: 'Fit the knee',
         d: 'Fits the legs from based on the knee circumference, rather than seat circumference',
@@ -4479,8 +5806,14 @@ export const designs = {
         t: 'Start of the cross seam curve',
         d: 'Controls how far into the cross seam we start to curve',
       },
-      crossSeamCurveBend: { t: 'Cross seam bend', d: 'Controls the curvature of the cross seam' },
-      crossSeamCurveAngle: { t: 'Cross seam angle', d: 'Controls the angle of the cross seam' },
+      crossSeamCurveBend: {
+        t: 'Cross seam bend',
+        d: 'Controls the curvature of the cross seam',
+      },
+      crossSeamCurveAngle: {
+        t: 'Cross seam angle',
+        d: 'Controls the angle of the cross seam',
+      },
       crotchSeamCurveStart: {
         t: 'Start of the crotch seam curve',
         d: 'Controls how far into the crotch seam we start to curve',
@@ -4489,14 +5822,26 @@ export const designs = {
         t: 'Crotch seam bend',
         d: 'Controls the curvature of the crotch seam',
       },
-      crotchSeamCurveAngle: { t: 'Crotch seam angle', d: 'Controls the angle of the crotch seam' },
-      seatEase: { t: 'Seat ease', d: 'Controls the amount of ease at your seat' },
+      crotchSeamCurveAngle: {
+        t: 'Crotch seam angle',
+        d: 'Controls the angle of the crotch seam',
+      },
+      seatEase: {
+        t: 'Seat ease',
+        d: 'Controls the amount of ease at your seat',
+      },
       waistBalance: {
         t: 'Waist balance',
         d: 'Controls the horizontal position of the waist relative to the seat',
       },
-      waistbandWidth: { t: 'Waistband width', d: 'The width of the waistband' },
-      waistEase: { t: 'Waist ease', d: 'Controls the amount of ease at your waist' },
+      waistbandWidth: {
+        t: 'Waistband width',
+        d: 'The width of the waistband',
+      },
+      waistEase: {
+        t: 'Waist ease',
+        d: 'Controls the amount of ease at your waist',
+      },
       waistAngle: {
         t: 'Waistband angle',
         d: 'Change the angle of the waistband when viewed from the side',
@@ -4505,8 +5850,14 @@ export const designs = {
         t: 'Use waistband angle for',
         d: 'Apply the waistband angle to the front, back or both',
       },
-      'useWaistAngleFor.both': { t: 'Both', d: 'Apply the waistband angle to the front and back' },
-      'useWaistAngleFor.backOnly': { t: 'Back', d: 'Apply the waistband angle only to the back' },
+      'useWaistAngleFor.both': {
+        t: 'Both',
+        d: 'Apply the waistband angle to the front and back',
+      },
+      'useWaistAngleFor.backOnly': {
+        t: 'Back',
+        d: 'Apply the waistband angle only to the back',
+      },
       'useWaistAngleFor.frontOnly': {
         t: 'Front',
         d: 'Apply the waistband angle only to the front',
@@ -4527,17 +5878,26 @@ export const designs = {
         t: 'Do not include front pockets',
         d: 'Draft a pattern without front pockets',
       },
-      frontPocketsYes: { t: 'Include front pockets', d: 'Draft a pattern with front pockets' },
+      frontPocketsYes: {
+        t: 'Include front pockets',
+        d: 'Draft a pattern with front pockets',
+      },
       frontPocketFlapSize: {
         t: 'Front pocket flap size',
         d: 'This option controls the front pocket flap size, but it is not exposed to the UI',
       },
-      backPockets: { t: 'Back pockets', d: 'Whether or not to add welt pockets to the back' },
+      backPockets: {
+        t: 'Back pockets',
+        d: 'Whether or not to add welt pockets to the back',
+      },
       backPocketsNo: {
         t: 'Do not include back pockets',
         d: 'Draft a pattern without back pockets',
       },
-      backPocketsYes: { t: 'Include back pockets', d: 'Draft a pattern with back pockets' },
+      backPocketsYes: {
+        t: 'Include back pockets',
+        d: 'Draft a pattern with back pockets',
+      },
       elasticatedCuff: {
         t: 'Elasticated cuff',
         d: 'Whether you want to include an elasticated cuff at the legs, or prefer a classic hemmed finish',
@@ -4559,21 +5919,37 @@ export const designs = {
   penelope: {
     t: 'Penelope pencil skirt',
     d: 'Penelope is a pencil skirt with or without a vent in the back.',
-    p: { back: 'Back', front: 'Front', waistband: 'Waistband' },
+    p: {
+      back: 'Back',
+      front: 'Front',
+      waistband: 'Waistband',
+    },
     s: {},
     o: {
       backDartDepthFactor: {
         t: 'Back dart depth factor',
         d: 'How far down does the back dart go from the waistband. This is a factor of the Natural Waist To Seat measurement.',
       },
-      backVent: { t: 'Back vent', d: 'Add a vent in the back of the skirt.' },
-      backVentNo: { t: 'No vent in the back', d: 'This will be the challenging way to walk.' },
-      backVentYes: { t: 'A vent in the back', d: 'Making it easier to walk.' },
+      backVent: {
+        t: 'Back vent',
+        d: 'Add a vent in the back of the skirt.',
+      },
+      backVentNo: {
+        t: 'No vent in the back',
+        d: 'This will be the challenging way to walk.',
+      },
+      backVentYes: {
+        t: 'A vent in the back',
+        d: 'Making it easier to walk.',
+      },
       backVentLength: {
         t: 'Back vent length',
         d: 'Length of the Back Vent as a percentage of the skirt length.',
       },
-      curvedDarts: { t: 'Curved darts', d: 'Whether or not to used curved darts.' },
+      curvedDarts: {
+        t: 'Curved darts',
+        d: 'Whether or not to used curved darts.',
+      },
       curvedDartsNo: {
         t: 'Straight darts',
         d: 'The darts will be straight, for the standard look.',
@@ -4590,7 +5966,10 @@ export const designs = {
         t: 'Front dart depth factor',
         d: 'How far down does the front dart go from the waistband. This is a factor of the Natural Waist To Seat measurement.',
       },
-      hem: { t: 'Size of the hem', d: 'The size of the hem. Measurement in absolute values.' },
+      hem: {
+        t: 'Size of the hem',
+        d: 'The size of the hem. Measurement in absolute values.',
+      },
       hemBonus: {
         t: 'Hem bonus',
         d: 'This option will reduce the circumference of the skirt at the hem. Percentage of the Seat measurement.',
@@ -4603,17 +5982,38 @@ export const designs = {
         t: 'Number of darts',
         d: 'The number of darts used in the pattern. Maximum is 2. This option can be reduced by the pattern if the calculations create darts that are too small.',
       },
-      seatEase: { t: 'Seat ease', d: 'Amount of ease at the seat level.' },
-      waistband: { t: 'Waistband', d: 'Add a waistband to the pattern.' },
-      waistbandNo: { t: 'No waistband', d: 'Just the skirt, nothing else.' },
-      waistbandYes: { t: 'Skirt with a waistband', d: 'Add a waistband.' },
+      seatEase: {
+        t: 'Seat ease',
+        d: 'Amount of ease at the seat level.',
+      },
+      waistband: {
+        t: 'Waistband',
+        d: 'Add a waistband to the pattern.',
+      },
+      waistbandNo: {
+        t: 'No waistband',
+        d: 'Just the skirt, nothing else.',
+      },
+      waistbandYes: {
+        t: 'Skirt with a waistband',
+        d: 'Add a waistband.',
+      },
       waistbandOverlap: {
         t: 'Waistband overlap',
         d: 'How much the waistband should overlap at the front.',
       },
-      waistbandWidth: { t: 'Waistband width', d: 'The width of the waistband.' },
-      waistEase: { t: 'Waist ease', d: 'Amount of ease at the waist level.' },
-      zipperLocation: { t: 'Zipper location', d: 'The location of the zipper.' },
+      waistbandWidth: {
+        t: 'Waistband width',
+        d: 'The width of the waistband.',
+      },
+      waistEase: {
+        t: 'Waist ease',
+        d: 'Amount of ease at the waist level.',
+      },
+      zipperLocation: {
+        t: 'Zipper location',
+        d: 'The location of the zipper.',
+      },
       'zipperLocation.backSeam': {
         t: 'Add the zipper to the back seam',
         d: 'Good option with the back vent.',
@@ -4658,13 +6058,22 @@ export const designs = {
       pocket_facing: 'Pocket Facing',
     },
     o: {
-      kneeEase: { t: 'Knee ease', d: 'Controls the amount of ease at the knee' },
+      kneeEase: {
+        t: 'Knee ease',
+        d: 'Controls the amount of ease at the knee',
+      },
       waistHeight: {
         t: 'Waist height',
         d: 'Controls the height of the waist, 100% = waist height, 0% = hip height',
       },
-      lengthBonus: { t: 'Length bonus', d: 'Controls the length of the trousers' },
-      crotchDrop: { t: 'Crotch drop', d: 'Lowers the crotch for a more relaxed fit' },
+      lengthBonus: {
+        t: 'Length bonus',
+        d: 'Controls the length of the trousers',
+      },
+      crotchDrop: {
+        t: 'Crotch drop',
+        d: 'Lowers the crotch for a more relaxed fit',
+      },
       fitKnee: {
         t: 'Fit the knee',
         d: 'Fits the legs from based on the knee circumference, rather than seat circumference',
@@ -4685,8 +6094,14 @@ export const designs = {
         t: 'Start of the cross seam curve',
         d: 'Controls how far into the cross seam we start to curve',
       },
-      crossSeamCurveBend: { t: 'Cross seam bend', d: 'Controls the curvature of the cross seam' },
-      crossSeamCurveAngle: { t: 'Cross seam angle', d: 'Controls the angle of the cross seam' },
+      crossSeamCurveBend: {
+        t: 'Cross seam bend',
+        d: 'Controls the curvature of the cross seam',
+      },
+      crossSeamCurveAngle: {
+        t: 'Cross seam angle',
+        d: 'Controls the angle of the cross seam',
+      },
       crotchSeamCurveStart: {
         t: 'Start of the crotch seam curve',
         d: 'Controls how far into the crotch seam we start to curve',
@@ -4695,14 +6110,26 @@ export const designs = {
         t: 'Crotch seam bend',
         d: 'Controls the curvature of the crotch seam',
       },
-      crotchSeamCurveAngle: { t: 'Crotch seam angle', d: 'Controls the angle of the crotch seam' },
-      seatEase: { t: 'Seat ease', d: 'Controls the amount of ease at your seat' },
+      crotchSeamCurveAngle: {
+        t: 'Crotch seam angle',
+        d: 'Controls the angle of the crotch seam',
+      },
+      seatEase: {
+        t: 'Seat ease',
+        d: 'Controls the amount of ease at your seat',
+      },
       waistBalance: {
         t: 'Waist balance',
         d: 'Controls the horizontal position of the waist relative to the seat',
       },
-      waistbandWidth: { t: 'Waistband width', d: 'The width of the waistband' },
-      waistEase: { t: 'Waist ease', d: 'Controls the amount of ease at your waist' },
+      waistbandWidth: {
+        t: 'Waistband width',
+        d: 'The width of the waistband',
+      },
+      waistEase: {
+        t: 'Waist ease',
+        d: 'Controls the amount of ease at your waist',
+      },
       waistAngle: {
         t: 'Waistband angle',
         d: 'Change the angle of the waistband when viewed from the side',
@@ -4711,8 +6138,14 @@ export const designs = {
         t: 'Use waistband angle for',
         d: 'Apply the waistband angle to the front, back or both',
       },
-      'useWaistAngleFor.both': { t: 'Both', d: 'Apply the waistband angle to the front and back' },
-      'useWaistAngleFor.backOnly': { t: 'Back', d: 'Apply the waistband angle only to the back' },
+      'useWaistAngleFor.both': {
+        t: 'Both',
+        d: 'Apply the waistband angle to the front and back',
+      },
+      'useWaistAngleFor.backOnly': {
+        t: 'Back',
+        d: 'Apply the waistband angle only to the back',
+      },
       'useWaistAngleFor.frontOnly': {
         t: 'Front',
         d: 'Apply the waistband angle only to the front',
@@ -4721,7 +6154,10 @@ export const designs = {
         t: 'Grainline position',
         d: 'Controls the horizontal position of the leg relative to the seat',
       },
-      cuffWidth: { t: 'Cuff Width', d: 'How wide to make the leg cuffs.' },
+      cuffWidth: {
+        t: 'Cuff Width',
+        d: 'How wide to make the leg cuffs.',
+      },
       pocketDepth: {
         t: 'Pocket Depth',
         d: 'How far below the waist the pockets should end. Measure from your waist to where your fingertips fall on your side.',
@@ -4742,12 +6178,30 @@ export const designs = {
         t: 'Pocket Facing Underlap',
         d: 'How far the pockets, pocket facings, and waist side pieces extend under the front panel',
       },
-      frontPleat: { t: 'Front Pleat', d: 'Whether to generate a pleat on the front panel.' },
-      frontPleatYes: { t: 'Yes', d: 'Generate a pleat on the front panel.' },
-      frontPleatNo: { t: 'No', d: "Don't generate a pleat on the front panel." },
-      spread: { t: 'Spread', d: 'Whether to slash and spread the body panels.' },
-      spreadYes: { t: 'Yes', d: 'Slash and spread the body panels.' },
-      spreadNo: { t: 'No', d: "Don't slash and spread the body panels." },
+      frontPleat: {
+        t: 'Front Pleat',
+        d: 'Whether to generate a pleat on the front panel.',
+      },
+      frontPleatYes: {
+        t: 'Yes',
+        d: 'Generate a pleat on the front panel.',
+      },
+      frontPleatNo: {
+        t: 'No',
+        d: "Don't generate a pleat on the front panel.",
+      },
+      spread: {
+        t: 'Spread',
+        d: 'Whether to slash and spread the body panels.',
+      },
+      spreadYes: {
+        t: 'Yes',
+        d: 'Slash and spread the body panels.',
+      },
+      spreadNo: {
+        t: 'No',
+        d: "Don't slash and spread the body panels.",
+      },
       frontPleatPosition: {
         t: 'Front Pleat Position',
         d: 'Where to generate a pleat on the front panel.',
@@ -4781,69 +6235,163 @@ export const designs = {
   plugintest: {
     t: 'Plugin Test',
     d: 'A FreeSewing pattern to test our various plugins',
-    p: { base: 'Base' },
+    p: {
+      base: 'Base',
+    },
     s: {},
     o: {
-      bannerDy: { t: 'dy', d: 'Distance perpendicular to the path the text is placed on' },
-      bannerRepeat: { t: 'repeat', d: 'The amount of time the text should be repeated' },
-      bannerSpaces: { t: 'spaces', d: 'The amount of spaces between repetitions of the text' },
-      bartackAngle: { t: 'angle', d: 'The angle of the line along which to bartack' },
+      bannerDy: {
+        t: 'dy',
+        d: 'Distance perpendicular to the path the text is placed on',
+      },
+      bannerRepeat: {
+        t: 'repeat',
+        d: 'The amount of time the text should be repeated',
+      },
+      bannerSpaces: {
+        t: 'spaces',
+        d: 'The amount of spaces between repetitions of the text',
+      },
+      bartackAngle: {
+        t: 'angle',
+        d: 'The angle of the line along which to bartack',
+      },
       bartackDensity: {
         t: 'density',
         d: 'Controls how close together the stitches of the bartack are drawn',
       },
-      bartackEnd: { t: 'end', d: 'Controls how far before the end the bartack stops' },
-      bartackLength: { t: 'length', d: 'Controls the length of the bartack' },
-      bartackStart: { t: 'start', d: 'Controls how far from the start the bartack begins' },
-      bartackWidth: { t: 'width', d: 'Controls the width of the (stitches making up the) bartack' },
+      bartackEnd: {
+        t: 'end',
+        d: 'Controls how far before the end the bartack stops',
+      },
+      bartackLength: {
+        t: 'length',
+        d: 'Controls the length of the bartack',
+      },
+      bartackStart: {
+        t: 'start',
+        d: 'Controls how far from the start the bartack begins',
+      },
+      bartackWidth: {
+        t: 'width',
+        d: 'Controls the width of the (stitches making up the) bartack',
+      },
     },
   },
   rendertest: {
     t: 'Render Test',
     d: 'A FreeSewing pattern to showcase how various elements are rendered/themed',
-    p: { demo: 'Demo' },
+    p: {
+      demo: 'Demo',
+    },
     s: {},
     o: {
       only: {
         t: 'Tests to include',
         d: 'This option allows you to limit render tests to a specific subset',
       },
-      'only.false': { t: 'All tests', d: 'Include all render tests' },
-      'only.circles': { t: 'Circles', d: 'Draft render tests for circles' },
-      'only.colors': { t: 'Colors', d: 'Draft render tests for colors' },
-      'only.widths': { t: 'Line widths', d: 'Draft render tests for line widths' },
-      'only.styles': { t: 'Styles', d: 'Draft render tests for line styles' },
-      'only.combos': { t: 'Combos', d: 'Draft combined render tests' },
-      'only.text': { t: 'Text', d: 'Draft render tests for text' },
-      'only.snippets': { t: 'Snippets tests', d: 'Draft render tests for snippets' },
-      'only.macros': { t: 'Macros', d: 'Draft render tests for macros' },
+      'only.false': {
+        t: 'All tests',
+        d: 'Include all render tests',
+      },
+      'only.circles': {
+        t: 'Circles',
+        d: 'Draft render tests for circles',
+      },
+      'only.colors': {
+        t: 'Colors',
+        d: 'Draft render tests for colors',
+      },
+      'only.widths': {
+        t: 'Line widths',
+        d: 'Draft render tests for line widths',
+      },
+      'only.styles': {
+        t: 'Styles',
+        d: 'Draft render tests for line styles',
+      },
+      'only.combos': {
+        t: 'Combos',
+        d: 'Draft combined render tests',
+      },
+      'only.text': {
+        t: 'Text',
+        d: 'Draft render tests for text',
+      },
+      'only.snippets': {
+        t: 'Snippets tests',
+        d: 'Draft render tests for snippets',
+      },
+      'only.macros': {
+        t: 'Macros',
+        d: 'Draft render tests for macros',
+      },
     },
   },
   sabrina: {
     t: 'Sabrina',
     d: 'A FreeSewing pattern that needs a description',
-    p: { base: 'Base', front: 'Front', side: 'Side', back: 'Back', waistband: 'Waistband' },
+    p: {
+      base: 'Base',
+      front: 'Front',
+      side: 'Side',
+      back: 'Back',
+      waistband: 'Waistband',
+    },
     s: {
       'cutWaistband.t': 'The waistband is not shown',
       'cutWaistband.d':
         'The **waistband** is a rectangular piece of main fabric {{{ w }}} wide and {{{ l }}} long.',
     },
     o: {
-      length: { t: 'Length', d: 'The length of the garment' },
-      neckHeightFront: { t: 'Neck depth front', d: 'The depth of the neck hole at the front' },
-      neckHeightBack: { t: 'Neck depth back', d: 'The depth of the neck hole at the back' },
-      armpitAdjustment: { t: 'Armpit adjustment', d: 'Move the armpit up or down' },
-      strapPosition: { t: 'Strap position', d: 'Move the straps towards your shoulders or neck' },
-      strapAngle: { t: 'Strap angle', d: 'The angle of the straps on your shoulder line' },
-      strapWidth: { t: 'Strap width', d: 'The width of the shoulder straps' },
-      backWidth: { t: 'Back width', d: 'The width of narrow part on the back' },
+      length: {
+        t: 'Length',
+        d: 'The length of the garment',
+      },
+      neckHeightFront: {
+        t: 'Neck depth front',
+        d: 'The depth of the neck hole at the front',
+      },
+      neckHeightBack: {
+        t: 'Neck depth back',
+        d: 'The depth of the neck hole at the back',
+      },
+      armpitAdjustment: {
+        t: 'Armpit adjustment',
+        d: 'Move the armpit up or down',
+      },
+      strapPosition: {
+        t: 'Strap position',
+        d: 'Move the straps towards your shoulders or neck',
+      },
+      strapAngle: {
+        t: 'Strap angle',
+        d: 'The angle of the straps on your shoulder line',
+      },
+      strapWidth: {
+        t: 'Strap width',
+        d: 'The width of the shoulder straps',
+      },
+      backWidth: {
+        t: 'Back width',
+        d: 'The width of narrow part on the back',
+      },
       bustPointFocus: {
         t: 'Bust point focus',
         d: 'How much the virtual bust darts aim at the bust point',
       },
-      backDartAngle: { t: 'Back dart angle', d: 'The angle of the virtual back dart' },
-      upperBackShape: { t: 'Upper back shape', d: 'The upper curve of the C shape on the back' },
-      lowerBackShape: { t: 'Lower back shape', d: 'The lower curve of the C shape on the back' },
+      backDartAngle: {
+        t: 'Back dart angle',
+        d: 'The angle of the virtual back dart',
+      },
+      upperBackShape: {
+        t: 'Upper back shape',
+        d: 'The upper curve of the C shape on the back',
+      },
+      lowerBackShape: {
+        t: 'Lower back shape',
+        d: 'The lower curve of the C shape on the back',
+      },
       strapCurveFront: {
         t: 'Strap curve front',
         d: 'How straight the shoulder straps are on the front',
@@ -4880,9 +6428,18 @@ export const designs = {
         t: 'Back split offset',
         d: 'Shifts the back seam towards the side or the back',
       },
-      fullSa: { t: 'Full seam allowance', d: 'Determines how the seam allowance is generated' },
-      fullSaNo: { t: 'Default', d: 'No seam allowance in the armscyes and neck opening' },
-      fullSaYes: { t: 'Burrito method', d: 'Seam allowance on the complete part outline' },
+      fullSa: {
+        t: 'Full seam allowance',
+        d: 'Determines how the seam allowance is generated',
+      },
+      fullSaNo: {
+        t: 'Default',
+        d: 'No seam allowance in the armscyes and neck opening',
+      },
+      fullSaYes: {
+        t: 'Burrito method',
+        d: 'Seam allowance on the complete part outline',
+      },
       frontArmholeOpening: {
         t: 'Front armhole opening',
         d: 'How wide the arm opening is at the front',
@@ -4896,15 +6453,24 @@ export const designs = {
   sandy: {
     t: 'Sandy circle skirt',
     d: 'Sandy is an adaptable circle skirt pattern.',
-    p: { skirt: 'Skirt', waistband: 'Waistband' },
+    p: {
+      skirt: 'Skirt',
+      waistband: 'Waistband',
+    },
     s: {
       'cutWaistband.t': 'The waistband is not shown',
       'cutWaistband.d':
         'The **Waistband** (2) is a rectangular piece of fabric {{{ w }}} wide and {{{ l }}} long.',
     },
     o: {
-      waistbandWidth: { t: 'Waistband width', d: 'Controls the width of the waistband.' },
-      waistbandPosition: { t: 'Waistband position', d: 'Controls the position of the waistband.' },
+      waistbandWidth: {
+        t: 'Waistband width',
+        d: 'Controls the width of the waistband.',
+      },
+      waistbandPosition: {
+        t: 'Waistband position',
+        d: 'Controls the position of the waistband.',
+      },
       waistbandShape: {
         t: 'Waistband shape',
         d: 'Whether you want a straight or shaped waistband.',
@@ -4917,7 +6483,10 @@ export const designs = {
         t: 'Curved waistband',
         d: 'Draft a pattern with a curved waistband',
       },
-      circleRatio: { t: 'Circle ratio', d: 'The percentage of a circle you want the skirt to be.' },
+      circleRatio: {
+        t: 'Circle ratio',
+        d: 'The percentage of a circle you want the skirt to be.',
+      },
       waistbandOverlap: {
         t: 'Waistband overlap',
         d: 'The amount by which the waistband overlaps.',
@@ -4926,8 +6495,14 @@ export const designs = {
         t: 'Gathering',
         d: 'The percent by which the top of the skirt is longer than the bottom of the waistband.',
       },
-      lengthBonus: { t: 'Length bonus', d: 'Determines how long the skirt will be.' },
-      seamlessFullCircle: { t: 'Seamless full circle', d: 'Enables a seamless full circle skirt.' },
+      lengthBonus: {
+        t: 'Length bonus',
+        d: 'Determines how long the skirt will be.',
+      },
+      seamlessFullCircle: {
+        t: 'Seamless full circle',
+        d: 'Enables a seamless full circle skirt.',
+      },
       seamlessFullCircleNo: {
         t: 'Draft less than a full circle skirt',
         d: 'Drafts a pattern for the exact circle ratio you request',
@@ -4936,14 +6511,24 @@ export const designs = {
         t: 'Draft a pattern for a full circle skirt',
         d: 'This allows you to cut the skirt on a double-fold',
       },
-      hemWidth: { t: 'Hem width', d: 'Width of the hem' },
-      panels: { t: 'Panels', d: 'Number of panels' },
+      hemWidth: {
+        t: 'Hem width',
+        d: 'Width of the hem',
+      },
+      panels: {
+        t: 'Panels',
+        d: 'Number of panels',
+      },
     },
   },
   sarah: {
     t: 'Sarah Skirt Block',
     d: 'A FreeSewing pattern for a basic skirt block pattern based on Aldrich',
-    p: { back: 'Back', front: 'Front', base: 'Base' },
+    p: {
+      back: 'Back',
+      front: 'Front',
+      base: 'Base',
+    },
     s: {},
     o: {
       centerFrontSeam: {
@@ -4954,23 +6539,50 @@ export const designs = {
         t: 'Add Seam to Center Front',
         d: 'Allows a zipper to be added to center front.',
       },
-      centerFrontSeamNo: { t: 'No Seam in Center Front', d: 'Creates a flat front panel.' },
-      centerBackSeam: { t: 'Center Back Seam', d: 'Disable for single center back piece.' },
+      centerFrontSeamNo: {
+        t: 'No Seam in Center Front',
+        d: 'Creates a flat front panel.',
+      },
+      centerBackSeam: {
+        t: 'Center Back Seam',
+        d: 'Disable for single center back piece.',
+      },
       centerBackSeamYes: {
         t: 'Add Seam to Center Back',
         d: 'Seam in center of back panel. (e.g., for zipper)',
       },
-      centerBackSeamNo: { t: 'Solid Back Piece', d: 'Creates flat back panel.' },
-      waistDrop: { t: 'Waist Drop', d: 'Waistline drop from waist toward hips' },
-      seatEase: { t: 'Seat Ease', d: 'Ease added to seat measurement' },
-      waistEaseFront: { t: 'Front Waist Ease', d: 'Ease added to front waistline' },
-      waistEaseBack: { t: 'Back Waist Ease', d: 'Ease added to back waistline.' },
+      centerBackSeamNo: {
+        t: 'Solid Back Piece',
+        d: 'Creates flat back panel.',
+      },
+      waistDrop: {
+        t: 'Waist Drop',
+        d: 'Waistline drop from waist toward hips',
+      },
+      seatEase: {
+        t: 'Seat Ease',
+        d: 'Ease added to seat measurement',
+      },
+      waistEaseFront: {
+        t: 'Front Waist Ease',
+        d: 'Ease added to front waistline',
+      },
+      waistEaseBack: {
+        t: 'Back Waist Ease',
+        d: 'Ease added to back waistline.',
+      },
       extraSeatEase: {
         t: 'Extra Seat Ease',
         d: 'Ease added to seat measurement to account for fabric stretch and closure style.',
       },
-      extraWaistEase: { t: 'Extra Waist Ease', d: 'Ease added to waistline' },
-      waistRise: { t: 'Waist Rise', d: 'Rise of waistline between front/back center and sides' },
+      extraWaistEase: {
+        t: 'Extra Waist Ease',
+        d: 'Ease added to waistline',
+      },
+      waistRise: {
+        t: 'Waist Rise',
+        d: 'Rise of waistline between front/back center and sides',
+      },
       sideSeamCurveOffset: {
         t: 'Side Seam Curve Offset',
         d: 'Offset from line between side seat and front/back side top to shape hip/seat curve',
@@ -4979,17 +6591,37 @@ export const designs = {
         t: 'Back Outside Dart Length',
         d: 'Length of the outside darts on the back',
       },
-      backInsideDartLength: { t: 'Back Inside Dart Length', d: 'Length of inside darts on back' },
-      frontDartLength: { t: 'Front Dart Length', d: 'Length of darts on front' },
-      length: { t: 'Length', d: 'Skirt length' },
-      hem: { t: 'Hem', d: 'Hem width' },
+      backInsideDartLength: {
+        t: 'Back Inside Dart Length',
+        d: 'Length of inside darts on back',
+      },
+      frontDartLength: {
+        t: 'Front Dart Length',
+        d: 'Length of darts on front',
+      },
+      length: {
+        t: 'Length',
+        d: 'Skirt length',
+      },
+      hem: {
+        t: 'Hem',
+        d: 'Hem width',
+      },
     },
   },
   shelly: {
     t: 'Shelly swimshirt',
     d: 'Shelly is a raglan shirt, perfect for swimshirts and rashguards',
-    p: { base: 'Base', back: 'Back', front: 'Front', neckband: 'Neckband', raglanSleeve: 'Sleeve' },
-    s: { foldLine: 'Fold line' },
+    p: {
+      base: 'Base',
+      back: 'Back',
+      front: 'Front',
+      neckband: 'Neckband',
+      raglanSleeve: 'Sleeve',
+    },
+    s: {
+      foldLine: 'Fold line',
+    },
     o: {
       hemWidth: {
         t: 'Hem width',
@@ -4999,12 +6631,18 @@ export const designs = {
         t: 'Sleeve hem',
         d: 'Sets the hem allowance of the hem along the end of the sleeves, as a multiple of the seam allowance.',
       },
-      chestEase: { t: 'Chest ease', d: 'Controls how wide the shirt will be at your chest.' },
+      chestEase: {
+        t: 'Chest ease',
+        d: 'Controls how wide the shirt will be at your chest.',
+      },
       neckBalance: {
         t: 'Neck position',
         d: 'Controls where the neck hole is placed on the shirt.',
       },
-      neckEase: { t: 'Neck ease', d: 'Controls how large the neck hole is.' },
+      neckEase: {
+        t: 'Neck ease',
+        d: 'Controls how large the neck hole is.',
+      },
       neckbandLength: {
         t: 'Neckband length',
         d: 'Controls how long the neckband is, as a percentage of the circumference of the neckline.',
@@ -5025,7 +6663,10 @@ export const designs = {
         t: 'Armpit ease',
         d: 'Gives more room in the armpit by shifting the sleeve down the body.',
       },
-      bodyLength: { t: 'Body length', d: 'Controls how long the shirt is.' },
+      bodyLength: {
+        t: 'Body length',
+        d: 'Controls how long the shirt is.',
+      },
       sleeveLength: {
         t: 'Sleeve length',
         d: 'Controls the how long the sleeves of your shirt will be.',
@@ -5055,21 +6696,37 @@ export const designs = {
   shin: {
     t: 'Shin swim trunks',
     d: 'Shin are athletic swim trunks.',
-    p: { back: 'Back', front: 'Front', waistband: 'Waistband' },
+    p: {
+      back: 'Back',
+      front: 'Front',
+      waistband: 'Waistband',
+    },
     s: {
       'cutWaistband.t': 'The waistband is not shown',
       'cutWaistband.d':
         'The **Waistband** (3) is a rectangular piece of fabric {{{ w }}} wide and {{{ l }}} long.',
     },
     o: {
-      legReduction: { t: 'Leg reduction', d: 'Reduces the leg opening to prevent gaping' },
-      elasticWidth: { t: 'Elastic width', d: 'Width of the elastic at the waist' },
-      stretch: { t: 'Stretch', d: 'The amount of stretch to design for.' },
+      legReduction: {
+        t: 'Leg reduction',
+        d: 'Reduces the leg opening to prevent gaping',
+      },
+      elasticWidth: {
+        t: 'Elastic width',
+        d: 'Width of the elastic at the waist',
+      },
+      stretch: {
+        t: 'Stretch',
+        d: 'The amount of stretch to design for.',
+      },
       bulge: {
         t: 'Bulge',
         d: 'Controls the amount of extra room to create at the front of the trunks.',
       },
-      rise: { t: 'Rise', d: 'Controls the height of the waist.' },
+      rise: {
+        t: 'Rise',
+        d: 'Controls the height of the waist.',
+      },
       backRise: {
         t: 'Back rise',
         d: 'Controls how much the waist is higher in the back than  the front.',
@@ -5131,14 +6788,26 @@ export const designs = {
         t: 'Armhole depth factor (legacy)',
         d: 'Controls the depth of the armhole. Higher values make a deeper armhole. This option only applies to the legacy (v2) way of calculating the armhole depth.',
       },
-      backNeckCutout: { t: 'Back neck cutout', d: 'How deep the neck is cut out at the back' },
+      backNeckCutout: {
+        t: 'Back neck cutout',
+        d: 'How deep the neck is cut out at the back',
+      },
       bicepsEase: {
         t: 'Biceps ease',
         d: 'The amount of ease at your upper arm. Note that while we try to respect this, fitting the sleeve to the armhole takes precedence over respecting the exact amount of ease.',
       },
-      collarEase: { t: 'Collar ease', d: 'The amount of ease around your neck' },
-      chestEase: { t: 'Chest ease', d: 'The amount of ease at your chest.' },
-      cuffEase: { t: 'Cuff ease', d: 'The amount of ease at your wrist.' },
+      collarEase: {
+        t: 'Collar ease',
+        d: 'The amount of ease around your neck',
+      },
+      chestEase: {
+        t: 'Chest ease',
+        d: 'The amount of ease at your chest.',
+      },
+      cuffEase: {
+        t: 'Cuff ease',
+        d: 'The amount of ease at your wrist.',
+      },
       draftForHighBust: {
         t: 'Draft for high bust',
         d: 'Draft the pattern using the high bust measurement if it is available, instead of using the chest measurement. This can result in a more fitted garment for people with breasts. (Please note that no additional adjustments or shaping is performed. Further manual adjustments may be needed for those with a larger difference between high bust and chest measurements.)',
@@ -5271,7 +6940,10 @@ export const designs = {
         t: 'Sleeve width guarantee',
         d: 'Controls how much of the sleeve width will be guaranteed. This determines how much we can alter the sleeve width to fit the sleeve in the armhole.',
       },
-      backDarts: { t: 'Back darts', d: 'Whether or not to include back darts' },
+      backDarts: {
+        t: 'Back darts',
+        d: 'Whether or not to include back darts',
+      },
       'backDarts.auto': {
         t: 'Automatic',
         d: 'Add back darts (only) when doing so will improve fit',
@@ -5300,18 +6972,42 @@ export const designs = {
         t: 'Include a narrow button',
         d: 'Draft a pattern with an extra button on the cuffs to tie them more narrow',
       },
-      boxPleat: { t: 'Box pleat', d: 'Whether to include a box pleat at the back or not' },
-      boxPleatNo: { t: 'No box pleat', d: 'Draft a pattern without a box pleat' },
-      boxPleatYes: { t: 'Include a box pleat', d: 'Draft a pattern with a box pleat' },
-      boxPleatWidth: { t: 'Box pleat width', d: 'The total width of the box pleat' },
-      boxPleatFold: { t: 'Box pleat fold', d: 'The amount by with the box pleat folds inwards' },
-      buttonPlacketStyle: { t: 'Button placket style', d: 'Style of the button placket.' },
-      'buttonPlacketStyle.classic': { t: 'Classic button placket', d: 'A classic button placket' },
+      boxPleat: {
+        t: 'Box pleat',
+        d: 'Whether to include a box pleat at the back or not',
+      },
+      boxPleatNo: {
+        t: 'No box pleat',
+        d: 'Draft a pattern without a box pleat',
+      },
+      boxPleatYes: {
+        t: 'Include a box pleat',
+        d: 'Draft a pattern with a box pleat',
+      },
+      boxPleatWidth: {
+        t: 'Box pleat width',
+        d: 'The total width of the box pleat',
+      },
+      boxPleatFold: {
+        t: 'Box pleat fold',
+        d: 'The amount by with the box pleat folds inwards',
+      },
+      buttonPlacketStyle: {
+        t: 'Button placket style',
+        d: 'Style of the button placket.',
+      },
+      'buttonPlacketStyle.classic': {
+        t: 'Classic button placket',
+        d: 'A classic button placket',
+      },
       'buttonPlacketStyle.seamless': {
         t: 'Seamless button placket',
         d: 'A seamless button placket gives a more modern look',
       },
-      buttonPlacketWidth: { t: 'Button placket width', d: 'Width of the button placket.' },
+      buttonPlacketWidth: {
+        t: 'Button placket width',
+        d: 'Width of the button placket.',
+      },
       buttonFreeLength: {
         t: 'Button free length',
         d: 'How much of the bottom of the front closure to keep button-free.',
@@ -5336,19 +7032,46 @@ export const designs = {
         t: 'Buttonhole placket width',
         d: 'Width of the buttonhole placket.',
       },
-      buttons: { t: 'Number of buttons', d: 'The number of buttons on the front closure.' },
-      collarAngle: { t: 'Collar angle', d: 'The angle of the collar tips.' },
-      collarBend: { t: 'Collar bend', d: 'The bend of the collar.' },
-      collarFlare: { t: 'Collar flare', d: 'The flare of the collar tips.' },
-      collarGap: { t: 'Collar gap', d: 'The gap between the two collar ends.' },
+      buttons: {
+        t: 'Number of buttons',
+        d: 'The number of buttons on the front closure.',
+      },
+      collarAngle: {
+        t: 'Collar angle',
+        d: 'The angle of the collar tips.',
+      },
+      collarBend: {
+        t: 'Collar bend',
+        d: 'The bend of the collar.',
+      },
+      collarFlare: {
+        t: 'Collar flare',
+        d: 'The flare of the collar tips.',
+      },
+      collarGap: {
+        t: 'Collar gap',
+        d: 'The gap between the two collar ends.',
+      },
       collarRoll: {
         t: 'Collar roll',
         d: 'The amount by which the top collar is larger than the undercollar.',
       },
-      collarWidth: { t: 'Collar width', d: 'Width of the collar relative to collar stand.' },
-      collarStandBend: { t: 'Collar stand bend', d: 'The bend of the collar stand.' },
-      collarStandCurve: { t: 'Collar stand curve', d: 'The curve of the collar stand.' },
-      collarStandWidth: { t: 'Collar stand width', d: 'Width of the collar stand.' },
+      collarWidth: {
+        t: 'Collar width',
+        d: 'Width of the collar relative to collar stand.',
+      },
+      collarStandBend: {
+        t: 'Collar stand bend',
+        d: 'The bend of the collar stand.',
+      },
+      collarStandCurve: {
+        t: 'Collar stand curve',
+        d: 'The curve of the collar stand.',
+      },
+      collarStandWidth: {
+        t: 'Collar stand width',
+        d: 'Width of the collar stand.',
+      },
       cuffButtonRows: {
         t: 'Cuff button rows',
         d: 'Whether to draft a single or double row of cuff buttons. This option is only relevant for barrel cuffs.',
@@ -5357,8 +7080,14 @@ export const designs = {
         t: 'Cuff drape',
         d: 'The amount by which the sleeve is wider than the cuff where the are joined.',
       },
-      cuffLength: { t: 'Cuff length', d: 'The length of the cuffs.' },
-      cuffStyle: { t: 'Cuff style', d: 'What style of cuffs do you prefer?' },
+      cuffLength: {
+        t: 'Cuff length',
+        d: 'The length of the cuffs.',
+      },
+      cuffStyle: {
+        t: 'Cuff style',
+        d: 'What style of cuffs do you prefer?',
+      },
       'cuffStyle.roundedBarrelCuff': {
         t: 'Rounded barrel cuff',
         d: 'A classic barrel cuff, but with rounded corners',
@@ -5399,9 +7128,18 @@ export const designs = {
         t: 'Flat-felled seam allowance',
         d: 'The amount of seam allowance on flat-felled seams as a proportion of the regular seam allowance',
       },
-      hemCurve: { t: 'Hem curve', d: 'The height of the curve on a curved hem.' },
-      hemStyle: { t: 'Hem style', d: 'The style of the shirt hem.' },
-      'hemStyle.straight': { t: 'Straight hem', d: 'Draft a straight hem' },
+      hemCurve: {
+        t: 'Hem curve',
+        d: 'The height of the curve on a curved hem.',
+      },
+      hemStyle: {
+        t: 'Hem style',
+        d: 'The style of the shirt hem.',
+      },
+      'hemStyle.straight': {
+        t: 'Straight hem',
+        d: 'Draft a straight hem',
+      },
       'hemStyle.baseball': {
         t: 'Baseball hem',
         d: 'Draft a so-called baseball hem that curves upwards towards the sides',
@@ -5410,7 +7148,10 @@ export const designs = {
         t: 'Slashed hem',
         d: 'Draft a so-called slashed hem that is mostly straight but then sharply turns upwards at the sides',
       },
-      hipsEase: { t: 'Hips ease', d: 'Controls the amount of ease at the hips.' },
+      hipsEase: {
+        t: 'Hips ease',
+        d: 'Controls the amount of ease at the hips.',
+      },
       roundBack: {
         t: 'Round back',
         d: 'To fit a round(er) back, this adds length to the center back (at the yoke) that tapers of towards the sides.',
@@ -5427,7 +7168,10 @@ export const designs = {
         t: 'Separate the buttonhole placket',
         d: 'Draft a pattern where the buttonhole placket is separated from the front, allowing one to use a different fabric or grain for the buttonhole placket',
       },
-      separateButtonPlacket: { t: 'Separate button placket', d: 'Draft a separate button placket' },
+      separateButtonPlacket: {
+        t: 'Separate button placket',
+        d: 'Draft a separate button placket',
+      },
       separateButtonPlacketNo: {
         t: 'Do not separate the button placket',
         d: 'Draft a pattern where the button placket is attached to the front',
@@ -5436,21 +7180,54 @@ export const designs = {
         t: 'Separate the button placket',
         d: 'Draft a pattern where the button placket is separated from the front, allowing one to use a different fabric or grain for the button placket',
       },
-      sleeveHemShort: { t: 'Sleeve hem length', d: 'Length of the hem' },
-      sleeveLengthShort: { t: 'Sleeve length', d: 'Length of the short sleeves' },
-      sleevePlacketLength: { t: 'Sleeve placket length', d: 'The length of the sleeve placket.' },
-      sleevePlacketWidth: { t: 'Sleeve placket width', d: 'The width of the sleeve placket.' },
-      sleeveStyle: { t: 'Sleeve style', d: 'Would you like long or short sleeves?' },
-      'sleeveStyle.long': { t: 'Long sleeves', d: 'Normal long sleeves with all the cuff options' },
-      'sleeveStyle.short': { t: 'Short sleeves', d: 'Short sleeves for the summer' },
+      sleeveHemShort: {
+        t: 'Sleeve hem length',
+        d: 'Length of the hem',
+      },
+      sleeveLengthShort: {
+        t: 'Sleeve length',
+        d: 'Length of the short sleeves',
+      },
+      sleevePlacketLength: {
+        t: 'Sleeve placket length',
+        d: 'The length of the sleeve placket.',
+      },
+      sleevePlacketWidth: {
+        t: 'Sleeve placket width',
+        d: 'The width of the sleeve placket.',
+      },
+      sleeveStyle: {
+        t: 'Sleeve style',
+        d: 'Would you like long or short sleeves?',
+      },
+      'sleeveStyle.long': {
+        t: 'Long sleeves',
+        d: 'Normal long sleeves with all the cuff options',
+      },
+      'sleeveStyle.short': {
+        t: 'Short sleeves',
+        d: 'Short sleeves for the summer',
+      },
       splitYoke: {
         t: 'Split yoke',
         d: 'Whether to draft a split or regular yoke. A split yoke is typically used for using a different grainline on both halves for visual effect',
       },
-      splitYokeNo: { t: 'Full-size yoke', d: 'Draft a pattern with a single full-size yoke' },
-      splitYokeYes: { t: 'Split the yoke', d: 'Draft a pattern with a yoke split in half' },
-      waistEase: { t: 'Waist ease', d: 'The amount of ease at your (natural) waist.' },
-      yokeHeight: { t: 'Yoke height', d: 'Controls the height of the yoke' },
+      splitYokeNo: {
+        t: 'Full-size yoke',
+        d: 'Draft a pattern with a single full-size yoke',
+      },
+      splitYokeYes: {
+        t: 'Split the yoke',
+        d: 'Draft a pattern with a yoke split in half',
+      },
+      waistEase: {
+        t: 'Waist ease',
+        d: 'The amount of ease at your (natural) waist.',
+      },
+      yokeHeight: {
+        t: 'Yoke height',
+        d: 'Controls the height of the yoke',
+      },
     },
   },
   simone: {
@@ -5509,14 +7286,26 @@ export const designs = {
         t: 'Armhole depth factor (legacy)',
         d: 'Controls the depth of the armhole. Higher values make a deeper armhole. This option only applies to the legacy (v2) way of calculating the armhole depth.',
       },
-      backNeckCutout: { t: 'Back neck cutout', d: 'How deep the neck is cut out at the back' },
+      backNeckCutout: {
+        t: 'Back neck cutout',
+        d: 'How deep the neck is cut out at the back',
+      },
       bicepsEase: {
         t: 'Biceps ease',
         d: 'The amount of ease at your upper arm. Note that while we try to respect this, fitting the sleeve to the armhole takes precedence over respecting the exact amount of ease.',
       },
-      collarEase: { t: 'Collar ease', d: 'The amount of ease around your neck' },
-      chestEase: { t: 'Chest ease', d: 'The amount of ease at your chest.' },
-      cuffEase: { t: 'Cuff ease', d: 'The amount of ease at your wrist.' },
+      collarEase: {
+        t: 'Collar ease',
+        d: 'The amount of ease around your neck',
+      },
+      chestEase: {
+        t: 'Chest ease',
+        d: 'The amount of ease at your chest.',
+      },
+      cuffEase: {
+        t: 'Cuff ease',
+        d: 'The amount of ease at your wrist.',
+      },
       draftForHighBust: {
         t: 'Draft for high bust',
         d: 'Draft the pattern using the high bust measurement if it is available, instead of using the chest measurement. This can result in a more fitted garment for people with breasts. (Please note that no additional adjustments or shaping is performed. Further manual adjustments may be needed for those with a larger difference between high bust and chest measurements.)',
@@ -5649,7 +7438,10 @@ export const designs = {
         t: 'Sleeve width guarantee',
         d: 'Controls how much of the sleeve width will be guaranteed. This determines how much we can alter the sleeve width to fit the sleeve in the armhole.',
       },
-      backDarts: { t: 'Back darts', d: 'Whether or not to include back darts' },
+      backDarts: {
+        t: 'Back darts',
+        d: 'Whether or not to include back darts',
+      },
       'backDarts.auto': {
         t: 'Automatic',
         d: 'Add back darts (only) when doing so will improve fit',
@@ -5678,18 +7470,42 @@ export const designs = {
         t: 'Include a narrow button',
         d: 'Draft a pattern with an extra button on the cuffs to tie them more narrow',
       },
-      boxPleat: { t: 'Box pleat', d: 'Whether to include a box pleat at the back or not' },
-      boxPleatNo: { t: 'No box pleat', d: 'Draft a pattern without a box pleat' },
-      boxPleatYes: { t: 'Include a box pleat', d: 'Draft a pattern with a box pleat' },
-      boxPleatWidth: { t: 'Box pleat width', d: 'The total width of the box pleat' },
-      boxPleatFold: { t: 'Box pleat fold', d: 'The amount by with the box pleat folds inwards' },
-      buttonPlacketStyle: { t: 'Button placket style', d: 'Style of the button placket.' },
-      'buttonPlacketStyle.classic': { t: 'Classic button placket', d: 'A classic button placket' },
+      boxPleat: {
+        t: 'Box pleat',
+        d: 'Whether to include a box pleat at the back or not',
+      },
+      boxPleatNo: {
+        t: 'No box pleat',
+        d: 'Draft a pattern without a box pleat',
+      },
+      boxPleatYes: {
+        t: 'Include a box pleat',
+        d: 'Draft a pattern with a box pleat',
+      },
+      boxPleatWidth: {
+        t: 'Box pleat width',
+        d: 'The total width of the box pleat',
+      },
+      boxPleatFold: {
+        t: 'Box pleat fold',
+        d: 'The amount by with the box pleat folds inwards',
+      },
+      buttonPlacketStyle: {
+        t: 'Button placket style',
+        d: 'Style of the button placket.',
+      },
+      'buttonPlacketStyle.classic': {
+        t: 'Classic button placket',
+        d: 'A classic button placket',
+      },
       'buttonPlacketStyle.seamless': {
         t: 'Seamless button placket',
         d: 'A seamless button placket gives a more modern look',
       },
-      buttonPlacketWidth: { t: 'Button placket width', d: 'Width of the button placket.' },
+      buttonPlacketWidth: {
+        t: 'Button placket width',
+        d: 'Width of the button placket.',
+      },
       buttonFreeLength: {
         t: 'Button free length',
         d: 'How much of the bottom of the front closure to keep button-free.',
@@ -5714,19 +7530,46 @@ export const designs = {
         t: 'Buttonhole placket width',
         d: 'Width of the buttonhole placket.',
       },
-      buttons: { t: 'Number of buttons', d: 'The number of buttons on the front closure.' },
-      collarAngle: { t: 'Collar angle', d: 'The angle of the collar tips.' },
-      collarBend: { t: 'Collar bend', d: 'The bend of the collar.' },
-      collarFlare: { t: 'Collar flare', d: 'The flare of the collar tips.' },
-      collarGap: { t: 'Collar gap', d: 'The gap between the two collar ends.' },
+      buttons: {
+        t: 'Number of buttons',
+        d: 'The number of buttons on the front closure.',
+      },
+      collarAngle: {
+        t: 'Collar angle',
+        d: 'The angle of the collar tips.',
+      },
+      collarBend: {
+        t: 'Collar bend',
+        d: 'The bend of the collar.',
+      },
+      collarFlare: {
+        t: 'Collar flare',
+        d: 'The flare of the collar tips.',
+      },
+      collarGap: {
+        t: 'Collar gap',
+        d: 'The gap between the two collar ends.',
+      },
       collarRoll: {
         t: 'Collar roll',
         d: 'The amount by which the top collar is larger than the undercollar.',
       },
-      collarWidth: { t: 'Collar width', d: 'Width of the collar relative to collar stand.' },
-      collarStandBend: { t: 'Collar stand bend', d: 'The bend of the collar stand.' },
-      collarStandCurve: { t: 'Collar stand curve', d: 'The curve of the collar stand.' },
-      collarStandWidth: { t: 'Collar stand width', d: 'Width of the collar stand.' },
+      collarWidth: {
+        t: 'Collar width',
+        d: 'Width of the collar relative to collar stand.',
+      },
+      collarStandBend: {
+        t: 'Collar stand bend',
+        d: 'The bend of the collar stand.',
+      },
+      collarStandCurve: {
+        t: 'Collar stand curve',
+        d: 'The curve of the collar stand.',
+      },
+      collarStandWidth: {
+        t: 'Collar stand width',
+        d: 'Width of the collar stand.',
+      },
       cuffButtonRows: {
         t: 'Cuff button rows',
         d: 'Whether to draft a single or double row of cuff buttons. This option is only relevant for barrel cuffs.',
@@ -5735,8 +7578,14 @@ export const designs = {
         t: 'Cuff drape',
         d: 'The amount by which the sleeve is wider than the cuff where the are joined.',
       },
-      cuffLength: { t: 'Cuff length', d: 'The length of the cuffs.' },
-      cuffStyle: { t: 'Cuff style', d: 'What style of cuffs do you prefer?' },
+      cuffLength: {
+        t: 'Cuff length',
+        d: 'The length of the cuffs.',
+      },
+      cuffStyle: {
+        t: 'Cuff style',
+        d: 'What style of cuffs do you prefer?',
+      },
       'cuffStyle.roundedBarrelCuff': {
         t: 'Rounded barrel cuff',
         d: 'A classic barrel cuff, but with rounded corners',
@@ -5777,9 +7626,18 @@ export const designs = {
         t: 'Flat-felled seam allowance',
         d: 'The amount of seam allowance on flat-felled seams as a proportion of the regular seam allowance',
       },
-      hemCurve: { t: 'Hem curve', d: 'The height of the curve on a curved hem.' },
-      hemStyle: { t: 'Hem style', d: 'The style of the shirt hem.' },
-      'hemStyle.straight': { t: 'Straight hem', d: 'Draft a straight hem' },
+      hemCurve: {
+        t: 'Hem curve',
+        d: 'The height of the curve on a curved hem.',
+      },
+      hemStyle: {
+        t: 'Hem style',
+        d: 'The style of the shirt hem.',
+      },
+      'hemStyle.straight': {
+        t: 'Straight hem',
+        d: 'Draft a straight hem',
+      },
       'hemStyle.baseball': {
         t: 'Baseball hem',
         d: 'Draft a so-called baseball hem that curves upwards towards the sides',
@@ -5788,7 +7646,10 @@ export const designs = {
         t: 'Slashed hem',
         d: 'Draft a so-called slashed hem that is mostly straight but then sharply turns upwards at the sides',
       },
-      hipsEase: { t: 'Hips ease', d: 'Controls the amount of ease at the hips.' },
+      hipsEase: {
+        t: 'Hips ease',
+        d: 'Controls the amount of ease at the hips.',
+      },
       roundBack: {
         t: 'Round back',
         d: 'To fit a round(er) back, this adds length to the center back (at the yoke) that tapers of towards the sides.',
@@ -5805,7 +7666,10 @@ export const designs = {
         t: 'Separate the buttonhole placket',
         d: 'Draft a pattern where the buttonhole placket is separated from the front, allowing one to use a different fabric or grain for the buttonhole placket',
       },
-      separateButtonPlacket: { t: 'Separate button placket', d: 'Draft a separate button placket' },
+      separateButtonPlacket: {
+        t: 'Separate button placket',
+        d: 'Draft a separate button placket',
+      },
       separateButtonPlacketNo: {
         t: 'Do not separate the button placket',
         d: 'Draft a pattern where the button placket is attached to the front',
@@ -5814,21 +7678,54 @@ export const designs = {
         t: 'Separate the button placket',
         d: 'Draft a pattern where the button placket is separated from the front, allowing one to use a different fabric or grain for the button placket',
       },
-      sleeveHemShort: { t: 'Sleeve hem length', d: 'Length of the hem' },
-      sleeveLengthShort: { t: 'Sleeve length', d: 'Length of the short sleeves' },
-      sleevePlacketLength: { t: 'Sleeve placket length', d: 'The length of the sleeve placket.' },
-      sleevePlacketWidth: { t: 'Sleeve placket width', d: 'The width of the sleeve placket.' },
-      sleeveStyle: { t: 'Sleeve style', d: 'Would you like long or short sleeves?' },
-      'sleeveStyle.long': { t: 'Long sleeves', d: 'Normal long sleeves with all the cuff options' },
-      'sleeveStyle.short': { t: 'Short sleeves', d: 'Short sleeves for the summer' },
+      sleeveHemShort: {
+        t: 'Sleeve hem length',
+        d: 'Length of the hem',
+      },
+      sleeveLengthShort: {
+        t: 'Sleeve length',
+        d: 'Length of the short sleeves',
+      },
+      sleevePlacketLength: {
+        t: 'Sleeve placket length',
+        d: 'The length of the sleeve placket.',
+      },
+      sleevePlacketWidth: {
+        t: 'Sleeve placket width',
+        d: 'The width of the sleeve placket.',
+      },
+      sleeveStyle: {
+        t: 'Sleeve style',
+        d: 'Would you like long or short sleeves?',
+      },
+      'sleeveStyle.long': {
+        t: 'Long sleeves',
+        d: 'Normal long sleeves with all the cuff options',
+      },
+      'sleeveStyle.short': {
+        t: 'Short sleeves',
+        d: 'Short sleeves for the summer',
+      },
       splitYoke: {
         t: 'Split yoke',
         d: 'Whether to draft a split or regular yoke. A split yoke is typically used for using a different grainline on both halves for visual effect',
       },
-      splitYokeNo: { t: 'Full-size yoke', d: 'Draft a pattern with a single full-size yoke' },
-      splitYokeYes: { t: 'Split the yoke', d: 'Draft a pattern with a yoke split in half' },
-      waistEase: { t: 'Waist ease', d: 'The amount of ease at your (natural) waist.' },
-      yokeHeight: { t: 'Yoke height', d: 'Controls the height of the yoke' },
+      splitYokeNo: {
+        t: 'Full-size yoke',
+        d: 'Draft a pattern with a single full-size yoke',
+      },
+      splitYokeYes: {
+        t: 'Split the yoke',
+        d: 'Draft a pattern with a yoke split in half',
+      },
+      waistEase: {
+        t: 'Waist ease',
+        d: 'The amount of ease at your (natural) waist.',
+      },
+      yokeHeight: {
+        t: 'Yoke height',
+        d: 'Controls the height of the yoke',
+      },
       bustAlignedButtons: {
         t: 'Bust-aligned buttons',
         d: 'Optional button spacing strategies to ensure a button at the bustline',
@@ -5857,9 +7754,18 @@ export const designs = {
         t: 'Contour',
         d: 'Controls how sharply the extra room for breasts is removed again below the chest',
       },
-      frontDarts: { t: 'Front darts', d: 'Whether to include front darts or not' },
-      frontDartsNo: { t: 'No front darts', d: 'Do not include front darts' },
-      frontDartsYes: { t: 'With front darts', d: 'Do include front darts' },
+      frontDarts: {
+        t: 'Front darts',
+        d: 'Whether to include front darts or not',
+      },
+      frontDartsNo: {
+        t: 'No front darts',
+        d: 'Do not include front darts',
+      },
+      frontDartsYes: {
+        t: 'With front darts',
+        d: 'Do include front darts',
+      },
       frontDartLength: {
         t: 'Front dart length',
         d: 'Controls how close the front dart approaches the bust point',
@@ -5917,12 +7823,26 @@ export const designs = {
   sophie: {
     t: 'Sophie Slip Dress',
     d: 'Sophie is a slip dress with a gathered bust.',
-    p: { cup: 'cup', backStrap: 'back strap', backPanel: 'back panel', frontPanel: 'front panel' },
+    p: {
+      cup: 'cup',
+      backStrap: 'back strap',
+      backPanel: 'back panel',
+      frontPanel: 'front panel',
+    },
     s: {},
     o: {
-      strapWidth: { t: 'Strap Width', d: 'How wide do you want your shoulder straps?' },
-      necklineCoverage: { t: 'Neckline Coverage', d: 'How far up the neckline will be covered' },
-      backCoverage: { t: 'Back Coverage', d: 'Controls how far up the back will be covered' },
+      strapWidth: {
+        t: 'Strap Width',
+        d: 'How wide do you want your shoulder straps?',
+      },
+      necklineCoverage: {
+        t: 'Neckline Coverage',
+        d: 'How far up the neckline will be covered',
+      },
+      backCoverage: {
+        t: 'Back Coverage',
+        d: 'Controls how far up the back will be covered',
+      },
       sideCornerDrop: {
         t: 'Side Corner Drop',
         d: 'How far down the cups go on the side between the underbust and the waist',
@@ -5935,7 +7855,10 @@ export const designs = {
         t: 'Bottom Width Bonus',
         d: 'How much room will there be around the legs at the bottom of the dress',
       },
-      armholeDrop: { t: 'Armhole Drop', d: 'How much to lower the armhole' },
+      armholeDrop: {
+        t: 'Armhole Drop',
+        d: 'How much to lower the armhole',
+      },
       armholeWidthFront: {
         t: 'Armhole Width Front',
         d: 'How far the armhole will extend toward the center of the chest',
@@ -5944,17 +7867,36 @@ export const designs = {
         t: 'Armhole Width Back',
         d: 'How far the armhole will extend toward the center of the back',
       },
-      bustEase: { t: 'Bust Ease', d: 'How much room do you want around the bust?' },
-      underbustEase: { t: 'Underbust Ease', d: 'How much room do you want around the underbust?' },
-      waistEase: { t: 'Waist Ease', d: 'How much room do you want around the waist?' },
-      hipsEase: { t: 'Hips Ease', d: 'How much room do you want around the hips?' },
-      seatEase: { t: 'Seat Ease', d: 'How much room do you want around the seat?' },
+      bustEase: {
+        t: 'Bust Ease',
+        d: 'How much room do you want around the bust?',
+      },
+      underbustEase: {
+        t: 'Underbust Ease',
+        d: 'How much room do you want around the underbust?',
+      },
+      waistEase: {
+        t: 'Waist Ease',
+        d: 'How much room do you want around the waist?',
+      },
+      hipsEase: {
+        t: 'Hips Ease',
+        d: 'How much room do you want around the hips?',
+      },
+      seatEase: {
+        t: 'Seat Ease',
+        d: 'How much room do you want around the seat?',
+      },
     },
   },
   sunny: {
     t: 'Sunny',
     d: 'An 18th century split-side skirt',
-    p: { panel: 'Front/back skirt panels', binding: 'Binding', waistband: 'Waistband' },
+    p: {
+      panel: 'Front/back skirt panels',
+      binding: 'Binding',
+      waistband: 'Waistband',
+    },
     s: {
       'cutPanel.t': 'The skirt front/back panels are not shown',
       'cutPanel.d':
@@ -5973,12 +7915,30 @@ export const designs = {
         'Extra waistband length may be required depending on fabric used and waistband width',
     },
     o: {
-      waistEase: { t: 'Waist Ease', d: 'Ease added to waistline.' },
-      pleatOverlap: { t: 'Pleat Overlap', d: 'Percentage overlap with the previous pleat.' },
-      sideOpeningLength: { t: 'Side Opening Length', d: 'Length of opening in the side seams.' },
-      length: { t: 'Length', d: 'Skirt length' },
-      waistbandWidth: { t: 'Waistband Width', d: 'Width of the fabric waistband.' },
-      bindingWidth: { t: 'Waistband Width', d: 'Width of the fabric waistband.' },
+      waistEase: {
+        t: 'Waist Ease',
+        d: 'Ease added to waistline.',
+      },
+      pleatOverlap: {
+        t: 'Pleat Overlap',
+        d: 'Percentage overlap with the previous pleat.',
+      },
+      sideOpeningLength: {
+        t: 'Side Opening Length',
+        d: 'Length of opening in the side seams.',
+      },
+      length: {
+        t: 'Length',
+        d: 'Skirt length',
+      },
+      waistbandWidth: {
+        t: 'Waistband Width',
+        d: 'Width of the fabric waistband.',
+      },
+      bindingWidth: {
+        t: 'Waistband Width',
+        d: 'Width of the fabric waistband.',
+      },
       fabricBinding: {
         t: 'Fabric Binding',
         d: 'Use a fabric binding to secure and finish the pleats.',
@@ -5987,9 +7947,18 @@ export const designs = {
         t: 'Fabric Waistband',
         d: 'Construct a fabric waistband instead of using a ribbon.',
       },
-      numPleats: { t: 'Number of Pleats', d: 'Number of pleats per side' },
-      waistbandLength: { t: 'Waistband Length', d: 'Length of waistband.' },
-      hem: { t: 'Hem', d: 'Hem width' },
+      numPleats: {
+        t: 'Number of Pleats',
+        d: 'Number of pleats per side',
+      },
+      waistbandLength: {
+        t: 'Waistband Length',
+        d: 'Length of waistband.',
+      },
+      hem: {
+        t: 'Hem',
+        d: 'Hem width',
+      },
     },
   },
   sven: {
@@ -6030,14 +7999,26 @@ export const designs = {
         t: 'Armhole depth factor (legacy)',
         d: 'Controls the depth of the armhole. Higher values make a deeper armhole. This option only applies to the legacy (v2) way of calculating the armhole depth.',
       },
-      backNeckCutout: { t: 'Back neck cutout', d: 'How deep the neck is cut out at the back' },
+      backNeckCutout: {
+        t: 'Back neck cutout',
+        d: 'How deep the neck is cut out at the back',
+      },
       bicepsEase: {
         t: 'Biceps ease',
         d: 'The amount of ease at your upper arm. Note that while we try to respect this, fitting the sleeve to the armhole takes precedence over respecting the exact amount of ease.',
       },
-      collarEase: { t: 'Collar ease', d: 'The amount of ease around your neck' },
-      chestEase: { t: 'Chest ease', d: 'The amount of ease at your chest.' },
-      cuffEase: { t: 'Cuff ease', d: 'The amount of ease at your wrist.' },
+      collarEase: {
+        t: 'Collar ease',
+        d: 'The amount of ease around your neck',
+      },
+      chestEase: {
+        t: 'Chest ease',
+        d: 'The amount of ease at your chest.',
+      },
+      cuffEase: {
+        t: 'Cuff ease',
+        d: 'The amount of ease at your wrist.',
+      },
       draftForHighBust: {
         t: 'Draft for high bust',
         d: 'Draft the pattern using the high bust measurement if it is available, instead of using the chest measurement. This can result in a more fitted garment for people with breasts. (Please note that no additional adjustments or shaping is performed. Further manual adjustments may be needed for those with a larger difference between high bust and chest measurements.)',
@@ -6174,13 +8155,22 @@ export const designs = {
         t: 'Hips ease',
         d: 'Controls the amount of ease at your hips (the bottom of the sweater)',
       },
-      ribbing: { t: 'Ribbing', d: 'Whether to finish the hem and cuffs with ribbing or not.' },
+      ribbing: {
+        t: 'Ribbing',
+        d: 'Whether to finish the hem and cuffs with ribbing or not.',
+      },
       ribbingNo: {
         t: 'Do not use ribbing',
         d: 'Do not finish the hem and cuffs with ribbing but rather use a classic hem',
       },
-      ribbingYes: { t: 'Use ribbing', d: 'Finish the hem and cuffs with ribbing fabric' },
-      ribbingHeight: { t: 'Ribbing height', d: 'The height of the ribbing on cuffs and hem.' },
+      ribbingYes: {
+        t: 'Use ribbing',
+        d: 'Finish the hem and cuffs with ribbing fabric',
+      },
+      ribbingHeight: {
+        t: 'Ribbing height',
+        d: 'The height of the ribbing on cuffs and hem.',
+      },
       ribbingStretch: {
         t: 'Ribbing stretch',
         d: 'The amount of negative ease to apply to the ribbing used for cuffs and hem.',
@@ -6190,10 +8180,15 @@ export const designs = {
   tamiko: {
     t: 'Tamiko top',
     d: 'Tamiko is a zero-waste top.',
-    p: { top: 'Top' },
+    p: {
+      top: 'Top',
+    },
     s: {},
     o: {
-      flare: { t: 'Flare', d: 'The amount by which the garment flares from your chest downwards' },
+      flare: {
+        t: 'Flare',
+        d: 'The amount by which the garment flares from your chest downwards',
+      },
       shoulderseamLength: {
         t: 'Shoulder seam length',
         d: 'The length of the shoulder seam, as a factor of your shoulder to shoulder measurement',
@@ -6202,7 +8197,10 @@ export const designs = {
         t: 'Armhole depth factor',
         d: 'Controls the depth of your armhole, as a factor of your shoulder to shoulder measurement.',
       },
-      chestEase: { t: 'Chest ease', d: 'The amount of ease at your chest.' },
+      chestEase: {
+        t: 'Chest ease',
+        d: 'The amount of ease at your chest.',
+      },
       lengthBonus: {
         t: 'Length bonus',
         d: 'How much longer than the default length to make your top.',
@@ -6236,7 +8234,13 @@ export const designs = {
       'neckOpeningLength.d':
         "The full length of the T-Shirt's neck opening is {{{ length }}}. This is relevant for the knit binding finish.",
     },
-    p: { back: 'Back', front: 'Front', base: 'Base', sleevecap: 'Sleevecap', sleeve: 'Sleeve' },
+    p: {
+      back: 'Back',
+      front: 'Front',
+      base: 'Base',
+      sleevecap: 'Sleevecap',
+      sleeve: 'Sleeve',
+    },
     o: {
       acrossBackFactor: {
         t: 'Across back factor',
@@ -6250,14 +8254,26 @@ export const designs = {
         t: 'Armhole depth factor (legacy)',
         d: 'Controls the depth of the armhole. Higher values make a deeper armhole. This option only applies to the legacy (v2) way of calculating the armhole depth.',
       },
-      backNeckCutout: { t: 'Back neck cutout', d: 'How deep the neck is cut out at the back' },
+      backNeckCutout: {
+        t: 'Back neck cutout',
+        d: 'How deep the neck is cut out at the back',
+      },
       bicepsEase: {
         t: 'Biceps ease',
         d: 'The amount of ease at your upper arm. Note that while we try to respect this, fitting the sleeve to the armhole takes precedence over respecting the exact amount of ease.',
       },
-      collarEase: { t: 'Collar ease', d: 'The amount of ease around your neck' },
-      chestEase: { t: 'Chest ease', d: 'The amount of ease at your chest.' },
-      cuffEase: { t: 'Cuff ease', d: 'The amount of ease at your wrist.' },
+      collarEase: {
+        t: 'Collar ease',
+        d: 'The amount of ease around your neck',
+      },
+      chestEase: {
+        t: 'Chest ease',
+        d: 'The amount of ease at your chest.',
+      },
+      cuffEase: {
+        t: 'Cuff ease',
+        d: 'The amount of ease at your wrist.',
+      },
       draftForHighBust: {
         t: 'Draft for high bust',
         d: 'Draft the pattern for the high bust measurement (if available) rather than the (full) chest. This will result in a more fitted garment for people with breasts.',
@@ -6386,11 +8402,26 @@ export const designs = {
         t: 'Sleeve width guarantee',
         d: 'Controls how much of the sleeve width will be guaranteed. This determines how much we can alter the sleeve width to fit the sleeve in the armhole.',
       },
-      sleeveEase: { t: 'Sleeve ease', d: 'Amount of ease of your sleeves' },
-      sleeveLength: { t: 'Sleeve length', d: 'Controls the length of your sleeves' },
-      necklineBend: { t: 'Neckline curvature', d: 'Controls the curvature of the neckline.' },
-      necklineDepth: { t: 'Neckline depth', d: 'Controls how deep the neck opening plunges down.' },
-      necklineWidth: { t: 'Neckline width', d: 'Controls the width of the neck opening.' },
+      sleeveEase: {
+        t: 'Sleeve ease',
+        d: 'Amount of ease of your sleeves',
+      },
+      sleeveLength: {
+        t: 'Sleeve length',
+        d: 'Controls the length of your sleeves',
+      },
+      necklineBend: {
+        t: 'Neckline curvature',
+        d: 'Controls the curvature of the neckline.',
+      },
+      necklineDepth: {
+        t: 'Neckline depth',
+        d: 'Controls how deep the neck opening plunges down.',
+      },
+      necklineWidth: {
+        t: 'Neckline width',
+        d: 'Controls the width of the neck opening.',
+      },
       fitWaist: {
         t: 'Fit the waist',
         d: 'Whether or not to fit the waist or rather only fit chest and hips.',
@@ -6407,39 +8438,91 @@ export const designs = {
         t: 'Waist ease',
         d: 'Ease at the waist (only applies when the waist is fitted).',
       },
-      hipsEase: { t: 'Hips ease', d: 'Ease at the hips.' },
+      hipsEase: {
+        t: 'Hips ease',
+        d: 'Ease at the hips.',
+      },
     },
   },
   tiberius: {
     t: 'Tiberius Tunica',
     d: 'Tiberius is a historical Roman tunic',
-    p: { tunica: 'Tunica' },
-    s: { biasTape: 'Bias tape' },
+    p: {
+      tunica: 'Tunica',
+    },
+    s: {
+      biasTape: 'Bias tape',
+    },
     o: {
-      headRatio: { t: 'Head ratio', d: 'Controls the size of the head opening' },
-      armholeDrop: { t: 'Armhole drop', d: 'Controls the depth of the armhole' },
-      lengthBonus: { t: 'Length bonus', d: 'Allows variation of the length of the garment' },
-      widthBonus: { t: 'Width bonus', d: 'Allows variation of the width of the garment' },
-      clavi: { t: 'Clavi', d: 'Whether or not to include guides for clavi' },
-      claviNo: { t: 'No clavi', d: 'Do not include clavi on the pattern' },
-      claviYes: { t: 'Include clavi', d: 'Include clavi on the pattern' },
-      clavusLocation: { t: 'Clavus location', d: 'Controls the location of the clavi' },
-      clavusWidth: { t: 'Clavus width', d: 'Controls the width of the clavi' },
-      length: { t: 'Length', d: 'Controls the length of the garment' },
-      width: { t: 'Width', d: 'Controls the width of the garment' },
-      'width.toElbow': { t: 'To the elbow', d: 'Drafts a tunica to the elbow' },
-      'width.toShoulder': { t: 'To the shoulder', d: 'Drafts a tunica to the shoulder' },
+      headRatio: {
+        t: 'Head ratio',
+        d: 'Controls the size of the head opening',
+      },
+      armholeDrop: {
+        t: 'Armhole drop',
+        d: 'Controls the depth of the armhole',
+      },
+      lengthBonus: {
+        t: 'Length bonus',
+        d: 'Allows variation of the length of the garment',
+      },
+      widthBonus: {
+        t: 'Width bonus',
+        d: 'Allows variation of the width of the garment',
+      },
+      clavi: {
+        t: 'Clavi',
+        d: 'Whether or not to include guides for clavi',
+      },
+      claviNo: {
+        t: 'No clavi',
+        d: 'Do not include clavi on the pattern',
+      },
+      claviYes: {
+        t: 'Include clavi',
+        d: 'Include clavi on the pattern',
+      },
+      clavusLocation: {
+        t: 'Clavus location',
+        d: 'Controls the location of the clavi',
+      },
+      clavusWidth: {
+        t: 'Clavus width',
+        d: 'Controls the width of the clavi',
+      },
+      length: {
+        t: 'Length',
+        d: 'Controls the length of the garment',
+      },
+      width: {
+        t: 'Width',
+        d: 'Controls the width of the garment',
+      },
+      'width.toElbow': {
+        t: 'To the elbow',
+        d: 'Drafts a tunica to the elbow',
+      },
+      'width.toShoulder': {
+        t: 'To the shoulder',
+        d: 'Drafts a tunica to the shoulder',
+      },
       'width.toMidArm': {
         t: 'To the midarm/biceps',
         d: 'Drafts a tunica to middle of the upperarm (biceps)',
       },
-      forceWidth: { t: 'Force width', d: 'Apply width settings regardless of constraints' },
+      forceWidth: {
+        t: 'Force width',
+        d: 'Apply width settings regardless of constraints',
+      },
     },
   },
   titan: {
     t: 'Titan trouser block',
     d: 'Titan is a dartless trouser block.',
-    p: { back: 'Back', front: 'Front' },
+    p: {
+      back: 'Back',
+      front: 'Front',
+    },
     s: {
       'crossSeamFitFailedBack.t': 'Back cross seam compromised',
       'crossSeamFitFailedBack.d':
@@ -6455,13 +8538,22 @@ export const designs = {
         'The back cross seam curve was adjusted as the back waistband was unexpectedly low.\n\nThe generated pattern is likely not correct. Please verify your measurements before contacting support.',
     },
     o: {
-      kneeEase: { t: 'Knee ease', d: 'Controls the amount of ease at the knee' },
+      kneeEase: {
+        t: 'Knee ease',
+        d: 'Controls the amount of ease at the knee',
+      },
       waistHeight: {
         t: 'Waist height',
         d: 'Controls the height of the waist, 100% = waist height, 0% = hip height',
       },
-      lengthBonus: { t: 'Length bonus', d: 'Controls the length of the trousers' },
-      crotchDrop: { t: 'Crotch drop', d: 'Lowers the crotch for a more relaxed fit' },
+      lengthBonus: {
+        t: 'Length bonus',
+        d: 'Controls the length of the trousers',
+      },
+      crotchDrop: {
+        t: 'Crotch drop',
+        d: 'Lowers the crotch for a more relaxed fit',
+      },
       fitKnee: {
         t: 'Fit the knee',
         d: 'Fits the legs from based on the knee circumference, rather than seat circumference',
@@ -6482,8 +8574,14 @@ export const designs = {
         t: 'Start of the cross seam curve',
         d: 'Controls how far into the cross seam we start to curve',
       },
-      crossSeamCurveBend: { t: 'Cross seam bend', d: 'Controls the curvature of the cross seam' },
-      crossSeamCurveAngle: { t: 'Cross seam angle', d: 'Controls the angle of the cross seam' },
+      crossSeamCurveBend: {
+        t: 'Cross seam bend',
+        d: 'Controls the curvature of the cross seam',
+      },
+      crossSeamCurveAngle: {
+        t: 'Cross seam angle',
+        d: 'Controls the angle of the cross seam',
+      },
       crotchSeamCurveStart: {
         t: 'Start of the crotch seam curve',
         d: 'Controls how far into the crotch seam we start to curve',
@@ -6492,14 +8590,26 @@ export const designs = {
         t: 'Crotch seam bend',
         d: 'Controls the curvature of the crotch seam',
       },
-      crotchSeamCurveAngle: { t: 'Crotch seam angle', d: 'Controls the angle of the crotch seam' },
-      seatEase: { t: 'Seat ease', d: 'Controls the amount of ease at your seat' },
+      crotchSeamCurveAngle: {
+        t: 'Crotch seam angle',
+        d: 'Controls the angle of the crotch seam',
+      },
+      seatEase: {
+        t: 'Seat ease',
+        d: 'Controls the amount of ease at your seat',
+      },
       waistBalance: {
         t: 'Waist balance',
         d: 'Controls the horizontal position of the waist relative to the seat',
       },
-      waistbandWidth: { t: 'Waistband width', d: 'The width of the waistband' },
-      waistEase: { t: 'Waist ease', d: 'Controls the amount of ease at your waist' },
+      waistbandWidth: {
+        t: 'Waistband width',
+        d: 'The width of the waistband',
+      },
+      waistEase: {
+        t: 'Waist ease',
+        d: 'Controls the amount of ease at your waist',
+      },
       waistAngle: {
         t: 'Waistband angle',
         d: 'Change the angle of the waistband when viewed from the side',
@@ -6508,8 +8618,14 @@ export const designs = {
         t: 'Use waistband angle for',
         d: 'Apply the waistband angle to the front, back or both',
       },
-      'useWaistAngleFor.both': { t: 'Both', d: 'Apply the waistband angle to the front and back' },
-      'useWaistAngleFor.backOnly': { t: 'Back', d: 'Apply the waistband angle only to the back' },
+      'useWaistAngleFor.both': {
+        t: 'Both',
+        d: 'Apply the waistband angle to the front and back',
+      },
+      'useWaistAngleFor.backOnly': {
+        t: 'Back',
+        d: 'Apply the waistband angle only to the back',
+      },
       'useWaistAngleFor.frontOnly': {
         t: 'Front',
         d: 'Apply the waistband angle only to the front',
@@ -6538,8 +8654,14 @@ export const designs = {
         'The **Loop** is a rectangular piece of fabric {{{ width }}} wide and {{{ length }}} long (this part does not use seam allowance). It is not shown because the **expand** core setting is currently disabled. Enable it to show this pattern part.',
     },
     o: {
-      tipWidth: { t: 'Tip width', d: 'The width of your tie at the tip' },
-      knotWidth: { t: 'Knot width', d: 'The width of your tie at the knot' },
+      tipWidth: {
+        t: 'Tip width',
+        d: 'The width of your tie at the tip',
+      },
+      knotWidth: {
+        t: 'Knot width',
+        d: 'The width of your tie at the knot',
+      },
       lengthBonus: {
         t: 'Length bonus',
         d: 'How much longer than the default length to make the tie.',
@@ -6574,8 +8696,14 @@ export const designs = {
       hem: 'Hem',
     },
     o: {
-      bustSpanEase: { t: 'Bust span ease', d: 'Controls the amount of ease along the bust span' },
-      chestEase: { t: 'Chest ease', d: 'Controls the amount of ease at the chest' },
+      bustSpanEase: {
+        t: 'Bust span ease',
+        d: 'Controls the amount of ease along the bust span',
+      },
+      chestEase: {
+        t: 'Chest ease',
+        d: 'Controls the amount of ease at the chest',
+      },
       shoulderToShoulderEase: {
         t: 'Shoulder to shoulder ease',
         d: 'Controls the amount of ease along the shoulder to shoulder measurement',
@@ -6584,7 +8712,10 @@ export const designs = {
         t: 'Full chest ease reduction',
         d: 'Allows you to independently reduce the ease around the chest to make it fit tight(er) in that area',
       },
-      waistEase: { t: 'Waist ease', d: 'Controls the amount of ease at the waist' },
+      waistEase: {
+        t: 'Waist ease',
+        d: 'Controls the amount of ease at the waist',
+      },
       waistdartposition: {
         t: 'Waist dart position',
         d: "Controls the position of the waist 'dart', moving it to the center (negative) or side (positive)",
@@ -6593,8 +8724,14 @@ export const designs = {
         t: 'Front shoulder width',
         d: 'Controls how much width is added to the shoulder in the front',
       },
-      highBustWidth: { t: 'High bust width', d: 'Controls the width of the high bust' },
-      armholeDepth: { t: 'Depth of the Armhole', d: 'Controls how deep the armhole is' },
+      highBustWidth: {
+        t: 'High bust width',
+        d: 'Controls the width of the high bust',
+      },
+      armholeDepth: {
+        t: 'Depth of the Armhole',
+        d: 'Controls how deep the armhole is',
+      },
       cutDepthBack: {
         t: 'Depth of the cut in the back',
         d: 'Controls the depth of the cut in the back',
@@ -6619,9 +8756,18 @@ export const designs = {
         t: 'Shoulder dart position',
         d: 'Controls the position of the shoulder dart',
       },
-      strapWidth: { t: 'Width of the straps', d: 'Controls the width of the straps' },
-      upperDartLength: { t: 'Upper dart length', d: 'Controls the length of the upper dart' },
-      waistDartLength: { t: 'Waist dart length', d: 'Controls the length of the waist dart' },
+      strapWidth: {
+        t: 'Width of the straps',
+        d: 'Controls the width of the straps',
+      },
+      upperDartLength: {
+        t: 'Upper dart length',
+        d: 'Controls the length of the upper dart',
+      },
+      waistDartLength: {
+        t: 'Waist dart length',
+        d: 'Controls the length of the waist dart',
+      },
       zipperLocation: {
         t: 'Zipper location',
         d: 'The location of the zipper: side, back, or front',
@@ -6638,9 +8784,18 @@ export const designs = {
         t: 'Back zipper location',
         d: 'The location of the zipper will be in the back',
       },
-      hem: { t: 'Hem option', d: 'Add a hem.' },
-      hemYes: { t: 'Add a hem', d: 'Add a hem at the waist' },
-      hemNo: { t: 'Do not add a hem', d: 'Do not add a hem at the waist' },
+      hem: {
+        t: 'Hem option',
+        d: 'Add a hem.',
+      },
+      hemYes: {
+        t: 'Add a hem',
+        d: 'Add a hem at the waist',
+      },
+      hemNo: {
+        t: 'Do not add a hem',
+        d: 'Do not add a hem at the waist',
+      },
       hemSize: {
         t: 'Size of the hem',
         d: 'Size of the hem, a percentage of the distance between the neckline and the waist',
@@ -6649,16 +8804,46 @@ export const designs = {
         t: 'Lacing option',
         d: 'This removes part of the seam to create an opening for lacing',
       },
-      lacingYes: { t: 'Add Lacing', d: 'Remove part of the seam to create an opening for lacing' },
-      lacingNo: { t: 'No lacing', d: 'Close the seams normally' },
-      lacingLocation: { t: 'Location of the lacing', d: 'Lacing in the front, or the back' },
-      'lacingLocation.back': { t: 'Lacing in the back', d: 'The lacing will be in the back' },
-      'lacingLocation.front': { t: 'Lacing in the front', d: 'The lacing will be in the front' },
-      lacingWidth: { t: 'Lacing width', d: 'Width of the lacing opening' },
-      peplum: { t: 'Peplum', d: 'Add a peplum' },
-      peplumYes: { t: 'Add a peplum', d: 'This will generate the peplum part.' },
-      peplumNo: { t: 'No peplum', d: 'Pattern will be generated without a peplum' },
-      peplumSize: { t: 'Peplum size', d: 'Controls the size of the peplum' },
+      lacingYes: {
+        t: 'Add Lacing',
+        d: 'Remove part of the seam to create an opening for lacing',
+      },
+      lacingNo: {
+        t: 'No lacing',
+        d: 'Close the seams normally',
+      },
+      lacingLocation: {
+        t: 'Location of the lacing',
+        d: 'Lacing in the front, or the back',
+      },
+      'lacingLocation.back': {
+        t: 'Lacing in the back',
+        d: 'The lacing will be in the back',
+      },
+      'lacingLocation.front': {
+        t: 'Lacing in the front',
+        d: 'The lacing will be in the front',
+      },
+      lacingWidth: {
+        t: 'Lacing width',
+        d: 'Width of the lacing opening',
+      },
+      peplum: {
+        t: 'Peplum',
+        d: 'Add a peplum',
+      },
+      peplumYes: {
+        t: 'Add a peplum',
+        d: 'This will generate the peplum part.',
+      },
+      peplumNo: {
+        t: 'No peplum',
+        d: 'Pattern will be generated without a peplum',
+      },
+      peplumSize: {
+        t: 'Peplum size',
+        d: 'Controls the size of the peplum',
+      },
       peplumFullness: {
         t: 'Peplum fullness',
         d: "Controls the 'fullness' of the peplum. Basically from a half-circle to a full-circle.",
@@ -6668,7 +8853,13 @@ export const designs = {
   uma: {
     t: 'Uma undies',
     d: 'Uma is a basic, highly-customizable underwear pattern.',
-    p: { back: 'Back', elastic: 'Elastic', front: 'Front', gusset: 'Gusset', base: 'Base' },
+    p: {
+      back: 'Back',
+      elastic: 'Elastic',
+      front: 'Front',
+      gusset: 'Gusset',
+      base: 'Base',
+    },
     s: {
       'legElasticLength.t': 'You need 2x {{{ length }}} elastic to finish the legs',
       'legElasticLength.d':
@@ -6682,8 +8873,14 @@ export const designs = {
         t: 'Bulge',
         d: "Increase the bugle angle to create more room in the front pouch. Doesn't kick in below 2 degrees.",
       },
-      gussetWidth: { t: 'Gusset width', d: 'Controls the width of the gusset' },
-      gussetLength: { t: 'Gusset length', d: 'Controls the length of the gusset' },
+      gussetWidth: {
+        t: 'Gusset width',
+        d: 'Controls the width of the gusset',
+      },
+      gussetLength: {
+        t: 'Gusset length',
+        d: 'Controls the length of the gusset',
+      },
       gussetPosition: {
         t: 'Gusset position',
         d: 'This option allows you to shift the gusset more to the front or back. It is ignored when bulge is active',
@@ -6696,8 +8893,14 @@ export const designs = {
         t: 'Vertical fabric stretch',
         d: 'Adjust this for more or less stretchy fabric in the vertical direction',
       },
-      rise: { t: 'Rise', d: 'Controls the height of the waist' },
-      legRise: { t: 'Leg rise', d: 'Controls how high the leg is cut out' },
+      rise: {
+        t: 'Rise',
+        d: 'Controls the height of the waist',
+      },
+      legRise: {
+        t: 'Leg rise',
+        d: 'Controls how high the leg is cut out',
+      },
       frontDip: {
         t: 'Front waist dip',
         d: 'Controls how much the front waist curves (revealing more or less skin)',
@@ -6706,14 +8909,25 @@ export const designs = {
         t: 'Back waist dip',
         d: 'Controls how much the back waist curves (revealing more or less skin)',
       },
-      frontExposure: { t: 'Front exposure', d: 'Controls the amount of exposed skin on the front' },
-      backExposure: { t: 'Back exposure', d: 'Controls the amount of exposed skin on the back' },
+      frontExposure: {
+        t: 'Front exposure',
+        d: 'Controls the amount of exposed skin on the front',
+      },
+      backExposure: {
+        t: 'Back exposure',
+        d: 'Controls the amount of exposed skin on the back',
+      },
     },
   },
   umbra: {
     t: 'Umbra undies',
     d: 'Umbra is a basic, highly-customizable underwear pattern.',
-    p: { back: 'Back', elastic: 'Elastic', front: 'Front', base: 'Base' },
+    p: {
+      back: 'Back',
+      elastic: 'Elastic',
+      front: 'Front',
+      base: 'Base',
+    },
     s: {
       seat: 'Seat',
       hips: 'Hips',
@@ -6742,12 +8956,18 @@ export const designs = {
         t: 'Bulge fullness',
         d: "Determines the roundness of the bulge. Doesn't have an effect if the bulge is disabled.",
       },
-      splitPosition: { t: 'Crotch seam', d: 'Determines the position of the crotch seam' },
+      splitPosition: {
+        t: 'Crotch seam',
+        d: 'Determines the position of the crotch seam',
+      },
       gussetPosition: {
         t: 'Gusset position',
         d: 'Shift the gusset (crotch position with the smallest width) forwards or backwards. The default position equals the cross seam front measurement.',
       },
-      gussetWidth: { t: 'Gusset width', d: 'Controls the minimum width in the crotch area' },
+      gussetWidth: {
+        t: 'Gusset width',
+        d: 'Controls the minimum width in the crotch area',
+      },
       xStretch: {
         t: 'Horizontal fabric stretch',
         d: 'Adjust this for more or less stretchy fabric in the horizontal direction',
@@ -6764,7 +8984,10 @@ export const designs = {
         t: 'Rise',
         d: 'Controls the height of the waist. A value of 100% puts the waistband onto the measured hip line.',
       },
-      legRise: { t: 'Leg rise', d: 'Controls how high the leg is cut out' },
+      legRise: {
+        t: 'Leg rise',
+        d: 'Controls how high the leg is cut out',
+      },
       frontDip: {
         t: 'Front waist dip',
         d: 'Controls how much the front waist curves (revealing more or less skin)',
@@ -6781,12 +9004,18 @@ export const designs = {
         t: 'Back waist dip shape',
         d: "Controls the shape of the back waist dip. Doesn't have much effect if the back waist dip is zero.",
       },
-      frontExposure: { t: 'Front exposure', d: 'Controls the amount of exposed skin on the front' },
+      frontExposure: {
+        t: 'Front exposure',
+        d: 'Controls the amount of exposed skin on the front',
+      },
       frontReduction: {
         t: 'Front narrowing',
         d: 'Controls by how much the front part is slimmer than the back part',
       },
-      pockets: { t: 'Pockets', d: 'Choose if you want pockets' },
+      pockets: {
+        t: 'Pockets',
+        d: 'Choose if you want pockets',
+      },
       pocketHeight: {
         t: 'Pocket height',
         d: 'Controls the position of the pocket hem or the zippers. Increasing this option results in shorter pockets. Only has an effect with pockets enabled.',
@@ -6795,12 +9024,18 @@ export const designs = {
         t: 'Pocket gap',
         d: 'Controls how much space is left in the front between both pockets. Only has an effect with pockets enabled.',
       },
-      backExposure: { t: 'Back exposure', d: 'Controls the amount of exposed skin on the back' },
+      backExposure: {
+        t: 'Back exposure',
+        d: 'Controls the amount of exposed skin on the back',
+      },
       minFabricWidth: {
         t: 'Minimum fabric width',
         d: 'Controls the minimum width of the thong strip and side band. Does not have an effect if the back exposure and the leg rise is low.',
       },
-      flipBack: { t: 'Flip back', d: 'Determines if the back part should be rendered upside down' },
+      flipBack: {
+        t: 'Flip back',
+        d: 'Determines if the back part should be rendered upside down',
+      },
       flipBackYes: {
         t: 'Flip upright',
         d: 'Flips the back part, which is constructed upside down, to an upright orientation',
@@ -6809,7 +9044,10 @@ export const designs = {
         t: 'Keep upside down',
         d: 'Keeps the back part in its original orientation, which might help in the pattern inspector view',
       },
-      'pockets.none': { t: 'No Pockets', d: 'Create the design without any pockets (default)' },
+      'pockets.none': {
+        t: 'No Pockets',
+        d: 'Create the design without any pockets (default)',
+      },
       'pockets.inside': {
         t: 'Inside Pockets',
         d: 'Create two secret pockets on the insides and a center front pouch',
@@ -6873,14 +9111,26 @@ export const designs = {
         t: 'Armhole depth factor (legacy)',
         d: 'Controls the depth of the armhole. Higher values make a deeper armhole. This option only applies to the legacy (v2) way of calculating the armhole depth.',
       },
-      backNeckCutout: { t: 'Back neck cutout', d: 'How deep the neck is cut out at the back' },
+      backNeckCutout: {
+        t: 'Back neck cutout',
+        d: 'How deep the neck is cut out at the back',
+      },
       bicepsEase: {
         t: 'Biceps ease',
         d: 'The amount of ease at your upper arm. Note that while we try to respect this, fitting the sleeve to the armhole takes precedence over respecting the exact amount of ease.',
       },
-      collarEase: { t: 'Collar ease', d: 'The amount of ease around your neck' },
-      chestEase: { t: 'Chest ease', d: 'The amount of ease at your chest.' },
-      cuffEase: { t: 'Cuff ease', d: 'The amount of ease at your wrist.' },
+      collarEase: {
+        t: 'Collar ease',
+        d: 'The amount of ease around your neck',
+      },
+      chestEase: {
+        t: 'Chest ease',
+        d: 'The amount of ease at your chest.',
+      },
+      cuffEase: {
+        t: 'Cuff ease',
+        d: 'The amount of ease at your wrist.',
+      },
       draftForHighBust: {
         t: 'Draft for high bust',
         d: 'Draft the pattern using the high bust measurement if it is available, instead of using the chest measurement. This can result in a more fitted garment for people with breasts. (Please note that no additional adjustments or shaping is performed. Further manual adjustments may be needed for those with a larger difference between high bust and chest measurements.)',
@@ -6937,11 +9187,26 @@ export const designs = {
         t: 'Front scye dart',
         d: 'The amount to take out in a dart at the front of the armhole.',
       },
-      pocketLocation: { t: 'Pocket location', d: 'Determines the placement of the pocket' },
-      pocketWidth: { t: 'Pocket width', d: 'Determines the width of the pocket' },
-      weltHeight: { t: 'Welt height', d: 'Determines the height of the welt' },
-      necklineDrop: { t: 'Neckline drop', d: 'Determines how low the neckline drops at the front' },
-      frontStyle: { t: 'Neck opening style', d: 'Style of the neck opening' },
+      pocketLocation: {
+        t: 'Pocket location',
+        d: 'Determines the placement of the pocket',
+      },
+      pocketWidth: {
+        t: 'Pocket width',
+        d: 'Determines the width of the pocket',
+      },
+      weltHeight: {
+        t: 'Welt height',
+        d: 'Determines the height of the welt',
+      },
+      necklineDrop: {
+        t: 'Neckline drop',
+        d: 'Determines how low the neckline drops at the front',
+      },
+      frontStyle: {
+        t: 'Neck opening style',
+        d: 'Style of the neck opening',
+      },
       'frontStyle.classic': {
         t: 'Classic',
         d: 'Draft a waistcoat with a classic V-shaped neck opening',
@@ -6950,25 +9215,58 @@ export const designs = {
         t: 'Rounded',
         d: 'Draft a waistcoat with a rounded V-shaped neck opening',
       },
-      hemStyle: { t: 'Hem style', d: 'Style of the front hem' },
+      hemStyle: {
+        t: 'Hem style',
+        d: 'Style of the front hem',
+      },
       'hemStyle.classic': {
         t: 'classic',
         d: 'Draft a waistcoat with a classic cut-away hem style',
       },
-      'hemStyle.rounded': { t: 'Rounded', d: 'Draft a waistcoat with a rounded hem style' },
-      'hemStyle.square': { t: 'Straight', d: 'Draft a waistcoat with with straight hem' },
-      hemRadius: { t: 'Hem radius', d: 'Radius by which the hem is rounded' },
-      backInset: { t: 'Back inset', d: 'How much the back of the armhole is cut inwards' },
-      frontInset: { t: 'Front inset', d: 'How much the front of the armhole is cut inwards' },
+      'hemStyle.rounded': {
+        t: 'Rounded',
+        d: 'Draft a waistcoat with a rounded hem style',
+      },
+      'hemStyle.square': {
+        t: 'Straight',
+        d: 'Draft a waistcoat with with straight hem',
+      },
+      hemRadius: {
+        t: 'Hem radius',
+        d: 'Radius by which the hem is rounded',
+      },
+      backInset: {
+        t: 'Back inset',
+        d: 'How much the back of the armhole is cut inwards',
+      },
+      frontInset: {
+        t: 'Front inset',
+        d: 'How much the front of the armhole is cut inwards',
+      },
       shoulderInset: {
         t: 'Shoulder inset',
         d: 'How much the shoulder seam is cut inwards at the shoulder',
       },
-      neckInset: { t: 'Neck inset', d: 'How much the shoulder seam is cut inwards at the neck' },
-      pocketAngle: { t: 'Pocket angle', d: 'Angle of the pocket slant' },
-      buttons: { t: 'Buttons', d: 'The amount of buttons to use.' },
-      waistEase: { t: 'Waist ease', d: 'Controls the amount of ease at the waist.' },
-      hipsEase: { t: 'Hips ease', d: 'Controls the amount of ease at the hips.' },
+      neckInset: {
+        t: 'Neck inset',
+        d: 'How much the shoulder seam is cut inwards at the neck',
+      },
+      pocketAngle: {
+        t: 'Pocket angle',
+        d: 'Angle of the pocket slant',
+      },
+      buttons: {
+        t: 'Buttons',
+        d: 'The amount of buttons to use.',
+      },
+      waistEase: {
+        t: 'Waist ease',
+        d: 'Controls the amount of ease at the waist.',
+      },
+      hipsEase: {
+        t: 'Hips ease',
+        d: 'Controls the amount of ease at the hips.',
+      },
       centerBackDart: {
         t: 'Center back dart',
         d: 'Whether or not to include a center back dart to fit a rounded back.',
@@ -6990,23 +9288,57 @@ export const designs = {
   walburga: {
     t: 'Walburga Wappenrock',
     d: 'Walburga is a tabard/surcoat, a historical garment from medieval Europe',
-    p: { base: 'Base', back: 'Back', front: 'Front' },
+    p: {
+      base: 'Base',
+      back: 'Back',
+      front: 'Front',
+    },
     s: {},
     o: {
-      headRatio: { t: 'Head ratio', d: 'Controls the size of the head opening' },
-      lengthBonus: { t: 'Length bonus', d: 'Allows variation of the length of the garment' },
-      widthBonus: { t: 'Width bonus', d: 'Allows variation of the width of the garment' },
-      length: { t: 'Length', d: 'Controls the length of the garment' },
-      'length.toKnee': { t: 'To the knee', d: 'Draft a surcoat that ends at the knee' },
+      headRatio: {
+        t: 'Head ratio',
+        d: 'Controls the size of the head opening',
+      },
+      lengthBonus: {
+        t: 'Length bonus',
+        d: 'Allows variation of the length of the garment',
+      },
+      widthBonus: {
+        t: 'Width bonus',
+        d: 'Allows variation of the width of the garment',
+      },
+      length: {
+        t: 'Length',
+        d: 'Controls the length of the garment',
+      },
+      'length.toKnee': {
+        t: 'To the knee',
+        d: 'Draft a surcoat that ends at the knee',
+      },
       'length.toMidLeg': {
         t: 'To the middle of the leg',
         d: 'Draft a surcoat that in the middle of the leg (below the knee)',
       },
-      'length.toFloor': { t: 'To the floor', d: 'Draft a full-length surcoat down to the floor' },
-      neckoRatio: { t: 'Neck opening shape', d: 'Controls the shape of the neck opening' },
-      neckline: { t: 'Neckline', d: 'Controls whether or not to draft a neck opening' },
-      necklineNo: { t: 'No neck opening', d: 'Drafts a surcoat without neck opening' },
-      necklineYes: { t: 'With neck opening', d: 'Drafts a surcoat with a neck opening included' },
+      'length.toFloor': {
+        t: 'To the floor',
+        d: 'Draft a full-length surcoat down to the floor',
+      },
+      neckoRatio: {
+        t: 'Neck opening shape',
+        d: 'Controls the shape of the neck opening',
+      },
+      neckline: {
+        t: 'Neckline',
+        d: 'Controls whether or not to draft a neck opening',
+      },
+      necklineNo: {
+        t: 'No neck opening',
+        d: 'Drafts a surcoat without neck opening',
+      },
+      necklineYes: {
+        t: 'With neck opening',
+        d: 'Drafts a surcoat with a neck opening included',
+      },
     },
   },
   waralee: {
@@ -7059,14 +9391,38 @@ export const designs = {
         'The **full pants** are not shown. Instead a minimized version is show with the dimensions, allowing you cut this directly from the fabric. This saves considerably on the required paper to print this pattern.',
     },
     o: {
-      backPocket: { t: 'Back pocket', d: 'Whether to include a back pocket or not' },
-      backPocketYes: { t: 'Back pocket', d: 'The back pocket is included' },
-      backPocketNo: { t: 'No Back pocket', d: 'The pattern is drawn without a back pocket' },
-      frontPocket: { t: 'Front pocket', d: 'Whether to include a front pocket or not' },
-      frontPocketYes: { t: 'Front pocket', d: 'The front pocket is included' },
-      frontPocketNo: { t: 'No Front pocket', d: 'The pattern is drawn without a front pocket' },
-      hemWidth: { t: 'Hem size', d: 'Size of the hem at the bottom of the pants' },
-      waistbandWidth: { t: 'Waist Band', d: 'Size of the waist band' },
+      backPocket: {
+        t: 'Back pocket',
+        d: 'Whether to include a back pocket or not',
+      },
+      backPocketYes: {
+        t: 'Back pocket',
+        d: 'The back pocket is included',
+      },
+      backPocketNo: {
+        t: 'No Back pocket',
+        d: 'The pattern is drawn without a back pocket',
+      },
+      frontPocket: {
+        t: 'Front pocket',
+        d: 'Whether to include a front pocket or not',
+      },
+      frontPocketYes: {
+        t: 'Front pocket',
+        d: 'The front pocket is included',
+      },
+      frontPocketNo: {
+        t: 'No Front pocket',
+        d: 'The pattern is drawn without a front pocket',
+      },
+      hemWidth: {
+        t: 'Hem size',
+        d: 'Size of the hem at the bottom of the pants',
+      },
+      waistbandWidth: {
+        t: 'Waist Band',
+        d: 'Size of the waist band',
+      },
       waistRaise: {
         t: 'Waist Raise',
         d: 'How much to raise the waist from the seat depth measurement. This influences the depth of the crotch cut-out.',
@@ -7111,7 +9467,10 @@ export const designs = {
         t: 'Fit the garment to the waist',
         d: 'Traditionally, wrap pants are not fitted to the waist, and just use the flexibility of the fabric to adjust.',
       },
-      fitWaistNo: { t: 'Do not fit the garment to the waist', d: 'The traditional wrap pants.' },
+      fitWaistNo: {
+        t: 'Do not fit the garment to the waist',
+        d: 'The traditional wrap pants.',
+      },
       fitWaistYes: {
         t: 'Fit the garment to the waist',
         d: 'Adjust the crotch cutout to make the waist fit better.',
@@ -7194,14 +9553,26 @@ export const designs = {
         t: 'Armhole depth factor (legacy)',
         d: 'Controls the depth of the armhole. Higher values make a deeper armhole. This option only applies to the legacy (v2) way of calculating the armhole depth.',
       },
-      backNeckCutout: { t: 'Back neck cutout', d: 'How deep the neck is cut out at the back' },
+      backNeckCutout: {
+        t: 'Back neck cutout',
+        d: 'How deep the neck is cut out at the back',
+      },
       bicepsEase: {
         t: 'Biceps ease',
         d: 'The amount of ease at your upper arm. Note that while we try to respect this, fitting the sleeve to the armhole takes precedence over respecting the exact amount of ease.',
       },
-      collarEase: { t: 'Collar ease', d: 'The amount of ease around your neck' },
-      chestEase: { t: 'Chest ease', d: 'The amount of ease at your chest.' },
-      cuffEase: { t: 'Cuff ease', d: 'The amount of ease at your wrist.' },
+      collarEase: {
+        t: 'Collar ease',
+        d: 'The amount of ease around your neck',
+      },
+      chestEase: {
+        t: 'Chest ease',
+        d: 'The amount of ease at your chest.',
+      },
+      cuffEase: {
+        t: 'Cuff ease',
+        d: 'The amount of ease at your wrist.',
+      },
       draftForHighBust: {
         t: 'Draft for high bust',
         d: 'Draft the pattern using the high bust measurement if it is available, instead of using the chest measurement. This can result in a more fitted garment for people with breasts. (Please note that no additional adjustments or shaping is performed. Further manual adjustments may be needed for those with a larger difference between high bust and chest measurements.)',
@@ -7334,7 +9705,10 @@ export const designs = {
         t: 'Sleeve width guarantee',
         d: 'Controls how much of the sleeve width will be guaranteed. This determines how much we can alter the sleeve width to fit the sleeve in the armhole.',
       },
-      hipsEase: { t: 'Hips ease', d: 'Controls the amount of ease at the hips' },
+      hipsEase: {
+        t: 'Hips ease',
+        d: 'Controls the amount of ease at the hips',
+      },
     },
   },
 }

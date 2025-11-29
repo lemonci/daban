@@ -1,6 +1,12 @@
 # Change log for: @freesewing/react
 
 
+## 4.4.3 (2025-11-29)
+
+### Fixed
+
+ - Add missing @freesewing/bonny dependency
+
 ## 4.4.1 (2025-11-29)
 
 ### Added

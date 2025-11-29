@@ -1,6 +1,19 @@
 Unreleased:
   Added:
 
+4.4.3:
+  date: 2025-11-29
+
+  Fixed:
+    react:
+      - Add missing @freesewing/bonny dependency
+    sabrina:
+      - Add missing @freesewing/plugin-path-utils dependency
+    sarah:
+      - Add missing @freesewing/plugin-path-utils dependency
+    sunny:
+      - Add missing @freesewing/plugin-path-utils dependency
+
 4.4.2:
   date: 2025-11-29
 

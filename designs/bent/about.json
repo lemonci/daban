@@ -15,7 +15,7 @@
     "set-sleeve"
   ],
   "block": true,
-  "version": "4.4.2",
+  "version": "4.4.3",
   "pkg": "@freesewing/bent",
   "collection": true
 }
