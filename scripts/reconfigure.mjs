@@ -209,22 +209,21 @@ await writeFile(
   })
 )
 
-// packages/i18n/designs.mjs is similar to the collection i18n.mjs, but contains all designs, even those not in a collection
-const completeDesignImports = Object.keys(repo.software.designs)
-  .map((name) => `import { i18n as ${name} } from '@freesewing/${name}'`)
-  .join('\n')
-const completeDesignMap = Object.keys(repo.software.designs)
-  .map((name) => `  ${name}: ${name}.en,`)
-  .join('\n')
-await writeFile(
-  ['packages', 'i18n', 'src', 'designs.mjs'],
-  mustache.render(repo.templates.i18n, {
-    imports: completeDesignImports,
-    designs: completeDesignMap,
-  })
-)
+// Step 7: Generate dependency-free i18n package
+async function bundleDesignTranslations() {
+  const strings = {}
+  for (const design of Object.keys(repo.software.designs)) {
+    strings[design] = (await import(`${root}/designs/${design}/src/index.mjs`)).i18n.en
+  }
+  await writeFile(
+    ['packages', 'i18n', 'src', 'designs.mjs'],
+    `// This file is auto-generated. Manual changes will be lost
+export const designs = ${JSON.stringify(strings)}`
+  )
+}
+await bundleDesignTranslations()
 
-// Step 7: Remove sites/studio/node_modules
+// Step 8: Remove sites/studio/node_modules
 
 // All done
 log.write(chalk.green(' All done\n'))

@@ -1,6 +1,13 @@
 Unreleased:
   Added:
 
+4.4.2:
+  date: 2025-11-29
+
+  Changed:
+    i18n:
+      - Make package dependency-free
+
 4.4.1:
   date: 2025-11-29
 

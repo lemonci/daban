@@ -4,6 +4,15 @@
 ## Unreleased
 
 
+## 4.4.2 (2025-11-29)
+
+### i18n
+
+#### Changed
+
+ - Make package dependency-free
+
+
 ## 4.4.1 (2025-11-29)
 
 ### sarah
