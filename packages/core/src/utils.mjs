@@ -425,7 +425,9 @@ export function generateStackTransform(
 export function getSnappedPercentageValue(abs, conf, units) {
   // Handle units-specific config - Side-step immutability for the snap conf
   let snapConf = conf.snap
-  if (!Array.isArray(snapConf) && snapConf.metric && snapConf.imperial) snapConf = snapConf[units]
+  if (!Array.isArray(snapConf) && snapConf.metric && snapConf.imperial) {
+    snapConf = units === 'imperial' ? snapConf.imperial : snapConf.metric
+  }
   // Simple steps
   if (typeof snapConf === 'number') return Math.round(abs / snapConf) * snapConf
   // List of snaps

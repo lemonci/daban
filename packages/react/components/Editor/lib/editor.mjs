@@ -619,6 +619,8 @@ export function stateUpdateFactory(setState, setEphemeralState, config) {
           measurements: cur.settings.measurements,
           // also keep the measurement set name in the metadata, since it belongs to the measurements.
           metadata: cur.settings.metadata,
+          // keep the selected units
+          units: cur.settings.units,
         })
         /*
          * Let's also reset the renderer to React as that feels a bit like a pattern setting even though it's UI
