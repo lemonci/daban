@@ -74,10 +74,7 @@ Pattern.prototype.addPart = function (part, resolveImmediately = true) {
   ) {
     this.store.log.debug(`Adding Part \`${part.name}\` at runtime`)
     this.designConfig.parts.push(part)
-    if (resolveImmediately) {
-      if (this.__configResolver.addPart(part) && typeof this.draftQueue !== 'undefined')
-        this.draftQueue.addPart(part.name)
-    } else this.__initialized = false
+    if (resolveImmediately) this.__configResolver.addPart(part)
   }
   return this
 }
