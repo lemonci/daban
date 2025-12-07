@@ -13,3 +13,21 @@ const Library = new Design({
 
 // Named exports
 export { sleeve, topsleeve, undersleeve, twoPartSleeve, Library, i18n, about }
+
+const _ = {
+  needs: {
+    backArmholeLength: 'Length of the armhole for the back part',
+    frontArmholeLength: 'Length of the armhole for the front part',
+    backArmholeToArmholePitch:
+      'Length from the back start of the sleevecap to the armhole pitch point (used for notch placement).',
+    frontArmholeToArmholePitch:
+      'Length from the front start of the sleevecap to the armhole pitch point (used for notch placement).',
+  },
+  sets: {
+    sleevecapLength: 'Length of the sleevecap',
+    sleevecapHeight: 'Height of the sleevecap',
+    sleeveLength: 'Total length of the sleeve',
+    sleevecapEase: 'Sleevecap ease as an absolute value',
+    sleevecapTarget: 'The theoretical sleevecap length we want',
+  },
+}

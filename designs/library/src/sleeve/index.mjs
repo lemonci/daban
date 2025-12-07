@@ -2,26 +2,26 @@
  * Positive values mean sleevecap is longer than armhole
  */
 function sleevecapDelta(store) {
-  return store.get('sleevecapLength') - store.get('sleevecapTarget')
+  return store.pget('sleevecapLength') - store.pget('sleevecapTarget')
 }
 
 function sleevecapAdjust(store) {
   const delta = sleevecapDelta(store)
-  const len = store.get('sleevecapLength')
+  const len = store.pget('sleevecapLength')
   const doverl = delta / len
-  store.set('doverl', doverl)
-  let factor = store.get('sleeveFactor')
+  let factor = store.pget('__sleevecapFactor')
   if (doverl > 0.1) factor = factor * 0.8
   if (doverl > 0.02) factor = factor * 0.9
   else if (doverl < -0.1) factor = factor * 1.3
   else if (doverl < -0.02) factor = factor * 1.15
   else if (delta > 0) factor = factor * 0.99
   else factor = factor * 1.008
-  store.set('sleeveFactor', factor)
+  store.pset('__sleevecapFactor', factor)
 }
 
 function draftSleevecap(part, run) {
   let { store, measurements, options, Point, points, Path, paths } = part.shorthand()
+
   // Sleeve center axis
   points.centerBiceps = new Point(0, 0)
   /*
@@ -35,7 +35,7 @@ function draftSleevecap(part, run) {
         (measurements.biceps *
           (1 + options.bicepsEase) *
           options.armholeDepthFactor *
-          store.get('sleeveFactor'))
+          store.pget('__sleevecapFactor'))
     )
   } else {
     points.centerCap = points.centerBiceps.shift(
@@ -43,22 +43,22 @@ function draftSleevecap(part, run) {
       options.sleevecapTopFactorY *
         (measurements.hpsToWaistBack - measurements.waistToArmpit) *
         /*
-         * We are multiplying by 0.5 here to allow
+         * We are multiplying by 0.75 here to allow
          * the armholeDept option to remain similar values
          * after fixing #651
          */
         (1 + options.armholeDepth) *
-        0.5 *
-        store.get('sleeveFactor')
+        0.75 *
+        store.pget('__sleevecapFactor')
     )
   }
 
-  // Left and right biceps points, limit impact of sleeveFactor to 25%
+  // Left and right biceps points, limit impact of sleevecapFactor to 25%
   let halfWidth = (measurements.biceps * (1 + options.bicepsEase)) / 2
   points.bicepsLeft = points.centerBiceps.shift(
     180,
     halfWidth * options.sleeveWidthGuarantee +
-      halfWidth * (1 - options.sleeveWidthGuarantee) * store.get('sleeveFactor')
+      halfWidth * (1 - options.sleeveWidthGuarantee) * store.pget('__sleevecapFactor')
   )
   points.bicepsRight = points.bicepsLeft.flipX(points.centerBiceps)
 
@@ -150,13 +150,13 @@ function draftSleevecap(part, run) {
     .curve(points.capQ4Cp2, points.bicepsLeft, points.bicepsLeft)
 
   // Store sleevecap length & height
-  store.set('sleevecapLength', paths.sleevecap.length())
-  store.set('sleevecapHeight', paths.sleevecap.edge('bottom').x - paths.sleevecap.edge('top').x)
+  store.pset('sleevecapLength', paths.sleevecap.length())
+  store.pset('sleevecapHeight', paths.sleevecap.edge('bottom').x - paths.sleevecap.edge('top').x)
   if (run === 0) {
-    let armholeLength = store.get('frontArmholeLength') + store.get('backArmholeLength')
+    let armholeLength = store.pget('frontArmholeLength') + store.pget('backArmholeLength')
     let sleevecapEase = armholeLength * options.sleevecapEase
-    store.set('sleevecapEase', sleevecapEase)
-    store.set('sleevecapTarget', armholeLength + sleevecapEase)
+    store.pset('sleevecapEase', sleevecapEase)
+    store.pset('sleevecapTarget', armholeLength + sleevecapEase)
 
     // Uncomment this line to see all sleevecap iterations
     //paths[run] = paths.sleevecap;
@@ -165,9 +165,11 @@ function draftSleevecap(part, run) {
 
 const menu = 'advanced.sleevecap'
 export const sleeve = {
+  library: true,
   name: 'library.sleeve',
   measurements: ['biceps', 'shoulderToWrist', 'wrist'],
   options: {
+    optionPrefix: '',
     sleevecapEase: { pct: 0, min: 0, max: 10, menu },
     sleevecapTopFactorX: { pct: 50, min: 25, max: 75, menu },
     sleevecapTopFactorY: { pct: 45, min: 35, max: 125, menu },
@@ -206,7 +208,7 @@ export const sleeve = {
     measurements,
     part,
   }) => {
-    store.set('sleeveFactor', 1)
+    store.pset('__sleevecapFactor', 1)
     let run = 0
     let delta = 0
     do {
@@ -214,19 +216,18 @@ export const sleeve = {
       delta = sleevecapDelta(store)
       sleevecapAdjust(store)
       run++
-      log.debug(`Fitting sleevecap. Run ${run}: delta is ${units(delta)}`)
     } while (options.libraryFitSleeve === true && run < 50 && Math.abs(sleevecapDelta(store)) > 2)
 
     // Paths
     paths.sleevecap.attr('class', 'fabric')
 
     // Determine the sleeve length
-    store.set('sleeveLength', measurements.shoulderToWrist * (1 + options.sleeveLengthBonus))
+    store.pset('sleeveLength', measurements.shoulderToWrist * (1 + options.sleeveLengthBonus))
     points.sleeveTip = paths.sleevecap.edge('top')
     points.sleeveTop = new Point(0, points.sleeveTip.y) // Always in center
 
     // Wrist
-    points.centerWrist = points.sleeveTop.shift(-90, store.get('sleeveLength'))
+    points.centerWrist = points.sleeveTop.shift(-90, store.pget('sleeveLength'))
     points.wristRight = points.centerWrist.shift(
       0,
       (measurements.wrist * (1 + options.cuffEase)) / 2
@@ -280,14 +281,14 @@ export const sleeve = {
     macro('scalebox', { at: points.scalebox })
 
     // Notches
-    if (store.get('frontArmholeToArmholePitch')) {
-      points.frontNotch = paths.sleevecap.shiftAlong(store.get('frontArmholeToArmholePitch'))
+    if (store.pget('frontArmholeToArmholePitch')) {
+      points.frontNotch = paths.sleevecap.shiftAlong(store.pget('frontArmholeToArmholePitch'))
       snippets.frontNotch = new Snippet('notch', points.frontNotch)
     }
-    if (store.get('backArmholeToArmholePitch')) {
+    if (store.pget('backArmholeToArmholePitch')) {
       points.backNotch = paths.sleevecap
         .reverse()
-        .shiftAlong(store.get('backArmholeToArmholePitch'))
+        .shiftAlong(store.pget('backArmholeToArmholePitch'))
       snippets.backNotch = new Snippet('bnotch', points.backNotch)
     }
 
@@ -323,5 +324,21 @@ export const sleeve = {
     })
 
     return part
+  },
+  store: {
+    reads: [
+      'backArmholeLength',
+      'backArmholeToArmholePitch',
+      'frontArmholeLength',
+      'frontArmholeToArmholePitch',
+    ],
+    writes: [
+      'sleevecapHeight',
+      'sleevecapLength',
+      'sleeveLength',
+      'sleevecapTarget',
+      'sleevecapEase',
+    ],
+    uses: ['__sleevecapFactor'],
   },
 }

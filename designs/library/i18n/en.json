@@ -7,7 +7,18 @@
     "undersleeve": "Undersleeve",
     "twoPartSleeve": "Two-Part Sleeve (base)"
   },
-  "s": {},
+  "s": {
+      "backArmholeLength": "The length of the armhole at the back of the garment",
+      "backArmholeToArmholePitch": "The length along the armhole from the bottom of the armhole to the back armhole pitch point",
+      "frontArmholeLength": "The length of the armhole at the front of the garment",
+      "frontArmholeToArmholePitch": "The length along the armhole from the bottom of the armhole to the front armhole pitch point",
+      "sleevecapHeight": "The height of the sleevecap",
+      "sleevecapLength": "The length of the sleevecap",
+      "sleeveLength": "The length of the sleeve",
+      "sleevecapTarget": "The theoretical length of the sleevecap we strive for",
+      "sleevecapEase": "The mount of sleevecap ease",
+      "__sleevecapFactor": "An internal variable that is used to tweak the sleevecap draft"
+  },
   "o": {
     "cuffEase": {
       "t": "Cuff ease",
