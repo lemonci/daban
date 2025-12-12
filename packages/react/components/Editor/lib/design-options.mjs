@@ -23,7 +23,7 @@ export function menuDesignOptionsStructure(design, options, settings, asFullList
   const eno = i18n[design]?.en?.o || {}
 
   const menu = {}
-  for (const option of orderBy(sorted, ['order', 'menu', 'name'], ['asc', 'asc', 'asc'])) {
+  for (const option of orderBy(sorted, ['order', 'name'], ['asc', 'asc'])) {
     if (typeof option === 'object') {
       const oType = designOptionType(option)
       option.dflt = option.dflt || option[oType]
