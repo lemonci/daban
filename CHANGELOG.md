@@ -854,12 +854,6 @@
 
  - Fixed wrong use of options in a value method. Fixes
 
-### plugintest
-
-#### Fixed
-
- - Remove names from old plugins from list option
-
 ### sandy
 
 #### Changed
@@ -1417,12 +1411,6 @@
 
  - Migrated from Rollup to Esbuild for all builds
 
-### plugintest
-
-#### Changed
-
- - Migrated from Rollup to Esbuild for all builds
-
 ### rendertest
 
 #### Changed
@@ -1954,16 +1942,6 @@
  - Switched to default import for version from package.json
 
 ### penelope
-
-#### Changed
-
- - Switched to default import for version from package.json
-
-### plugintest
-
-#### Added
-
- - Added the plugintest pattern which is used for testing plugins
 
 #### Changed
 

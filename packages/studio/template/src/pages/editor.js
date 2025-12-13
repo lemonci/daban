@@ -3,6 +3,10 @@ import { BareLayout } from '@site/src/components/bare-layout.mjs'
 import { Editor } from '@freesewing/react/components/Editor'
 import { localDesigns } from '@site/src/local-designs.mjs'
 import { Examples } from '@freesewing/examples'
+import { Rendertest } from '@freesewing/rendertest'
+import { Bonny } from '@freesewing/bonny'
+import { Legend } from '@freesewing/legend'
+import { Library } from '@freesewing/library'
 
 /*
  * This hinges on two things:
@@ -20,7 +24,17 @@ const EditorPage = () => {
 
   return (
     <BareLayout title={title}>
-      <Editor setTitle={setTitle} localDesigns={{ ...localDesigns, examples: Examples }} />
+      <Editor
+        setTitle={setTitle}
+        localDesigns={{
+          ...localDesigns,
+          bonny: Bonny,
+          examples: Examples,
+          legend: Legend,
+          library: Library,
+          rendertest: Rendertest,
+        }}
+      />
     </BareLayout>
   )
 }
