@@ -26,18 +26,4 @@ const i18n = {
   }),
 }
 
-/*
- * Since the creation of @freesewing/library
- * Bent does not actually do anything
- * All it does is combine front & back from Brian with
- * the topsleeve & undersleeve from the library
- *
- * For now, we still export all parts, but we will
- * drop this design in FreeSewing 5 and we log a deprecation
- * warning for it.
- */
 export { front, back, topsleeve, undersleeve, Bent, i18n, about }
-
-console.log(`@freesewing/bent is deprecated and will be removed in FreeSewing v5.
-To migrate, use front & back from @freesewing/brian
-combined with topsleeve & undersleeve from @freesewing/library`)
