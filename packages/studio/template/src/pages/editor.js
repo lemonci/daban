@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { BareLayout } from '@site/src/components/bare-layout.mjs'
 import { Editor } from '@freesewing/react/components/Editor'
 import { localDesigns } from '@site/src/local-designs.mjs'
+import { Examples } from '@freesewing/examples'
 
 /*
  * This hinges on two things:
@@ -19,7 +20,7 @@ const EditorPage = () => {
 
   return (
     <BareLayout title={title}>
-      <Editor {...{ setTitle, localDesigns }} />
+      <Editor setTitle={setTitle} localDesigns={{ ...localDesigns, examples: Examples }} />
     </BareLayout>
   )
 }

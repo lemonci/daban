@@ -6,7 +6,6 @@ const stack = (settings, partName) => {
 export const stacks_top = {
   name: 'examples.stacks_top',
   stack,
-  measurements: ['head'],
   options: {
     size: { pct: 50, min: 5, max: 100, menu: 'stack' },
     x: { pct: 0, min: -100, max: 100, menu: 'stack' },
@@ -14,12 +13,13 @@ export const stacks_top = {
     stackIt: { dflt: 'Do stack', list: ['Do stack', 'Do not stack'], menu: 'stack' },
   },
   draft: ({ store, Point, points, Path, paths, options, measurements, part }) => {
-    store.set('size', measurements.head * options.size)
-    store.set('x', measurements.head * options.x)
-    store.set('y', measurements.head * options.y)
+    const size = 120
+    store.set('size', size * options.size)
+    store.set('x', size * options.x)
+    store.set('y', size * options.y)
     points.from = new Point(store.get('x'), store.get('y'))
     points.to = points.from.shift(0, store.get('size'))
-    paths.line = new Path().move(points.from).line(points.to).attr('class', 'fabric stroke-4xl')
+    paths.line = new Path().move(points.from).line(points.to).attr('class', 'note stroke-lg')
 
     return part
   },
@@ -32,7 +32,7 @@ export const stacks_right = {
   draft: ({ store, Point, points, Path, paths, part }) => {
     points.from = new Point(store.get('x') + store.get('size'), store.get('y'))
     points.to = points.from.shift(-90, store.get('size'))
-    paths.line = new Path().move(points.from).line(points.to).attr('class', 'fabric stroke-4xl')
+    paths.line = new Path().move(points.from).line(points.to).attr('class', 'contrast stroke-lg')
 
     return part
   },
@@ -45,7 +45,7 @@ export const stacks_bottom = {
   draft: ({ store, Point, points, Path, paths, part }) => {
     points.from = new Point(store.get('x') + store.get('size'), store.get('y') + store.get('size'))
     points.to = points.from.shift(180, store.get('size'))
-    paths.line = new Path().move(points.from).line(points.to).attr('class', 'fabric stroke-4xl')
+    paths.line = new Path().move(points.from).line(points.to).attr('class', 'canvas stroke-lg')
 
     return part
   },
@@ -58,7 +58,7 @@ export const stacks_left = {
   draft: ({ store, Point, points, Path, paths, part }) => {
     points.from = new Point(store.get('x'), store.get('y') + store.get('size'))
     points.to = points.from.shift(90, store.get('size'))
-    paths.line = new Path().move(points.from).line(points.to).attr('class', 'fabric stroke-4xl')
+    paths.line = new Path().move(points.from).line(points.to).attr('class', 'lining stroke-lg')
 
     return part
   },
@@ -74,7 +74,7 @@ export const stacks_leftEye = {
       store.get('y') + store.get('size') * 0.4
     )
       .attr('data-circle', store.get('size') * 0.1)
-      .attr('data-circle-class', 'stroke-6xl')
+      .attr('data-circle-class', 'stroke-xl')
 
     return part
   },
@@ -90,7 +90,7 @@ export const stacks_rightEye = {
       store.get('y') + store.get('size') * 0.4
     )
       .attr('data-circle', store.get('size') * 0.08)
-      .attr('data-circle-class', 'stroke-7xl')
+      .attr('data-circle-class', 'stroke-3xl')
 
     return part
   },
@@ -121,7 +121,7 @@ export const stacks_mouth = {
     paths.mouth = new Path()
       .move(points.left)
       .curve(points.leftCp, points.rightCp, points.right)
-      .attr('class', 'fabric stroke-7xl')
+      .attr('class', 'fabric stroke-2xl')
 
     return part
   },

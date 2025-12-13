@@ -1,6 +1,8 @@
 import { Design } from '@freesewing/core'
-import { gorePlugin } from '@freesewing/plugin-gore'
 import { i18n } from '../i18n/index.mjs'
+
+// Library
+import { rectBase, rect1, rect2, rect3 } from './library.mjs'
 
 // Stacks
 import {
@@ -13,12 +15,15 @@ import {
   stacks_mouth,
 } from './stacks.mjs'
 
-// Settings
-import { settings_sa } from './settings.mjs'
-
 // Setup our new design
 const Examples = new Design({
   parts: [
+    // Library
+    rectBase,
+    rect1,
+    rect2,
+    rect3,
+
     // Stacks
     stacks_top,
     stacks_left,
@@ -27,15 +32,20 @@ const Examples = new Design({
     stacks_leftEye,
     stacks_rightEye,
     stacks_mouth,
-
-    // Settings
-    settings_sa,
   ],
-  plugins: [gorePlugin],
 })
 
 // Named exports
 export {
+  // Design
+  Examples,
+
+  // Library
+  rectBase,
+  rect1,
+  rect2,
+  rect3,
+
   // Stacks
   stacks_top,
   stacks_left,
@@ -44,10 +54,6 @@ export {
   stacks_leftEye,
   stacks_rightEye,
   stacks_mouth,
-
-  // Settings
-  settings_sa,
-  Examples,
 
   // Translation
   i18n,

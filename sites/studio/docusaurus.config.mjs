@@ -73,6 +73,7 @@ const config = {
       items: [
         { label: 'FreeSewing Collection', to: '/collection', position: 'left' },
         { label: 'Local Designs', to: '/local', position: 'left' },
+        { label: 'Utility Designs', to: '/utility', position: 'left' },
         { label: 'Add a Design', to: '/add', position: 'left' },
         { label: 'Documentation', to: 'https://freesewing.dev/', position: 'left' },
         { label: 'Support', to: '/support', position: 'left' },
