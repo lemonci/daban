@@ -124,8 +124,11 @@ export const back = {
       .attr('class', 'fabric')
 
     // Store lengths to fit sleeve
-    store.set('backArmholeLength', shared.armholeLength(points, Path))
-    store.set('backArmholeToArmholePitch', shared.armholeToArmholePitch(points, Path))
+    store.set('library.sleeve.backArmholeLength', shared.armholeLength(points, Path))
+    store.set(
+      'library.sleeve.backArmholeToArmholePitch',
+      shared.armholeToArmholePitch(points, Path)
+    )
 
     if (sa) {
       paths.sa = paths.saBase

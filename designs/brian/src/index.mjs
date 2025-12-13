@@ -1,7 +1,7 @@
 import { Design, mergeI18n } from '@freesewing/core'
-import { sleeve, i18n as libraryI18n } from '@freesewing/library'
 import { i18n as brianI18n } from '../i18n/index.mjs'
 import about from '../about.json' with { type: 'json' }
+import { sleeve, i18n as libraryI18n } from '@freesewing/library'
 import { back } from './back.mjs'
 import { front } from './front.mjs'
 // Re-export skeleton parts so peope can re-use them
@@ -12,8 +12,6 @@ const Brian = new Design({
   data: about,
   parts: [back, front, sleeve],
 })
-
-console.log(Brian.patternConfig)
 
 // Merge translations
 const i18n = mergeI18n([libraryI18n, brianI18n], {
