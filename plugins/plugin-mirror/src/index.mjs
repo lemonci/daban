@@ -44,8 +44,10 @@ export const plugin = {
       clone = true,
       points = [],
       paths = [],
+      snippets = [],
       prefix = 'mirrored',
       nameFormat = undefined,
+      reverse = false,
     }) {
       const [start, end] = mirror
       const mirrorPoint = mirrorGen(start, end)
@@ -53,7 +55,8 @@ export const plugin = {
       for (const pathId of paths) {
         // Make sure the path exists
         if (this.paths[pathId]) {
-          const path = clone ? this.paths[pathId].clone() : this.paths[pathId]
+          let path = clone ? this.paths[pathId].clone() : this.paths[pathId]
+          path = reverse ? path.reverse() : path
 
           const newId = clone
             ? typeof nameFormat == 'function'
@@ -95,6 +98,37 @@ export const plugin = {
             : pointId
 
           this.points[newId] = point
+        }
+      }
+
+      for (const snippetId of snippets) {
+        // Make sure the snippet exists
+        if (this.snippets[snippetId]) {
+          const pointId = this.snippets[snippetId].anchor.name
+          const snippet = clone ? this.snippets[snippetId].clone() : this.snippets[snippetId]
+
+          const newSnippetId = clone
+            ? typeof nameFormat == 'function'
+              ? nameFormat(snippetId, 'snippet')
+              : `${prefix}${capFirst(snippetId)}`
+            : snippetId
+
+          this.snippets[newSnippetId] = snippet
+
+          const point = mirrorPoint(snippet.anchor)
+
+          if (this.points[pointId]) {
+            const newPointId = clone
+              ? typeof nameFormat == 'function'
+                ? nameFormat(pointId, 'point')
+                : `${prefix}${capFirst(pointId)}`
+              : pointId
+
+            this.points[newPointId] = point
+            snippet.anchor = this.points[newPointId]
+          } else {
+            snippet.anchor = point
+          }
         }
       }
     },
