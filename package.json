@@ -47,10 +47,10 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/freesewing/freesewing.git"
+    "url": "git+https://codeberg.org/freesewing/freesewing.git"
   },
   "bugs": {
-    "url": "https://github.com/freesewing/freesewing/issues"
+    "url": "https://codeberg.org/freesewing/freesewing/issues"
   },
   "prettier": "@freesewing/prettier-config",
   "lint-staged": {
