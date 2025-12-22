@@ -211,8 +211,8 @@ const offsetMacro = function (conf, props) {
           // insert dummy node to make path go to the endpoint of the previous path (to return to the baseline)
           segments.push(new Path().move(prevPath.end()).line(prevPath.end()))
           segments.push(null)
-          prevPath = null
         }
+        prevPath = null
       } else {
         if (prevPath === null) {
           // insert dummy node to make path go to the start point of the current path (before going sideways)
