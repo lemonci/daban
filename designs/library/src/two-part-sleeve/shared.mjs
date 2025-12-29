@@ -1,11 +1,15 @@
+import { ensureStoreValues } from '../shared.mjs'
 import { pctBasedOn } from '@freesewing/core'
 
 function draftTwoPartSleeve({ Path, paths, points, store, options, part }) {
   function draftSleeve(part, tweak) {
     let { Point, Path, points, store, options, measurements, utils } = part.shorthand()
+    /*
+     * The bicepsEase option comes from the block. If it is not set, we default to 0.15
+     */
     // Sleeve frame
     points.top = new Point(0, 0)
-    const easedQuarterBiceps = (measurements.biceps / 4) * (1 + options.bicepsEase)
+    const easedQuarterBiceps = (measurements.biceps / 4) * (1 + (options.bicepsEase || 0.15))
     points.boxTopRight = points.top.shift(0, easedQuarterBiceps * tweak)
     points.boxTopLeft = points.boxTopRight.flipX()
     points.boxBottom = points.top.shift(
@@ -16,7 +20,7 @@ function draftTwoPartSleeve({ Path, paths, points, store, options, part }) {
     points.boxBottomLeft = points.boxBottomRight.flipX()
     points.armCenter = points.top.shift(
       -90,
-      measurements.biceps * (1 + options.bicepsEase) * options.sleevecapHeight * tweak
+      measurements.biceps * (1 + (options.bicepsEase || 0.15)) * options.sleevecapHeight * tweak
     )
     points.armRight = points.armCenter.shift(0, points.boxTopRight.x)
     points.armLeft = points.armRight.flipX()
@@ -124,7 +128,13 @@ function draftTwoPartSleeve({ Path, paths, points, store, options, part }) {
     store.set('sleevecapLength', lenTop + lenUnder)
   }
 
-  let armholeLength = store.get('frontArmholeLength') + store.get('backArmholeLength')
+  /*
+   * If things are missing in the store, flag a warning and return early.
+   * Unless we are asked to mock these values.
+   */
+  if (!ensureStoreValues(twoPartSleeve, 'mockTwoPartSleeve', store, options)) return part
+
+  let armholeLength = store.pget('frontArmholeLength', 200) + store.pget('backArmholeLength', 200)
   let sleevecapEase = armholeLength * options.sleevecapEase
   store.set('sleevecapEase', sleevecapEase)
   store.set('sleevecapTarget', armholeLength + sleevecapEase)
@@ -132,11 +142,11 @@ function draftTwoPartSleeve({ Path, paths, points, store, options, part }) {
   let delta = 0
   let runs = 0
   let tweak = 1
-  let target = store.get('sleevecapTarget')
+  let target = store.pget('sleevecapTarget')
   do {
     draftSleeve(part, tweak)
     runs++
-    delta = store.get('sleevecapLength') - target
+    delta = store.pget('sleevecapLength') - target
     if (delta > 0) tweak = tweak * 0.99
     else tweak = tweak * 1.02
   } while (Math.abs(delta) > 2 && runs < 25)
@@ -154,7 +164,7 @@ function draftTwoPartSleeve({ Path, paths, points, store, options, part }) {
     .line(points.tsWristLeft)
     .line(points.tsWristRight)
     .close()
-    .attr('class', 'lining')
+    .hide()
 
   paths.us = new Path()
     .move(points.usWristRight)
@@ -167,7 +177,7 @@ function draftTwoPartSleeve({ Path, paths, points, store, options, part }) {
     .line(points.usWristLeft)
     .line(points.usWristRight)
     .close()
-    .attr('class', 'stroke-xl interfacing')
+    .hide()
 
   return part
 }
@@ -177,6 +187,7 @@ export const twoPartSleeve = {
   hide: { self: true },
   measurements: ['shoulderToElbow', 'shoulderToWrist', 'wrist'],
   options: {
+    mockTwoPartSleeve: false, // Can be set via a flag/suggest, not via UI
     // Fit
     cuffEase: { pct: 40, min: 2, max: 100, ...pctBasedOn('wrist'), menu: 'fit' },
     sleeveLengthBonus: { pct: 0, min: -20, max: 15, menu: 'fit' },
@@ -185,6 +196,10 @@ export const twoPartSleeve = {
     sleevecapEase: { pct: 1, min: 0, max: 10, menu: 'advanced' },
   },
   draft: draftTwoPartSleeve,
+  store: {
+    reads: ['frontArmholeLength', 'backArmholeLength', 'sleevecapTarget'],
+    writes: ['sleevecapLength'],
+  },
 }
 
 export function dimensions(part, s) {

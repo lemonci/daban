@@ -24,6 +24,18 @@
       "t": "Cuff ease",
       "d": "The amount of ease at your wrist."
     },
+    "noSa": {
+      "t": "No Seam Allowance",
+      "d": "Explicitly disabled seam allowance on this part, regardless of the pattern settings"
+    },
+    "rectangleHeight": {
+      "t": "Rectangle height",
+      "d": "Height of the rectangle"
+    },
+    "rectangleWidth": {
+      "t": "Rectangle width",
+      "d": "Width of the rectangle"
+    },
     "sleevecapHeight": {
       "t": "Sleevecap height",
       "d": "Controls the height of the sleevecap."

@@ -1,12 +1,15 @@
+import { ensureStoreValues } from '../shared.mjs'
+
 export const rectangle = {
   library: true,
   name: 'library.rectangle',
   measurements: [],
   options: {
+    mockRectangle: false, // Can be set via a flag/suggest, not via UI
+    noSa: false,
     seamClasses: 'fabric',
     rectangleWidth: { pct: 100, min: 50, max: 150, menu: 'rectangle' },
     rectangleHeight: { pct: 100, min: 50, max: 150, menu: 'rectangle' },
-    naSa: { bool: false },
   },
   store: {
     reads: ['width', 'height'],
@@ -27,12 +30,18 @@ export const rectangle = {
     measurements,
     part,
   }) => {
+    /*
+     * If things are missing in the store, flag a warning and return early.
+     * Unless we are asked to mock these values.
+     */
+    if (!ensureStoreValues(rectangle, 'mockRectangle', store, options)) return part
+
     // Points
     points.topLeft = new Point(0, 0)
-    points.topRight = new Point(store.pget('width') * options.rectangleWidth, 0)
+    points.topRight = new Point(store.pget('width', 100) * options.rectangleWidth, 0)
     points.bottomRight = new Point(
       points.topRight.x,
-      store.pget('height') * options.rectangleHeight
+      store.pget('height', 100) * options.rectangleHeight
     )
     points.bottomLeft = new Point(0, points.bottomRight.y)
 

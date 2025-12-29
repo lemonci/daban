@@ -1,3 +1,5 @@
+import { ensureStoreValues } from '../shared.mjs'
+
 /** Calculates the differece between actual and optimal sleevecap length
  * Positive values mean sleevecap is longer than armhole
  */
@@ -33,7 +35,7 @@ function draftSleevecap(part, run) {
       90,
       options.sleevecapTopFactorY *
         (measurements.biceps *
-          (1 + options.bicepsEase) *
+          (1 + (options.bicepsEase || 0.15)) * // Option from block, defaults to 0.15 if not set
           options.armholeDepthFactor *
           store.pget('__sleevecapFactor'))
     )
@@ -46,15 +48,19 @@ function draftSleevecap(part, run) {
          * We are multiplying by 0.75 here to allow
          * the armholeDept option to remain similar values
          * after fixing #651
+         * Note that options.armholdeDepth is not set in this library part
+         * but typically set in blocks like Brian. So if it is not present
+         * we just use zero.
          */
-        (1 + options.armholeDepth) *
+        (1 + (options.armholeDepth || 0)) *
         0.75 *
         store.pget('__sleevecapFactor')
     )
   }
 
   // Left and right biceps points, limit impact of sleevecapFactor to 25%
-  let halfWidth = (measurements.biceps * (1 + options.bicepsEase)) / 2
+  // Note that options.bicepsEase is from a block, we default to 0.15 if it is not set
+  let halfWidth = (measurements.biceps * (1 + (options.bicepsEase || 0.15))) / 2
   points.bicepsLeft = points.centerBiceps.shift(
     180,
     halfWidth * options.sleeveWidthGuarantee +
@@ -89,7 +95,7 @@ function draftSleevecap(part, run) {
   points.capQ3Base = points.backPitch.shiftFractionTowards(points.centerCap, 0.5)
   points.capQ4Base = points.backPitch.shiftFractionTowards(points.bicepsLeft, 0.5)
   // Offset points
-  let baseOffset = measurements.biceps * (1 + options.bicepsEase)
+  let baseOffset = measurements.biceps * (1 + (options.bicepsEase || 0.15))
   points.capQ1 = points.capQ1Base.shift(
     points.bicepsRight.angle(points.frontPitch) + 90,
     baseOffset * options.sleevecapQ1Offset
@@ -153,7 +159,7 @@ function draftSleevecap(part, run) {
   store.pset('sleevecapLength', paths.sleevecap.length())
   store.pset('sleevecapHeight', paths.sleevecap.edge('bottom').x - paths.sleevecap.edge('top').x)
   if (run === 0) {
-    let armholeLength = store.pget('frontArmholeLength') + store.pget('backArmholeLength')
+    let armholeLength = store.pget('frontArmholeLength', 250) + store.pget('backArmholeLength', 250)
     let sleevecapEase = armholeLength * options.sleevecapEase
     store.pset('sleevecapEase', sleevecapEase)
     store.pset('sleevecapTarget', armholeLength + sleevecapEase)
@@ -167,9 +173,10 @@ const menu = 'advanced.sleevecap'
 export const sleeve = {
   library: true,
   name: 'library.sleeve',
-  measurements: ['biceps', 'shoulderToWrist', 'wrist'],
+  measurements: ['biceps', 'hpsToWaistBack', 'shoulderToWrist', 'waistToArmpit', 'wrist'],
   options: {
     optionPrefix: '',
+    mockSleeve: false, // Can be set via a flag/suggest, not via UI
     sleevecapEase: { pct: 0, min: 0, max: 10, menu },
     sleevecapTopFactorX: { pct: 50, min: 25, max: 75, menu },
     sleevecapTopFactorY: { pct: 45, min: 35, max: 125, menu },
@@ -208,6 +215,12 @@ export const sleeve = {
     measurements,
     part,
   }) => {
+    /*
+     * If things are missing in the store, flag a warning and return early.
+     * Unless we are asked to mock these values.
+     */
+    if (!ensureStoreValues(sleeve, 'mockSleeve', store, options)) return part
+
     store.pset('__sleevecapFactor', 1)
     let run = 0
     let delta = 0
@@ -216,7 +229,11 @@ export const sleeve = {
       delta = sleevecapDelta(store)
       sleevecapAdjust(store)
       run++
-    } while (options.libraryFitSleeve === true && run < 50 && Math.abs(sleevecapDelta(store)) > 2)
+    } while (
+      (options.mockSleeve || options.libraryFitSleeve === true) &&
+      run < 50 &&
+      Math.abs(sleevecapDelta(store)) > 2
+    )
 
     // Paths
     paths.sleevecap.attr('class', 'fabric')
@@ -247,7 +264,6 @@ export const sleeve = {
       .join(paths.sleevecap)
       .close()
       .attr('class', 'fabric')
-
     if (sa) paths.sa = paths.seam.offset(sa).attr('class', 'fabric sa')
 
     /*
@@ -281,14 +297,14 @@ export const sleeve = {
     macro('scalebox', { at: points.scalebox })
 
     // Notches
-    if (store.pget('frontArmholeToArmholePitch')) {
-      points.frontNotch = paths.sleevecap.shiftAlong(store.pget('frontArmholeToArmholePitch'))
+    if (options.mockSleeve || store.pget('frontArmholeToArmholePitch')) {
+      points.frontNotch = paths.sleevecap.shiftAlong(store.pget('frontArmholeToArmholePitch', 150))
       snippets.frontNotch = new Snippet('notch', points.frontNotch)
     }
-    if (store.pget('backArmholeToArmholePitch')) {
+    if (options.mockSleeve || store.pget('backArmholeToArmholePitch')) {
       points.backNotch = paths.sleevecap
         .reverse()
-        .shiftAlong(store.pget('backArmholeToArmholePitch'))
+        .shiftAlong(store.pget('backArmholeToArmholePitch', 150))
       snippets.backNotch = new Snippet('bnotch', points.backNotch)
     }
 
