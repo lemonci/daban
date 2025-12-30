@@ -1,3 +1,4 @@
+import { ensureStoreValues } from '../shared.mjs'
 import { twoPartSleeve, dimensions } from './shared.mjs'
 
 function draftUndersleeve({
@@ -13,6 +14,12 @@ function draftUndersleeve({
   store,
   part,
 }) {
+  /*
+   * If things are missing in the store, flag a warning and return early.
+   * Unless we are asked to mock these values.
+   */
+  if (!ensureStoreValues(twoPartSleeve, 'mockTwoPartSleeve', store, options)) return part
+
   // Extract seamline from sleeve
   delete paths.ts
   paths.seam = paths.us.clone().unhide().setClass('fabric')
