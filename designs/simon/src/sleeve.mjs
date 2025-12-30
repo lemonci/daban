@@ -32,13 +32,9 @@ function simonSleeve({
 }) {
   let pleats = 0
 
-  // Update the back armhole notch because the one from Brian is not correct
-  points.backNotch = paths.sleevecap.reverse().shiftAlong(store.get('backArmholeToArmholePitch'))
-
-  // Remove inherited paths, snippets, and scalebox
+  // Remove inherited paths and snippets
   for (const p in paths) delete paths[p]
   for (const s in snippets) delete snippets[s]
-  macro('rmscalebox')
 
   // Determine the sleeve length
   paths.sleevecap = new Path()
