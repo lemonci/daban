@@ -220,7 +220,7 @@ function draftCarltonFront({
 
   // Store distance to armhole pitch point notch
   store.set(
-    'frontArmholePitchToShoulder',
+    'library.twoPartSleeve.frontArmholePitchToShoulder',
     new Path()
       .move(points.armholePitch)
       .curve(points.armholePitchCp2, points.shoulderCp1, points.shoulder)
