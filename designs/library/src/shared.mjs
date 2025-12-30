@@ -8,7 +8,8 @@
 export function ensureStoreValues(partConfig, mockOptionName, store, options) {
   let missing = false
   for (const key of partConfig.store.reads) {
-    if (!store.pget(key)) missing = true
+    // No need to be pedantic about title and cutlist
+    if (!['title', 'cutlist'].includes(key) && !store.pget(key)) missing = true
   }
   if (missing) {
     const desc = `Part **${partConfig.name}** part relies on these values to be set in the store: ${partConfig.store.reads.map((item) => '`' + item + '`').join(', ')}`
