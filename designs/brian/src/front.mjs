@@ -146,12 +146,14 @@ export const front = {
       paths.sa.line(paths.sa.start())
     }
 
-    // Store lengths to fit sleeve
-    store.set('library.sleeve.frontArmholeLength', shared.armholeLength(points, Path))
-    store.set(
-      'library.sleeve.frontArmholeToArmholePitch',
-      shared.armholeToArmholePitch(points, Path)
-    )
+    // Store lengths to fit sleeve, ensuring compatibility with both sleeve types
+    for (const type of ['sleeve', 'twoPartSleeve', 'topsleeve', 'undersleeve']) {
+      store.set(`library.${type}.frontArmholeLength`, shared.armholeLength(points, Path))
+      store.set(
+        `library.${type}.frontArmholeToArmholePitch`,
+        shared.armholeToArmholePitch(points, Path)
+      )
+    }
 
     /*
      * Annotations

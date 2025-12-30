@@ -1,4 +1,3 @@
-import { ensureStoreValues } from '../shared.mjs'
 import { twoPartSleeve, dimensions } from './shared.mjs'
 
 function draftTopsleeve({
@@ -14,12 +13,6 @@ function draftTopsleeve({
   store,
   part,
 }) {
-  /*
-   * If things are missing in the store, flag a warning and return early.
-   * Unless we are asked to mock these values.
-   */
-  if (!ensureStoreValues(twoPartSleeve, 'mockTwoPartSleeve', store, options)) return part
-
   // Extract seamline from sleeve
   delete paths.us
   paths.seam = paths.ts.clone().unhide().setClass('fabric')
@@ -55,7 +48,7 @@ function draftTopsleeve({
 
   // Title
   const title = store.pget('title', {})
-  macro('title', { at: points.armCenter, nr: 1, title: 'topsleeve', ...title })
+  macro('title', { at: points.armCenter, nr: 3, title: 'topsleeve', ...title })
 
   // Grainline
   macro('grainline', {

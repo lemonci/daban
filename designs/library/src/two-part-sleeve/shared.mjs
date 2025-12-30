@@ -197,8 +197,8 @@ export const twoPartSleeve = {
   },
   draft: draftTwoPartSleeve,
   store: {
-    reads: ['frontArmholeLength', 'backArmholeLength', 'sleevecapTarget', 'cutlist', 'title'],
-    writes: ['sleevecapLength'],
+    reads: ['frontArmholeLength', 'backArmholeLength', 'cutlist', 'title'],
+    writes: ['sleevecapLength', 'sleevecapTarget'],
   },
 }
 
