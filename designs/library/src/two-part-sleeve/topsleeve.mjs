@@ -4,6 +4,7 @@ import { twoPartSleeve, dimensions } from './shared.mjs'
 function draftTopsleeve({
   macro,
   Path,
+  Point,
   points,
   paths,
   snippets,
@@ -45,19 +46,21 @@ function draftTopsleeve({
    * Annotations
    */
   // Cut list
-  store.cutlist.addCut({ cut: 2, from: 'fabric' })
-
-  // Scalebox
-  macro('scalebox', { at: points.elbowCenter })
+  let cuts = store.pget('cutlist', {})
+  if (!Array.isArray(cuts)) cuts = [cuts]
+  for (const cut of cuts) store.cutlist.addCut({ cut: 2, from: 'fabric', ...cut })
 
   // Logo
   snippets.logo = new Snippet('logo', points.elbowCenter.shift(90, 50))
 
   // Title
-  macro('title', {
-    at: points.armCenter,
-    nr: 3,
-    title: 'topsleeve',
+  const title = store.pget('title', {})
+  macro('title', { at: points.armCenter, nr: 1, title: 'topsleeve', ...title })
+
+  // Grainline
+  macro('grainline', {
+    from: new Point(points.top.x, points.tsWristLeft.y),
+    to: points.top,
   })
 
   // Dimensions

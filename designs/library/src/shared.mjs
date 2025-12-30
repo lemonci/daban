@@ -11,7 +11,7 @@ export function ensureStoreValues(partConfig, mockOptionName, store, options) {
     if (!store.pget(key)) missing = true
   }
   if (missing) {
-    const desc = `The ${partConfig.name} part requires the following data to be set in the store: ${partConfig.store.reads.join(', ')}`
+    const desc = `Part **${partConfig.name}** part relies on these values to be set in the store: ${partConfig.store.reads.map((item) => '`' + item + '`').join(', ')}`
     store.flag.warn({
       title: `Missing store data for ${partConfig.name}`,
       desc,

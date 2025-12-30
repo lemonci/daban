@@ -12,7 +12,7 @@ export const rectangle = {
     rectangleHeight: { pct: 100, min: 50, max: 150, menu: 'rectangle' },
   },
   store: {
-    reads: ['width', 'height'],
+    reads: ['width', 'height', 'cutlist', 'title'],
   },
   draft: ({
     store,
@@ -59,76 +59,44 @@ export const rectangle = {
 
     /*
      * Annotations
+     */
 
     // Anchor point for sampling
     points.gridAnchor = new Point(0, 0)
 
     // Grainline
     macro('grainline', {
-      from: points.centerWrist,
-      to: points.centerBiceps,
+      from: points.bottomLeft.shift(0, points.bottomRight.x / 4),
+      to: points.topLeft.shift(0, points.bottomRight.x / 4),
     })
 
     // Cut list
-    store.cutlist.addCut({ cut: 2, from: 'fabric' })
+    let cuts = store.pget('cutlist', {})
+    if (!Array.isArray(cuts)) cuts = [cuts]
+    for (const cut of cuts) store.cutlist.addCut({ cut: 1, from: 'fabric', ...cut })
 
     // Logo
-    points.logo = points.centerBiceps.shiftFractionTowards(points.centerWrist, 0.3)
-    snippets.logo = new Snippet('logo', points.logo)
+    points.logo = new Point(points.topRight.x / 2, points.bottomRight.y / 2)
+    snippets.logo = new Snippet('logo', points.logo).scale(75 / points.bottomRight.x)
 
     // Title
-    macro('title', { at: points.centerBiceps, nr: 3, title: 'sleeve' })
-
-    // Scalebox
-    points.scaleboxAnchor = points.scalebox = points.centerBiceps.shiftFractionTowards(
-      points.centerWrist,
-      0.5
-    )
-    macro('scalebox', { at: points.scalebox })
-
-    // Notches
-    if (store.pget('frontArmholeToArmholePitch')) {
-      points.frontNotch = paths.sleevecap.shiftAlong(store.pget('frontArmholeToArmholePitch'))
-      snippets.frontNotch = new Snippet('notch', points.frontNotch)
-    }
-    if (store.pget('backArmholeToArmholePitch')) {
-      points.backNotch = paths.sleevecap
-        .reverse()
-        .shiftAlong(store.pget('backArmholeToArmholePitch'))
-      snippets.backNotch = new Snippet('bnotch', points.backNotch)
-    }
+    const title = store.pget('title', {})
+    points.title = new Point(points.topRight.x / 4, points.bottomRight.y / 1.5)
+    macro('title', { at: points.title, nr: 1, title: 'rectangle', scale: 0.5, ...title })
 
     // Dimensions
-    macro('vd', {
-      id: 'hCuffToArmhole',
-      from: points.wristLeft,
-      to: points.bicepsLeft,
-      x: points.bicepsLeft.x - sa - 15,
-    })
-    macro('vd', {
-      id: 'hFull',
-      from: points.wristLeft,
-      to: points.sleeveTip,
-      x: points.bicepsLeft.x - sa - 30,
-    })
     macro('hd', {
-      id: 'wFull',
-      from: points.bicepsLeft,
-      to: points.bicepsRight,
-      y: points.sleeveTip.y - sa - 30,
+      id: 'width',
+      from: points.bottomLeft,
+      to: points.bottomRight,
+      y: points.bottomLeft.y + sa + 15,
     })
-    macro('hd', {
-      id: 'wCuff',
-      from: points.wristLeft,
-      to: points.wristRight,
-      y: points.wristLeft.y + sa + 30,
+    macro('vd', {
+      id: 'height',
+      from: points.bottomRight,
+      to: points.topRight,
+      x: points.bottomRight.x + sa + 15,
     })
-    macro('pd', {
-      id: 'lSleevevap',
-      path: paths.sleevecap.reverse(),
-      d: -1 * sa - 15,
-    })
-     */
 
     return part
   },

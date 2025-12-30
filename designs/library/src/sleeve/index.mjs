@@ -280,21 +280,17 @@ export const sleeve = {
     })
 
     // Cut list
-    store.cutlist.addCut({ cut: 2, from: 'fabric' })
+    let cuts = store.pget('cutlist', {})
+    if (!Array.isArray(cuts)) cuts = [cuts]
+    for (const cut of cuts) store.cutlist.addCut({ cut: 2, from: 'fabric', ...cut })
 
     // Logo
     points.logo = points.centerBiceps.shiftFractionTowards(points.centerWrist, 0.3)
     snippets.logo = new Snippet('logo', points.logo)
 
     // Title
-    macro('title', { at: points.centerBiceps, nr: 3, title: 'sleeve' })
-
-    // Scalebox
-    points.scaleboxAnchor = points.scalebox = points.centerBiceps.shiftFractionTowards(
-      points.centerWrist,
-      0.5
-    )
-    macro('scalebox', { at: points.scalebox })
+    const title = store.pget('title', {})
+    macro('title', { at: points.centerBiceps, nr: 1, title: 'sleeve', ...title })
 
     // Notches
     if (options.mockSleeve || store.pget('frontArmholeToArmholePitch')) {
@@ -347,6 +343,8 @@ export const sleeve = {
       'backArmholeToArmholePitch',
       'frontArmholeLength',
       'frontArmholeToArmholePitch',
+      'cutlist',
+      'title',
     ],
     writes: [
       'sleevecapHeight',

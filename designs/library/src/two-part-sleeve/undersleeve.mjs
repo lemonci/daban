@@ -4,6 +4,7 @@ import { twoPartSleeve, dimensions } from './shared.mjs'
 function draftUndersleeve({
   macro,
   Path,
+  Point,
   points,
   paths,
   snippets,
@@ -47,17 +48,22 @@ function draftUndersleeve({
    * Annotatinos
    */
 
-  // Cutlist
-  store.cutlist.addCut({ cut: 2, from: 'fabric' })
+  // Cut list
+  let cuts = store.pget('cutlist', {})
+  if (!Array.isArray(cuts)) cuts = [cuts]
+  for (const cut of cuts) store.cutlist.addCut({ cut: 2, from: 'fabric', ...cut })
 
   // Logo
   snippets.logo = new Snippet('logo', points.elbowCenter)
 
   // Title
-  macro('title', {
-    at: points.armCenter,
-    nr: 4,
-    title: 'undersleeve',
+  const title = store.pget('title', {})
+  macro('title', { at: points.armCenter, nr: 1, title: 'undersleeve', ...title })
+
+  // Grainline
+  macro('grainline', {
+    from: new Point(points.usLeftEdgeCpRight.x, points.usWristLeft.y),
+    to: points.usLeftEdgeCpRight,
   })
 
   // Dimensions
