@@ -163,10 +163,10 @@ function draftSleevecap(part, run) {
     let sleevecapEase = armholeLength * options.sleevecapEase
     store.pset('sleevecapEase', sleevecapEase)
     store.pset('sleevecapTarget', armholeLength + sleevecapEase)
-
-    // Uncomment this line to see all sleevecap iterations
-    //paths[run] = paths.sleevecap;
   }
+
+  // Uncomment this line to see all sleevecap iterations
+  //paths[run] = paths.sleevecap;
 }
 
 const menu = 'advanced.sleevecap'
