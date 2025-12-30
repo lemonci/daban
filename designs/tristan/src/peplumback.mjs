@@ -1,5 +1,5 @@
 import { plugin as ringsectorPlugin } from '@freesewing/plugin-ringsector'
-import { CreateShape, peplumFront } from './peplumFront.mjs'
+import { CreateShape, peplumFront } from './peplumfront.mjs'
 
 export const peplumBack = {
   name: 'tristan.peplumBack',
