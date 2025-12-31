@@ -143,8 +143,12 @@ function bibiSleeve({
   macro('title', { at: points.centerBiceps, nr: 4, title: 'sleeve' })
 
   // Notches
-  points.frontNotch = paths.sleevecap.shiftAlong(store.get('frontArmholeToArmholePitch'))
-  points.backNotch = paths.sleevecap.reverse().shiftAlong(store.get('backArmholeToArmholePitch'))
+  points.frontNotch = paths.sleevecap.shiftAlong(
+    store.get('library.sleeve.frontArmholeToArmholePitch')
+  )
+  points.backNotch = paths.sleevecap
+    .reverse()
+    .shiftAlong(store.get('library.sleeve.backArmholeToArmholePitch'))
   snippets.frontNotch = new Snippet('notch', points.frontNotch)
   snippets.backNotch = new Snippet('bnotch', points.backNotch)
 

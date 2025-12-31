@@ -27,6 +27,8 @@ export const cuff = {
     legacyArmholeDepth: false,
     // Unused as legacyArmholeDepth is disabled, hide option in documentation
     armholeDepthFactor: 0.5,
+    // Unused
+    sleeveLengthBonus: 0,
     shoulderEase: { pct: 0, min: -2, max: 6, ...pctBasedOn('shoulderToShoulder'), menu: 'fit' },
     // Note: we reuse Brian's cuff ease as "armhole fullness"
     cuffEase: {
