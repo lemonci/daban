@@ -71,5 +71,6 @@ export {
   upperCollar,
   waistband,
   i18n,
+  about,
   Devon,
 }
