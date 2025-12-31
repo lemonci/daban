@@ -1,6 +1,10 @@
 import { Design } from '@freesewing/core'
 import about from '../about.json' with { type: 'json' }
 import { i18n } from '../i18n/index.mjs'
+import { i18n as rectangleI18n } from '../i18n/rectangle/index.mjs'
+import { i18n as sleeveI18n } from '../i18n/sleeve/index.mjs'
+import { i18n as twoPartSleeveI18n } from '../i18n/two-part-sleeve/index.mjs'
+
 // Parts
 import { rectangle } from './rectangle/index.mjs'
 import { sleeve } from './sleeve/index.mjs'
@@ -13,7 +17,19 @@ const Library = new Design({
 })
 
 // Named exports
-export { rectangle, sleeve, topsleeve, undersleeve, twoPartSleeve, Library, i18n, about }
+export {
+  rectangle,
+  sleeve,
+  topsleeve,
+  undersleeve,
+  twoPartSleeve,
+  Library,
+  i18n,
+  rectangleI18n,
+  sleeveI18n,
+  twoPartSleeveI18n,
+  about,
+}
 
 const _ = {
   needs: {
