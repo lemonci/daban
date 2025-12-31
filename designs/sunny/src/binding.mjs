@@ -50,7 +50,6 @@ export const binding = {
 
       return part.hide()
     }
-
     if (complete) {
       paths.bfold1 = new Path()
         .move(points.bfold1tr)
@@ -72,7 +71,6 @@ export const binding = {
     paths.bTop = new Path().move(points.btr).line(points.tl).hide()
 
     paths.bBottom = new Path().move(points.bbl).line(points.bbr).hide()
-
     paths.binding = paths.bLeft.clone().join(paths.bBottom).join(paths.bRight).join(paths.bTop)
 
     if (sa) {
