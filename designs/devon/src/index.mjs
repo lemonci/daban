@@ -1,5 +1,8 @@
-import { Design } from '@freesewing/core'
-import { i18n } from '../i18n/index.mjs'
+import { Design, mergeI18n } from '@freesewing/core'
+import { i18n as devonI18n } from '../i18n/index.mjs'
+import { i18n as brianI18n } from '@freesewing/brian'
+import { i18n as nobleI18n } from '@freesewing/noble'
+import { twoPartSleeveI18n } from '@freesewing/library'
 import about from '../about.json' with { type: 'json' }
 
 // Parts
@@ -47,6 +50,60 @@ const Devon = new Design({
     upperCollar,
     waistband,
   ],
+})
+
+// Merge translations
+const i18n = mergeI18n([twoPartSleeveI18n, brianI18n, nobleI18n, devonI18n], {
+  o: {
+    drop: [
+      'armholeDartCurved',
+      'armholeDartCurvePoint',
+      'armholeDartCurveWidth',
+      'armholeDartPosition',
+      'backArmholeCurvature',
+      'backArmholePitchDepth',
+      'backArmholeSlant',
+      'backDartHeight',
+      'backHemSlope',
+      'bustSpanEase',
+      'dartPosition',
+      'dartPosition.armhole',
+      'dartPosition.shoulder',
+      'frontArmholeCurvature',
+      'frontArmholePitchDepth',
+      'frontShoulderWidth',
+      'fullChestEaseReduction',
+      'highBustWidth',
+      'shoulderDartCurvature',
+      'shoulderDartPosition',
+      'shoulderToShoulderEase',
+      'sleevecapBackFactorX',
+      'sleevecapBackFactorY',
+      'sleevecapFrontFactorX',
+      'sleevecapFrontFactorY',
+      'sleevecapQ1Offset',
+      'sleevecapQ1Spread1',
+      'sleevecapQ1Spread2',
+      'sleevecapQ2Offset',
+      'sleevecapQ2Spread1',
+      'sleevecapQ2Spread2',
+      'sleevecapQ3Offset',
+      'sleevecapQ3Spread1',
+      'sleevecapQ3Spread2',
+      'sleevecapQ4Offset',
+      'sleevecapQ4Spread1',
+      'sleevecapQ4Spread2',
+      'sleevecapTopFactorX',
+      'sleevecapTopFactorY',
+      'sleeveWidthGuarantee',
+      'upperDartLength',
+      'waistDartLength',
+      'waistdartposition',
+      'waistDartPosition',
+      'waistDartPosition',
+      'waistEase',
+    ],
+  },
 })
 
 // Named exports
