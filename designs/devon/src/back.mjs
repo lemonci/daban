@@ -145,6 +145,9 @@ export const back = {
       paths.backArmholeComplete.split(points.backArmholeYoke)[0].length()
     )
 
+    // Update store with required values for the library's twoPartSleeve
+    store.set(`library.twoPartSleeve.backArmholeLength`, paths.backArmholeComplete.length())
+
     return part
   },
 }

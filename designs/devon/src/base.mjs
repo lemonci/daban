@@ -18,14 +18,12 @@ export const base = {
     'neck',
     'seat',
     'seatBack',
-    // 'seatFront',
     'shoulderToShoulder',
     'shoulderSlope',
     'waistToArmpit',
     'waistToHips',
     'waist',
     'waistBack',
-    // 'waistFront',
   ],
 
   options: {
