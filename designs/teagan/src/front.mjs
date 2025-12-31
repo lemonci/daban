@@ -2,6 +2,7 @@ import { base } from '@freesewing/brian'
 import { hidePresets, pctBasedOn } from '@freesewing/core'
 
 function teaganFront({
+  complete,
   utils,
   store,
   sa,
@@ -167,6 +168,29 @@ function teaganFront({
     'library.sleeve.frontArmholeToArmholePitch',
     store.get('library.sleeve.frontArmholeLength') / 2
   )
+
+  // Chest line
+  points.chest = new Point(points.armhole.x, points.cbChest.y)
+  if (complete) {
+    paths.chest = new Path().move(points.cbChest).line(points.chest).attr('class', 'contrast help')
+    macro('banner', {
+      id: 'chestLine',
+      classes: 'center contrast help',
+      path: paths.chest,
+      text: 'teagan:chestLine',
+    })
+  }
+
+  // Waist line
+  if (complete) {
+    paths.waist = new Path().move(points.cbWaist).line(points.waist).attr('class', 'contrast help')
+    macro('banner', {
+      id: 'waistLine',
+      classes: 'center contrast help',
+      path: paths.waist,
+      text: 'teagan:waistLine',
+    })
+  }
 
   /*
    * Annotations
