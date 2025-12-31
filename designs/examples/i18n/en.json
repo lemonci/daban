@@ -15,5 +15,26 @@
     "stacks_mouth": "Stacks layout: mouth"
   },
   "s": {},
-  "o": {}
+  "o": {
+    "stackIt": {
+      "t": "Stack parts",
+      "d": "Causes parts to be stacked on top of each other"
+    },
+    "x": {
+      "t": "X-Size",
+      "d": "Scales the examples along the X-axis"
+    },
+    "y": {
+      "t": "Y-Size",
+      "d": "Scales the examples along the Y-axis"
+    },
+    "examples_rect3_rectangleHeight": {
+      "t": "Rectangle height (rect3)",
+      "d": "Controls the height of this rectangle"
+    },
+    "size": {
+      "t": "Stack size",
+      "d": "Controls the size of the stacked box"
+    }
+  }
 }

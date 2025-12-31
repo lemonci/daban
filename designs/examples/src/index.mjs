@@ -1,5 +1,7 @@
-import { Design } from '@freesewing/core'
-import { i18n } from '../i18n/index.mjs'
+import { Design, mergeI18n } from '@freesewing/core'
+import about from '../about.json' with { type: 'json' }
+import { rectangleI18n } from '@freesewing/library'
+import { i18n as examplesI18n } from '../i18n/index.mjs'
 
 // Library
 import { rectBase, rect1, rect2, rect3 } from './library.mjs'
@@ -17,6 +19,7 @@ import {
 
 // Setup our new design
 const Examples = new Design({
+  data: about,
   parts: [
     // Library
     rectBase,
@@ -34,6 +37,9 @@ const Examples = new Design({
     stacks_mouth,
   ],
 })
+
+// Merge i18n
+const i18n = mergeI18n([rectangleI18n, examplesI18n])
 
 // Named exports
 export {
@@ -57,4 +63,5 @@ export {
 
   // Translation
   i18n,
+  about,
 }

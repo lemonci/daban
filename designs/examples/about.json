@@ -1,6 +1,11 @@
 {
-  "id": "examples",
-  "version": "4.4.0",
+  "id": "rendertest",
+  "name": "Examples",
+  "code": "Joost De Cock",
+  "design": "Joost De Cock",
   "description": "A FreeSewing pattern holding examples for our documentation",
-  "collection": false
+  "version": "4.4.0",
+  "collection": false,
+  "pkg": "@freesewing/examples",
+  "difficulty": 5
 }
