@@ -1,6 +1,11 @@
 {
   "id": "rendertest",
+  "name": "Render test",
+  "code": "Joost De Cock",
+  "design": "Joost De Cock",
   "description": "A FreeSewing pattern to test (y)our render engine our CSS",
   "version": "4.4.0",
-  "collection": false
+  "collection": false,
+  "pkg": "@freesewing/rendertest",
+  "difficulty": 5
 }
