@@ -1,7 +1,7 @@
 {
   "t": "Jett jacket",
   "d": "A FreeSewing pattern for a bomber or letterman jacket",
-  "p": { 
+  "p": {
     "back": "Back",
     "front": "Front",
     "base": "Base",
@@ -14,7 +14,7 @@
     "pocket_bag_front": "Front pocket bag",
     "waistband": "Waistband",
     "waistband_ends": "Waistband extension"
-  
+
   },
   "s": {
       "bustWarning.t": "The bust dart won't be generated",
@@ -50,7 +50,6 @@
     "fullBustEase": {
       "t": "Full bust ease",
       "d": "Allows you to independently control the ease in the bust adjustment without affecting the armscye"
-
     },
     "bustDartHeight": {
       "t": "Bust dart height",
@@ -64,33 +63,35 @@
       "t": "Dart legs truing",
       "d": "This option tweaks the side seam to keep the bust dart legs the same length."
     },
-    "dartLegsTruingYes": 
+    "dartLegsTruingYes":
     {
       "t": "Yes",
       "d": "Adjust the dart leg lengths"
     },
-    "dartLegsTruingNo": 
+    "dartLegsTruingNo":
     {
       "t": "No",
       "d": "Don't adjust the dart leg lengths"
     },
-    "bustDartPercentage": {
-      "t": "FBA adjustment percentage",
-      "d": "How much of the effect of the FBA to use."
-    },
     "bustDartOffset": {
       "t": "Bust dart offset",
       "d": "How close to the bust apex to start the bust dart"
+    },
+    "pocketCornerOffset": {
+      "t": "Pocket corner offset",
+      "d": "How close to the corner do you want the pocket to start"
     },
     "ribbing": {
       "t": "Ribbing",
       "d": "Whether to generate a waistband and cuffs made of stretchy ribbing"
     },
     "ribbingYes": {
-      "t": "Yes"
+      "t": "Yes",
+      "d": "Use ribbing for waistband and cuffs"
     },
     "ribbingNo": {
-      "t": "No"
+      "t": "No",
+      "d": "Do not use ribbing for waistband and cuffs"
     },
     "ribbingEndsPercentage": {
       "t": "Waistband extension percentage",
@@ -99,7 +100,7 @@
     "neckShiftForward": {
       "t": "Neck shift forward",
       "d": "Cut the neck lower in the front than Brian's default neckline, by this percentage of the neck measurement"
-    },   
+    },
      "yokesplit": {
       "t": "Yoke height",
       "d": "How tall to make the yoke"
@@ -121,11 +122,17 @@
       "t": "Yoke",
       "d": "Whether to draft the back panel with a yoke across the shoulders. The yoke does no extra shaping right now, so this doesn't affect the fit."
     },
+    "waistEase": {
+      "t": "Waist ease",
+      "d": "The amount of ease at the waist"
+    },
     "yokeYes": {
-      "t": "Yes"
+      "t": "Yes",
+      "d": "Include a yoke"
     },
     "yokeNo": {
-      "t": "No"
+      "t": "No",
+      "d": "Do not include a yoke"
     },
     "placketwidth": {
       "t": "Placket width",
@@ -136,14 +143,16 @@
       "d": "This widens the front piece to account for a waist wider than the hip measurement. To use this, make sure to take the waist measurement at the fullest part of your belly"
     },
     "useBellyAdjustmentYes": {
-      "t": "Yes"
+      "t": "Yes",
+      "d": "Include belly adjustment"
     },
     "useBellyAdjustmentNo": {
-      "t": "No"
+      "t": "No",
+      "d": "Do not include belly adjustment"
     },
-    "bustDart.None": {
-      "t": "None",
-      "d": "No full bust adjustment"
+    "bellyAdjustmentX": {
+      "t": "FIXME",
+      "d": "FIXME -- Check with Gawain_CCBR"
     },
     "armCutAngle": {
       "t": "Armhole cut angle",
