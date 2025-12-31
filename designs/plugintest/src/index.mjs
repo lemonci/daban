@@ -1,4 +1,5 @@
 import { Design } from '@freesewing/core'
+import about from '../about.json' with { type: 'json' }
 import { i18n } from '../i18n/index.mjs'
 import { annotations } from './plugin-annotations.mjs'
 import { flip } from './plugin-flip.mjs'
@@ -12,6 +13,7 @@ import { ringsector } from './plugin-ringsector.mjs'
 
 // Setup our new design
 const Plugintest = new Design({
+  data: about,
   parts: [annotations, flip, gore, i18nStack, measurements, mirror, round, sprinkle, ringsector],
 })
 
@@ -27,5 +29,6 @@ export {
   sprinkle,
   ringsector,
   Plugintest,
+  about,
   i18n,
 }
