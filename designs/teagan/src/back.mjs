@@ -12,6 +12,8 @@ function teaganBack({
   utils,
   units,
   measurements,
+  snippets,
+  Snippet,
   part,
 }) {
   // Adjust neckline
@@ -61,12 +63,21 @@ function teaganBack({
   // Set store values required to draft sleevecap
   store.set('sleevecapEase', 0)
   store.set(
-    'backArmholeLength',
+    'library.sleeve.backArmholeLength',
     new Path()
       .move(points.armhole)
       .curve(points.armholeCp2, points.armholeHollowCp1, points.armholeHollow)
       .curve(points.armholeHollowCp2, points.shoulderCp1, points.shoulder)
       .length()
+  )
+  points.armholeNotchBack = new Path()
+    .move(points.armhole)
+    .curve(points.armholeCp2, points.armholeHollowCp1, points.armholeHollow)
+    .curve(points.armholeHollowCp2, points.shoulderCp1, points.shoulder)
+    .shiftFractionAlong(0.5)
+  store.set(
+    'library.sleeve.backArmholeToArmholePitch',
+    store.get('library.sleeve.backArmholeLength') / 2
   )
 
   // Let the user know how long the neck opening is
@@ -103,6 +114,9 @@ function teaganBack({
   // Scalebox
   points.scaleboxAnchor = points.scalebox = points.title.shift(90, 100)
   macro('scalebox', { at: points.scalebox })
+
+  // Notches
+  snippets.armholeNotch = new Snippet('bnotch', points.armholeNotchBack)
 
   // Dimensions
   macro('vd', {

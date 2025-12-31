@@ -151,12 +151,21 @@ function teaganFront({
 
   // Store front sleevecap length
   store.set(
-    'frontArmholeLength',
+    'library.sleeve.frontArmholeLength',
     new Path()
       .move(points.armhole)
       .curve(points.armholeCp2, points.armholeHollowCp1, points.armholeHollow)
       .curve(points.armholeHollowCp2, points.shoulderCp1, points.shoulder)
       .length()
+  )
+  points.armholeNotchFront = new Path()
+    .move(points.armhole)
+    .curve(points.armholeCp2, points.armholeHollowCp1, points.armholeHollow)
+    .curve(points.armholeHollowCp2, points.shoulderCp1, points.shoulder)
+    .shiftFractionAlong(0.5)
+  store.set(
+    'library.sleeve.frontArmholeToArmholePitch',
+    store.get('library.sleeve.frontArmholeLength') / 2
   )
 
   /*
@@ -179,6 +188,9 @@ function teaganFront({
   // Logo
   points.logo = points.title.shift(-90, 75)
   snippets.logo = new Snippet('logo', points.logo)
+
+  // Notches
+  snippets.armholeNotch = new Snippet('bnotch', points.armholeNotchFront)
 
   // Dimensions
   macro('hd', {
