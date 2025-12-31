@@ -1,0 +1,59 @@
+---
+title: utils.projectPointOntoCurve()
+---
+
+The `utils.projectPointOntoCurve()` function finds the closest point to `p` on the Bézier curve defined by `from`, `to` and two control points.
+
+:::note
+The line between the given point and the returned point will always be either perpendicular to the curve or go to an endpoint.
+:::
+
+## Signature
+
+```js
+Point utils.projectPointOntoCurve(
+  Point p,
+  Point from,
+  Point cp1,
+  Point cp2,
+  Point to
+)
+```
+
+## Example
+
+<Example caption="A Utils.projectPointOntoCurve() example">
+
+```js
+;({ Point, points, Path, paths, Snippet, snippets, getId, utils, part }) => {
+  points.from = new Point(130, 130)
+  points.cp1 = new Point(180, 150)
+  points.cp2 = new Point(100, 210)
+  points.to = new Point(220, 200)
+
+  // create a few random points
+  const scatter = []
+  for (let i = 1; i < 6; i++) {
+    for (let j = 1; j < 27; j++) {
+      if ((i * 111 + j * 37) % 7 == 0) {
+        scatter.push(new Point(i * 60, j * 10))
+      }
+    }
+  }
+  let snippet
+  for (let point of scatter) {
+    snippets[getId()] = new Snippet('notch', point)
+    paths[getId()] = new Path()
+      .move(point)
+      .line(utils.projectPointOntoCurve(point, points.from, points.cp1, points.cp2, points.to))
+      .setClass('mark')
+  }
+  paths.curve = new Path()
+    .move(points.from)
+    .curve(points.cp1, points.cp2, points.to)
+    .setClass('contrast stroke-xl')
+  return part
+}
+```
+
+</Example>

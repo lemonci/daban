@@ -135,7 +135,7 @@ export const editor = {
 /*
  * URL of the FreeSewing monorepo
  */
-export const monorepo = 'https://github.com/freesewing/freesewing'
+export const monorepo = 'https://codeberg.org/freesewing/freesewing'
 
 /*
  * Social media and other account links for FreeSewing

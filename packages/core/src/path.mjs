@@ -14,6 +14,8 @@ import {
   __asNumber,
   beamIntersectsCurve,
   beamIntersectsLine,
+  projectPointOntoLine,
+  projectPointOntoCurve,
 } from './utils.mjs'
 
 //////////////////////////////////////////////
@@ -386,6 +388,114 @@ Path.prototype.divide = function () {
   }
 
   return paths
+}
+
+/**
+ * Finds and returns the point on this path that is closest to the given point. If multiple points have the same distance,
+ * which of these nearest points is chosen is not defined.
+ *
+ * Note: The line between the given point and the returned point will always be either perpendicular to this path
+ * or a corner or endpoint.
+ *
+ * @param {Point} p The point to project onto the path
+ * @return {Point} the closest point on the Path (will always exist assuming `this` is a valid, non-empty path)
+ */
+Path.prototype.projectPoint = function (p) {
+  if (!(p instanceof Point)) {
+    this.log.error('Called `Path.projectPoint(p)` but `p` is not a `Point` object')
+    return null
+  }
+  let closest = this.start()
+  let minDist = Infinity
+  let current = closest,
+    start = closest
+  for (let i in this.ops) {
+    let op = this.ops[i]
+    if (op.type === 'move') {
+      start = op.to
+    } else if (op.type === 'line') {
+      let proj = projectPointOntoLine(p, current, op.to)
+      let dist = proj.dist(p)
+      if (dist < minDist) {
+        minDist = dist
+        closest = proj
+      }
+    } else if (op.type === 'curve') {
+      let proj = projectPointOntoCurve(p, current, op.cp1, op.cp2, op.to)
+      let dist = proj.dist(p)
+      if (dist < minDist) {
+        minDist = dist
+        closest = proj
+      }
+    } else if (op.type === 'close') {
+      let proj = projectPointOntoLine(p, current, start)
+      let dist = proj.dist(p)
+      if (dist < minDist) {
+        minDist = dist
+        closest = proj
+      }
+    }
+    if (op.to) current = op.to
+  }
+  return closest
+}
+
+/**
+ * Returns the offset of the given point on this path, as if you measured along this path until
+ * you've reached the given point.
+ *
+ * Note: This method returns (approximately) the same value as `this.split(p)[0].length()` would.
+ *
+ * However, this method is likely faster and you need less handling of special cases. E.g., if the
+ * given point is identical to the start of this path, then this method would simply return `0`,
+ * whereas `this.split(p)[0]` would be `null`, requiring you to handle that edge case.
+ *
+ * This returns `null` if the given point doesn't lie on this path.
+ *
+ * @param {Point} p target point to measure until
+ * @return {number|null} length on the path until the target point, or null if the point is not on the path
+ */
+Path.prototype.measureAlong = function (p) {
+  if (!(p instanceof Point)) {
+    this.log.error('Called `Path.measureAlong(p)` but `p` is not a `Point` object')
+    return null
+  }
+  let offset = 0
+  let current = this.start()
+  let start = current
+  for (let i in this.ops) {
+    let op = this.ops[i]
+    if (op.type === 'move') {
+      start = op.to
+    } else if (op.type === 'line') {
+      if (pointOnLine(current, op.to, p)) {
+        offset += current.dist(p)
+        return offset
+      }
+      offset += current.dist(op.to)
+    } else if (op.type === 'curve') {
+      let bezier = new Bezier(
+        { x: current.x, y: current.y },
+        { x: op.cp1.x, y: op.cp1.y },
+        { x: op.cp2.x, y: op.cp2.y },
+        { x: op.to.x, y: op.to.y }
+      )
+      const result = bezier.project({ x: p.x, y: p.y })
+      if (result.d < 1) {
+        offset += bezier.split(result.t).left.length()
+        return offset
+      }
+      offset += bezier.length()
+    } else if (op.type === 'close') {
+      if (pointOnLine(current, start, p)) {
+        offset += current.dist(p)
+        return offset
+      }
+      offset += current.dist(start)
+    }
+    if (op.to) current = op.to
+  }
+  return null
 }
 
 /**

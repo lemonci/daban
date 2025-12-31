@@ -232,6 +232,125 @@ describe('Path', () => {
     expect(round(curve.roughLength())).to.equal(300)
   })
 
+  describe('project', () => {
+    it('Should project a point onto a line', () => {
+      const line = new Path().move(new Point(0, 0)).line(new Point(100, 0))
+      const point = new Point(50, 50)
+      const projection = line.projectPoint(point)
+      expect(round(projection.x)).to.equal(50)
+      expect(round(projection.y)).to.equal(0)
+    })
+
+    it('Should project a point onto a curve', () => {
+      const curve = new Path()
+        .move(new Point(0, 0))
+        .curve(new Point(0, 50), new Point(100, 50), new Point(100, 0))
+      const point = new Point(50, 50)
+      const projection = curve.projectPoint(point)
+      expect(round(projection.x)).to.equal(50)
+      expect(round(projection.y)).to.equal(37.5)
+    })
+
+    it('Should handle projection onto zero-length path', () => {
+      const path = new Path().move(new Point(10, 10))
+      const point = new Point(20, 20)
+      const projection = path.projectPoint(point)
+      expect(round(projection.x)).to.equal(10)
+      expect(round(projection.y)).to.equal(10)
+    })
+  })
+
+  describe('measureAlong', () => {
+    it('Should return null when called with a non-Point argument', () => {
+      const path = new Path()
+        .__withLog({ error: () => {} })
+        .move(new Point(0, 0))
+        .line(new Point(10, 0))
+      const offset = path.measureAlong({ x: 1, y: 2 })
+      expect(offset).to.equal(null)
+    })
+
+    it('Should return null on a path with only a move (no drawable segments)', () => {
+      const path = new Path().move(new Point(10, 10))
+      const offset = path.measureAlong(new Point(10, 10))
+      expect(offset).to.equal(null)
+    })
+
+    it('Should measure along a single line segment', () => {
+      const path = new Path().move(new Point(0, 0)).line(new Point(100, 0))
+      const pOnLine = new Point(30, 0)
+      const offset = path.measureAlong(pOnLine)
+      expect(offset).to.equal(30)
+    })
+
+    it('Should return null for a point not on a line segment of the path', () => {
+      const path = new Path().move(new Point(0, 0)).line(new Point(100, 0))
+      const pOffLine = new Point(50, 10)
+      const offset = path.measureAlong(pOffLine)
+      expect(offset).to.equal(null)
+    })
+
+    it('Should accumulare length across multiple line segments', () => {
+      const path = new Path().move(new Point(0, 0)).line(new Point(100, 0)).line(new Point(200, 0))
+      // Point on second segment, 25 units from its start
+      const p = new Point(125, 0)
+      const offset = path.measureAlong(p)
+      expect(offset).to.equal(100 + 25)
+    })
+
+    it('Should measure along a cubic Bezier curve when the point is on the curve', () => {
+      // Curve: (0,0) -> (100,0) with cp1=(0,50), cp2=(100,50)
+      const p0 = new Point(0, 0)
+      const cp1 = new Point(0, 50)
+      const cp2 = new Point(100, 50)
+      const p3 = new Point(100, 0)
+      const path = new Path().move(p0).curve(cp1, cp2, p3)
+
+      // Point on the curve at t=0.5 is (50, 37.5)
+      const pOnCurve = new Point(50, 37.5)
+
+      // Expected offset midpoint on the path, so half the length
+      const expected = path.length() / 2
+
+      const offset = path.measureAlong(pOnCurve)
+      expect(offset).to.be.closeTo(expected, 1e-6)
+    })
+
+    it('Should return null for a point not sufficiently close to a curve', () => {
+      // Same curve as previous test
+      const p0 = new Point(0, 0)
+      const cp1 = new Point(0, 50)
+      const cp2 = new Point(100, 50)
+      const p3 = new Point(100, 0)
+      const path = new Path().move(p0).curve(cp1, cp2, p3)
+
+      const pFar = new Point(50, 100)
+      const offset = path.measureAlong(pFar)
+      expect(offset).to.equal(null)
+    })
+
+    it('Should measure along a closed path on the closing segment', () => {
+      // Triangle: (0,0) -> (100,0) -> (100,100) -> close back to (0,0)
+      const a = new Point(0, 0)
+      const bPt = new Point(100, 0)
+      const c = new Point(100, 100)
+      const path = new Path().move(a).line(bPt).line(c).close()
+
+      // Point on closing segment from C back to A
+      // Parametric point 25 units from C towards A: (75, 75)
+      const pOnClose = new Point(75, 75)
+
+      // Expected offset: |AB| + |BC| + distance from C to P
+      const ab = a.dist(bPt) // 100
+      const bc = bPt.dist(c) // 100
+      const cp = c.dist(pOnClose) // 25 * sqrt(2)
+      const expected = ab + bc + cp
+
+      const offset = path.measureAlong(pOnClose)
+      expect(offset).to.be.closeTo(expected, 1e-9)
+    })
+  })
+
   it('Should return the rough length of a line', () => {
     const line = new Path().move(new Point(0, 0)).line(new Point(0, 50))
     expect(round(line.roughLength())).to.equal(50)

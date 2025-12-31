@@ -104,12 +104,15 @@ plugintest:
     '@freesewing/plugin-theme': *freesewing
 sabrina:
   peer:
+    '@freesewing/plugin-path-utils': *freesewing
     '@freesewing/snapseries': *freesewing
 sandy:
-  _:
-    '@freesewing/plugin-ringsector': *freesewing
   peer:
+    '@freesewing/plugin-ringsector': *freesewing
     '@freesewing/snapseries': *freesewing
+sarah:
+  peer:
+    '@freesewing/plugin-path-utils': *freesewing
 shin:
   peer:
     '@freesewing/snapseries': *freesewing
@@ -124,6 +127,9 @@ simone:
     '@freesewing/simon': *freesewing
     '@freesewing/plugin-flip': *freesewing
     '@freesewing/plugin-bust': *freesewing
+sunny:
+  peer:
+    '@freesewing/plugin-path-utils': *freesewing
 sven:
   peer:
     '@freesewing/brian': *freesewing
@@ -141,6 +147,9 @@ titan:
 trayvon:
   peer:
     '@freesewing/snapseries': *freesewing
+umbra:
+  peer:
+    '@freesewing/plugin-path-utils': *freesewing
 wahid:
   peer:
     '@freesewing/brian': *freesewing
@@ -225,6 +234,7 @@ react:
     yaml: "^2.7.0"
   peer:
     react: &react "^19.0.0"
+    '@freesewing/bonny': *freesewing
 utils:
   _:
     lodash: "^4.17.21"

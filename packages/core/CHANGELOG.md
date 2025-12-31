@@ -1,6 +1,12 @@
 # Change log for: @freesewing/core
 
 
+## 4.4.1 (2025-11-29)
+
+### Added
+
+ - Added point projection methods for paths and curves
+
 ## 4.4.0 (2025-11-06)
 
 ### Fixed

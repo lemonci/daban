@@ -13,7 +13,7 @@
     "elastic",
     "curved-seam"
   ],
-  "version": "4.4.0",
+  "version": "4.4.3",
   "pkg": "@freesewing/uma",
   "collection": true
 }

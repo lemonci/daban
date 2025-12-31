@@ -14,7 +14,7 @@
     "flat-sleeve",
     "knit-band"
   ],
-  "version": "4.4.0",
+  "version": "4.4.3",
   "pkg": "@freesewing/teagan",
   "collection": true
 }

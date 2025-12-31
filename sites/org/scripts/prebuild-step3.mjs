@@ -68,19 +68,24 @@ const loadUser = async (id) => {
   let result
   try {
     result = await fetch(`https://backend.freesewing.eu/users/${id}`)
+    if (result) result = await result.json()
   } catch (err) {
     console.warn(`Failed to load user with id ${id}`, err)
   }
 
-  if (result) return await result.json()
+  return result
 }
 
 async function prebuild() {
   const all = {}
   const { authors, examples, tags, recentBlogPosts } = await loadExamplesTagsAndAuthors()
   for (const author of authors) {
-    const user = await loadUser(author)
-    if (user.profile.id) all[user.profile.id] = userAsAuthor(user)
+    try {
+      const user = await loadUser(author)
+      if (user.profile.id) all[user.profile.id] = userAsAuthor(user)
+    } catch (err) {
+      console.warn(`Failed to load user with id ${author}`, err)
+    }
   }
   fs.writeFileSync(`./authors.json`, JSON.stringify(all, null, 2))
   fs.writeFileSync(

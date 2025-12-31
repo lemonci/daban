@@ -1,6 +1,12 @@
 # Change log for: @freesewing/i18n
 
 
+## 4.4.2 (2025-11-29)
+
+### Changed
+
+ - Make package dependency-free
+
 ## 4.0.0 (2025-04-01)
 
 ### Added

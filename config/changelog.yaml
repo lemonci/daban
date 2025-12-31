@@ -1,6 +1,40 @@
 Unreleased:
   Added:
 
+4.4.3:
+  date: 2025-11-29
+
+  Fixed:
+    react:
+      - Add missing @freesewing/bonny dependency
+    sabrina:
+      - Add missing @freesewing/plugin-path-utils dependency
+    sarah:
+      - Add missing @freesewing/plugin-path-utils dependency
+    sunny:
+      - Add missing @freesewing/plugin-path-utils dependency
+
+4.4.2:
+  date: 2025-11-29
+
+  Changed:
+    i18n:
+      - Make package dependency-free
+
+4.4.1:
+  date: 2025-11-29
+
+  Added:
+    core:
+      - Added point projection methods for paths and curves
+    react:
+      - Added linedrawing for Sarah
+      - Improved absolute option selection (#657)
+
+  Fixed:
+    plugin-annotations: Workjaround for i18n with namespaced materials (#652)
+    sarah: Expand notification support (#646)
+
 4.4.0:
   date: 2025-11-06
 

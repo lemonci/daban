@@ -74,7 +74,7 @@ export const testPatternI18n = (Pattern, i18n) => {
       } else if (key.split('.').length === 2) {
         // Entry of a list option
         const [option, entry] = key.split('.')
-        it(`  - The translation of o.${option} list option should have a translation for the ${entry} entry`, () => {
+        it(`  - The translation of o.${option}.${entry} should correspond to a known value of the ${option} option`, () => {
           expect(Pattern.patternConfig.options[option].list.includes(entry)).to.equal(true)
         })
       }

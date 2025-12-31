@@ -17,7 +17,7 @@
     "block"
   ],
   "block": true,
-  "version": "4.4.0",
+  "version": "4.4.3",
   "pkg": "@freesewing/bella",
   "collection": true
 }

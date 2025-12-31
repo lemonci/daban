@@ -4,6 +4,155 @@
 ## Unreleased
 
 
+## 4.4.3 (2025-11-29)
+
+### sabrina
+
+#### Fixed
+
+ - Add missing @freesewing/plugin-path-utils dependency
+
+### sarah
+
+#### Fixed
+
+ - Add missing @freesewing/plugin-path-utils dependency
+
+### sunny
+
+#### Fixed
+
+ - Add missing @freesewing/plugin-path-utils dependency
+
+### react
+
+#### Fixed
+
+ - Add missing @freesewing/bonny dependency
+
+
+## 4.4.2 (2025-11-29)
+
+### i18n
+
+#### Changed
+
+ - Make package dependency-free
+
+
+## 4.4.1 (2025-11-29)
+
+### sarah
+
+#### Fixed
+
+ - E
+ - x
+ - p
+ - a
+ - n
+ - d
+ -  
+ - n
+ - o
+ - t
+ - i
+ - f
+ - i
+ - c
+ - a
+ - t
+ - i
+ - o
+ - n
+ -  
+ - s
+ - u
+ - p
+ - p
+ - o
+ - r
+ - t
+ -  
+ - (
+ - #
+ - 6
+ - 4
+ - 6
+ - )
+
+### plugin-annotations
+
+#### Fixed
+
+ - W
+ - o
+ - r
+ - k
+ - j
+ - a
+ - r
+ - o
+ - u
+ - n
+ - d
+ -  
+ - f
+ - o
+ - r
+ -  
+ - i
+ - 1
+ - 8
+ - n
+ -  
+ - w
+ - i
+ - t
+ - h
+ -  
+ - n
+ - a
+ - m
+ - e
+ - s
+ - p
+ - a
+ - c
+ - e
+ - d
+ -  
+ - m
+ - a
+ - t
+ - e
+ - r
+ - i
+ - a
+ - l
+ - s
+ -  
+ - (
+ - #
+ - 6
+ - 5
+ - 2
+ - )
+
+### core
+
+#### Added
+
+ - Added point projection methods for paths and curves
+
+### react
+
+#### Added
+
+ - Added linedrawing for Sarah
+ - Improved absolute option selection (#657)
+
+
 ## 4.4.0 (2025-11-06)
 
 ### hi
@@ -854,6 +1003,12 @@
 
  - Fixed wrong use of options in a value method. Fixes
 
+### plugintest
+
+#### Fixed
+
+ - Remove names from old plugins from list option
+
 ### sandy
 
 #### Changed
@@ -1411,6 +1566,12 @@
 
  - Migrated from Rollup to Esbuild for all builds
 
+### plugintest
+
+#### Changed
+
+ - Migrated from Rollup to Esbuild for all builds
+
 ### rendertest
 
 #### Changed
@@ -1942,6 +2103,16 @@
  - Switched to default import for version from package.json
 
 ### penelope
+
+#### Changed
+
+ - Switched to default import for version from package.json
+
+### plugintest
+
+#### Added
+
+ - Added the plugintest pattern which is used for testing plugins
 
 #### Changed
 
