@@ -92,13 +92,13 @@ function draftWaistband({
   macro('grainline', {
     from: points.grainlineTop,
     to: points.grainlineBottom,
-    text: null,
+    text: '',
   })
   macro('grainline', {
     id: 'grainline2',
     from: points.grainlineTop2,
     to: points.grainlineBottom2,
-    text: null,
+    text: '',
   })
 
   store.cutlist.addCut({ cut: 1, from: 'fabric' })
