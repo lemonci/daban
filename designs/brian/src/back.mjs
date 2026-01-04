@@ -124,7 +124,7 @@ export const back = {
       .attr('class', 'fabric')
 
     // Store lengths to fit sleeve, ensuring compatibility with both sleeve types
-    for (const type of ['sleeve', 'twoPartSleeve']) {
+    for (const type of ['sleeve', 'twoPartSleeve', 'topsleeve', 'undersleeve']) {
       store.set(`library.${type}.backArmholeLength`, shared.armholeLength(points, Path))
       store.set(
         `library.${type}.backArmholeToArmholePitch`,
