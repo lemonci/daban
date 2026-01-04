@@ -9,5 +9,5 @@
   "techniques": [],
   "version": "4.4.3",
   "pkg": "@freesewing/library",
-  "collection": false
+  "collection": true
 }
