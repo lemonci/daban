@@ -458,7 +458,7 @@ export const MenuOnlySettingInput = (props) => {
       <span>
         <span className="tw:font-medium tw:opacity-80 tw:capitalize">{design}</span>
         <span className="tw:font-medium tw:opacity-80 tw:capitalize tw:px-2">&raquo;</span>
-        {i18n[design]?.en?.p[name]}
+        {i18n[design]?.en?.p[name] || name}
       </span>
     )
   }
