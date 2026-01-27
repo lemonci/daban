@@ -6,7 +6,6 @@ import { formatDesignOptionValue, menuCoreSettingsStructure, fractionToDecimal }
 import { menuUiPreferencesStructure } from './ui-preferences.mjs'
 import { i18n } from '@freesewing/collection'
 import { i18n as pluginI18n } from '@freesewing/core-plugins'
-import { flags as flagTranslations } from '@freesewing/i18n'
 // Components
 import {
   ErrorIcon,
@@ -17,33 +16,6 @@ import {
 } from '@freesewing/react/components/Icon'
 import { HtmlSpan } from '../components/HtmlSpan.mjs'
 
-/*
- * i18n makes everything complicated
- */
-const flagTranslationsWithNamespace = {}
-for (const [key, val] of Object.entries(flagTranslations || {}))
-  flagTranslationsWithNamespace[`flag:${key}`] = val
-
-/*
- * This method bundles pattern translations in a object we can pass to the Pattern component
- *
- * @param {string} design - The name of the design
- * @return {object} strings - An object of key/value pairs for translation
- */
-export const bundlePatternTranslations = (design) => {
-  const strings = {}
-  for (const [key, val] of Object.entries(flagTranslationsWithNamespace)) strings[key] = val
-  if (i18n[design]?.en) {
-    const en = i18n[design].en
-    // Parts have no prefix
-    for (const [key, val] of Object.entries(en.p || {})) strings[key] = val
-    // Strings do
-    for (const [key, val] of Object.entries(en.s || {})) strings[`${design}:${key}`] = val
-  }
-  for (const [key, val] of Object.entries(pluginI18n.en)) strings[key] = val
-
-  return strings
-}
 /*
  * This method drafts the pattern
  *

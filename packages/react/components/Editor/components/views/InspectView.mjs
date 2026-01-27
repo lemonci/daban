@@ -1,6 +1,7 @@
 // Dependencies
 import React, { useContext } from 'react'
-import { draft, missingMeasurements, bundlePatternTranslations } from '../../lib/index.mjs'
+import { useDesignTranslation } from '../../../../hooks/useDesignTranslation/index.mjs'
+import { draft, missingMeasurements } from '../../lib/index.mjs'
 // Context
 import { ModalContext } from '@freesewing/react/context/Modal'
 // Components
@@ -54,7 +55,7 @@ export const InspectView = ({ Design, state, update, config }) => {
   /*
    * Create object holding strings for translation
    */
-  const strings = bundlePatternTranslations(pattern.designConfig.data.id)
+  const strings = useDesignTranslation(pattern.designConfig.data.id)
 
   const renderProps = pattern.getRenderProps()
   const output = (
