@@ -22,7 +22,7 @@ export const cup = {
     const hpsToUnderbust = store.get('hpsToUnderbust')
     const strapWidth = store.get('strapWidth')
     const armholeDrop = store.get('armholeDrop')
-    const armholeWidth = store.get('armholeWidth')
+    const armholeWidthFront = store.get('armholeWidthFront')
     const necklineCoverage = store.get('necklineCoverage')
     const bustFront = store.get('bustFront')
     const cornerWidth = store.get('cornerWidth')
@@ -44,7 +44,7 @@ export const cup = {
     points.c = new Point(bustFront / 2, hpsToUnderbust - necklineCoverage)
     points.d = new Point(measurements.shoulderToShoulder / 4, 0)
     points.e = points.d.shift(180 + measurements.shoulderSlope, strapWidth)
-    points.ea = new Point(armholeWidth, armholeDrop * 0.9)
+    points.ea = new Point(armholeWidthFront, armholeDrop * 0.9)
 
     /*
      * Construct the path
