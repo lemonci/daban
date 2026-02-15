@@ -1,4 +1,4 @@
-import { sleeve as brianSleeve } from '@freesewing/brian'
+import { sleeve as librarySleeve } from '@freesewing/library'
 import { back } from './back.mjs'
 import { hidePresets } from '@freesewing/core'
 
@@ -87,8 +87,12 @@ function draftHueySleeve({ Point, Path, points, paths, store, options, sa, macro
 
 export const sleeve = {
   name: 'huey.sleeve',
-  from: brianSleeve,
+  from: librarySleeve,
   after: back,
   draft: draftHueySleeve,
   hide: hidePresets.HIDE_TREE,
+  options: {
+    ...librarySleeve.options,
+    libraryFitSleeve: true,
+  },
 }

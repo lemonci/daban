@@ -91,19 +91,21 @@ export const panel = {
       y: paperlessOffset,
     })
 
-    macro('hd', {
-      id: 'pleatA',
-      to: points.pleat3_top_down,
-      from: points.pleat3_top_up,
-      y: paperlessOffset * 2,
-    })
+    if (complete) {
+      macro('hd', {
+        id: 'pleatA',
+        to: points.pleat3_top_down,
+        from: points.pleat3_top_up,
+        y: paperlessOffset * 2,
+      })
 
-    macro('hd', {
-      id: 'pleatB',
-      from: points.pleat3_top_down,
-      to: points.pleat4_top_up,
-      y: paperlessOffset * 2,
-    })
+      macro('hd', {
+        id: 'pleatB',
+        from: points.pleat3_top_down,
+        to: points.pleat4_top_up,
+        y: paperlessOffset * 2,
+      })
+    }
 
     macro('vd', {
       id: 'width',

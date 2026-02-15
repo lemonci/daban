@@ -4,6 +4,17 @@ export const designs = {
     t: 'Aaron A-Shirt',
     d: 'Aaron is an athletic shirt or tank top.',
     s: {
+      backArmholeLength: 'The length of the armhole at the back of the garment',
+      backArmholeToArmholePitch:
+        'The length along the armhole from the bottom of the armhole to the back armhole pitch point',
+      frontArmholeLength: 'The length of the armhole at the front of the garment',
+      frontArmholeToArmholePitch:
+        'The length along the armhole from the bottom of the armhole to the front armhole pitch point',
+      sleevecapLength: 'The length of the sleevecap',
+      sleeveLength: 'The length of the sleeve',
+      sleevecapTarget: 'The theoretical length of the sleevecap we strive for',
+      sleevecapEase: 'The mount of sleevecap ease',
+      __sleevecapFactor: 'An internal variable that is used to tweak the sleevecap draft',
       'largeShoulderWidth.t': 'Shoulder Width larger than anticipated',
       'largeShoulderWidth.d':
         'The pattern was not able to generate an optimal armhole shape using the given measurements and options. Please be aware that the generated pattern may not be correct. Please retake your measurements, verify that they are correct, and try generating a new pattern with the new measurements.',
@@ -30,6 +41,10 @@ export const designs = {
       neckBinding: 'Neck opening knit binding',
     },
     o: {
+      cuffEase: {
+        t: 'Cuff ease',
+        d: 'The amount of ease at your wrist.',
+      },
       acrossBackFactor: {
         t: 'Across back factor',
         d: 'Controls your across back width as a factor of your shoulder to shoulder measurement.',
@@ -57,10 +72,6 @@ export const designs = {
       chestEase: {
         t: 'Chest ease',
         d: 'The amount of ease at your chest.',
-      },
-      cuffEase: {
-        t: 'Cuff ease',
-        d: 'The amount of ease at your wrist.',
       },
       draftForHighBust: {
         t: 'Draft for high bust',
@@ -618,6 +629,17 @@ export const designs = {
     t: 'Bent body Block',
     d: 'This two-part sleeve block is the basis of our coat and jacket patterns.',
     s: {
+      backArmholeLength: 'The length of the armhole at the back of the garment',
+      backArmholeToArmholePitch:
+        'The length along the armhole from the bottom of the armhole to the back armhole pitch point',
+      frontArmholeLength: 'The length of the armhole at the front of the garment',
+      frontArmholeToArmholePitch:
+        'The length along the armhole from the bottom of the armhole to the front armhole pitch point',
+      sleevecapLength: 'The length of the sleevecap',
+      sleeveLength: 'The length of the sleeve',
+      sleevecapTarget: 'The theoretical length of the sleevecap we strive for',
+      sleevecapEase: 'The mount of sleevecap ease',
+      __sleevecapFactor: 'An internal variable that is used to tweak the sleevecap draft',
       'largeShoulderWidth.t': 'Shoulder Width larger than anticipated',
       'largeShoulderWidth.d':
         'The pattern was not able to generate an optimal armhole shape using the given measurements and options. Please be aware that the generated pattern may not be correct. Please retake your measurements, verify that they are correct, and try generating a new pattern with the new measurements.',
@@ -625,15 +647,35 @@ export const designs = {
       chestLine: 'Chest Line',
     },
     p: {
+      topsleeve: 'Topsleeve',
+      undersleeve: 'Undersleeve',
+      twoPartSleeve: 'Two-Part Sleeve (base)',
+      sleeve: 'Sleeve',
       back: 'Back',
       front: 'Front',
       base: 'Base',
-      sleevecap: 'Sleevecap',
-      sleeve: 'Sleeve',
-      topSleeve: 'Topsleeve',
-      underSleeve: 'Undersleeve',
     },
     o: {
+      cuffEase: {
+        t: 'Cuff ease',
+        d: 'The amount of ease at your wrist.',
+      },
+      sleevecapHeight: {
+        t: 'Sleevecap height',
+        d: 'Controls the height of the sleevecap.',
+      },
+      sleevecapEase: {
+        t: 'Sleevecap ease',
+        d: 'The amount by which the sleevecap seam is longer than the armhole seam.',
+      },
+      sleeveBend: {
+        t: 'Sleeve bend',
+        d: 'Controls the bend of the sleeve at the elbow.',
+      },
+      sleeveLengthBonus: {
+        t: 'Sleeve length bonus',
+        d: 'The amount to lengthen the sleeve. A negative value will shorten it.',
+      },
       acrossBackFactor: {
         t: 'Across back factor',
         d: 'Controls your across back width as a factor of your shoulder to shoulder measurement.',
@@ -661,10 +703,6 @@ export const designs = {
       chestEase: {
         t: 'Chest ease',
         d: 'The amount of ease at your chest.',
-      },
-      cuffEase: {
-        t: 'Cuff ease',
-        d: 'The amount of ease at your wrist.',
       },
       draftForHighBust: {
         t: 'Draft for high bust',
@@ -714,28 +752,23 @@ export const designs = {
         t: 'Shoulder slope reduction',
         d: 'The amount by which the shoulder slope is reduced to allow for shoulder padding.',
       },
-      sleeveLengthBonus: {
-        t: 'Sleeve length bonus',
-        d: 'The amount to lengthen the sleeve. A negative value will shorten it.',
-      },
-      sleevecapEase: {
-        t: 'Sleevecap ease',
-        d: 'The amount by which the sleevecap seam is longer than the armhole seam.',
-      },
-      sleeveBend: {
-        t: 'Sleeve bend',
-        d: 'Controls the bend of the sleeve at the elbow.',
-      },
-      sleevecapHeight: {
-        t: 'Sleevecap height',
-        d: 'Controls the height of the sleevecap.',
-      },
     },
   },
   bibi: {
     t: 'Bibi body block',
     d: 'Bibi is a multifunctional building block for knit tops and dresses.',
     s: {
+      backArmholeLength: 'The length of the armhole at the back of the garment',
+      backArmholeToArmholePitch:
+        'The length along the armhole from the bottom of the armhole to the back armhole pitch point',
+      frontArmholeLength: 'The length of the armhole at the front of the garment',
+      frontArmholeToArmholePitch:
+        'The length along the armhole from the bottom of the armhole to the front armhole pitch point',
+      sleevecapLength: 'The length of the sleevecap',
+      sleeveLength: 'The length of the sleeve',
+      sleevecapTarget: 'The theoretical length of the sleevecap we strive for',
+      sleevecapEase: 'The mount of sleevecap ease',
+      __sleevecapFactor: 'An internal variable that is used to tweak the sleevecap draft',
       'largeShoulderWidth.t': 'Shoulder Width larger than anticipated',
       'largeShoulderWidth.d':
         'The pattern was not able to generate an optimal armhole shape using the given measurements and options. Please be aware that the generated pattern may not be correct. Please retake your measurements, verify that they are correct, and try generating a new pattern with the new measurements.',
@@ -788,96 +821,19 @@ export const designs = {
       'useCuffRibbingYes.d': 'Include ribbing on the sleeve',
     },
     p: {
+      sleeve: 'Sleeve',
       back: 'Back',
       front: 'Front',
       base: 'Base',
-      sleevecap: 'Sleevecap',
-      sleeve: 'Sleeve',
       waistband: 'Waistband',
       cuff: 'Cuff',
       neckBinding: 'Neck Binding',
       armholeBinding: 'Armhole Binding',
     },
     o: {
-      acrossBackFactor: {
-        t: 'Across back factor',
-        d: 'Controls your across back width as a factor of your shoulder to shoulder measurement.',
-      },
-      armholeDepth: {
-        t: 'Armhole depth',
-        d: 'Controls the depth of the armhole. Higher values make a deeper armhole.',
-      },
-      armholeDepthFactor: {
-        t: 'Armhole depth factor (legacy)',
-        d: 'Controls the depth of the armhole. Higher values make a deeper armhole. This option only applies to the legacy (v2) way of calculating the armhole depth.',
-      },
-      backNeckCutout: {
-        t: 'Back neckline depth',
-        d: 'Controls how deep the neck opening plunges down on the back.',
-      },
-      bicepsEase: {
-        t: 'Biceps ease',
-        d: 'The amount of ease at your upper arm. Note that while we try to respect this, fitting the sleeve to the armhole takes precedence over respecting the exact amount of ease.',
-      },
-      collarEase: {
-        t: 'Collar ease',
-        d: 'The amount of ease around your neck',
-      },
-      chestEase: {
-        t: 'Chest ease',
-        d: 'The amount of ease at your chest.',
-      },
       cuffEase: {
         t: 'Sleeve fullness',
         d: 'Controls how wide the sleeves are.',
-      },
-      draftForHighBust: {
-        t: 'Bust adjustment',
-        d: 'If the pattern should be drafted with a basic full bust adjustment (FBA). This will result in a more fitted garment for people with breasts.',
-      },
-      draftForHighBustYes: {
-        t: 'Draft with bust adjustment',
-        d: 'Suggested for most people with breasts. This option only has an effect if the optional bust-related measurements are available.',
-      },
-      draftForHighBustNo: {
-        t: 'Draft without bust adjustment',
-        d: 'Drafts a pattern using the chest measurement only.',
-      },
-      frontArmholeDeeper: {
-        t: 'Front armhole extra cutout',
-        d: 'How much do you want the front armhole to be cut out deeper than the back.',
-      },
-      legacyArmholeDepth: {
-        t: 'Legacy armhole depth',
-        d: 'Enable this option to use the legacy way to calculate the armhole depth (using biceps circumference) rather than the v3 way (using the waist to armpit measurement)',
-      },
-      legacyArmholeDepthNo: {
-        t: 'Calculate armhole depth the v3 way',
-        d: 'Uses the waist to armpit measurement to locate the bottom of the armhole',
-      },
-      legacyArmholeDepthYes: {
-        t: 'Calculate armhole depth the legacy (v2) way',
-        d: 'Uses the biceps measurement to locate the bottom of the armhole',
-      },
-      lengthBonus: {
-        t: 'Length bonus',
-        d: 'The amount to lengthen the garment. A negative value will shorten it.',
-      },
-      s3Collar: {
-        t: 'Shoulder seam shift: collar side',
-        d: 'Increase this option to shift the shoulder seam forward on the collar side. Decreasing it shifts it backwards.',
-      },
-      s3Armhole: {
-        t: 'Shoulder seam shift: armhole side',
-        d: 'Increase this option to shift the shoulder seam forward on the armhole side. Decreasing it shifts it backwards.',
-      },
-      shoulderEase: {
-        t: 'Shoulder ease',
-        d: 'The amount of ease at your shoulder. This increases the shoulder to shoulder distance to accommodate additional layers or thickness.',
-      },
-      shoulderSlopeReduction: {
-        t: 'Shoulder slope reduction',
-        d: 'The amount by which the shoulder slope is reduced to allow for shoulder padding.',
       },
       sleevecapEase: {
         t: 'Sleevecap ease',
@@ -958,6 +914,82 @@ export const designs = {
       sleeveWidthGuarantee: {
         t: 'Sleeve width guarantee',
         d: 'Controls how much of the sleeve width will be guaranteed. This determines how much we can alter the sleeve width to fit the sleeve in the armhole.',
+      },
+      acrossBackFactor: {
+        t: 'Across back factor',
+        d: 'Controls your across back width as a factor of your shoulder to shoulder measurement.',
+      },
+      armholeDepth: {
+        t: 'Armhole depth',
+        d: 'Controls the depth of the armhole. Higher values make a deeper armhole.',
+      },
+      armholeDepthFactor: {
+        t: 'Armhole depth factor (legacy)',
+        d: 'Controls the depth of the armhole. Higher values make a deeper armhole. This option only applies to the legacy (v2) way of calculating the armhole depth.',
+      },
+      backNeckCutout: {
+        t: 'Back neckline depth',
+        d: 'Controls how deep the neck opening plunges down on the back.',
+      },
+      bicepsEase: {
+        t: 'Biceps ease',
+        d: 'The amount of ease at your upper arm. Note that while we try to respect this, fitting the sleeve to the armhole takes precedence over respecting the exact amount of ease.',
+      },
+      collarEase: {
+        t: 'Collar ease',
+        d: 'The amount of ease around your neck',
+      },
+      chestEase: {
+        t: 'Chest ease',
+        d: 'The amount of ease at your chest.',
+      },
+      draftForHighBust: {
+        t: 'Bust adjustment',
+        d: 'If the pattern should be drafted with a basic full bust adjustment (FBA). This will result in a more fitted garment for people with breasts.',
+      },
+      draftForHighBustYes: {
+        t: 'Draft with bust adjustment',
+        d: 'Suggested for most people with breasts. This option only has an effect if the optional bust-related measurements are available.',
+      },
+      draftForHighBustNo: {
+        t: 'Draft without bust adjustment',
+        d: 'Drafts a pattern using the chest measurement only.',
+      },
+      frontArmholeDeeper: {
+        t: 'Front armhole extra cutout',
+        d: 'How much do you want the front armhole to be cut out deeper than the back.',
+      },
+      legacyArmholeDepth: {
+        t: 'Legacy armhole depth',
+        d: 'Enable this option to use the legacy way to calculate the armhole depth (using biceps circumference) rather than the v3 way (using the waist to armpit measurement)',
+      },
+      legacyArmholeDepthNo: {
+        t: 'Calculate armhole depth the v3 way',
+        d: 'Uses the waist to armpit measurement to locate the bottom of the armhole',
+      },
+      legacyArmholeDepthYes: {
+        t: 'Calculate armhole depth the legacy (v2) way',
+        d: 'Uses the biceps measurement to locate the bottom of the armhole',
+      },
+      lengthBonus: {
+        t: 'Length bonus',
+        d: 'The amount to lengthen the garment. A negative value will shorten it.',
+      },
+      s3Collar: {
+        t: 'Shoulder seam shift: collar side',
+        d: 'Increase this option to shift the shoulder seam forward on the collar side. Decreasing it shifts it backwards.',
+      },
+      s3Armhole: {
+        t: 'Shoulder seam shift: armhole side',
+        d: 'Increase this option to shift the shoulder seam forward on the armhole side. Decreasing it shifts it backwards.',
+      },
+      shoulderEase: {
+        t: 'Shoulder ease',
+        d: 'The amount of ease at your shoulder. This increases the shoulder to shoulder distance to accommodate additional layers or thickness.',
+      },
+      shoulderSlopeReduction: {
+        t: 'Shoulder slope reduction',
+        d: 'The amount by which the shoulder slope is reduced to allow for shoulder padding.',
       },
       sleeveLength: {
         t: 'Sleeve length',
@@ -1395,104 +1427,34 @@ export const designs = {
   brian: {
     t: 'Brian body block',
     d: 'Brian is a basic body block for people without breasts.',
-    p: {
-      back: 'Back',
-      front: 'Front',
-      base: 'Base',
-      sleevecap: 'Sleevecap',
-      sleeve: 'Sleeve',
-    },
     s: {
+      backArmholeLength: 'The length of the armhole at the back of the garment',
+      backArmholeToArmholePitch:
+        'The length along the armhole from the bottom of the armhole to the back armhole pitch point',
+      frontArmholeLength: 'The length of the armhole at the front of the garment',
+      frontArmholeToArmholePitch:
+        'The length along the armhole from the bottom of the armhole to the front armhole pitch point',
+      sleevecapLength: 'The length of the sleevecap',
+      sleeveLength: 'The length of the sleeve',
+      sleevecapTarget: 'The theoretical length of the sleevecap we strive for',
+      sleevecapEase: 'The mount of sleevecap ease',
+      __sleevecapFactor: 'An internal variable that is used to tweak the sleevecap draft',
       'largeShoulderWidth.t': 'Shoulder Width larger than anticipated',
       'largeShoulderWidth.d':
         'The pattern was not able to generate an optimal armhole shape using the given measurements and options. Please be aware that the generated pattern may not be correct. Please retake your measurements, verify that they are correct, and try generating a new pattern with the new measurements.',
       waistLine: 'Waist Line',
       chestLine: 'Chest Line',
     },
+    p: {
+      sleeve: 'Sleeve',
+      back: 'Back',
+      front: 'Front',
+      base: 'Base',
+    },
     o: {
-      acrossBackFactor: {
-        t: 'Across back factor',
-        d: 'Controls your across back width as a factor of your shoulder to shoulder measurement.',
-      },
-      armholeDepth: {
-        t: 'Armhole depth',
-        d: 'Controls the depth of the armhole. Higher values make a deeper armhole.',
-      },
-      armholeDepthFactor: {
-        t: 'Armhole depth factor (legacy)',
-        d: 'Controls the depth of the armhole. Higher values make a deeper armhole. This option only applies to the legacy (v2) way of calculating the armhole depth.',
-      },
-      backNeckCutout: {
-        t: 'Back neck cutout',
-        d: 'How deep the neck is cut out at the back',
-      },
-      bicepsEase: {
-        t: 'Biceps ease',
-        d: 'The amount of ease at your upper arm. Note that while we try to respect this, fitting the sleeve to the armhole takes precedence over respecting the exact amount of ease.',
-      },
-      collarEase: {
-        t: 'Collar ease',
-        d: 'The amount of ease around your neck',
-      },
-      chestEase: {
-        t: 'Chest ease',
-        d: 'The amount of ease at your chest.',
-      },
       cuffEase: {
         t: 'Cuff ease',
         d: 'The amount of ease at your wrist.',
-      },
-      draftForHighBust: {
-        t: 'Draft for high bust',
-        d: 'Draft the pattern using the high bust measurement if it is available, instead of using the chest measurement. This can result in a more fitted garment for people with breasts. (Please note that no additional adjustments or shaping is performed. Further manual adjustments may be needed for those with a larger difference between high bust and chest measurements.)',
-      },
-      draftForHighBustYes: {
-        t: 'Draft using the high bust measurement',
-        d: 'Drafts a pattern using the high bust measurement instead of the chest measurement. Suggested for most people with breasts.',
-      },
-      draftForHighBustNo: {
-        t: 'Draft using the chest measurement',
-        d: 'Drafts a pattern using the chest measurement. Suggested for most people without breasts.',
-      },
-      frontArmholeDeeper: {
-        t: 'Front armhole extra cutout',
-        d: 'How much do you want the front armhole to be cut out deeper than the back.',
-      },
-      legacyArmholeDepth: {
-        t: 'Legacy armhole depth',
-        d: 'Enable this option to use the legacy way to calculate the armhole depth (using biceps circumference) rather than the v3 way (using the waist to armpit measurement)',
-      },
-      legacyArmholeDepthNo: {
-        t: 'Calculate armhole depth the v3 way',
-        d: 'Uses the waist to armpit measurement to locate the bottom of the armhole',
-      },
-      legacyArmholeDepthYes: {
-        t: 'Calculate armhole depth the legacy (v2) way',
-        d: 'Uses the biceps measurement to locate the bottom of the armhole',
-      },
-      lengthBonus: {
-        t: 'Length bonus',
-        d: 'The amount to lengthen the garment. A negative value will shorten it.',
-      },
-      s3Collar: {
-        t: 'Shoulder seam shift: collar side',
-        d: 'Increase this option to shift the shoulder seam forward on the collar side. Decreasing it shifts it backwards.',
-      },
-      s3Armhole: {
-        t: 'Shoulder seam shift: armhole side',
-        d: 'Increase this option to shift the shoulder seam forward on the armhole side. Decreasing it shifts it backwards.',
-      },
-      shoulderEase: {
-        t: 'Shoulder ease',
-        d: 'The amount of ease at your shoulder. This increases the shoulder to shoulder distance to accommodate additional layers or thickness.',
-      },
-      shoulderSlopeReduction: {
-        t: 'Shoulder slope reduction',
-        d: 'The amount by which the shoulder slope is reduced to allow for shoulder padding.',
-      },
-      sleeveLengthBonus: {
-        t: 'Sleeve length bonus',
-        d: 'The amount to lengthen the sleeve. A negative value will shorten it.',
       },
       sleevecapEase: {
         t: 'Sleevecap ease',
@@ -1570,9 +1532,89 @@ export const designs = {
         t: 'Sleevecap Q4 downward spread',
         d: 'Controls the spread of the sleevecap fourth quadrant curvature towards the armhole',
       },
+      sleeveLengthBonus: {
+        t: 'Sleeve length bonus',
+        d: 'The amount to lengthen the sleeve. A negative value will shorten it.',
+      },
       sleeveWidthGuarantee: {
         t: 'Sleeve width guarantee',
         d: 'Controls how much of the sleeve width will be guaranteed. This determines how much we can alter the sleeve width to fit the sleeve in the armhole.',
+      },
+      acrossBackFactor: {
+        t: 'Across back factor',
+        d: 'Controls your across back width as a factor of your shoulder to shoulder measurement.',
+      },
+      armholeDepth: {
+        t: 'Armhole depth',
+        d: 'Controls the depth of the armhole. Higher values make a deeper armhole.',
+      },
+      armholeDepthFactor: {
+        t: 'Armhole depth factor (legacy)',
+        d: 'Controls the depth of the armhole. Higher values make a deeper armhole. This option only applies to the legacy (v2) way of calculating the armhole depth.',
+      },
+      backNeckCutout: {
+        t: 'Back neck cutout',
+        d: 'How deep the neck is cut out at the back',
+      },
+      bicepsEase: {
+        t: 'Biceps ease',
+        d: 'The amount of ease at your upper arm. Note that while we try to respect this, fitting the sleeve to the armhole takes precedence over respecting the exact amount of ease.',
+      },
+      collarEase: {
+        t: 'Collar ease',
+        d: 'The amount of ease around your neck',
+      },
+      chestEase: {
+        t: 'Chest ease',
+        d: 'The amount of ease at your chest.',
+      },
+      draftForHighBust: {
+        t: 'Draft for high bust',
+        d: 'Draft the pattern using the high bust measurement if it is available, instead of using the chest measurement. This can result in a more fitted garment for people with breasts. (Please note that no additional adjustments or shaping is performed. Further manual adjustments may be needed for those with a larger difference between high bust and chest measurements.)',
+      },
+      draftForHighBustYes: {
+        t: 'Draft using the high bust measurement',
+        d: 'Drafts a pattern using the high bust measurement instead of the chest measurement. Suggested for most people with breasts.',
+      },
+      draftForHighBustNo: {
+        t: 'Draft using the chest measurement',
+        d: 'Drafts a pattern using the chest measurement. Suggested for most people without breasts.',
+      },
+      frontArmholeDeeper: {
+        t: 'Front armhole extra cutout',
+        d: 'How much do you want the front armhole to be cut out deeper than the back.',
+      },
+      legacyArmholeDepth: {
+        t: 'Legacy armhole depth',
+        d: 'Enable this option to use the legacy way to calculate the armhole depth (using biceps circumference) rather than the v3 way (using the waist to armpit measurement)',
+      },
+      legacyArmholeDepthNo: {
+        t: 'Calculate armhole depth the v3 way',
+        d: 'Uses the waist to armpit measurement to locate the bottom of the armhole',
+      },
+      legacyArmholeDepthYes: {
+        t: 'Calculate armhole depth the legacy (v2) way',
+        d: 'Uses the biceps measurement to locate the bottom of the armhole',
+      },
+      lengthBonus: {
+        t: 'Length bonus',
+        d: 'The amount to lengthen the garment. A negative value will shorten it.',
+      },
+      s3Collar: {
+        t: 'Shoulder seam shift: collar side',
+        d: 'Increase this option to shift the shoulder seam forward on the collar side. Decreasing it shifts it backwards.',
+      },
+      s3Armhole: {
+        t: 'Shoulder seam shift: armhole side',
+        d: 'Increase this option to shift the shoulder seam forward on the armhole side. Decreasing it shifts it backwards.',
+      },
+      shoulderEase: {
+        t: 'Shoulder ease',
+        d: 'The amount of ease at your shoulder. This increases the shoulder to shoulder distance to accommodate additional layers or thickness.',
+      },
+      shoulderSlopeReduction: {
+        t: 'Shoulder slope reduction',
+        d: 'The amount by which the shoulder slope is reduced to allow for shoulder padding.',
       },
     },
   },
@@ -1617,6 +1659,17 @@ export const designs = {
     t: 'Carlita coat',
     d: 'The version for breasts of our Carlton coat, aka Sherlock Holmes coat.',
     s: {
+      backArmholeLength: 'The length of the armhole at the back of the garment',
+      backArmholeToArmholePitch:
+        'The length along the armhole from the bottom of the armhole to the back armhole pitch point',
+      frontArmholeLength: 'The length of the armhole at the front of the garment',
+      frontArmholeToArmholePitch:
+        'The length along the armhole from the bottom of the armhole to the front armhole pitch point',
+      sleevecapLength: 'The length of the sleevecap',
+      sleeveLength: 'The length of the sleeve',
+      sleevecapTarget: 'The theoretical length of the sleevecap we strive for',
+      sleevecapEase: 'The mount of sleevecap ease',
+      __sleevecapFactor: 'An internal variable that is used to tweak the sleevecap draft',
       'largeShoulderWidth.t': 'Shoulder Width larger than anticipated',
       'largeShoulderWidth.d':
         'The pattern was not able to generate an optimal armhole shape using the given measurements and options. Please be aware that the generated pattern may not be correct. Please retake your measurements, verify that they are correct, and try generating a new pattern with the new measurements.',
@@ -1652,11 +1705,14 @@ export const designs = {
       seatLine: 'Seat Line',
     },
     p: {
+      rectangle: 'Rectangle',
+      sleeve: 'Sleeve',
+      topsleeve: 'Topsleeve',
+      undersleeve: 'Undersleeve',
+      twoPartSleeve: 'Two-Part Sleeve (base)',
       back: 'Back',
       front: 'Front',
       base: 'Base',
-      sleevecap: 'Sleevecap',
-      sleeve: 'Sleeve',
       backStay: 'Back stay',
       belt: 'Belt',
       chestPocketWelt: 'Chest pocket welt',
@@ -1673,11 +1729,29 @@ export const designs = {
       pocketLining: 'Pocket lining',
       pocket: 'Pocket',
       tail: 'Tail',
-      topSleeve: 'Topsleeve',
-      underSleeve: 'Undersleeve',
       side: 'Side',
     },
     o: {
+      cuffEase: {
+        t: 'Cuff ease',
+        d: 'The amount of ease at your wrist.',
+      },
+      sleevecapEase: {
+        t: 'Sleevecap ease',
+        d: 'Controls the amount of sleevecap ease.',
+      },
+      sleeveLengthBonus: {
+        t: 'Sleeve length bonus',
+        d: 'The amount to lengthen the sleeve. A negative value will shorten it.',
+      },
+      sleevecapHeight: {
+        t: 'Sleevecap height',
+        d: 'Controls the height of the sleevecap.',
+      },
+      sleeveBend: {
+        t: 'Sleeve bend',
+        d: 'The angle of the sleeve at the elbow.',
+      },
       acrossBackFactor: {
         t: 'Across back factor',
         d: 'Controls your across back width as a factor of your shoulder to shoulder measurement.',
@@ -1706,21 +1780,9 @@ export const designs = {
         t: 'Chest ease',
         d: 'The amount of ease at your chest.',
       },
-      cuffEase: {
-        t: 'Cuff ease',
-        d: 'The amount of ease at your wrist.',
-      },
       draftForHighBust: {
         t: 'Draft for high bust',
         d: 'Draft the pattern using the high bust measurement if it is available, instead of using the chest measurement. This can result in a more fitted garment for people with breasts. (Please note that no additional adjustments or shaping is performed. Further manual adjustments may be needed for those with a larger difference between high bust and chest measurements.)',
-      },
-      draftForHighBustYes: {
-        t: 'Draft using the high bust measurement',
-        d: 'Drafts a pattern using the high bust measurement instead of the chest measurement. Suggested for most people with breasts.',
-      },
-      draftForHighBustNo: {
-        t: 'Draft using the chest measurement',
-        d: 'Drafts a pattern using the chest measurement. Suggested for most people without breasts.',
       },
       frontArmholeDeeper: {
         t: 'Front armhole extra cutout',
@@ -1729,14 +1791,6 @@ export const designs = {
       legacyArmholeDepth: {
         t: 'Legacy armhole depth',
         d: 'Enable this option to use the legacy way to calculate the armhole depth (using biceps circumference) rather than the v3 way (using the waist to armpit measurement)',
-      },
-      legacyArmholeDepthNo: {
-        t: 'Calculate armhole depth the v3 way',
-        d: 'Uses the waist to armpit measurement to locate the bottom of the armhole',
-      },
-      legacyArmholeDepthYes: {
-        t: 'Calculate armhole depth the legacy (v2) way',
-        d: 'Uses the biceps measurement to locate the bottom of the armhole',
       },
       lengthBonus: {
         t: 'Length bonus',
@@ -1757,14 +1811,6 @@ export const designs = {
       shoulderSlopeReduction: {
         t: 'Shoulder slope reduction',
         d: 'The amount by which the shoulder slope is reduced to allow for shoulder padding.',
-      },
-      sleeveLengthBonus: {
-        t: 'Sleeve length bonus',
-        d: 'The amount to lengthen the sleeve. A negative value will shorten it.',
-      },
-      sleevecapEase: {
-        t: 'Sleevecap ease',
-        d: 'Controls the amount of sleevecap ease.',
       },
       seatEase: {
         t: 'Seat ease',
@@ -1849,14 +1895,6 @@ export const designs = {
       innerPocketWeltHeight: {
         t: 'Inner pocket welt height',
         d: 'Controls the height of the inner pocket welts.',
-      },
-      sleeveBend: {
-        t: 'Sleeve bend',
-        d: 'The angle of the sleeve at the elbow.',
-      },
-      sleevecapHeight: {
-        t: 'Sleevecap height',
-        d: 'Controls the height of the sleevecap.',
       },
       cuffLength: {
         t: 'Cuff length',
@@ -1884,6 +1922,17 @@ export const designs = {
     t: 'Carlton coat',
     d: 'For Sherlock Holmes cosplay, or just a really nice coat.',
     s: {
+      backArmholeLength: 'The length of the armhole at the back of the garment',
+      backArmholeToArmholePitch:
+        'The length along the armhole from the bottom of the armhole to the back armhole pitch point',
+      frontArmholeLength: 'The length of the armhole at the front of the garment',
+      frontArmholeToArmholePitch:
+        'The length along the armhole from the bottom of the armhole to the front armhole pitch point',
+      sleevecapLength: 'The length of the sleevecap',
+      sleeveLength: 'The length of the sleeve',
+      sleevecapTarget: 'The theoretical length of the sleevecap we strive for',
+      sleevecapEase: 'The mount of sleevecap ease',
+      __sleevecapFactor: 'An internal variable that is used to tweak the sleevecap draft',
       'largeShoulderWidth.t': 'Shoulder Width larger than anticipated',
       'largeShoulderWidth.d':
         'The pattern was not able to generate an optimal armhole shape using the given measurements and options. Please be aware that the generated pattern may not be correct. Please retake your measurements, verify that they are correct, and try generating a new pattern with the new measurements.',
@@ -1919,11 +1968,14 @@ export const designs = {
       seatLine: 'Seat Line',
     },
     p: {
+      rectangle: 'Rectangle',
+      sleeve: 'Sleeve',
+      topsleeve: 'Topsleeve',
+      undersleeve: 'Undersleeve',
+      twoPartSleeve: 'Two-Part Sleeve (base)',
       back: 'Back',
       front: 'Front',
       base: 'Base',
-      sleevecap: 'Sleevecap',
-      sleeve: 'Sleeve',
       backStay: 'Back stay',
       belt: 'Belt',
       chestPocketWelt: 'Chest pocket welt',
@@ -1940,10 +1992,28 @@ export const designs = {
       pocketLining: 'Pocket lining',
       pocket: 'Pocket',
       tail: 'Tail',
-      topSleeve: 'Topsleeve',
-      underSleeve: 'Undersleeve',
     },
     o: {
+      cuffEase: {
+        t: 'Cuff ease',
+        d: 'The amount of ease at your wrist.',
+      },
+      sleevecapEase: {
+        t: 'Sleevecap ease',
+        d: 'Controls the amount of sleevecap ease.',
+      },
+      sleeveLengthBonus: {
+        t: 'Sleeve length bonus',
+        d: 'The amount to lengthen the sleeve. A negative value will shorten it.',
+      },
+      sleevecapHeight: {
+        t: 'Sleevecap height',
+        d: 'Controls the height of the sleevecap.',
+      },
+      sleeveBend: {
+        t: 'Sleeve bend',
+        d: 'The angle of the sleeve at the elbow.',
+      },
       acrossBackFactor: {
         t: 'Across back factor',
         d: 'Controls your across back width as a factor of your shoulder to shoulder measurement.',
@@ -1972,21 +2042,9 @@ export const designs = {
         t: 'Chest ease',
         d: 'The amount of ease at your chest.',
       },
-      cuffEase: {
-        t: 'Cuff ease',
-        d: 'The amount of ease at your wrist.',
-      },
       draftForHighBust: {
         t: 'Draft for high bust',
         d: 'Draft the pattern using the high bust measurement if it is available, instead of using the chest measurement. This can result in a more fitted garment for people with breasts. (Please note that no additional adjustments or shaping is performed. Further manual adjustments may be needed for those with a larger difference between high bust and chest measurements.)',
-      },
-      draftForHighBustYes: {
-        t: 'Draft using the high bust measurement',
-        d: 'Drafts a pattern using the high bust measurement instead of the chest measurement. Suggested for most people with breasts.',
-      },
-      draftForHighBustNo: {
-        t: 'Draft using the chest measurement',
-        d: 'Drafts a pattern using the chest measurement. Suggested for most people without breasts.',
       },
       frontArmholeDeeper: {
         t: 'Front armhole extra cutout',
@@ -1995,14 +2053,6 @@ export const designs = {
       legacyArmholeDepth: {
         t: 'Legacy armhole depth',
         d: 'Enable this option to use the legacy way to calculate the armhole depth (using biceps circumference) rather than the v3 way (using the waist to armpit measurement)',
-      },
-      legacyArmholeDepthNo: {
-        t: 'Calculate armhole depth the v3 way',
-        d: 'Uses the waist to armpit measurement to locate the bottom of the armhole',
-      },
-      legacyArmholeDepthYes: {
-        t: 'Calculate armhole depth the legacy (v2) way',
-        d: 'Uses the biceps measurement to locate the bottom of the armhole',
       },
       lengthBonus: {
         t: 'Length bonus',
@@ -2023,14 +2073,6 @@ export const designs = {
       shoulderSlopeReduction: {
         t: 'Shoulder slope reduction',
         d: 'The amount by which the shoulder slope is reduced to allow for shoulder padding.',
-      },
-      sleeveLengthBonus: {
-        t: 'Sleeve length bonus',
-        d: 'The amount to lengthen the sleeve. A negative value will shorten it.',
-      },
-      sleevecapEase: {
-        t: 'Sleevecap ease',
-        d: 'Controls the amount of sleevecap ease.',
       },
       seatEase: {
         t: 'Seat ease',
@@ -2115,14 +2157,6 @@ export const designs = {
       innerPocketWeltHeight: {
         t: 'Inner pocket welt height',
         d: 'Controls the height of the inner pocket welts.',
-      },
-      sleeveBend: {
-        t: 'Sleeve bend',
-        d: 'The angle of the sleeve at the elbow.',
-      },
-      sleevecapHeight: {
-        t: 'Sleevecap height',
-        d: 'Controls the height of the sleevecap.',
       },
       cuffLength: {
         t: 'Cuff length',
@@ -2495,34 +2529,23 @@ export const designs = {
   devon: {
     t: 'Devon',
     d: 'A denim jacket design',
-    p: {
-      back: 'Back',
-      backPanel: 'Back panel',
-      backSide: 'Back outside',
-      backYoke: 'Back yoke',
-      base: 'Base',
-      collar: 'Collar',
-      cuff: 'Cuff',
-      front: 'Front',
-      frontFacing: 'Front facing',
-      frontInside: 'Front inside panel',
-      frontPanel: 'Front panel',
-      frontSidePanel: 'Front outside panel',
-      frontYoke: 'Front yoke',
-      pocket: 'Pocket',
-      pocketflap: 'Pocket flap',
-      sleevecap: 'Sleevecap',
-      sleeve: 'Sleeve',
-      topSleeve: 'Top sleeve',
-      underSleeve: 'Under sleeve',
-      underCollar: 'Under collar',
-      upperCollar: 'Upper collar',
-      waistband: 'Waistband',
-    },
     s: {
+      backArmholeLength: 'The length of the armhole at the back of the garment',
+      backArmholeToArmholePitch:
+        'The length along the armhole from the bottom of the armhole to the back armhole pitch point',
+      frontArmholeLength: 'The length of the armhole at the front of the garment',
+      frontArmholeToArmholePitch:
+        'The length along the armhole from the bottom of the armhole to the front armhole pitch point',
+      sleevecapLength: 'The length of the sleevecap',
+      sleeveLength: 'The length of the sleeve',
+      sleevecapTarget: 'The theoretical length of the sleevecap we strive for',
+      sleevecapEase: 'The mount of sleevecap ease',
+      __sleevecapFactor: 'An internal variable that is used to tweak the sleevecap draft',
       'largeShoulderWidth.t': 'Shoulder Width larger than anticipated',
       'largeShoulderWidth.d':
         'The pattern was not able to generate an optimal armhole shape using the given measurements and options. Please be aware that the generated pattern may not be correct. Please retake your measurements, verify that they are correct, and try generating a new pattern with the new measurements.',
+      waistLine: 'Waist Line',
+      chestLine: 'Chest Line',
       'cutWaistband.t': 'The waist band is not shown',
       'cutWaistband.d':
         'The **waist band** is a strip of fabric {{{ width }}} wide and {{{ length }}} long.',
@@ -2530,246 +2553,63 @@ export const designs = {
       'cutCuff.d':
         'The **cuffs** require two strips of fabric {{{ width }}} wide and {{{ length }}} long.',
     },
+    p: {
+      topsleeve: 'Topsleeve',
+      undersleeve: 'Undersleeve',
+      twoPartSleeve: 'Two-Part Sleeve (base)',
+      sleeve: 'Sleeve',
+      back: 'Back',
+      front: 'Front',
+      base: 'Base',
+      backInside: 'Back inside',
+      backOutside: 'Back outside',
+      backPoints: 'Back base',
+      frontInside: 'Front inside panel',
+      frontOutside: 'Front outside',
+      frontPoints: 'Front base',
+      backPanel: 'Back panel',
+      backSide: 'Back outside',
+      backYoke: 'Back yoke',
+      collar: 'Collar',
+      cuff: 'Cuff',
+      frontFacing: 'Front facing',
+      frontPanel: 'Front panel',
+      frontSidePanel: 'Front outside panel',
+      frontYoke: 'Front yoke',
+      pocket: 'Pocket',
+      pocketflap: 'Pocket flap',
+      underCollar: 'Under collar',
+      upperCollar: 'Upper collar',
+      waistband: 'Waistband',
+    },
     o: {
-      fullBustAdjustment: {
-        t: 'Full Bust Adjustment',
-        d: 'Tries to adjust the jacket to better fit a full bust.',
-      },
-      fullBustAdjustmentNo: {
-        t: 'No Full Bust Adjustment',
-        d: 'Do not adjust the jacket to better fit a full bust.',
-      },
-      fullBustAdjustmentYes: {
-        t: 'Full Bust Adjustment',
-        d: 'Adjust the jacket to better fit a full bust.',
-      },
-      waistAdjustment: {
-        t: 'Waist/Hips adjustment',
-        d: 'Adjusts the bottom of the denim jacket to match the hips measurement.',
-      },
-      waistAdjustmentNo: {
-        t: 'No waist/hips adjustment',
-        d: 'Do not Adjust the bottom of the denim jacket to match the hips measurement.',
-      },
-      waistAdjustmentYes: {
-        t: 'Waist/Hips adjustment',
-        d: 'Adjust the bottom of the denim jacket to match the hips measurement.',
-      },
-      acrossBackFactor: {
-        t: 'Across back factor',
-        d: 'Controls your across back width as a factor of your shoulder to shoulder measurement.',
-      },
-      armholeDepth: {
-        t: 'Armhole depth',
-        d: 'Controls the depth of the armhole. Higher values make a deeper armhole.',
-      },
-      armholeDepthFactor: {
-        t: 'Armhole depth factor (legacy)',
-        d: 'Controls the depth of the armhole. Higher values make a deeper armhole. This option only applies to the legacy (v2) way of calculating the armhole depth.',
-      },
-      backNeckCutout: {
-        t: 'Back neck cutout',
-        d: 'How deep the neck is cut out at the back',
-      },
-      bicepsEase: {
-        t: 'Biceps ease',
-        d: 'The amount of ease at your upper arm. Note that while we try to respect this, fitting the sleeve to the armhole takes precedence over respecting the exact amount of ease.',
-      },
-      collarEase: {
-        t: 'Collar ease',
-        d: 'The amount of ease around your neck',
-      },
-      chestEase: {
-        t: 'Chest ease',
-        d: 'The amount of ease at your chest.',
-      },
       cuffEase: {
         t: 'Cuff ease',
         d: 'The amount of ease at your wrist.',
-      },
-      cuffWidth: {
-        t: 'Cuff width',
-        d: 'The width of the cuff.',
-      },
-      hemEase: {
-        t: 'Hem ease',
-        d: 'The amount of ease at the hem.',
-      },
-      frontArmholeDeeper: {
-        t: 'Front armhole extra cutout',
-        d: 'How much do you want the front armhole to be cut out deeper than the back.',
-      },
-      legacyArmholeDepth: {
-        t: 'Legacy armhole depth',
-        d: 'Enable this option to use the legacy way to calculate the armhole depth (using biceps circumference) rather than the v3 way (using the waist to armpit measurement)',
-      },
-      legacyArmholeDepthNo: {
-        t: 'Calculate armhole depth the v3 way',
-        d: 'Uses the waist to armpit measurement to locate the bottom of the armhole',
-      },
-      legacyArmholeDepthYes: {
-        t: 'Calculate armhole depth the legacy (v2) way',
-        d: 'Uses the biceps measurement to locate the bottom of the armhole',
-      },
-      frontPocket: {
-        t: 'Front pocket',
-        d: 'Enable this option to create a front pocket',
-      },
-      frontPocketNo: {
-        t: 'Do not create a front pocket',
-        d: 'Leave out the front pocket in the panel seam',
-      },
-      frontPocketYes: {
-        t: 'Create a front pocket',
-        d: 'This creates a front pocket in the panel seam',
-      },
-      lengthBonus: {
-        t: 'Length bonus',
-        d: 'The amount to lengthen the garment. A negative value will shorten it.',
-      },
-      neckDrop: {
-        t: 'Neck drop',
-        d: 'The amount the front of the neck will drop.',
-      },
-      shoulderEase: {
-        t: 'Shoulder ease',
-        d: 'The amount of ease at your shoulder. This increases the shoulder to shoulder distance to accommodate additional layers or thickness.',
-      },
-      shoulderShift: {
-        t: 'Shoulder shift',
-        d: 'This controls how far the shoulder seam is shifted to the front.',
-      },
-      shoulderSlopeReduction: {
-        t: 'Shoulder slope reduction',
-        d: 'The amount by which the shoulder slope is reduced to allow for shoulder padding.',
-      },
-      sleeveLengthBonus: {
-        t: 'Sleeve length bonus',
-        d: 'The amount to lengthen the sleeve. A negative value will shorten it.',
-      },
-      sleeveBend: {
-        t: 'Sleeve bend',
-        d: 'The angle of the sleeve at the elbow.',
-      },
-      sleevecapEase: {
-        t: 'Sleevecap ease',
-        d: 'The amount by which the sleevecap seam is longer than the armhole seam.',
       },
       sleevecapHeight: {
         t: 'Sleevecap height',
         d: 'Controls the height of the sleevecap.',
       },
-      sleevecapTopFactorX: {
-        t: 'Sleevecap top X',
-        d: 'Controls the horizontal location of the sleevecap top.',
+      sleevecapEase: {
+        t: 'Sleevecap ease',
+        d: 'The amount by which the sleevecap seam is longer than the armhole seam.',
       },
-      sleevecapTopFactorY: {
-        t: 'Sleevecap top Y',
-        d: 'Controls the height of the sleevecap. A higher value results in a higher and more narrow sleevecap.',
+      sleeveBend: {
+        t: 'Sleeve bend',
+        d: 'Controls the bend of the sleeve at the elbow.',
       },
-      sleevecapBackFactorX: {
-        t: 'Sleevecap back X',
-        d: 'Controls the placement of the sleevecap back pitchpoint on the X-axis (horizontal)',
+      sleeveLengthBonus: {
+        t: 'Sleeve length bonus',
+        d: 'The amount to lengthen the sleeve. A negative value will shorten it.',
       },
-      sleevecapBackFactorY: {
-        t: 'Sleevecap back Y',
-        d: 'Controls the placement of the sleevecap back pitchpoint on the Y-axis (vertical)',
-      },
-      sleevecapFrontFactorX: {
-        t: 'Sleevecap front X',
-        d: 'Controls the placement of the sleevecap front pitchpoint on the X-axis (horizontal)',
-      },
-      sleevecapFrontFactorY: {
-        t: 'Sleevecap front Y',
-        d: 'Controls the placement of the sleevecap front pitchpoint on the Y-axis (vertical)',
-      },
-      sleevecapQ1Offset: {
-        t: 'Sleevecap Q1 offset',
-        d: 'Controls the curvature of the sleevecap in the first quadrant (front armhole)',
-      },
-      sleevecapQ2Offset: {
-        t: 'Sleevecap Q2 offset',
-        d: 'Controls the curvature of the sleevecap in the second quadrant (front shoulder)',
-      },
-      sleevecapQ3Offset: {
-        t: 'Sleevecap Q3 offset',
-        d: 'Controls the curvature of the sleevecap in the third quadrant (back shoulder)',
-      },
-      sleevecapQ4Offset: {
-        t: 'Sleevecap Q4 offset',
-        d: 'Controls the curvature of the sleevecap in the fourth quadrant (back armhole)',
-      },
-      sleevecapQ1Spread1: {
-        t: 'Sleevecap Q1 downward spread',
-        d: 'Controls the spread of the sleevecap first quadrant curvature towards the armhole',
-      },
-      sleevecapQ1Spread2: {
-        t: 'Sleevecap Q1 upward spread',
-        d: 'Controls the spread of the sleevecap first quadrant curvature towards the shoulder',
-      },
-      sleevecapQ2Spread1: {
-        t: 'Sleevecap Q2 downward spread',
-        d: 'Controls the spread of the sleevecap second quadrant curvature towards the armhole',
-      },
-      sleevecapQ2Spread2: {
-        t: 'Sleevecap Q2 upward spread',
-        d: 'Controls the spread of the sleevecap second quadrant curvature towards the shoulder',
-      },
-      sleevecapQ3Spread1: {
-        t: 'Sleevecap Q3 upward spread',
-        d: 'Controls the spread of the sleevecap third quadrant curvature towards the shoulder',
-      },
-      sleevecapQ3Spread2: {
-        t: 'Sleevecap Q3 downward spread',
-        d: 'Controls the spread of the sleevecap third quadrant curvature towards the armhole',
-      },
-      sleevecapQ4Spread1: {
-        t: 'Sleevecap Q4 upward spread',
-        d: 'Controls the spread of the sleevecap fourth quadrant curvature towards the shoulder',
-      },
-      sleevecapQ4Spread2: {
-        t: 'Sleevecap Q4 downward spread',
-        d: 'Controls the spread of the sleevecap fourth quadrant curvature towards the armhole',
-      },
-      sleeveWidthGuarantee: {
-        t: 'Sleeve width guarantee',
-        d: 'Controls how much of the sleeve width will be guaranteed. This determines how much we can alter the sleeve width to fit the sleeve in the armhole.',
-      },
-      waistbandWidth: {
-        t: 'Waistband width',
-        d: 'The width of the waistband.',
-      },
-      yokeDrop: {
-        t: 'Yoke drop',
-        d: 'How far the yoke will drop down. Percentage of back neck-to-waist.',
-      },
-    },
-  },
-  diana: {
-    t: 'Diana draped top',
-    d: 'Diana is a top with a draped neckline.',
-    s: {
-      'largeShoulderWidth.t': 'Shoulder Width larger than anticipated',
-      'largeShoulderWidth.d':
-        'The pattern was not able to generate an optimal armhole shape using the given measurements and options. Please be aware that the generated pattern may not be correct. Please retake your measurements, verify that they are correct, and try generating a new pattern with the new measurements.',
-      waistLine: 'Waist Line',
-      chestLine: 'Chest Line',
-    },
-    p: {
-      back: 'Back',
-      front: 'Front',
-      base: 'Base',
-      sleevecap: 'Sleevecap',
-      sleeve: 'Sleeve',
-    },
-    o: {
       acrossBackFactor: {
         t: 'Across back factor',
         d: 'Controls your across back width as a factor of your shoulder to shoulder measurement.',
       },
       armholeDepth: {
         t: 'Armhole depth',
-        d: 'Controls the depth of the armhole. Higher values make a deeper armhole.',
+        d: 'Controls the depth of the armhole',
       },
       armholeDepthFactor: {
         t: 'Armhole depth factor (legacy)',
@@ -2777,7 +2617,7 @@ export const designs = {
       },
       backNeckCutout: {
         t: 'Back neck cutout',
-        d: 'How deep the neck is cut out at the back',
+        d: 'Controls how deep the neck is cutout in the back',
       },
       bicepsEase: {
         t: 'Biceps ease',
@@ -2789,11 +2629,7 @@ export const designs = {
       },
       chestEase: {
         t: 'Chest ease',
-        d: 'The amount of ease at your chest.',
-      },
-      cuffEase: {
-        t: 'Cuff ease',
-        d: 'The amount of ease at your wrist.',
+        d: 'Controls the amount of ease at the chest',
       },
       draftForHighBust: {
         t: 'Draft for high bust',
@@ -2843,9 +2679,107 @@ export const designs = {
         t: 'Shoulder slope reduction',
         d: 'The amount by which the shoulder slope is reduced to allow for shoulder padding.',
       },
-      sleeveLengthBonus: {
-        t: 'Sleeve length bonus',
-        d: 'The amount to lengthen the sleeve. A negative value will shorten it.',
+      armholeDartCurvedYes: {
+        t: 'Cruved princess seam',
+        d: 'The princess seam will have the v1 curvature',
+      },
+      armholeDartCurvedNo: {
+        t: 'Straighter princess seam',
+        d: 'The princess seam will have the v2 curvature',
+      },
+      cuffWidth: {
+        t: 'Cuff width',
+        d: 'The width of the cuff.',
+      },
+      frontPocket: {
+        t: 'Front pocket',
+        d: 'Enable this option to create a front pocket',
+      },
+      frontPocketNo: {
+        t: 'Do not create a front pocket',
+        d: 'Leave out the front pocket in the panel seam',
+      },
+      frontPocketYes: {
+        t: 'Create a front pocket',
+        d: 'This creates a front pocket in the panel seam',
+      },
+      fullBustAdjustment: {
+        t: 'Full Bust Adjustment',
+        d: 'Tries to adjust the jacket to better fit a full bust.',
+      },
+      fullBustAdjustmentNo: {
+        t: 'No Full Bust Adjustment',
+        d: 'Do not adjust the jacket to better fit a full bust.',
+      },
+      fullBustAdjustmentYes: {
+        t: 'Full Bust Adjustment',
+        d: 'Adjust the jacket to better fit a full bust.',
+      },
+      hemEase: {
+        t: 'Hem ease',
+        d: 'The amount of ease at the hem.',
+      },
+      neckDrop: {
+        t: 'Neck drop',
+        d: 'The amount the front of the neck will drop.',
+      },
+      shoulderShift: {
+        t: 'Shoulder shift',
+        d: 'This controls how far the shoulder seam is shifted to the front.',
+      },
+      waistAdjustment: {
+        t: 'Waist/Hips adjustment',
+        d: 'Adjusts the bottom of the denim jacket to match the hips measurement.',
+      },
+      waistAdjustmentNo: {
+        t: 'No waist/hips adjustment',
+        d: 'Do not Adjust the bottom of the denim jacket to match the hips measurement.',
+      },
+      waistAdjustmentYes: {
+        t: 'Waist/Hips adjustment',
+        d: 'Adjust the bottom of the denim jacket to match the hips measurement.',
+      },
+      waistbandWidth: {
+        t: 'Waistband width',
+        d: 'The width of the waistband.',
+      },
+      yokeDrop: {
+        t: 'Yoke drop',
+        d: 'How far the yoke will drop down. Percentage of back neck-to-waist.',
+      },
+    },
+  },
+  diana: {
+    t: 'Diana draped top',
+    d: 'Diana is a top with a draped neckline.',
+    s: {
+      backArmholeLength: 'The length of the armhole at the back of the garment',
+      backArmholeToArmholePitch:
+        'The length along the armhole from the bottom of the armhole to the back armhole pitch point',
+      frontArmholeLength: 'The length of the armhole at the front of the garment',
+      frontArmholeToArmholePitch:
+        'The length along the armhole from the bottom of the armhole to the front armhole pitch point',
+      sleevecapLength: 'The length of the sleevecap',
+      sleeveLength: 'The length of the sleeve',
+      sleevecapTarget: 'The theoretical length of the sleevecap we strive for',
+      sleevecapEase: 'The mount of sleevecap ease',
+      __sleevecapFactor: 'An internal variable that is used to tweak the sleevecap draft',
+      'largeShoulderWidth.t': 'Shoulder Width larger than anticipated',
+      'largeShoulderWidth.d':
+        'The pattern was not able to generate an optimal armhole shape using the given measurements and options. Please be aware that the generated pattern may not be correct. Please retake your measurements, verify that they are correct, and try generating a new pattern with the new measurements.',
+      waistLine: 'Waist Line',
+      chestLine: 'Chest Line',
+    },
+    p: {
+      sleeve: 'Sleeve',
+      back: 'Back',
+      front: 'Front',
+      base: 'Base',
+    },
+    o: {
+      cuffEase: {
+        t: 'Cuff ease',
+        d: 'The amount of ease at your wrist.',
       },
       sleevecapEase: {
         t: 'Sleevecap ease',
@@ -2923,9 +2857,89 @@ export const designs = {
         t: 'Sleevecap Q4 downward spread',
         d: 'Controls the spread of the sleevecap fourth quadrant curvature towards the armhole',
       },
+      sleeveLengthBonus: {
+        t: 'Sleeve length bonus',
+        d: 'The amount to lengthen the sleeve. A negative value will shorten it.',
+      },
       sleeveWidthGuarantee: {
         t: 'Sleeve width guarantee',
         d: 'Controls how much of the sleeve width will be guaranteed. This determines how much we can alter the sleeve width to fit the sleeve in the armhole.',
+      },
+      acrossBackFactor: {
+        t: 'Across back factor',
+        d: 'Controls your across back width as a factor of your shoulder to shoulder measurement.',
+      },
+      armholeDepth: {
+        t: 'Armhole depth',
+        d: 'Controls the depth of the armhole. Higher values make a deeper armhole.',
+      },
+      armholeDepthFactor: {
+        t: 'Armhole depth factor (legacy)',
+        d: 'Controls the depth of the armhole. Higher values make a deeper armhole. This option only applies to the legacy (v2) way of calculating the armhole depth.',
+      },
+      backNeckCutout: {
+        t: 'Back neck cutout',
+        d: 'How deep the neck is cut out at the back',
+      },
+      bicepsEase: {
+        t: 'Biceps ease',
+        d: 'The amount of ease at your upper arm. Note that while we try to respect this, fitting the sleeve to the armhole takes precedence over respecting the exact amount of ease.',
+      },
+      collarEase: {
+        t: 'Collar ease',
+        d: 'The amount of ease around your neck',
+      },
+      chestEase: {
+        t: 'Chest ease',
+        d: 'The amount of ease at your chest.',
+      },
+      draftForHighBust: {
+        t: 'Draft for high bust',
+        d: 'Draft the pattern using the high bust measurement if it is available, instead of using the chest measurement. This can result in a more fitted garment for people with breasts. (Please note that no additional adjustments or shaping is performed. Further manual adjustments may be needed for those with a larger difference between high bust and chest measurements.)',
+      },
+      draftForHighBustYes: {
+        t: 'Draft using the high bust measurement',
+        d: 'Drafts a pattern using the high bust measurement instead of the chest measurement. Suggested for most people with breasts.',
+      },
+      draftForHighBustNo: {
+        t: 'Draft using the chest measurement',
+        d: 'Drafts a pattern using the chest measurement. Suggested for most people without breasts.',
+      },
+      frontArmholeDeeper: {
+        t: 'Front armhole extra cutout',
+        d: 'How much do you want the front armhole to be cut out deeper than the back.',
+      },
+      legacyArmholeDepth: {
+        t: 'Legacy armhole depth',
+        d: 'Enable this option to use the legacy way to calculate the armhole depth (using biceps circumference) rather than the v3 way (using the waist to armpit measurement)',
+      },
+      legacyArmholeDepthNo: {
+        t: 'Calculate armhole depth the v3 way',
+        d: 'Uses the waist to armpit measurement to locate the bottom of the armhole',
+      },
+      legacyArmholeDepthYes: {
+        t: 'Calculate armhole depth the legacy (v2) way',
+        d: 'Uses the biceps measurement to locate the bottom of the armhole',
+      },
+      lengthBonus: {
+        t: 'Length bonus',
+        d: 'The amount to lengthen the garment. A negative value will shorten it.',
+      },
+      s3Collar: {
+        t: 'Shoulder seam shift: collar side',
+        d: 'Increase this option to shift the shoulder seam forward on the collar side. Decreasing it shifts it backwards.',
+      },
+      s3Armhole: {
+        t: 'Shoulder seam shift: armhole side',
+        d: 'Increase this option to shift the shoulder seam forward on the armhole side. Decreasing it shifts it backwards.',
+      },
+      shoulderEase: {
+        t: 'Shoulder ease',
+        d: 'The amount of ease at your shoulder. This increases the shoulder to shoulder distance to accommodate additional layers or thickness.',
+      },
+      shoulderSlopeReduction: {
+        t: 'Shoulder slope reduction',
+        d: 'The amount by which the shoulder slope is reduced to allow for shoulder padding.',
       },
       shoulderSeamLength: {
         t: 'Shoulder seam length',
@@ -2948,9 +2962,55 @@ export const designs = {
   examples: {
     t: 'Examples',
     d: 'A FreeSewing pattern with examples used throughout our documentation',
-    p: {},
     s: {},
-    o: {},
+    p: {
+      rectangle: 'Rectangle',
+      rectBase: 'Library polymorphism: base rectangle',
+      rect1: 'Library polymorphism: rectangle 1',
+      rect2: 'Library polymorphism: rectangle 2',
+      rect3: 'Library polymorphism: rectangle 3',
+      stacks_top: 'Stacks layout: top',
+      stacks_left: 'Stacks layout: left',
+      stacks_right: 'Stacks layout: right',
+      stacks_bottom: 'Stacks layout: bottom ',
+      stacks_leftEye: 'Stacks layout: left eye',
+      stacks_rightEye: 'Stacks layout: right eye',
+      stacks_mouth: 'Stacks layout: mouth',
+    },
+    o: {
+      noSa: {
+        t: 'No Seam Allowance',
+        d: 'Explicitly disabled seam allowance on this part, regardless of the pattern settings',
+      },
+      rectangleHeight: {
+        t: 'Rectangle height',
+        d: 'Height of the rectangle',
+      },
+      rectangleWidth: {
+        t: 'Rectangle width',
+        d: 'Width of the rectangle',
+      },
+      stackIt: {
+        t: 'Stack parts',
+        d: 'Causes parts to be stacked on top of each other',
+      },
+      x: {
+        t: 'X-Size',
+        d: 'Scales the examples along the X-axis',
+      },
+      y: {
+        t: 'Y-Size',
+        d: 'Scales the examples along the Y-axis',
+      },
+      examples_rect3_rectangleHeight: {
+        t: 'Rectangle height (rect3)',
+        d: 'Controls the height of this rectangle',
+      },
+      size: {
+        t: 'Stack size',
+        d: 'Controls the size of the stacked box',
+      },
+    },
   },
   florence: {
     t: 'Florence face mask',
@@ -3192,6 +3252,17 @@ export const designs = {
     t: 'Huey hoodie',
     d: 'Huey is a zip-up hoodie with optional front pockets.',
     s: {
+      backArmholeLength: 'The length of the armhole at the back of the garment',
+      backArmholeToArmholePitch:
+        'The length along the armhole from the bottom of the armhole to the back armhole pitch point',
+      frontArmholeLength: 'The length of the armhole at the front of the garment',
+      frontArmholeToArmholePitch:
+        'The length along the armhole from the bottom of the armhole to the front armhole pitch point',
+      sleevecapLength: 'The length of the sleevecap',
+      sleeveLength: 'The length of the sleeve',
+      sleevecapTarget: 'The theoretical length of the sleevecap we strive for',
+      sleevecapEase: 'The mount of sleevecap ease',
+      __sleevecapFactor: 'An internal variable that is used to tweak the sleevecap draft',
       'largeShoulderWidth.t': 'Shoulder Width larger than anticipated',
       'largeShoulderWidth.d':
         'The pattern was not able to generate an optimal armhole shape using the given measurements and options. Please be aware that the generated pattern may not be correct. Please retake your measurements, verify that they are correct, and try generating a new pattern with the new measurements.',
@@ -3215,100 +3286,19 @@ export const designs = {
       'ribbingYes.d': 'Include ribbing on sleeve and waistband',
     },
     p: {
+      sleeve: 'Sleeve',
       back: 'Back',
       front: 'Front',
       base: 'Base',
-      sleevecap: 'Sleevecap',
-      sleeve: 'Sleeve',
       cuff: 'Cuff',
       hood: 'Hood',
       pocket: 'Pocket',
       waistband: 'Waistband',
     },
     o: {
-      acrossBackFactor: {
-        t: 'Across back factor',
-        d: 'Controls your across back width as a factor of your shoulder to shoulder measurement.',
-      },
-      armholeDepth: {
-        t: 'Armhole depth',
-        d: 'Controls the depth of the armhole. Higher values make a deeper armhole.',
-      },
-      armholeDepthFactor: {
-        t: 'Armhole depth factor (legacy)',
-        d: 'Controls the depth of the armhole. Higher values make a deeper armhole. This option only applies to the legacy (v2) way of calculating the armhole depth.',
-      },
-      backNeckCutout: {
-        t: 'Back neck cutout',
-        d: 'How deep the neck is cut out at the back',
-      },
-      bicepsEase: {
-        t: 'Biceps ease',
-        d: 'The amount of ease at your upper arm. Note that while we try to respect this, fitting the sleeve to the armhole takes precedence over respecting the exact amount of ease.',
-      },
-      collarEase: {
-        t: 'Collar ease',
-        d: 'The amount of ease around your neck',
-      },
-      chestEase: {
-        t: 'Chest ease',
-        d: 'The amount of ease at your chest.',
-      },
       cuffEase: {
         t: 'Cuff ease',
         d: 'The amount of ease at your wrist.',
-      },
-      draftForHighBust: {
-        t: 'Draft for high bust',
-        d: 'Draft the pattern using the high bust measurement if it is available, instead of using the chest measurement. This can result in a more fitted garment for people with breasts. (Please note that no additional adjustments or shaping is performed. Further manual adjustments may be needed for those with a larger difference between high bust and chest measurements.)',
-      },
-      draftForHighBustYes: {
-        t: 'Draft using the high bust measurement',
-        d: 'Drafts a pattern using the high bust measurement instead of the chest measurement. Suggested for most people with breasts.',
-      },
-      draftForHighBustNo: {
-        t: 'Draft using the chest measurement',
-        d: 'Drafts a pattern using the chest measurement. Suggested for most people without breasts.',
-      },
-      frontArmholeDeeper: {
-        t: 'Front armhole extra cutout',
-        d: 'How much do you want the front armhole to be cut out deeper than the back.',
-      },
-      legacyArmholeDepth: {
-        t: 'Legacy armhole depth',
-        d: 'Enable this option to use the legacy way to calculate the armhole depth (using biceps circumference) rather than the v3 way (using the waist to armpit measurement)',
-      },
-      legacyArmholeDepthNo: {
-        t: 'Calculate armhole depth the v3 way',
-        d: 'Uses the waist to armpit measurement to locate the bottom of the armhole',
-      },
-      legacyArmholeDepthYes: {
-        t: 'Calculate armhole depth the legacy (v2) way',
-        d: 'Uses the biceps measurement to locate the bottom of the armhole',
-      },
-      lengthBonus: {
-        t: 'Length bonus',
-        d: 'The amount to lengthen the garment. A negative value will shorten it.',
-      },
-      s3Collar: {
-        t: 'Shoulder seam shift: collar side',
-        d: 'Increase this option to shift the shoulder seam forward on the collar side. Decreasing it shifts it backwards.',
-      },
-      s3Armhole: {
-        t: 'Shoulder seam shift: armhole side',
-        d: 'Increase this option to shift the shoulder seam forward on the armhole side. Decreasing it shifts it backwards.',
-      },
-      shoulderEase: {
-        t: 'Shoulder ease',
-        d: 'The amount of ease at your shoulder. This increases the shoulder to shoulder distance to accommodate additional layers or thickness.',
-      },
-      shoulderSlopeReduction: {
-        t: 'Shoulder slope reduction',
-        d: 'The amount by which the shoulder slope is reduced to allow for shoulder padding.',
-      },
-      sleeveLengthBonus: {
-        t: 'Sleeve length bonus',
-        d: 'The amount to lengthen the sleeve. A negative value will shorten it.',
       },
       sleevecapEase: {
         t: 'Sleevecap ease',
@@ -3386,9 +3376,89 @@ export const designs = {
         t: 'Sleevecap Q4 downward spread',
         d: 'Controls the spread of the sleevecap fourth quadrant curvature towards the armhole',
       },
+      sleeveLengthBonus: {
+        t: 'Sleeve length bonus',
+        d: 'The amount to lengthen the sleeve. A negative value will shorten it.',
+      },
       sleeveWidthGuarantee: {
         t: 'Sleeve width guarantee',
         d: 'Controls how much of the sleeve width will be guaranteed. This determines how much we can alter the sleeve width to fit the sleeve in the armhole.',
+      },
+      acrossBackFactor: {
+        t: 'Across back factor',
+        d: 'Controls your across back width as a factor of your shoulder to shoulder measurement.',
+      },
+      armholeDepth: {
+        t: 'Armhole depth',
+        d: 'Controls the depth of the armhole. Higher values make a deeper armhole.',
+      },
+      armholeDepthFactor: {
+        t: 'Armhole depth factor (legacy)',
+        d: 'Controls the depth of the armhole. Higher values make a deeper armhole. This option only applies to the legacy (v2) way of calculating the armhole depth.',
+      },
+      backNeckCutout: {
+        t: 'Back neck cutout',
+        d: 'How deep the neck is cut out at the back',
+      },
+      bicepsEase: {
+        t: 'Biceps ease',
+        d: 'The amount of ease at your upper arm. Note that while we try to respect this, fitting the sleeve to the armhole takes precedence over respecting the exact amount of ease.',
+      },
+      collarEase: {
+        t: 'Collar ease',
+        d: 'The amount of ease around your neck',
+      },
+      chestEase: {
+        t: 'Chest ease',
+        d: 'The amount of ease at your chest.',
+      },
+      draftForHighBust: {
+        t: 'Draft for high bust',
+        d: 'Draft the pattern using the high bust measurement if it is available, instead of using the chest measurement. This can result in a more fitted garment for people with breasts. (Please note that no additional adjustments or shaping is performed. Further manual adjustments may be needed for those with a larger difference between high bust and chest measurements.)',
+      },
+      draftForHighBustYes: {
+        t: 'Draft using the high bust measurement',
+        d: 'Drafts a pattern using the high bust measurement instead of the chest measurement. Suggested for most people with breasts.',
+      },
+      draftForHighBustNo: {
+        t: 'Draft using the chest measurement',
+        d: 'Drafts a pattern using the chest measurement. Suggested for most people without breasts.',
+      },
+      frontArmholeDeeper: {
+        t: 'Front armhole extra cutout',
+        d: 'How much do you want the front armhole to be cut out deeper than the back.',
+      },
+      legacyArmholeDepth: {
+        t: 'Legacy armhole depth',
+        d: 'Enable this option to use the legacy way to calculate the armhole depth (using biceps circumference) rather than the v3 way (using the waist to armpit measurement)',
+      },
+      legacyArmholeDepthNo: {
+        t: 'Calculate armhole depth the v3 way',
+        d: 'Uses the waist to armpit measurement to locate the bottom of the armhole',
+      },
+      legacyArmholeDepthYes: {
+        t: 'Calculate armhole depth the legacy (v2) way',
+        d: 'Uses the biceps measurement to locate the bottom of the armhole',
+      },
+      lengthBonus: {
+        t: 'Length bonus',
+        d: 'The amount to lengthen the garment. A negative value will shorten it.',
+      },
+      s3Collar: {
+        t: 'Shoulder seam shift: collar side',
+        d: 'Increase this option to shift the shoulder seam forward on the collar side. Decreasing it shifts it backwards.',
+      },
+      s3Armhole: {
+        t: 'Shoulder seam shift: armhole side',
+        d: 'Increase this option to shift the shoulder seam forward on the armhole side. Decreasing it shifts it backwards.',
+      },
+      shoulderEase: {
+        t: 'Shoulder ease',
+        d: 'The amount of ease at your shoulder. This increases the shoulder to shoulder distance to accommodate additional layers or thickness.',
+      },
+      shoulderSlopeReduction: {
+        t: 'Shoulder slope reduction',
+        d: 'The amount by which the shoulder slope is reduced to allow for shoulder padding.',
       },
       pocket: {
         t: 'Pocket',
@@ -3448,6 +3518,17 @@ export const designs = {
     t: 'Hugo hoodie',
     d: 'Hugo is a hooded jumper with raglan sleeves.',
     s: {
+      backArmholeLength: 'The length of the armhole at the back of the garment',
+      backArmholeToArmholePitch:
+        'The length along the armhole from the bottom of the armhole to the back armhole pitch point',
+      frontArmholeLength: 'The length of the armhole at the front of the garment',
+      frontArmholeToArmholePitch:
+        'The length along the armhole from the bottom of the armhole to the front armhole pitch point',
+      sleevecapLength: 'The length of the sleevecap',
+      sleeveLength: 'The length of the sleeve',
+      sleevecapTarget: 'The theoretical length of the sleevecap we strive for',
+      sleevecapEase: 'The mount of sleevecap ease',
+      __sleevecapFactor: 'An internal variable that is used to tweak the sleevecap draft',
       'largeShoulderWidth.t': 'Shoulder Width larger than anticipated',
       'largeShoulderWidth.d':
         'The pattern was not able to generate an optimal armhole shape using the given measurements and options. Please be aware that the generated pattern may not be correct. Please retake your measurements, verify that they are correct, and try generating a new pattern with the new measurements.',
@@ -3473,11 +3554,10 @@ export const designs = {
         'The neck opening of {{{ opening }}} is smaller than the head circumference of {{{ head }}}.\n\nPlease check and adjust Collar Ease option setting as needed to ensure the neck opening is large enough to accommodate head circumference.',
     },
     p: {
+      sleeve: 'Sleeve',
       back: 'Back',
       front: 'Front',
       base: 'Base',
-      sleevecap: 'Sleevecap',
-      sleeve: 'Sleeve',
       cuff: 'Cuff',
       hoodCenter: 'Hood center',
       hoodSide: 'Hood side',
@@ -3487,89 +3567,9 @@ export const designs = {
       waistband: 'Waistband',
     },
     o: {
-      acrossBackFactor: {
-        t: 'Across back factor',
-        d: 'Controls your across back width as a factor of your shoulder to shoulder measurement.',
-      },
-      armholeDepth: {
-        t: 'Armhole depth',
-        d: 'Controls the depth of the armhole. Higher values make a deeper armhole.',
-      },
-      armholeDepthFactor: {
-        t: 'Armhole depth factor (legacy)',
-        d: 'Controls the depth of the armhole. Higher values make a deeper armhole. This option only applies to the legacy (v2) way of calculating the armhole depth.',
-      },
-      backNeckCutout: {
-        t: 'Back neck cutout',
-        d: 'How deep the neck is cut out at the back',
-      },
-      bicepsEase: {
-        t: 'Biceps ease',
-        d: 'The amount of ease at your upper arm. Note that while we try to respect this, fitting the sleeve to the armhole takes precedence over respecting the exact amount of ease.',
-      },
-      collarEase: {
-        t: 'Collar ease',
-        d: 'The amount of ease around your neck',
-      },
-      chestEase: {
-        t: 'Chest ease',
-        d: 'The amount of ease at your chest.',
-      },
       cuffEase: {
         t: 'Cuff ease',
         d: 'The amount of ease at your wrist.',
-      },
-      draftForHighBust: {
-        t: 'Draft for high bust',
-        d: 'Draft the pattern using the high bust measurement if it is available, instead of using the chest measurement. This can result in a more fitted garment for people with breasts. (Please note that no additional adjustments or shaping is performed. Further manual adjustments may be needed for those with a larger difference between high bust and chest measurements.)',
-      },
-      draftForHighBustYes: {
-        t: 'Draft using the high bust measurement',
-        d: 'Drafts a pattern using the high bust measurement instead of the chest measurement. Suggested for most people with breasts.',
-      },
-      draftForHighBustNo: {
-        t: 'Draft using the chest measurement',
-        d: 'Drafts a pattern using the chest measurement. Suggested for most people without breasts.',
-      },
-      frontArmholeDeeper: {
-        t: 'Front armhole extra cutout',
-        d: 'How much do you want the front armhole to be cut out deeper than the back.',
-      },
-      legacyArmholeDepth: {
-        t: 'Legacy armhole depth',
-        d: 'Enable this option to use the legacy way to calculate the armhole depth (using biceps circumference) rather than the v3 way (using the waist to armpit measurement)',
-      },
-      legacyArmholeDepthNo: {
-        t: 'Calculate armhole depth the v3 way',
-        d: 'Uses the waist to armpit measurement to locate the bottom of the armhole',
-      },
-      legacyArmholeDepthYes: {
-        t: 'Calculate armhole depth the legacy (v2) way',
-        d: 'Uses the biceps measurement to locate the bottom of the armhole',
-      },
-      lengthBonus: {
-        t: 'Length bonus',
-        d: 'The amount to lengthen the garment. A negative value will shorten it.',
-      },
-      s3Collar: {
-        t: 'Shoulder seam shift: collar side',
-        d: 'Increase this option to shift the shoulder seam forward on the collar side. Decreasing it shifts it backwards.',
-      },
-      s3Armhole: {
-        t: 'Shoulder seam shift: armhole side',
-        d: 'Increase this option to shift the shoulder seam forward on the armhole side. Decreasing it shifts it backwards.',
-      },
-      shoulderEase: {
-        t: 'Shoulder ease',
-        d: 'The amount of ease at your shoulder. This increases the shoulder to shoulder distance to accommodate additional layers or thickness.',
-      },
-      shoulderSlopeReduction: {
-        t: 'Shoulder slope reduction',
-        d: 'The amount by which the shoulder slope is reduced to allow for shoulder padding.',
-      },
-      sleeveLengthBonus: {
-        t: 'Sleeve length bonus',
-        d: 'The amount to lengthen the sleeve. A negative value will shorten it.',
       },
       sleevecapEase: {
         t: 'Sleevecap ease',
@@ -3647,79 +3647,14 @@ export const designs = {
         t: 'Sleevecap Q4 downward spread',
         d: 'Controls the spread of the sleevecap fourth quadrant curvature towards the armhole',
       },
+      sleeveLengthBonus: {
+        t: 'Sleeve length bonus',
+        d: 'The amount to lengthen the sleeve. A negative value will shorten it.',
+      },
       sleeveWidthGuarantee: {
         t: 'Sleeve width guarantee',
         d: 'Controls how much of the sleeve width will be guaranteed. This determines how much we can alter the sleeve width to fit the sleeve in the armhole.',
       },
-      ribbingHeight: {
-        t: 'Ribbing height',
-        d: 'Controls the height of the ribbing',
-      },
-      ribbingStretch: {
-        t: 'Ribbing stretch',
-        d: 'Use this to adapt the pattern to how stretchy the ribbing that you are using is.',
-      },
-      pocketWidth: {
-        t: 'Pocket width',
-        d: 'Determined the width of the pocket.',
-      },
-      hipsEase: {
-        t: 'Hips ease',
-        d: 'The amount of ease at your hips.',
-      },
-    },
-  },
-  jaeger: {
-    t: 'Jaeger jacket',
-    d: 'Jaeger is a sport coat style jacket with two buttons and patch pockets.',
-    s: {
-      'largeShoulderWidth.t': 'Shoulder Width larger than anticipated',
-      'largeShoulderWidth.d':
-        'The pattern was not able to generate an optimal armhole shape using the given measurements and options. Please be aware that the generated pattern may not be correct. Please retake your measurements, verify that they are correct, and try generating a new pattern with the new measurements.',
-      waistLine: 'Waist Line',
-      chestLine: 'Chest Line',
-      'cutFrontFacing.t': 'The front facing is not shown',
-      'cutFrontFacing.d':
-        'The **Front facing** (1a) is not shown, but you can trace it from the Front part (1), which has the facing/lining boundary on it (not including seam allowance).',
-      'cutFrontLining.t': 'The front lining is not shown',
-      'cutFrontLining.d':
-        'The **Front lining** (1b) is not shown, but you can trace it from the Front part (1), which has the facing/lining boundary on it (not including seam allowance).',
-      'cutChestPiece.t': 'The chest piece is not shown',
-      'cutChestPiece.d':
-        'The **Chest piece** (1c) is not shown, but you can trace it from the Front part (1), which has the chest piece boundary on it (not including seam allowance).',
-      'cutInnerPocketBag.t': 'The inner pocket bag is not shown',
-      'cutInnerPocketBag.d':
-        'The **Inner pocket bag** is a rectangular piece of lining {{{ width }}} wide and {{{ length }}} long.',
-      'cutInnerPocketWelt.t': 'The inner pocket welt is not shown',
-      'cutInnerPocketWelt.d':
-        'The **Inner pocket welt** is a rectangular piece of fabric {{{ width }}} wide and {{{ length }}} long.',
-      foldAlongThisLine: 'Fold along this line',
-    },
-    p: {
-      back: 'Back',
-      front: 'Front',
-      base: 'Base',
-      sleevecap: 'Sleevecap',
-      sleeve: 'Sleeve',
-      topSleeve: 'Top sleeve',
-      underSleeve: 'Under sleeve',
-      backBase: 'Back base',
-      chestPocketBag: 'Chest pocket bag',
-      chestPocketWelt: 'Chest pocket welt',
-      collar: 'Collar',
-      collarStand: 'Collar stand',
-      frontBase: 'Front base',
-      frontFacing: 'Front facing',
-      frontLining: 'Front lining',
-      chestPiece: 'Chest piece',
-      innerPocketBag: 'Inner pocket bag',
-      innerPocketWelt: 'Inner pocket welt',
-      pocket: 'Pocket',
-      pocketLining: 'Pocket lining',
-      side: 'Side',
-      underCollar: 'Under collar',
-    },
-    o: {
       acrossBackFactor: {
         t: 'Across back factor',
         d: 'Controls your across back width as a factor of your shoulder to shoulder measurement.',
@@ -3747,10 +3682,6 @@ export const designs = {
       chestEase: {
         t: 'Chest ease',
         d: 'The amount of ease at your chest.',
-      },
-      cuffEase: {
-        t: 'Cuff ease',
-        d: 'The amount of ease at your wrist.',
       },
       draftForHighBust: {
         t: 'Draft for high bust',
@@ -3800,9 +3731,95 @@ export const designs = {
         t: 'Shoulder slope reduction',
         d: 'The amount by which the shoulder slope is reduced to allow for shoulder padding.',
       },
-      sleeveLengthBonus: {
-        t: 'Sleeve length bonus',
-        d: 'The amount to lengthen the sleeve. A negative value will shorten it.',
+      ribbingHeight: {
+        t: 'Ribbing height',
+        d: 'Controls the height of the ribbing',
+      },
+      ribbingStretch: {
+        t: 'Ribbing stretch',
+        d: 'Use this to adapt the pattern to how stretchy the ribbing that you are using is.',
+      },
+      pocketWidth: {
+        t: 'Pocket width',
+        d: 'Determined the width of the pocket.',
+      },
+      hipsEase: {
+        t: 'Hips ease',
+        d: 'The amount of ease at your hips.',
+      },
+    },
+  },
+  jaeger: {
+    t: 'Jaeger jacket',
+    d: 'Jaeger is a sport coat style jacket with two buttons and patch pockets.',
+    s: {
+      backArmholeLength: 'The length of the armhole at the back of the garment',
+      backArmholeToArmholePitch:
+        'The length along the armhole from the bottom of the armhole to the back armhole pitch point',
+      frontArmholeLength: 'The length of the armhole at the front of the garment',
+      frontArmholeToArmholePitch:
+        'The length along the armhole from the bottom of the armhole to the front armhole pitch point',
+      sleevecapLength: 'The length of the sleevecap',
+      sleeveLength: 'The length of the sleeve',
+      sleevecapTarget: 'The theoretical length of the sleevecap we strive for',
+      sleevecapEase: 'The mount of sleevecap ease',
+      __sleevecapFactor: 'An internal variable that is used to tweak the sleevecap draft',
+      'largeShoulderWidth.t': 'Shoulder Width larger than anticipated',
+      'largeShoulderWidth.d':
+        'The pattern was not able to generate an optimal armhole shape using the given measurements and options. Please be aware that the generated pattern may not be correct. Please retake your measurements, verify that they are correct, and try generating a new pattern with the new measurements.',
+      waistLine: 'Waist Line',
+      chestLine: 'Chest Line',
+      'cutFrontFacing.t': 'The front facing is not shown',
+      'cutFrontFacing.d':
+        'The **Front facing** (1a) is not shown, but you can trace it from the Front part (1), which has the facing/lining boundary on it (not including seam allowance).',
+      'cutFrontLining.t': 'The front lining is not shown',
+      'cutFrontLining.d':
+        'The **Front lining** (1b) is not shown, but you can trace it from the Front part (1), which has the facing/lining boundary on it (not including seam allowance).',
+      'cutChestPiece.t': 'The chest piece is not shown',
+      'cutChestPiece.d':
+        'The **Chest piece** (1c) is not shown, but you can trace it from the Front part (1), which has the chest piece boundary on it (not including seam allowance).',
+      'cutInnerPocketBag.t': 'The inner pocket bag is not shown',
+      'cutInnerPocketBag.d':
+        'The **Inner pocket bag** is a rectangular piece of lining {{{ width }}} wide and {{{ length }}} long.',
+      'cutInnerPocketWelt.t': 'The inner pocket welt is not shown',
+      'cutInnerPocketWelt.d':
+        'The **Inner pocket welt** is a rectangular piece of fabric {{{ width }}} wide and {{{ length }}} long.',
+      foldAlongThisLine: 'Fold along this line',
+    },
+    p: {
+      topsleeve: 'Topsleeve',
+      undersleeve: 'Undersleeve',
+      twoPartSleeve: 'Two-Part Sleeve (base)',
+      sleeve: 'Sleeve',
+      back: 'Back',
+      front: 'Front',
+      base: 'Base',
+      backBase: 'Back base',
+      chestPocketBag: 'Chest pocket bag',
+      chestPocketWelt: 'Chest pocket welt',
+      collar: 'Collar',
+      collarStand: 'Collar stand',
+      frontBase: 'Front base',
+      frontFacing: 'Front facing',
+      frontLining: 'Front lining',
+      chestPiece: 'Chest piece',
+      innerPocketBag: 'Inner pocket bag',
+      innerPocketWelt: 'Inner pocket welt',
+      pocket: 'Pocket',
+      pocketLining: 'Pocket lining',
+      side: 'Side',
+      topSleeve: 'Top sleeve',
+      underCollar: 'Under collar',
+      underSleeve: 'Under sleeve',
+    },
+    o: {
+      cuffEase: {
+        t: 'Cuff ease',
+        d: 'The amount of ease at your wrist.',
+      },
+      sleevecapHeight: {
+        t: 'Sleevecap height',
+        d: 'Controls the height of the sleevecap.',
       },
       sleevecapEase: {
         t: 'Sleevecap ease',
@@ -3812,9 +3829,85 @@ export const designs = {
         t: 'Sleeve bend',
         d: 'Controls the bend of the sleeve at the elbow.',
       },
-      sleevecapHeight: {
-        t: 'Sleevecap height',
-        d: 'Controls the height of the sleevecap.',
+      sleeveLengthBonus: {
+        t: 'Sleeve length bonus',
+        d: 'The amount to lengthen the sleeve. A negative value will shorten it.',
+      },
+      acrossBackFactor: {
+        t: 'Across back factor',
+        d: 'Controls your across back width as a factor of your shoulder to shoulder measurement.',
+      },
+      armholeDepth: {
+        t: 'Armhole depth',
+        d: 'Controls the depth of the armhole. Higher values make a deeper armhole.',
+      },
+      armholeDepthFactor: {
+        t: 'Armhole depth factor (legacy)',
+        d: 'Controls the depth of the armhole. Higher values make a deeper armhole. This option only applies to the legacy (v2) way of calculating the armhole depth.',
+      },
+      backNeckCutout: {
+        t: 'Back neck cutout',
+        d: 'How deep the neck is cut out at the back',
+      },
+      bicepsEase: {
+        t: 'Biceps ease',
+        d: 'The amount of ease at your upper arm. Note that while we try to respect this, fitting the sleeve to the armhole takes precedence over respecting the exact amount of ease.',
+      },
+      collarEase: {
+        t: 'Collar ease',
+        d: 'The amount of ease around your neck',
+      },
+      chestEase: {
+        t: 'Chest ease',
+        d: 'The amount of ease at your chest.',
+      },
+      draftForHighBust: {
+        t: 'Draft for high bust',
+        d: 'Draft the pattern using the high bust measurement if it is available, instead of using the chest measurement. This can result in a more fitted garment for people with breasts. (Please note that no additional adjustments or shaping is performed. Further manual adjustments may be needed for those with a larger difference between high bust and chest measurements.)',
+      },
+      draftForHighBustYes: {
+        t: 'Draft using the high bust measurement',
+        d: 'Drafts a pattern using the high bust measurement instead of the chest measurement. Suggested for most people with breasts.',
+      },
+      draftForHighBustNo: {
+        t: 'Draft using the chest measurement',
+        d: 'Drafts a pattern using the chest measurement. Suggested for most people without breasts.',
+      },
+      frontArmholeDeeper: {
+        t: 'Front armhole extra cutout',
+        d: 'How much do you want the front armhole to be cut out deeper than the back.',
+      },
+      legacyArmholeDepth: {
+        t: 'Legacy armhole depth',
+        d: 'Enable this option to use the legacy way to calculate the armhole depth (using biceps circumference) rather than the v3 way (using the waist to armpit measurement)',
+      },
+      legacyArmholeDepthNo: {
+        t: 'Calculate armhole depth the v3 way',
+        d: 'Uses the waist to armpit measurement to locate the bottom of the armhole',
+      },
+      legacyArmholeDepthYes: {
+        t: 'Calculate armhole depth the legacy (v2) way',
+        d: 'Uses the biceps measurement to locate the bottom of the armhole',
+      },
+      lengthBonus: {
+        t: 'Length bonus',
+        d: 'The amount to lengthen the garment. A negative value will shorten it.',
+      },
+      s3Collar: {
+        t: 'Shoulder seam shift: collar side',
+        d: 'Increase this option to shift the shoulder seam forward on the collar side. Decreasing it shifts it backwards.',
+      },
+      s3Armhole: {
+        t: 'Shoulder seam shift: armhole side',
+        d: 'Increase this option to shift the shoulder seam forward on the armhole side. Decreasing it shifts it backwards.',
+      },
+      shoulderEase: {
+        t: 'Shoulder ease',
+        d: 'The amount of ease at your shoulder. This increases the shoulder to shoulder distance to accommodate additional layers or thickness.',
+      },
+      shoulderSlopeReduction: {
+        t: 'Shoulder slope reduction',
+        d: 'The amount by which the shoulder slope is reduced to allow for shoulder padding.',
       },
       centerBackDart: {
         t: 'Center back dart',
@@ -4042,6 +4135,17 @@ export const designs = {
     t: 'Jett jacket',
     d: 'A FreeSewing pattern for a bomber or letterman jacket',
     s: {
+      backArmholeLength: 'The length of the armhole at the back of the garment',
+      backArmholeToArmholePitch:
+        'The length along the armhole from the bottom of the armhole to the back armhole pitch point',
+      frontArmholeLength: 'The length of the armhole at the front of the garment',
+      frontArmholeToArmholePitch:
+        'The length along the armhole from the bottom of the armhole to the front armhole pitch point',
+      sleevecapLength: 'The length of the sleevecap',
+      sleeveLength: 'The length of the sleeve',
+      sleevecapTarget: 'The theoretical length of the sleevecap we strive for',
+      sleevecapEase: 'The mount of sleevecap ease',
+      __sleevecapFactor: 'An internal variable that is used to tweak the sleevecap draft',
       'largeShoulderWidth.t': 'Shoulder Width larger than anticipated',
       'largeShoulderWidth.d':
         'The pattern was not able to generate an optimal armhole shape using the given measurements and options. Please be aware that the generated pattern may not be correct. Please retake your measurements, verify that they are correct, and try generating a new pattern with the new measurements.',
@@ -4055,11 +4159,11 @@ export const designs = {
         'HPS to waist front is smaller than HPS to waist back.\nDid you take the HPS to waist front measurement down over the bust?',
     },
     p: {
+      sleeve: 'Sleeve',
       back: 'Back',
       front: 'Front',
       base: 'Base',
       sleevecap: 'Sleevecap',
-      sleeve: 'Sleeve',
       collar_ribbing: 'Collar ribbing',
       cuff: 'Cuff',
       yoke: 'Yoke',
@@ -4069,89 +4173,9 @@ export const designs = {
       waistband_ends: 'Waistband extension',
     },
     o: {
-      acrossBackFactor: {
-        t: 'Across back factor',
-        d: 'Controls your across back width as a factor of your shoulder to shoulder measurement.',
-      },
-      armholeDepth: {
-        t: 'Armhole depth',
-        d: 'Controls the depth of the armhole. Higher values make a deeper armhole.',
-      },
-      armholeDepthFactor: {
-        t: 'Armhole depth factor (legacy)',
-        d: 'Controls the depth of the armhole. Higher values make a deeper armhole. This option only applies to the legacy (v2) way of calculating the armhole depth.',
-      },
-      backNeckCutout: {
-        t: 'Back neck cutout',
-        d: 'How deep the neck is cut out at the back',
-      },
-      bicepsEase: {
-        t: 'Biceps ease',
-        d: 'The amount of ease at your upper arm. Note that while we try to respect this, fitting the sleeve to the armhole takes precedence over respecting the exact amount of ease.',
-      },
-      collarEase: {
-        t: 'Collar ease',
-        d: 'The amount of ease around your neck',
-      },
-      chestEase: {
-        t: 'Chest ease',
-        d: 'The amount of ease at your chest.',
-      },
       cuffEase: {
         t: 'Cuff ease',
         d: 'The amount of ease at your wrist.',
-      },
-      draftForHighBust: {
-        t: 'Draft for high bust',
-        d: 'Draft the pattern using the high bust measurement if it is available, instead of using the chest measurement. This can result in a more fitted garment for people with breasts. (Please note that no additional adjustments or shaping is performed. Further manual adjustments may be needed for those with a larger difference between high bust and chest measurements.)',
-      },
-      draftForHighBustYes: {
-        t: 'Draft using the high bust measurement',
-        d: 'Drafts a pattern using the high bust measurement instead of the chest measurement. Suggested for most people with breasts.',
-      },
-      draftForHighBustNo: {
-        t: 'Draft using the chest measurement',
-        d: 'Drafts a pattern using the chest measurement. Suggested for most people without breasts.',
-      },
-      frontArmholeDeeper: {
-        t: 'Front armhole extra cutout',
-        d: 'How much do you want the front armhole to be cut out deeper than the back.',
-      },
-      legacyArmholeDepth: {
-        t: 'Legacy armhole depth',
-        d: 'Enable this option to use the legacy way to calculate the armhole depth (using biceps circumference) rather than the v3 way (using the waist to armpit measurement)',
-      },
-      legacyArmholeDepthNo: {
-        t: 'Calculate armhole depth the v3 way',
-        d: 'Uses the waist to armpit measurement to locate the bottom of the armhole',
-      },
-      legacyArmholeDepthYes: {
-        t: 'Calculate armhole depth the legacy (v2) way',
-        d: 'Uses the biceps measurement to locate the bottom of the armhole',
-      },
-      lengthBonus: {
-        t: 'Length bonus',
-        d: 'The amount to lengthen the garment. A negative value will shorten it.',
-      },
-      s3Collar: {
-        t: 'Shoulder seam shift: collar side',
-        d: 'Increase this option to shift the shoulder seam forward on the collar side. Decreasing it shifts it backwards.',
-      },
-      s3Armhole: {
-        t: 'Shoulder seam shift: armhole side',
-        d: 'Increase this option to shift the shoulder seam forward on the armhole side. Decreasing it shifts it backwards.',
-      },
-      shoulderEase: {
-        t: 'Shoulder ease',
-        d: 'The amount of ease at your shoulder. This increases the shoulder to shoulder distance to accommodate additional layers or thickness.',
-      },
-      shoulderSlopeReduction: {
-        t: 'Shoulder slope reduction',
-        d: 'The amount by which the shoulder slope is reduced to allow for shoulder padding.',
-      },
-      sleeveLengthBonus: {
-        t: 'Sleeve length bonus',
-        d: 'The amount to lengthen the sleeve. A negative value will shorten it.',
       },
       sleevecapEase: {
         t: 'Sleevecap ease',
@@ -4229,9 +4253,89 @@ export const designs = {
         t: 'Sleevecap Q4 downward spread',
         d: 'Controls the spread of the sleevecap fourth quadrant curvature towards the armhole',
       },
+      sleeveLengthBonus: {
+        t: 'Sleeve length bonus',
+        d: 'The amount to lengthen the sleeve. A negative value will shorten it.',
+      },
       sleeveWidthGuarantee: {
         t: 'Sleeve width guarantee',
         d: 'Controls how much of the sleeve width will be guaranteed. This determines how much we can alter the sleeve width to fit the sleeve in the armhole.',
+      },
+      acrossBackFactor: {
+        t: 'Across back factor',
+        d: 'Controls your across back width as a factor of your shoulder to shoulder measurement.',
+      },
+      armholeDepth: {
+        t: 'Armhole depth',
+        d: 'Controls the depth of the armhole. Higher values make a deeper armhole.',
+      },
+      armholeDepthFactor: {
+        t: 'Armhole depth factor (legacy)',
+        d: 'Controls the depth of the armhole. Higher values make a deeper armhole. This option only applies to the legacy (v2) way of calculating the armhole depth.',
+      },
+      backNeckCutout: {
+        t: 'Back neck cutout',
+        d: 'How deep the neck is cut out at the back',
+      },
+      bicepsEase: {
+        t: 'Biceps ease',
+        d: 'The amount of ease at your upper arm. Note that while we try to respect this, fitting the sleeve to the armhole takes precedence over respecting the exact amount of ease.',
+      },
+      collarEase: {
+        t: 'Collar ease',
+        d: 'The amount of ease around your neck',
+      },
+      chestEase: {
+        t: 'Chest ease',
+        d: 'The amount of ease at your chest.',
+      },
+      draftForHighBust: {
+        t: 'Draft for high bust',
+        d: 'Draft the pattern using the high bust measurement if it is available, instead of using the chest measurement. This can result in a more fitted garment for people with breasts. (Please note that no additional adjustments or shaping is performed. Further manual adjustments may be needed for those with a larger difference between high bust and chest measurements.)',
+      },
+      draftForHighBustYes: {
+        t: 'Draft using the high bust measurement',
+        d: 'Drafts a pattern using the high bust measurement instead of the chest measurement. Suggested for most people with breasts.',
+      },
+      draftForHighBustNo: {
+        t: 'Draft using the chest measurement',
+        d: 'Drafts a pattern using the chest measurement. Suggested for most people without breasts.',
+      },
+      frontArmholeDeeper: {
+        t: 'Front armhole extra cutout',
+        d: 'How much do you want the front armhole to be cut out deeper than the back.',
+      },
+      legacyArmholeDepth: {
+        t: 'Legacy armhole depth',
+        d: 'Enable this option to use the legacy way to calculate the armhole depth (using biceps circumference) rather than the v3 way (using the waist to armpit measurement)',
+      },
+      legacyArmholeDepthNo: {
+        t: 'Calculate armhole depth the v3 way',
+        d: 'Uses the waist to armpit measurement to locate the bottom of the armhole',
+      },
+      legacyArmholeDepthYes: {
+        t: 'Calculate armhole depth the legacy (v2) way',
+        d: 'Uses the biceps measurement to locate the bottom of the armhole',
+      },
+      lengthBonus: {
+        t: 'Length bonus',
+        d: 'The amount to lengthen the garment. A negative value will shorten it.',
+      },
+      s3Collar: {
+        t: 'Shoulder seam shift: collar side',
+        d: 'Increase this option to shift the shoulder seam forward on the collar side. Decreasing it shifts it backwards.',
+      },
+      s3Armhole: {
+        t: 'Shoulder seam shift: armhole side',
+        d: 'Increase this option to shift the shoulder seam forward on the armhole side. Decreasing it shifts it backwards.',
+      },
+      shoulderEase: {
+        t: 'Shoulder ease',
+        d: 'The amount of ease at your shoulder. This increases the shoulder to shoulder distance to accommodate additional layers or thickness.',
+      },
+      shoulderSlopeReduction: {
+        t: 'Shoulder slope reduction',
+        d: 'The amount by which the shoulder slope is reduced to allow for shoulder padding.',
       },
       hipsEase: {
         t: 'Hips ease',
@@ -4281,13 +4385,13 @@ export const designs = {
         t: 'No',
         d: "Don't adjust the dart leg lengths",
       },
-      bustDartPercentage: {
-        t: 'FBA adjustment percentage',
-        d: 'How much of the effect of the FBA to use.',
-      },
       bustDartOffset: {
         t: 'Bust dart offset',
         d: 'How close to the bust apex to start the bust dart',
+      },
+      pocketCornerOffset: {
+        t: 'Pocket corner offset',
+        d: 'How close to the corner do you want the pocket to start',
       },
       ribbing: {
         t: 'Ribbing',
@@ -4295,9 +4399,11 @@ export const designs = {
       },
       ribbingYes: {
         t: 'Yes',
+        d: 'Use ribbing for waistband and cuffs',
       },
       ribbingNo: {
         t: 'No',
+        d: 'Do not use ribbing for waistband and cuffs',
       },
       ribbingEndsPercentage: {
         t: 'Waistband extension percentage',
@@ -4327,11 +4433,17 @@ export const designs = {
         t: 'Yoke',
         d: "Whether to draft the back panel with a yoke across the shoulders. The yoke does no extra shaping right now, so this doesn't affect the fit.",
       },
+      waistEase: {
+        t: 'Waist ease',
+        d: 'The amount of ease at the waist',
+      },
       yokeYes: {
         t: 'Yes',
+        d: 'Include a yoke',
       },
       yokeNo: {
         t: 'No',
+        d: 'Do not include a yoke',
       },
       placketwidth: {
         t: 'Placket width',
@@ -4343,13 +4455,15 @@ export const designs = {
       },
       useBellyAdjustmentYes: {
         t: 'Yes',
+        d: 'Include belly adjustment',
       },
       useBellyAdjustmentNo: {
         t: 'No',
+        d: 'Do not include belly adjustment',
       },
-      'bustDart.None': {
-        t: 'None',
-        d: 'No full bust adjustment',
+      bellyAdjustmentX: {
+        t: 'FIXME',
+        d: 'FIXME -- Check with Gawain_CCBR',
       },
       armCutAngle: {
         t: 'Armhole cut angle',
@@ -4395,6 +4509,140 @@ export const designs = {
     p: {},
     s: {},
     o: {},
+  },
+  library: {
+    t: 'Library',
+    d: 'A library of FreeSewing design parts',
+    p: {
+      rectangle: 'Rectangle',
+      sleeve: 'Sleeve',
+      topsleeve: 'Topsleeve',
+      undersleeve: 'Undersleeve',
+      twoPartSleeve: 'Two-Part Sleeve (base)',
+    },
+    s: {
+      backArmholeLength: 'The length of the armhole at the back of the garment',
+      backArmholeToArmholePitch:
+        'The length along the armhole from the bottom of the armhole to the back armhole pitch point',
+      frontArmholeLength: 'The length of the armhole at the front of the garment',
+      frontArmholeToArmholePitch:
+        'The length along the armhole from the bottom of the armhole to the front armhole pitch point',
+      sleevecapLength: 'The length of the sleevecap',
+      sleeveLength: 'The length of the sleeve',
+      sleevecapTarget: 'The theoretical length of the sleevecap we strive for',
+      sleevecapEase: 'The mount of sleevecap ease',
+      __sleevecapFactor: 'An internal variable that is used to tweak the sleevecap draft',
+    },
+    o: {
+      noSa: {
+        t: 'No Seam Allowance',
+        d: 'Explicitly disabled seam allowance on this part, regardless of the pattern settings',
+      },
+      rectangleHeight: {
+        t: 'Rectangle height',
+        d: 'Height of the rectangle',
+      },
+      rectangleWidth: {
+        t: 'Rectangle width',
+        d: 'Width of the rectangle',
+      },
+      cuffEase: {
+        t: 'Cuff ease',
+        d: 'The amount of ease at your wrist.',
+      },
+      sleevecapEase: {
+        t: 'Sleevecap ease',
+        d: 'The amount by which the sleevecap seam is longer than the armhole seam.',
+      },
+      sleevecapTopFactorX: {
+        t: 'Sleevecap top X',
+        d: 'Controls the horizontal location of the sleevecap top.',
+      },
+      sleevecapTopFactorY: {
+        t: 'Sleevecap top Y',
+        d: 'Controls the height of the sleevecap. A higher value results in a higher and more narrow sleevecap.',
+      },
+      sleevecapBackFactorX: {
+        t: 'Sleevecap back X',
+        d: 'Controls the placement of the sleevecap back pitchpoint on the X-axis (horizontal)',
+      },
+      sleevecapBackFactorY: {
+        t: 'Sleevecap back Y',
+        d: 'Controls the placement of the sleevecap back pitchpoint on the Y-axis (vertical)',
+      },
+      sleevecapFrontFactorX: {
+        t: 'Sleevecap front X',
+        d: 'Controls the placement of the sleevecap front pitchpoint on the X-axis (horizontal)',
+      },
+      sleevecapFrontFactorY: {
+        t: 'Sleevecap front Y',
+        d: 'Controls the placement of the sleevecap front pitchpoint on the Y-axis (vertical)',
+      },
+      sleevecapQ1Offset: {
+        t: 'Sleevecap Q1 offset',
+        d: 'Controls the curvature of the sleevecap in the first quadrant (front armhole)',
+      },
+      sleevecapQ2Offset: {
+        t: 'Sleevecap Q2 offset',
+        d: 'Controls the curvature of the sleevecap in the second quadrant (front shoulder)',
+      },
+      sleevecapQ3Offset: {
+        t: 'Sleevecap Q3 offset',
+        d: 'Controls the curvature of the sleevecap in the third quadrant (back shoulder)',
+      },
+      sleevecapQ4Offset: {
+        t: 'Sleevecap Q4 offset',
+        d: 'Controls the curvature of the sleevecap in the fourth quadrant (back armhole)',
+      },
+      sleevecapQ1Spread1: {
+        t: 'Sleevecap Q1 downward spread',
+        d: 'Controls the spread of the sleevecap first quadrant curvature towards the armhole',
+      },
+      sleevecapQ1Spread2: {
+        t: 'Sleevecap Q1 upward spread',
+        d: 'Controls the spread of the sleevecap first quadrant curvature towards the shoulder',
+      },
+      sleevecapQ2Spread1: {
+        t: 'Sleevecap Q2 downward spread',
+        d: 'Controls the spread of the sleevecap second quadrant curvature towards the armhole',
+      },
+      sleevecapQ2Spread2: {
+        t: 'Sleevecap Q2 upward spread',
+        d: 'Controls the spread of the sleevecap second quadrant curvature towards the shoulder',
+      },
+      sleevecapQ3Spread1: {
+        t: 'Sleevecap Q3 upward spread',
+        d: 'Controls the spread of the sleevecap third quadrant curvature towards the shoulder',
+      },
+      sleevecapQ3Spread2: {
+        t: 'Sleevecap Q3 downward spread',
+        d: 'Controls the spread of the sleevecap third quadrant curvature towards the armhole',
+      },
+      sleevecapQ4Spread1: {
+        t: 'Sleevecap Q4 upward spread',
+        d: 'Controls the spread of the sleevecap fourth quadrant curvature towards the shoulder',
+      },
+      sleevecapQ4Spread2: {
+        t: 'Sleevecap Q4 downward spread',
+        d: 'Controls the spread of the sleevecap fourth quadrant curvature towards the armhole',
+      },
+      sleeveLengthBonus: {
+        t: 'Sleeve length bonus',
+        d: 'The amount to lengthen the sleeve. A negative value will shorten it.',
+      },
+      sleeveWidthGuarantee: {
+        t: 'Sleeve width guarantee',
+        d: 'Controls how much of the sleeve width will be guaranteed. This determines how much we can alter the sleeve width to fit the sleeve in the armhole.',
+      },
+      sleevecapHeight: {
+        t: 'Sleevecap height',
+        d: 'Controls the height of the sleevecap.',
+      },
+      sleeveBend: {
+        t: 'Sleeve bend',
+        d: 'Controls the bend of the sleeve at the elbow.',
+      },
+    },
   },
   lily: {
     t: 'Lily Leggings',
@@ -6276,6 +6524,154 @@ export const designs = {
         t: 'width',
         d: 'Controls the width of the (stitches making up the) bartack',
       },
+      plugin: {
+        t: 'Plugin',
+        d: 'FIXME',
+      },
+      crossboxText: {
+        t: 'Cross box text',
+        d: 'FIXME',
+      },
+      cutonfoldMargin: {
+        t: 'Cut-on-fold margin',
+        d: 'FIXME',
+      },
+      cutonfoldOffset: {
+        t: 'Cut-on-fold offset',
+        d: 'FIXME',
+      },
+      cutonfoldGrainline: {
+        t: 'Cut-on-fold Grainline',
+        d: 'FIXME',
+      },
+      dimensionsCustomText: {
+        t: 'Dimension custom text',
+        d: 'FIXME',
+      },
+      dimensionsEndMarker: {
+        t: 'Dimensions End Marker',
+        d: 'FIXME',
+      },
+      dimensionsStartMarker: {
+        t: 'Dimensions Start Marker',
+        d: 'FIXME',
+      },
+      logoScale: {
+        t: 'Logo scale',
+        d: 'FIXME',
+      },
+      logoRotate: {
+        t: 'Logo rotation',
+        d: 'FIXME',
+      },
+      pleatMargin: {
+        t: 'Pleat margin',
+        d: 'FIXME',
+      },
+      pleatReverse: {
+        t: 'Pleat reverse',
+        d: 'FIXME',
+      },
+      scaleboxRotation: {
+        t: 'Scalebox rotation',
+        d: 'FIXME',
+      },
+      scaleboxText: {
+        t: 'Scalebox text',
+        d: 'FIXME',
+      },
+      sewtogetherHinge: {
+        t: 'Sew together hinge',
+        d: 'FIXME',
+      },
+      sewtogetherMiddle: {
+        t: 'Sew together middle',
+        d: 'FIXME',
+      },
+      titleNr: {
+        t: 'Title number',
+        d: 'FIXME',
+      },
+      titleTitle: {
+        t: 'Title text',
+        d: 'FIXME',
+      },
+      titleMeta: {
+        t: 'Title meta text',
+        d: 'FIXME',
+      },
+      titleScale: {
+        t: 'Title scale',
+        d: 'FIXME',
+      },
+      titleRotate: {
+        t: 'Title rotation',
+        d: 'FIXME',
+      },
+      snippetScale: {
+        t: 'Snippet scale',
+        d: 'FIXME',
+      },
+      snippetRotation: {
+        t: 'Snippet rotation',
+        d: 'FIXME',
+      },
+      flipAxis: {
+        t: 'Flip axis',
+        d: 'FIXME',
+      },
+      goreRadius: {
+        t: 'Gore radius',
+        d: 'FIXME',
+      },
+      goreGoreNumber: {
+        t: 'Number of gores',
+        d: 'FIXME',
+      },
+      goreExtraLength: {
+        t: 'Gore extra length',
+        d: 'FIXME',
+      },
+      mirrorLine: {
+        t: 'Mirror line',
+        d: 'FIXME',
+      },
+      mirrorClone: {
+        t: 'Mirror clone',
+        d: 'FIXME',
+      },
+      roundRadius: {
+        t: 'Round radios',
+        d: 'FIXME',
+      },
+      roundHide: {
+        t: 'Round hide',
+        d: 'FIXME',
+      },
+      sprinkleScale: {
+        t: 'Sprinkle scale',
+        d: 'FIXME',
+      },
+      sprinkleRotate: {
+        t: 'Sprinkle rotation',
+        d: 'FIXME',
+      },
+      sprinkleSnippet: {
+        t: 'Sprinkle snippet',
+        d: 'FIXME',
+      },
+      ringsectorInsideRadius: {
+        t: 'Ring sector inside radius',
+        d: 'FIXME',
+      },
+      ringsectorOutsideRadius: {
+        t: 'Ring sector outside radius',
+        d: 'FIXME',
+      },
+      ringsectorAngle: {
+        t: 'Ring sector angle',
+        d: 'FIXME',
+      },
     },
   },
   rendertest: {
@@ -6325,6 +6721,10 @@ export const designs = {
       'only.macros': {
         t: 'Macros',
         d: 'Draft render tests for macros',
+      },
+      width: {
+        t: 'Width',
+        d: 'The width of the tests',
       },
     },
   },
@@ -6737,6 +7137,17 @@ export const designs = {
     t: 'Simon shirt',
     d: 'Simon is a highly adaptable shirt pattern for people without breasts.',
     s: {
+      backArmholeLength: 'The length of the armhole at the back of the garment',
+      backArmholeToArmholePitch:
+        'The length along the armhole from the bottom of the armhole to the back armhole pitch point',
+      frontArmholeLength: 'The length of the armhole at the front of the garment',
+      frontArmholeToArmholePitch:
+        'The length along the armhole from the bottom of the armhole to the front armhole pitch point',
+      sleevecapLength: 'The length of the sleevecap',
+      sleeveLength: 'The length of the sleeve',
+      sleevecapTarget: 'The theoretical length of the sleevecap we strive for',
+      sleevecapEase: 'The mount of sleevecap ease',
+      __sleevecapFactor: 'An internal variable that is used to tweak the sleevecap draft',
       'largeShoulderWidth.t': 'Shoulder Width larger than anticipated',
       'largeShoulderWidth.d':
         'The pattern was not able to generate an optimal armhole shape using the given measurements and options. Please be aware that the generated pattern may not be correct. Please retake your measurements, verify that they are correct, and try generating a new pattern with the new measurements.',
@@ -6758,11 +7169,10 @@ export const designs = {
       flatFelledSeamAllowance: 'Flat-felled seam allowance',
     },
     p: {
+      sleeve: 'Sleeve',
       back: 'Back',
       front: 'Front',
       base: 'Base',
-      sleevecap: 'Sleevecap',
-      sleeve: 'Sleeve',
       buttonholePlacket: 'Buttonhole placket',
       buttonPlacket: 'Button placket',
       collar: 'Collar',
@@ -6776,89 +7186,9 @@ export const designs = {
       yoke: 'Yoke',
     },
     o: {
-      acrossBackFactor: {
-        t: 'Across back factor',
-        d: 'Controls your across back width as a factor of your shoulder to shoulder measurement.',
-      },
-      armholeDepth: {
-        t: 'Armhole depth',
-        d: 'Controls the depth of the armhole. Higher values make a deeper armhole.',
-      },
-      armholeDepthFactor: {
-        t: 'Armhole depth factor (legacy)',
-        d: 'Controls the depth of the armhole. Higher values make a deeper armhole. This option only applies to the legacy (v2) way of calculating the armhole depth.',
-      },
-      backNeckCutout: {
-        t: 'Back neck cutout',
-        d: 'How deep the neck is cut out at the back',
-      },
-      bicepsEase: {
-        t: 'Biceps ease',
-        d: 'The amount of ease at your upper arm. Note that while we try to respect this, fitting the sleeve to the armhole takes precedence over respecting the exact amount of ease.',
-      },
-      collarEase: {
-        t: 'Collar ease',
-        d: 'The amount of ease around your neck',
-      },
-      chestEase: {
-        t: 'Chest ease',
-        d: 'The amount of ease at your chest.',
-      },
       cuffEase: {
         t: 'Cuff ease',
         d: 'The amount of ease at your wrist.',
-      },
-      draftForHighBust: {
-        t: 'Draft for high bust',
-        d: 'Draft the pattern using the high bust measurement if it is available, instead of using the chest measurement. This can result in a more fitted garment for people with breasts. (Please note that no additional adjustments or shaping is performed. Further manual adjustments may be needed for those with a larger difference between high bust and chest measurements.)',
-      },
-      draftForHighBustYes: {
-        t: 'Draft using the high bust measurement',
-        d: 'Drafts a pattern using the high bust measurement instead of the chest measurement. Suggested for most people with breasts.',
-      },
-      draftForHighBustNo: {
-        t: 'Draft using the chest measurement',
-        d: 'Drafts a pattern using the chest measurement. Suggested for most people without breasts.',
-      },
-      frontArmholeDeeper: {
-        t: 'Front armhole extra cutout',
-        d: 'How much do you want the front armhole to be cut out deeper than the back.',
-      },
-      legacyArmholeDepth: {
-        t: 'Legacy armhole depth',
-        d: 'Enable this option to use the legacy way to calculate the armhole depth (using biceps circumference) rather than the v3 way (using the waist to armpit measurement)',
-      },
-      legacyArmholeDepthNo: {
-        t: 'Calculate armhole depth the v3 way',
-        d: 'Uses the waist to armpit measurement to locate the bottom of the armhole',
-      },
-      legacyArmholeDepthYes: {
-        t: 'Calculate armhole depth the legacy (v2) way',
-        d: 'Uses the biceps measurement to locate the bottom of the armhole',
-      },
-      lengthBonus: {
-        t: 'Length bonus',
-        d: 'The amount to lengthen the garment. A negative value will shorten it.',
-      },
-      s3Collar: {
-        t: 'Shoulder seam shift: collar side',
-        d: 'Increase this option to shift the shoulder seam forward on the collar side. Decreasing it shifts it backwards.',
-      },
-      s3Armhole: {
-        t: 'Shoulder seam shift: armhole side',
-        d: 'Increase this option to shift the shoulder seam forward on the armhole side. Decreasing it shifts it backwards.',
-      },
-      shoulderEase: {
-        t: 'Shoulder ease',
-        d: 'The amount of ease at your shoulder. This increases the shoulder to shoulder distance to accommodate additional layers or thickness.',
-      },
-      shoulderSlopeReduction: {
-        t: 'Shoulder slope reduction',
-        d: 'The amount by which the shoulder slope is reduced to allow for shoulder padding.',
-      },
-      sleeveLengthBonus: {
-        t: 'Sleeve length bonus',
-        d: 'The amount to lengthen the sleeve. A negative value will shorten it.',
       },
       sleevecapEase: {
         t: 'Sleevecap ease',
@@ -6936,9 +7266,89 @@ export const designs = {
         t: 'Sleevecap Q4 downward spread',
         d: 'Controls the spread of the sleevecap fourth quadrant curvature towards the armhole',
       },
+      sleeveLengthBonus: {
+        t: 'Sleeve length bonus',
+        d: 'The amount to lengthen the sleeve. A negative value will shorten it.',
+      },
       sleeveWidthGuarantee: {
         t: 'Sleeve width guarantee',
         d: 'Controls how much of the sleeve width will be guaranteed. This determines how much we can alter the sleeve width to fit the sleeve in the armhole.',
+      },
+      acrossBackFactor: {
+        t: 'Across back factor',
+        d: 'Controls your across back width as a factor of your shoulder to shoulder measurement.',
+      },
+      armholeDepth: {
+        t: 'Armhole depth',
+        d: 'Controls the depth of the armhole. Higher values make a deeper armhole.',
+      },
+      armholeDepthFactor: {
+        t: 'Armhole depth factor (legacy)',
+        d: 'Controls the depth of the armhole. Higher values make a deeper armhole. This option only applies to the legacy (v2) way of calculating the armhole depth.',
+      },
+      backNeckCutout: {
+        t: 'Back neck cutout',
+        d: 'How deep the neck is cut out at the back',
+      },
+      bicepsEase: {
+        t: 'Biceps ease',
+        d: 'The amount of ease at your upper arm. Note that while we try to respect this, fitting the sleeve to the armhole takes precedence over respecting the exact amount of ease.',
+      },
+      collarEase: {
+        t: 'Collar ease',
+        d: 'The amount of ease around your neck',
+      },
+      chestEase: {
+        t: 'Chest ease',
+        d: 'The amount of ease at your chest.',
+      },
+      draftForHighBust: {
+        t: 'Draft for high bust',
+        d: 'Draft the pattern using the high bust measurement if it is available, instead of using the chest measurement. This can result in a more fitted garment for people with breasts. (Please note that no additional adjustments or shaping is performed. Further manual adjustments may be needed for those with a larger difference between high bust and chest measurements.)',
+      },
+      draftForHighBustYes: {
+        t: 'Draft using the high bust measurement',
+        d: 'Drafts a pattern using the high bust measurement instead of the chest measurement. Suggested for most people with breasts.',
+      },
+      draftForHighBustNo: {
+        t: 'Draft using the chest measurement',
+        d: 'Drafts a pattern using the chest measurement. Suggested for most people without breasts.',
+      },
+      frontArmholeDeeper: {
+        t: 'Front armhole extra cutout',
+        d: 'How much do you want the front armhole to be cut out deeper than the back.',
+      },
+      legacyArmholeDepth: {
+        t: 'Legacy armhole depth',
+        d: 'Enable this option to use the legacy way to calculate the armhole depth (using biceps circumference) rather than the v3 way (using the waist to armpit measurement)',
+      },
+      legacyArmholeDepthNo: {
+        t: 'Calculate armhole depth the v3 way',
+        d: 'Uses the waist to armpit measurement to locate the bottom of the armhole',
+      },
+      legacyArmholeDepthYes: {
+        t: 'Calculate armhole depth the legacy (v2) way',
+        d: 'Uses the biceps measurement to locate the bottom of the armhole',
+      },
+      lengthBonus: {
+        t: 'Length bonus',
+        d: 'The amount to lengthen the garment. A negative value will shorten it.',
+      },
+      s3Collar: {
+        t: 'Shoulder seam shift: collar side',
+        d: 'Increase this option to shift the shoulder seam forward on the collar side. Decreasing it shifts it backwards.',
+      },
+      s3Armhole: {
+        t: 'Shoulder seam shift: armhole side',
+        d: 'Increase this option to shift the shoulder seam forward on the armhole side. Decreasing it shifts it backwards.',
+      },
+      shoulderEase: {
+        t: 'Shoulder ease',
+        d: 'The amount of ease at your shoulder. This increases the shoulder to shoulder distance to accommodate additional layers or thickness.',
+      },
+      shoulderSlopeReduction: {
+        t: 'Shoulder slope reduction',
+        d: 'The amount by which the shoulder slope is reduced to allow for shoulder padding.',
       },
       backDarts: {
         t: 'Back darts',
@@ -7234,6 +7644,17 @@ export const designs = {
     t: 'Simone shirt',
     d: 'Simone is simon, adapted for breasts.',
     s: {
+      backArmholeLength: 'The length of the armhole at the back of the garment',
+      backArmholeToArmholePitch:
+        'The length along the armhole from the bottom of the armhole to the back armhole pitch point',
+      frontArmholeLength: 'The length of the armhole at the front of the garment',
+      frontArmholeToArmholePitch:
+        'The length along the armhole from the bottom of the armhole to the front armhole pitch point',
+      sleevecapLength: 'The length of the sleevecap',
+      sleeveLength: 'The length of the sleeve',
+      sleevecapTarget: 'The theoretical length of the sleevecap we strive for',
+      sleevecapEase: 'The mount of sleevecap ease',
+      __sleevecapFactor: 'An internal variable that is used to tweak the sleevecap draft',
       'largeShoulderWidth.t': 'Shoulder Width larger than anticipated',
       'largeShoulderWidth.d':
         'The pattern was not able to generate an optimal armhole shape using the given measurements and options. Please be aware that the generated pattern may not be correct. Please retake your measurements, verify that they are correct, and try generating a new pattern with the new measurements.',
@@ -7255,11 +7676,10 @@ export const designs = {
       flatFelledSeamAllowance: 'Flat-felled seam allowance',
     },
     p: {
+      sleeve: 'Sleeve',
       back: 'Back',
       front: 'Front',
       base: 'Base',
-      sleevecap: 'Sleevecap',
-      sleeve: 'Sleeve',
       buttonholePlacket: 'Buttonhole placket',
       buttonPlacket: 'Button placket',
       collar: 'Collar',
@@ -7274,89 +7694,9 @@ export const designs = {
       fbaFront: 'FBA Front',
     },
     o: {
-      acrossBackFactor: {
-        t: 'Across back factor',
-        d: 'Controls your across back width as a factor of your shoulder to shoulder measurement.',
-      },
-      armholeDepth: {
-        t: 'Armhole depth',
-        d: 'Controls the depth of the armhole. Higher values make a deeper armhole.',
-      },
-      armholeDepthFactor: {
-        t: 'Armhole depth factor (legacy)',
-        d: 'Controls the depth of the armhole. Higher values make a deeper armhole. This option only applies to the legacy (v2) way of calculating the armhole depth.',
-      },
-      backNeckCutout: {
-        t: 'Back neck cutout',
-        d: 'How deep the neck is cut out at the back',
-      },
-      bicepsEase: {
-        t: 'Biceps ease',
-        d: 'The amount of ease at your upper arm. Note that while we try to respect this, fitting the sleeve to the armhole takes precedence over respecting the exact amount of ease.',
-      },
-      collarEase: {
-        t: 'Collar ease',
-        d: 'The amount of ease around your neck',
-      },
-      chestEase: {
-        t: 'Chest ease',
-        d: 'The amount of ease at your chest.',
-      },
       cuffEase: {
         t: 'Cuff ease',
         d: 'The amount of ease at your wrist.',
-      },
-      draftForHighBust: {
-        t: 'Draft for high bust',
-        d: 'Draft the pattern using the high bust measurement if it is available, instead of using the chest measurement. This can result in a more fitted garment for people with breasts. (Please note that no additional adjustments or shaping is performed. Further manual adjustments may be needed for those with a larger difference between high bust and chest measurements.)',
-      },
-      draftForHighBustYes: {
-        t: 'Draft using the high bust measurement',
-        d: 'Drafts a pattern using the high bust measurement instead of the chest measurement. Suggested for most people with breasts.',
-      },
-      draftForHighBustNo: {
-        t: 'Draft using the chest measurement',
-        d: 'Drafts a pattern using the chest measurement. Suggested for most people without breasts.',
-      },
-      frontArmholeDeeper: {
-        t: 'Front armhole extra cutout',
-        d: 'How much do you want the front armhole to be cut out deeper than the back.',
-      },
-      legacyArmholeDepth: {
-        t: 'Legacy armhole depth',
-        d: 'Enable this option to use the legacy way to calculate the armhole depth (using biceps circumference) rather than the v3 way (using the waist to armpit measurement)',
-      },
-      legacyArmholeDepthNo: {
-        t: 'Calculate armhole depth the v3 way',
-        d: 'Uses the waist to armpit measurement to locate the bottom of the armhole',
-      },
-      legacyArmholeDepthYes: {
-        t: 'Calculate armhole depth the legacy (v2) way',
-        d: 'Uses the biceps measurement to locate the bottom of the armhole',
-      },
-      lengthBonus: {
-        t: 'Length bonus',
-        d: 'The amount to lengthen the garment. A negative value will shorten it.',
-      },
-      s3Collar: {
-        t: 'Shoulder seam shift: collar side',
-        d: 'Increase this option to shift the shoulder seam forward on the collar side. Decreasing it shifts it backwards.',
-      },
-      s3Armhole: {
-        t: 'Shoulder seam shift: armhole side',
-        d: 'Increase this option to shift the shoulder seam forward on the armhole side. Decreasing it shifts it backwards.',
-      },
-      shoulderEase: {
-        t: 'Shoulder ease',
-        d: 'The amount of ease at your shoulder. This increases the shoulder to shoulder distance to accommodate additional layers or thickness.',
-      },
-      shoulderSlopeReduction: {
-        t: 'Shoulder slope reduction',
-        d: 'The amount by which the shoulder slope is reduced to allow for shoulder padding.',
-      },
-      sleeveLengthBonus: {
-        t: 'Sleeve length bonus',
-        d: 'The amount to lengthen the sleeve. A negative value will shorten it.',
       },
       sleevecapEase: {
         t: 'Sleevecap ease',
@@ -7434,9 +7774,89 @@ export const designs = {
         t: 'Sleevecap Q4 downward spread',
         d: 'Controls the spread of the sleevecap fourth quadrant curvature towards the armhole',
       },
+      sleeveLengthBonus: {
+        t: 'Sleeve length bonus',
+        d: 'The amount to lengthen the sleeve. A negative value will shorten it.',
+      },
       sleeveWidthGuarantee: {
         t: 'Sleeve width guarantee',
         d: 'Controls how much of the sleeve width will be guaranteed. This determines how much we can alter the sleeve width to fit the sleeve in the armhole.',
+      },
+      acrossBackFactor: {
+        t: 'Across back factor',
+        d: 'Controls your across back width as a factor of your shoulder to shoulder measurement.',
+      },
+      armholeDepth: {
+        t: 'Armhole depth',
+        d: 'Controls the depth of the armhole. Higher values make a deeper armhole.',
+      },
+      armholeDepthFactor: {
+        t: 'Armhole depth factor (legacy)',
+        d: 'Controls the depth of the armhole. Higher values make a deeper armhole. This option only applies to the legacy (v2) way of calculating the armhole depth.',
+      },
+      backNeckCutout: {
+        t: 'Back neck cutout',
+        d: 'How deep the neck is cut out at the back',
+      },
+      bicepsEase: {
+        t: 'Biceps ease',
+        d: 'The amount of ease at your upper arm. Note that while we try to respect this, fitting the sleeve to the armhole takes precedence over respecting the exact amount of ease.',
+      },
+      collarEase: {
+        t: 'Collar ease',
+        d: 'The amount of ease around your neck',
+      },
+      chestEase: {
+        t: 'Chest ease',
+        d: 'The amount of ease at your chest.',
+      },
+      draftForHighBust: {
+        t: 'Draft for high bust',
+        d: 'Draft the pattern using the high bust measurement if it is available, instead of using the chest measurement. This can result in a more fitted garment for people with breasts. (Please note that no additional adjustments or shaping is performed. Further manual adjustments may be needed for those with a larger difference between high bust and chest measurements.)',
+      },
+      draftForHighBustYes: {
+        t: 'Draft using the high bust measurement',
+        d: 'Drafts a pattern using the high bust measurement instead of the chest measurement. Suggested for most people with breasts.',
+      },
+      draftForHighBustNo: {
+        t: 'Draft using the chest measurement',
+        d: 'Drafts a pattern using the chest measurement. Suggested for most people without breasts.',
+      },
+      frontArmholeDeeper: {
+        t: 'Front armhole extra cutout',
+        d: 'How much do you want the front armhole to be cut out deeper than the back.',
+      },
+      legacyArmholeDepth: {
+        t: 'Legacy armhole depth',
+        d: 'Enable this option to use the legacy way to calculate the armhole depth (using biceps circumference) rather than the v3 way (using the waist to armpit measurement)',
+      },
+      legacyArmholeDepthNo: {
+        t: 'Calculate armhole depth the v3 way',
+        d: 'Uses the waist to armpit measurement to locate the bottom of the armhole',
+      },
+      legacyArmholeDepthYes: {
+        t: 'Calculate armhole depth the legacy (v2) way',
+        d: 'Uses the biceps measurement to locate the bottom of the armhole',
+      },
+      lengthBonus: {
+        t: 'Length bonus',
+        d: 'The amount to lengthen the garment. A negative value will shorten it.',
+      },
+      s3Collar: {
+        t: 'Shoulder seam shift: collar side',
+        d: 'Increase this option to shift the shoulder seam forward on the collar side. Decreasing it shifts it backwards.',
+      },
+      s3Armhole: {
+        t: 'Shoulder seam shift: armhole side',
+        d: 'Increase this option to shift the shoulder seam forward on the armhole side. Decreasing it shifts it backwards.',
+      },
+      shoulderEase: {
+        t: 'Shoulder ease',
+        d: 'The amount of ease at your shoulder. This increases the shoulder to shoulder distance to accommodate additional layers or thickness.',
+      },
+      shoulderSlopeReduction: {
+        t: 'Shoulder slope reduction',
+        d: 'The amount by which the shoulder slope is reduced to allow for shoulder padding.',
       },
       backDarts: {
         t: 'Back darts',
@@ -7965,6 +8385,17 @@ export const designs = {
     t: 'Sven sweatshirt',
     d: 'Sven is a straightforward sweater.',
     s: {
+      backArmholeLength: 'The length of the armhole at the back of the garment',
+      backArmholeToArmholePitch:
+        'The length along the armhole from the bottom of the armhole to the back armhole pitch point',
+      frontArmholeLength: 'The length of the armhole at the front of the garment',
+      frontArmholeToArmholePitch:
+        'The length along the armhole from the bottom of the armhole to the front armhole pitch point',
+      sleevecapLength: 'The length of the sleevecap',
+      sleeveLength: 'The length of the sleeve',
+      sleevecapTarget: 'The theoretical length of the sleevecap we strive for',
+      sleevecapEase: 'The mount of sleevecap ease',
+      __sleevecapFactor: 'An internal variable that is used to tweak the sleevecap draft',
       'largeShoulderWidth.t': 'Shoulder Width larger than anticipated',
       'largeShoulderWidth.d':
         'The pattern was not able to generate an optimal armhole shape using the given measurements and options. Please be aware that the generated pattern may not be correct. Please retake your measurements, verify that they are correct, and try generating a new pattern with the new measurements.',
@@ -7978,98 +8409,17 @@ export const designs = {
         'The **Waistband** (4) is a rectangular piece of ribbing fabric {{{ w }}} wide and {{{ l }}} long.',
     },
     p: {
+      sleeve: 'Sleeve',
       back: 'Back',
       front: 'Front',
       base: 'Base',
-      sleevecap: 'Sleevecap',
-      sleeve: 'Sleeve',
       cuff: 'Cuff',
       waistband: 'Waistband',
     },
     o: {
-      acrossBackFactor: {
-        t: 'Across back factor',
-        d: 'Controls your across back width as a factor of your shoulder to shoulder measurement.',
-      },
-      armholeDepth: {
-        t: 'Armhole depth',
-        d: 'Controls the depth of the armhole. Higher values make a deeper armhole.',
-      },
-      armholeDepthFactor: {
-        t: 'Armhole depth factor (legacy)',
-        d: 'Controls the depth of the armhole. Higher values make a deeper armhole. This option only applies to the legacy (v2) way of calculating the armhole depth.',
-      },
-      backNeckCutout: {
-        t: 'Back neck cutout',
-        d: 'How deep the neck is cut out at the back',
-      },
-      bicepsEase: {
-        t: 'Biceps ease',
-        d: 'The amount of ease at your upper arm. Note that while we try to respect this, fitting the sleeve to the armhole takes precedence over respecting the exact amount of ease.',
-      },
-      collarEase: {
-        t: 'Collar ease',
-        d: 'The amount of ease around your neck',
-      },
-      chestEase: {
-        t: 'Chest ease',
-        d: 'The amount of ease at your chest.',
-      },
       cuffEase: {
         t: 'Cuff ease',
         d: 'The amount of ease at your wrist.',
-      },
-      draftForHighBust: {
-        t: 'Draft for high bust',
-        d: 'Draft the pattern using the high bust measurement if it is available, instead of using the chest measurement. This can result in a more fitted garment for people with breasts. (Please note that no additional adjustments or shaping is performed. Further manual adjustments may be needed for those with a larger difference between high bust and chest measurements.)',
-      },
-      draftForHighBustYes: {
-        t: 'Draft using the high bust measurement',
-        d: 'Drafts a pattern using the high bust measurement instead of the chest measurement. Suggested for most people with breasts.',
-      },
-      draftForHighBustNo: {
-        t: 'Draft using the chest measurement',
-        d: 'Drafts a pattern using the chest measurement. Suggested for most people without breasts.',
-      },
-      frontArmholeDeeper: {
-        t: 'Front armhole extra cutout',
-        d: 'How much do you want the front armhole to be cut out deeper than the back.',
-      },
-      legacyArmholeDepth: {
-        t: 'Legacy armhole depth',
-        d: 'Enable this option to use the legacy way to calculate the armhole depth (using biceps circumference) rather than the v3 way (using the waist to armpit measurement)',
-      },
-      legacyArmholeDepthNo: {
-        t: 'Calculate armhole depth the v3 way',
-        d: 'Uses the waist to armpit measurement to locate the bottom of the armhole',
-      },
-      legacyArmholeDepthYes: {
-        t: 'Calculate armhole depth the legacy (v2) way',
-        d: 'Uses the biceps measurement to locate the bottom of the armhole',
-      },
-      lengthBonus: {
-        t: 'Length bonus',
-        d: 'The amount to lengthen the garment. A negative value will shorten it.',
-      },
-      s3Collar: {
-        t: 'Shoulder seam shift: collar side',
-        d: 'Increase this option to shift the shoulder seam forward on the collar side. Decreasing it shifts it backwards.',
-      },
-      s3Armhole: {
-        t: 'Shoulder seam shift: armhole side',
-        d: 'Increase this option to shift the shoulder seam forward on the armhole side. Decreasing it shifts it backwards.',
-      },
-      shoulderEase: {
-        t: 'Shoulder ease',
-        d: 'The amount of ease at your shoulder. This increases the shoulder to shoulder distance to accommodate additional layers or thickness.',
-      },
-      shoulderSlopeReduction: {
-        t: 'Shoulder slope reduction',
-        d: 'The amount by which the shoulder slope is reduced to allow for shoulder padding.',
-      },
-      sleeveLengthBonus: {
-        t: 'Sleeve length bonus',
-        d: 'The amount to lengthen the sleeve. A negative value will shorten it.',
       },
       sleevecapEase: {
         t: 'Sleevecap ease',
@@ -8147,9 +8497,89 @@ export const designs = {
         t: 'Sleevecap Q4 downward spread',
         d: 'Controls the spread of the sleevecap fourth quadrant curvature towards the armhole',
       },
+      sleeveLengthBonus: {
+        t: 'Sleeve length bonus',
+        d: 'The amount to lengthen the sleeve. A negative value will shorten it.',
+      },
       sleeveWidthGuarantee: {
         t: 'Sleeve width guarantee',
         d: 'Controls how much of the sleeve width will be guaranteed. This determines how much we can alter the sleeve width to fit the sleeve in the armhole.',
+      },
+      acrossBackFactor: {
+        t: 'Across back factor',
+        d: 'Controls your across back width as a factor of your shoulder to shoulder measurement.',
+      },
+      armholeDepth: {
+        t: 'Armhole depth',
+        d: 'Controls the depth of the armhole. Higher values make a deeper armhole.',
+      },
+      armholeDepthFactor: {
+        t: 'Armhole depth factor (legacy)',
+        d: 'Controls the depth of the armhole. Higher values make a deeper armhole. This option only applies to the legacy (v2) way of calculating the armhole depth.',
+      },
+      backNeckCutout: {
+        t: 'Back neck cutout',
+        d: 'How deep the neck is cut out at the back',
+      },
+      bicepsEase: {
+        t: 'Biceps ease',
+        d: 'The amount of ease at your upper arm. Note that while we try to respect this, fitting the sleeve to the armhole takes precedence over respecting the exact amount of ease.',
+      },
+      collarEase: {
+        t: 'Collar ease',
+        d: 'The amount of ease around your neck',
+      },
+      chestEase: {
+        t: 'Chest ease',
+        d: 'The amount of ease at your chest.',
+      },
+      draftForHighBust: {
+        t: 'Draft for high bust',
+        d: 'Draft the pattern using the high bust measurement if it is available, instead of using the chest measurement. This can result in a more fitted garment for people with breasts. (Please note that no additional adjustments or shaping is performed. Further manual adjustments may be needed for those with a larger difference between high bust and chest measurements.)',
+      },
+      draftForHighBustYes: {
+        t: 'Draft using the high bust measurement',
+        d: 'Drafts a pattern using the high bust measurement instead of the chest measurement. Suggested for most people with breasts.',
+      },
+      draftForHighBustNo: {
+        t: 'Draft using the chest measurement',
+        d: 'Drafts a pattern using the chest measurement. Suggested for most people without breasts.',
+      },
+      frontArmholeDeeper: {
+        t: 'Front armhole extra cutout',
+        d: 'How much do you want the front armhole to be cut out deeper than the back.',
+      },
+      legacyArmholeDepth: {
+        t: 'Legacy armhole depth',
+        d: 'Enable this option to use the legacy way to calculate the armhole depth (using biceps circumference) rather than the v3 way (using the waist to armpit measurement)',
+      },
+      legacyArmholeDepthNo: {
+        t: 'Calculate armhole depth the v3 way',
+        d: 'Uses the waist to armpit measurement to locate the bottom of the armhole',
+      },
+      legacyArmholeDepthYes: {
+        t: 'Calculate armhole depth the legacy (v2) way',
+        d: 'Uses the biceps measurement to locate the bottom of the armhole',
+      },
+      lengthBonus: {
+        t: 'Length bonus',
+        d: 'The amount to lengthen the garment. A negative value will shorten it.',
+      },
+      s3Collar: {
+        t: 'Shoulder seam shift: collar side',
+        d: 'Increase this option to shift the shoulder seam forward on the collar side. Decreasing it shifts it backwards.',
+      },
+      s3Armhole: {
+        t: 'Shoulder seam shift: armhole side',
+        d: 'Increase this option to shift the shoulder seam forward on the armhole side. Decreasing it shifts it backwards.',
+      },
+      shoulderEase: {
+        t: 'Shoulder ease',
+        d: 'The amount of ease at your shoulder. This increases the shoulder to shoulder distance to accommodate additional layers or thickness.',
+      },
+      shoulderSlopeReduction: {
+        t: 'Shoulder slope reduction',
+        d: 'The amount by which the shoulder slope is reduced to allow for shoulder padding.',
       },
       hipsEase: {
         t: 'Hips ease',
@@ -8223,6 +8653,17 @@ export const designs = {
     t: 'Teagan T-shirt',
     d: 'Teagan is a fitted T-shirt pattern.',
     s: {
+      backArmholeLength: 'The length of the armhole at the back of the garment',
+      backArmholeToArmholePitch:
+        'The length along the armhole from the bottom of the armhole to the back armhole pitch point',
+      frontArmholeLength: 'The length of the armhole at the front of the garment',
+      frontArmholeToArmholePitch:
+        'The length along the armhole from the bottom of the armhole to the front armhole pitch point',
+      sleevecapLength: 'The length of the sleevecap',
+      sleeveLength: 'The length of the sleeve',
+      sleevecapTarget: 'The theoretical length of the sleevecap we strive for',
+      sleevecapEase: 'The mount of sleevecap ease',
+      __sleevecapFactor: 'An internal variable that is used to tweak the sleevecap draft',
       'largeShoulderWidth.t': 'Shoulder Width larger than anticipated',
       'largeShoulderWidth.d':
         'The pattern was not able to generate an optimal armhole shape using the given measurements and options. Please be aware that the generated pattern may not be correct. Please retake your measurements, verify that they are correct, and try generating a new pattern with the new measurements.',
@@ -8235,92 +8676,15 @@ export const designs = {
         "The full length of the T-Shirt's neck opening is {{{ length }}}. This is relevant for the knit binding finish.",
     },
     p: {
+      sleeve: 'Sleeve',
       back: 'Back',
       front: 'Front',
       base: 'Base',
-      sleevecap: 'Sleevecap',
-      sleeve: 'Sleeve',
     },
     o: {
-      acrossBackFactor: {
-        t: 'Across back factor',
-        d: 'Controls your across back width as a factor of your shoulder to shoulder measurement.',
-      },
-      armholeDepth: {
-        t: 'Armhole depth',
-        d: 'Controls the depth of the armhole. Higher values make a deeper armhole.',
-      },
-      armholeDepthFactor: {
-        t: 'Armhole depth factor (legacy)',
-        d: 'Controls the depth of the armhole. Higher values make a deeper armhole. This option only applies to the legacy (v2) way of calculating the armhole depth.',
-      },
-      backNeckCutout: {
-        t: 'Back neck cutout',
-        d: 'How deep the neck is cut out at the back',
-      },
-      bicepsEase: {
-        t: 'Biceps ease',
-        d: 'The amount of ease at your upper arm. Note that while we try to respect this, fitting the sleeve to the armhole takes precedence over respecting the exact amount of ease.',
-      },
-      collarEase: {
-        t: 'Collar ease',
-        d: 'The amount of ease around your neck',
-      },
-      chestEase: {
-        t: 'Chest ease',
-        d: 'The amount of ease at your chest.',
-      },
       cuffEase: {
         t: 'Cuff ease',
         d: 'The amount of ease at your wrist.',
-      },
-      draftForHighBust: {
-        t: 'Draft for high bust',
-        d: 'Draft the pattern for the high bust measurement (if available) rather than the (full) chest. This will result in a more fitted garment for people with breasts.',
-      },
-      draftForHighBustYes: {
-        t: 'Draft using the high bust measurement',
-        d: 'Drafts a pattern using the high bust measurement instead of the chest measurement. Suggested for most people with breasts.',
-      },
-      draftForHighBustNo: {
-        t: 'Draft using the chest measurement',
-        d: 'Drafts a pattern using the chest measurement. Suggested for most people without breasts.',
-      },
-      frontArmholeDeeper: {
-        t: 'Front armhole extra cutout',
-        d: 'How much do you want the front armhole to be cut out deeper than the back.',
-      },
-      legacyArmholeDepth: {
-        t: 'Legacy armhole depth',
-        d: 'Enable this option to use the legacy way to calculate the armhole depth (using biceps circumference) rather than the v3 way (using the waist to armpit measurement)',
-      },
-      legacyArmholeDepthNo: {
-        t: 'Calculate armhole depth the v3 way',
-        d: 'Uses the waist to armpit measurement to locate the bottom of the armhole',
-      },
-      legacyArmholeDepthYes: {
-        t: 'Calculate armhole depth the legacy (v2) way',
-        d: 'Uses the biceps measurement to locate the bottom of the armhole',
-      },
-      lengthBonus: {
-        t: 'Length bonus',
-        d: 'The amount to lengthen the garment. A negative value will shorten it.',
-      },
-      s3Collar: {
-        t: 'Shoulder seam shift: collar side',
-        d: 'Increase this option to shift the shoulder seam forward on the collar side. Decreasing it shifts it backwards.',
-      },
-      s3Armhole: {
-        t: 'Shoulder seam shift: armhole side',
-        d: 'Increase this option to shift the shoulder seam forward on the armhole side. Decreasing it shifts it backwards.',
-      },
-      shoulderEase: {
-        t: 'Shoulder ease',
-        d: 'The amount of ease at your shoulder. This increases the shoulder to shoulder distance to accommodate additional layers or thickness.',
-      },
-      shoulderSlopeReduction: {
-        t: 'Shoulder slope reduction',
-        d: 'The amount by which the shoulder slope is reduced to allow for shoulder padding.',
       },
       sleevecapEase: {
         t: 'Sleevecap ease',
@@ -8398,9 +8762,89 @@ export const designs = {
         t: 'Sleevecap Q4 downward spread',
         d: 'Controls the spread of the sleevecap fourth quadrant curvature towards the armhole',
       },
+      sleeveLengthBonus: {
+        t: 'Sleeve length bonus',
+        d: 'The amount to lengthen the sleeve. A negative value will shorten it.',
+      },
       sleeveWidthGuarantee: {
         t: 'Sleeve width guarantee',
         d: 'Controls how much of the sleeve width will be guaranteed. This determines how much we can alter the sleeve width to fit the sleeve in the armhole.',
+      },
+      acrossBackFactor: {
+        t: 'Across back factor',
+        d: 'Controls your across back width as a factor of your shoulder to shoulder measurement.',
+      },
+      armholeDepth: {
+        t: 'Armhole depth',
+        d: 'Controls the depth of the armhole. Higher values make a deeper armhole.',
+      },
+      armholeDepthFactor: {
+        t: 'Armhole depth factor (legacy)',
+        d: 'Controls the depth of the armhole. Higher values make a deeper armhole. This option only applies to the legacy (v2) way of calculating the armhole depth.',
+      },
+      backNeckCutout: {
+        t: 'Back neck cutout',
+        d: 'How deep the neck is cut out at the back',
+      },
+      bicepsEase: {
+        t: 'Biceps ease',
+        d: 'The amount of ease at your upper arm. Note that while we try to respect this, fitting the sleeve to the armhole takes precedence over respecting the exact amount of ease.',
+      },
+      collarEase: {
+        t: 'Collar ease',
+        d: 'The amount of ease around your neck',
+      },
+      chestEase: {
+        t: 'Chest ease',
+        d: 'The amount of ease at your chest.',
+      },
+      draftForHighBust: {
+        t: 'Draft for high bust',
+        d: 'Draft the pattern for the high bust measurement (if available) rather than the (full) chest. This will result in a more fitted garment for people with breasts.',
+      },
+      draftForHighBustYes: {
+        t: 'Draft using the high bust measurement',
+        d: 'Drafts a pattern using the high bust measurement instead of the chest measurement. Suggested for most people with breasts.',
+      },
+      draftForHighBustNo: {
+        t: 'Draft using the chest measurement',
+        d: 'Drafts a pattern using the chest measurement. Suggested for most people without breasts.',
+      },
+      frontArmholeDeeper: {
+        t: 'Front armhole extra cutout',
+        d: 'How much do you want the front armhole to be cut out deeper than the back.',
+      },
+      legacyArmholeDepth: {
+        t: 'Legacy armhole depth',
+        d: 'Enable this option to use the legacy way to calculate the armhole depth (using biceps circumference) rather than the v3 way (using the waist to armpit measurement)',
+      },
+      legacyArmholeDepthNo: {
+        t: 'Calculate armhole depth the v3 way',
+        d: 'Uses the waist to armpit measurement to locate the bottom of the armhole',
+      },
+      legacyArmholeDepthYes: {
+        t: 'Calculate armhole depth the legacy (v2) way',
+        d: 'Uses the biceps measurement to locate the bottom of the armhole',
+      },
+      lengthBonus: {
+        t: 'Length bonus',
+        d: 'The amount to lengthen the garment. A negative value will shorten it.',
+      },
+      s3Collar: {
+        t: 'Shoulder seam shift: collar side',
+        d: 'Increase this option to shift the shoulder seam forward on the collar side. Decreasing it shifts it backwards.',
+      },
+      s3Armhole: {
+        t: 'Shoulder seam shift: armhole side',
+        d: 'Increase this option to shift the shoulder seam forward on the armhole side. Decreasing it shifts it backwards.',
+      },
+      shoulderEase: {
+        t: 'Shoulder ease',
+        d: 'The amount of ease at your shoulder. This increases the shoulder to shoulder distance to accommodate additional layers or thickness.',
+      },
+      shoulderSlopeReduction: {
+        t: 'Shoulder slope reduction',
+        d: 'The amount by which the shoulder slope is reduced to allow for shoulder padding.',
       },
       sleeveEase: {
         t: 'Sleeve ease',
@@ -8671,16 +9115,6 @@ export const designs = {
   tristan: {
     t: 'Tristan top',
     d: 'Tristan is a fitted tank top with prince(ss) seams.',
-    p: {
-      backInside: 'Back inside',
-      backOutside: 'Back outside',
-      backPoints: 'Back base',
-      frontInside: 'Front inside',
-      frontOutside: 'Front outside',
-      frontPoints: 'Front base',
-      peplumFront: 'Peplum front',
-      peplumBack: 'Peplum back',
-    },
     s: {
       'strapWidthAdjusted.t': 'The strap width has been adjusted',
       'strapWidthAdjusted.d':
@@ -8695,30 +9129,104 @@ export const designs = {
       backPeplum: 'Peplum back',
       hem: 'Hem',
     },
+    p: {
+      backInside: 'Back inside',
+      backOutside: 'Back outside',
+      backPoints: 'Back base',
+      frontInside: 'Front inside',
+      frontOutside: 'Front outside',
+      frontPoints: 'Front base',
+      peplumFront: 'Peplum front',
+      peplumBack: 'Peplum back',
+    },
     o: {
-      bustSpanEase: {
-        t: 'Bust span ease',
-        d: 'Controls the amount of ease along the bust span',
+      dartPosition: {
+        t: 'Dart position',
+        d: 'Controls whether to split at the shoulder or armhole',
       },
       chestEase: {
         t: 'Chest ease',
         d: 'Controls the amount of ease at the chest',
       },
-      shoulderToShoulderEase: {
-        t: 'Shoulder to shoulder ease',
-        d: 'Controls the amount of ease along the shoulder to shoulder measurement',
-      },
-      fullChestEaseReduction: {
-        t: 'Full chest ease reduction',
-        d: 'Allows you to independently reduce the ease around the chest to make it fit tight(er) in that area',
-      },
       waistEase: {
         t: 'Waist ease',
         d: 'Controls the amount of ease at the waist',
       },
+      bustSpanEase: {
+        t: 'Bust span ease',
+        d: 'Controls the amount of ease along the bust span',
+      },
       waistdartposition: {
         t: 'Waist dart position',
         d: "Controls the position of the waist 'dart', moving it to the center (negative) or side (positive)",
+      },
+      backDartHeight: {
+        t: 'Controls the height of the back dart',
+        d: 'Back dart height',
+      },
+      waistDartLength: {
+        t: 'Waist dart length',
+        d: 'Controls the length of the waist dart',
+      },
+      shoulderDartCurvature: {
+        t: 'Shoulder dart curvature',
+        d: 'Controls the curvature of the upper part of the shoulder dart',
+      },
+      shoulderDartPosition: {
+        t: 'Shoulder dart position',
+        d: 'Controls the position of the shoulder dart',
+      },
+      upperDartLength: {
+        t: 'Upper dart length',
+        d: 'Controls the length of the upper dart',
+      },
+      armholeDartPosition: {
+        t: 'Armhole dart position',
+        d: 'Controls the position of the armhole dart',
+      },
+      armholeDepth: {
+        t: 'Armhole depth',
+        d: 'Controls the depth of the armhole',
+      },
+      armholeDartCurved: {
+        t: 'Princess Seam Curviness',
+        d: 'Controls the curvature of the princess seam',
+      },
+      armholeDartCurvePoint: {
+        t: 'Armhole princess seam curve point',
+        d: 'This controls where (vertically) the curve of the princess seam starts',
+      },
+      armholeDartCurveWidth: {
+        t: 'Armhole princess seam curve width',
+        d: 'This controls the radius of the curve of the princess seam',
+      },
+      backArmholeSlant: {
+        t: 'Back armhole slant',
+        d: 'Controls the slant of the armhole at the back',
+      },
+      backArmholeCurvature: {
+        t: 'Back armhole curvature',
+        d: 'Controls how deep the armhole is scooped out at the back',
+      },
+      frontArmholeCurvature: {
+        t: 'Front armhole curvature',
+        d: 'Controls how deep the armhole is scooped out at the front bottom',
+      },
+      frontArmholePitchDepth: {
+        t: 'Front armhole pitch depth',
+        d: 'Controls how deep the armhole cuts into the front',
+      },
+      backArmholePitchDepth: {
+        t: 'Back armhole pitch depth',
+        d: 'Controls how deep the armhole cuts into the back',
+      },
+      backNeckCutout: {
+        t: 'Back neck cutout',
+        d: 'Controls how deep the neck is cutout in the back',
+      },
+      backHemSlope: {
+        t: 'Back hem slope',
+        d: 'Controls the slope of the back hem',
       },
       frontShoulderWidth: {
         t: 'Front shoulder width',
@@ -8728,9 +9236,13 @@ export const designs = {
         t: 'High bust width',
         d: 'Controls the width of the high bust',
       },
-      armholeDepth: {
-        t: 'Depth of the Armhole',
-        d: 'Controls how deep the armhole is',
+      shoulderToShoulderEase: {
+        t: 'Shoulder to shoulder ease',
+        d: 'Controls the amount of ease along the shoulder to shoulder measurement',
+      },
+      fullChestEaseReduction: {
+        t: 'Full chest ease reduction',
+        d: 'Allows you to independently reduce the ease around the chest to make it fit tight(er) in that area',
       },
       cutDepthBack: {
         t: 'Depth of the cut in the back',
@@ -8748,53 +9260,17 @@ export const designs = {
         t: 'Roundness of the cut in the front',
         d: "Controls how 'round' the cut in the front is, from V to round to square",
       },
-      shoulderDartCurvature: {
-        t: 'Shoulder dart curvature',
-        d: 'Controls the curvature of the upper part of the shoulder dart',
-      },
-      shoulderDartPosition: {
-        t: 'Shoulder dart position',
-        d: 'Controls the position of the shoulder dart',
-      },
       strapWidth: {
         t: 'Width of the straps',
         d: 'Controls the width of the straps',
-      },
-      upperDartLength: {
-        t: 'Upper dart length',
-        d: 'Controls the length of the upper dart',
-      },
-      waistDartLength: {
-        t: 'Waist dart length',
-        d: 'Controls the length of the waist dart',
       },
       zipperLocation: {
         t: 'Zipper location',
         d: 'The location of the zipper: side, back, or front',
       },
-      'zipperLocation.front': {
-        t: 'Front zipper location',
-        d: 'The location of the zipper will be in the front',
-      },
-      'zipperLocation.side': {
-        t: 'Side zipper location',
-        d: 'The location of the zipper will be on the side',
-      },
-      'zipperLocation.back': {
-        t: 'Back zipper location',
-        d: 'The location of the zipper will be in the back',
-      },
       hem: {
         t: 'Hem option',
         d: 'Add a hem.',
-      },
-      hemYes: {
-        t: 'Add a hem',
-        d: 'Add a hem at the waist',
-      },
-      hemNo: {
-        t: 'Do not add a hem',
-        d: 'Do not add a hem at the waist',
       },
       hemSize: {
         t: 'Size of the hem',
@@ -8804,25 +9280,9 @@ export const designs = {
         t: 'Lacing option',
         d: 'This removes part of the seam to create an opening for lacing',
       },
-      lacingYes: {
-        t: 'Add Lacing',
-        d: 'Remove part of the seam to create an opening for lacing',
-      },
-      lacingNo: {
-        t: 'No lacing',
-        d: 'Close the seams normally',
-      },
       lacingLocation: {
         t: 'Location of the lacing',
         d: 'Lacing in the front, or the back',
-      },
-      'lacingLocation.back': {
-        t: 'Lacing in the back',
-        d: 'The lacing will be in the back',
-      },
-      'lacingLocation.front': {
-        t: 'Lacing in the front',
-        d: 'The lacing will be in the front',
       },
       lacingWidth: {
         t: 'Lacing width',
@@ -8831,14 +9291,6 @@ export const designs = {
       peplum: {
         t: 'Peplum',
         d: 'Add a peplum',
-      },
-      peplumYes: {
-        t: 'Add a peplum',
-        d: 'This will generate the peplum part.',
-      },
-      peplumNo: {
-        t: 'No peplum',
-        d: 'Pattern will be generated without a peplum',
       },
       peplumSize: {
         t: 'Peplum size',
@@ -9062,6 +9514,17 @@ export const designs = {
     t: 'Wahid waistcoat',
     d: 'Wahid is a classic fitted waistcoat.',
     s: {
+      backArmholeLength: 'The length of the armhole at the back of the garment',
+      backArmholeToArmholePitch:
+        'The length along the armhole from the bottom of the armhole to the back armhole pitch point',
+      frontArmholeLength: 'The length of the armhole at the front of the garment',
+      frontArmholeToArmholePitch:
+        'The length along the armhole from the bottom of the armhole to the front armhole pitch point',
+      sleevecapLength: 'The length of the sleevecap',
+      sleeveLength: 'The length of the sleeve',
+      sleevecapTarget: 'The theoretical length of the sleevecap we strive for',
+      sleevecapEase: 'The mount of sleevecap ease',
+      __sleevecapFactor: 'An internal variable that is used to tweak the sleevecap draft',
       'largeShoulderWidth.t': 'Shoulder Width larger than anticipated',
       'largeShoulderWidth.d':
         'The pattern was not able to generate an optimal armhole shape using the given measurements and options. Please be aware that the generated pattern may not be correct. Please retake your measurements, verify that they are correct, and try generating a new pattern with the new measurements.',
@@ -9086,11 +9549,10 @@ export const designs = {
       flbLiningSide: 'Facing/Lining boundary : Lining side',
     },
     p: {
+      sleeve: 'Sleeve',
       back: 'Back',
       front: 'Front',
       base: 'Base',
-      sleevecap: 'Sleevecap',
-      sleeve: 'Sleeve',
       frontFacing: 'Front facing',
       frontLining: 'Front lining',
       pocketBag: 'Pocket bag',
@@ -9099,6 +9561,10 @@ export const designs = {
       pocketWelt: 'Pocket welt',
     },
     o: {
+      cuffEase: {
+        t: 'Cuff ease',
+        d: 'The amount of ease at your wrist.',
+      },
       acrossBackFactor: {
         t: 'Across back factor',
         d: 'Controls your across back width as a factor of your shoulder to shoulder measurement.',
@@ -9126,10 +9592,6 @@ export const designs = {
       chestEase: {
         t: 'Chest ease',
         d: 'The amount of ease at your chest.',
-      },
-      cuffEase: {
-        t: 'Cuff ease',
-        d: 'The amount of ease at your wrist.',
       },
       draftForHighBust: {
         t: 'Draft for high bust',
@@ -9521,6 +9983,17 @@ export const designs = {
     t: 'Yuri hoodie',
     d: 'Yuri is a fancy zipless cardigan based on the Huey & Hugo hoodies',
     s: {
+      backArmholeLength: 'The length of the armhole at the back of the garment',
+      backArmholeToArmholePitch:
+        'The length along the armhole from the bottom of the armhole to the back armhole pitch point',
+      frontArmholeLength: 'The length of the armhole at the front of the garment',
+      frontArmholeToArmholePitch:
+        'The length along the armhole from the bottom of the armhole to the front armhole pitch point',
+      sleevecapLength: 'The length of the sleevecap',
+      sleeveLength: 'The length of the sleeve',
+      sleevecapTarget: 'The theoretical length of the sleevecap we strive for',
+      sleevecapEase: 'The mount of sleevecap ease',
+      __sleevecapFactor: 'An internal variable that is used to tweak the sleevecap draft',
       'largeShoulderWidth.t': 'Shoulder Width larger than anticipated',
       'largeShoulderWidth.d':
         'The pattern was not able to generate an optimal armhole shape using the given measurements and options. Please be aware that the generated pattern may not be correct. Please retake your measurements, verify that they are correct, and try generating a new pattern with the new measurements.',
@@ -9531,99 +10004,18 @@ export const designs = {
         'The **Hood center** is a rectangular piece of fabric {{{ width }}} wide and {{{ length }}} long.',
     },
     p: {
+      sleeve: 'Sleeve',
       back: 'Back',
       front: 'Front',
       base: 'Base',
-      sleevecap: 'Sleevecap',
-      sleeve: 'Sleeve',
       gusset: 'Gusset',
       hoodCenter: 'Hood center',
       hoodSide: 'Hood side',
     },
     o: {
-      acrossBackFactor: {
-        t: 'Across back factor',
-        d: 'Controls your across back width as a factor of your shoulder to shoulder measurement.',
-      },
-      armholeDepth: {
-        t: 'Armhole depth',
-        d: 'Controls the depth of the armhole. Higher values make a deeper armhole.',
-      },
-      armholeDepthFactor: {
-        t: 'Armhole depth factor (legacy)',
-        d: 'Controls the depth of the armhole. Higher values make a deeper armhole. This option only applies to the legacy (v2) way of calculating the armhole depth.',
-      },
-      backNeckCutout: {
-        t: 'Back neck cutout',
-        d: 'How deep the neck is cut out at the back',
-      },
-      bicepsEase: {
-        t: 'Biceps ease',
-        d: 'The amount of ease at your upper arm. Note that while we try to respect this, fitting the sleeve to the armhole takes precedence over respecting the exact amount of ease.',
-      },
-      collarEase: {
-        t: 'Collar ease',
-        d: 'The amount of ease around your neck',
-      },
-      chestEase: {
-        t: 'Chest ease',
-        d: 'The amount of ease at your chest.',
-      },
       cuffEase: {
         t: 'Cuff ease',
         d: 'The amount of ease at your wrist.',
-      },
-      draftForHighBust: {
-        t: 'Draft for high bust',
-        d: 'Draft the pattern using the high bust measurement if it is available, instead of using the chest measurement. This can result in a more fitted garment for people with breasts. (Please note that no additional adjustments or shaping is performed. Further manual adjustments may be needed for those with a larger difference between high bust and chest measurements.)',
-      },
-      draftForHighBustYes: {
-        t: 'Draft using the high bust measurement',
-        d: 'Drafts a pattern using the high bust measurement instead of the chest measurement. Suggested for most people with breasts.',
-      },
-      draftForHighBustNo: {
-        t: 'Draft using the chest measurement',
-        d: 'Drafts a pattern using the chest measurement. Suggested for most people without breasts.',
-      },
-      frontArmholeDeeper: {
-        t: 'Front armhole extra cutout',
-        d: 'How much do you want the front armhole to be cut out deeper than the back.',
-      },
-      legacyArmholeDepth: {
-        t: 'Legacy armhole depth',
-        d: 'Enable this option to use the legacy way to calculate the armhole depth (using biceps circumference) rather than the v3 way (using the waist to armpit measurement)',
-      },
-      legacyArmholeDepthNo: {
-        t: 'Calculate armhole depth the v3 way',
-        d: 'Uses the waist to armpit measurement to locate the bottom of the armhole',
-      },
-      legacyArmholeDepthYes: {
-        t: 'Calculate armhole depth the legacy (v2) way',
-        d: 'Uses the biceps measurement to locate the bottom of the armhole',
-      },
-      lengthBonus: {
-        t: 'Length bonus',
-        d: 'The amount to lengthen the garment. A negative value will shorten it.',
-      },
-      s3Collar: {
-        t: 'Shoulder seam shift: collar side',
-        d: 'Increase this option to shift the shoulder seam forward on the collar side. Decreasing it shifts it backwards.',
-      },
-      s3Armhole: {
-        t: 'Shoulder seam shift: armhole side',
-        d: 'Increase this option to shift the shoulder seam forward on the armhole side. Decreasing it shifts it backwards.',
-      },
-      shoulderEase: {
-        t: 'Shoulder ease',
-        d: 'The amount of ease at your shoulder. This increases the shoulder to shoulder distance to accommodate additional layers or thickness.',
-      },
-      shoulderSlopeReduction: {
-        t: 'Shoulder slope reduction',
-        d: 'The amount by which the shoulder slope is reduced to allow for shoulder padding.',
-      },
-      sleeveLengthBonus: {
-        t: 'Sleeve length bonus',
-        d: 'The amount to lengthen the sleeve. A negative value will shorten it.',
       },
       sleevecapEase: {
         t: 'Sleevecap ease',
@@ -9701,9 +10093,89 @@ export const designs = {
         t: 'Sleevecap Q4 downward spread',
         d: 'Controls the spread of the sleevecap fourth quadrant curvature towards the armhole',
       },
+      sleeveLengthBonus: {
+        t: 'Sleeve length bonus',
+        d: 'The amount to lengthen the sleeve. A negative value will shorten it.',
+      },
       sleeveWidthGuarantee: {
         t: 'Sleeve width guarantee',
         d: 'Controls how much of the sleeve width will be guaranteed. This determines how much we can alter the sleeve width to fit the sleeve in the armhole.',
+      },
+      acrossBackFactor: {
+        t: 'Across back factor',
+        d: 'Controls your across back width as a factor of your shoulder to shoulder measurement.',
+      },
+      armholeDepth: {
+        t: 'Armhole depth',
+        d: 'Controls the depth of the armhole. Higher values make a deeper armhole.',
+      },
+      armholeDepthFactor: {
+        t: 'Armhole depth factor (legacy)',
+        d: 'Controls the depth of the armhole. Higher values make a deeper armhole. This option only applies to the legacy (v2) way of calculating the armhole depth.',
+      },
+      backNeckCutout: {
+        t: 'Back neck cutout',
+        d: 'How deep the neck is cut out at the back',
+      },
+      bicepsEase: {
+        t: 'Biceps ease',
+        d: 'The amount of ease at your upper arm. Note that while we try to respect this, fitting the sleeve to the armhole takes precedence over respecting the exact amount of ease.',
+      },
+      collarEase: {
+        t: 'Collar ease',
+        d: 'The amount of ease around your neck',
+      },
+      chestEase: {
+        t: 'Chest ease',
+        d: 'The amount of ease at your chest.',
+      },
+      draftForHighBust: {
+        t: 'Draft for high bust',
+        d: 'Draft the pattern using the high bust measurement if it is available, instead of using the chest measurement. This can result in a more fitted garment for people with breasts. (Please note that no additional adjustments or shaping is performed. Further manual adjustments may be needed for those with a larger difference between high bust and chest measurements.)',
+      },
+      draftForHighBustYes: {
+        t: 'Draft using the high bust measurement',
+        d: 'Drafts a pattern using the high bust measurement instead of the chest measurement. Suggested for most people with breasts.',
+      },
+      draftForHighBustNo: {
+        t: 'Draft using the chest measurement',
+        d: 'Drafts a pattern using the chest measurement. Suggested for most people without breasts.',
+      },
+      frontArmholeDeeper: {
+        t: 'Front armhole extra cutout',
+        d: 'How much do you want the front armhole to be cut out deeper than the back.',
+      },
+      legacyArmholeDepth: {
+        t: 'Legacy armhole depth',
+        d: 'Enable this option to use the legacy way to calculate the armhole depth (using biceps circumference) rather than the v3 way (using the waist to armpit measurement)',
+      },
+      legacyArmholeDepthNo: {
+        t: 'Calculate armhole depth the v3 way',
+        d: 'Uses the waist to armpit measurement to locate the bottom of the armhole',
+      },
+      legacyArmholeDepthYes: {
+        t: 'Calculate armhole depth the legacy (v2) way',
+        d: 'Uses the biceps measurement to locate the bottom of the armhole',
+      },
+      lengthBonus: {
+        t: 'Length bonus',
+        d: 'The amount to lengthen the garment. A negative value will shorten it.',
+      },
+      s3Collar: {
+        t: 'Shoulder seam shift: collar side',
+        d: 'Increase this option to shift the shoulder seam forward on the collar side. Decreasing it shifts it backwards.',
+      },
+      s3Armhole: {
+        t: 'Shoulder seam shift: armhole side',
+        d: 'Increase this option to shift the shoulder seam forward on the armhole side. Decreasing it shifts it backwards.',
+      },
+      shoulderEase: {
+        t: 'Shoulder ease',
+        d: 'The amount of ease at your shoulder. This increases the shoulder to shoulder distance to accommodate additional layers or thickness.',
+      },
+      shoulderSlopeReduction: {
+        t: 'Shoulder slope reduction',
+        d: 'The amount by which the shoulder slope is reduced to allow for shoulder padding.',
       },
       hipsEase: {
         t: 'Hips ease',

@@ -13,6 +13,7 @@ import {
 } from './options.mjs'
 
 function simonFront({
+  complete,
   store,
   measurements,
   sa,
@@ -27,6 +28,7 @@ function simonFront({
   part,
 }) {
   // Clean up
+
   for (const i in paths) {
     if (['frontArmhole', 'frontCollar', 'chest', 'waist'].indexOf(i) === -1) delete paths[i]
   }
@@ -39,7 +41,7 @@ function simonFront({
   // Populare store with data we need
   calculateReduction(part)
   store.set(
-    'frontArmholeLength',
+    'library.sleeve.frontArmholeLength',
     new Path()
       .move(points.armhole)
       .curve(points.armholeCp2, points.armholeHollowCp1, points.armholeHollow)
@@ -137,23 +139,10 @@ function simonFront({
     delete paths.sa
   }
 
-  // Chest & Waist line
-  macro('banner', {
-    id: 'chestLine',
-    classes: 'center contrast help',
-    path: paths.chest,
-    text: 'simon:chestLine',
-  })
-  macro('banner', {
-    id: 'waistLine',
-    classes: 'center contrast help',
-    path: paths.waist,
-    text: 'simon:waistLine',
-  })
-
   /*
    * Annotations
    */
+
   // Cutlist
   store.cutlist.setCut({ cut: 1, from: 'fabric' })
 

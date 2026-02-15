@@ -334,7 +334,7 @@ PatternConfig.prototype.__addPartPlugins = function (part) {
 
 // the two types of dependencies
 const depTypes = ['from', 'after']
-// the two lists of special istructions
+// the two lists of special instructions
 const exceptionTypes = ['never', 'always']
 /**
  * Resolve the hiding configuration of this part

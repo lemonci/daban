@@ -1,4 +1,4 @@
-import { sleeve as brianSleeve } from '@freesewing/brian'
+import { sleeve as librarySleeve } from '@freesewing/library'
 import { front } from './front.mjs'
 import { back } from './back.mjs'
 import { cuffEase, sleeveLengthBonus, ribbingHeight } from './options.mjs'
@@ -280,7 +280,7 @@ function hugoSleeve({
 
 export const sleeve = {
   name: 'hugo.sleeve',
-  from: brianSleeve,
+  from: librarySleeve,
   hide: hidePresets.HIDE_TREE,
   after: [front, back],
   options: {
@@ -312,6 +312,7 @@ export const sleeve = {
     sleevecapQ4Spread1: 0.07,
     sleevecapQ4Spread2: 0.063,
     sleeveWidthGuarantee: 0.9,
+    libraryFitSleeve: true,
   },
   draft: hugoSleeve,
 }

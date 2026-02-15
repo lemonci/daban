@@ -45,6 +45,10 @@
     "only.macros": {
       "t": "Macros",
       "d": "Draft render tests for macros"
+    },
+    "width": {
+      "t": "Width",
+      "d": "The width of the tests"
     }
   }
 }

@@ -1,7 +1,40 @@
 {
   "t": "Examples",
   "d": "A FreeSewing pattern with examples used throughout our documentation",
-  "p": {},
+  "p": {
+    "rectBase": "Library polymorphism: base rectangle",
+    "rect1": "Library polymorphism: rectangle 1",
+    "rect2": "Library polymorphism: rectangle 2",
+    "rect3": "Library polymorphism: rectangle 3",
+    "stacks_top": "Stacks layout: top",
+    "stacks_left": "Stacks layout: left",
+    "stacks_right": "Stacks layout: right",
+    "stacks_bottom": "Stacks layout: bottom ",
+    "stacks_leftEye": "Stacks layout: left eye",
+    "stacks_rightEye": "Stacks layout: right eye",
+    "stacks_mouth": "Stacks layout: mouth"
+  },
   "s": {},
-  "o": {}
+  "o": {
+    "stackIt": {
+      "t": "Stack parts",
+      "d": "Causes parts to be stacked on top of each other"
+    },
+    "x": {
+      "t": "X-Size",
+      "d": "Scales the examples along the X-axis"
+    },
+    "y": {
+      "t": "Y-Size",
+      "d": "Scales the examples along the Y-axis"
+    },
+    "examples_rect3_rectangleHeight": {
+      "t": "Rectangle height (rect3)",
+      "d": "Controls the height of this rectangle"
+    },
+    "size": {
+      "t": "Stack size",
+      "d": "Controls the size of the stacked box"
+    }
+  }
 }

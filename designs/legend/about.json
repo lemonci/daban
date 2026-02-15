@@ -1,6 +1,11 @@
 {
   "id": "legend",
+  "name": "Render test",
+  "code": "Joost De Cock",
+  "design": "Joost De Cock",
   "description": "A FreeSewing pattern to document pattern notation",
   "version": "4.4.3",
-  "collection": false
+  "collection": false,
+  "pkg": "@freesewing/rendertest",
+  "difficulty": 5
 }

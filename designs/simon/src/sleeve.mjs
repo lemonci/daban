@@ -1,5 +1,5 @@
 import { front } from './front.mjs'
-import { sleeve as brianSleeve } from '@freesewing/brian'
+import { sleeve as librarySleeve } from '@freesewing/library'
 import { hidePresets } from '@freesewing/core'
 import {
   cuffOverlap,
@@ -32,13 +32,9 @@ function simonSleeve({
 }) {
   let pleats = 0
 
-  // Update the back armhole notch because the one from Brian is not correct
-  points.backNotch = paths.sleevecap.reverse().shiftAlong(store.get('backArmholeToArmholePitch'))
-
-  // Remove inherited paths, snippets, and scalebox
+  // Remove inherited paths and snippets
   for (const p in paths) delete paths[p]
   for (const s in snippets) delete snippets[s]
-  macro('rmscalebox')
 
   // Determine the sleeve length
   paths.sleevecap = new Path()
@@ -363,7 +359,7 @@ function simonSleeve({
 
 export const sleeve = {
   name: 'simon.sleeve',
-  from: brianSleeve,
+  from: librarySleeve,
   after: front,
   hide: hidePresets.HIDE_TREE,
   options: {
@@ -377,6 +373,7 @@ export const sleeve = {
     sleeveHemShort,
     sleevePlacketLength,
     sleeveStyle,
+    libraryFitSleeve: true,
   },
   draft: simonSleeve,
 }

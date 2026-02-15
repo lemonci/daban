@@ -14,7 +14,6 @@ function pctWaistSeatDiff() {
 export const base = {
   name: 'sunny.base',
   measurements: ['waist', 'waistToSeat', 'seat'],
-  optionalMeasurements: [],
   options: {
     paperlessOffset: 15,
     waistEase: {
@@ -124,9 +123,7 @@ export const base = {
     const o = options.sideOpeningLength * measurements.waistToSeat
     const h = hWaist + waistEase / 2
 
-    if (expand) {
-      store.flag.preset('expandIsOn')
-    }
+    if (expand) store.flag.preset('expandIsOn')
 
     const hem = options.hem * (sa ? sa : 10)
     store.set('hem', hem)
@@ -160,44 +157,44 @@ export const base = {
     points.br = new Point(w, l)
     points.tr = new Point(w, 0)
 
+    points.lNotch = new Point(0, o)
+    points.rNotch = new Point(w, o)
+
+    if (options.fabricWaistband) {
+      points.wfold1tr = points.wtr.shift(-90, waistbandWidth / 4)
+      points.wfold1tl = points.tl.shift(-90, waistbandWidth / 4)
+      points.wfold1br = points.wbr.shift(90, waistbandWidth / 4)
+      points.wfold1bl = points.wbl.shift(90, waistbandWidth / 4)
+
+      points.wfold2r = points.wtr.shift(-90, waistbandWidth / 2)
+      points.wfold2l = points.tl.shift(-90, waistbandWidth / 2)
+
+      points.wtlNotch = new Point(b / 2 - h / 2, waistbandWidth / 4)
+      points.wtrNotch = new Point(b / 2 + h / 2, waistbandWidth / 4)
+      points.wblNotch = new Point(b / 2 - h / 2, (waistbandWidth / 4) * 3)
+      points.wbrNotch = new Point(b / 2 + h / 2, (waistbandWidth / 4) * 3)
+    }
+
+    if (options.fabricBinding) {
+      points.bbl = new Point(0, bindingWidth)
+      points.btr = new Point(h, 0)
+      points.bbr = new Point(h, bindingWidth)
+      points.bfold1tr = points.btr.shift(-90, bindingWidth / 4)
+      points.bfold1tl = points.tl.shift(-90, bindingWidth / 4)
+      points.bfold1br = points.bbr.shift(90, bindingWidth / 4)
+      points.bfold1bl = points.bbl.shift(90, bindingWidth / 4)
+
+      points.bfold2r = points.btr.shift(-90, bindingWidth / 2)
+      points.bfold2l = points.tl.shift(-90, bindingWidth / 2)
+    }
+
+    const pps = options.numPleats
+    const ws = (measurements.waist + waistEase) / 2
+    const pleatWidth = ws / options.numPleats
+    const pleatInterval = pleatWidth * (3 - options.pleatOverlap)
+
     if (complete) {
-      points.lNotch = new Point(0, o)
-      points.rNotch = new Point(w, o)
-
-      if (options.fabricWaistband) {
-        points.wfold1tr = points.wtr.shift(-90, waistbandWidth / 4)
-        points.wfold1tl = points.tl.shift(-90, waistbandWidth / 4)
-        points.wfold1br = points.wbr.shift(90, waistbandWidth / 4)
-        points.wfold1bl = points.wbl.shift(90, waistbandWidth / 4)
-
-        points.wfold2r = points.wtr.shift(-90, waistbandWidth / 2)
-        points.wfold2l = points.tl.shift(-90, waistbandWidth / 2)
-
-        points.wtlNotch = new Point(b / 2 - h / 2, waistbandWidth / 4)
-        points.wtrNotch = new Point(b / 2 + h / 2, waistbandWidth / 4)
-        points.wblNotch = new Point(b / 2 - h / 2, (waistbandWidth / 4) * 3)
-        points.wbrNotch = new Point(b / 2 + h / 2, (waistbandWidth / 4) * 3)
-      }
-
-      if (options.fabricBinding) {
-        points.bbl = new Point(0, bindingWidth)
-        points.btr = new Point(h, 0)
-        points.bbr = new Point(h, bindingWidth)
-        points.bfold1tr = points.btr.shift(-90, bindingWidth / 4)
-        points.bfold1tl = points.tl.shift(-90, bindingWidth / 4)
-        points.bfold1br = points.bbr.shift(90, bindingWidth / 4)
-        points.bfold1bl = points.bbl.shift(90, bindingWidth / 4)
-
-        points.bfold2r = points.btr.shift(-90, bindingWidth / 2)
-        points.bfold2l = points.tl.shift(-90, bindingWidth / 2)
-      }
-
-      const pps = options.numPleats
-      const ws = (measurements.waist + waistEase) / 2
-      const pleatWidth = ws / options.numPleats
-      const pleatInterval = pleatWidth * (3 - options.pleatOverlap)
-
-      // pleat
+      // pleats
       for (let i = 0; i < pps; i++) {
         // up/down
         for (let j = 0; j < 2; j++) {

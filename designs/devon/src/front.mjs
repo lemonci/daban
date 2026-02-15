@@ -163,6 +163,8 @@ export const front = {
       .curve(points.armholeHollowCp2, points.armholePitchCp1, points.armholePitch)
       .join(paths.frontArmhole)
       .hide()
+    // Update store with required values for the library's twoPartSleeve
+    store.set(`library.twoPartSleeve.frontArmholeLength`, paths.frontArmholeComplete.length())
 
     points.frontArmholeYoke = paths.frontArmholeComplete.intersectsY(points.cfYoke.y)[0]
 

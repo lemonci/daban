@@ -41,6 +41,156 @@
     "bartackWidth": {
       "t": "width",
       "d": "Controls the width of the (stitches making up the) bartack"
+    },
+    "plugin": {
+      "t": "Plugin",
+      "d": "FIXME"
+    },
+    "crossboxText": {
+      "t": "Cross box text",
+      "d": "FIXME"
+    },
+    "cutonfoldMargin": {
+      "t": "Cut-on-fold margin",
+      "d": "FIXME"
+    },
+    "cutonfoldOffset": {
+      "t": "Cut-on-fold offset",
+      "d": "FIXME"
+    },
+    "cutonfoldGrainline": {
+      "t": "Cut-on-fold Grainline",
+      "d": "FIXME"
+    },
+    "dimensionsCustomText": {
+      "t": "Dimension custom text",
+      "d": "FIXME"
+    },
+    "dimensionsEndMarker": {
+      "t": "Dimensions End Marker",
+      "d": "FIXME"
+    },
+    "dimensionsStartMarker": {
+      "t": "Dimensions Start Marker",
+      "d": "FIXME"
+    },
+    "logoScale": {
+      "t": "Logo scale",
+      "d": "FIXME"
+    },
+    "logoRotate": {
+      "t": "Logo rotation",
+      "d": "FIXME"
+    },
+    "pleatMargin": {
+      "t": "Pleat margin",
+      "d": "FIXME"
+    },
+    "pleatReverse": {
+      "t": "Pleat reverse",
+      "d": "FIXME"
+    },
+    "scaleboxRotation": {
+      "t": "Scalebox rotation",
+      "d": "FIXME"
+    },
+    "scaleboxText": {
+      "t": "Scalebox text",
+      "d": "FIXME"
+    },
+    "sewtogetherHinge": {
+      "t": "Sew together hinge",
+      "d": "FIXME"
+    },
+    "sewtogetherMiddle": {
+      "t": "Sew together middle",
+      "d": "FIXME"
+    },
+    "titleNr": {
+      "t": "Title number",
+      "d": "FIXME"
+    },
+    "titleTitle": {
+      "t": "Title text",
+      "d": "FIXME"
+    },
+    "titleMeta": {
+      "t": "Title meta text",
+      "d": "FIXME"
+    },
+    "titleScale": {
+      "t": "Title scale",
+      "d": "FIXME"
+    },
+    "titleRotate": {
+      "t": "Title rotation",
+      "d": "FIXME"
+    },
+    "snippetScale": {
+      "t": "Snippet scale",
+      "d": "FIXME"
+    },
+    "snippetRotation": {
+      "t": "Snippet rotation",
+      "d": "FIXME"
+    },
+    "flipAxis": {
+      "t": "Flip axis",
+      "d": "FIXME"
+    },
+    "goreRadius": {
+      "t": "Gore radius",
+      "d": "FIXME"
+    },
+    "goreGoreNumber": {
+      "t": "Number of gores",
+      "d": "FIXME"
+    },
+    "goreExtraLength": {
+      "t": "Gore extra length",
+      "d": "FIXME"
+    },
+    "mirrorLine": {
+      "t": "Mirror line",
+      "d": "FIXME"
+    },
+    "mirrorClone": {
+      "t": "Mirror clone",
+      "d": "FIXME"
+    },
+    "roundRadius": {
+      "t": "Round radios",
+      "d": "FIXME"
+    },
+    "roundHide": {
+      "t": "Round hide",
+      "d": "FIXME"
+    },
+    "sprinkleScale": {
+      "t": "Sprinkle scale",
+      "d": "FIXME"
+    },
+    "sprinkleRotate": {
+      "t": "Sprinkle rotation",
+      "d": "FIXME"
+    },
+    "sprinkleSnippet": {
+      "t": "Sprinkle snippet",
+      "d": "FIXME"
+    },
+    "ringsectorInsideRadius" : {
+      "t": "Ring sector inside radius",
+      "d": "FIXME"
+    },
+    "ringsectorOutsideRadius": {
+      "t": "Ring sector outside radius",
+      "d": "FIXME"
+    },
+    "ringsectorAngle": {
+      "t": "Ring sector angle",
+      "d": "FIXME"
     }
   }
 }
+
+

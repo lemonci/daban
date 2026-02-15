@@ -3,6 +3,7 @@ import { base } from './base.mjs'
 
 export const back = {
   from: base,
+  options: base.options,
   name: 'brian.back',
   draft: ({
     store,
@@ -122,9 +123,14 @@ export const back = {
       .join(paths.saBase)
       .attr('class', 'fabric')
 
-    // Store lengths to fit sleeve
-    store.set('backArmholeLength', shared.armholeLength(points, Path))
-    store.set('backArmholeToArmholePitch', shared.armholeToArmholePitch(points, Path))
+    // Store lengths to fit sleeve, ensuring compatibility with both sleeve types
+    for (const type of ['sleeve', 'twoPartSleeve', 'topsleeve', 'undersleeve']) {
+      store.set(`library.${type}.backArmholeLength`, shared.armholeLength(points, Path))
+      store.set(
+        `library.${type}.backArmholeToArmholePitch`,
+        shared.armholeToArmholePitch(points, Path)
+      )
+    }
 
     if (sa) {
       paths.sa = paths.saBase

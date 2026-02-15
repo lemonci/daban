@@ -32,6 +32,7 @@ breanna:
     '@freesewing/brian': *freesewing
 brian:
   peer:
+    '@freesewing/library': *freesewing
     '@freesewing/plugin-bust': *freesewing
 carlita:
   peer:

@@ -255,7 +255,6 @@ export const frontSidePanel = {
       ['v', 'armhole', 'frontArmholeYoke', 'armhole', 15],
       ['v', 'frontArmholeYoke', 'frontYokeSidePanel', 'armhole', 15],
     ])
-    console.log({ hemBackLength: store.get('hemBackLength') })
     if (options.waistAdjustment) {
       dim(part, [
         ['h', 'frontHemSidePanelSaved', 'hem', 'frontHemSidePanelSaved', 15],
@@ -275,10 +274,6 @@ export const frontSidePanel = {
         ['v', 'hemOriginal', 'armhole', 'armhole', 15],
       ])
       store.set('hemLength', points.hemOriginal.dist(points.frontHem) + store.get('hemBackLength'))
-      console.log({
-        f1: points.hemOriginal.dist(points.frontHem),
-        f2: store.get('hemBackLength'),
-      })
     }
     if (options.frontPocket) {
       if (complete) {

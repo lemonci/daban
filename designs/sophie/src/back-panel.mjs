@@ -2,9 +2,6 @@ import { base } from './base.mjs'
 
 export const backPanel = {
   name: 'sophie.backPanel',
-  measurements: [],
-  optionalMeasurements: [],
-  options: {},
   from: base,
   draft: ({
     Point,

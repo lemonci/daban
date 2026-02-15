@@ -126,6 +126,8 @@ Part.prototype.setHidden = function (hidden = false) {
  * @return {object} short - The so-called shorthand object with what you might need in your draft method
  */
 Part.prototype.shorthand = function () {
+  // We'll need this
+  let self = this
   const complete = this.context.settings?.complete ? true : false
   const expand = this.context.settings?.expand ? true : false
   const paperless = this.context.settings?.paperless ? true : false
@@ -140,13 +142,33 @@ Part.prototype.shorthand = function () {
     part: this,
     sa,
     scale: this.context.settings?.scale,
-    store: this.context.store,
+    store: this.context.store.extend([
+      // Add prefixed getter
+      [
+        'pget',
+        function (s, path, dflt) {
+          const prefix = self.context.settings.options.storePrefix
+            ? self.context.settings.options.storePrefix
+            : self.context.store.activePart + '.'
+          const val = self.context.store.get(path, dflt, prefix)
+          return self.context.store.get(path, dflt, prefix)
+        },
+      ],
+      // Add prefixed setter
+      [
+        'pset',
+        function (s, path, value) {
+          const prefix = self.context.settings.options.storePrefix
+            ? self.context.settings.options.storePrefix
+            : self.context.store.activePart + '.'
+          return self.context.store.set(path, value, prefix)
+        },
+      ],
+    ]),
     units: this.__unitsClosure(),
     utils: utils,
     Bezier: Bezier,
   }
-  // We'll need this
-  let self = this
 
   // Wrap the Point constructor so objects can log
   shorthand.Point = function (x, y) {
@@ -186,10 +208,16 @@ Part.prototype.shorthand = function () {
     set: (measurements, name, value) => (self.context.settings.measurements[name] = value),
   })
   shorthand.options = new Proxy(this.context.settings.options, {
-    get: function (options, name) {
-      if (typeof options[name] === 'undefined')
-        self.context.store.log.warn(`Tried to access \`options.${name}\` but it is \`undefined\``)
-      return Reflect.get(...arguments)
+    get: function (options, name, receiver) {
+      // Part-scoped options take precedence
+      const prefixedName = self.context.store.activePart.replace('.', '_') + '_' + name
+      if (typeof options[prefixedName] === 'undefined') {
+        if (typeof options[name] === 'undefined') {
+          self.context.store.log.warn(`Tried to access \`options.${name}\` but it is \`undefined\``)
+        }
+        return Reflect.get(...arguments)
+      }
+      return options[prefixedName]
     },
     set: (options, name, value) => (self.context.settings.options[name] = value),
   })
@@ -203,7 +231,6 @@ Part.prototype.shorthand = function () {
     },
     set: (absoluteOptions, name, value) => (self.context.settings.absoluteOptions[name] = value),
   })
-
   // Macro closure at the end as it includes the shorthand object
   shorthand.macro = this.__macroClosure(shorthand)
 

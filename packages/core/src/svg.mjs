@@ -117,7 +117,7 @@ Svg.prototype.__closeGroup = function () {
  * @return {string} escaped - The escaped text
  */
 Svg.prototype.__escapeText = function (text) {
-  if (Array.isArray(text)) return text.map((t) => t.replace(/"/g, '&#8220;')).join(' ')
+  if (Array.isArray(text)) return text.map((t) => (t ? t.replace(/"/g, '&#8220;') : '')).join(' ')
   return text.replace(/"/g, '&#8220;')
 }
 
