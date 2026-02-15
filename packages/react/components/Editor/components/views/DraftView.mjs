@@ -1,6 +1,7 @@
 // Dependencies
 import React, { useContext } from 'react'
-import { bundlePatternTranslations, draft, missingMeasurements } from '../../lib/index.mjs'
+import { useDesignTranslation } from '../../../../hooks/useDesignTranslation/index.mjs'
+import { draft, missingMeasurements } from '../../lib/index.mjs'
 import { colors, darkColors } from '@freesewing/plugin-theme'
 // Context
 import { ModalContext } from '@freesewing/react/context/Modal'
@@ -55,7 +56,7 @@ export const DraftView = ({ Design, state, update, config, plugins = [], PluginO
    */
   const { pattern, failure, errors } = draft(Design, state.settings, plugins, (pattern) => {
     if (state.ui?.renderer === 'svg') {
-      const strings = bundlePatternTranslations(pattern.designConfig.data.id)
+      const strings = useDesignTranslation(pattern.designConfig.data.id)
       pattern.use(i18nPlugin, (t) => translateStrings([t], strings))
       pattern.use(themePlugin)
       pattern.use(svgAttrPlugin, {
@@ -67,7 +68,7 @@ export const DraftView = ({ Design, state, update, config, plugins = [], PluginO
   /*
    * Create object holding strings for translation
    */
-  const strings = bundlePatternTranslations(pattern.designConfig.data.id)
+  const strings = useDesignTranslation(pattern.designConfig.data.id)
 
   let output = null
   let renderProps = false

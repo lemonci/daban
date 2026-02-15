@@ -13,7 +13,6 @@ import { findOption, getOptionStructure, menuDesignOptionsStructure } from './de
 import { menuLayoutSettingsStructure } from './layout-settings.mjs'
 import {
   addUndoStep,
-  bundlePatternTranslations,
   cloneObject,
   cloudImageUrl,
   draft,
@@ -75,7 +74,6 @@ export {
   menuLayoutSettingsStructure,
   // editor.mjs
   addUndoStep,
-  bundlePatternTranslations,
   cloneObject,
   cloudImageUrl,
   draft,

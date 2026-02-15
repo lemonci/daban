@@ -1,26 +1,26 @@
-import React from 'react'
 import { mergeOptions } from '@freesewing/core'
-import { designOptionType, set, orderBy } from '@freesewing/utils'
-import { i18n } from '@freesewing/collection'
+import { designOptionType, orderBy, set } from '@freesewing/utils'
+import React from 'react'
+import { useDesignOptionTranslation } from '../../../hooks/useDesignTranslation/index.mjs'
 
 export function menuDesignOptionsStructure(design, options, settings, asFullList = false) {
   if (!options) return options
   const sorted = {}
+
+  const eno = useDesignOptionTranslation(design)
+
   for (const [name, option] of Object.entries(options)) {
     if (typeof option === 'object') {
       sorted[name] = {
         ...option,
         name,
-        title: i18n[design]?.en?.o?.[name]?.t || name,
-        about: <span>{i18n[design]?.en?.o?.[name]?.d || name}</span>,
+        title: eno[name]?.t || name,
+        about: <span>{eno[name]?.d || name}</span>,
         dense: true,
         sideBySide: true,
       }
     }
   }
-
-  // Save us some typing to access English options
-  const eno = i18n[design]?.en?.o || {}
 
   const menu = {}
   for (const option of orderBy(sorted, ['order', 'name'], ['asc', 'asc'])) {
