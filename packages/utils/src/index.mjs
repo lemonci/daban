@@ -757,9 +757,10 @@ export function navigate(href, relative = false) {
  * Formats time as yyyymmdd
  *
  * @param {string} timestamp - An optional timestamp to use
+ * @param {string} spacer - An optional spacer to use between yyyy, mm, and dd
  * @return {string} yyyymmdd - The time in yyyymmdd format
  */
-export const yyyymmdd = (timestamp = false) => {
+export const yyyymmdd = (timestamp = false, spacer = '') => {
   const ts = timestamp ? new Date(timestamp) : new Date()
 
   let m = String(ts.getMonth() + 1)
@@ -767,7 +768,7 @@ export const yyyymmdd = (timestamp = false) => {
   let d = '' + ts.getDate()
   if (d.length === 1) d = '0' + d
 
-  return `${ts.getFullYear()}${m}${d}`
+  return `${ts.getFullYear()}${spacer}${m}${spacer}${d}`
 }
 
 /**
