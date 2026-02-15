@@ -3,6 +3,12 @@
 
 ## Unreleased
 
+### utils
+
+#### Added
+
+ - ddddmmyy() now takes an optional spacer parameter
+
 
 ## 4.4.3 (2025-11-29)
 
