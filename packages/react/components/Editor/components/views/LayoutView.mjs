@@ -1,9 +1,10 @@
 // Dependencies
 import React from 'react'
+import { useDesignTranslation } from '../../../../hooks/useDesignTranslation/index.mjs'
 import { defaultPrintSettings } from '../../lib/export/index.mjs'
 import { tilerPlugin } from '../../lib/export/plugin-tiler.mjs'
 import { get } from '@freesewing/utils'
-import { bundlePatternTranslations, draft } from '../../lib/index.mjs'
+import { draft } from '../../lib/index.mjs'
 // Components
 import { PatternLayout } from '../PatternLayout.mjs'
 import { MovablePattern } from '../MovablePattern.mjs'
@@ -28,7 +29,7 @@ export const LayoutView = (props) => {
   /*
    * Create object holding strings for translation
    */
-  const strings = bundlePatternTranslations(pattern.designConfig.data.id)
+  const strings = useDesignTranslation(pattern.designConfig.data.id)
 
   const output = (
     <>
