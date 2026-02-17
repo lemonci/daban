@@ -1,6 +1,6 @@
-import { measurements, cisFemaleAdult28 } from '@freesewing/models'
+import { cisFemaleAdult28, measurements } from '@freesewing/models'
 //import { designs } from '@freesewing/collection'
-import { expect, assert } from 'chai'
+import { assert, expect } from 'chai'
 
 export const getShortName = (name) => name.split('/').pop()
 // These are ok to use mm options
@@ -12,7 +12,7 @@ const mmAllowed = ['rendertest']
  *
  * @param string Pattern: The Pattern constructor
  */
-export const testPatternConfig = (Pattern, about) => {
+export const testPatternConfig = (Pattern) => {
   const designConfig = Pattern.designConfig
   const patternConfig = Pattern.patternConfig
   describe('Pattern configuration:', function () {
@@ -43,12 +43,14 @@ export const testPatternConfig = (Pattern, about) => {
     })
     // About tests
     it(`  - 'description' should be set and be a string of reasonable length`, () => {
-      expect(typeof about.description).to.equal('string')
-      expect(about.description.length > 15).to.be.true
-      expect(about.description.length < 280).to.be.true
+      expect(typeof designConfig.data.description).to.equal('string')
+      expect(designConfig.data.description.length > 15).to.be.true
+      expect(designConfig.data.description.length < 280).to.be.true
     })
     it(`  - 'design' should be set and be a string of reasonable length`, () => {
-      const people = Array.isArray(about.design) ? about.design : [about.design]
+      const people = Array.isArray(designConfig.data.design)
+        ? designConfig.data.design
+        : [designConfig.data.design]
       for (const person of people) {
         expect(typeof person).to.equal('string')
         expect(person.length > 2).to.be.true
@@ -56,7 +58,9 @@ export const testPatternConfig = (Pattern, about) => {
       }
     })
     it(`  - 'code' should be set and be a string of reasonable length`, () => {
-      const people = Array.isArray(about.code) ? about.code : [about.code]
+      const people = Array.isArray(designConfig.data.code)
+        ? designConfig.data.code
+        : [designConfig.data.code]
       for (const person of people) {
         expect(typeof person).to.equal('string')
         expect(person.length > 2).to.be.true
@@ -64,8 +68,8 @@ export const testPatternConfig = (Pattern, about) => {
       }
     })
     it(`  - 'dfficulty' should be set and be a [1-5] number`, () => {
-      expect(typeof about.difficulty).to.equal('number')
-      expect([1, 2, 3, 4, 5].indexOf(about.difficulty) === -1).to.be.false
+      expect(typeof designConfig.data.difficulty).to.equal('number')
+      expect([1, 2, 3, 4, 5].indexOf(designConfig.data.difficulty) === -1).to.be.false
     })
 
     // Ensure required measurements are known measurements
