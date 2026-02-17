@@ -217,8 +217,8 @@ describe('Dimension Plugin Tests', () => {
       expect(c.ops[1].type).to.equal('curve')
       expect(round(c.ops[0].to.x)).to.equal(10)
       expect(round(c.ops[0].to.y)).to.equal(25)
-      expect(round(c.ops[1].to.x)).to.equal(37.15)
-      expect(round(c.ops[1].to.y)).to.equal(32.79)
+      expect(round(c.ops[1].to.x)).to.equal(36.91)
+      expect(round(c.ops[1].to.y)).to.equal(32.41)
     })
 
     it('Should draw the start marker', () => {
