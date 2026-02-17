@@ -709,14 +709,13 @@ export function curveParameterFromPoint(start, cp1, cp2, end, check) {
  * @param {Point} to - End of the line segment
  * @param {Point} check - Point to check
  * @param {float} precision - How precise we should check
- * @return {bool} result - True of the Point is on the line segment, false when not
+ * @return {boolean} result - True if the Point is on the line segment, false when not
  */
 export function pointOnLine(from, to, check, precision = 1e6) {
   if (!pointOnBeam(from, to, check, precision)) return false
   let lenA = from.dist(to)
   let lenB = from.dist(check) + check.dist(to)
-  if (Math.round(lenA) == Math.round(lenB)) return true
-  else return false
+  return Math.round(Math.abs(lenA - lenB) * precision) === 0
 }
 
 /**
