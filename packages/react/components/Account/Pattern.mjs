@@ -323,7 +323,7 @@ export const PatternCard = ({
   return <div {...wrapperProps}>{inner}</div>
 }
 
-const BadgeLink = ({ label, href }) => (
+export const BadgeLink = ({ label, href }) => (
   <a
     href={href}
     className="tw:daisy-badge tw:daisy-badge-secondary tw:font-bold tw:daisy-badge-lg tw:hover:text-secondary-content tw:hover:cursor-pointer"
