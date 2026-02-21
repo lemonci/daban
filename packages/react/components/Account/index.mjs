@@ -16,7 +16,7 @@ import { Mfa } from './Mfa.mjs'
 import { MsetCard, Sets } from './Sets.mjs'
 import { Newsletter } from './Newsletter.mjs'
 import { Password } from './Password.mjs'
-import { Pattern, PatternCard } from './Pattern.mjs'
+import { Pattern, PatternCard, BadgeLink } from './Pattern.mjs'
 import { Patterns } from './Patterns.mjs'
 import { Reload } from './Reload.mjs'
 import { Remove } from './Remove.mjs'
@@ -31,6 +31,7 @@ export {
   AccountStatus,
   Apikeys,
   Avatar,
+  BadgeLink,
   Bio,
   BookmarkButton,
   Bookmarks,

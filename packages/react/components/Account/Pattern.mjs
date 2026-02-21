@@ -323,7 +323,7 @@ export const PatternCard = ({
   return <div {...wrapperProps}>{inner}</div>
 }
 
-const BadgeLink = ({ label, href }) => (
+export const BadgeLink = ({ label, href }) => (
   <a
     href={href}
     className="tw:daisy-badge tw:daisy-badge-secondary tw:font-bold tw:daisy-badge-lg tw:hover:text-secondary-content tw:hover:cursor-pointer"
@@ -349,7 +349,7 @@ const PatternHeader = ({ pattern, Link, account, setModal, setEdit, togglePublic
         <PatternCard pattern={pattern} size="md" Link={Link} />
       </div>
       <div className="tw:flex tw:flex-col tw:justify-end tw:gap-2 tw:mb-2 tw:grow">
-        {account.control > 3 && (pattern?.public || pattern.userId === account.id) ? (
+        {account.control > 3 && pattern.public ? (
           <div className="tw:flex tw:flex-row tw:gap-2 tw:items-center">
             <BadgeLink label="JSON" href={`${urls.backend}/patterns/${pattern.id}.json`} />
             <BadgeLink label="YAML" href={`${urls.backend}/patterns/${pattern.id}.yaml`} />

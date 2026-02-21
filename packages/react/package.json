@@ -67,6 +67,7 @@
     "./components/Patrons": "./components/Patrons/index.mjs",
     "./components/Popout": "./components/Popout/index.mjs",
     "./components/Profile": "./components/Profile/index.mjs",
+    "./components/PublicPattern": "./components/PublicPattern/index.mjs",
     "./components/Role": "./components/Role/index.mjs",
     "./components/SignIn": "./components/SignIn/index.mjs",
     "./components/SignUp": "./components/SignUp/index.mjs",

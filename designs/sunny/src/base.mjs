@@ -206,13 +206,13 @@ export const base = {
           }
         }
       }
+    }
 
-      paths.upFolds = new Path().hide().addClass('lashed')
-      paths.downFolds = new Path().hide().addClass('dashed')
-      for (let i = pps; i > 0; i--) {
-        paths.upFolds.move(points[`pleat${i}_top_up`]).line(points[`pleat${i}_bottom_up`])
-        paths.downFolds.move(points[`pleat${i}_top_down`]).line(points[`pleat${i}_bottom_down`])
-      }
+    paths.upFolds = new Path().hide().addClass('lashed')
+    paths.downFolds = new Path().hide().addClass('dashed')
+    for (let i = pps; i > 0; i--) {
+      paths.upFolds.move(points[`pleat${i}_top_up`]).line(points[`pleat${i}_bottom_up`])
+      paths.downFolds.move(points[`pleat${i}_top_down`]).line(points[`pleat${i}_bottom_down`])
     }
 
     points.text = new Point(25, 50)

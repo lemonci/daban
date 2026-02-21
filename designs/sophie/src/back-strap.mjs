@@ -26,7 +26,7 @@ export const backStrap = {
     const hpsToUnderbust = store.get('hpsToUnderbust')
     const strapWidth = store.get('strapWidth')
     const armholeDrop = store.get('armholeDrop')
-    const armholeWidth = store.get('armholeWidth')
+    const armholeWidthBack = store.get('armholeWidthBack')
     const backCoverage = store.get('backCoverage')
     const underbust = store.get('underbust')
     const cornerWidth = store.get('cornerWidth')
@@ -41,7 +41,7 @@ export const backStrap = {
     points.d = new Point(measurements.shoulderToShoulder / 4, 0)
     points.e = points.d.shift(180 + measurements.shoulderSlope, strapWidth)
     points.ea = new Point(
-      armholeWidth,
+      armholeWidthBack,
       underbustVerticalPosition - (hpsToUnderbust - armholeDrop) * 0.9
     )
 

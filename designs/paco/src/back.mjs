@@ -335,6 +335,13 @@ function pacoBack({
   return part
 }
 
+/*
+ * Helper methods to conditionally show/hide options in the menu
+ */
+// Option is false by default, so a simple check will do
+const onlyWithFrontPockets = (_settings, mergedOptions) =>
+  mergedOptions?.frontPockets ? 'pockets' : false
+
 export const back = {
   name: 'paco.back',
   from: titanBack,
@@ -387,11 +394,11 @@ export const back = {
     // Not exposed to the user
     frontPocketFlapSize: {
       pct: 3,
-      min: 3,
-      max: 3,
+      min: 2,
+      max: 4,
       snap: smallSteps,
       ...pctBasedOn('waist'),
-      menu: false,
+      menu: onlyWithFrontPockets,
     },
     // Advanced
     legBalance: { pct: 57.5, min: 52.5, max: 62.5, menu: 'advanced' },

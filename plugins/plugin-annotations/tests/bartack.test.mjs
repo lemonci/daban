@@ -72,7 +72,7 @@ describe('Bartack plugin Tests', () => {
     expect(c.ops).to.have.lengthOf(21)
   })
 
-  it('can be called using the bartackFractionAlong syntax', function () {
+  it('can be called using the bartackAlong syntax', function () {
     const part = {
       name: 'test',
       draft: ({ Point, points, Path, macro, part }) => {

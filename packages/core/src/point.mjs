@@ -105,13 +105,13 @@ Point.prototype.copy = function () {
  * Returns the distance between this Point and that Point
  *
  * @param {Point} that - The Point instance to calculate the distance to
- * @return {float} distance - The distance between this Point and that Point
+ * @return {number} distance - The distance between this Point and that Point
  */
 Point.prototype.dist = function (that) {
   const dx = this.__check().x - that.__check().x
   const dy = this.y - that.y
 
-  return Math.sqrt(Math.pow(dx, 2) + Math.pow(dy, 2))
+  return Math.hypot(dx, dy)
 }
 
 /**

@@ -30,7 +30,7 @@ export const base = {
 
     //armhole fit
     armholeDrop: { pct: 80, min: 50, max: 90, menu: 'fit' },
-    armholeWidthFront: { pct: 30, min: 20, max: 90, menu: 'fit' },
+    armholeWidthFront: { pct: 30, min: 20, max: 60, menu: 'fit' },
     armholeWidthBack: { pct: 30, min: 20, max: 90, menu: 'fit' },
 
     //body fit
@@ -95,9 +95,9 @@ export const base = {
     const armholeDrop = hpsToUnderbust * options.armholeDrop
     store.set('armholeDrop', armholeDrop)
 
-    const armholeWidth =
+    const armholeWidthFront =
       (measurements.bustFront - measurements.bustSpan / 2) * options.armholeWidthFront
-    store.set('armholeWidth', armholeWidth)
+    store.set('armholeWidthFront', armholeWidthFront)
     const armholeWidthBack = (underbust / 4) * options.armholeWidthBack
     store.set('armholeWidthBack', armholeWidthBack)
 
