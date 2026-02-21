@@ -1,6 +1,7 @@
 import {
   root,
   globDir,
+  mkdir,
   readJsonFile,
   readDirectory,
   readFile,
@@ -8,10 +9,12 @@ import {
 } from '../../../scripts/fs.mjs'
 import path from 'path'
 import matter from 'gray-matter'
+import { capitalize } from '../../../packages/utils/src/index.mjs'
 
 const prefix = 'packages/react'
 const cdir = ['prebuild', 'jsdoc', 'react', 'components']
 const components = await globDir(cdir, '**/*.json')
+const designs = await readDirectory(['..', '..', 'designs'])
 
 async function processJsdocFile(file) {
   const all = {
@@ -213,5 +216,223 @@ for (const file of components) {
   await writeJsdocFiles(data)
 }
 
+const mkDesignDocs = async (design) => {
+  // Dynamic import to see what's in the package
+  const mod = await import(`../../../designs/${design}/src/index.mjs`)
+  const md = [
+    '---',
+    `title: ${design}`,
+    '---',
+    '',
+    `import { Tab, Tabs } from "@freesewing/react/components/Tab"`,
+    '',
+  ]
+  if (mod.about?.collection)
+    md.push(
+      ':::note',
+      'This design is part of [the FreeSewing collection](/reference/packages/collection/)',
+      ':::'
+    )
+
+  // Named exports
+  let constructor = false
+  md.push(`## Named exports`)
+  let i = 0
+  const parts = []
+  for (const exp of Object.keys(mod)) {
+    if (i === 0 && typeof mod[exp] === 'function' && capitalize(exp.toLowerCase()) === exp) {
+      constructor = exp
+      md.push(`  - \`${exp}\`: [The design constructor](#constructor)`)
+    } else if (exp === 'about') md.push(`  - \`${exp}\`: [Metadata about the design](#metadata)`)
+    else if (exp === 'i18n')
+      md.push(
+        `  - \`${exp}\`: [Internationalisation (i18n/translation) data for the design](#i18n)`
+      )
+    else if (exp.slice(-4) === 'I18n') {
+      const part = exp.slice(0, 4)
+      md.push(
+        `  - \`${exp}\`: [Internationalisation (i18n/translation) data for the ${part} part of this design](#${part})`
+      )
+    } else {
+      parts.push(exp)
+      md.push(`  - \`${exp}\`: The __${exp}__ part of the design`)
+    }
+  }
+  // Constructor
+  md.push(
+    `## Constructor`,
+    `To create a new __${design}__ Design, import the constructur as such:`,
+    '```js',
+    `import { ${constructor} } from '@freesewing/${design}'`,
+    '```',
+    `Then you can instantiate it by passing [a settings object](/reference/settings/):`,
+    '```js',
+    `const pattern = new ${constructor}(settings)`,
+    '```'
+  )
+  // Design config
+  md.push(
+    `### Design config`,
+    `<Tabs tabs="Usage, Data">`,
+    `<Tab>`,
+    `You can access the design configuration without instantiating a design.`,
+    `It is available as the \`designConfig\` property of the design constructor:`,
+    '```js',
+    `import { ${constructor} } from '@freesewing/${design}'`,
+    ``,
+    `// Access the design config from the constructor`,
+    `const dConf = ${constructor}.designConfig`,
+    '```',
+    `</Tab>`,
+    `<Tab>`,
+    'The \`designConfig\` of the `\${design}\` design is included below for reference:',
+    '```json',
+    JSON.stringify(mod[constructor].designConfig, null, 2),
+    '```',
+    `</Tab>`,
+    `</Tabs>`
+  )
+  // Pattern config
+  md.push(
+    `### Pattern config`,
+    `<Tabs tabs="Usage, Data">`,
+    `<Tab>`,
+    `You can access the pattern configuration without instantiating a design.`,
+    `It is available as the \`patternConfig\` property of the design constructor:`,
+    '```js',
+    `import { ${constructor} } from '@freesewing/${design}'`,
+    ``,
+    `// Access the pattern config from the constructor`,
+    `const pConf = ${constructor}.patternConfig`,
+    '```',
+    `</Tab>`,
+    `<Tab>`,
+    'The \`patternConfig\` of the `\${design}\` design is included below for reference:',
+    '```json',
+    JSON.stringify(mod[constructor].patternConfig, null, 2),
+    '```',
+    `</Tab>`,
+    `</Tabs>`
+  )
+
+  // Metadata
+  if (mod.about)
+    md.push(
+      `## Metadata`,
+      `<Tabs tabs="Usage, Data">`,
+      `<Tab>`,
+      `You can access the design's metadata through the \`about\` named export:`,
+      '```js',
+      `import { about } from '@freesewing/${design}'`,
+      '```',
+      `</Tab>`,
+      `<Tab>`,
+      `The metadata of the \`${design}\` design is included below for reference:`,
+      '```json',
+      JSON.stringify(mod.about, null, 2),
+      '```',
+      `</Tab>`,
+      `</Tabs>`
+    )
+
+  // i18n
+  if (mod.i18n)
+    md.push(
+      `## I18n`,
+      `<Tabs tabs="Usage, Data">`,
+      `<Tab>`,
+      `You can access the design's internationalization data through the \`i18n\` named export:`,
+      '```js',
+      `import { i18n } from '@freesewing/${design}'`,
+      '```',
+      `</Tab>`,
+      `<Tab>`,
+      ':::note',
+      'While FreeSewing does fully support translation, we only provide English translations for our own designs',
+      ':::',
+      `The following internationalization data is provided by the design:`,
+      '```json',
+      JSON.stringify(mod.i18n, null, 2),
+      '```',
+      `</Tab>`,
+      `</Tabs>`
+    )
+
+  // parts
+  if (parts.length > 0) md.push('## Parts')
+  for (const part of parts) {
+    const pi18n = []
+    if (mod[`${part}I18n`])
+      pi18n.push(
+        '\n',
+        `#### Part translations`,
+        '\n',
+        `In addition, this part exports a subset of i18n data that is limited to the data for this part.`,
+        `You can access that through the \`${part}I18n\` named export:`,
+        '```js',
+        `import { ${part}, ${part}I18n } from '@freesewing/${design}'`,
+        '```',
+        `This part-specific i18n export signals that this part was specifically designed to facilitate re-use in other designs.`
+      )
+    const store = []
+    if (mod[part].store) {
+      if (mod[part].store.reads)
+        store.push(
+          '\n',
+          `#### Part store reads`,
+          '\n',
+          `This part __reads__ the following values from the store:`,
+          ...mod[part].store.reads.map((key) => `  - \`${key}\``),
+          '\n',
+          `This means that this part __relies on these values being available in the store__ prior to the part being drafted.`,
+          '\n'
+        )
+      if (mod[part].store.writes)
+        store.push(
+          '\n',
+          `##### Part store writes`,
+          '\n',
+          `This part __writes the following values to the store:`,
+          ...mod[part].store.writes.map((key) => `  - \`${key}\``),
+          '\n',
+          `This means that this part __makes these values available__ after the part is drafted.`,
+          '\n'
+        )
+    }
+    md.push(
+      '\n',
+      `### ${part}`,
+      `<Tabs tabs="Usage, Data">`,
+      `<Tab>`,
+      `#### The part itself`,
+      '\n',
+      `You can access this part as the \`${part}\` named export:`,
+      '```js',
+      `import { ${part} } from '@freesewing/${design}'`,
+      '```',
+      ...pi18n,
+      ...store,
+      `</Tab>`,
+      `<Tab>`,
+      `The metadata of the \`${design}\` design is included below for reference:`,
+      '```json',
+      JSON.stringify(mod[part], null, 2),
+      '```',
+      `</Tab>`,
+      `</Tabs>`
+    )
+  }
+
+  await writeFile(`docs/reference/designs/${design}/readme.mdx`, md.join('\n'))
+}
+
+const ensureDesignDocs = async () => {
+  for (const design of designs) {
+    await mkdir(`docs/reference/designs/${design}`)
+    await mkDesignDocs(design)
+  }
+}
+
+ensureDesignDocs()
 ensureJargonImports()
 ensureTerminologyImports()
