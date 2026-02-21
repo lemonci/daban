@@ -23,6 +23,7 @@ function simonFront({
   macro,
   utils,
   snippets,
+  complete,
   options,
   part,
 }) {
@@ -137,19 +138,21 @@ function simonFront({
     delete paths.sa
   }
 
-  // Chest & Waist line
-  macro('banner', {
-    id: 'chestLine',
-    classes: 'center contrast help',
-    path: paths.chest,
-    text: 'simon:chestLine',
-  })
-  macro('banner', {
-    id: 'waistLine',
-    classes: 'center contrast help',
-    path: paths.waist,
-    text: 'simon:waistLine',
-  })
+  if (complete) {
+    // Chest & Waist line
+    macro('banner', {
+      id: 'chestLine',
+      classes: 'center contrast help',
+      path: paths.chest,
+      text: 'simon:chestLine',
+    })
+    macro('banner', {
+      id: 'waistLine',
+      classes: 'center contrast help',
+      path: paths.waist,
+      text: 'simon:waistLine',
+    })
+  }
 
   /*
    * Annotations
