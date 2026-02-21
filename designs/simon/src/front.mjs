@@ -13,7 +13,6 @@ import {
 } from './options.mjs'
 
 function simonFront({
-  complete,
   store,
   measurements,
   sa,
