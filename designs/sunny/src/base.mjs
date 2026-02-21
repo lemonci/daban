@@ -193,17 +193,15 @@ export const base = {
     const pleatWidth = ws / options.numPleats
     const pleatInterval = pleatWidth * (3 - options.pleatOverlap)
 
-    if (complete) {
-      // pleats
-      for (let i = 0; i < pps; i++) {
-        // up/down
-        for (let j = 0; j < 2; j++) {
-          // top/bottom
-          for (let k = 0; k < 2; k++) {
-            points[`pleat${i + 1}_${k ? 'top' : 'bottom'}_${j ? 'up' : 'down'}`] = points[
-              k ? 'tl' : 'bl'
-            ].shift(0, pleatWidth * (2 - j) + pleatInterval * i)
-          }
+    // pleats
+    for (let i = 0; i < pps; i++) {
+      // up/down
+      for (let j = 0; j < 2; j++) {
+        // top/bottom
+        for (let k = 0; k < 2; k++) {
+          points[`pleat${i + 1}_${k ? 'top' : 'bottom'}_${j ? 'up' : 'down'}`] = points[
+            k ? 'tl' : 'bl'
+          ].shift(0, pleatWidth * (2 - j) + pleatInterval * i)
         }
       }
     }

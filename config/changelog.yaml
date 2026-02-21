@@ -75,6 +75,7 @@ Unreleased:
       - Only render chest and waistline if complete is true
     sunny:
       - Don't skip creating points and paths in base part if not complete
+      - Fix missing pleat points when drafting when complete is false
     sophie:
       - Fixed armholewidth front and back (#722)
       - Enforce the correct draft order (#734)

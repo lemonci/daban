@@ -6,6 +6,7 @@
 ### Fixed
 
  - Don't skip creating points and paths in base part if not complete
+ - Fix missing pleat points when drafting when complete is false
 
 ## 4.4.3 (2025-11-29)
 
