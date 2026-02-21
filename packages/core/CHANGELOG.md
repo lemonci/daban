@@ -1,6 +1,14 @@
 # Change log for: @freesewing/core
 
 
+## 4.5.0 (2026-02-21)
+
+### Fixed
+
+ - Handle snapped percentage options when units are undefined (#660)
+ - Fix imprecision in the utils.pointOnLine function (#737)
+ - Guard against invalid text input (#734)
+
 ## 4.4.1 (2025-11-29)
 
 ### Added

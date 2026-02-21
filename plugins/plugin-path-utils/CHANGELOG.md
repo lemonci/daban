@@ -1,6 +1,12 @@
 # Change log for: @freesewing/plugin-path-utils
 
 
+## 4.5.0 (2026-02-21)
+
+### Fixed
+
+ - Ensure prevPath is reset properly (#685)
+
 ## 4.3.0 (2025-09-26)
 
 ### Fixed

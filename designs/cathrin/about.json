@@ -18,7 +18,7 @@
     "curved-seam",
     "interfacing"
   ],
-  "version": "4.4.3",
+  "version": "4.5.0",
   "pkg": "@freesewing/cathrin",
   "collection": true
 }

@@ -1,8 +1,88 @@
 Unreleased:
 
   Added:
+
+4.5.0:
+  date: 2026-02-21
+
+  Added:
+    library:
+      - Initial release of the FreeSewing Library (#734)
+    plugin-mirror:
+      - Added a reverse option to the mirror macro (#676)
+      - Added support for mirroring snippets (#676)
+    react:
+      - Added the 'useDesignTranslation' and 'useDesignOptionTranslation' hooks (#737)
+    studio:
+      - Added utility designs to the studio (#734)
+    teagan:
+      - Added notches (#734)
+      - Added chest and wait line (#734)
     utils:
       - ddddmmyy() now takes an optional spacer parameter
+
+  Changed:
+    bent:
+      - Ported to the FreeSewing Library (#734)
+    bibi:
+      - Ported to the FreeSewing Library (#734)
+    brian:
+      - Ported to the FreeSewing Library (#734)
+    carlton:
+      - Ported to the FreeSewing Library (#734)
+    diana:
+      - Ported to the FreeSewing Library (#734)
+    huey:
+      - Ported to the FreeSewing Library (#734)
+    hugo:
+      - Ported to the FreeSewing Library (#734)
+    jaeger:
+      - Ported to the FreeSewing Library (#734)
+    jett:
+      - Ported to the FreeSewing Library (#734)
+    paco:
+      - Exposed Paco frontPocketFlapSize in UI (#736)
+    react:
+      - Hide JSON and YAML pattern links for non-public patterns
+    simon:
+      - Ported to the FreeSewing Library (#734)
+    sven:
+      - Ported to the FreeSewing Library (#734)
+    teagan:
+      - Ported to the FreeSewing Library (#734)
+    yuri:
+      - Ported to the FreeSewing Library (#734)
+
+  Fixed:
+    core:
+      - Handle snapped percentage options when units are undefined (#660)
+      - Fix imprecision in the utils.pointOnLine function (#737)
+      - Guard against invalid text input (#734)
+    devon:
+      - Remove debug output
+      - Added the 'about' named export (#734)
+    opal:
+      - Do not use null for text (#734)
+    plugin-bartack:
+      - Fix bartack IDs
+    plugin-path-utils:
+      - Ensure prevPath is reset properly (#685)
+    react:
+      - Do not order menu options by the `menu` prop, as that can be a function
+    sabrina:
+      - Added the 'about' named export (#734)
+    simon:
+      - Only render chest and waistline if complete is true
+    sunny:
+      - Don't skip creating points and paths in base part if not complete
+    sophie:
+      - Fixed armholewidth front and back (#722)
+      - Enforce the correct draft order (#734)
+    tristan:
+      - Avoid duplication of translations (#734)
+    utils:
+      - Guard against a null measurements object in structureMeasurementsAsDesign (#735)
+
 
 4.4.3:
   date: 2025-11-29

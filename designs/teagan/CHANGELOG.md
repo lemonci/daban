@@ -1,6 +1,17 @@
 # Change log for: @freesewing/teagan
 
 
+## 4.5.0 (2026-02-21)
+
+### Added
+
+ - Added notches (#734)
+ - Added chest and wait line (#734)
+
+### Changed
+
+ - Ported to the FreeSewing Library (#734)
+
 ## 4.0.0 (2025-04-01)
 
 ### Changed

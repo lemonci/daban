@@ -1,6 +1,12 @@
 # Change log for: @freesewing/studio
 
 
+## 4.5.0 (2026-02-21)
+
+### Added
+
+ - Added utility designs to the studio (#734)
+
 ## 4.4.0 (2025-11-06)
 
 ### Added

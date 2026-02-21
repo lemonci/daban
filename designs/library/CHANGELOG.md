@@ -1,6 +1,12 @@
 # Change log for: @freesewing/library
 
 
+## 4.5.0 (2026-02-21)
+
+### Added
+
+ - Initial release of the FreeSewing Library (#734)
+
 ## 3.0.0 (2023-09-30)
 
 ### Changed

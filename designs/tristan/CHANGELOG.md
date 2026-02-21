@@ -1,6 +1,12 @@
 # Change log for: @freesewing/tristan
 
 
+## 4.5.0 (2026-02-21)
+
+### Fixed
+
+ - Avoid duplication of translations (#734)
+
 ## 3.2.0 (2024-02-11)
 
 ### Added
