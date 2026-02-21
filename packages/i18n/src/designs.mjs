@@ -5976,7 +5976,7 @@ export const designs = {
       },
       "frontPocketFlapSize": {
         "t": "Front pocket flap size",
-        "d": "This option controls the front pocket flap size, but it is not exposed to the UI"
+        "d": "This option controls the front pocket flap size"
       },
       "backPockets": {
         "t": "Back pockets",
