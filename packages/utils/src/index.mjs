@@ -644,11 +644,11 @@ export const shortUuid = (uuid) => uuid.slice(0, 5)
 /*
  * This takes a POJO of measurements, and turns it into a structure that matches a design object
  *
- * @param {object} measurements - The POJO of measurments
+ * @param {object} measurements - The POJO of measurements
  * @return {object} design - The measurements structured as a design object
  */
 export function structureMeasurementsAsDesign(measurements) {
-  return measurements.patternConfig ? measurements : { patternConfig: { measurements } }
+  return measurements?.patternConfig ? measurements : { patternConfig: { measurements } }
 }
 /*
  * We used to use react-timeago but that's too much overhead
