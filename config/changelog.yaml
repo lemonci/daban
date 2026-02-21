@@ -13,6 +13,7 @@ Unreleased:
       - Added support for mirroring snippets (#676)
     react:
       - Added the 'useDesignTranslation' and 'useDesignOptionTranslation' hooks (#737)
+      - Added the PublicPattern component
     studio:
       - Added utility designs to the studio (#734)
     teagan:

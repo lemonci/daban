@@ -6,6 +6,7 @@
 ### Added
 
  - Added the 'useDesignTranslation' and 'useDesignOptionTranslation' hooks (#737)
+ - Added the PublicPattern component
 
 ### Changed
 
