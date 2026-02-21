@@ -1,0 +1,16 @@
+---
+title: Pattern
+sidebar_label: ' '
+sidebar_position: 99
+sidebar_class_name: 'tw:hidden'
+---
+
+import { getSearchParam } from '@freesewing/utils'
+import { DocusaurusDoc } from '@freesewing/react/components/Docusaurus'
+import { RoleBlock } from '@freesewing/react/components/Role'
+import { PublicPattern } from '@freesewing/react/components/PublicPattern'
+import Link from '@docusaurus/Link'
+
+<DocusaurusDoc>
+  <PublicPattern Link={Link} id={getSearchParam('id')} />
+</DocusaurusDoc>
