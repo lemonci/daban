@@ -1,6 +1,16 @@
 # Change log for: @freesewing/utils
 
 
+## 4.5.0 (2026-02-21)
+
+### Added
+
+ - ddddmmyy() now takes an optional spacer parameter
+
+### Fixed
+
+ - Guard against a null measurements object in structureMeasurementsAsDesign (#735)
+
 ## 4.3.0 (2025-09-26)
 
 ### Added

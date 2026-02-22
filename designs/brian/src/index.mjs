@@ -1,12 +1,11 @@
-import { Design } from '@freesewing/core'
-import { i18n } from '../i18n/index.mjs'
+import { Design, mergeI18n } from '@freesewing/core'
+import { i18n as brianI18n } from '../i18n/index.mjs'
 import about from '../about.json' with { type: 'json' }
+import { sleeve, sleeveI18n } from '@freesewing/library'
 import { back } from './back.mjs'
 import { front } from './front.mjs'
-import { sleeve } from './sleeve.mjs'
 // Re-export skeleton parts so peope can re-use them
 import { base } from './base.mjs'
-import { sleevecap } from './sleevecap.mjs'
 
 // Setup our new design
 const Brian = new Design({
@@ -14,5 +13,8 @@ const Brian = new Design({
   parts: [back, front, sleeve],
 })
 
+// Merge translations
+const i18n = mergeI18n([sleeveI18n, brianI18n])
+
 // Named exports
-export { back, front, sleeve, base, sleevecap, Brian, i18n, about }
+export { back, front, base, Brian, i18n, about }

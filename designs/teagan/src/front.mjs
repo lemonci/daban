@@ -2,6 +2,7 @@ import { base } from '@freesewing/brian'
 import { hidePresets, pctBasedOn } from '@freesewing/core'
 
 function teaganFront({
+  complete,
   utils,
   store,
   sa,
@@ -151,13 +152,45 @@ function teaganFront({
 
   // Store front sleevecap length
   store.set(
-    'frontArmholeLength',
+    'library.sleeve.frontArmholeLength',
     new Path()
       .move(points.armhole)
       .curve(points.armholeCp2, points.armholeHollowCp1, points.armholeHollow)
       .curve(points.armholeHollowCp2, points.shoulderCp1, points.shoulder)
       .length()
   )
+  points.armholeNotchFront = new Path()
+    .move(points.armhole)
+    .curve(points.armholeCp2, points.armholeHollowCp1, points.armholeHollow)
+    .curve(points.armholeHollowCp2, points.shoulderCp1, points.shoulder)
+    .shiftFractionAlong(0.5)
+  store.set(
+    'library.sleeve.frontArmholeToArmholePitch',
+    store.get('library.sleeve.frontArmholeLength') / 2
+  )
+
+  // Chest line
+  points.chest = new Point(points.armhole.x, points.cbChest.y)
+  if (complete) {
+    paths.chest = new Path().move(points.cbChest).line(points.chest).attr('class', 'contrast help')
+    macro('banner', {
+      id: 'chestLine',
+      classes: 'center contrast help',
+      path: paths.chest,
+      text: 'teagan:chestLine',
+    })
+  }
+
+  // Waist line
+  if (complete) {
+    paths.waist = new Path().move(points.cbWaist).line(points.waist).attr('class', 'contrast help')
+    macro('banner', {
+      id: 'waistLine',
+      classes: 'center contrast help',
+      path: paths.waist,
+      text: 'teagan:waistLine',
+    })
+  }
 
   /*
    * Annotations
@@ -179,6 +212,9 @@ function teaganFront({
   // Logo
   points.logo = points.title.shift(-90, 75)
   snippets.logo = new Snippet('logo', points.logo)
+
+  // Notches
+  snippets.armholeNotch = new Snippet('bnotch', points.armholeNotchFront)
 
   // Dimensions
   macro('hd', {

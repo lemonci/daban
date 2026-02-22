@@ -1,5 +1,5 @@
-import { topSleeve } from './topsleeve.mjs'
-import { underSleeve } from './undersleeve.mjs'
+import { topsleeve } from './topsleeve.mjs'
+import { undersleeve } from './undersleeve.mjs'
 
 function draftCarltonCuffFacing({ sa, store, utils, points, macro, Point, paths, Path, part }) {
   points.topLeft = new Point(0, 0)
@@ -99,6 +99,6 @@ function draftCarltonCuffFacing({ sa, store, utils, points, macro, Point, paths,
 
 export const cuffFacing = {
   name: 'carlton.cuffFacing',
-  after: [topSleeve, underSleeve],
+  after: [topsleeve, undersleeve],
   draft: draftCarltonCuffFacing,
 }

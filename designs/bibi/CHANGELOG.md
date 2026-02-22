@@ -1,6 +1,12 @@
 # Change log for: @freesewing/bibi
 
 
+## 4.5.0 (2026-02-21)
+
+### Changed
+
+ - Ported to the FreeSewing Library (#734)
+
 ## 4.0.0 (2025-04-01)
 
 ### Changed

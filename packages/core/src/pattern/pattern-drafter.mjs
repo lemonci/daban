@@ -1,4 +1,3 @@
-import { PatternDraftQueue } from './pattern-draft-queue.mjs'
 import { Part } from '../part.mjs'
 import { __macroName, getSnappedPercentageValue, mergeOptions } from '../utils.mjs'
 
@@ -16,7 +15,6 @@ export function PatternDrafter(pattern) {
  * @return {object} this - The Pattern instance
  */
 PatternDrafter.prototype.draft = function () {
-  this.pattern.draftQueue = new PatternDraftQueue(this.pattern)
   this.pattern.__runHooks('preDraft')
   // Keep container for drafted parts fresh
   this.pattern.parts = []
@@ -38,11 +36,8 @@ PatternDrafter.prototype.draft = function () {
 
     // Handle snap for pct options
     this.__loadAbsoluteOptionsSet(set)
-
     // draft all the parts for this set
-    this.pattern.draftQueue.start()
-    while (this.pattern.draftQueue.hasNext()) {
-      const partName = this.pattern.draftQueue.next()
+    for (const partName of this.pattern.config.draftOrder) {
       if (this.pattern.__needs(partName, set)) {
         this.draftPartForSet(partName, set)
       } else {

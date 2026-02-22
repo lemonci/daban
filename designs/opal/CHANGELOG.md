@@ -1,6 +1,12 @@
 # Change log for: @freesewing/opal
 
 
+## 4.5.0 (2026-02-21)
+
+### Fixed
+
+ - Do not use null for text (#734)
+
 ## 4.0.1 (2025-06-09)
 
 ### Fixed

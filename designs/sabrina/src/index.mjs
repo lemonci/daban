@@ -15,4 +15,4 @@ const Sabrina = new Design({
 })
 
 // Named exports
-export { base, front, side, back, waistband, i18n, Sabrina }
+export { base, front, side, back, waistband, i18n, about, Sabrina }

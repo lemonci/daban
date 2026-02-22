@@ -95,6 +95,7 @@ sites/dev/public/favicon.ico
 sites/dev/public/mstile-150x150.png
 sites/dev/public/safari-pinned-tab.svg
 sites/dev/public/site.webmanifest
+sites/dev/docs/reference/designs
 
 # react docs
 packages/react/docs

@@ -1,6 +1,16 @@
 # Change log for: @freesewing/simon
 
 
+## 4.5.0 (2026-02-21)
+
+### Changed
+
+ - Ported to the FreeSewing Library (#734)
+
+### Fixed
+
+ - Only render chest and waistline if complete is true
+
 ## 4.4.0 (2025-11-06)
 
 ### Added

@@ -274,10 +274,6 @@ export const frontSidePanel = {
         ['v', 'hemOriginal', 'armhole', 'armhole', 15],
       ])
       store.set('hemLength', points.hemOriginal.dist(points.frontHem) + store.get('hemBackLength'))
-      console.log({
-        f1: points.hemOriginal.dist(points.frontHem),
-        f2: store.get('hemBackLength'),
-      })
     }
     if (options.frontPocket) {
       if (complete) {

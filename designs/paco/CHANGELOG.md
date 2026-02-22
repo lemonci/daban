@@ -1,6 +1,12 @@
 # Change log for: @freesewing/paco
 
 
+## 4.5.0 (2026-02-21)
+
+### Changed
+
+ - Exposed Paco frontPocketFlapSize in UI (#736)
+
 ## 4.3.0 (2025-09-26)
 
 ### Fixed

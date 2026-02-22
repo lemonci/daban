@@ -49,6 +49,7 @@ export {
   cuff,
   collar_ribbing,
   pocket_bag_front,
+  about,
   i18n,
   Jett,
 }

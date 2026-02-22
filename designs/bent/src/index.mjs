@@ -1,31 +1,40 @@
 import { Design, mergeI18n } from '@freesewing/core'
 import about from '../about.json' with { type: 'json' }
 import { front, back, i18n as brianI18n } from '@freesewing/brian'
-import { sleeve } from './sleeve.mjs'
-import { topSleeve } from './topsleeve.mjs'
-import { underSleeve } from './undersleeve.mjs'
+import { undersleeve, topsleeve, twoPartSleeveI18n } from '@freesewing/library'
 import { i18n as bentI18n } from '../i18n/index.mjs'
 
 // Create new design
 const Bent = new Design({
   data: about,
-  parts: [front, back, sleeve, topSleeve, underSleeve],
+  parts: [front, back, topsleeve, undersleeve],
 })
 
 // Merge translations
-const i18n = mergeI18n([brianI18n, bentI18n], {
+const i18n = mergeI18n([twoPartSleeveI18n, brianI18n, bentI18n], {
   o: {
-    keep: [
-      ...Object.keys(sleeve.options),
-      'legacyArmholeDepthNo',
-      'legacyArmholeDepthYes',
-      'draftForHighBustNo',
-      'draftForHighBustYes',
-      'legacyArmholeDepthNo',
-      'legacyArmholeDepthYes',
+    drop: [
+      'sleevecapTopFactorX',
+      'sleevecapTopFactorY',
+      'sleevecapBackFactorX',
+      'sleevecapBackFactorY',
+      'sleevecapFrontFactorX',
+      'sleevecapFrontFactorY',
+      'sleevecapQ1Offset',
+      'sleevecapQ2Offset',
+      'sleevecapQ3Offset',
+      'sleevecapQ4Offset',
+      'sleevecapQ1Spread1',
+      'sleevecapQ1Spread2',
+      'sleevecapQ2Spread1',
+      'sleevecapQ2Spread2',
+      'sleevecapQ3Spread1',
+      'sleevecapQ3Spread2',
+      'sleevecapQ4Spread1',
+      'sleevecapQ4Spread2',
+      'sleeveWidthGuarantee',
     ],
   },
 })
 
-// Named exports
-export { front, back, sleeve, topSleeve, underSleeve, Bent, i18n, about }
+export { front, back, topsleeve, undersleeve, Bent, i18n, about }

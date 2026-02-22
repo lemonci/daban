@@ -1,17 +1,23 @@
-import { sleevecap as brianSleeveCap } from '@freesewing/brian'
+import { sleeve } from '@freesewing/library'
+import { front, back } from '@freesewing/brian'
 import { hidePresets, pctBasedOn } from '@freesewing/core'
 import { draftRibbing } from './shared.mjs'
 
 export const cuff = {
   name: 'bibi.cuff',
-  from: brianSleeveCap,
-  hide: hidePresets.HIDE_TREE,
+  from: sleeve,
+  after: [front, back],
+  hide: {
+    from: true,
+    inherited: true,
+    after: true,
+  },
 
   options: {
     // Brian overrides, placed here as this is the first loaded part that inherits from brian base
     s3Collar: 0,
     s3Armhole: 0,
-    brianFitSleeve: true,
+    libraryFitSleeve: true,
     brianFitCollar: false,
     bicepsEase: { pct: 5, min: 0, max: 50, ...pctBasedOn('biceps'), menu: 'fit' },
     collarEase: 0,
@@ -21,6 +27,8 @@ export const cuff = {
     legacyArmholeDepth: false,
     // Unused as legacyArmholeDepth is disabled, hide option in documentation
     armholeDepthFactor: 0.5,
+    // Unused
+    sleeveLengthBonus: 0,
     shoulderEase: { pct: 0, min: -2, max: 6, ...pctBasedOn('shoulderToShoulder'), menu: 'fit' },
     // Note: we reuse Brian's cuff ease as "armhole fullness"
     cuffEase: {
@@ -70,7 +78,16 @@ export const cuff = {
   draft: bibiCuff,
 }
 
-function bibiCuff({ part, store, measurements, options, paths, points, Point, macro }) {
+function bibiCuff({ part, store, measurements, options, paths, points, snippets, Point, macro }) {
+  macro('rmtitle')
+  macro('rmscalebox')
+  for (const path of Object.keys(paths)) {
+    paths[path].hide()
+  }
+  for (const key of Object.keys(snippets)) {
+    delete snippets[key]
+  }
+
   store.set(
     'ribbingHeight',
     (measurements.hpsToWaistBack + measurements.waistToHips) * options.ribbingHeight

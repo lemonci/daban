@@ -3,11 +3,198 @@
 
 ## Unreleased
 
+
+## 4.5.0 (2026-02-21)
+
+### bent
+
+#### Changed
+
+ - Ported to the FreeSewing Library (#734)
+
+### bibi
+
+#### Changed
+
+ - Ported to the FreeSewing Library (#734)
+
+### brian
+
+#### Changed
+
+ - Ported to the FreeSewing Library (#734)
+
+### carlton
+
+#### Changed
+
+ - Ported to the FreeSewing Library (#734)
+
+### devon
+
+#### Fixed
+
+ - Remove debug output
+ - Added the 'about' named export (#734)
+
+### diana
+
+#### Changed
+
+ - Ported to the FreeSewing Library (#734)
+
+### huey
+
+#### Changed
+
+ - Ported to the FreeSewing Library (#734)
+
+### hugo
+
+#### Changed
+
+ - Ported to the FreeSewing Library (#734)
+
+### jaeger
+
+#### Changed
+
+ - Ported to the FreeSewing Library (#734)
+
+### jett
+
+#### Changed
+
+ - Ported to the FreeSewing Library (#734)
+
+### library
+
+#### Added
+
+ - Initial release of the FreeSewing Library (#734)
+
+### opal
+
+#### Fixed
+
+ - Do not use null for text (#734)
+
+### paco
+
+#### Changed
+
+ - Exposed Paco frontPocketFlapSize in UI (#736)
+
+### sabrina
+
+#### Fixed
+
+ - Added the 'about' named export (#734)
+
+### simon
+
+#### Changed
+
+ - Ported to the FreeSewing Library (#734)
+
+#### Fixed
+
+ - Only render chest and waistline if complete is true
+
+### sophie
+
+#### Fixed
+
+ - Fixed armholewidth front and back (#722)
+ - Enforce the correct draft order (#734)
+
+### sunny
+
+#### Fixed
+
+ - Don't skip creating points and paths in base part if not complete
+ - Fix missing pleat points when drafting when complete is false
+
+### sven
+
+#### Changed
+
+ - Ported to the FreeSewing Library (#734)
+
+### teagan
+
+#### Added
+
+ - Added notches (#734)
+ - Added chest and wait line (#734)
+
+#### Changed
+
+ - Ported to the FreeSewing Library (#734)
+
+### tristan
+
+#### Fixed
+
+ - Avoid duplication of translations (#734)
+
+### yuri
+
+#### Changed
+
+ - Ported to the FreeSewing Library (#734)
+
+### plugin-mirror
+
+#### Added
+
+ - Added a reverse option to the mirror macro (#676)
+ - Added support for mirroring snippets (#676)
+
+### plugin-path-utils
+
+#### Fixed
+
+ - Ensure prevPath is reset properly (#685)
+
+### core
+
+#### Fixed
+
+ - Handle snapped percentage options when units are undefined (#660)
+ - Fix imprecision in the utils.pointOnLine function (#737)
+ - Guard against invalid text input (#734)
+
+### react
+
+#### Added
+
+ - Added the 'useDesignTranslation' and 'useDesignOptionTranslation' hooks (#737)
+ - Added the PublicPattern component
+
+#### Changed
+
+ - Hide JSON and YAML pattern links for non-public patterns
+
+#### Fixed
+
+ - Do not order menu options by the `menu` prop, as that can be a function
+
+### studio
+
+#### Added
+
+ - Added utility designs to the studio (#734)
+
 ### utils
 
 #### Added
 
  - ddddmmyy() now takes an optional spacer parameter
+
+#### Fixed
+
+ - Guard against a null measurements object in structureMeasurementsAsDesign (#735)
 
 
 ## 4.4.3 (2025-11-29)

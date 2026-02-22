@@ -1,6 +1,12 @@
 # Change log for: @freesewing/sabrina
 
 
+## 4.5.0 (2026-02-21)
+
+### Fixed
+
+ - Added the 'about' named export (#734)
+
 ## 4.4.3 (2025-11-29)
 
 ### Fixed

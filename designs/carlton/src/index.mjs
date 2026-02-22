@@ -1,7 +1,8 @@
 import { Design, mergeI18n } from '@freesewing/core'
 import about from '../about.json' with { type: 'json' }
-import { i18n as brianI18n, Brian, sleevecap as brianSleevecap } from '@freesewing/brian'
+import { i18n as brianI18n, Brian, back as brianBack } from '@freesewing/brian'
 import { i18n as carltonI18n } from '../i18n/index.mjs'
+import { i18n as libraryI18n, topsleeve as libraryTopsleeve } from '@freesewing/library'
 // Parts
 import { front } from './front.mjs'
 import { frontFacing } from './front-facing.mjs'
@@ -9,8 +10,8 @@ import { frontLining } from './front-lining.mjs'
 import { back } from './back.mjs'
 import { backStay } from './back-stay.mjs'
 import { tail } from './tail.mjs'
-import { topSleeve } from './topsleeve.mjs'
-import { underSleeve } from './undersleeve.mjs'
+import { topsleeve } from './topsleeve.mjs'
+import { undersleeve } from './undersleeve.mjs'
 import { belt } from './belt.mjs'
 import { collarStand } from './collarstand.mjs'
 import { collar } from './collar.mjs'
@@ -34,8 +35,8 @@ const Carlton = new Design({
     back,
     backStay,
     tail,
-    topSleeve,
-    underSleeve,
+    topsleeve,
+    undersleeve,
     belt,
     collarStand,
     collar,
@@ -52,17 +53,13 @@ const Carlton = new Design({
 })
 
 // Merge translations
-const i18n = mergeI18n([brianI18n, carltonI18n], {
+const i18n = mergeI18n([libraryI18n, brianI18n, carltonI18n], {
   o: {
     keep: [
-      ...Object.keys(Brian.patternConfig.options),
+      ...Object.keys(brianBack.options),
       ...Object.keys(Carlton.patternConfig.options),
-      'legacyArmholeDepthNo',
-      'legacyArmholeDepthYes',
-      'draftForHighBustNo',
-      'draftForHighBustYes',
+      ...Object.keys(libraryTopsleeve.options),
     ],
-    drop: Object.keys(brianSleevecap.options).filter((o) => o !== 'sleevecapEase'),
   },
 })
 
@@ -74,8 +71,8 @@ export {
   back,
   backStay,
   tail,
-  topSleeve,
-  underSleeve,
+  topsleeve,
+  undersleeve,
   belt,
   collarStand,
   collar,

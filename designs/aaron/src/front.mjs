@@ -8,7 +8,7 @@ export const front = {
   measurements: ['hips'],
   options: {
     brianFitCollar: false,
-    brianFitSleeve: false,
+    libraryFitSleeve: false,
     acrossBackFactor: 0.97,
     bicepsEase: 0.05,
     shoulderEase: 0,

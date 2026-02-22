@@ -1,6 +1,12 @@
 # Change log for: @freesewing/jaeger
 
 
+## 4.5.0 (2026-02-21)
+
+### Changed
+
+ - Ported to the FreeSewing Library (#734)
+
 ## 3.1.0 (2023-12-26)
 
 ### Changed

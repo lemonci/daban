@@ -54,7 +54,7 @@ function simonBack({
   // Populare store with data we need
   calculateReduction(part)
   store.set(
-    'backArmholeLength',
+    'library.sleeve.backArmholeLength',
     new Path()
       .move(points.armhole)
       .curve(points.armholeCp2, points.armholeHollowCp1, points.armholeHollow)
@@ -146,7 +146,10 @@ function simonBack({
 
   // Update this value in the store set by Brian because it is only correct
   // if the yoke height happens to fall on the armhole pitch point
-  store.set('backArmholeToArmholePitch', paths.backArmholeBack.length() + armholeToPitch.length())
+  store.set(
+    'library.sleeve.backArmholeToArmholePitch',
+    paths.backArmholeBack.length() + armholeToPitch.length()
+  )
 
   // Round back
   paths.armhole = armholeToPitch

@@ -1,9 +1,8 @@
+import { base } from './base.mjs'
+
 export const backStrap = {
   name: 'sophie.backStrap',
-  measurements: [],
-  optionalMeasurements: [],
-  options: {},
-
+  after: base,
   draft: ({
     Point,
     points,

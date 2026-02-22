@@ -1,6 +1,12 @@
 # Change log for: @freesewing/carlton
 
 
+## 4.5.0 (2026-02-21)
+
+### Changed
+
+ - Ported to the FreeSewing Library (#734)
+
 ## 4.3.0 (2025-09-26)
 
 ### Added

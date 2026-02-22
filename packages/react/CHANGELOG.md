@@ -1,6 +1,21 @@
 # Change log for: @freesewing/react
 
 
+## 4.5.0 (2026-02-21)
+
+### Added
+
+ - Added the 'useDesignTranslation' and 'useDesignOptionTranslation' hooks (#737)
+ - Added the PublicPattern component
+
+### Changed
+
+ - Hide JSON and YAML pattern links for non-public patterns
+
+### Fixed
+
+ - Do not order menu options by the `menu` prop, as that can be a function
+
 ## 4.4.3 (2025-11-29)
 
 ### Fixed

@@ -146,9 +146,11 @@ Store.prototype.extend = function (methods) {
  *
  * @param {string|array} path - Path to the key
  * @param {mixed} dflt - Default method to return if key is undefined
+ * @param {string|array} prefix - A prefix to apply to the path to the key
  * @return {mixed} value - The value stored under key
  */
-Store.prototype.get = function (path, dflt) {
+Store.prototype.get = function (path, dflt, prefix = '') {
+  path = prefixStorePath(prefix, path)
   const val = get(this, path, dflt)
   if (typeof val === 'undefined') {
     this.log.warn(`Store.get(key) on key \`${path}\`, which is undefined`)
@@ -180,9 +182,11 @@ Store.prototype.push = function (path, ...values) {
  *
  * @param {string|array} path - Path to the key
  * @param {mixed} value - The value to set
+ * @param {string|array} prefix - A prefix to apply to the path to the key
  * @return {Store} this - The Store instance
  */
-Store.prototype.set = function (path, value) {
+Store.prototype.set = function (path, value, prefix) {
+  path = prefixStorePath(prefix, path)
   if (typeof value === 'undefined') {
     this.log.warn(`Store.set(value) on key \`${path}\`, but value is undefined`)
   }
@@ -196,9 +200,11 @@ Store.prototype.set = function (path, value) {
  *
  * @param {string|array} path - Path to the key
  * @param {mixed} value - The value to set
+ * @param {string|array} prefix - A prefix to apply to the path to the key
  * @return {Store} this - The Store instance
  */
-Store.prototype.setIfUnset = function (path, value) {
+Store.prototype.setIfUnset = function (path, value, prefix = '') {
+  path = prefixStorePath(prefix, path)
   if (typeof value === 'undefined') {
     this.log.warn(`Store.setIfUnset(value) on key \`${path}\`, but value is undefined`)
   }
@@ -214,10 +220,11 @@ Store.prototype.setIfUnset = function (path, value) {
  *
  * @param {string|array} path - Path to the key
  * @param {mixed} value - The value to set
+ * @param {string|array} prefix - A prefix to apply to the path to the key
  * @return {Store} this - The Store instance
  */
-Store.prototype.unset = function (path) {
-  unset(this, path)
+Store.prototype.unset = function (path, prefix = '') {
+  unset(this, prefixStorePath(prefix, path))
 
   return this
 }
@@ -238,4 +245,24 @@ function fallbackPacker(items) {
   }
 
   return { w, h }
+}
+
+/**
+ * Applies a prefix to a store path
+ *
+ * @param {string|array} prefix - The prefix to apply
+ * @param {string|array} path - The path
+ * @return {string|array} prefixedPath - The prefixed path
+ */
+function prefixStorePath(prefix, path) {
+  if (!prefix) return path
+  if (Array.isArray(path)) {
+    if (Array.isArray(prefix)) path = [...prefix, ...path]
+    else path = [prefix, ...path]
+  } else {
+    if (Array.isArray(prefix)) path = prefix.join('.') + path
+    else path = prefix + path
+  }
+
+  return path
 }

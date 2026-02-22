@@ -1,6 +1,13 @@
 # Change log for: @freesewing/devon
 
 
+## 4.5.0 (2026-02-21)
+
+### Fixed
+
+ - Remove debug output
+ - Added the 'about' named export (#734)
+
 ## 4.3.0 (2025-09-26)
 
 ### Fixed

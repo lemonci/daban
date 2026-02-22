@@ -1,6 +1,13 @@
 # Change log for: @freesewing/plugin-mirror
 
 
+## 4.5.0 (2026-02-21)
+
+### Added
+
+ - Added a reverse option to the mirror macro (#676)
+ - Added support for mirroring snippets (#676)
+
 ## 3.0.0 (2023-09-30)
 
 ### Changed

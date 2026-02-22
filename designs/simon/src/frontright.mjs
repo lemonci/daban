@@ -25,6 +25,7 @@ function simonFrontRight(params) {
       text: 'simon:waistLine',
     })
   }
+
   /*
    * Annotations
    */

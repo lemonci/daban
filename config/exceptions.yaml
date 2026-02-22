@@ -101,6 +101,7 @@ packageJson:
       "./components/Null": "./components/Null/index.mjs"
       "./components/Number": "./components/Number/index.mjs"
       "./components/Pattern": "./components/Pattern/index.mjs"
+      "./components/PublicPattern": "./components/PublicPattern/index.mjs"
       "./components/Patrons": "./components/Patrons/index.mjs"
       "./components/Popout": "./components/Popout/index.mjs"
       "./components/Profile": "./components/Profile/index.mjs"

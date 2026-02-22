@@ -164,7 +164,7 @@ export default function Home() {
             icon={<DocsIcon className="tw:w-12 tw:h-12 tw:shrink-0" />}
           >
             <p className="tw:font-medium tw:text-inherit tw:italic tw:text-lg">
-              FreeSewing.org is unlike any sewing pattern website you know. Read this short guide to
+              FreeSewing.eu is unlike any sewing pattern website you know. Read this short guide to
               get the most our of our platform.
             </p>
           </CardLink>

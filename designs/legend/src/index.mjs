@@ -1,4 +1,5 @@
 import { Design } from '@freesewing/core'
+import about from '../about.json' with { type: 'json' }
 import { i18n } from '../i18n/index.mjs'
 import { fabricLines, saLines, otherLines, lineWidths, lineStrokes } from './lines.mjs'
 import { notches } from './notches.mjs'
@@ -16,6 +17,7 @@ import { sa } from './sa.mjs'
 
 // Setup our new design
 const Legend = new Design({
+  data: about,
   parts: [
     fabricLines,
     saLines,
@@ -57,5 +59,6 @@ export {
   dimension,
   sa,
   Legend,
+  about,
   i18n,
 }

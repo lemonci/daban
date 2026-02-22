@@ -1,4 +1,4 @@
-import { sleeve as briansleeve } from '@freesewing/brian'
+import { sleeve as librarySleeve } from '@freesewing/library'
 import { front } from './front.mjs'
 import { hidePresets } from '@freesewing/core'
 
@@ -90,9 +90,12 @@ function draftsleeve({
 
 export const sleeve = {
   name: 'jett.sleeve',
-  from: briansleeve,
+  from: librarySleeve,
   after: front,
   hide: hidePresets.HIDE_TREE,
-  options: { cuffEase: { pct: 60, min: -8, max: 100, menu: 'fit' } },
+  options: {
+    cuffEase: { pct: 60, min: -8, max: 100, menu: 'fit' },
+    libraryFitSleeve: true,
+  },
   draft: draftsleeve,
 }

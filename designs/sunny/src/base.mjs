@@ -14,7 +14,6 @@ function pctWaistSeatDiff() {
 export const base = {
   name: 'sunny.base',
   measurements: ['waist', 'waistToSeat', 'seat'],
-  optionalMeasurements: [],
   options: {
     paperlessOffset: 15,
     waistEase: {
@@ -124,9 +123,7 @@ export const base = {
     const o = options.sideOpeningLength * measurements.waistToSeat
     const h = hWaist + waistEase / 2
 
-    if (expand) {
-      store.flag.preset('expandIsOn')
-    }
+    if (expand) store.flag.preset('expandIsOn')
 
     const hem = options.hem * (sa ? sa : 10)
     store.set('hem', hem)
@@ -196,7 +193,7 @@ export const base = {
     const pleatWidth = ws / options.numPleats
     const pleatInterval = pleatWidth * (3 - options.pleatOverlap)
 
-    // pleat
+    // pleats
     for (let i = 0; i < pps; i++) {
       // up/down
       for (let j = 0; j < 2; j++) {

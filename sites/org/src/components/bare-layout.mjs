@@ -25,7 +25,7 @@ export function BareLayout({
   footer = false,
   noHeader = false,
   className = 'tw:bg-transparent tw:p-0 tw:m-0',
-  title = 'FreeSewing.org',
+  title = 'FreeSewing.eu',
   description = 'Free bespoke sewing patterns',
 }) {
   useKeyboardNavigation()

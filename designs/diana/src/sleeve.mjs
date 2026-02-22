@@ -1,4 +1,4 @@
-import { sleeve as sleeveBase } from '@freesewing/brian'
+import { sleeve as librarySleeve } from '@freesewing/library'
 import { front } from './front.mjs'
 import { back } from './front.mjs'
 import { hidePresets } from '@freesewing/core'
@@ -76,7 +76,7 @@ function draftDianaSleeve({ sa, points, paths, Path, macro, store, part }) {
 
 export const sleeve = {
   name: 'diana.sleeve',
-  from: sleeveBase,
+  from: librarySleeve,
   after: [front, back],
   hide: hidePresets.HIDE_TREE,
   draft: draftDianaSleeve,

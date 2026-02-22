@@ -1,6 +1,13 @@
 # Change log for: @freesewing/sophie
 
 
+## 4.5.0 (2026-02-21)
+
+### Fixed
+
+ - Fixed armholewidth front and back (#722)
+ - Enforce the correct draft order (#734)
+
 ## 4.4.0 (2025-11-06)
 
 ### Added

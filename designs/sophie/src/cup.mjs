@@ -1,8 +1,8 @@
+import { base } from './base.mjs'
+
 export const cup = {
   name: 'sophie.cup',
-  measurements: [],
-  optionalMeasurements: [],
-  options: {},
+  after: base,
   draft: ({
     Point,
     points,

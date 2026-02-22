@@ -1,5 +1,5 @@
-import { sleevecap } from '@freesewing/brian'
-import { hidePresets } from '@freesewing/core'
+import { sleeve as librarySleeve } from '@freesewing/library'
+import { back } from './back.mjs'
 
 function teaganSleeve({
   sa,
@@ -105,16 +105,13 @@ function teaganSleeve({
 
 export const sleeve = {
   name: 'teagan.sleeve',
-  from: sleevecap,
-  hide: hidePresets.HIDE_TREE,
+  from: librarySleeve,
+  after: back,
+  hide: { from: true },
   options: {
+    ...librarySleeve.options,
     sleeveEase: { pct: 15, min: 5, max: 35, menu: 'style' },
-    /*
-     * Hide options from Brian
-     */
-    cuffEase: 0,
-    s3Collar: 0,
-    s3Armhole: 0,
+    libraryFitSleeve: true,
   },
   draft: teaganSleeve,
 }

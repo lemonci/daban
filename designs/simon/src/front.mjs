@@ -28,6 +28,7 @@ function simonFront({
   part,
 }) {
   // Clean up
+
   for (const i in paths) {
     if (['frontArmhole', 'frontCollar', 'chest', 'waist'].indexOf(i) === -1) delete paths[i]
   }
@@ -40,7 +41,7 @@ function simonFront({
   // Populare store with data we need
   calculateReduction(part)
   store.set(
-    'frontArmholeLength',
+    'library.sleeve.frontArmholeLength',
     new Path()
       .move(points.armhole)
       .curve(points.armholeCp2, points.armholeHollowCp1, points.armholeHollow)
@@ -157,6 +158,7 @@ function simonFront({
   /*
    * Annotations
    */
+
   // Cutlist
   store.cutlist.setCut({ cut: 1, from: 'fabric' })
 

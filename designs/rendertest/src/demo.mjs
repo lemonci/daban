@@ -1,7 +1,7 @@
 export const demo = {
   name: 'rendertest.demo',
   options: {
-    width: { mm: 200, min: 50, max: 500, testIgnore: false },
+    width: { pct: 100, min: 50, max: 500, menu: 'size' },
     only: {
       menu: 'show',
       dflt: 'false',
@@ -22,7 +22,7 @@ export const demo = {
     const { store, options, Path, paths, Point, part } = params
     // Keep things in store
     store.set('y', 0)
-    store.set('w', options.width)
+    store.set('w', options.width * 200)
     store.set('colors', [
       'fabric',
       'lining',

@@ -166,7 +166,7 @@ describe('Pattern', () => {
           })
 
           pattern.draft()
-          expect(pattern.draftQueue.contains('newPartTest')).to.be.true
+          expect(pattern.config.draftOrder.includes('newPartTest')).to.be.true
         })
         it('drafts the part', () => {
           const design = new Design({ parts: [part1] })

@@ -1,6 +1,12 @@
 # Change log for: @freesewing/diana
 
 
+## 4.5.0 (2026-02-21)
+
+### Changed
+
+ - Ported to the FreeSewing Library (#734)
+
 ## 3.0.0 (2023-09-30)
 
 ### Changed
