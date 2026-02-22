@@ -1,0 +1,104 @@
+---
+title: 'Announcing the FreeSewing Library'
+caption: 'A picture of Trinity College Library in Dublin taken by
+[Kelly](https://www.pexels.com/photo/people-inside-building-2881370/)'
+date: '2026-02-22'
+intro: 'This release brings a slip dress design to the FreeSewing collection'
+authors:
+  - 1
+---
+
+We have just released FreeSewing v4.5. It's a big release with a plenty of
+under-the-hood changes.
+
+As usual, [our changelog][changelog] has all the details of what went in this release.
+Here, we'll focus on the main item: The FreeSewing Library.
+
+<!-- truncate -->
+
+## The FreeSewing Library
+
+Ever since the release of version 3 of FreeSewing, we've supported the ability
+to freely combine different parts from existing designs as part of a new design.
+
+It was -- and remains -- a good idea and a feature we absolutely want to support.
+But over time, we've seen that in practice, this can sometimes lead to problems:
+
+- It takes careful design to ensure a part is created that can stand on its own
+  without making assumptions about the design it is used in
+- Pulling in a part from a design as a dependency often brings along a bunch of
+  stuff of that design we are not interested in
+
+People have also been extracting parts from designs that were never intended to
+be used outside of that design. This often required _a bit of a hack_ to make
+it work, which saddles us with technical debt and code that is difficult to
+maintain.
+
+So this created tension between the set of features we are committed to support,
+and the way those features sometimes were used which caused concerns about
+maintainability.
+
+So, after some discussion on the matter, we've decided the create _the
+FreeSewing Library_. It is _just another design_ named
+[Library](/designs/library/) but it's _raison d'être_ is not as a stand-alone
+design, but rather as a _library_ for commonly used parts that are explicitly
+created to be re-used in other designs.
+
+## How does it work?
+
+This works just the same as any other inheritance that we've been using before.
+It's really just a matter of creating a growing body of ready to be reused parts
+which people can use.
+
+That being said, we've made a bunch of changes under the hood to make sure this
+works in a way that is elegant. Such as allowing to reuse a part more than once
+with different settings, or the ability to scope design options to a specific part,
+rather than to the entire pattern.
+
+## Inheritance is here to stay
+
+This does not mean that it is now _bad_ to inherit parts from designs that are
+not the library. In particular, extending blocks into more fully featured patterns
+is not going anywhere.
+
+What we wanted to avoid is a growing number of ad-hoc dependencies that some
+designers were creating, which makes it really hard to maintain the software.
+The people who maintain our foundational blocks are typically seasoned
+FreeSewing contributors, which is a good thing as every change to these blocks
+has ripple effect that impact many other designs.
+
+By perhaps somewhat overeagerly re-using parts from various designs that were
+never intended for that, other designs (and designers) are now also faced with
+the delicate balance of maintaining not merely a design, but rather a library
+that is used by other designs.
+
+So, we figured we would instead formalize this and create a proper library.
+The message we want to send to designers is:
+
+- Inherit from our blocks, it's what they are there for
+- Reuse what's in our library as much as you want
+- Reach out to us before reusing parts from other designs
+
+## What's in the library
+
+We wanted to take this one step at a time. So for now, the library holds:
+
+- A `rectangle` part. This is what we initially used to test-drive our solution.
+- A `sleeve` part. This is the sleeve that was originally in the Brian block.
+- A `two-part-sleeve` part. This is a combo of the two-part sleeve that was originally in the Bent block.
+- A `topsleeve` part. This is the top part of the two-part sleeve.
+- A `undersleeve` part. This is the under part of the two-part sleeve.
+
+This is a _modest_ start, as there's obviously plenty of other things that
+would make a lot of sense in the library, such as collars, or cuffs, pockets,
+waistbands, and so on.
+
+However, we wanted to start small and iron out any kinks before further
+extending the use of the library. You'll also notice that merely by moving the
+various sleeves to the library, we already had to overhaul two foundational
+blocks, so it's not like this was a small change.
+
+Going forward, we will be looking to move more common parts into the library,
+with the ultimate goal that nobody should need to reinvent the wheel.
+
+[changelog]: https://codeberg.org/freesewing/freesewing/src/branch/develop/CHANGELOG.md#4-5-0-2026-02-21
