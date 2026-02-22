@@ -131,6 +131,8 @@ export const back = {
         shared.armholeToArmholePitch(points, Path)
       )
     }
+    // Set title info for the sleeve
+    store.set(`library.sleeve.title`, { nr: 3 })
 
     if (sa) {
       paths.sa = paths.saBase
