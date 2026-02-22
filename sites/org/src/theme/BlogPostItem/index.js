@@ -9,6 +9,7 @@ import BlogPostItemHeaderAuthors from '@theme/BlogPostItem/Header/Authors'
 import { Breadcrumbs } from '../BlogPostItems/index.js'
 import { capitalize } from '@site/src/lib/utils.mjs'
 import { ModalContext, ModalContextProvider } from '@freesewing/react/context/Modal'
+import { Markdown } from '@freesewing/react/components/Markdown'
 
 // apply a bottom margin in list view
 function useContainerClassName() {
@@ -45,7 +46,22 @@ const BlogPostHeader = ({ type }) => {
         <BlogPostItemHeaderInfo />
         <BlogPostItemHeaderAuthors />
       </header>
-      {type === 'newsletter' ? null : <img src={imgUrl(metadata.permalink)} />}
+      {type === 'newsletter' ? null : (
+        <figure>
+          <img src={imgUrl(metadata.permalink)} />
+          <figcaption
+            style={{
+              fontSize: '1rem',
+              fontStyle: 'italic',
+              textAlign: 'center',
+              padding: '0.25rem',
+              marginBottom: '2rem',
+            }}
+          >
+            <Markdown>{metadata.frontMatter?.caption || ''}</Markdown>
+          </figcaption>
+        </figure>
+      )}
     </>
   )
 }
