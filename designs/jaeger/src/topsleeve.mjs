@@ -1,3 +1,4 @@
+import { front } from '@freesewing/brian'
 import { topsleeve as libraryTopsleeve } from '@freesewing/library'
 import { sleeveVentLength, sleeveVentWidth } from './options.mjs'
 import { hidePresets } from '@freesewing/core'
@@ -248,4 +249,5 @@ export const topsleeve = {
   hide: hidePresets.HIDE_TREE,
   options: { sleeveVentLength, sleeveVentWidth },
   draft: jaegerTopsleeve,
+  after: front, // Brian's front
 }

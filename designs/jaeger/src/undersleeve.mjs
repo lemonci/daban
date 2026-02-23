@@ -1,3 +1,4 @@
+import { front } from '@freesewing/brian'
 import { undersleeve as libraryUndersleeve } from '@freesewing/library'
 import { sleeveVentLength, sleeveVentWidth } from './options.mjs'
 import { hidePresets } from '@freesewing/core'
@@ -226,4 +227,5 @@ export const undersleeve = {
   options: { sleeveVentLength, sleeveVentWidth },
   hide: hidePresets.HIDE_TREE,
   draft: jaegerUndersleeve,
+  after: front, // Brian's front
 }
