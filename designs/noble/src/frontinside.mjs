@@ -132,6 +132,8 @@ export const frontInside = {
     } else {
       if (options.armholeDartCurved) {
         snippets.shoulderDartTip = new Snippet('notch', points.armholeDartTipInside)
+      } else {
+        snippets.shoulderDartTip = new Snippet('notch', points.armholeToBustInside)
       }
     }
     points.titleAnchor = new Point(points.hpsCp2.x * 0.75, points.cfNeckCp1.y * 1.5)
