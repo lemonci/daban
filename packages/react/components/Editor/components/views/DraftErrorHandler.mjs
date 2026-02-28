@@ -20,8 +20,8 @@ export const DraftErrorHandler = ({ failure, errors }) => {
       </p>
       <p>
         Please double check your measurements according to{' '}
-        <Link href="/docs/measurements/">our documentation</Link>. Also check{' '}
-        <Link href="https://v4.freesewing.org/docs/about/faq/measurements-issues/">
+        <Link href="https://freesewing.eu/docs/measurements/">our documentation</Link>. Also check{' '}
+        <Link href="https://freesewing.eu/docs/about/faq/measurements-issues/">
           our common measurement issues FAQ entry
         </Link>
         .
@@ -29,7 +29,7 @@ export const DraftErrorHandler = ({ failure, errors }) => {
       <p>
         If you believe your measurements are correct and/or if you&apos;d like further assistance,
         you can ask for help <Link href="https://forum.freesewing.eu">on our forum</Link>,{' '}
-        <Link href="https://discord.freesewing.org">our Discord server</Link>, or{' '}
+        <Link href="https://discord.freesewing.eu">our Discord server</Link>, or{' '}
         <Link href="https://codeberg.org/freesewing/freesewing/issues">report an issue</Link>.
       </p>
 
