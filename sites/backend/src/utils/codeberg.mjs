@@ -1,4 +1,3 @@
-import fetch from 'node-fetch'
 import { hash } from '../utils/crypto.mjs'
 import { codeberg as config } from '../config.mjs'
 

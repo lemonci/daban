@@ -17,7 +17,7 @@ export function restClient(api, onError, options = {}) {
     method: 'GET',
     headers: {},
     data: undefined,
-    timeout: 1500,
+    timeout: 2500,
     ...options,
   }
   if (api.toLowerCase().slice(0, 6) === 'https:') {

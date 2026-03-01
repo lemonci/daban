@@ -1,5 +1,9 @@
 Unreleased:
 
+  Changed:
+    backend:
+      - Remove Prisma dependency, refactor to use NodeJS native SQLite bindings
+
   Fixed:
     jaeger:
       - Ensure draft order for topsleeve and undersleeve (#752)

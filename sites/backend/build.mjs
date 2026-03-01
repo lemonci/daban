@@ -1,6 +1,6 @@
 /* This script will build the backend with esbuild */
 import esbuild from 'esbuild'
-import pkg from './package.json' assert { type: 'json' }
+import pkg from './package.json' with { type: 'json' }
 
 // Create banner based on package info
 const banner = `/**
@@ -15,11 +15,11 @@ const options = {
   banner: {
     js: `// See: https://github.com/evanw/esbuild/issues/1921
 import { createRequire } from 'module';
-import path from 'path';
 import { fileURLToPath } from 'url';
 const require = createRequire(import.meta.url);
+import __path from 'path';
 const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
+const __dirname = __path.dirname(__filename);
 
 ${banner}
 `,
@@ -28,12 +28,12 @@ ${banner}
   entryPoints: ['src/index.mjs'],
   format: 'esm',
   outfile: 'dist/index.mjs',
-  external: ['./local-config.mjs', 'sharp'],
+  external: ['./local-config.mjs', './sluglist.mjs'],
   metafile: process.env.VERBOSE ? true : false,
   minify: process.env.NO_MINIFY ? false : true,
   sourcemap: true,
   platform: 'node',
-  target: 'node16',
+  target: 'node22',
 }
 
 // Let esbuild generate the build

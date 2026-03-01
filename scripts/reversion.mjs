@@ -18,10 +18,11 @@ rl.question(`Enter a new version number: `, async (version) => {
   console.log(`Setting version to ${chalk.green.bold(version)}`)
   let file
   try {
-    const result = await fs.promises.writeFile(
+    const result1 = await fs.promises.writeFile(
       path.resolve('lerna.json'),
       JSON.stringify({ ...lernaConfig, version }, null, 2)
     )
+    const result2 = await fs.promises.writeFile(path.resolve('VERSION'), version)
   } catch (err) {
     console.log(`Failed to write version to lerna.json file`, err)
   }

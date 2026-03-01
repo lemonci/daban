@@ -6,7 +6,7 @@ import {
 } from '../../../packages/models/src/index.mjs'
 
 const sets = { her, him }
-export const api = new restClient(`http://localhost:3000`)
+export const api = new restClient(`http://localhost:3001`)
 
 // Store holds test accounts
 export const store = await setup()

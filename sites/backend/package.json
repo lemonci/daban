@@ -14,23 +14,20 @@
     "url": "https://freesewing.org/patrons/join"
   },
   "scripts": {
-    "build": "node build.mjs",
-    "clean": "rimraf dist",
-    "dev": "nodemon src/index.mjs",
-    "initdb": "npx prisma db push",
-    "mbuild": "NO_MINIFY=1 node build.mjs",
-    "newdb": "node ./scripts/newdb.mjs",
+    "build": "NO_MINIFY=1 node build.mjs",
+    "build:container": "./scripts/build-container.sh",
+    "ship:container": "npm run build:container && ./scripts/ship-container.sh",
+    "dev": "node --watch src/index.mjs",
+    "initdb": "node ./scripts/initdb.mjs",
     "prettier": "npx prettier --write 'src/*.mjs' 'tests/*.mjs'",
-    "rmdb": "node ./scripts/rmdb.mjs",
-    "_test": "node --no-warnings --test-concurrency=1 --test",
-    "test": "echo \"Tests are disabled for now. They are a WIP\"",
-    "ctest": "c8 --reporter=html --reports-dir=coverage node --no-warnings --test-concurrency=1 --test tests/all.mjs",
-    "vbuild": "VERBOSE=1 node build.mjs",
-    "wbuild": "node build.mjs"
+    "citest": "node --no-warnings --test-concurrency=1 --test",
+    "test": "echo \"Use `npm run citest` to run tests, but it requires running the backend service (`npm run dev`)\"",
+    "ctest": "c8 --reporter=html --reports-dir=coverage node --no-warnings --test-concurrency=1 --test tests/all.mjs"
   },
   "dependencies": {
     "@aws-sdk/client-sesv2": "3.592.0",
-    "@prisma/client": "5.15.0",
+    "@freesewing/config": "^4.5.0",
+    "axios": "^1.13.6",
     "bcryptjs": "2.4.3",
     "cors": "2.8.5",
     "dotenv": "16.4.5",
@@ -46,7 +43,6 @@
     "passport-jwt": "4.0.1",
     "pino": "9.2.0",
     "qrcode": "1.5.3",
-    "sharp": "^0.33.5",
     "swagger-ui-dist": "5.17.10",
     "swagger-ui-express": "5.0.0"
   },
@@ -57,9 +53,7 @@
     "esbuild": "0.21.3",
     "glob": "^11.0.0",
     "mocha": "10.4.0",
-    "mocha-steps": "1.3.0",
-    "nodemon": "3.1.0",
-    "prisma": "5.15.0"
+    "mocha-steps": "1.3.0"
   },
   "engines": {
     "node": ">= 20.0.0"

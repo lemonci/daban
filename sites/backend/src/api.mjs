@@ -1,7 +1,7 @@
 // Dependencies
 import express from 'express'
 import chalk from 'chalk'
-import { PrismaClient } from '@prisma/client'
+import { createDb } from './utils/db.mjs'
 import passport from 'passport'
 import path from 'node:path'
 import { fileURLToPath } from 'url'
@@ -30,7 +30,8 @@ import { html as catchAll } from './html/catch-all.mjs'
 export const api = () => {
   // Bootstrap
   const config = verifyConfig()
-  const prisma = new PrismaClient()
+  const dbPath = config.db.path
+  const prisma = createDb(dbPath)
   const app = express()
   app.use(express.json({ limit: '12mb' })) // Required for img upload
   app.use(express.urlencoded({ extended: false })) // Form submission for OIDC

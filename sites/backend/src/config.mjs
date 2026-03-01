@@ -3,11 +3,10 @@ import chalk from 'chalk'
 import dotenv from 'dotenv'
 import { asJson } from './utils/index.mjs'
 import { randomString } from './utils/crypto.mjs'
-import { measurements } from '../../../packages/config/src/measurements.mjs'
 import get from 'lodash.get'
 import { readFileSync, writeFileSync } from 'node:fs'
 import { postConfig } from '../local-config.mjs'
-import { roles } from '../../../packages/config/src/roles.mjs'
+import { measurements, roles } from '@freesewing/config'
 dotenv.config()
 
 /*
@@ -86,7 +85,7 @@ const baseConfig = {
     opack: process.env.BACKEND_AVATAR_OPACK || 'default-avatar',
   },
   db: {
-    url: process.env.BACKEND_DB_URL || './db.sqlite',
+    path: process.env.BACKEND_DB_PATH || './db.sqlite',
   },
   bookmarks: {
     types: ['set', 'cset', 'pattern', 'design', 'doc', 'custom'],
@@ -306,7 +305,7 @@ export const exports = config.exports
 export const imgConfig = config.img
 
 const vars = {
-  BACKEND_DB_URL: ['required', 'db.url'],
+  BACKEND_DB_PATH: ['required', 'db.path'],
   BACKEND_PORT: 'optional',
   BACKEND_WEBSITE_DOMAIN: 'optional',
   BACKEND_WEBSITE_SCHEME: 'optional',
@@ -383,6 +382,9 @@ export function verifyConfig(silent = false) {
         // Allow falling back to defaults for required config
         if (configPath) val = get(config, configPath)
         if (typeof val === 'undefined') errors.push(key)
+      } else {
+        if (configPath) val = get(config, configPath)
+        else val = process.env[key]
       }
       if (type === 'requiredSecret')
         ok.push(`🔒 ${chalk.yellow(key)}: ` + chalk.grey('***redacted***'))
