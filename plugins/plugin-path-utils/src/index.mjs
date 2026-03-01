@@ -159,12 +159,15 @@ const joinMacro = function (conf, props) {
 
         if (result.ops.length === 0) {
           // make sure the path starts with a move
-          result.move(paths[prevPathIndex].end())
+          result.move(prevPath.end())
         }
-        insertJoin(result, paths[prevPathIndex], path, mode, conf.limit, props.utils)
-
+        insertJoin(result, prevPath, path, mode, conf.limit, props.utils)
         if (!path.hidden) {
-          result.line(path.start())
+          if (prevPath.hidden) {
+            result.move(path.start())
+          } else {
+            result.line(path.start())
+          }
           result.ops.push(...path.ops.slice(1))
         }
       } else if (!path.hidden) {

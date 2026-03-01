@@ -1,0 +1,53 @@
+---
+title: utils.pctBasedOnSa()
+---
+
+The `utils.pctBasedOnSa()` function is a helper function to be used when
+configuring [snapped percentage
+options](/reference/api/part/config/options/pct/snap).
+
+:::note
+
+`pctBasedOnSa` is also useful for non-snapped percentage options,
+since it allows the interface to convert absolute values to percentages and back,
+which allows the user to enter both a percentage or an absolute value when editing options.
+
+:::
+
+`pctBasedOnSa` does the same as [utils.pctBasedOn()](/reference/api/utils/pctbasedon),
+but instead of taking a measurement parameter, it uses the current seam allowance as the basis for the percentage value.
+
+If seam allowance is disabled, it will use 1 cm as the basis for the percentage value.
+
+`pctBasedOnSa` is useful for creating hem or binding width options that often more depend on the seam allowance or the width of bias binding than on body measurements.
+
+You can optionally add a snap if the selectable values should be limited to e.g. commons widths of elastics.
+
+## Signature
+
+```js
+object utils.pctBasedOnSa()
+```
+
+## Example
+
+```js
+const options = {
+  hemWidth: {
+    pct: 300,
+    min: 0,
+    max: 500,
+    ...pctBasedOnSa(),
+  },
+}
+```
+
+This creates a percentage option that defaults to three times the seam allowance,
+but the user is able to enter either a percentage between 0% and 500% or an absolute value.
+
+## Notes
+
+This will return an object with `toAbs` and `fromAbs` properties that calculate
+the option's absolute and relative values based on a measurement. Refer to
+[snapped percentage options](/reference/api/part/config/options/pct/snap) for
+more details.

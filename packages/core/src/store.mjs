@@ -133,7 +133,7 @@ Store.prototype.extend = function (methods) {
     if (avoid.indexOf(path) !== -1) {
       this.log.warn(`You cannot overwrite \`store.${path}()\``)
     } else {
-      this.log.info(`Extending store with \`${path}\``)
+      this.log.debug(`Extending store with \`${path}\``)
       set(this, path, (...args) => method(this, ...args))
     }
   }

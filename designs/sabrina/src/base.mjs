@@ -47,10 +47,19 @@ function draftBase({ options, measurements, Point, Path, points, paths, utils, s
     points.cfWaist.y - measurements.waistToArmpit * (1 - options.armpitAdjustment) * verticalScale
   )
 
+  points.defaultArmpit = new Point(
+    chestFront * 0.5,
+    points.cfWaist.y - measurements.waistToArmpit * verticalScale
+  )
+
   points.cbNeck = new Point(backOffset, measurements.neck * options.neckHeightBack)
 
   const armpitWidth = chestBack * 0.1
   const backWidth = chestBack * options.backWidth
+
+  if (points.defaultArmpit.y + armpitWidth * 0.2 > points.bustPoint.y) {
+    store.flag.error({ msg: `sabrina:badArmpitPosition` })
+  }
 
   const strapPositionAdj = options.strapPosition * (1 - options.strapWidth) + options.strapWidth / 2
   points.strapFrontLeft = points.hps.shiftFractionTowards(
@@ -125,14 +134,21 @@ function draftBase({ options, measurements, Point, Path, points, paths, utils, s
 
   points.sbDart = points.sbBand.translate(0, -bustToBand * 0.8)
 
-  points.sbArmpit = utils
-    .beamsIntersect(
+  points.intersectTarget = utils.beamIntersectsX(
+    points.armpitBottom,
+    points.armpitBottom.shift(10, 10),
+    points.sbBust.x
+  )
+  let intersect =
+    utils.linesIntersect(
       points.sbBust,
-      points.armpit,
+      points.defaultArmpit,
       points.armpitBottom,
-      points.armpitBottom.shift(10, 10)
-    )
-    .translate(armpitWidth, 0)
+      points.intersectTarget
+    ) || points.sbBust
+
+  points.sbArmpit = intersect.translate(armpitWidth, 0)
+
   if (points.sbArmpit.x > points.sbBust.x) {
     points.sbArmpit.x = points.sbBust.x
   }

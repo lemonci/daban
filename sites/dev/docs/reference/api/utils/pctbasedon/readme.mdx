@@ -4,8 +4,15 @@ title: utils.pctBasedOn()
 
 The `utils.pctBasedOn()` function is a helper function to be used when
 configuring [snapped percentage
-options](/reference/api/part/config/options/pct/snap). 
+options](/reference/api/part/config/options/pct/snap).
 
+:::note
+
+`pctBasedOn` is also useful for non-snapped percentage options,
+since it allows the interface to convert absolute values to percentages and back,
+which allows the user to enter both a percentage or an absolute value when editing options.
+
+:::
 
 ## Signature
 
@@ -22,8 +29,8 @@ const options = {
     min: 5,
     max: 18,
     snap: 3,
-    ...pctBasedOn('chest')
-  }
+    ...pctBasedOn('chest'),
+  },
 }
 ```
 

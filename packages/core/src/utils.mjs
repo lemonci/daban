@@ -604,7 +604,7 @@ export function mergeOptions(settings = {}, optionsConfig) {
 }
 
 /**
- * Helper method to calculate abolute option value based on a measurement
+ * Helper method to calculate absolute option value based on a measurement
  *
  * @param {string} measurement - The measurement to base the calculation on
  * @return {object} result - An object with the toAbs() and fromAbs() methods
@@ -614,6 +614,18 @@ export function pctBasedOn(measurement) {
     toAbs: (val, { measurements }) => measurements[measurement] * val,
     fromAbs: (val, { measurements }) =>
       Math.round((10000 * val) / measurements[measurement]) / 10000,
+  }
+}
+
+/**
+ * Helper method to calculate absolute option value based on the seam allowance
+ *
+ * @return {object} result - An object with the toAbs() and fromAbs() methods
+ */
+export function pctBasedOnSa() {
+  return {
+    toAbs: (val, { sa }) => (sa || 10) * val,
+    fromAbs: (val, { sa }) => Math.round((10000 * val) / (sa || 10)) / 10000,
   }
 }
 
