@@ -2,7 +2,7 @@
   "name": "@freesewing/plugin-transform",
   "version": "4.6.0",
   "description": "A FreeSewing plugin to transform (translate, rotate, or scale) points or paths",
-  "author": "Joost De Cock <joost@joost.at> (https://codeberg.org/joostdecock)",
+  "author": "Wouter van Wageningen",
   "homepage": "https://freesewing.eu/",
   "repository": "codeberg:freesewing/freesewing",
   "license": "MIT",
