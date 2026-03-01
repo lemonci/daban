@@ -1,0 +1,35 @@
+---
+title: plugin-transform
+---
+
+Published as [@freesewing/plugin-transform][1], this plugin provides [the transform
+macro](/reference/macros/transform) which facilitates rotating/translating/scaling a number of
+points and/or paths.
+
+## Installation
+
+```sh
+npm install @freesewing/plugin-transform
+```
+
+## Usage
+
+Either [add it as a part plugins](/reference/api/part/config/plugins) in your
+design, or [add it to a pattern instance with
+Pattern.use()](/reference/api/pattern/use).
+
+To import the plugin for use:
+
+```js
+import { transformPlugin } from '@freesewing/plugin-transform'
+// or
+import { pluginTransform } from '@freesewing/plugin-transform'
+```
+
+## Notes
+
+This plugin is part of the [core-plugins bundle](/reference/plugins/core),
+so there is no need to install or import it manually unless you wish to forego
+loading of core plugins yet still want to load this plugin.
+
+[1]: https://www.npmjs.com/package/@freesewing/plugin-transform

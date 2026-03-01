@@ -1,6 +1,7 @@
 import { annotationsPlugin, i18n as annotationsI18n } from '@freesewing/plugin-annotations'
 import { measurementsPlugin } from '@freesewing/plugin-measurements'
 import { mirrorPlugin } from '@freesewing/plugin-mirror'
+import { transformPlugin } from '@freesewing/plugin-transform'
 import { roundPlugin } from '@freesewing/plugin-round'
 import { sprinklePlugin } from '@freesewing/plugin-sprinkle'
 import { binpackPlugin } from '@freesewing/plugin-bin-pack'
@@ -12,6 +13,7 @@ const bundledPlugins = [
   mirrorPlugin,
   roundPlugin,
   sprinklePlugin,
+  transformPlugin,
   binpackPlugin,
 ]
 
