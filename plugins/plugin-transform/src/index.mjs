@@ -1,5 +1,4 @@
 import about from '../about.json' with { type: 'json' }
-import { capitalize } from '@freesewing/core'
 
 const scalePoint = (p, x, y, c) => {
   p.x = (p.x - c.x) * x + c.x
@@ -20,7 +19,7 @@ export const plugin = {
       clone = true,
       points = [],
       paths = [],
-      prefix = 'transformed',
+      prefix = 'transformed_',
     }) {
       if (y === undefined) y = x
 
@@ -32,7 +31,7 @@ export const plugin = {
           const newId = clone
             ? typeof prefix == 'function'
               ? prefix(pathId, 'path')
-              : `${prefix}${capitalize(pathId)}`
+              : `${prefix}${pathId}`
             : pathId
 
           switch (transform) {
@@ -66,7 +65,7 @@ export const plugin = {
           const newId = clone
             ? typeof prefix == 'function'
               ? prefix(pointId, 'point')
-              : `${prefix}${capitalize(pointId)}`
+              : `${prefix}${pointId}`
             : pointId
 
           switch (transform) {
