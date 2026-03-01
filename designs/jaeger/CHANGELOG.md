@@ -1,6 +1,12 @@
 # Change log for: @freesewing/jaeger
 
 
+## 4.6.0 (2026-03-01)
+
+### Fixed
+
+ - Ensure draft order for topsleeve and undersleeve (#752)
+
 ## 4.5.0 (2026-02-21)
 
 ### Changed

@@ -1,6 +1,12 @@
 # Change log for: @freesewing/plugin-path-utils
 
 
+## 4.6.0 (2026-03-01)
+
+### Fixed
+
+ - Fix path joining logic in plugin-path-utils to handle hidden paths properly (#753)
+
 ## 4.5.0 (2026-02-21)
 
 ### Fixed

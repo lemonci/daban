@@ -10,6 +10,49 @@
  - Ensure draft order for topsleeve and undersleeve (#752)
 
 
+## 4.6.0 (2026-03-01)
+
+### jaeger
+
+#### Fixed
+
+ - Ensure draft order for topsleeve and undersleeve (#752)
+
+### noble
+
+#### Fixed
+
+ - Add notch for armholeToBustInside if armholeDartCurved is false (#763)
+
+### sabrina
+
+#### Fixed
+
+ - Improve armpit position drafting in Sabrina (#764)
+
+### plugin-path-utils
+
+#### Fixed
+
+ - Fix path joining logic in plugin-path-utils to handle hidden paths properly (#753)
+
+### plugin-transform
+
+#### Added
+
+ - Added new transform macro and plugin (#593)
+
+### core
+
+#### Added
+
+ - Add pctBasedOnSa() utility (#768)
+
+#### Fixed
+
+ - Reduce debug level of "Extending store" call (#769)
+
+
 ## 4.5.0 (2026-02-21)
 
 ### bent

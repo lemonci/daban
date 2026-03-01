@@ -1,6 +1,12 @@
 # Change log for: @freesewing/noble
 
 
+## 4.6.0 (2026-03-01)
+
+### Fixed
+
+ - Add notch for armholeToBustInside if armholeDartCurved is false (#763)
+
 ## 4.4.0 (2025-11-06)
 
 ### Fixed
