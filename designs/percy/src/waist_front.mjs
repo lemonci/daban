@@ -260,6 +260,11 @@ function draftPercyWaistFront({
     path: paths.bottomCurve,
     d: 15 + sa,
   })
+  macro('pd', {
+    id: 'lengthTop',
+    path: paths.topCurve,
+    d: 15 + sa,
+  })
 
   return part
 }
