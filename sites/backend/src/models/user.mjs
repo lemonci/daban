@@ -78,7 +78,10 @@ UserModel.prototype.profileCard = async function ({ params }) {
    */
   if (!this.exists) return this.setResponse(404)
 
-  return this.setResponse200(userCard(this.record.username, this.record.id), true)
+  return this.setResponse200(
+    userCard(encodeForSVG(sanitizeUsername(this.record.username)), this.record.id),
+    true
+  )
 }
 
 /*
@@ -1825,4 +1828,31 @@ UserModel.prototype.searchProfiles = async function ({ body, user }) {
   }
 
   return this.setResponse200({ profiles })
+}
+
+function encodeForSVG(str) {
+  return str
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#x27;')
+}
+
+function sanitizeUsername(input) {
+  if (typeof input !== 'string') return ''
+
+  return (
+    input
+      // Normalize unicode to prevent lookalike/homoglyph attacks
+      .normalize('NFC')
+      // Keep only: letters (any language), numbers, spaces, underscores,
+      // hyphens, dots, and emoji (via unicode property escapes)
+      .replace(/[^\p{L}\p{N}\p{Emoji_Presentation}\p{Emoji}\s._-]/gu, '')
+      // Collapse whitespace
+      .replace(/\s+/g, ' ')
+      .trim()
+      // Enforce a reasonable length cap
+      .slice(0, 64)
+  )
 }
