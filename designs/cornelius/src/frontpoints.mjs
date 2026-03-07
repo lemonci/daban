@@ -16,6 +16,7 @@ export const frontpoints = {
   options: {
     pctAtoO: 0.5,
     pctAtoC: 0.25,
+    pctAtoT: 0.33333,
     pctUtoA: 0.25,
     pctJtoA: 0.25,
     pctSeatAdjustment: 0.5,
@@ -28,8 +29,8 @@ export const frontpoints = {
         (options === undefined
           ? 0.25
           : options.bandBelowKnee === undefined
-          ? 0.25
-          : options.bandBelowKnee) *
+            ? 0.25
+            : options.bandBelowKnee) *
         measurements.waistToKnee *
         val,
       menu: 'style',
@@ -63,7 +64,7 @@ export const frontpoints = {
     points.pB = points.pO.shift(270, waistToKnee - waistDown)
     points.pA = points.pB.shift(90, inseam)
     points.pC = points.pB.shift(270, waistToKnee * options.bandBelowKnee)
-    points.pT = points.pA.shift(90, (waistToKnee - inseam) / 3)
+    points.pT = points.pA.shift(90, (waistToKnee - inseam) * options.pctAtoT)
     points.pE = points.pA.shift(180, seat / 4)
     points.pF = points.pA.shift(180, seat / 2)
     points.pD = points.pO.shift(180, seat / 4)

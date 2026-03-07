@@ -1,0 +1,288 @@
+---
+title: "Crux: Design Options"
+sidebar_label: Design Options
+sidebar_position: 10
+toc_max_heading_level: 5
+---
+
+import Articulatedknee from '@site/docs/docs/designs/crux/options/articulatedknee/readme.mdx'
+import Backpocketcargo from '@site/docs/docs/designs/crux/options/backpocketcargo/readme.mdx'
+import Backpocketcargowidth from '@site/docs/docs/designs/crux/options/backpocketcargowidth/readme.mdx'
+import Backpocketinside from '@site/docs/docs/designs/crux/options/backpocketinside/readme.mdx'
+import Backpockettype from '@site/docs/docs/designs/crux/options/backpockettype/readme.mdx'
+import Curveddarts from '@site/docs/docs/designs/crux/options/curveddarts/readme.mdx'
+import Flywidth from '@site/docs/docs/designs/crux/options/flywidth/readme.mdx'
+import Frontpocketcargo from '@site/docs/docs/designs/crux/options/frontpocketcargo/readme.mdx'
+import Frontpocketcargowidth from '@site/docs/docs/designs/crux/options/frontpocketcargowidth/readme.mdx'
+import Frontpocketinside from '@site/docs/docs/designs/crux/options/frontpocketinside/readme.mdx'
+import Frontpockettype from '@site/docs/docs/designs/crux/options/frontpockettype/readme.mdx'
+import Fullness from '@site/docs/docs/designs/crux/options/fullness/readme.mdx'
+import Gussetdepth from '@site/docs/docs/designs/crux/options/gussetdepth/readme.mdx'
+import Gussetextraspace from '@site/docs/docs/designs/crux/options/gussetextraspace/readme.mdx'
+import Gussetwidthback from '@site/docs/docs/designs/crux/options/gussetwidthback/readme.mdx'
+import Gussetwidthfront from '@site/docs/docs/designs/crux/options/gussetwidthfront/readme.mdx'
+import Hemlength from '@site/docs/docs/designs/crux/options/hemlength/readme.mdx'
+import Hemtype from '@site/docs/docs/designs/crux/options/hemtype/readme.mdx'
+import Hipsshift from '@site/docs/docs/designs/crux/options/hipsshift/readme.mdx'
+import Leglength from '@site/docs/docs/designs/crux/options/leglength/readme.mdx'
+import Leglengthcustom from '@site/docs/docs/designs/crux/options/leglengthcustom/readme.mdx'
+import Waistbandwidth from '@site/docs/docs/designs/crux/options/waistbandwidth/readme.mdx'
+import Waistreduction from '@site/docs/docs/designs/crux/options/waistreduction/readme.mdx'
+import Waistbandlower from '@site/docs/docs/designs/crux/options/waistbandlower/readme.mdx'
+import Waistbandtype from '@site/docs/docs/designs/crux/options/waistbandtype/readme.mdx'
+
+## Style {#style}
+### Leg length {#leglength}
+
+**Leg length type**
+- Type: **List**
+- Default: **long**
+- options:
+  - long
+  - capris
+  - shorts
+  - custom
+
+<Leglength />
+
+### Pockets {#pockets}
+#### Front pocket type {#frontpockettype}
+
+**The type of front pocket**
+- Type: **List**
+- Default: **standard**
+- options:
+  - standard
+  - hole
+  - square
+  - diamond
+
+<Frontpockettype />
+
+#### Front pocket on the inside {#frontpocketinside}
+
+**Invert the front pocket**
+- Type: **Boolean**
+- Default: **false**
+
+<Frontpocketinside />
+
+#### Back pocket type {#backpockettype}
+
+**The type of back pocket**
+- Type: **List**
+- Default: **standard**
+- options:
+  - standard
+  - hole
+  - square
+  - diamond
+
+<Backpockettype />
+
+### Waistband type {#waistbandtype}
+
+**The type of waistband**
+- Type: **List**
+- Default: **standard**
+- options:
+  - standard
+  - elastic
+  - ribknit
+
+<Waistbandtype />
+
+### Waistband position {#waistbandlower}
+
+**Percentage between waist and hips**
+- Type: **Percentage**
+- Default: **80%**
+- Minimum: **0%**
+- Maximum: **100%**
+
+<Waistbandlower />
+
+### Waistband width {#waistbandwidth}
+
+**The width of the waistband**
+- Type: **Percentage**
+- Default: **3.2%**
+- Minimum: **1%**
+- Maximum: **10%**
+
+<Waistbandwidth />
+
+### Curved darts {#curveddarts}
+
+**Type of darts**
+- Type: **Boolean**
+- Default: **true**
+
+<Curveddarts />
+
+## Conditional Options {#conditional}
+### Custom leg length {#leglengthcustom}
+
+**Set your own pant leg length**
+- Type: **Percentage**
+- Default: **95%**
+- Minimum: **40%**
+- Maximum: **100%**
+
+<Leglengthcustom />
+
+### Cargo front pocket {#frontpocketcargo}
+
+**Add extra space**
+- Type: **Boolean**
+- Default: **false**
+
+<Frontpocketcargo />
+
+### Front pocket cargo width {#frontpocketcargowidth}
+
+**Adjust the width of the extra strip of fabric**
+- Type: **Percentage**
+- Default: **2%**
+- Minimum: **0.3%**
+- Maximum: **5%**
+
+<Frontpocketcargowidth />
+
+### Back pocket on the inside {#backpocketinside}
+
+**Invert the back pocket**
+- Type: **Boolean**
+- Default: **false**
+
+<Backpocketinside />
+
+### Cargo back pocket {#backpocketcargo}
+
+**Add extra space**
+- Type: **Boolean**
+- Default: **false**
+
+<Backpocketcargo />
+
+### Back pocket cargo width {#backpocketcargowidth}
+
+**Adjust the width of the extra strip of fabric**
+- Type: **Percentage**
+- Default: **2%**
+- Minimum: **0.3%**
+- Maximum: **5%**
+
+<Backpocketcargowidth />
+
+### Articulated knee {#articulatedknee}
+
+**Type of pants leg**
+- Type: **Boolean**
+- Default: **true**
+
+<Articulatedknee />
+
+### Hem type {#hemtype}
+
+**The type of hem**
+- Type: **List**
+- Default: **hem**
+- options:
+  - hem
+  - ribknit
+
+<Hemtype />
+
+### Hem length {#hemlength}
+
+**Length/Width of the hem**
+- Type: **Percentage**
+- Default: **3%**
+- Minimum: **1%**
+- Maximum: **10%**
+
+<Hemlength />
+
+## Fit {#fit}
+### Waist reduction {#waistreduction}
+
+**Make the waist band smaller than calculated**
+- Type: **Percentage**
+- Default: **0%**
+- Minimum: **0%**
+- Maximum: **10%**
+
+<Waistreduction />
+
+### Gusset {#gusset}
+#### Extra Gusset space {#gussetextraspace}
+
+**Adds extra space between the front and the back in the gusset**
+- Type: **Percentage**
+- Default: **0%**
+- Minimum: **0%**
+- Maximum: **100%**
+
+<Gussetextraspace />
+
+#### Gusset depth {#gussetdepth}
+
+**How far down the leg the gusset extends**
+- Type: **Percentage**
+- Default: **20%**
+- Minimum: **5%**
+- Maximum: **25%**
+
+<Gussetdepth />
+
+#### Gusset Width in the front {#gussetwidthfront}
+
+**How far up the front seam the gusset extends**
+- Type: **Percentage**
+- Default: **25%**
+- Minimum: **20%**
+- Maximum: **50%**
+
+<Gussetwidthfront />
+
+#### Gusset Width in the back {#gussetwidthback}
+
+**How far up the back seam the gusset extends**
+- Type: **Percentage**
+- Default: **15%**
+- Minimum: **5%**
+- Maximum: **20%**
+
+<Gussetwidthback />
+
+### Fullness {#fullness}
+
+**Add extra fullness to the pant legs**
+- Type: **Percentage**
+- Default: **0%**
+- Minimum: **0%**
+- Maximum: **25%**
+
+<Fullness />
+
+### undefined {#hipsshift}
+
+**undefined**
+- Type: **Percentage**
+- Default: **0%**
+- Minimum: **-10%**
+- Maximum: **10%**
+
+<Hipsshift />
+
+## Advanced {#advanced}
+### Fly width {#flywidth}
+
+**The width of the fly**
+- Type: **Percentage**
+- Default: **3.8%**
+- Minimum: **2%**
+- Maximum: **6%**
+
+<Flywidth />

@@ -1,0 +1,23 @@
+{
+  "id": "crux",
+  "code": "Wouter Van Wageningen",
+  "name": "Crux Climbing pants",
+  "design": "Wouter Van Wageningen",
+  "description": "A FreeSewing pattern for climbing or hiking pants",
+  "difficulty": 3,
+  "tags": [
+    "bottoms",
+    "trousers"
+  ],
+  "techniques": [
+    "curved-seam",
+    "fly",
+    "zipper",
+    "button",
+    "pocket",
+    "dart"
+  ],
+  "version": "4.3.0",
+  "pkg": "@freesewing/crux",
+  "collection": true
+}
