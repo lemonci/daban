@@ -2,6 +2,7 @@ Unreleased:
 
   Changed:
     backend:
+      - Removed user card endpoint
       - Removed all code unit test code paths
       - Remove Prisma dependency, refactor to use NodeJS native SQLite bindings
 

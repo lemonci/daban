@@ -131,18 +131,6 @@ UsersController.prototype.profile = async (req, res, tools) => {
 }
 
 /*
- * Returns a user profile card
- *
- * See: https://freesewing.dev/reference/backend/api
- */
-UsersController.prototype.profileCard = async (req, res, tools) => {
-  const User = new UserModel(tools)
-  await User.profileCard(req)
-
-  return User.sendSvgResponse(res)
-}
-
-/*
  * Returns all user data
  *
  * See: https://freesewing.dev/reference/backend/api

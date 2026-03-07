@@ -4,7 +4,6 @@ import { hash, hashPassword, randomString, verifyPassword } from '../utils/crypt
 import { replaceImage, removeImage } from '../utils/cloudflare-images.mjs'
 import { clean, asJson, i18nUrl, writeExportedData } from '../utils/index.mjs'
 import { decorateModel } from '../utils/model-decorator.mjs'
-import { userCard } from '../templates/svg/user-card.mjs'
 
 /*
  * This model handles all user updates
@@ -50,38 +49,6 @@ UserModel.prototype.profile = async function ({ params }) {
     result: 'success',
     profile: this.asProfile(),
   })
-}
-
-/*
- * Returns an SVG user card
- * This is an anonymous route returning limited info (profile data)
- *
- * @param {params} object - The request (URL) parameters
- * @returns {UserModel} object - The UserModel
- */
-UserModel.prototype.profileCard = async function ({ params }) {
-  /*
-   * Is id set?
-   */
-  if (typeof params.id === 'undefined') return this.setResponse(403, 'idMissing')
-
-  /*
-   * Try to find the record in the database
-   * Note that find checks lusername, ehash, and id but we
-   * pass it in the username value as that's what the login
-   * rout does
-   */
-  await this.find({ username: params.id })
-
-  /*
-   * If it does not exist, return 404
-   */
-  if (!this.exists) return this.setResponse(404)
-
-  return this.setResponse200(
-    userCard(encodeForSVG(sanitizeUsername(this.record.username)), this.record.id),
-    true
-  )
 }
 
 /*
@@ -1788,31 +1755,4 @@ UserModel.prototype.searchProfiles = async function ({ body, user }) {
   }
 
   return this.setResponse200({ profiles })
-}
-
-function encodeForSVG(str) {
-  return str
-    .replace(/&/g, '&amp;')
-    .replace(/</g, '&lt;')
-    .replace(/>/g, '&gt;')
-    .replace(/"/g, '&quot;')
-    .replace(/'/g, '&#x27;')
-}
-
-function sanitizeUsername(input) {
-  if (typeof input !== 'string') return ''
-
-  return (
-    input
-      // Normalize unicode to prevent lookalike/homoglyph attacks
-      .normalize('NFC')
-      // Keep only: letters (any language), numbers, spaces, underscores,
-      // hyphens, dots, and emoji (via unicode property escapes)
-      .replace(/[^\p{L}\p{N}\p{Emoji_Presentation}\p{Emoji}\s._-]/gu, '')
-      // Collapse whitespace
-      .replace(/\s+/g, ' ')
-      .trim()
-      // Enforce a reasonable length cap
-      .slice(0, 64)
-  )
 }

@@ -7,7 +7,6 @@
 
  - Remove Prisma dependency, refactor to use NodeJS native SQLite bindings (#765)
  - Run backend in container image freesewing/backend (#765)
- - Removed an admin signup bug that abused unit test code paths to create admin accounts | Reported by Alen Sarang
 
 ## 4.0.1 (2025-06-09)
 
