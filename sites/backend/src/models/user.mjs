@@ -1413,12 +1413,9 @@ UserModel.prototype.asAccount = function () {
     consent: this.record.consent,
     control: this.record.control,
     createdAt: this.record.createdAt,
-    ehash: this.record.ehash,
     email: this.clear.email,
     data,
-    ihash: this.record.ihash,
     imperial: this.record.imperial,
-    initial: this.clear.initial,
     jwtCalls: this.record.jwtCalls,
     keyCalls: this.record.keyCalls,
     language: this.record.language,
@@ -1431,10 +1428,6 @@ UserModel.prototype.asAccount = function () {
     updatedAt: this.record.updatedAt,
     username: this.record.username,
     lusername: this.record.lusername,
-    /*
-     * Add this so we can give a note to users about migrating their password
-     */
-    passwordType: JSON.parse(this.record.password).type,
   }
 }
 
