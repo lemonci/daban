@@ -294,21 +294,24 @@ export const front = {
         points.indicatorSeatInside,
         points.indicatorSeatSide
       )[0]
-      points.markerSeatInside = frontPath.intersectsBeam(
+      let markerSeatInsideCandidate = frontPath.intersectsBeam(
         points.indicatorSeatInside,
         points.indicatorSeatSide
-      )[0]
-
-      paths.seatLine = new Path()
-        .move(points.markerSeatInside)
-        .line(points.markerSeatSide)
-        .attr('class', 'contrast help')
-      macro('banner', {
-        id: 'seatLine',
-        classes: 'center contrast help',
-        path: paths.seatLine,
-        text: 'seatLine',
-      })
+      )
+      // Guard against us not finding this point
+      if (Array.isArray(markerSeatInsideCandidate) && markerSeatInsideCandidate.length > 0) {
+        points.markerSeatInside = markerSeatInsideCandidate[0]
+        paths.seatLine = new Path()
+          .move(points.markerSeatInside)
+          .line(points.markerSeatSide)
+          .attr('class', 'contrast help')
+        macro('banner', {
+          id: 'seatLine',
+          classes: 'center contrast help',
+          path: paths.seatLine,
+          text: 'seatLine',
+        })
+      }
 
       if (measurements.waistToKnee / (measurements.waistToFloor * store.get('legLength')) < 0.97) {
         points.markerKneeSide = paths.sideSeamFrontOriginal

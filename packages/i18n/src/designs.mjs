@@ -2440,6 +2440,258 @@ export const designs = {
       }
     }
   },
+  "crux": {
+    "t": "Crux",
+    "d": "Crux Climbing Pants",
+    "p": {
+      "back": "Back",
+      "front": "Front",
+      "gusset": "Gusset",
+      "backpocket": "Back pocket",
+      "backpocketpoints": "Back pocket points",
+      "backpocketfacing": "Back pocket facing",
+      "backpocketcargo": "Back pocket cargo strip",
+      "flyshield": "Fly shield",
+      "frontpocket": "Front pocket",
+      "frontpocketpoints": "Front pocket points",
+      "frontpocketfacing": "Front pocket facing",
+      "frontpocketcargo": "Front pocket cargo strip",
+      "basepoints": "Base Points",
+      "waistband": "Waistband",
+      "waistbanda": "Waistband extra",
+      "hipsLine": "Approximate line of the hips",
+      "seatLine": "Approximate line of the seat",
+      "kneeLine": "Approximate line of the knee"
+    },
+    "s": {
+      "cutWaistband.t": "The waist band is not shown",
+      "cutWaistband.d": "The **waist band** is a strip of fabric {{{ width }}} wide and {{{ length }}} long.",
+      "cutWaistbanda.t": "The extra waist band is not shown",
+      "cutWaistbanda.d": "The **extra waist band** is a strip of fabric {{{ width }}} wide and {{{ length }}} long."
+    },
+    "o": {
+      "hemLength": {
+        "t": "Hem length",
+        "d": "Length/Width of the hem"
+      },
+      "hemType": {
+        "t": "Hem type",
+        "d": "The type of hem"
+      },
+      "hemType.hem": {
+        "t": "Traditional hem",
+        "d": "Folded back hem"
+      },
+      "hemType.elastic": {
+        "t": "Elastic hem",
+        "d": "Folded back hem with elastic inside"
+      },
+      "hemType.ribknit": {
+        "t": "Rib knit hem",
+        "d": "Hem is replaced with rib knit"
+      },
+      "waistbandType": {
+        "t": "Waistband type",
+        "d": "The type of waistband"
+      },
+      "waistbandType.standard": {
+        "t": "Standard waistband",
+        "d": "Waistband made of main fabric"
+      },
+      "waistbandType.elastic": {
+        "t": "Elastic waistband",
+        "d": "Waistband with elastic inside"
+      },
+      "waistbandType.ribknit": {
+        "t": "Rib knit waistband",
+        "d": "Waistband is replaced with rib knit"
+      },
+      "waistBandWidth": {
+        "t": "Waistband width",
+        "d": "The width of the waistband"
+      },
+      "waistbandLower": {
+        "t": "Waistband position",
+        "d": "Percentage between waist and hips"
+      },
+      "articulatedKnee": {
+        "t": "Articulated knee",
+        "d": "Type of pants leg"
+      },
+      "articulatedKneeYes": {
+        "t": "Articulated knee",
+        "d": "Make the knee articulated"
+      },
+      "articulatedKneeNo": {
+        "t": "Standard pants leg",
+        "d": "Do not make the knee articulated"
+      },
+      "curvedDarts": {
+        "t": "Curved darts",
+        "d": "Type of darts"
+      },
+      "curvedDartsYes": {
+        "t": "Curved darts",
+        "d": "Use curved darts"
+      },
+      "curvedDartsNo": {
+        "t": "Straight darts",
+        "d": "Use straight darts"
+      },
+      "legLength": {
+        "t": "Leg length",
+        "d": "Leg length type"
+      },
+      "legLength.long": {
+        "t": "Long",
+        "d": "Standard long pant legs"
+      },
+      "legLength.capris": {
+        "t": "Capris",
+        "d": "Pant legs just below the knee"
+      },
+      "legLength.shorts": {
+        "t": "Shorts",
+        "d": "Shorts, just above the knee"
+      },
+      "legLength.custom": {
+        "t": "Custom",
+        "d": "Set your own pant leg length"
+      },
+      "legLengthCustom": {
+        "t": "Custom leg length",
+        "d": "Set your own pant leg length"
+      },
+      "frontPocketType": {
+        "t": "Front pocket type",
+        "d": "The type of front pocket"
+      },
+      "frontPocketType.standard": {
+        "t": "Standard",
+        "d": "Curved front pocket"
+      },
+      "frontPocketType.hole": {
+        "t": "Hole",
+        "d": "Curved front pocket with a hole opening"
+      },
+      "frontPocketType.diamond": {
+        "t": "Diamond",
+        "d": "Front pocket with a diamond shaped hole"
+      },
+      "frontPocketType.square": {
+        "t": "Square",
+        "d": "Square front pocket"
+      },
+      "backPocketType": {
+        "t": "Back pocket type",
+        "d": "The type of back pocket"
+      },
+      "backPocketType.standard": {
+        "t": "Standard",
+        "d": "Curved back pocket"
+      },
+      "backPocketType.hole": {
+        "t": "Hole",
+        "d": "Curved back pocket with a hole opening"
+      },
+      "backPocketType.diamond": {
+        "t": "Diamond",
+        "d": "Back pocket with a diamond shaped hole"
+      },
+      "backPocketType.square": {
+        "t": "Square",
+        "d": "Square back pocket"
+      },
+      "frontPocketCargo": {
+        "t": "Cargo front pocket",
+        "d": "Add extra space"
+      },
+      "frontPocketCargoYes": {
+        "t": "Cargo front pocket",
+        "d": "Add a strip of fabric to add depth to the front pocket"
+      },
+      "frontPocketCargoNo": {
+        "t": "Normal patch pocket",
+        "d": "No extra fabric added"
+      },
+      "backPocketCargo": {
+        "t": "Cargo back pocket",
+        "d": "Add extra space"
+      },
+      "backPocketCargoYes": {
+        "t": "Cargo back pocket",
+        "d": "Add a strip of fabric to add depth to the back pocket"
+      },
+      "backPocketCargoNo": {
+        "t": "Normal patch pocket",
+        "d": "No extra fabric added"
+      },
+      "frontPocketInside": {
+        "t": "Front pocket on the inside",
+        "d": "Invert the front pocket"
+      },
+      "frontPocketInsideYes": {
+        "t": "Move the pocket to the inside",
+        "d": "The patch pocket now becomes an internal pocket"
+      },
+      "frontPocketInsideNo": {
+        "t": "Normal patch pocket",
+        "d": "The pocket is on the outside"
+      },
+      "backPocketInside": {
+        "t": "Back pocket on the inside",
+        "d": "Invert the back pocket"
+      },
+      "backPocketInsideYes": {
+        "t": "Move the pocket to the inside",
+        "d": "The patch pocket now becomes an internal pocket"
+      },
+      "backPocketInsideNo": {
+        "t": "Normal patch pocket",
+        "d": "The pocket is on the outside"
+      },
+      "frontPocketCargoWidth": {
+        "t": "Front pocket cargo width",
+        "d": "Adjust the width of the extra strip of fabric"
+      },
+      "backPocketCargoWidth": {
+        "t": "Back pocket cargo width",
+        "d": "Adjust the width of the extra strip of fabric"
+      },
+      "fullness": {
+        "t": "Fullness",
+        "d": "Add extra fullness to the pant legs"
+      },
+      "waistReduction": {
+        "t": "Waist reduction",
+        "d": "Make the waist band smaller than calculated"
+      },
+      "HipsShift": {
+        "t": "Hip shift",
+        "d": "Shifts fabric from the front to the back. This is to compensate if you need extra space around the hips in the back of the front. Negative numbers move it to the back."
+      },
+      "gussetDepth": {
+        "t": "Gusset depth",
+        "d": "How far down the leg the gusset extends"
+      },
+      "gussetWidthFront": {
+        "t": "Gusset Width in the front",
+        "d": "How far up the front seam the gusset extends"
+      },
+      "gussetWidthBack": {
+        "t": "Gusset Width in the back",
+        "d": "How far up the back seam the gusset extends"
+      },
+      "gussetExtraSpace": {
+        "t": "Extra Gusset space",
+        "d": "Adds extra space between the front and the back in the gusset"
+      },
+      "flyWidth": {
+        "t": "Fly width",
+        "d": "The width of the fly"
+      }
+    }
+  },
   "devon": {
     "t": "Devon",
     "d": "A denim jacket design",
