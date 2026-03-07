@@ -2,12 +2,14 @@ Unreleased:
 
   Changed:
     backend:
+      - Removed all code unit test code paths
       - Remove Prisma dependency, refactor to use NodeJS native SQLite bindings
 
   Fixed:
     backend:
-      - Sanitize usernames in SVG output
-      - Enforce authenticated user ID check in account data endpoint
+      - Sanitize usernames in SVG output | Reported by Alen Sarang
+      - Enforce authenticated user ID check in account data endpoint, prevent cross-account data access | Reported by Alen Sarang
+      - Removed an admin signup bug that abused unit test code paths to create admin accounts | Reported by Alen Sarang
     jaeger:
       - Ensure draft order for topsleeve and undersleeve (#752)
 

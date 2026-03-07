@@ -27,9 +27,7 @@ export function cloudflareImageUrl(id, variant = 'public') {
  * Method that does the actual image upload to cloudflare
  * Use this for a new image that does not yet exist
  */
-export async function storeImage(props, isTest = false) {
-  if (isTest) return props.id || false
-
+export async function storeImage(props) {
   const form = getFormData(props)
   let result
   try {
@@ -60,8 +58,7 @@ export async function storeImage(props, isTest = false) {
  * Method that does the actual image upload to cloudflare
  * Use this to replace an existing image
  */
-export async function replaceImage(props, isTest = false) {
-  if (isTest) return props.id || false
+export async function replaceImage(props) {
   const form = getFormData(props)
   // Ignore errors on delete, probably means the image does not exist
   try {
@@ -84,8 +81,7 @@ export async function replaceImage(props, isTest = false) {
  * Method that uploads an image to cloudflare
  * Use this to merely ensure the image exists (will fail silently if it does)
  */
-export async function ensureImage(props, isTest = false) {
-  if (isTest) return props.id || false
+export async function ensureImage(props) {
   const form = getFormData(props)
   let result = false
   try {
