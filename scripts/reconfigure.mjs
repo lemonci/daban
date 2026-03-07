@@ -155,6 +155,9 @@ for (const type of ['designs', 'packages', 'plugins']) {
     }
   }
 }
+// Backend changelog
+await writeFile(['sites', 'backend', 'CHANGELOG.md'], changelog('backend', 'sites', 'test'))
+
 log.write(chalk.green(' Done\n'))
 
 // Step 4: Generate overall CHANGELOG.md
