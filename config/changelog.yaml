@@ -5,6 +5,7 @@ Unreleased:
       - Removed user card endpoint
       - Removed all code unit test code paths
       - Remove Prisma dependency, refactor to use NodeJS native SQLite bindings
+      - Remove anonymous user profile access
 
   Fixed:
     backend:
