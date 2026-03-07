@@ -54,18 +54,15 @@ SetModel.prototype.guardedCreate = async function ({ body, user }) {
    */
   const img =
     typeof body.img === 'string'
-      ? await storeImage(
-          {
-            id: `set-${this.record.id}`,
-            metadata: {
-              user: user.uid,
-              name: this.clear.name,
-            },
-            b64: body.img,
-            requireSignedURLs: true,
+      ? await storeImage({
+          id: `set-${this.record.id}`,
+          metadata: {
+            user: user.uid,
+            name: this.clear.name,
           },
-          this.isTest(body)
-        )
+          b64: body.img,
+          requireSignedURLs: true,
+        })
       : false
 
   /*
@@ -286,17 +283,14 @@ SetModel.prototype.guardedUpdate = async function ({ params, body, user }) {
    * Image (img)
    */
   if (typeof body.img === 'string')
-    data.img = await replaceImage(
-      {
-        id: `set-${this.record.id}`,
-        data: body.img,
-        metadata: {
-          user: user.uid,
-          name: this.clear.name,
-        },
+    data.img = await replaceImage({
+      id: `set-${this.record.id}`,
+      data: body.img,
+      metadata: {
+        user: user.uid,
+        name: this.clear.name,
       },
-      this.isTest(body)
-    )
+    })
 
   /*
    * Now update the database record

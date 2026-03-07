@@ -299,37 +299,6 @@ export function decorateModel(Model, tools, modelConfig) {
   }
 
   /*
-   * Helper method to determine whether this request is part of a (unit) test
-   */
-  Model.isTest = function (body) {
-    /*
-     * Test in production need to be explicitly allowed
-     */
-    if (this.config.env === 'production' && !this.config.tests.production) return false
-
-    /*
-     * If there's not test in the body, it's not a test
-     */
-    if (!body.test) return false
-
-    /*
-     * If the authenticated user does not use the configured test domain for email, it's not a test
-     */
-    if (this.clear?.email && !this.clear.email.split('@').pop() === this.config.tests.domain)
-      return false
-
-    /*
-     * If the email used in the POST body does not use the configured test domain for email, it's not a test
-     */
-    if (body.email && !body.email.split('@').pop() === this.config.tests.domain) return false
-
-    /*
-     * Looks like it's a test
-     */
-    return true
-  }
-
-  /*
    * Helper method to troubleshoot requests by outputting timing data
    */
   Model.time = function (key) {

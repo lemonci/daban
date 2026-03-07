@@ -77,10 +77,8 @@ export function usersRoutes(tools) {
   )
 
   // Load a user profile
-  app.get('/users/:id', (req, res) => Users.profile(req, res, tools))
-
-  // Load a user profile card
-  app.get('/users/:id/card', (req, res) => Users.profileCard(req, res, tools))
+  // We removed this to prevent user enumeration
+  //app.get('/users/:id', (req, res) => Users.profile(req, res, tools))
 
   // Export account data
   app.get('/account/export/jwt', passport.authenticate(...jwt), (req, res) =>

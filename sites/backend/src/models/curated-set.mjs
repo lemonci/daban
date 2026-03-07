@@ -75,14 +75,11 @@ CuratedSetModel.prototype.guardedCreate = async function ({ body, user }) {
   /*
    * Now that we have a record and ID, we can upload the image to cloudflare and set its id
    */
-  await storeImage(
-    {
-      id: `cset-${this.record.id}`,
-      metadata: { user: user.uid },
-      b64: body.img,
-    },
-    this.isTest(body)
-  )
+  await storeImage({
+    id: `cset-${this.record.id}`,
+    metadata: { user: user.uid },
+    b64: body.img,
+  })
 
   /*
    * Record created, return data in the proper format
@@ -265,14 +262,11 @@ CuratedSetModel.prototype.guardedUpdate = async function ({ params, body, user }
    * Handle the image, if there is one
    */
   if (typeof body.img === 'string') {
-    await storeImage(
-      {
-        id: `cset-${this.record.id}`,
-        metadata: { user: user.uid },
-        b64: body.img,
-      },
-      this.isTest(body)
-    )
+    await storeImage({
+      id: `cset-${this.record.id}`,
+      metadata: { user: user.uid },
+      b64: body.img,
+    })
   }
 
   /*
@@ -362,14 +356,11 @@ CuratedSetModel.prototype.suggest = async function ({ body, user }) {
   /*
    * Now the we have an id, upload the image
    */
-  const img = await storeImage(
-    {
-      id: `sugset-${this.Confirmation.record.id}`,
-      data: body.img,
-      metadata: { user: user.uid },
-    },
-    this.isTest(body)
-  )
+  const img = await storeImage({
+    id: `sugset-${this.Confirmation.record.id}`,
+    data: body.img,
+    metadata: { user: user.uid },
+  })
 
   /*
    * If an image was uploaded, update the record with the image ID

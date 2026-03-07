@@ -4,7 +4,6 @@ import { hash, hashPassword, randomString, verifyPassword } from '../utils/crypt
 import { replaceImage, removeImage } from '../utils/cloudflare-images.mjs'
 import { clean, asJson, i18nUrl, writeExportedData } from '../utils/index.mjs'
 import { decorateModel } from '../utils/model-decorator.mjs'
-import { userCard } from '../templates/svg/user-card.mjs'
 
 /*
  * This model handles all user updates
@@ -53,38 +52,6 @@ UserModel.prototype.profile = async function ({ params }) {
 }
 
 /*
- * Returns an SVG user card
- * This is an anonymous route returning limited info (profile data)
- *
- * @param {params} object - The request (URL) parameters
- * @returns {UserModel} object - The UserModel
- */
-UserModel.prototype.profileCard = async function ({ params }) {
-  /*
-   * Is id set?
-   */
-  if (typeof params.id === 'undefined') return this.setResponse(403, 'idMissing')
-
-  /*
-   * Try to find the record in the database
-   * Note that find checks lusername, ehash, and id but we
-   * pass it in the username value as that's what the login
-   * rout does
-   */
-  await this.find({ username: params.id })
-
-  /*
-   * If it does not exist, return 404
-   */
-  if (!this.exists) return this.setResponse(404)
-
-  return this.setResponse200(
-    userCard(encodeForSVG(sanitizeUsername(this.record.username)), this.record.id),
-    true
-  )
-}
-
-/*
  * Loads a user from the database based on the where clause you pass it
  * In addition prepares it for returning all account data
  * This is guarded so it enforces access control and validates input
@@ -92,11 +59,16 @@ UserModel.prototype.profileCard = async function ({ params }) {
  * @param {params} object - The request (URL) parameters
  * @returns {UserModel} object - The UserModel
  */
-UserModel.prototype.allData = async function ({ params }) {
+UserModel.prototype.allData = async function ({ params, user }) {
   /*
    * Is id set?
    */
   if (typeof params.id === 'undefined') return this.setResponse(403, 'idMissing')
+
+  /*
+   * Is this the user's own data?
+   */
+  if (params.id !== user.id) return this.setResponse(403, 'idMismatch')
 
   /*
    * Try to find the record in the database
@@ -455,11 +427,6 @@ UserModel.prototype.guardedCreate = async function ({ body }) {
    */
   await this.read({ ehash })
 
-  /*
-   * Check for unit tests only once
-   */
-  const isTest = this.isTest(body)
-
   if (this.exists) {
     /*
      * User already exists. However, if we return an error, then baddies can
@@ -509,19 +476,18 @@ UserModel.prototype.guardedCreate = async function ({ body }) {
       actionUrl = i18nUrl('en', `/confirm/signin?id=${this.Confirmation.record.id}&check=${check}`)
 
     /*
-     * Send email unless it's a test and we don't want to send test emails
+     * Send email
      */
-    if (!isTest || this.config.tests.sendEmail)
-      await this.mailer.send({
-        template: type,
-        language: 'en',
-        to: this.clear.email,
-        replacements: {
-          actionUrl,
-          whyUrl: i18nUrl('en', `/docs/faq/email/why-${type}`),
-          supportUrl: i18nUrl('en', `/patrons/join`),
-        },
-      })
+    await this.mailer.send({
+      template: type,
+      language: 'en',
+      to: this.clear.email,
+      replacements: {
+        actionUrl,
+        whyUrl: i18nUrl('en', `/docs/faq/email/why-${type}`),
+        supportUrl: i18nUrl('en', `/patrons/join`),
+      },
+    })
 
     /*
      * Now return as if everything is fine
@@ -571,10 +537,6 @@ UserModel.prototype.guardedCreate = async function ({ body }) {
       data: this.encrypt({}),
       bio: this.encrypt(''),
     }
-    /*
-     * During tests, users can set their own permission level so you can test admin stuff
-     */
-    if (isTest && body.role) data.role = body.role
 
     /*
      * Now attempt to create the record in the database
@@ -623,31 +585,21 @@ UserModel.prototype.guardedCreate = async function ({ body }) {
   /*
    * And send out the signup email
    */
-  if (!this.isTest(body) || this.config.tests.sendEmail)
-    await this.mailer.send({
-      template: 'signup',
-      language: 'en',
-      to: this.clear.email,
-      replacements: {
-        actionUrl: i18nUrl(
-          'en',
-          `/confirm/signup?id=${this.Confirmation.record.id}&check=${check}`
-        ),
-        whyUrl: i18nUrl('en', `/docs/faq/email/why-signup`),
-        supportUrl: i18nUrl('en', `/patrons/join`),
-      },
-    })
+  await this.mailer.send({
+    template: 'signup',
+    language: 'en',
+    to: this.clear.email,
+    replacements: {
+      actionUrl: i18nUrl('en', `/confirm/signup?id=${this.Confirmation.record.id}&check=${check}`),
+      whyUrl: i18nUrl('en', `/docs/faq/email/why-signup`),
+      supportUrl: i18nUrl('en', `/patrons/join`),
+    },
+  })
 
   /*
-   * For unit tests, we return the confirmation code so no email is needed
-   * Obviously, that would defeat the point for production use.
+   * Return
    */
-  return this.isTest(body)
-    ? this.setResponse201({
-        email: this.clear.email,
-        confirmation: this.confirmation.record.id,
-      })
-    : this.setResponse201({ email: this.clear.email })
+  return this.setResponse201({ email: this.clear.email })
 }
 
 /*
@@ -885,31 +837,21 @@ UserModel.prototype.sendSigninlink = async function (req) {
   })
 
   /*
-   * Figure out whether this is part of a unit test
+   * Send sign-in link email
    */
-  const isTest = this.isTest(req.body)
-
-  /*
-   * Only send out this email if it is not a unit test
-   */
-  if (!isTest) {
-    /*
-     * Send sign-in link email
-     */
-    await this.mailer.send({
-      template: 'signinlink',
-      language: this.record.language,
-      to: this.clear.email,
-      replacements: {
-        actionUrl: i18nUrl(
-          this.record.language,
-          `/confirm/signin?id=${this.Confirmation.record.id}&check=${check}`
-        ),
-        whyUrl: i18nUrl(this.record.language, `/docs/faq/email/why-signin-link`),
-        supportUrl: i18nUrl(this.record.language, `/patrons/join`),
-      },
-    })
-  }
+  await this.mailer.send({
+    template: 'signinlink',
+    language: this.record.language,
+    to: this.clear.email,
+    replacements: {
+      actionUrl: i18nUrl(
+        this.record.language,
+        `/confirm/signin?id=${this.Confirmation.record.id}&check=${check}`
+      ),
+      whyUrl: i18nUrl(this.record.language, `/docs/faq/email/why-signin-link`),
+      supportUrl: i18nUrl(this.record.language, `/patrons/join`),
+    },
+  })
 
   return this.setResponse200({ result: 'emailSent' })
 }
@@ -1138,11 +1080,6 @@ UserModel.prototype.guardedUpdate = async function ({ body, user }) {
   await this.update(data)
 
   /*
-   * Figure out whether this is a unit test
-   */
-  const isTest = this.isTest(body)
-
-  /*
    * If it is, we'll need to raise this to a higher scope
    */
   let check
@@ -1173,27 +1110,25 @@ UserModel.prototype.guardedUpdate = async function ({ body, user }) {
     })
 
     /*
-     * Send out confirmation email (unless it's a test)
+     * Send out confirmation email
      */
-    if (!isTest || this.config.tests.sendEmail) {
-      await this.mailer.send({
-        template: 'emailchange',
-        language: this.record.language,
-        to: body.email,
-        /*
-         * CC the old address to guard against account take-over
-         */
-        cc: this.clear.email,
-        replacements: {
-          actionUrl: i18nUrl(
-            this.record.language,
-            `/confirm/emailchange?id=${this.Confirmation.record.id}&check=${check}`
-          ),
-          whyUrl: i18nUrl(this.record.language, `/docs/faq/email/why-emailchange`),
-          supportUrl: i18nUrl(this.record.language, `/patrons/join`),
-        },
-      })
-    }
+    await this.mailer.send({
+      template: 'emailchange',
+      language: this.record.language,
+      to: body.email,
+      /*
+       * CC the old address to guard against account take-over
+       */
+      cc: this.clear.email,
+      replacements: {
+        actionUrl: i18nUrl(
+          this.record.language,
+          `/confirm/emailchange?id=${this.Confirmation.record.id}&check=${check}`
+        ),
+        whyUrl: i18nUrl(this.record.language, `/docs/faq/email/why-emailchange`),
+        supportUrl: i18nUrl(this.record.language, `/patrons/join`),
+      },
+    })
   } else if (
     /*
      * Could be an email change confirmation
@@ -1256,14 +1191,6 @@ UserModel.prototype.guardedUpdate = async function ({ body, user }) {
   const returnData = {
     result: 'success',
     account: this.asAccount(),
-  }
-
-  /*
-   * If it is a unit test, include the confirmation id
-   */
-  if (isTest && this.Confirmation.record?.id) {
-    returnData.confirmation = this.Confirmation.record.id
-    returnData.check = check
   }
 
   /*
@@ -1486,12 +1413,9 @@ UserModel.prototype.asAccount = function () {
     consent: this.record.consent,
     control: this.record.control,
     createdAt: this.record.createdAt,
-    ehash: this.record.ehash,
     email: this.clear.email,
     data,
-    ihash: this.record.ihash,
     imperial: this.record.imperial,
-    initial: this.clear.initial,
     jwtCalls: this.record.jwtCalls,
     keyCalls: this.record.keyCalls,
     language: this.record.language,
@@ -1504,10 +1428,6 @@ UserModel.prototype.asAccount = function () {
     updatedAt: this.record.updatedAt,
     username: this.record.username,
     lusername: this.record.lusername,
-    /*
-     * Add this so we can give a note to users about migrating their password
-     */
-    passwordType: JSON.parse(this.record.password).type,
   }
 }
 
@@ -1664,8 +1584,8 @@ UserModel.prototype.signInOk = function () {
  * as well as making sure username is not something we
  * do not allow
  *
- * @param {lusername} string - The lowercased username
- * @returns {isTest} boolean - True if it's a test. False if not.
+ * @param {string} lusername - The lowercased username
+ * @returns {boolean} available - True if it's available. False if not.
  */
 UserModel.prototype.isLusernameAvailable = async function (lusername) {
   /*
@@ -1828,31 +1748,4 @@ UserModel.prototype.searchProfiles = async function ({ body, user }) {
   }
 
   return this.setResponse200({ profiles })
-}
-
-function encodeForSVG(str) {
-  return str
-    .replace(/&/g, '&amp;')
-    .replace(/</g, '&lt;')
-    .replace(/>/g, '&gt;')
-    .replace(/"/g, '&quot;')
-    .replace(/'/g, '&#x27;')
-}
-
-function sanitizeUsername(input) {
-  if (typeof input !== 'string') return ''
-
-  return (
-    input
-      // Normalize unicode to prevent lookalike/homoglyph attacks
-      .normalize('NFC')
-      // Keep only: letters (any language), numbers, spaces, underscores,
-      // hyphens, dots, and emoji (via unicode property escapes)
-      .replace(/[^\p{L}\p{N}\p{Emoji_Presentation}\p{Emoji}\s._-]/gu, '')
-      // Collapse whitespace
-      .replace(/\s+/g, ' ')
-      .trim()
-      // Enforce a reasonable length cap
-      .slice(0, 64)
-  )
 }

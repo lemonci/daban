@@ -44,11 +44,6 @@ SubscriberModel.prototype.guardedCreate = async function ({ body }) {
   const language = body.language.toLowerCase()
 
   /*
-   * Check whether this is a unit test
-   */
-  const isTest = this.isTest(body)
-
-  /*
    * Attempt to read existing subscriber record for this email address
    */
   let newSubscriber = false
@@ -68,30 +63,24 @@ SubscriberModel.prototype.guardedCreate = async function ({ body }) {
   )
 
   /*
-   * Send out confirmation email unless it's a test and we don't want to send test emails
+   * Send out confirmation email
    */
-  if (!isTest || this.config.use.tests.email) {
-    const template = newSubscriber ? 'nlsub' : this.record.active ? 'nlsubact' : 'nlsubinact'
-    await this.mailer.send({
-      template,
-      language,
-      to: email,
-      replacements: {
-        actionUrl,
-        whyUrl: i18nUrl(body.language, `/docs/faq/email/why-${template}`),
-        supportUrl: i18nUrl(body.language, `/patrons/join`),
-      },
-    })
-  }
+  const template = newSubscriber ? 'nlsub' : this.record.active ? 'nlsubact' : 'nlsubinact'
+  await this.mailer.send({
+    template,
+    language,
+    to: email,
+    replacements: {
+      actionUrl,
+      whyUrl: i18nUrl(body.language, `/docs/faq/email/why-${template}`),
+      supportUrl: i18nUrl(body.language, `/patrons/join`),
+    },
+  })
 
   /*
    * Prepare the return data
    */
   const returnData = { language, email }
-  if (isTest) {
-    returnData.id = this.record.id
-    returnData.ehash = ehash
-  }
 
   /*
    * Return 200 and the data
