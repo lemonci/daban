@@ -7,22 +7,6 @@ const bsc = ['basic', { session: false }]
 export function flowsRoutes(tools) {
   const { app, passport } = tools
 
-  // Send a translator invite
-  app.post('/flows/translator-invite/jwt', passport.authenticate(...jwt), (req, res) =>
-    Flow.sendTranslatorInvite(req, res, tools)
-  )
-  app.post('/flows/translator-invite/key', passport.authenticate(...bsc), (req, res) =>
-    Flow.sendTranslatorInvite(req, res, tools)
-  )
-
-  // Send a language suggestion (to add a new language)
-  app.post('/flows/language-suggestion/jwt', passport.authenticate(...jwt), (req, res) =>
-    Flow.sendLanguageSuggestion(req, res, tools)
-  )
-  app.post('/flows/language-suggestion/key', passport.authenticate(...bsc), (req, res) =>
-    Flow.sendLanguageSuggestion(req, res, tools)
-  )
-
   // Upload an image
   app.post('/images/jwt', passport.authenticate(...jwt), (req, res) =>
     Flow.uploadImage(req, res, tools)
@@ -51,12 +35,6 @@ export function flowsRoutes(tools) {
       Flow.createPostPr(req, res, tools, type)
     )
   }
-
-  // Create Issue - No auth needed
-  app.post('/issues', (req, res) => Flow.createIssue(req, res, tools))
-
-  // Create Discussion - No auth needed
-  app.post('/discussions', (req, res) => Flow.createDiscussion(req, res, tools))
 
   // See if a showcase or blog slug is available
   for (const type of ['showcase', 'blog']) {

@@ -6,6 +6,7 @@ Unreleased:
       - Removed all code unit test code paths
       - Remove Prisma dependency, refactor to use NodeJS native SQLite bindings
       - Remove anonymous user profile access
+      - Remove unused flow routes
 
   Fixed:
     backend:
