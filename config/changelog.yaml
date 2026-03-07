@@ -7,6 +7,7 @@ Unreleased:
   Fixed:
     backend:
       - Sanitize usernames in SVG output
+      - Enforce authenticated user ID check in account data endpoint
     jaeger:
       - Ensure draft order for topsleeve and undersleeve (#752)
 
@@ -2841,8 +2842,6 @@ Unreleased:
   Removed:
     components:
       - The Ogol component has been removed as it wasn't used
-  Fixed:
-  Security:
 
 2.1.3:
   date: 2019-10-18

@@ -92,11 +92,16 @@ UserModel.prototype.profileCard = async function ({ params }) {
  * @param {params} object - The request (URL) parameters
  * @returns {UserModel} object - The UserModel
  */
-UserModel.prototype.allData = async function ({ params }) {
+UserModel.prototype.allData = async function ({ params, user }) {
   /*
    * Is id set?
    */
   if (typeof params.id === 'undefined') return this.setResponse(403, 'idMissing')
+
+  /*
+   * Is this the user's own data?
+   */
+  if (params.id !== user.id) return this.setResponse(403, 'idMismatch')
 
   /*
    * Try to find the record in the database
