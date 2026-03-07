@@ -1,17 +1,17 @@
 {
   "name": "@freesewing/plugin-transform",
-  "version": "4.3.0",
+  "version": "4.6.0",
   "description": "A FreeSewing plugin to transform (translate, rotate, or scale) points or paths",
   "author": "Wouter van Wageningen",
-  "homepage": "https://freesewing.org/",
-  "repository": "github:freesewing/freesewing",
+  "homepage": "https://freesewing.eu/",
+  "repository": "codeberg:freesewing/freesewing",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/freesewing/freesewing/issues"
+    "url": "https://codeberg.org/freesewing/freesewing/issues"
   },
   "funding": {
     "type": "individual",
-    "url": "https://freesewing.org/patrons/join"
+    "url": "https://freesewing.eu/patrons/join"
   },
   "keywords": [
     "freesewing",
@@ -36,7 +36,7 @@
     "testci": "NODE_OPTIONS=\"--conditions=internal\" npx mocha tests/*.test.mjs --reporter ../../tests/reporters/terse.js"
   },
   "peerDependencies": {
-    "@freesewing/core": "4.3.0"
+    "@freesewing/core": "4.6.0"
   },
   "dependencies": {},
   "devDependencies": {

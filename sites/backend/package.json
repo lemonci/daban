@@ -21,7 +21,7 @@
     "initdb": "node ./scripts/initdb.mjs",
     "prettier": "npx prettier --write 'src/*.mjs' 'tests/*.mjs'",
     "citest": "node --no-warnings --test-concurrency=1 --test",
-    "test": "echo \"Use `npm run citest` to run tests, but it requires running the backend service (`npm run dev`)\"",
+    "test": "echo \"Use npm run citest to run tests, but it requires running the backend service (npm run dev)\"",
     "ctest": "c8 --reporter=html --reports-dir=coverage node --no-warnings --test-concurrency=1 --test tests/all.mjs"
   },
   "dependencies": {

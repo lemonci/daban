@@ -1,6 +1,12 @@
 # Change log for: @freesewing/plugin-transform
 
 
+## 4.6.0 (2026-03-01)
+
+### Added
+
+ - Added new transform macro and plugin (#593)
+
 ## 3.0.0 (2023-09-30)
 
 ### Changed

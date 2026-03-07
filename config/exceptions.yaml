@@ -51,6 +51,8 @@ packageJson:
     author: woutervdub (https://github.com/woutervdub)
   plugin-gore:
     author: AlfaLyr (https://github.com/alfalyr)
+  plugin-transform:
+    author: Wouter van Wageningen
   prettier-config:
     type: 'module'
     exports: { .: './index.json' }

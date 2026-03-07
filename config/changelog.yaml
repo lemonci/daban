@@ -10,6 +10,32 @@ Unreleased:
     jaeger:
       - Ensure draft order for topsleeve and undersleeve (#752)
 
+4.6.0:
+  date: 2026-03-01
+
+  Added:
+    core:
+      - Add pctBasedOnSa() utility (#768)
+    plugin-transform:
+      - Added new transform macro and plugin (#593)
+
+  Changed:
+    backend:
+      - Remove Prisma dependency, refactor to use NodeJS native SQLite bindings (#765)
+      - Run backend in container image freesewing/backend (#765)
+
+  Fixed:
+    core:
+      - Reduce debug level of "Extending store" call (#769)
+    jaeger:
+      - Ensure draft order for topsleeve and undersleeve (#752)
+    noble:
+      - Add notch for armholeToBustInside if armholeDartCurved is false (#763)
+    plugin-path-utils:
+      - Fix path joining logic in plugin-path-utils to handle hidden paths properly (#753)
+    sabrina:
+      - Improve armpit position drafting in Sabrina (#764)
+
 4.5.0:
   date: 2026-02-21
 
