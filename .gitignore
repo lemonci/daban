@@ -143,7 +143,6 @@ lerna-debug.log*
 packages/core/.nyc_output
 packages/i18n/src/designs.mjs
 packages/i18n/sort.sh
-.gitignore
 scripts/taskrunner.sh
 scripts/verdaccio.sh
 
