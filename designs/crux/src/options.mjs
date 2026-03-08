@@ -89,9 +89,7 @@ export const legLengthCustom = {
 }
 export const hemType = {
   dflt: 'hem',
-  // FIXME: This seems to only work with 'hem'
-  // list: ['hem', 'elastic', 'ribknit'],
-  list: ['hem'],
+  list: ['hem', 'ribknit'],
   menu: (settings, mergedOptions) => (mergedOptions.legLength === 'long' ? 'style' : false),
   order: '160',
 }
