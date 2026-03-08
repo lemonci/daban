@@ -131,7 +131,10 @@ export const FlagsAccordionEntries = ({ flags, update, strings, Design }) => {
   return (
     <SubAccordion
       items={Object.entries(flagList).map(([key, flag], i) => {
-        const title = flag.replace ? mustache.render(flag.title, flag.replace) : flag.title
+        const design = Design?.designConfig?.data?.id
+        const title = flag.replace
+          ? mustache.render(translate(flag.title, strings, design), flag.replace)
+          : translate(flag.title, strings, design)
 
         return [
           <div className="tw:w-full tw:flex tw:flex-row tw:gap2 tw:justify-between" key={i}>
@@ -139,9 +142,7 @@ export const FlagsAccordionEntries = ({ flags, update, strings, Design }) => {
               <div className="tw:no-shrink">
                 <FlagIcon type={flag.type} />
               </div>
-              <span className="tw:font-medium tw:text-left">
-                {translate(title, strings, Design?.designConfig?.data?.id)}
-              </span>
+              <span className="tw:font-medium tw:text-left">{title}</span>
             </div>
             <span className="tw:uppercase tw:font-bold">{flag.type}</span>
           </div>,
