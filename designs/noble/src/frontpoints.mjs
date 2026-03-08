@@ -196,6 +196,18 @@ export const frontPoints = {
       points.bust,
       options.upperDartLength
     )
+    const waistDartSize = points.waistDartLeft.dist(points.waistDartRight)
+    const waistDartMove = (waistDartSize / 2) * options.waistdartposition
+
+    points.waistDartLeft = points.waistDartLeft.shiftTowards(points.cfHem, waistDartMove * -1)
+    points.waistDartLeftCp = points.waistDartLeftCp.shift(270, 2 * waistDartMove)
+    points.waistDartRight = points.waistDartRight.shiftTowards(points.sideHemInitial, waistDartMove)
+
+    points.shoulderDartInside = points.hps.shiftFractionTowards(
+      points.shoulder,
+      options.dartPosition == 'shoulder' ? options.shoulderDartPosition : 0.5
+    )
+
     if (options.armholeDartCurved) {
       const armholeDartAngle =
         armholePathInside.reverse().shiftAlong(1).angle(armholePathOutside.shiftAlong(1)) - 90
@@ -219,18 +231,6 @@ export const frontPoints = {
       points.armholeToBustOutside = points.armholeToBustInside.clone()
       points.waistToBustOutside = points.waistToBustInside.clone()
     }
-
-    const waistDartSize = points.waistDartLeft.dist(points.waistDartRight)
-    const waistDartMove = (waistDartSize / 2) * options.waistdartposition
-
-    points.waistDartLeft = points.waistDartLeft.shiftTowards(points.cfHem, waistDartMove * -1)
-    points.waistDartLeftCp = points.waistDartLeftCp.shift(0, waistDartMove)
-    points.waistDartRight = points.waistDartRight.shiftTowards(points.sideHemInitial, waistDartMove)
-
-    points.shoulderDartInside = points.hps.shiftFractionTowards(
-      points.shoulder,
-      options.dartPosition == 'shoulder' ? options.shoulderDartPosition : 0.5
-    )
 
     let rotateAngle =
       points.shoulderDartInside.angle(points.bustA) - points.bustDartTop.angle(points.bustA)
