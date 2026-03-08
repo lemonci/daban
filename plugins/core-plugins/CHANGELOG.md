@@ -1,6 +1,12 @@
 # Change log for: @freesewing/core-plugins
 
 
+## 4.6.0 (2026-03-08)
+
+### Changed
+
+ - Added the new transform plugin to core plugins
+
 ## 3.0.0 (2023-09-30)
 
 ### Changed

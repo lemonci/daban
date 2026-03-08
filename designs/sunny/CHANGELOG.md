@@ -1,6 +1,12 @@
 # Change log for: @freesewing/sunny
 
 
+## 4.6.0 (2026-03-08)
+
+### Fixed
+
+ - Make pleat points available when complete is false
+
 ## 4.5.0 (2026-02-21)
 
 ### Fixed

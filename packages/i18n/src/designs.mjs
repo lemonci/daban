@@ -2441,7 +2441,7 @@ export const designs = {
     }
   },
   "crux": {
-    "t": "Crux",
+    "t": "Crux Climbing Pants",
     "d": "Crux Climbing Pants",
     "p": {
       "back": "Back",
@@ -2481,10 +2481,6 @@ export const designs = {
       "hemType.hem": {
         "t": "Traditional hem",
         "d": "Folded back hem"
-      },
-      "hemType.elastic": {
-        "t": "Elastic hem",
-        "d": "Folded back hem with elastic inside"
       },
       "hemType.ribknit": {
         "t": "Rib knit hem",
@@ -2666,7 +2662,7 @@ export const designs = {
         "t": "Waist reduction",
         "d": "Make the waist band smaller than calculated"
       },
-      "HipsShift": {
+      "hipsShift": {
         "t": "Hip shift",
         "d": "Shifts fabric from the front to the back. This is to compensate if you need extra space around the hips in the back of the front. Negative numbers move it to the back."
       },

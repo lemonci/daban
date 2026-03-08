@@ -1,6 +1,12 @@
 # Change log for: @freesewing/crux
 
 
+## 4.6.0 (2026-03-08)
+
+### Added
+
+ - Initial release of Crux climbing pants
+
 ## 3.0.0 (2023-09-30)
 
 ### Changed

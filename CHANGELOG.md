@@ -3,14 +3,20 @@
 
 ## Unreleased
 
-### jaeger
+
+## 4.6.0 (2026-03-08)
+
+### brian
 
 #### Fixed
 
- - Ensure draft order for topsleeve and undersleeve (#752)
+ - Set correct title number for sleeve
 
+### crux
 
-## 4.6.0 (2026-03-01)
+#### Added
+
+ - Initial release of Crux climbing pants
 
 ### jaeger
 
@@ -24,11 +30,30 @@
 
  - Add notch for armholeToBustInside if armholeDartCurved is false (#763)
 
+### percy
+
+#### Fixed
+
+ - Fix to how the waistband pieces calculate their curve
+ - Added an additional paperless measurement to waist pieces to make double-checking the fit easier
+
 ### sabrina
 
 #### Fixed
 
  - Improve armpit position drafting in Sabrina (#764)
+
+### sunny
+
+#### Fixed
+
+ - Make pleat points available when complete is false
+
+### core-plugins
+
+#### Changed
+
+ - Added the new transform plugin to core plugins
 
 ### plugin-path-utils
 
@@ -48,9 +73,18 @@
 
  - Add pctBasedOnSa() utility (#768)
 
-#### Fixed
+#### Changed
 
  - Reduce debug level of "Extending store" call (#769)
+
+### react
+
+#### Fixed
+
+ - Ensure PublicPattern component is available as an export
+ - Ensure the flag title is translated before placeholders are replaced
+ - Fix links in the DraftErrorHandler component
+ - Fix translations in flag menu
 
 
 ## 4.5.0 (2026-02-21)

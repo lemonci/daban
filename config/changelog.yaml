@@ -1,12 +1,29 @@
 Unreleased:
 
   Changed:
+
+4.6.0:
+  date: 2026-03-08
+
+  Added:
+    core:
+      - Add pctBasedOnSa() utility (#768)
+    crux:
+      - Initial release of Crux climbing pants
+    plugin-transform:
+      - Added new transform macro and plugin (#593)
+  Changed:
     backend:
       - Removed user card endpoint
       - Removed all code unit test code paths
-      - Remove Prisma dependency, refactor to use NodeJS native SQLite bindings
       - Remove anonymous user profile access
-      - Remove unused flow routes
+      - Remove unused flow routed
+      - Remove Prisma dependency, refactor to use NodeJS native SQLite bindings (#765)
+      - Run backend in container image freesewing/backend (#765)
+    core:
+      - Reduce debug level of "Extending store" call (#769)
+    core-plugins:
+      - Added the new transform plugin to core plugins
 
   Fixed:
     backend:
@@ -14,34 +31,27 @@ Unreleased:
       - Enforce authenticated user ID check in account data endpoint, prevent cross-account data access | Reported by Alen Sarang
       - Removed an admin signup bug that abused unit test code paths to create admin accounts | Reported by Alen Sarang
       - Limit data returned from account endpoint | Reported by Alen Sarang
-    jaeger:
-      - Ensure draft order for topsleeve and undersleeve (#752)
-
-4.6.0:
-  date: 2026-03-01
-
-  Added:
-    core:
-      - Add pctBasedOnSa() utility (#768)
-    plugin-transform:
-      - Added new transform macro and plugin (#593)
-
-  Changed:
-    backend:
-      - Remove Prisma dependency, refactor to use NodeJS native SQLite bindings (#765)
-      - Run backend in container image freesewing/backend (#765)
-
-  Fixed:
-    core:
-      - Reduce debug level of "Extending store" call (#769)
+      - Handle various time formats in OIDC provider
+    brian:
+      - Set correct title number for sleeve
     jaeger:
       - Ensure draft order for topsleeve and undersleeve (#752)
     noble:
       - Add notch for armholeToBustInside if armholeDartCurved is false (#763)
+    percy:
+      - Fix to how the waistband pieces calculate their curve
+      - Added an additional paperless measurement to waist pieces to make double-checking the fit easier
     plugin-path-utils:
       - Fix path joining logic in plugin-path-utils to handle hidden paths properly (#753)
+    react:
+      - Ensure PublicPattern component is available as an export
+      - Ensure the flag title is translated before placeholders are replaced
+      - Fix links in the DraftErrorHandler component
+      - Fix translations in flag menu
     sabrina:
       - Improve armpit position drafting in Sabrina (#764)
+    sunny:
+      - Make pleat points available when complete is false
 
 4.5.0:
   date: 2026-02-21

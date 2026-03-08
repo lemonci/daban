@@ -1,12 +1,24 @@
 # Change log for: @freesewing/backend
 
 
-## 4.6.0 (2026-03-01)
+## 4.6.0 (2026-03-08)
 
 ### Changed
 
+ - Removed user card endpoint
+ - Removed all code unit test code paths
+ - Remove anonymous user profile access
+ - Remove unused flow routed
  - Remove Prisma dependency, refactor to use NodeJS native SQLite bindings (#765)
  - Run backend in container image freesewing/backend (#765)
+
+### Fixed
+
+ - Sanitize usernames in SVG output | Reported by Alen Sarang
+ - Enforce authenticated user ID check in account data endpoint, prevent cross-account data access | Reported by Alen Sarang
+ - Removed an admin signup bug that abused unit test code paths to create admin accounts | Reported by Alen Sarang
+ - Limit data returned from account endpoint | Reported by Alen Sarang
+ - Handle various time formats in OIDC provider
 
 ## 4.0.1 (2025-06-09)
 

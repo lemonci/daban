@@ -1,6 +1,12 @@
 # Change log for: @freesewing/brian
 
 
+## 4.6.0 (2026-03-08)
+
+### Fixed
+
+ - Set correct title number for sleeve
+
 ## 4.5.0 (2026-02-21)
 
 ### Changed

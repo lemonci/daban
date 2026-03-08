@@ -1,7 +1,7 @@
 # Change log for: @freesewing/plugin-transform
 
 
-## 4.6.0 (2026-03-01)
+## 4.6.0 (2026-03-08)
 
 ### Added
 

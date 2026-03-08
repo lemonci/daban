@@ -1,6 +1,15 @@
 # Change log for: @freesewing/react
 
 
+## 4.6.0 (2026-03-08)
+
+### Fixed
+
+ - Ensure PublicPattern component is available as an export
+ - Ensure the flag title is translated before placeholders are replaced
+ - Fix links in the DraftErrorHandler component
+ - Fix translations in flag menu
+
 ## 4.5.0 (2026-02-21)
 
 ### Added

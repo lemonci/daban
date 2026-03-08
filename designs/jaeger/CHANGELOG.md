@@ -1,7 +1,7 @@
 # Change log for: @freesewing/jaeger
 
 
-## 4.6.0 (2026-03-01)
+## 4.6.0 (2026-03-08)
 
 ### Fixed
 

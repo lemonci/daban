@@ -1,13 +1,13 @@
 # Change log for: @freesewing/core
 
 
-## 4.6.0 (2026-03-01)
+## 4.6.0 (2026-03-08)
 
 ### Added
 
  - Add pctBasedOnSa() utility (#768)
 
-### Fixed
+### Changed
 
  - Reduce debug level of "Extending store" call (#769)
 

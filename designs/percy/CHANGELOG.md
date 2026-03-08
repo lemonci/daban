@@ -1,6 +1,13 @@
 # Change log for: @freesewing/percy
 
 
+## 4.6.0 (2026-03-08)
+
+### Fixed
+
+ - Fix to how the waistband pieces calculate their curve
+ - Added an additional paperless measurement to waist pieces to make double-checking the fit easier
+
 ## 4.3.0 (2025-09-26)
 
 ### Added
