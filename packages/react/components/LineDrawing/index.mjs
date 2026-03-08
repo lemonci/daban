@@ -14,6 +14,7 @@ import { Carlton, CarltonFront, CarltonBack } from './carlton.mjs'
 import { Cathrin, CathrinFront, CathrinBack } from './cathrin.mjs'
 import { Charlie, CharlieFront, CharlieBack } from './charlie.mjs'
 import { Cornelius, CorneliusFront, CorneliusBack } from './cornelius.mjs'
+import { Crux, CruxFront /*, CruxBack*/ } from './crux.mjs'
 import { Devon, DevonFront /*, DevonBack*/ } from './devon.mjs'
 import { Diana, DianaFront, DianaBack } from './diana.mjs'
 import { Florence, FlorenceFront } from './florence.mjs'
@@ -69,6 +70,7 @@ export const lineDrawingsFront = {
   cathrin: CathrinFront,
   charlie: CharlieFront,
   cornelius: CorneliusFront,
+  crux: CruxFront,
   devon: DevonFront,
   diana: DianaFront,
   florence: FlorenceFront,
@@ -126,6 +128,7 @@ export const lineDrawingsBack = {
   cathrin: CathrinBack,
   charlie: CharlieBack,
   cornelius: CorneliusBack,
+  /*crux: CruxBack,*/
   /*devon: DevonBack,*/
   diana: DianaBack,
   gozer: GozerBack,
@@ -174,6 +177,7 @@ export const lineDrawings = {
   cathrin: Cathrin,
   charlie: Charlie,
   cornelius: Cornelius,
+  crux: Crux,
   devon: Devon,
   diana: Diana,
   florence: Florence,
@@ -272,6 +276,10 @@ export {
   Cornelius,
   CorneliusFront,
   CorneliusBack,
+  // Crux
+  Crux,
+  CruxFront,
+  /*CruxBack,*/
   // Devon
   Devon,
   DevonFront,

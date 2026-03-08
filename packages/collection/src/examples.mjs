@@ -19,6 +19,8 @@ export const designExampleIds = {
   carlita: 'showcase-quentin-carlita',
   charlie: 'showcase-charlie-by-joost',
   cornelius: 'showcase-cornelius-by-wouter',
+  crux: 'showcase-crux-for-my-daughter',
+  devon: 'showcase-the-first-devon',
   diana: 'showcase-diana-by-deby',
   florence: 'showcase-rowans-leaf-print-florence',
   florent: 'showcase-florent-by-enno',
