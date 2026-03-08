@@ -40,6 +40,10 @@
       "t": "Traditional hem",
       "d": "Folded back hem"
     },
+    "hemType.ribknit": {
+      "t": "Rib knit hem",
+      "d": "Hem is replaced with rib knit"
+    },
     "waistbandType": {
       "t": "Waistband type",
       "d": "The type of waistband"
