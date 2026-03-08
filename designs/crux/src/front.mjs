@@ -239,7 +239,7 @@ export const front = {
     snippets.gussetFrontLeg = new Snippet('notch', points.gussetFrontLeg)
 
     if (complete) {
-      const frontPath = paths.flyFold.join(paths.crotchSeamFront)
+      const frontPath = paths.flyFold.join(paths.crotchSeamFront).join(paths.gussetFront)
 
       points.indicatorWaistbandSide = paths.waistSeamFront.shiftFractionAlong(0.2)
       points.indicatorWaistbandInside = paths.waistSeamFront.shiftFractionAlong(0.8)
@@ -294,24 +294,21 @@ export const front = {
         points.indicatorSeatInside,
         points.indicatorSeatSide
       )[0]
-      let markerSeatInsideCandidate = frontPath.intersectsBeam(
+      points.markerSeatInside = frontPath.intersectsBeam(
         points.indicatorSeatInside,
         points.indicatorSeatSide
-      )
-      // Guard against us not finding this point
-      if (Array.isArray(markerSeatInsideCandidate) && markerSeatInsideCandidate.length > 0) {
-        points.markerSeatInside = markerSeatInsideCandidate[0]
-        paths.seatLine = new Path()
-          .move(points.markerSeatInside)
-          .line(points.markerSeatSide)
-          .attr('class', 'contrast help')
-        macro('banner', {
-          id: 'seatLine',
-          classes: 'center contrast help',
-          path: paths.seatLine,
-          text: 'seatLine',
-        })
-      }
+      )[0]
+
+      paths.seatLine = new Path()
+        .move(points.markerSeatInside)
+        .line(points.markerSeatSide)
+        .attr('class', 'contrast help')
+      macro('banner', {
+        id: 'seatLine',
+        classes: 'center contrast help',
+        path: paths.seatLine,
+        text: 'seatLine',
+      })
 
       if (measurements.waistToKnee / (measurements.waistToFloor * store.get('legLength')) < 0.97) {
         points.markerKneeSide = paths.sideSeamFrontOriginal
@@ -387,11 +384,6 @@ export const front = {
       ['h', 'flyBottom', 'flyTopCenter', 'waistSeamFrontStart', -25],
       ['h', 'gussetFront', 'flyTopCenter', 'waistSeamFrontStart', -35],
       ['h', 'waistSeamFrontStart', 'seamRight', 'waistSeamFrontStart', -15],
-      ['h', 'hemIn', 'hemSide', 'hemSideUp', 15],
-      ['h', 'hemSide', 'seamRight', 'hemSideUp', 15],
-      ['h', 'gussetFrontLeg', 'hemIn', 'hemSideUp', 15],
-      ['h', 'gussetFront', 'hemIn', 'hemSideUp', 25],
-      ['h', 'hemInUp', 'hemSideUp', 'hemSideUp', 25],
       ['v', 'seamRight', 'waistSeamFrontStart', 'seamRight', 15],
       ['v', 'flyBottom', 'flyTopCenter', 'flyTop', -15],
       ['v', 'pZ', 'flyTopCenter', 'flyTop', -25],
@@ -399,14 +391,27 @@ export const front = {
       ['v', 'gussetFrontLeg', 'gussetFront', 'flyTop', -35],
       ['v', 'hemIn', 'gussetFrontLeg', 'flyTop', -35],
     ])
+
     if (options.hemType === 'hem' || options.hemType === 'elastic') {
       dim(part, [
         ['v', 'hemInUp', 'hemIn', 'flyTop', -35],
         ['v', 'hemSideUp', 'waistSeamFrontStart', 'seamRight', 25],
+        ['h', 'hemIn', 'hemSide', 'hemSideUp', 15],
+        ['h', 'hemSide', 'seamRight', 'hemSideUp', 15],
+        ['h', 'gussetFrontLeg', 'hemIn', 'hemSideUp', 15],
+        ['h', 'gussetFront', 'hemIn', 'hemSideUp', 25],
+        ['h', 'hemInUp', 'hemSideUp', 'hemSideUp', 25],
       ])
     } else {
-      dim(part, [['v', 'hemSide', 'waistSeamFrontStart', 'seamRight', 25]])
+      dim(part, [
+        ['v', 'hemSide', 'waistSeamFrontStart', 'seamRight', 25],
+        ['h', 'hemIn', 'hemSide', 'hemSide', 15],
+        ['h', 'hemSide', 'seamRight', 'hemSide', 15],
+        ['h', 'gussetFrontLeg', 'hemIn', 'hemSide', 15],
+        ['h', 'gussetFront', 'hemIn', 'hemSide', 25],
+      ])
     }
+
     if (
       options.articulatedKnee &&
       measurements.waistToKnee / (measurements.waistToFloor * store.get('legLength')) < 0.8
@@ -418,6 +423,7 @@ export const front = {
         ['v', 'hemSide', 'artKneeSideDownDart', 'artKneeSideDownDart', 15],
       ])
     }
+
     return part
   },
 }
