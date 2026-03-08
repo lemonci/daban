@@ -20,6 +20,8 @@ function useContainerClassName() {
 const BlogPostHeader = ({ type }) => {
   const { metadata } = useBlogPost()
 
+  // FIXME: We have disabled author info for now since the backend endpoint is gone
+
   return (
     <>
       <header>
@@ -44,9 +46,9 @@ const BlogPostHeader = ({ type }) => {
           {metadata.title}
         </h1>
         <BlogPostItemHeaderInfo />
-        <BlogPostItemHeaderAuthors />
+        {false ? <BlogPostItemHeaderAuthors /> : null}
       </header>
-      {type === 'newsletter' ? null : (
+      {true || type === 'newsletter' ? null : (
         <figure>
           <img src={imgUrl(metadata.permalink)} />
           <figcaption
