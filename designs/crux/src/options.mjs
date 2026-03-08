@@ -89,7 +89,6 @@ export const legLengthCustom = {
 }
 export const hemType = {
   dflt: 'hem',
-  // list: ['hem', 'elastic', 'ribknit'],
   list: ['hem', 'ribknit'],
   menu: (settings, mergedOptions) => (mergedOptions.legLength === 'long' ? 'style' : false),
   order: '160',
