@@ -26,16 +26,19 @@ function draftPercyWaistFront({
 
   const seatHeightCircumference = measurements.seat * (1 + options.seatEase)
   const waistHeightCircumference = measurements.waist * (1 + options.waistEase)
-  const waistHeightFront = measurements.waistFront * (1 + options.waistEase)
-  const waistHeightBack = measurements.waistBack * (1 + options.waistEase)
+  const waistFrontEased = measurements.waistFront * (1 + options.waistEase)
+  const waistBackEased = measurements.waistBack * (1 + options.waistEase)
 
   const waistToSeatSlope =
     (seatHeightCircumference - waistHeightCircumference) / measurements.waistToSeat
 
-  const waistToSeatSlopeFront =
-    (store.get('front_waist_width') - waistHeightFront) / measurements.waistToSeat
-  const waistToSeatSlopeBack =
-    (store.get('back_waist_width') - waistHeightBack) / measurements.waistToSeat
+  const garmentEdgeBelowWaist =
+    options.waistbandWidth * measurements.waistToFloor +
+    (1 - options.waistHeight) * measurements.waistToHips
+  const waistToGarmentSlopeFront =
+    (store.get('front_waist_width') * 2 - waistFrontEased) / garmentEdgeBelowWaist
+  const waistToGarmentSlopeBack =
+    (store.get('back_waist_width') * 2 - waistBackEased) / garmentEdgeBelowWaist
 
   //Total cicumference of top of waistband
   const waistbandTopCircumference =
@@ -44,10 +47,11 @@ function draftPercyWaistFront({
 
   //total length of front top of waistband
   const waistbandTopFront =
-    waistHeightFront + waistToSeatSlopeFront * measurements.waistToHips * (1 - options.waistHeight)
+    waistFrontEased +
+    waistToGarmentSlopeFront * measurements.waistToHips * (1 - options.waistHeight)
   //total length of back top of waistband
   const waistbandTopBack =
-    waistHeightBack + waistToSeatSlopeBack * measurements.waistToHips * (1 - options.waistHeight)
+    waistBackEased + waistToGarmentSlopeBack * measurements.waistToHips * (1 - options.waistHeight)
 
   store.set('garmentTopCircumference', garmentTopCircumference)
   store.set('waistbandTopCircumference', waistbandTopCircumference)
@@ -254,6 +258,11 @@ function draftPercyWaistFront({
   macro('pd', {
     id: 'lengthBottom',
     path: paths.bottomCurve,
+    d: 15 + sa,
+  })
+  macro('pd', {
+    id: 'lengthTop',
+    path: paths.topCurve,
     d: 15 + sa,
   })
 
