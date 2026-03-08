@@ -46,8 +46,11 @@ async function findAccount(ctx, id, tools) {
       if (scope.includes('profile')) {
         claims.name = account.username
         claims.preferred_username = account.username
-        ;(claims.picture = `https://imagedelivery.net/ouSuR9yY1bHt-fuAokSA5Q/uid-${account.ihash}/sq500`),
-          (claims.updated_at = Math.floor(account.updatedAt.getTime() / 1000))
+        claims.picture = `https://imagedelivery.net/ouSuR9yY1bHt-fuAokSA5Q/uid-${account.ihash}/sq500`
+        claims.updated_at =
+          typeof account2.updatedAt === 'string'
+            ? new Date(account2.updatedAt).getTime() / 1e3
+            : Math.floor(account2.updatedAt.getTime() / 1e3)
         claims.bio = account.bio
         claims.moderator = false
       }
