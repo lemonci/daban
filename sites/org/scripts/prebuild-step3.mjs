@@ -3,6 +3,13 @@ import { glob } from 'glob'
 import matter from 'gray-matter'
 import { orderBy } from '../../../packages/utils/src/index.mjs'
 
+/*
+ * We need an authenticated session to pull author info from the backend
+ */
+const API_KEY = process.env.BACKEND_API_KEY_ID
+const API_SECRET = process.env.BACKEND_API_KEY_SECRET
+const CREDENTIALS = Buffer.from(`${API_KEY}:${API_SECRET}`).toString('base64')
+
 const loadExamplesTagsAndAuthors = async () => {
   const lists = {
     blog: await glob('./blog/*/index.mdx'),
@@ -56,18 +63,44 @@ const titles = {
   user: 'FreeSewing User',
 }
 
-const userAsAuthor = (user) => ({
-  name: user.profile.username,
-  title: titles[user.profile.role],
-  url: `https://freesewing.eu/users/?id=${user.profile.id}`,
-  image_url: `https://imagedelivery.net/ouSuR9yY1bHt-fuAokSA5Q/uid-${user.profile.ihash}/public`,
-  bio: user.profile.bio,
-})
+const userAsAuthor = (user) => {
+  /*
+   * FIXME: This backend endpoint is gone, so we need to provide a new solution
+   * For now, we just hard-code the response
+   */
+  return {
+    name: 'Unknown Author (under construction)',
+    title: 'Author',
+    url: '#',
+    image_url: '#',
+    bio: 'FIXME: This is a temporary placeholder, we are working on this',
+  }
+
+  // Original code below
+  return {
+    name: user.profile.username,
+    title: titles[user.profile.role],
+    url: `https://freesewing.eu/users/?id=${user.profile.id}`,
+    image_url: `https://imagedelivery.net/ouSuR9yY1bHt-fuAokSA5Q/uid-${user.profile.ihash}/public`,
+    bio: user.profile.bio,
+  }
+}
 
 const loadUser = async (id) => {
+  /*
+   * FIXME: This backend endpoint is gone, so we need to provide a new solution
+   * For now, we just hard-code the response
+   */
+  return { profile: { id } }
+
+  // Original code below
   let result
   try {
-    result = await fetch(`https://backend.freesewing.eu/users/${id}`)
+    result = await fetch(`https://backend.freesewing.eu/users/${id}`, {
+      headers: {
+        Authorization: `Basic ${CREDENTIALS}`,
+      },
+    })
     if (result) result = await result.json()
   } catch (err) {
     console.warn(`Failed to load user with id ${id}`, err)
@@ -86,6 +119,7 @@ async function prebuild() {
     } catch (err) {
       console.warn(`Failed to load user with id ${author}`, err)
     }
+    //await sleep()
   }
   fs.writeFileSync(`./authors.json`, JSON.stringify(all, null, 2))
   fs.writeFileSync(
@@ -97,6 +131,15 @@ async function prebuild() {
     `./recent-blog-posts.mjs`,
     `export const recentBlogPosts = ${JSON.stringify(recentBlogPosts, 0, 2)}`
   )
+}
+
+/*
+ * Backend is rate-limited. If we go too fast, things will fail
+ */
+function sleep(ms = 200) {
+  return new Promise((resolve) => {
+    setTimeout(resolve, ms)
+  })
 }
 
 prebuild()
