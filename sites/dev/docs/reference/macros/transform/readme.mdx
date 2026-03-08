@@ -35,41 +35,40 @@ macro('transform', {
   paths.example = new Path()
   .move(points.from)
   .curve(points.cp1, points.cp2, points.to)
-  
-  macro('transform', {
-    transform: 'rotate',
-    c: points.center,
-    angle: 145,
-    clone: true,
-    paths: ['example'],
-    prefix: 'rotate',
-  })
-  
-  macro('transform', {
-    transform: 'scale',
-    clone: true,
-    x: 0.6,
-    c: points.center,
-    paths: ['example'],
-    prefix: 'scale',
-  })
-  
-  macro('transform', {
-    transform: 'translate',
-    clone: true,
-    x: 20,
-    y: 10,
-    paths: ['example'],
-    prefix: (n, t) => {return 'translated-'+ t +'-'+ n },
-  })
 
-paths.rotateExample.addText('rotate','note center')
-paths.rotateExample.addClass('note')
-paths.scaleExample.addText('scale','canvas center')
-paths.scaleExample.addClass('canvas')
-paths.translateExample.addText('translate','lining center')
-paths.translateExample.addClass('lining')
+macro('transform', {
+transform: 'rotate',
+c: points.center,
+angle: 145,
+clone: true,
+paths: ['example'],
+prefix: 'rotate\_',
+})
 
+macro('transform', {
+transform: 'scale',
+clone: true,
+x: 0.6,
+c: points.center,
+paths: ['example'],
+prefix: 'scale\_',
+})
+
+macro('transform', {
+transform: 'translate',
+clone: true,
+x: 20,
+y: 10,
+paths: ['example'],
+prefix: (n, t) => `translated_${t}_${n}`
+})
+
+paths.rotate_example.addText('rotate','note center')
+paths.rotate_example.addClass('note')
+paths.scale_example.addText('scale','canvas center')
+paths.scale_example.addClass('canvas')
+paths.translated_path_example.addText('translate','lining center')
+paths.translated_path_example.addClass('lining')
 return part
 }
 
@@ -80,19 +79,19 @@ return part
 
 | Property     | Default       | Type       | Description |
 |-------------:|---------------|------------|-------------|
-| `transform`  |               | `string`   | String indicating the action to perform. _Must_ be one of: 'rotate', 'scale', or 'translate'
+| `transform`  |               | `string`   | String indicating the action to perform. _Must_ be one of: `rotate`, `scale`, or `translate`
 | `clone`      | `true`        | `bool`     | Whether to clone transformed points and/or paths |
 | `points`     |               | `array`    | An array of pointnames, the names of Points in the `points` array to transform |
 | `paths`      |               | `array`    | An array of pathnames, the names of Paths in the `paths` array to transform |
-| `prefix`     | `transformed` | `string`   | A prefix to apply to the names of the clones points and or paths.<br>or<br>A method that receives the name of the path or point as a first argument and one of `path` or `point` as the second argument and should return the name for the cloned path and or point |
-| `c`          | (0,0)         | [Point](/reference/api/point) | The point used to `rotate` around (or `scale` from) |
-| `angle`      | 0             | `float`    | The angle of rotation, used with the `rotate` option |
-| `x`          | 0             | `float`    | How far to move in the X direction in the `translate` option or<br>How much to scale in the X direction in the `scale` option |
-| `y`          | 0             | `float`    | How far to move in the Y direction in the `translate` option or<br>How much to scale in the Y direction in the `scale` option |
+| `prefix`     | `transformed` | `string`   | One of: <ul><li>A prefix to apply to the names of the clones points and or paths.</li><li>A method that receives the name of the path or point as a first argument and one of `path` or `point` as the second argument and should return the name for the cloned path and or point</li></ul> |
+| `c`          | `new Point(0,0)`         | [Point](/reference/api/point) | The point used to `rotate` around (or `scale` from) |
+| `angle`      | `0`             | `float`    | The angle of rotation, used with the `rotate` option |
+| `x`          | `0`             | `float`    | How far to move in the X direction in the `translate` option or<br />How much to scale in the X direction in the `scale` option |
+| `y`          | `0`             | `float`    | How far to move in the Y direction in the `translate` option or<br />How much to scale in the Y direction in the `scale` option |
 
 
 ## Notes
 
 When using the `scale` option, a center point is recommended. The macro does not automatically calculate the center point
-for the arrays of `points` and `paths`. If omitted, a default of (0,0) will be used.
+for the arrays of `points` and `paths`. If omitted, a default of `new Point(0,0)` will be used.
 ```
