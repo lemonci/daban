@@ -67,7 +67,13 @@ async function loadOrCreateJwks() {
 async function findAccount(ctx, id, tools) {
   const User = new UserModel(tools)
   await User.read({ id: Number(id) })
+
+  // Return undefined if the user doesn't exist so the provider rejects the request
+  if (!User.exists) return undefined
+
   const account = User.asAccount()
+  // ihash is not included in asAccount() but is needed for the avatar URL
+  const ihash = User.record.ihash
 
   return {
     accountId: id,
@@ -79,7 +85,7 @@ async function findAccount(ctx, id, tools) {
       if (scope.includes('profile')) {
         claims.name = account.username
         claims.preferred_username = account.username
-        claims.picture = `https://imagedelivery.net/ouSuR9yY1bHt-fuAokSA5Q/uid-${account.ihash}/sq500`
+        claims.picture = `https://imagedelivery.net/ouSuR9yY1bHt-fuAokSA5Q/uid-${ihash}/sq500`
         // updatedAt must be a Unix timestamp (seconds)
         claims.updated_at =
           typeof account.updatedAt === 'string'

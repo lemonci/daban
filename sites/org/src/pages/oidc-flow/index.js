@@ -24,8 +24,6 @@ export default function SignInPage() {
     setUid(interaction || false)
   }, [])
 
-  const submit = () => submitForm(uid, token)
-
   if (uid === false) return <InvalidUrlWarning />
   if (!uid) return <OneMomentPlease />
 
@@ -69,15 +67,20 @@ export default function SignInPage() {
                   ))}
                 </tbody>
               </table>
-              <form className="tw:mb-4" onSubmit={submit}>
+              <form
+                method="POST"
+                action={`https://backend.freesewing.eu/interaction/${uid}/login`}
+                className="tw:mb-4"
+              >
+                <input type="hidden" name="token" value={token} />
                 <div className="tw:grid tw:grid-cols-2 tw:gap-2 tw:mt-2">
-                  <button
-                    type="submit"
+                  <a
+                    href="https://forum.freesewing.eu/"
                     className="tw:daisy-btn tw:daisy-btn-primary tw:daisy-btn-outline"
                   >
                     Deny
-                  </button>
-                  <button className="tw:daisy-btn tw:daisy-btn-primary" onClick={submit}>
+                  </a>
+                  <button type="submit" className="tw:daisy-btn tw:daisy-btn-primary">
                     Allow
                   </button>
                 </div>
@@ -93,15 +96,6 @@ export default function SignInPage() {
       </div>
     </DocusaurusPage>
   )
-}
-
-async function submitForm(uid, token) {
-  await fetch(`https://backend.freesewing.eu/interaction/${uid}/login`, {
-    method: 'POST',
-    headers: {
-      Authorization: `Bearer ${token}`,
-    },
-  })
 }
 
 const InvalidUrlWarning = () => (
@@ -162,7 +156,3 @@ const OneMomentPlease = () => (
     </div>
   </DocusaurusPage>
 )
-
-function oidcLogin(body) {
-  console.log({ body })
-}

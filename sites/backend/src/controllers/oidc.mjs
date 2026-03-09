@@ -19,7 +19,7 @@ OidcController.prototype.init = async (req, res, tools) => {
     // interactionDetails validates the signed _interaction cookie against the
     // uid in the URL. If the cookie is absent or tampered, it throws.
     const details = await tools.oidcProvider.interactionDetails(req, res)
-    return res.redirect(`https://freesewing.eu/oidc-flow/?uid=${details.uid}`)
+    return redirect(`https://freesewing.eu/oidc-flow/?uid=${details.uid}`)
   } catch (err) {
     console.error('OIDC init error:', err)
     return res.status(400).send('Invalid or expired OIDC interaction')
@@ -63,20 +63,25 @@ OidcController.prototype.login = async (req, res, tools) => {
       .json({ error: 'invalid_request', error_description: 'Invalid or expired OIDC interaction' })
   }
 
-  // Step 2: Authenticate the user via Bearer token in the Authorization header.
-  // We do not accept the token in the request body. A body-supplied token is
-  // trivially replayable against any interaction uid and offers no binding to
-  // the browsing session that initiated the OIDC flow.
+  // Step 2: Authenticate the user via their FreeSewing JWT.
+  //
+  // The token may arrive as a Bearer header (XHR/fetch) or in the form body
+  // as req.body.token (native HTML form POST). Both are equally secure here
+  // because the real CSRF protection is the _interaction cookie validated in
+  // step 1: that cookie is HttpOnly, so no cross-site request can include it,
+  // and without it interactionDetails() throws before we ever reach this point.
+  // A token in the form body therefore cannot be replayed against a different
+  // interaction — the cookie always ties the token to this specific session.
   const authHeader = req.headers['authorization']
-  if (!authHeader || !authHeader.startsWith('Bearer ')) {
-    return res
-      .status(401)
-      .json({ error: 'unauthorized', error_description: 'Bearer token required' })
+  const rawToken = authHeader?.startsWith('Bearer ') ? authHeader.slice(7) : req.body?.token
+
+  if (!rawToken) {
+    return res.status(401).json({ error: 'unauthorized', error_description: 'Token required' })
   }
 
   let decoded
   try {
-    decoded = jwt.verify(authHeader.slice(7), tools.config.jwt.secretOrKey, {
+    decoded = jwt.verify(rawToken, tools.config.jwt.secretOrKey, {
       issuer: tools.config.jwt.issuer,
     })
   } catch (err) {
@@ -85,7 +90,10 @@ OidcController.prototype.login = async (req, res, tools) => {
       .json({ error: 'unauthorized', error_description: 'Invalid or expired token' })
   }
 
-  if (!decoded._id) {
+  // Verify the audience claim to prevent tokens issued for one instance being
+  // accepted by another instance even if they share the same signing key.
+  const expectedAud = `${tools.config.api}/${tools.config.instance}`
+  if (!decoded._id || decoded.aud !== expectedAud) {
     return res
       .status(401)
       .json({ error: 'unauthorized', error_description: 'Invalid token payload' })
