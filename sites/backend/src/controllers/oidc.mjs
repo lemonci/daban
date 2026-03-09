@@ -19,7 +19,7 @@ OidcController.prototype.init = async (req, res, tools) => {
     // interactionDetails validates the signed _interaction cookie against the
     // uid in the URL. If the cookie is absent or tampered, it throws.
     const details = await tools.oidcProvider.interactionDetails(req, res)
-    return redirect(`https://freesewing.eu/oidc-flow/?uid=${details.uid}`)
+    return res.redirect(`https://freesewing.eu/oidc-flow/?uid=${details.uid}`)
   } catch (err) {
     console.error('OIDC init error:', err)
     return res.status(400).send('Invalid or expired OIDC interaction')
