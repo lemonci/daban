@@ -34,6 +34,7 @@ export const api = () => {
   const dbPath = config.db.path
   const prisma = createDb(dbPath)
   const app = express()
+  app.set('trust proxy', 1)
   app.use(
     helmet({
       // The Swagger UI uses inline scripts, so we relax CSP only for /docs
