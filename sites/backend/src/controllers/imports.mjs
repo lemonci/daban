@@ -1,14 +1,25 @@
 import { SubscriberModel } from '../models/subscriber.mjs'
 import { UserModel } from '../models/user.mjs'
 import axios from 'axios'
+import { timingSafeEqual } from 'crypto'
 
 export function ImportsController() {}
 
 /*
- * This is a special route that uses hard-coded credentials
+ * This is a special route that uses hard-coded credentials.
+ * We use timingSafeEqual to prevent timing side-channel attacks when
+ * comparing the token, so an attacker cannot brute-force the token by
+ * measuring response times.
  */
 const runChecks = (req) => {
-  if (req.body.import_token !== process.env.IMPORT_TOKEN) {
+  const provided = req.body.import_token
+  const expected = process.env.IMPORT_TOKEN
+  if (
+    !provided ||
+    !expected ||
+    provided.length !== expected.length ||
+    !timingSafeEqual(Buffer.from(provided), Buffer.from(expected))
+  ) {
     return [401, { result: 'error', error: 'accessDenied' }]
   }
 

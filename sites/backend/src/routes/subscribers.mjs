@@ -1,4 +1,5 @@
 import { SubscribersController } from '../controllers/subscribers.mjs'
+import { publicRateLimit } from '../middleware.mjs'
 
 const Subscriber = new SubscribersController()
 
@@ -10,7 +11,7 @@ export function subscribersRoutes(tools) {
    */
 
   // Subscribe to the newsletter
-  app.post('/subscriber', (req, res) => Subscriber.subscribe(req, res, tools))
+  app.post('/subscriber', publicRateLimit, (req, res) => Subscriber.subscribe(req, res, tools))
 
   // Trigger unsubscribe from newsletter flow
   app.post('/subscriber/remove', (req, res) => Subscriber.startUnsubscribe(req, res, tools))
