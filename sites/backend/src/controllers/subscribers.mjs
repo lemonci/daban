@@ -54,14 +54,14 @@ SubscribersController.prototype.confirm = async (req, res, tools) => {
  * See: https://freesewing.dev/reference/backend/api
  */
 SubscribersController.prototype.ocunsub = async (req, res, tools) => {
-  if (!res.params?.ehash) return res.set('Content-Type', 'text/html').status(200).send(ocunsubKo)
+  if (!req.params?.ehash) return res.set('Content-Type', 'text/html').status(200).send(ocunsubKo)
 
   const Subscriber = new SubscriberModel(tools)
   const result = await Subscriber.ocunsub(req)
 
   if (result) return res.set('Content-Type', 'text/html').status(200).send(ocunsubOk)
 
-  return res.set('Content-Type', 'text/html').status(200).send(okunsubKo)
+  return res.set('Content-Type', 'text/html').status(200).send(ocunsubKo)
 }
 
 /*
@@ -78,7 +78,6 @@ SubscribersController.prototype.startUnsubscribe = async (req, res, tools) => {
 
   const Subscriber = new SubscriberModel(tools)
   const result = await Subscriber.startUnsubscribe(req.body.email)
-  console.log(result)
 
   return res.status(200).send({ result })
 }

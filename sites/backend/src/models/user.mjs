@@ -67,8 +67,9 @@ UserModel.prototype.allData = async function ({ params, user }) {
 
   /*
    * Is this the user's own data?
+   * params.id is a string from the URL; user.uid is the numeric id from the JWT.
    */
-  if (params.id !== user.id) return this.setResponse(403, 'idMismatch')
+  if (Number(params.id) !== user.uid) return this.setResponse(403, 'idMismatch')
 
   /*
    * Try to find the record in the database
