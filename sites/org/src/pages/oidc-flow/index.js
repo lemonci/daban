@@ -74,12 +74,12 @@ export default function SignInPage() {
               >
                 <input type="hidden" name="token" value={token} />
                 <div className="tw:grid tw:grid-cols-2 tw:gap-2 tw:mt-2">
-                  <button
-                    type="submit"
+                  <a
+                    href="https://forum.freesewing.eu/"
                     className="tw:daisy-btn tw:daisy-btn-primary tw:daisy-btn-outline"
                   >
                     Deny
-                  </button>
+                  </a>
                   <button type="submit" className="tw:daisy-btn tw:daisy-btn-primary">
                     Allow
                   </button>
@@ -156,7 +156,3 @@ const OneMomentPlease = () => (
     </div>
   </DocusaurusPage>
 )
-
-function oidcLogin(body) {
-  console.log({ body })
-}

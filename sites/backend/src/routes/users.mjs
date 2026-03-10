@@ -1,4 +1,5 @@
 import { UsersController } from '../controllers/users.mjs'
+import { authRateLimit } from '../middleware.mjs'
 
 const Users = new UsersController()
 const jwt = ['jwt', { session: false }]
@@ -9,19 +10,21 @@ export function usersRoutes(tools) {
   const { app, passport } = tools
 
   // Sign Up
-  app.post('/signup', (req, res) => Users.signup(req, res, tools))
+  app.post('/signup', authRateLimit, (req, res) => Users.signup(req, res, tools))
 
   // Confirm account
-  app.post('/confirm/signup/:id', (req, res) => Users.confirm(req, res, tools))
+  app.post('/confirm/signup/:id', authRateLimit, (req, res) => Users.confirm(req, res, tools))
 
   // Sign In
-  app.post('/signin', (req, res) => Users.signin(req, res, tools))
+  app.post('/signin', authRateLimit, (req, res) => Users.signin(req, res, tools))
 
   // Send sign-in link (aka magic link)
-  app.post('/signinlink', (req, res) => Users.signinlink(req, res, tools))
+  app.post('/signinlink', authRateLimit, (req, res) => Users.signinlink(req, res, tools))
 
   // Login via sign-in link (aka magic link)
-  app.post('/signinlink/:id/:check', (req, res) => Users.signinvialink(req, res, tools))
+  app.post('/signinlink/:id/:check', authRateLimit, (req, res) =>
+    Users.signinvialink(req, res, tools)
+  )
 
   // Read current jwt This gets special treatment as it is a route that we allow
   // even when the account status or consent would normally prohibit access.
@@ -88,11 +91,11 @@ export function usersRoutes(tools) {
     Users.exportAccount(req, res, tools)
   )
 
-  // Restrict processing of account data
-  app.get('/account/restrict/jwt', passport.authenticate(...jwt), (req, res) =>
+  // Restrict processing of account data (POST because this mutates state)
+  app.post('/account/restrict/jwt', passport.authenticate(...jwt), (req, res) =>
     Users.restrictAccount(req, res, tools)
   )
-  app.get('/account/restrict/key', passport.authenticate(...bsc), (req, res) =>
+  app.post('/account/restrict/key', passport.authenticate(...bsc), (req, res) =>
     Users.restrictAccount(req, res, tools)
   )
 

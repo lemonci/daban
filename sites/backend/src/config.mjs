@@ -21,11 +21,18 @@ export const port = process.env.BACKEND_PORT || 3000
 export const api = process.env.BACKEND_URL || `http://localhost:${port}`
 
 /*
- * Generate/Check keys only once
+ * Generate/Check keys only once.
+ *
+ * We use three distinct keys so that a compromise of one does not
+ * automatically compromise the others:
+ *   - BACKEND_ENC_KEY   : AES-256 encryption of data at rest
+ *   - BACKEND_JWT_KEY   : HMAC signing of JWTs (falls back to enc key)
+ *   - BACKEND_COOKIE_KEY: Signing of OIDC session cookies (falls back to enc key)
  */
 const encryptionKey = process.env.BACKEND_ENC_KEY || ensureKey('encryption', 64)
-const cookie1Key = process.env.BACKEND_ENC_KEY || ensureKey('cookie1', 32)
-const cookie2Key = process.env.BACKEND_ENC_KEY || ensureKey('cookie2', 32)
+const jwtKey = process.env.BACKEND_JWT_KEY || ensureKey('jwt', 64)
+const cookie1Key = process.env.BACKEND_COOKIE_KEY || ensureKey('cookie1', 32)
+const cookie2Key = process.env.BACKEND_COOKIE_KEY || ensureKey('cookie2', 32)
 
 /*
  * All environment variables are strings
@@ -150,7 +157,7 @@ const baseConfig = {
     },
   },
   jwt: {
-    secretOrKey: encryptionKey,
+    secretOrKey: jwtKey,
     issuer: api,
     expiresIn: process.env.BACKEND_JWT_EXPIRY || '7d',
   },
@@ -310,6 +317,8 @@ const vars = {
   BACKEND_WEBSITE_DOMAIN: 'optional',
   BACKEND_WEBSITE_SCHEME: 'optional',
   BACKEND_ENC_KEY: ['requiredSecret', 'encryption.key'],
+  BACKEND_JWT_KEY: 'optional',
+  BACKEND_COOKIE_KEY: 'optional',
   BACKEND_JWT_ISSUER: 'optional',
   BACKEND_JWT_EXPIRY: 'optional',
   // Feature flags

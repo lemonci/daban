@@ -111,23 +111,5 @@ InfoController.prototype.getStats = async (req, res, tools) => {
     error = err
   }
 
-  /*
-   * Find most active users
-   */
-  /*
-   * Count designs
-   */
-  let top
-  try {
-    top = await tools.prisma.user.findMany({
-      orderBy: { jwtCalls: 'desc' },
-      take: 25,
-    })
-    stats.topUsers = top.map((u) => ({ id: u.id, username: u.username, calls: u.jwtCalls }))
-  } catch (err) {
-    console.log(err)
-    error = err
-  }
-
   return error ? res.status(500).send({ errors: ['Failed to run query'] }) : res.send(stats)
 }

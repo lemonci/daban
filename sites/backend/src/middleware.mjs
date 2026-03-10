@@ -1,9 +1,33 @@
 import cors from 'cors'
+import rateLimit from 'express-rate-limit'
 import http from 'passport-http'
 import jwt from 'passport-jwt'
 import { ApikeyModel } from './models/apikey.mjs'
 import { UserModel } from './models/user.mjs'
 import { api, instance } from './config.mjs'
+
+/*
+ * Rate limiter for authentication endpoints (signup, signin, magic link).
+ * Tight window to slow brute-force and credential-stuffing attacks.
+ */
+export const authRateLimit = rateLimit({
+  windowMs: 15 * 60 * 1000, // 15 minutes
+  max: 10, // 10 attempts per window per IP
+  standardHeaders: true,
+  legacyHeaders: false,
+  message: { result: 'error', error: 'tooManyRequests' },
+})
+
+/*
+ * Rate limiter for general unauthenticated public endpoints.
+ */
+export const publicRateLimit = rateLimit({
+  windowMs: 15 * 60 * 1000, // 15 minutes
+  max: 60,
+  standardHeaders: true,
+  legacyHeaders: false,
+  message: { result: 'error', error: 'tooManyRequests' },
+})
 
 /*
  * In v2 we ended up with a bug where we did not properly track the last login
@@ -24,8 +48,37 @@ async function checkAccess(payload, tools, type) {
   return [ok, err]
 }
 
-function loadExpressMiddleware(app) {
-  app.use(cors())
+function loadExpressMiddleware(app, config) {
+  /*
+   * Build the list of allowed CORS origins from configuration.
+   * We always allow the configured website domain plus the known
+   * forum domains (which act as OIDC clients).
+   */
+  const scheme = config?.website?.scheme || 'https'
+  const domain = config?.website?.domain || 'freesewing.org'
+  const allowedOrigins = new Set([
+    `${scheme}://${domain}`,
+    `${scheme}://www.${domain}`,
+    // Forum OIDC clients
+    'https://forum.freesewing.eu',
+    'https://forum.freesewing.org',
+  ])
+
+  app.use(
+    cors({
+      origin: (origin, cb) => {
+        /*
+         * Allow requests with no Origin header (e.g. server-to-server, curl)
+         * and any origin that is on the allow-list.
+         */
+        if (!origin || allowedOrigins.has(origin)) return cb(null, true)
+        cb(new Error(`CORS: origin '${origin}' is not allowed`))
+      },
+      methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
+      allowedHeaders: ['Content-Type', 'Authorization'],
+      credentials: true,
+    })
+  )
 }
 
 function loadPassportMiddleware(passport, tools) {
