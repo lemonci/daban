@@ -40,13 +40,13 @@ export const ImportSet = () => {
           const name = set.name || 'J. Doe'
           setLoadingStatus([true, `Importing ${name}`])
           const [status] = await backend.createSet({
-            name: set.name || 'J. Doe',
-            units: set.units || 'metric',
+            name,
             notes: set.notes || '',
             measies: set.measurements || set.measies,
-            userId: account.id,
+            imperial: set.imperial === true ? true : false,
+            public: set.public === true ? true : false,
           })
-          if (status === 200) setLoadingStatus([true, `Imported ${name}`, true, true])
+          if (status === 201) setLoadingStatus([true, `Imported ${name}`, true, true])
           else setLoadingStatus([true, `Import of ${name} failed`, true, false])
         } else {
           setLoadingStatus([true, `Invalid format`, true, false])
@@ -82,9 +82,10 @@ export const ImportSet = () => {
         <Yaml
           js={{
             name: 'Joost',
-            units: 'metric',
+            imperial: false,
+            public: false,
             notes: 'These are my notes',
-            measurements: { biceps: 335, wrist: 190 },
+            measies: { biceps: 350, wrist: 180 },
           }}
           title="measurements.yaml"
         />

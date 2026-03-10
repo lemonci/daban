@@ -92,7 +92,7 @@ export const Sets = ({ Link = false }) => {
           className="tw:daisy-btn tw:daisy-btn-secondary tw:capitalize tw:w-full tw:md:w-auto tw:mr-2 tw:hover:no-underline tw:hover:text-primary-content no-hover-decoration"
           bottom
           primary
-          href="/account/import"
+          href="/account/actions/import"
         >
           <UploadIcon className="tw:w-6 tw:h-6 tw:text-secondary-content" />
           <span className="tw:text-secondary-content">Import Measurements Sets</span>
