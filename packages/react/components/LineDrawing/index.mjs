@@ -39,8 +39,10 @@ import { Penelope, PenelopeFront /*, PenelopeBack*/ } from './penelope.mjs'
 import { Sabrina, SabrinaFront, SabrinaBack } from './sabrina.mjs'
 import { Sandy, SandyFront } from './sandy.mjs'
 import { Sarah, SarahFront, SarahBack } from './sarah.mjs'
-import { Sophie, SophieFront, SophieBack } from './sophie.mjs'
 import { Simon, SimonFront, SimonBack } from './simon.mjs'
+import { Shin, ShinFront } from './shin.mjs'
+import { Sophie, SophieFront, SophieBack } from './sophie.mjs'
+import { Sven, SvenFront } from './sven.mjs'
 import { Teagan, TeaganFront, TeaganBack } from './teagan.mjs'
 import { Tristan, TristanFront, TristanBack } from './tristan.mjs'
 import { Uma, UmaFront, UmaBack } from './uma.mjs'
@@ -95,11 +97,13 @@ export const lineDrawingsFront = {
   otis: OtisFront,
   penelope: PenelopeFront,
 
-  sophie: SophieFront,
+  sabrina: SabrinaFront,
   sandy: SandyFront,
   sarah: SarahFront,
-  sabrina: SabrinaFront,
+  shin: ShinFront,
   simon: SimonFront,
+  sven: SvenFront,
+  sophie: SophieFront,
 
   teagan: TeaganFront,
 
@@ -143,10 +147,10 @@ export const lineDrawingsBack = {
   /*octoplushy: OctoplushyBack,*/
   /*otis: OtisBack,*/
   /*penelope: PenelopeBack,*/
-  sarah: SarahBack,
-  sophie: SophieBack,
   sabrina: SabrinaBack,
+  sarah: SarahBack,
   simon: SimonBack,
+  sophie: SophieBack,
   teagan: TeaganBack,
   tristan: TristanBack,
   uma: UmaBack,
@@ -201,10 +205,12 @@ export const lineDrawings = {
   otis: Otis,
   penelope: Penelope,
   sarah: Sarah,
-  sophie: Sophie,
+  shin: Shin,
   sabrina: Sabrina,
   sandy: Sandy,
   simon: Simon,
+  sophie: Sophie,
+  sven: Sven,
   teagan: Teagan,
   tristan: Tristan,
   uma: Uma,
@@ -364,14 +370,20 @@ export {
   Sarah,
   SarahFront,
   SarahBack,
-  // Sophie
-  Sophie,
-  SophieFront,
-  SophieBack,
+  //Shin
+  Shin,
+  ShinFront,
   // Simon
   Simon,
   SimonFront,
   SimonBack,
+  // Sophie
+  Sophie,
+  SophieFront,
+  SophieBack,
+  //Sven
+  Sven,
+  SvenFront,
   // Teagan
   Teagan,
   TeaganFront,
