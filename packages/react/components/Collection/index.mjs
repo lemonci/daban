@@ -177,7 +177,7 @@ export const Collection = ({ Link = false, linkTo = 'about', editor = false, onC
               </button>
               <button
                 className="tw:daisy-btn tw:daisy-btn-secondary tw:daisy-btn-outline"
-                onClick={() => setFilter({ ld: 1 })}
+                onClick={() => setFilter({ ld: filter.ld })}
               >
                 <ResetIcon />
                 Clear Filters
