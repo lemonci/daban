@@ -34,6 +34,7 @@ import { Percy, PercyFront } from './percy.mjs'
 import { Noble, NobleFront, NobleBack } from './noble.mjs'
 import { Octoplushy, OctoplushyFront /*, OctoplushyBack*/ } from './octoplushy.mjs'
 import { Otis, OtisFront /*, OtisBack*/ } from './otis.mjs'
+import { Onyx, OnyxFront } from './onyx.mjs'
 import { Penelope, PenelopeFront /*, PenelopeBack*/ } from './penelope.mjs'
 import { Sabrina, SabrinaFront, SabrinaBack } from './sabrina.mjs'
 import { Sarah, SarahFront, SarahBack } from './sarah.mjs'
@@ -89,6 +90,7 @@ export const lineDrawingsFront = {
   percy: PercyFront,
   noble: NobleFront,
   octoplushy: OctoplushyFront,
+  onyx: OnyxFront,
   otis: OtisFront,
   penelope: PenelopeFront,
 
@@ -193,6 +195,7 @@ export const lineDrawings = {
   percy: Percy,
   noble: Noble,
   octoplushy: Octoplushy,
+  onyx: Onyx,
   otis: Otis,
   penelope: Penelope,
   sarah: Sarah,
@@ -340,6 +343,9 @@ export {
   Octoplushy,
   OctoplushyFront,
   /*OctoplushyBack,*/
+  //Onyx
+  Onyx,
+  OnyxFront,
   // Otis
   Otis,
   OtisFront,
