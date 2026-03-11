@@ -3,6 +3,9 @@ Unreleased:
   Changed:
     backend:
       - Removed the profile find endpoint
+  Fixed:
+    backend:
+      - Typo in config lookup for max api key expiry
 
 4.6.0:
   date: 2026-03-08
