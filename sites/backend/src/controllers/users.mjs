@@ -197,13 +197,3 @@ UsersController.prototype.isUsernameAvailable = async (req, res, tools) => {
 
   return User.sendResponse(res)
 }
-
-/*
- * Search user profiles
- */
-UsersController.prototype.searchProfiles = async (req, res, tools) => {
-  const User = new UserModel(tools)
-  await User.searchProfiles(req)
-
-  return User.sendResponse(res)
-}

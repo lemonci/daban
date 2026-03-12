@@ -232,7 +232,10 @@ ApikeyModel.prototype.create = async function ({ body, user }) {
   /*
    * Is expiresIn above the maximum?
    */
-  if (body.expiresIn > this.config.apikeys.maxExpirySeconds)
+  if (
+    !this.config.apikeys.expiryMaxSeconds ||
+    body.expiresIn > this.config.apikeys.expiryMaxSeconds
+  )
     return this.setResponse(400, 'expiresIsHigherThanMaximum')
 
   /*
