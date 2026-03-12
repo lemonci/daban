@@ -49,6 +49,7 @@ import { Uma, UmaFront, UmaBack } from './uma.mjs'
 import { Umbra, UmbraFront, UmbraBack } from './umbra.mjs'
 import { Wahid, WahidFront, WahidBack } from './wahid.mjs'
 import { Waralee, WaraleeFront /*, WaraleeBack*/ } from './waralee.mjs'
+import { Yuri, YuriFront, YuriBack } from './yuri.mjs'
 
 /**
  * An object where the key is the design name and the value the front LineDrawing component
@@ -112,6 +113,7 @@ export const lineDrawingsFront = {
   umbra: UmbraFront,
   wahid: WahidFront,
   waralee: WaraleeFront,
+  yuri: YuriFront,
 }
 
 /**
@@ -157,6 +159,7 @@ export const lineDrawingsBack = {
   umbra: UmbraBack,
   wahid: WahidBack,
   /*waralee: WaraleeBack,*/
+  yuri: YuriBack,
 }
 
 /**
@@ -217,6 +220,7 @@ export const lineDrawings = {
   umbra: Umbra,
   wahid: Wahid,
   waralee: Waralee,
+  yuri: Yuri,
 }
 
 /*
@@ -408,4 +412,8 @@ export {
   Waralee,
   WaraleeFront,
   /*WaraleeBack,*/
+  //Yuri
+  Yuri,
+  YuriFront,
+  YuriBack,
 }
