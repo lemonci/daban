@@ -38,6 +38,7 @@ import { Otis, OtisFront /*, OtisBack*/ } from './otis.mjs'
 import { Penelope, PenelopeFront /*, PenelopeBack*/ } from './penelope.mjs'
 import { Sabrina, SabrinaFront, SabrinaBack } from './sabrina.mjs'
 import { Sarah, SarahFront, SarahBack } from './sarah.mjs'
+import { Skully, SkullyFront /*, SkullyBack*/ } from './skully.mjs'
 import { Sophie, SophieFront, SophieBack } from './sophie.mjs'
 import { Simon, SimonFront, SimonBack } from './simon.mjs'
 import { Teagan, TeaganFront, TeaganBack } from './teagan.mjs'
@@ -97,6 +98,7 @@ export const lineDrawingsFront = {
   sophie: SophieFront,
   sarah: SarahFront,
   sabrina: SabrinaFront,
+  skully: SkullyFront,
   simon: SimonFront,
 
   teagan: TeaganFront,
@@ -145,6 +147,7 @@ export const lineDrawingsBack = {
   sarah: SarahBack,
   sophie: SophieBack,
   sabrina: SabrinaBack,
+  /* skully: SkullyBack, */
   simon: SimonBack,
   teagan: TeaganBack,
   tristan: TristanBack,
@@ -202,6 +205,7 @@ export const lineDrawings = {
   sarah: Sarah,
   sophie: Sophie,
   sabrina: Sabrina,
+  skully: Skully,
   simon: Simon,
   teagan: Teagan,
   tristan: Tristan,
@@ -364,6 +368,10 @@ export {
   Sophie,
   SophieFront,
   SophieBack,
+  // Skully
+  Skully,
+  SkullyFront,
+  // SkullyBack,
   // Simon
   Simon,
   SimonFront,
