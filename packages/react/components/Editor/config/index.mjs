@@ -13,7 +13,7 @@ export const defaultConfig = {
   extraViews: ['measurements', 'undos', 'layout', 'docs'],
   devViews: ['editSettings', 'inspect', 'logs', 'test', 'timing'],
   utilViews: ['picker'],
-  measurementsFreeViews: ['designs', 'measurements', 'docs', 'picker'],
+  measurementsFreeViews: ['designs', 'measurements', 'docs', 'picker', 'editSettings'],
   // View components
   // Facilitate lookup of view components
   viewComponents: {
