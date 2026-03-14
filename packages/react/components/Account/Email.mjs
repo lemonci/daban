@@ -62,7 +62,7 @@ export const Email = ({ Link = false }) => {
           <EmailInput
             id="account-email"
             label="Email Address"
-            placeholder="example@freesewing.org"
+            placeholder="example@freesewing.eu"
             update={setEmail}
             labelBL="You will need to confirm that you can receive email at this address"
             current={email}

@@ -1,5 +1,6 @@
 // Dependencies
 import { linkClasses } from '@freesewing/utils'
+import { relPath } from '@freesewing/config'
 // Context
 import { ModalContext } from '@freesewing/react/context/Modal'
 // Hooks
@@ -33,7 +34,7 @@ export const DocsView = ({ state, config, update }) => {
               <div className="tw:font-bold tw:py-1">
                 <a
                   className={linkClasses}
-                  href={`https://freesewing.eu/docs/designs/${state.design}`}
+                  href={relPath(`docs/designs/${state.design}`)}
                 >{`FreeSewing.eu/docs/designs/${state.design}`}</a>
               </div>
             </Popout>
@@ -50,7 +51,7 @@ export const DocsView = ({ state, config, update }) => {
           <div className="tw:font-bold tw:py-1">
             <a
               className={linkClasses}
-              href="https://freesewing.eu/docs/editor"
+              href={relPath('docs/editor')}
             >{`FreeSewing.eu/docs/editor`}</a>
           </div>
         </Popout>

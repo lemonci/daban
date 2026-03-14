@@ -2,6 +2,7 @@
 import { horFlexClasses, notEmpty } from '@freesewing/utils'
 // Hooks
 import React, { useState, useEffect, Fragment, useContext } from 'react'
+import { relPath } from '@freesewing/config'
 import { useBackend } from '@freesewing/react/hooks/useBackend'
 // Context
 import { LoadingStatusContext } from '@freesewing/react/context/LoadingStatus'
@@ -230,7 +231,7 @@ const NewBookmark = ({ onCreated = false }) => {
         update={setUrl}
         current={url}
         valid={(val) => val.length > 0}
-        placeholder={'https://freesewing.org/account'}
+        placeholder={relPath('account')}
       />
       <div className="tw:flex tw:flex-row tw:gap-2 tw:items-center tw:w-full tw:my-8">
         <button

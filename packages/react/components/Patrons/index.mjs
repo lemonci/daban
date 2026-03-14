@@ -2,6 +2,7 @@
 import { linkClasses } from '@freesewing/utils'
 // Hooks
 import React, { useState } from 'react'
+import { relPath } from '@freesewing/config'
 
 /**
  * A component to ask people to support FreeSewing financially
@@ -301,7 +302,7 @@ const paypalConfig = {
        * Return URL the user will be redirected to after completion
        * of the payment.
        */
-      return: 'https://freesewing.org/patrons/thanks',
+      return: relPath('patrons/thanks'),
       /*
        * This needs to be set to 1 to indicate that recurring
        * payments should be collected.
@@ -325,7 +326,7 @@ const paypalConfig = {
        * Return URL the user will be redirected to after completion
        * of the payment.
        */
-      return: 'https://freesewing.org/donate/thanks',
+      return: relPath('donate/thanks'),
     },
     // Included in both forms
     shared: {

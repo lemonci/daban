@@ -17,7 +17,8 @@ export const urls = {
   // Social media and other account links for FreeSewing
   social: {
     YouTube: 'https://www.youtube.com/@freesewing',
-    Discord: 'https://discord.freesewing.org/',
+    Discord: 'https://discord.freesewing.eu/',
+    Forum: 'https://forum.freesewing.eu',
     Instagram: 'https://instagram.com/freesewing_org',
     Facebook: 'https://www.facebook.com/groups/627769821272714/',
     Codeberg: 'https://codeberg.org/freesewing',
@@ -25,4 +26,18 @@ export const urls = {
     Mastodon: 'https://freesewing.social/@freesewing',
     Bluesky: 'https://bsky.app/profile/freesewing.org',
   },
+}
+
+/**
+ * A utility function to create an absolute URL from a relative path
+ * using the FreeSewing website base URL.
+ *
+ * @param {string} path - The relative path (e.g., '/docs/measurements')
+ * @returns {string} - The absolute URL
+ */
+export const relPath = (path = '') => {
+  const base = urls.website
+  const cleanPath = path.startsWith('/') ? path : `/${path}`
+
+  return `${base}${cleanPath}`
 }

@@ -1,5 +1,6 @@
 import path from 'node:path'
 import { themes as prismThemes } from 'prism-react-renderer'
+import { urls } from '@freesewing/config'
 
 const config = {
   title: 'FreeSewing',
@@ -158,7 +159,7 @@ const config = {
         { to: '/reference', label: 'Reference', position: 'left' },
         { to: '/tutorials', label: 'Tutorials', position: 'left' },
         {
-          to: 'https://freesewing.eu/',
+          to: urls.website,
           label: 'FreeSewing.eu',
           position: 'right',
         },
@@ -181,15 +182,15 @@ const config = {
           items: [
             {
               label: 'Forum',
-              href: 'https://forum.freesewing.eu/',
+              href: urls.social.Forum,
             },
             {
               label: 'Discord',
-              href: 'https://discord.freesewing.org/',
+              href: urls.social.Discord,
             },
             {
               label: 'All Support Options',
-              href: 'https://freesewing.eu/support',
+              href: `${urls.website}/support`,
             },
           ],
         },
@@ -198,20 +199,20 @@ const config = {
           items: [
             {
               label: 'FreeSewing.eu',
-              to: 'https://freesewing.eu/',
+              to: urls.website,
             },
             {
               label: 'FreeSewing.social',
-              to: 'https://freesewing.social/',
+              to: urls.social.Mastodon,
             },
             {
               label: 'Code on Codeberg',
-              href: 'https://codeberg.org/freesewing/freesewing',
+              href: urls.monorepo,
             },
           ],
         },
       ],
-      copyright: `<a href="https://freesewing.org/">FreeSewing</a> is brought to you by <a href="https://codeberg.eu/joostdecock">Joost De Cock</a> and <a href="https://codeberg.eu/freesewing/freesewing/blob/develop/CONTRIBUTORS.md">contributors</a> with the financial support of <a href="https://freesewing.org/patrons/join">our patrons</a>`,
+      copyright: `<a href="${urls.website}/">FreeSewing</a> is brought to you by <a href="https://codeberg.eu/joostdecock">Joost De Cock</a> and <a href="https://codeberg.eu/freesewing/freesewing/blob/develop/CONTRIBUTORS.md">contributors</a> with the financial support of <a href="${urls.website}/patrons/join">our patrons</a>`,
     },
     prism: {
       theme: prismThemes.dracula,

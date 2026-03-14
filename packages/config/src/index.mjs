@@ -3,7 +3,7 @@ import { logoPath } from './logo.mjs'
 import { measurements, degreeMeasurements, isDegreeMeasurement } from './measurements.mjs'
 import { sewingTechniques } from './sewing.mjs'
 import { roles, uiRoles } from './roles.mjs'
-import { urls } from './urls.mjs'
+import { urls, relPath } from './urls.mjs'
 import { apikeyLevels } from './apikeys.mjs'
 import { domains } from './domains.mjs'
 
@@ -23,4 +23,5 @@ export {
   roles,
   uiRoles,
   urls,
+  relPath,
 }

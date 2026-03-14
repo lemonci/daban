@@ -1,6 +1,7 @@
 import { themes as prismThemes } from 'prism-react-renderer'
 import { docusaurusPlugins } from './plugins/index.mjs'
 import smartypants from 'remark-smartypants'
+import { urls } from '@freesewing/config'
 
 /*
  * We customize the sidebar somewhat:
@@ -50,7 +51,7 @@ const config = {
   title: 'FreeSewing',
   tagline: 'FreeSewing documentation for makers',
   favicon: 'img/favicon.ico',
-  url: 'https://freesewing.eu',
+  url: urls.website,
   baseUrl: '/',
   customFields: {
     backendUrl: process.env.BACKEND_URL ?? 'https://backend.freesewing.eu',
@@ -261,15 +262,15 @@ const config = {
         {
           title: 'More',
           items: [
-            { label: 'FreeSewing.eu', to: 'https://freesewing.eu/' },
+            { label: 'FreeSewing.eu', to: urls.website },
             { label: 'FreeSewing.dev', to: 'https://freesewing.dev/' },
-            { label: 'FreeSewing.social', to: 'https://freesewing.social/' },
-            { label: 'Code on Codeberg', to: 'https://codeberg.org/freesewing/freesewing' },
+            { label: 'FreeSewing.social', to: urls.social.Mastodon },
+            { label: 'Code on Codeberg', to: urls.monorepo },
             { label: 'FreeSewing Revenue Pledge 💜', href: '/docs/about/pledge/' },
           ],
         },
       ],
-      copyright: `<a href="https://freesewing.org/">FreeSewing</a> is brought to you by <a href="https://codeberg.org/joostdecock">Joost De Cock</a> and <a href="https://codeberg.org/freesewing/freesewing/src/branch/develop/CONTRIBUTORS.md">contributors</a> with the financial support of <a href="/patrons/join">our patrons</a>`,
+      copyright: `<a href="${urls.website}/">FreeSewing</a> is brought to you by <a href="https://codeberg.org/joostdecock">Joost De Cock</a> and <a href="https://codeberg.org/freesewing/freesewing/src/branch/develop/CONTRIBUTORS.md">contributors</a> with the financial support of <a href="/patrons/join">our patrons</a>`,
     },
     prism: {
       theme: prismThemes.dracula,

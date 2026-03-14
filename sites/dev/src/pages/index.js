@@ -4,6 +4,7 @@ import Studio from './_studio.md'
 import SetupMonorepo from './_setup-monorepo.md'
 import MDXContent from '@theme/MDXContent'
 import { FreeSewingIcon } from '@freesewing/react/components/Icon'
+import { urls } from '@freesewing/config'
 
 const styles = {
   top: {
@@ -117,8 +118,8 @@ export default function Home() {
               ecosystem.
             </p>
             <p style={styles.cardp}>
-              For documentation for makers, please refer to{' '}
-              <a href="https://freesewing.eu">FreeSewing.eu</a>.
+              For documentation for makers, please refer to <a href={urls.website}>FreeSewing.eu</a>
+              .
             </p>
           </Card>
           <Card title="Git good scrub" icon="🐙">

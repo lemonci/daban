@@ -1,5 +1,6 @@
 // Dependencies
 import { capitalize, linkClasses, slugifyTitle, slugifyNoTrim, yyyymmdd } from '@freesewing/utils'
+import { relPath } from '@freesewing/config'
 // Hooks
 import React, { useState, useContext, Fragment } from 'react'
 import { useAccount } from '@freesewing/react/hooks/useAccount'
@@ -376,7 +377,7 @@ const PostEditor = ({
           ) : (
             <>
               Sorry, but slug <b>{slug}</b> is already taken by{' '}
-              <a href={`https://freesewing.eu/${type}/${slug}/`} target="_BLANK">
+              <a href={relPath(`${type}/${slug}/`)} target="_BLANK">
                 this post
               </a>
             </>

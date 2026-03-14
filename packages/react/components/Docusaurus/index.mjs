@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useContext } from 'react'
+import { urls } from '@freesewing/config'
 import { useAccount } from '@freesewing/react/hooks/useAccount'
 import {
   LoadingStatusContext,
@@ -178,12 +179,7 @@ const navbarItems = {
   ),
   blog: (props) => <SimpleNavbarItem label="Blog" href="/blog/" Icon={RssIcon} Link={props.Link} />,
   forum: (props) => (
-    <SimpleNavbarItem
-      label="Forum"
-      href="https://forum.freesewing.eu/"
-      Icon={ChatIcon}
-      Link={props.Link}
-    />
+    <SimpleNavbarItem label="Forum" href={urls.social.Forum} Icon={ChatIcon} Link={props.Link} />
   ),
   support: (props) => (
     <SimpleNavbarItem label="Support" href="/support/" Icon={HelpIcon} Link={props.Link} />
