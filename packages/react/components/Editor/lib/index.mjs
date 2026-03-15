@@ -14,7 +14,6 @@ import { menuLayoutSettingsStructure } from './layout-settings.mjs'
 import {
   addUndoStep,
   cloneObject,
-  cloudImageUrl,
   draft,
   flattenFlags,
   getCoreSettingUndoStepData,
@@ -75,7 +74,6 @@ export {
   // editor.mjs
   addUndoStep,
   cloneObject,
-  cloudImageUrl,
   draft,
   flattenFlags,
   getCoreSettingUndoStepData,

@@ -25,6 +25,7 @@ export function ConfirmationModel(tools) {
  * @returns {ConfirmationModel} object - The ConfirmationModel
  */
 ConfirmationModel.prototype.guardedRead = async function ({ params }) {
+  console.log(params)
   /*
    * Is the id set?
    */
@@ -33,7 +34,7 @@ ConfirmationModel.prototype.guardedRead = async function ({ params }) {
   /*
    * Is the check set?
    */
-  //if (typeof params.check === 'undefined') return this.setResponse(404)
+  if (typeof params.check === 'undefined') return this.setResponse(404)
 
   /*
    * Attempt to read record from the database

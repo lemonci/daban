@@ -1,5 +1,5 @@
 import { log } from '../utils/log.mjs'
-import { storeImage } from '../utils/cloudflare-images.mjs'
+import { saveImage } from '../utils/image.mjs'
 import { decorateModel } from '../utils/model-decorator.mjs'
 
 /*
@@ -105,21 +105,14 @@ PatternModel.prototype.guardedCreate = async function ({ body, user }) {
   })
 
   /*
-   * Now that we have a record ID, we can update the image, but only if needed
+   * Re-read the record to pick up the UUID set by the database trigger
    */
-  if (body.img) {
-    const img = await storeImage({
-      id: `pattern-${this.record.id}`,
-      metadata: { user: user.uid },
-      b64: body.img,
-    })
+  await this.read({ id: this.record.id })
 
-    /*
-     * If an image was created, update the record with its ID
-     * If not, just update the record from the database
-     */
-    await this.update({ img })
-  } else await this.read({ id: this.record.id })
+  /*
+   * If an image was provided, save it to disk using the UUID
+   */
+  if (body.img) await saveImage('pattern', this.record.uuid, body.img)
 
   /*
    * Now return 201 and the record data
@@ -298,13 +291,7 @@ PatternModel.prototype.guardedUpdate = async function ({ params, body, user }) {
   /*
    * img
    */
-  if (typeof body.img === 'string') {
-    data.img = await storeImage({
-      id: `pattern-${this.record.id}`,
-      metadata: { user: user.uid },
-      b64: body.img,
-    })
-  }
+  if (typeof body.img === 'string') await saveImage('pattern', this.record.uuid, body.img)
 
   /*
    * Now update the record

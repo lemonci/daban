@@ -20,6 +20,6 @@ ${closingRow.text}
     preLead:
       'An account can become disabled when a user revokes consent, or (exceptionally) when an administrator disables it.',
     lead: 'In any case, the only way to re-enable a disabled account is to reach out to support.',
-    closing: 'To contact support, you can reply to this email.',
+    closing: 'To contact support, send an email to support@freesewing.eu.',
   },
 }

@@ -19,7 +19,7 @@ import { Popout } from '@freesewing/react/components/Popout'
  * @param {function} [props.Link = false] - An optional framework-specific Link component
  * @returns {JSX.Element}
  */
-export const Consent = ({ signUp = false, Link = false, title = false }) => {
+export const Consent = ({ signUp = false, Link = false, title = false, check = false }) => {
   if (!Link) Link = WebLink
 
   // Hooks
@@ -38,7 +38,7 @@ export const Consent = ({ signUp = false, Link = false, title = false }) => {
     if (consent1 && consent2) newConsent = 2
     if (newConsent > 0 && signUp) {
       setLoadingStatus([true, 'Creating your account'])
-      const [status, body] = await backend.confirmSignup({ id: signUp, consent: newConsent })
+      const [status, body] = await backend.confirmSignup({ id: signUp, consent: newConsent, check })
       if (status === 200) {
         setLoadingStatus([true, 'Account created', true, true])
         if (body?.token) setToken(body.token)

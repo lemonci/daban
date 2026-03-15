@@ -1,5 +1,5 @@
 // Config
-import { cloudflareImageUrl, capitalize } from '@freesewing/utils'
+import { imageCdnUrl, capitalize } from '@freesewing/utils'
 import { control as controlConfig } from '@freesewing/config'
 // Hooks
 import React, { useState, useEffect } from 'react'
@@ -118,7 +118,7 @@ export const Links = ({ Link = false }) => {
   // Effects
   useEffect(() => {
     const getUserData = async () => {
-      const [status, body] = await backend.getUserData(account.id)
+      const [status, body] = await backend.getUserData(account.uuid)
       if (status === 200 && body.result === 'success') {
         setApikeys(body.data.apikeys)
         setBookmarks(body.data.bookmarks)
@@ -127,7 +127,7 @@ export const Links = ({ Link = false }) => {
       }
     }
     getUserData()
-  }, [account.id])
+  }, [account.uuid])
 
   if (!account.username) return null
 
@@ -141,7 +141,7 @@ export const Links = ({ Link = false }) => {
     bio: account.bio ? <span>{account.bio.slice(0, 15)}&hellip;</span> : '',
     img: (
       <img
-        src={cloudflareImageUrl({ type: 'sq100', id: `uid-${account.ihash}` })}
+        src={imageCdnUrl({ type: 'user', id: account.uuid })}
         className="tw:w-8 tw:h-8 tw:aspect-square tw:rounded-full shadow"
       />
     ),

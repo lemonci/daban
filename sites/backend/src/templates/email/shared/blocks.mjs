@@ -1,117 +1,49 @@
-export const buttonRow = {
-  html: `
-  <tr>
-    <td align="left" class="sm-p-15px" style="padding-top: 25px">
-      <table class="sm-w-full sm-mx-auto" border="0" cellpadding="0" cellspacing="0" role="presentation">
-        <tr>
-          <td align="center" class="hover-bg-blue-600" style="border-radius: 2px; background-color: #262626">
-            <a href="{{{ actionUrl }}}" target="_blank" class="sm-block sm-p-15px sm-border-0" style="text-decoration: none; border: 1px solid #000; display: inline-block; border-radius: 2px; padding: 15px 25px; font-size: 16px; font-weight: 700; color: #fff">{{ button }} &nbsp;&nbsp;&rarr;</a>
-          </td>
-        </tr>
-      </table>
-    </td>
-  </tr>`,
-  text: `{{{ actionUrl }}}`,
-}
+export const h2 = (content) => `
+<tr>
+  <td align="left" class="sm-p-15px" style="padding-top: 30px">
+    <h2 style="margin: 0; font-size: 30px; color: #525252">${content}</h2>
+  </td>
+</tr>
+`
 
-export const closingRow = {
-  html: `
-  <tr>
-    <td align="left" class="sm-p-15px" style="padding-top: 30px">
-      <p style="margin: 0; font-size: 16px; line-height: 25px; color: #262626">
-        {{{ closing }}}
-        <br><br>
-        {{{ greeting }}}
-        <br>
-        joost
-        <br><br>
-        PS: {{{ ps-pre-link}}}
-        <a href="{{{ supportUrl }}}" target="_blank" style="text-decoration: underline; color: #262626">
-          <b>{{{ ps-link}}}</b>
-        </a> {{{ ps-post-link }}}
-      </p>
-    </td>
-  </tr>`,
-  text: `
-{{{ closing }}}
+export const p = (content) => `
+<tr>
+  <td align="left" class="sm-p-15px" style="padding-top: 15px">
+    <p style="margin: 0; font-size: 16px; line-height: 25px; color: #262626">
+      ${content}
+    </p>
+  </td>
+</tr>
+`
 
-{{{ greeting }}}
-joost
+export const small = (content) => `
+<tr>
+  <td align="left" class="sm-p-15px" style="padding-top: 15px">
+    <p style="margin: 0; font-size: 12px; line-height: 18px; color: #262626">
+      ${content}
+    </p>
+  </td>
+</tr>
+`
 
-PS: {{{ text-ps }}} : {{{ supportUrl }}}`,
-}
+export const check = (content) => `
+<tr>
+  <td align="left" class="sm-p-15px" style="padding-top: 15px">
+    <p style="margin: 0; font-size: 24px; line-height: 35px; color: #262626; font-weight: 900; letter-spacing: 8px; padding-left: 24px;">
+      ${content}
+    </p>
+  </td>
+</tr>
+`
 
-export const newsletterClosingRow = {
-  html: `
-  <tr>
-    <td align="left" class="sm-p-15px" style="padding-top: 30px">
-      <p style="margin: 0; font-size: 16px; line-height: 25px; color: #262626">
-        {{{ closing }}}
-        <br><br>
-        {{{ greeting }}}
-        <br>
-        joost
-      </p>
-    </td>
-  </tr>`,
-  text: `
-{{{ closing }}}
-
-{{{ greeting }}}
-joost
-`,
-}
-
-export const headingRow = {
-  html: `
-  <tr>
-    <td align="left" class="sm-p-15px" style="padding-top: 30px">
-      <h2 style="margin: 0; font-size: 30px; color: #525252">
-        <a href="{{{ actionUrl }}}" target="_blank" style="text-decoration: none; color: #525252">
-          {{{ heading }}}
-        </a>
-      </h2>
-    </td>
-  </tr>`,
-  text: `
-{{ heading }}
-`,
-}
-
-export const lead1Row = {
-  html: `
-  <tr>
-    <td align="left" class="sm-p-15px" style="padding-top: 15px">
-      <p style="margin: 0; font-size: 16px; line-height: 25px; color: #262626">
-        <a href="{{{ actionUrl }}}" target="_blank" style="text-decoration: none; color: #262626">
-          <b>{{{ lead }}}</b>
-        </a>
-      </p>
-    </td>
-  </tr>`,
-  text: `{{{ text-lead }}}
-  {{{ actionUrl }}}
-  `,
-}
-
-export const preLeadRow = {
-  html: `
-  <tr>
-    <td align="left" class="sm-p-15px" style="padding-top: 15px">
-      <p style="margin: 0; font-size: 16px; line-height: 25px; color: #262626">
-        {{{ preLead }}}
-        <br><br>
-        <a href="{{{ actionUrl }}}" target="_blank" style="text-decoration: none; color: #262626">
-          <b>{{{ lead }}}</b>
-        </a>
-      </p>
-    </td>
-  </tr>`,
-  text: `{{{ preLead }}}
-  {{{ text-lead }}}
-  {{{ actionUrl }}}
-  `,
-}
+export const link = ({ link, text }) =>
+  p(`
+  <a
+    href="${link}"
+    target="_blank"
+    class="sm-block sm-p-15px sm-border-0"
+    style="padding: 15px 25px; font-size: 16px; font-weight: 700;"
+  >${text}</a>`)
 
 export const wrap = {
   html: (body) => `<!DOCTYPE html>
@@ -223,18 +155,16 @@ export const wrap = {
 <table align="center" class="sm-max-w-full" style="width: 100%; max-width: 500px" border="0" cellpadding="0" cellspacing="0" role="presentation">
   <tr>
     <td align="left" style="border-top: 1px solid #ddd; padding: 8px" ;>
-      <p style="margin: 0; font-size: 14px; line-height: 24px; color: #868e96; text-align: center;">
-        <a href="https://{{ website }}" target="_blank" style="text-decoration: underline; color: #868e96"><b>{{ website }}</b></a>
-        <span style="font-size: 13px; color: #737373">&nbsp;&nbsp;|&nbsp;&nbsp;</span>
-        <a href="https://freesewing.dev" target="_blank" style="text-decoration: underline; color: #868e96"><b>FreeSewing.dev</b></a>
-        <span style="font-size: 13px; color: #737373">&nbsp;&nbsp;|&nbsp;&nbsp;</span>
-        <a href="https://freesewing.social" target="_blank" style="text-decoration: underline; color: #868e96"><b>FreeSewing.social</b></a>
-      </p>
       <p style="margin: 0; font-size: 12px; margin-top: 12px; line-height: 18px; color: #868e96; text-align: center;">
-        {{ notMarketing }}
+        This message was sent to: {{ email }}.
         <br>
-        Recipient: {{ email }}&nbsp;&nbsp;|&nbsp;&nbsp;
-        <a href="{{{ whyUrl }}}" target="_blank" style="text-decoration: underline; color: #868e96">{{ whyDidIGetThis }}</a>
+        This is a not a marketing message, but a transactional email from
+        <a href="https://freesewing.eu/" target="_blank" style="text-decoration: underline; color: #868e96"><b>FreeSewing.eu</b></a>
+        <br>
+        <br>
+        For support, you can reach us at <a href="mailto:support@freesewing.eu" target="_blank"
+        style="text-decoration: underline; color: #868e96"><b>support@freesewing.eu</b></a>, or
+        you can simply reply to this message.
         <br>
         <br>
         FreeSewing
@@ -269,7 +199,7 @@ Antwerp 2018
 Belgium
 
 {{ website }} : {{{ urlWebsite }}}
-Github : https://github.com/freesewing/freesewing
+Codeberg : https://codeberg.org/freesewing/freesewing
 {{ whyDidIGetThis }} : {{{ whyUrl }}}
 `,
 }

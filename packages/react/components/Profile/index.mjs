@@ -1,5 +1,5 @@
 // Dependencies
-import { cloudflareImageUrl, getSearchParam } from '@freesewing/utils'
+import { imageCdnUrl, getSearchParam } from '@freesewing/utils'
 // Context
 import { ModalContext } from '@freesewing/react/context/Modal'
 // Hooks
@@ -88,10 +88,10 @@ export const UserProfile = ({ Link = false, setTitle = false, uid = false, fromU
  * A component to render an avatar image
  *
  * @component
- * @param {string} ihash - The ihash of the account
+ * @param {string} uuid - The uuid of the account
  * @returns {JSX.Element}
  */
-export const Avatar = ({ ihash }) => {
+export const Avatar = ({ uuid }) => {
   const { setModal } = useContext(ModalContext)
 
   return (
@@ -100,7 +100,7 @@ export const Avatar = ({ ihash }) => {
         setModal(
           <ModalWrapper>
             <img
-              src={cloudflareImageUrl({ id: `uid-${ihash}`, variant: 'public' })}
+              src={imageCdnUrl({ type: 'user', id: uuid })}
               className="tw:max-w-full tw:max-h-screen"
             />
           </ModalWrapper>
@@ -108,7 +108,7 @@ export const Avatar = ({ ihash }) => {
       }
     >
       <img
-        src={cloudflareImageUrl({ id: `uid-${ihash}`, variant: 'sq500' })}
+        src={imageCdnUrl({ type: 'user', id: uuid })}
         className="tw:w-32 tw:h-32 tw:rounded-full tw:shadow tw:border-current tw:border-4"
       />
     </button>

@@ -97,6 +97,12 @@ const baseConfig = {
   bookmarks: {
     types: ['set', 'cset', 'pattern', 'design', 'doc', 'custom'],
   },
+  email: {
+    from: 'FreeSewing <no-reply@tx.freesewing.eu>',
+    bcc: ['FreeSewing records <records@freesewing.eu>'],
+    token: process.env.BACKEND_SCALEWAY_EMAIL_TOKEN,
+    project: process.env.BACKEND_SCALEWAY_PROJECT_ID,
+  },
   encryption: {
     key: encryptionKey,
   },
@@ -218,23 +224,6 @@ if (baseConfig.use.fowardmx)
     useInTests: baseConfig.use.tests.fowardmx,
   }
 
-// AWS SES config (for sending out emails)
-if (baseConfig.use.ses)
-  baseConfig.aws = {
-    ses: {
-      region: process.env.BACKEND_AWS_SES_REGION || 'us-east-1',
-      from: process.env.BACKEND_AWS_SES_FROM || 'FreeSewing <info@freesewing.org>',
-      replyTo: process.env.BACKEND_AWS_SES_REPLY_TO
-        ? JSON.parse(process.env.BACKEND_AWS_SES_REPLY_TO)
-        : ['FreeSewing <info@freesewing.org>'],
-      feedback: process.env.BACKEND_AWS_SES_FEEDBACK,
-      cc: process.env.BACKEND_AWS_SES_CC ? JSON.parse(process.env.BACKEND_AWS_SES_CC) : [],
-      bcc: process.env.BACKEND_AWS_SES_BCC
-        ? JSON.parse(process.env.BACKEND_AWS_SES_BCC)
-        : ['FreeSewing records <records@freesewing.org>'],
-    },
-  }
-
 // OIDC Provider config
 if (baseConfig.use.oidc.provider) {
   baseConfig.oidc = {
@@ -329,9 +318,12 @@ const vars = {
   BACKEND_ENABLE_TESTS: 'optional',
   BACKEND_ALLOW_TESTS_IN_PRODUCTION: 'optional',
   BACKEND_ENABLE_DUMP_CONFIG_AT_STARTUP: 'optional',
+  // Email
+  BACKEND_SCALEWAY_PROJECT_ID: 'required',
+  BACKEND_SCALEWAY_EMAIL_TOKEN: 'requiredSecret',
 }
 
-// Vars for AWS SES integration
+// Vars for email
 if (envToBool(process.env.BACKEND_ENABLE_AWS_SES)) {
   vars.AWS_ACCESS_KEY_ID = 'required'
   vars.AWS_SECRET_ACCESS_KEY = 'requiredSecret'

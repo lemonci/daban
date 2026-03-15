@@ -62,6 +62,7 @@ function loadExpressMiddleware(app, config) {
     // Forum OIDC clients
     'https://forum.freesewing.eu',
     'https://forum.freesewing.org',
+    'http://localhost:3000',
   ])
 
   app.use(
@@ -116,7 +117,7 @@ function loadPassportMiddleware(passport, tools) {
         return ok
           ? done(null, {
               ...jwt_payload,
-              uid: jwt_payload._id,
+              uuid: jwt_payload._id,
               level: tools.config.roles.levels[jwt_payload.role] || 0,
             })
           : done(false)
@@ -142,7 +143,7 @@ function loadPassportMiddleware(passport, tools) {
         return ok
           ? done(null, {
               ...jwt_payload,
-              uid: jwt_payload._id,
+              uuid: jwt_payload._id,
               level: tools.config.roles.levels[jwt_payload.role] || 0,
               guestError: err ? err : false,
             })

@@ -1,5 +1,5 @@
 import { replacements } from './shared/replacements.mjs'
-import { buttonRow, closingRow, headingRow, preLeadRow, wrap } from './shared/blocks.mjs'
+import { buttonRow, checkRow, closingRow, headingRow, preLeadRow, wrap } from './shared/blocks.mjs'
 
 // aea = Account Exists and is Active
 export const signupaea = {
@@ -7,6 +7,7 @@ export const signupaea = {
   ${headingRow.html}
   ${preLeadRow.html}
   ${buttonRow.html}
+  ${checkRow.html}
   ${closingRow.html}
 `),
   text: wrap.text(`
@@ -17,6 +18,8 @@ export const signupaea = {
 {{{ textLead }}}
 
 {{{ actionUrl }}}
+
+{{{ check }}}
 
 {{{ closing }}}
 
@@ -33,6 +36,7 @@ PS: {{{ text-ps }}} : {{{ supportUrl }}}
       'Someone (you?) tried to sign up with this email address. But we already have an active account tied to this email.',
     lead: 'To log in to your account, click the big black button below:',
     'text-lead': 'To log in to your account, click the link below:',
+    check: 'Use this confirmation code:',
     button: 'Log in',
     closing: "That's all it takes.",
   },

@@ -1,4 +1,3 @@
-import { replacements } from './shared/replacements.mjs'
 import { buttonRow, closingRow, headingRow, lead1Row, wrap } from './shared/blocks.mjs'
 
 export const emailchange = {

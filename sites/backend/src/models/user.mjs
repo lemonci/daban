@@ -1,7 +1,7 @@
 import jwt from 'jsonwebtoken'
 import { log } from '../utils/log.mjs'
-import { hash, hashPassword, randomString, verifyPassword } from '../utils/crypto.mjs'
-import { replaceImage, removeImage } from '../utils/cloudflare-images.mjs'
+import { hash, hashPassword, randomString, randomOtp, verifyPassword } from '../utils/crypto.mjs'
+import { saveImage } from '../utils/image.mjs'
 import { clean, asJson, i18nUrl, writeExportedData } from '../utils/index.mjs'
 import { decorateModel } from '../utils/model-decorator.mjs'
 
@@ -34,9 +34,9 @@ UserModel.prototype.profile = async function ({ params }) {
 
   /*
    * Try to find the record in the database
-   * Note that find checks lusername, ehash, and id but we
+   * Note that find checks lusername, ehash, and uuid but we
    * pass it in the username value as that's what the login
-   * rout does
+   * route does
    */
   await this.find({ username: params.id })
 
@@ -61,15 +61,15 @@ UserModel.prototype.profile = async function ({ params }) {
  */
 UserModel.prototype.allData = async function ({ params, user }) {
   /*
-   * Is id set?
+   * Is uuid set?
    */
-  if (typeof params.id === 'undefined') return this.setResponse(403, 'idMissing')
+  if (typeof params.uuid === 'undefined') return this.setResponse(403, 'uuidMissing')
 
   /*
    * Is this the user's own data?
-   * params.id is a string from the URL; user.uid is the numeric id from the JWT.
+   * params.uuid is a string from the URL; user.uid is the numeric id from the JWT.
    */
-  if (Number(params.id) !== user.uid) return this.setResponse(403, 'idMismatch')
+  if (Number(params.id) !== user.uuid) return this.setResponse(403, 'idMismatch')
 
   /*
    * Try to find the record in the database
@@ -78,7 +78,7 @@ UserModel.prototype.allData = async function ({ params, user }) {
    * route does
    */
   await this.read(
-    { id: Number(params.id) },
+    { uuid: Number(params.uuid) },
     { apikeys: true, bookmarks: true, patterns: true, sets: true }
   )
 
@@ -103,7 +103,10 @@ UserModel.prototype.exportAccount = async function ({ user }) {
   /*
    * Read the record from the database
    */
-  await this.read({ id: user.uid }, { apikeys: true, bookmarks: true, patterns: true, sets: true })
+  await this.read(
+    { uuid: user.uuid },
+    { apikeys: true, bookmarks: true, patterns: true, sets: true }
+  )
 
   /*
    * If it does not exist, return 404
@@ -163,8 +166,9 @@ UserModel.prototype.removeAccount = async function ({ user }) {
 
   /*
    * Remove user image
+   * FIXME: To be migrated
    */
-  await removeImage(`user-${this.record.ihash}`)
+  //await removeImage(`user-${this.record.ihash}`)
 
   /*
    * Remove account
@@ -421,7 +425,7 @@ UserModel.prototype.guardedCreate = async function ({ body }) {
    * Create ehash and check
    */
   const ehash = hash(clean(body.email))
-  const check = randomString()
+  const check = randomOtp(4)
 
   /*
    * Check if we already have a user with this email address
@@ -472,9 +476,9 @@ UserModel.prototype.guardedCreate = async function ({ body }) {
      */
     let actionUrl = false
     if (this.record.status === 0)
-      actionUrl = i18nUrl('en', `/confirm/${type}?id=${this.Confirmation.record.id}&check=${check}`)
+      actionUrl = i18nUrl('en', `/confirm/${type}?id=${this.Confirmation.record.id}`)
     else if (this.record.status === 1)
-      actionUrl = i18nUrl('en', `/confirm/signin?id=${this.Confirmation.record.id}&check=${check}`)
+      actionUrl = i18nUrl('en', `/confirm/signin?id=${this.Confirmation.record.id}`)
 
     /*
      * Send email
@@ -487,6 +491,7 @@ UserModel.prototype.guardedCreate = async function ({ body }) {
         actionUrl,
         whyUrl: i18nUrl('en', `/docs/faq/email/why-${type}`),
         supportUrl: i18nUrl('en', `/patrons/join`),
+        check,
       },
     })
 
@@ -591,9 +596,10 @@ UserModel.prototype.guardedCreate = async function ({ body }) {
     language: 'en',
     to: this.clear.email,
     replacements: {
-      actionUrl: i18nUrl('en', `/confirm/signup?id=${this.Confirmation.record.id}&check=${check}`),
+      actionUrl: i18nUrl('en', `/confirm/signup?id=${this.Confirmation.record.id}`),
       whyUrl: i18nUrl('en', `/docs/faq/email/why-signup`),
       supportUrl: i18nUrl('en', `/patrons/join`),
+      check,
     },
   })
 
@@ -711,7 +717,7 @@ UserModel.prototype.passwordSignIn = async function (req) {
  */
 UserModel.prototype.linkSignIn = async function (req) {
   /*
-   * Is the id set?
+   * Is the uuid set?
    */
   if (!req.params.id) return this.setResponse(400, 'signInIdMissing')
 
@@ -868,12 +874,12 @@ UserModel.prototype.confirm = async function ({ body, params }) {
   /*
    * Is the id set?
    */
-  if (!params.id) return this.setResponse(404)
+  if (!params.uuid) return this.setResponse(404)
 
   /*
    * Do we have a POST body?
    */
-  if (Object.keys(body).length < 1) return this.setResponse(400, 'postBodyMissing')
+  if (Object.keys(body).length < 2) return this.setResponse(400, 'postBodyMissing')
 
   /*
    * Do we have consent from the user to process their data?
@@ -884,13 +890,13 @@ UserModel.prototype.confirm = async function ({ body, params }) {
   /*
    * Attempt to read the confirmation from the database
    */
-  await this.Confirmation.read({ id: params.id }, { user: true })
+  await this.Confirmation.read({ id: params.uuid }, { user: true })
 
   /*
    * If the confirmation does not exist, log a warning and return 404
    */
   if (!this.Confirmation.exists) {
-    log.warn(`Could not find confirmation id ${params.id}`)
+    log.warn(`Could not find confirmation id ${params.uuid}`)
     return this.setResponse(404)
   }
 
@@ -898,7 +904,7 @@ UserModel.prototype.confirm = async function ({ body, params }) {
    * If the confirmation is of the wrong type, log a warning and return 404
    */
   if (this.Confirmation.record.type !== 'signup') {
-    log.warn(`Confirmation mismatch; ${params.id} is not a signup id`)
+    log.warn(`Confirmation mismatch; ${params.uuid} is not a signup id`)
     return this.setResponse(404)
   }
 
@@ -913,9 +919,9 @@ UserModel.prototype.confirm = async function ({ body, params }) {
   const data = this.Confirmation.clear.data
 
   /*
-   * If the ehash does not match, return 404
+   * If the check does not match, return 404
    */
-  if (data.ehash !== this.Confirmation.record.user.ehash) return this.setResponse(404)
+  if (data.check !== body.check) return this.setResponse(404)
 
   /*
    * If the id does not match, return 404
@@ -1069,11 +1075,7 @@ UserModel.prototype.guardedUpdate = async function ({ body, user }) {
   /*
    * Image (img)
    */
-  if (typeof body.img === 'string')
-    await replaceImage({
-      id: `uid-${this.record.ihash}`,
-      data: body.img,
-    })
+  if (typeof body.img === 'string') await saveImage('user', this.record.uuid, body.img)
 
   /*
    * Now update the database record
@@ -1405,28 +1407,22 @@ UserModel.prototype.asAccount = function () {
    * Nothing to do here but construct the object to return
    */
   const data = this.clear.data
-  if (data.mfaScratchCodes) delete data.mfaScratchCodes
+  if (data?.mfaScratchCodes) delete data.mfaScratchCodes
 
   return {
-    id: this.record.id,
+    //id: this.record.id,
+    uuid: this.record.uuid,
     bio: this.clear.bio,
     compare: this.record.compare,
     consent: this.record.consent,
     control: this.record.control,
-    createdAt: this.record.createdAt,
     email: this.clear.email,
     data,
     imperial: this.record.imperial,
-    jwtCalls: this.record.jwtCalls,
-    keyCalls: this.record.keyCalls,
-    language: this.record.language,
-    lastSeen: this.record.lastSeen,
     mfaEnabled: this.record.mfaEnabled,
     newsletter: this.record.newsletter,
-    patron: this.record.patron,
     role: this.record.role,
     status: this.record.status,
-    updatedAt: this.record.updatedAt,
     username: this.record.username,
     lusername: this.record.lusername,
   }
@@ -1526,7 +1522,7 @@ UserModel.prototype.getToken = function () {
    */
   return jwt.sign(
     {
-      _id: this.record.id,
+      _id: this.record.uuid,
       username: this.record.username,
       role: this.record.role,
       status: this.record.status,
@@ -1629,7 +1625,7 @@ UserModel.prototype.isLusernameAvailable = async function (lusername) {
  *
  * If this returns false, the request will never make it past the middleware.
  *
- * @param {id} string - The user ID
+ * @param {id} string - The user UUID
  * @param {type} string - The authentication type (one of 'jwt' or 'key')
  * @param {type} string - The middleware auth payload
  * @returns {success} boolean - True if it worked, false if not
@@ -1646,7 +1642,8 @@ UserModel.prototype.papersPlease = async function (id, type, payload) {
    */
   let user
   try {
-    user = await this.prisma.user.update({ where: { id }, data })
+    const where = type === 'key' ? { id } : { uuid: id }
+    user = await this.prisma.user.update({ where, data })
   } catch (err) {
     /*
      * An error means it's not good. Return false

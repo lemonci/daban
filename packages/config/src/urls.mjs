@@ -3,8 +3,11 @@
  */
 export const urls = {
   // FreeSewing Backend
-  backend: 'https://backend.freesewing.eu',
+  backend: 'http://localhost:3001',
+  //backend: 'https://backend.freesewing.eu',
   //backend: 'http://localhost:3001',
+  // FreeSewing CDN (content delivery network)
+  cdn: 'https://cdn.freesewing.eu',
   // FreeSewing website
   website: 'https://freesewing.eu',
   // FreeSewing monorepo

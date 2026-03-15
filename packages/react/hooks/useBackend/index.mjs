@@ -134,8 +134,8 @@ Backend.prototype.confirmMfa = async function (data) {
  * @param {string} data.consent - The consent data
  * @return {array} result - The REST response, a [status, data] array
  */
-Backend.prototype.confirmSignup = async function ({ id, consent }) {
-  return await this.post(`/confirm/signup/${id}`, { consent })
+Backend.prototype.confirmSignup = async function ({ id, consent, check }) {
+  return await this.post(`/confirm/signup/${id}`, { consent, check })
 }
 
 /**
@@ -398,11 +398,11 @@ Backend.prototype.getUserCount = async function () {
 /**
  * Get user data
  *
- * @param {number} uid - The user ID
+ * @param {number} uuid - The user UUID
  * @return {array} result - The REST response, a [status, data] array
  */
-Backend.prototype.getUserData = async function (uid) {
-  return await this.get(`/users/${uid}/jwt`)
+Backend.prototype.getUserData = async function (uuid) {
+  return await this.get(`/users/${uuid}/jwt`)
 }
 
 /**

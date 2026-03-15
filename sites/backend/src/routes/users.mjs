@@ -13,7 +13,7 @@ export function usersRoutes(tools) {
   app.post('/signup', authRateLimit, (req, res) => Users.signup(req, res, tools))
 
   // Confirm account
-  app.post('/confirm/signup/:id', authRateLimit, (req, res) => Users.confirm(req, res, tools))
+  app.post('/confirm/signup/:uuid', authRateLimit, (req, res) => Users.confirm(req, res, tools))
 
   // Sign In
   app.post('/signin', authRateLimit, (req, res) => Users.signin(req, res, tools))
@@ -72,16 +72,15 @@ export function usersRoutes(tools) {
   )
 
   // Load full user data
-  app.get('/users/:id/jwt', passport.authenticate(...jwt), (req, res) =>
+  app.get('/users/:uuid/jwt', passport.authenticate(...jwt), (req, res) =>
     Users.allData(req, res, tools)
   )
-  app.get('/users/:id/key', passport.authenticate(...bsc), (req, res) =>
+  app.get('/users/:uuid/key', passport.authenticate(...bsc), (req, res) =>
     Users.allData(req, res, tools)
   )
 
   // Load a user profile
-  // We removed this to prevent user enumeration
-  //app.get('/users/:id', (req, res) => Users.profile(req, res, tools))
+  app.get('/users/:uuid', (req, res) => Users.profile(req, res, tools))
 
   // Export account data
   app.get('/account/export/jwt', passport.authenticate(...jwt), (req, res) =>

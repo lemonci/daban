@@ -8,13 +8,6 @@ export const defaultConfig = {
   // TODO: this is the link to the sets page, the new set button is a dynamic popover on that page
   // TODO and not directly linkable
   hrefNewSet: '/account/data/sets/',
-  // Cloud default image
-  cloudImageDflt:
-    'https://imagedelivery.net/ouSuR9yY1bHt-fuAokSA5Q/365cc64e-1502-4d2b-60e0-cc8beee73f00/public',
-  // Cloud image base URL
-  cloudImageUrl: 'https://imagedelivery.net/ouSuR9yY1bHt-fuAokSA5Q/',
-  // Cloud image variants
-  cloudImageVariants: ['public', 'sq100', 'sq200', 'sq500', 'w200', 'w500', 'w1000', 'w2000'],
   // Views
   mainViews: ['draft', 'designs', 'save', 'export'],
   extraViews: ['measurements', 'undos', 'layout', 'docs'],

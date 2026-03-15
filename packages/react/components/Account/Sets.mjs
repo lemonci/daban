@@ -1,7 +1,7 @@
 // Dependencies
 import { measurements as measurementsTranslations } from '@freesewing/i18n'
 import { requiredMeasurements as designMeasurements } from '@freesewing/collection'
-import { cloudflareImageUrl, hasRequiredMeasurements } from '@freesewing/utils'
+import { imageCdnUrl, hasRequiredMeasurements } from '@freesewing/utils'
 // Context
 import { LoadingStatusContext } from '@freesewing/react/context/LoadingStatus'
 import { ModalContext } from '@freesewing/react/context/Modal'
@@ -198,7 +198,7 @@ export const MsetCard = ({
       tw:hover:cursor-pointer tw:border-0 tw:opacity-80 tw:hover:opacity-100
       tw:mx-auto tw:flex tw:flex-col tw:items-start tw:text-center tw:justify-between tw:rounded-none tw:md:rounded shadow`,
     style: {
-      backgroundImage: `url(${cloudflareImageUrl({ type: 'w500', id: set.img })})`,
+      backgroundImage: `url(${imageCdnUrl({ type: 'set', id: set.uuid })})`,
       backgroundSize: 'cover',
       backgroundRepeat: 'no-repeat',
       backgroundPosition: '50%',

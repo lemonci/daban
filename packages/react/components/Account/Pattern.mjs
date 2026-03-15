@@ -1,5 +1,5 @@
 // Dependencies
-import { cloudflareImageUrl, horFlexClasses, patternUrlFromState } from '@freesewing/utils'
+import { imageCdnUrl, horFlexClasses, patternUrlFromState } from '@freesewing/utils'
 import { urls, control as controlConfig } from '@freesewing/config'
 // Context
 import { LoadingStatusContext } from '@freesewing/react/context/LoadingStatus'
@@ -285,7 +285,7 @@ export const PatternCard = ({
   const wrapperProps = {
     className: `tw:bg-base-300 tw:w-full tw:mb-2 tw:mx-auto tw:flex tw:flex-col tw:items-start tw:text-center tw:justify-center tw:rounded tw:shadow tw:py-4 tw:w-${s} tw:aspect-square`,
     style: {
-      backgroundImage: `url(${cloudflareImageUrl({ type: 'w1000', id: pattern.img })})`,
+      backgroundImage: `url(${imageCdnUrl({ type: 'pattern', id: pattern.uuid })})`,
       backgroundSize: 'cover',
       backgroundRepeat: 'no-repeat',
       backgroundPosition: '50%',
@@ -361,7 +361,7 @@ const PatternHeader = ({ pattern, Link, account, setModal, setEdit, togglePublic
           onClick={() =>
             setModal(
               <ModalWrapper flex="col" justify="top tw:lg:justify-center" slideFrom="right">
-                <img src={cloudflareImageUrl({ type: 'public', id: pattern.img })} />
+                <img src={imageCdnUrl({ type: 'pattern', id: pattern.uuid })} />
               </ModalWrapper>
             )
           }

@@ -1,3 +1,4 @@
+import { domains } from '@freesewing/config'
 // Utils
 import { horFlexClasses, horFlexClassesNoSm, getSearchParam, navigate } from '@freesewing/utils'
 // Context
@@ -157,10 +158,11 @@ export const SignIn = ({ onSuccess = false, silent = false }) => {
       <WrapForm>
         <H1>Email Sent</H1>
         <p className="tw:text-inherit tw:text-lg tw:text-center">
-          Go check your inbox for an email from <b>FreeSewing.org</b>
+          Go check your inbox for an email from <b>no-reply@{domains.email.transaction}</b>
         </p>
         <p className="tw:text-inherit tw:text-lg tw:text-center">
-          Click the sign-in link in that email to sign in to your FreeSewing account.
+          The email will include a code and a link. Click the sign-in link in that email to go to
+          the sign in page, then enter the code to sign in.
         </p>
         <div className="tw:flex tw:flex-row tw:gap-4 tw:items-center tw:justify-center tw:p-8">
           <button

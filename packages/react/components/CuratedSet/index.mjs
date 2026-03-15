@@ -1,5 +1,5 @@
 // Dependencies
-import { orderBy, cloudflareImageUrl, getSearchParam, formatMm } from '@freesewing/utils'
+import { orderBy, imageCdnUrl, getSearchParam, formatMm } from '@freesewing/utils'
 import { isDegreeMeasurement } from '@freesewing/config'
 import { measurements as measurementTranslations } from '@freesewing/i18n'
 // Hooks
@@ -72,9 +72,9 @@ export const CuratedSetLineup = ({ href = false, clickHandler = false, Link = fa
           className:
             'tw:aspect-1/3 tw:w-auto tw:h-96 tw:bg-transparent tw:border-0 tw:hover:cursor-pointer tw:hover:bg-secondary/20',
           style: {
-            backgroundImage: `url(${cloudflareImageUrl({
-              id: `cset-${set.id}`,
-              type: 'lineup',
+            backgroundImage: `url(${imageCdnUrl({
+              id: set.id,
+              type: 'cset',
             })})`,
             width: 'auto',
             backgroundSize: 'contain',
@@ -144,7 +144,7 @@ export const CuratedSet = ({ Link = false, id = false }) => {
       </h2>
       <Markdown>{set.notesEn}</Markdown>
       <h2>Image</h2>
-      <img src={cloudflareImageUrl({ id: `cset-${set.id}`, variant: 'public' })} />
+      <img src={imageCdnUrl({ id: set.id, type: 'cset' })} />
       <h2>Measurements</h2>
       <table className="tw:table">
         <thead>

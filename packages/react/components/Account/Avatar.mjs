@@ -1,6 +1,6 @@
 // Dependencies
 import { welcomeSteps } from './shared.mjs'
-import { cloudflareImageUrl } from '@freesewing/utils'
+import { imageCdnUrl } from '@freesewing/utils'
 
 // Context
 import { LoadingStatusContext } from '@freesewing/react/context/LoadingStatus'
@@ -13,7 +13,7 @@ import { useBackend } from '@freesewing/react/hooks/useBackend'
 // Components
 import { Link as WebLink } from '@freesewing/react/components/Link'
 import { SaveIcon, RightIcon } from '@freesewing/react/components/Icon'
-import { PassiveImageInput } from '@freesewing/react/components/Input'
+import { PassiveImageInput, NoImageUploads } from '@freesewing/react/components/Input'
 import { IconButton } from '@freesewing/react/components/Button'
 import { WelcomeIcons } from './shared.mjs'
 
@@ -52,12 +52,41 @@ export const Avatar = ({ welcome = false, Link = false }) => {
   // Next page in welcome flow
   const nextHref = '/docs/about/'
 
+  // FIXME - Remove this once image upload logic is migrated
+  if (welcome)
+    return (
+      <>
+        <NoImageUploads />
+        <IconButton href={nextHref} className="tw:mt-4">
+          <RightIcon stroke={3} /> Continue
+        </IconButton>
+        {welcomeSteps[account.control].length > 0 ? (
+          <>
+            <progress
+              className="tw:progress tw:progress-primary tw:w-full tw:mt-12"
+              value={700 / welcomeSteps[account.control].length}
+              max="100"
+            ></progress>
+            <span className="tw:pt-4 tw:text-sm tw:font-bold tw:opacity-50">
+              7 / {welcomeSteps[account.control].length}
+            </span>
+            <WelcomeIcons
+              done={welcomeSteps[account.control].slice(0, 6)}
+              todo={welcomeSteps[account.control].slice(7)}
+              current="img"
+            />
+          </>
+        ) : null}
+      </>
+    )
+  return <NoImageUploads />
+
   return (
     <div className="tw:w-full">
       {!welcome || img !== false ? (
         <img
           alt="img"
-          src={img || cloudflareImageUrl({ id: `uid-${account.ihash}`, variant: 'public' })}
+          src={img || imageCdnUrl({ type: 'user', id: account.uuid })}
           className="tw:shadow tw:mb-4"
         />
       ) : null}
@@ -68,7 +97,8 @@ export const Avatar = ({ welcome = false, Link = false }) => {
         update={setImg}
         current={img}
         valid={(val) => val.length > 0}
-      />
+      />{' '}
+      )}
       {welcome ? (
         <>
           <IconButton onClick={save} btnProps={{ disabled: !img }}>

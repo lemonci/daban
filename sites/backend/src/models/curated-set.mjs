@@ -1,6 +1,5 @@
 import { capitalize } from '../utils/index.mjs'
 import { log } from '../utils/log.mjs'
-import { storeImage } from '../utils/cloudflare-images.mjs'
 import { decorateModel } from '../utils/model-decorator.mjs'
 
 /*
@@ -74,12 +73,13 @@ CuratedSetModel.prototype.guardedCreate = async function ({ body, user }) {
 
   /*
    * Now that we have a record and ID, we can upload the image to cloudflare and set its id
+   * FIXME: To be migrated
    */
-  await storeImage({
-    id: `cset-${this.record.id}`,
-    metadata: { user: user.uid },
-    b64: body.img,
-  })
+  //await storeImage({
+  //  id: `cset-${this.record.id}`,
+  //  metadata: { user: user.uid },
+  //  b64: body.img,
+  //})
 
   /*
    * Record created, return data in the proper format

@@ -1,5 +1,5 @@
 import { log } from '../utils/log.mjs'
-import { replaceImage, storeImage } from '../utils/cloudflare-images.mjs'
+import { saveImage } from '../utils/image.mjs'
 import { decorateModel } from '../utils/model-decorator.mjs'
 
 /*
@@ -50,26 +50,14 @@ SetModel.prototype.guardedCreate = async function ({ body, user }) {
   })
 
   /*
-   * If an image was added, now update it since we have the record id now
+   * Re-read the record to pick up the UUID set by the database trigger
    */
-  const img =
-    typeof body.img === 'string'
-      ? await storeImage({
-          id: `set-${this.record.id}`,
-          metadata: {
-            user: user.uid,
-            name: this.clear.name,
-          },
-          b64: body.img,
-          requireSignedURLs: true,
-        })
-      : false
+  await this.read({ id: this.record.id })
 
   /*
-   * Either update the image, or refresh the record
+   * If an image was provided, save it to disk using the UUID
    */
-  if (img) await this.update({ img })
-  else await this.read({ id: this.record.id })
+  if (typeof body.img === 'string') await saveImage('set', this.record.uuid, body.img)
 
   /*
    * Now return 201 and the data
@@ -282,15 +270,7 @@ SetModel.prototype.guardedUpdate = async function ({ params, body, user }) {
   /*
    * Image (img)
    */
-  if (typeof body.img === 'string')
-    data.img = await replaceImage({
-      id: `set-${this.record.id}`,
-      data: body.img,
-      metadata: {
-        user: user.uid,
-        name: this.clear.name,
-      },
-    })
+  if (typeof body.img === 'string') await saveImage('set', this.record.uuid, body.img)
 
   /*
    * Now update the database record

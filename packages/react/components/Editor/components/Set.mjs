@@ -1,5 +1,5 @@
 // Dependencies
-import { cloudflareImageUrl, hasRequiredMeasurements, orderBy } from '@freesewing/utils'
+import { imageCdnUrl, hasRequiredMeasurements, orderBy } from '@freesewing/utils'
 // Hooks
 import React, { useState, useEffect } from 'react'
 import { useBackend } from '@freesewing/react/hooks/useBackend'
@@ -247,10 +247,7 @@ export const CuratedMeasurementsSetLineup = ({ sets = [], clickHandler }) => (
         className:
           'tw:aspect-1/3 tw:w-auto tw:h-96 tw:bg-transparent tw:border-0 tw:hover:cursor-pointer tw:hover:bg-secondary/20',
         style: {
-          backgroundImage: `url(${cloudflareImageUrl({
-            id: `cset-${set.id}`,
-            type: 'lineup',
-          })})`,
+          backgroundImage: `url(${imageCdnUrl({ type: 'cset', id: set.id })})`,
           width: 'auto',
           backgroundSize: 'contain',
           backgroundRepeat: 'no-repeat',

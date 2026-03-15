@@ -690,23 +690,7 @@ export function stateUpdateFactory(setState, setEphemeralState, config) {
       }),
   }
 }
-/*
- * Returns the URL of a cloud-hosted image (cloudflare in this case) based on the ID and Variant
- */
-export function cloudImageUrl({ id = 'default-avatar', variant = 'public' }) {
-  /*
-   * Return something default so that people will actually change it
-   */
-  if (!id || id === 'default-avatar') return defaultConfig.cloudImageDflt
 
-  /*
-   * If the variant is invalid, set it to the smallest thumbnail so
-   * people don't load enourmous images by accident
-   */
-  if (!defaultConfig.cloudImageVariants.includes(variant)) variant = 'sq100'
-
-  return `${defaultConfig.cloudImageUrl}${id}/${variant}`
-}
 /**
  * This method does nothing. It is used to disable certain methods
  * that need to be passed it to work
@@ -716,6 +700,7 @@ export function cloudImageUrl({ id = 'default-avatar', variant = 'public' }) {
 export function noop() {
   return null
 }
+
 /*
  * A method that check that a value is not empty
  */

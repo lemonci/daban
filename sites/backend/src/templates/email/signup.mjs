@@ -1,35 +1,36 @@
-import { replacements } from './shared/replacements.mjs'
-import { buttonRow, closingRow, headingRow, lead1Row, wrap } from './shared/blocks.mjs'
+import { link, p, small, h2, check, wrap } from './shared/blocks.mjs'
 
 export const signup = {
-  html: wrap.html(`
-  ${headingRow.html}
-  ${lead1Row.html}
-  ${buttonRow.html}
-  ${closingRow.html}
-`),
+  subject: '[FreeSewing] You are invited to join FreeSewing',
+  html: wrap.html(
+    [
+      h2('This is your personal FreeSewing invite'),
+      p('This is an invite to create a FreeSewing account.'),
+      p('Your personal confirmation code is:'),
+      check('{{{ check }}}'),
+      link({ link: '{{{ actionUrl }}}', text: 'Create a FreeSewing account' }),
+      p(
+        `To accept this invite, click the link above, and enter your confirmation code (<b>{{{ check }}}</b>).`
+      ),
+      small(
+        `PS: If you did not expect this email, you can safely ignore it.  Nothing will happen if you take no action.`
+      ),
+    ].join('\n')
+  ),
   text: wrap.text(`
-{{{ heading }}}
+Hello,
 
-{{{ textLead }}}
+This is an invite to create a FreeSewing account.
+
+Your personal confirmation code is: {{{ check }}}
+
+To accept this invite, visit the URL below, and enter your confirmation code ({{{ check }}}) :
 
 {{{ actionUrl }}}
 
-{{{ closing }}}
-
-{{{ greeting }}},
+love,
 joost
 
-PS: {{{ text-ps }}} : {{{ supportUrl }}}
+PS: If you did not expect this email, you can safely ignore it. Nothing will happen if you take no action.
 `),
-  replacements: {
-    ...replacements,
-    subject: '[FreeSewing] Here is your sign-up link for FreeSewing.org',
-    heading: 'Join FreeSewing',
-    lead: 'To create a FreeSewing account linked to this email address, click the big black rectangle below:',
-    'text-lead':
-      'To create a FreeSewing account linked to this email address, click the link below:',
-    button: 'Create an account',
-    closing: "That's all for now.",
-  },
 }

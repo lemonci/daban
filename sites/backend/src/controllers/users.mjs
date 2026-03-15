@@ -74,7 +74,7 @@ UsersController.prototype.signinvialink = async function (req, res, tools) {
  */
 UsersController.prototype.whoami = async (req, res, tools) => {
   const User = new UserModel(tools)
-  await User.whoami({ id: req.user.uid }, req)
+  await User.whoami({ uuid: req.user._id }, req)
 
   return User.sendResponse(res)
 }
@@ -86,7 +86,7 @@ UsersController.prototype.whoami = async (req, res, tools) => {
  */
 UsersController.prototype.update = async (req, res, tools) => {
   const User = new UserModel(tools)
-  await User.guardedRead({ id: req.user.uid }, req)
+  await User.guardedRead({ uuid: req.user._id }, req)
   await User.guardedUpdate(req)
 
   return User.sendResponse(res)

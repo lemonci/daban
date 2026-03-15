@@ -1,5 +1,5 @@
 // Dependencies
-import { cloudflareImageUrl, horFlexClasses, patternUrlFromState } from '@freesewing/utils'
+import { imageCdnUrl, horFlexClasses, patternUrlFromState } from '@freesewing/utils'
 import { urls, control as controlConfig } from '@freesewing/config'
 // Context
 import { LoadingStatusContext } from '@freesewing/react/context/LoadingStatus'
@@ -121,7 +121,7 @@ const PatternHeader = ({ pattern, Link, account, setModal, clone }) => (
           onClick={() =>
             setModal(
               <ModalWrapper flex="col" justify="top tw:lg:justify-center" slideFrom="right">
-                <img src={cloudflareImageUrl({ type: 'public', id: pattern.img })} />
+                <img src={imageCdnUrl({ type: 'pattern', id: pattern.uuid })} />
               </ModalWrapper>
             )
           }

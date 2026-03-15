@@ -8,7 +8,7 @@ import {
 import { measurements as measurementTranslations } from '@freesewing/i18n'
 import { measurements as designMeasurements } from '@freesewing/collection'
 import {
-  cloudflareImageUrl,
+  imageCdnUrl,
   formatMm,
   horFlexClasses,
   linkClasses,
@@ -276,7 +276,7 @@ export const Set = ({ id, publicOnly = false, Link = false }) => {
             onClick={() =>
               setModal(
                 <ModalWrapper flex="col" justify="top lg:justify-center" slideFrom="right">
-                  <img src={cloudflareImageUrl({ type: 'public', id: mset.img })} />
+                  <img src={imageCdnUrl({ type: 'set', id: mset.uuid })} />
                 </ModalWrapper>
               )
             }

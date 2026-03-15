@@ -46,6 +46,19 @@ export function randomString(bytes = 8) {
   return randomBytes(bytes).toString('hex')
 }
 
+export function randomDigit() {
+  const digits = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+
+  return digits[Math.floor(Math.random() * digits.length)]
+}
+
+export function randomOtp(length = 4) {
+  return Array(length)
+    .fill('')
+    .map((it) => randomDigit())
+    .join('')
+}
+
 /*
  * Returns an object holding encrypt() and decrypt() methods
  *
