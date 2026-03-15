@@ -5,7 +5,6 @@ import { bookmarksRoutes } from './bookmarks.mjs'
 import { patternsRoutes } from './patterns.mjs'
 import { confirmationsRoutes } from './confirmations.mjs'
 import { curatedSetsRoutes } from './curated-sets.mjs'
-import { optionPacksRoutes } from './option-packs.mjs'
 import { subscribersRoutes } from './subscribers.mjs'
 import { flowsRoutes } from './flows.mjs'
 import { adminRoutes } from './admin.mjs'
@@ -20,7 +19,6 @@ export const routes = {
   patternsRoutes,
   confirmationsRoutes,
   curatedSetsRoutes,
-  optionPacksRoutes,
   subscribersRoutes,
   flowsRoutes,
   adminRoutes,

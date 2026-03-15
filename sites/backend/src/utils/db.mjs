@@ -13,7 +13,6 @@ const TABLE_MAP = {
   pattern: 'Pattern',
   set: 'Set',
   curatedSet: 'CuratedSet',
-  optionPack: 'OptionPack',
 }
 
 /*
@@ -43,13 +42,12 @@ const HAS_CREATED_AT = new Set([
   'Confirmation',
   'Subscriber',
   'CuratedSet',
-  'OptionPack',
 ])
 
 /*
  * Tables that have an updatedAt column (Prisma @updatedAt - auto-set on every update)
  */
-const HAS_UPDATED_AT = new Set(['User', 'Pattern', 'Set', 'Subscriber', 'CuratedSet', 'OptionPack'])
+const HAS_UPDATED_AT = new Set(['User', 'Pattern', 'Set', 'Subscriber', 'CuratedSet'])
 
 /*
  * Relation config for include support in findUnique/update.
