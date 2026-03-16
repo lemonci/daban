@@ -156,10 +156,9 @@ export const wrap = {
   <tr>
     <td align="left" style="border-top: 1px solid #ddd; padding: 8px" ;>
       <p style="margin: 0; font-size: 12px; margin-top: 12px; line-height: 18px; color: #868e96; text-align: center;">
-        This message was sent to: {{ email }}.
-        <br>
-        This is a not a marketing message, but a transactional email from
+        This is an automated message from
         <a href="https://freesewing.eu/" target="_blank" style="text-decoration: underline; color: #868e96"><b>FreeSewing.eu</b></a>
+        for {{ email }}.
         <br>
         <br>
         For support, you can reach us at <a href="mailto:support@freesewing.eu" target="_blank"
