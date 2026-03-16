@@ -19,7 +19,6 @@ export const urls = {
     YouTube: 'https://www.youtube.com/@freesewing',
     Discord: 'https://discord.freesewing.eu/',
     Forum: 'https://forum.freesewing.eu',
-    Instagram: 'https://instagram.com/freesewing_org',
     Facebook: 'https://www.facebook.com/groups/627769821272714/',
     Codeberg: 'https://codeberg.org/freesewing',
     Reddit: 'https://www.reddit.com/r/freesewing/',
