@@ -5,6 +5,7 @@ production.sqlite-shm
 production.sqlite-wal
 .husky
 local
+oidc-jwks.json
 
 # .env
 .env

@@ -66,7 +66,7 @@ ConfirmationModel.prototype.guardedRead = async function ({ params }) {
 }
 
 /*
- * Gets suggested sets/packs - Curators or higher only
+ * Gets suggested sets - Curators or higher only
  *
  * @param {user} object - The user as returned from middleware
  * @params {type} string - The confiramtion type
@@ -94,7 +94,7 @@ ConfirmationModel.prototype.getSuggested = async function ({ user }, type) {
 }
 
 /*
- * Removes a suggested set/pack - Curators or higher only
+ * Removes a suggested set - Curators or higher only
  *
  * @param {params} object - The request URL parameters
  * @param {user} object - The user as returned from middleware
