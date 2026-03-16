@@ -61,7 +61,7 @@ export const SignUp = ({ embed = false }) => {
           <div className="tw:bg-base-100 tw:rounded-lg tw:p-4 tw:lg:px-8 tw:max-w-xl">
             <h3>Your sign up request was rate limited</h3>
             <p className="tw:text-lg">
-              The backend returned status code 420 <b>Too Many Requests</b>
+              The backend returned status code 429 <b>Too Many Requests</b>
             </p>
             <p className="tw:text-lg">
               This indicates that your request was <em>rate limited</em>. In other words, you have
