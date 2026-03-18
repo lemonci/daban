@@ -196,7 +196,7 @@ export const designers = Array.from(_dess)
 export const i18n = translations
 
 /*
- * These are URLs to examples
+ * These are examples
  */
 export const examples = {
   id: Object.keys(designs),
