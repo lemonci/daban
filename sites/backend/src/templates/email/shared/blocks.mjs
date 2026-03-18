@@ -155,15 +155,14 @@ export const wrap = {
 <table align="center" class="sm-max-w-full" style="width: 100%; max-width: 500px" border="0" cellpadding="0" cellspacing="0" role="presentation">
   <tr>
     <td align="left" style="border-top: 1px solid #ddd; padding: 8px" ;>
-      <p style="margin: 0; font-size: 12px; margin-top: 12px; line-height: 18px; color: #868e96; text-align: center;">
-        This is an automated message from
+      <p style="margin: 0; font-size: 12px; line-height: 18px; color: #868e96; text-align: center;">
+        This a notification from
         <a href="https://freesewing.eu/" target="_blank" style="text-decoration: underline; color: #868e96"><b>FreeSewing.eu</b></a>
-        for {{ email }}.
-        <br>
+        for <b>{{ email }}</b>.
         <br>
         For support, you can reach us at <a href="mailto:support@freesewing.eu" target="_blank"
         style="text-decoration: underline; color: #868e96"><b>support@freesewing.eu</b></a>, or
-        you can simply reply to this message.
+        reply to this message.
         <br>
         <br>
         FreeSewing

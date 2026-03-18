@@ -47,14 +47,14 @@ async function sendEmailViaScaleway(config, { template, to, replacements = {} })
       {
         from: {
           name: 'FreeSewing',
-          email: 'no-reply@tx.freesewing.eu',
+          email: `no-reply@${config.email.domain}`,
         },
         to: [{ name: to, email: to }],
         subject,
         text: mustache.render(text, replace),
         html: mustache.render(html, replace),
         project_id: config.email.project,
-        domain_name: 'tx.freesewing.eu',
+        domain_name: config.email.domain,
         additional_headers: [
           {
             key: 'Reply-To',

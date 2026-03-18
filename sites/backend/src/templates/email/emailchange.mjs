@@ -1,20 +1,20 @@
-import { buttonRow, closingRow, headingRow, lead1Row, wrap } from './shared/blocks.mjs'
+import { link, p, small, h2, check, wrap } from './shared/blocks.mjs'
 
 export const emailchange = {
-  html: wrap.html(`
-    ${headingRow.html}
-    ${lead1Row.html}
-    ${buttonRow.html}
-    ${closingRow.html}
-  `),
-  text: wrap.text(`${headingRow.text}${lead1Row.text}${buttonRow.text}${closingRow.text}`),
-  replacements: {
-    ...replacements,
-    subject: '[FreeSewing] Confirm your new E-mail address',
-    heading: 'Does this new E-mail address work?',
-    lead: 'To confirm your new E-mail address, click the big black rectangle below:',
-    'text-lead': 'To confirm your new E-mail address, click the link below:',
-    button: 'Confirm E-mail change',
-    closing: "That's all it takes.",
-  },
+  subject: '[FreeSewing] Confirm your new E-mail address',
+  html: wrap.html(
+    [
+      h2('Does this new E-mail address work?'),
+      p('To confirm your email address change, click the link below:'),
+      link({ link: '{{{ actionUrl }}}', text: 'Confirm E-mail change' }),
+    ].join('\n')
+  ),
+  text: wrap.text(`
+Hello,
+
+To confirm your new email address, visit the link below:
+
+{{{ actionUrl }}}
+
+`),
 }
