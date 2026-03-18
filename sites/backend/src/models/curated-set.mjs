@@ -264,7 +264,7 @@ CuratedSetModel.prototype.guardedUpdate = async function ({ params, body, user }
   if (typeof body.img === 'string') {
     await storeImage({
       id: `cset-${this.record.id}`,
-      metadata: { user: user.uid },
+      metadata: { user: user.uuid },
       b64: body.img,
     })
   }
@@ -351,7 +351,7 @@ CuratedSetModel.prototype.suggest = async function ({ body, user }) {
     set: body.set,
     height: body.height,
   }
-  await this.Confirmation.createRecord({ type: 'sugset', data, userId: user.uid })
+  await this.Confirmation.createRecord({ type: 'sugset', data, userId: user.id })
 
   /*
    * Now the we have an id, upload the image
@@ -359,7 +359,7 @@ CuratedSetModel.prototype.suggest = async function ({ body, user }) {
   const img = await storeImage({
     id: `sugset-${this.Confirmation.record.id}`,
     data: body.img,
-    metadata: { user: user.uid },
+    metadata: { user: user.uuid },
   })
 
   /*
