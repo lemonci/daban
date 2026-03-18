@@ -19,6 +19,7 @@ import { IconButton } from '@freesewing/react/components/Button'
 import { Spinner } from '@freesewing/react/components/Spinner'
 import { Consent } from '@freesewing/react/components/Account'
 import { Popout } from '@freesewing/react/components/Popout'
+import { EmailHelp } from '@freesewing/react/components/Help'
 
 /**
  * The SignUp component holds the entire sign-up form
@@ -114,7 +115,7 @@ export const SignUp = ({ embed = false }) => {
     : ({ children }) => <h1 className="tw:text-inherit">{children}</h1>
 
   return (
-    <div className="tw:w-full">
+    <div className="tw:w-full tw:my-16">
       <Heading className="tw:text-inherit">
         {result ? (
           result === 'success' ? (
@@ -123,26 +124,15 @@ export const SignUp = ({ embed = false }) => {
             <span>An error occured while trying to process your request</span>
           )
         ) : (
-          <span>Create a FreeSewing account</span>
+          <span>Join FreeSewing</span>
         )}
       </Heading>
 
       {result ? (
         result === 'success' ? (
           <>
-            <p className="tw:text-inherit tw:text-lg">
-              Go check your inbox for an email from <b>no-reply@{domains.email.transaction}</b>
-            </p>
-            <p className="tw:text-inherit tw:text-lg">
-              Click your personal signup link in that email to create your FreeSewing account. The
-              email will include a personal signup links as well as a confirmation code.
-            </p>
-            <img src="https://cdn.freesewing.eu/ui/screen-signup.webp" />
-            <p>
-              Click the signup link in that email, then enter the confirmation code code to create
-              your account.
-            </p>
-            <div className="tw:grid tw:grid-cols-1 tw:md:grid-cols-2 tw:gap-2">
+            <EmailHelp type="signup" />
+            <div className="tw:grid tw:grid-cols-1 tw:md:grid-cols-2 tw:gap-2 tw:mt-8">
               <IconButton onClick={() => setResult(false)}>
                 <LeftIcon />
                 Back
@@ -155,7 +145,6 @@ export const SignUp = ({ embed = false }) => {
           </>
         ) : (
           <>
-            robot here
             <p className="tw:text-inherit tw:text-lg">
               Unfortunately, we cannot recover from this error, we need a human being to look into
               this.
@@ -176,15 +165,15 @@ export const SignUp = ({ embed = false }) => {
       ) : (
         <>
           <fieldset className="tw:daisy-fieldset tw:border-base-300 tw:border tw:rounded-box tw:p-4 tw:mb-4">
-            <legend className="tw:daisy-fieldset-legend">Sign up for FreeSewing</legend>
+            <legend className="tw:daisy-fieldset-legend">Join FreeSewing</legend>
             <form onSubmit={signupHandler}>
               <EmailInput
                 id="signup-email"
-                label="Email address"
+                label="Your Email Address"
                 current={email}
                 original={''}
                 valid={() => emailValid}
-                placeholder="Email address"
+                placeholder="scritchies@cat.co"
                 update={updateEmail}
               />
               <IconButton
@@ -193,7 +182,7 @@ export const SignUp = ({ embed = false }) => {
                 className="tw:lg:w-full tw:grow tw:mt-2"
               >
                 <EmailIcon />
-                Email me a sign-up link
+                Send me an invite
               </IconButton>
             </form>
           </fieldset>
@@ -236,7 +225,6 @@ export const SignUpConfirmation = () => {
   const checkOtp = (val) => {
     setCheck(val)
     confirmCheck(backend, id, val, setCheckConfirmed)
-    console.log(val)
   }
 
   // Short-circuit errors
@@ -253,9 +241,7 @@ export const SignUpConfirmation = () => {
       <>
         <h1 className="tw:mt-24">Enter your confirmation code</h1>
         <OtpInput onComplete={checkOtp} valid={checkConfirmed} />
-        {check && check.length === 4 ? (
-          <p>Do something</p>
-        ) : (
+        {check && check.length === 4 ? null : (
           <p>Enter the 4-digit confirmation code that was included in your FreeSewing invite.</p>
         )}
       </>
@@ -279,8 +265,7 @@ export const SignUpConfirmation = () => {
   )
 }
 
-async function confirmCheck(backend, id, check, setResult) {
-  console.log({ id, check })
+export async function confirmCheck(backend, id, check, setResult) {
   let result
   try {
     result = await backend.getConfirmation({ id, check })
