@@ -3,7 +3,7 @@ export const domains = {
   dev: 'freesewing.dev',
   forum: 'forum.freesewing.eu',
   email: {
-    transaction: 'tx.freesewing.eu',
-    newsletter: 'nl.freesewing.eu',
+    notifications: 'notifications.freesewing.eu',
+    newsletter: 'newsletter.freesewing.eu',
   },
 }
