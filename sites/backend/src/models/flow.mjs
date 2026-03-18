@@ -19,14 +19,13 @@ export function FlowModel(tools) {
  *
  * @param {body} object - The request body
  * @param {user} object - The user as loaded by auth middleware
- * @param {anon} boolean - True if it is an anonymous upload (no auth)
  * @returns {FlowModel} object - The FlowModel
  */
-FlowModel.prototype.uploadImage = async function ({ body, user }, anon = false) {
+FlowModel.prototype.uploadImage = async function ({ body, user }) {
   /*
    * Enforce RBAC
    */
-  if (!anon && !this.rbac.readSome(user)) return this.setResponse(403, 'insufficientAccessLevel')
+  if (!this.rbac.readSome(user)) return this.setResponse(403, 'insufficientAccessLevel')
 
   /*
    * Do we have a POST body?
@@ -61,7 +60,7 @@ FlowModel.prototype.uploadImage = async function ({ body, user }, anon = false) 
    */
   const data = {
     id: `${body.type}-${body.slug}${body.subId !== 'main' ? '-' + body.subId : ''}`,
-    metadata: { uploadedBy: anon ? 'anonymous' : user.id },
+    metadata: { uploadedBy: user.uuid },
   }
   if (body.img) data.b64 = body.img
   else if (body.url) data.url = body.url
@@ -72,7 +71,7 @@ FlowModel.prototype.uploadImage = async function ({ body, user }, anon = false) 
    * If not, any user could overwrite any showcase image.
    * FIXME: To be migrated
    */
-  //if (!anon && this.rbac.curator(user)) await replaceImage(data)
+  //if (this.rbac.curator(user)) await replaceImage(data)
   //else await ensureImage(data)
 
   /*
