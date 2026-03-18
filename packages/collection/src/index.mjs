@@ -200,5 +200,8 @@ export const i18n = translations
  */
 export const examples = {
   id: Object.keys(designs),
-  href: Object.keys(designs).map((design) => `https://cdn.freesewing.eu/design/${design}.webp`),
+  href: {},
 }
+// Create URLs
+for (const design of Object.keys(designs))
+  examples.href[design] = `https://cdn.freesewing.eu/design/${design}.webp`
