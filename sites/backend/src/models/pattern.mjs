@@ -16,14 +16,14 @@ export function PatternModel(tools) {
 /*
  * Returns a list of patterns for the user making the API call
  *
- * @param {uid} string - uid of the user, as provided by the auth middleware
+ * @param {id} string - id of the user, as provided by the auth middleware
  * @returns {patterns} array - The list of patterns
  */
-PatternModel.prototype.userPatterns = async function (uid) {
+PatternModel.prototype.userPatterns = async function (id) {
   /*
-   * No uid no deal
+   * No id no deal
    */
-  if (!uid) return false
+  if (!id) return false
 
   /*
    * Run query returning all patterns from the database
@@ -31,10 +31,10 @@ PatternModel.prototype.userPatterns = async function (uid) {
   let patterns
   try {
     patterns = await this.prisma.pattern.findMany({
-      where: { userId: uid },
+      where: { userId: id },
     })
   } catch (err) {
-    log.warn(`Failed to search patterns for user ${uid}: ${err}`)
+    log.warn(`Failed to search patterns for user ${id}: ${err}`)
   }
 
   /*
@@ -98,7 +98,7 @@ PatternModel.prototype.guardedCreate = async function ({ body, user }) {
       measurements:
         typeof body.settings.measurements === 'object' ? body.settings.measurements : {},
     },
-    userId: user.uid,
+    userId: user.id,
     name: typeof body.name === 'string' && body.name.length > 0 ? body.name : '--',
     notes: typeof body.notes === 'string' && body.notes.length > 0 ? body.notes : '--',
     public: body.public === true ? true : false,
@@ -130,7 +130,7 @@ PatternModel.prototype.publicRead = async function ({ params }) {
   /*
    * Attempt to read the database record
    */
-  await this.read({ id: parseInt(params.id) })
+  await this.read({ uuid: params.uuid })
 
   /*
    * Ensure it is public and if it is not public, return 404
@@ -159,15 +159,14 @@ PatternModel.prototype.guardedRead = async function ({ params, user }) {
   if (!this.rbac.readSome(user)) return this.setResponse(403, 'insufficientAccessLevel')
 
   /*
-   * Is the id set?
+   * Is the uuid set?
    */
-  if (typeof params.id !== 'undefined' && !Number(params.id))
-    return this.setResponse(403, 'idNotNumeric')
+  if (!params.uuid || typeof params.uuid !== 'string') return this.setResponse(403, 'uuidNotValid')
 
   /*
    * Attempt to read record from database
    */
-  await this.read({ id: parseInt(params.id) })
+  await this.read({ uuid: params.uuid })
 
   /*
    * Return 404 if it cannot be found
@@ -177,7 +176,7 @@ PatternModel.prototype.guardedRead = async function ({ params, user }) {
   /*
    * You need at least the bughunter role to read another user's pattern
    */
-  if (this.record.userId !== user.uid && !this.rbac.bughunter(user)) {
+  if (this.record.userId !== user.id && !this.rbac.bughunter(user)) {
     return this.setResponse(403, 'insufficientAccessLevel')
   }
 
@@ -204,12 +203,12 @@ PatternModel.prototype.guardedClone = async function ({ params, user }) {
   /*
    * Attempt to read record from database
    */
-  await this.read({ id: parseInt(params.id) })
+  await this.read({ uuid: params.uuid })
 
   /*
    * You need the support role to clone another user's pattern that is not public
    */
-  if (this.record.userId !== user.uid && !this.record.public && !this.rbac.support(user)) {
+  if (this.record.userId !== user.id && !this.record.public && !this.rbac.support(user)) {
     return this.setResponse(403, 'insufficientAccessLevel')
   }
 
@@ -218,8 +217,8 @@ PatternModel.prototype.guardedClone = async function ({ params, user }) {
    */
   const data = this.asPattern()
   delete data.id
-  data.name += ` (cloned from #${this.record.id})`
-  data.notes += ` (Note: This pattern was cloned from pattern #${this.record.id})`
+  data.name += ` (cloned from #${this.record.uuid})`
+  data.notes += ` (Note: This pattern was cloned from pattern ${this.record.uuid})`
 
   /*
    * Write it to the database
@@ -255,12 +254,12 @@ PatternModel.prototype.guardedUpdate = async function ({ params, body, user }) {
   /*
    * Attempt to read record from the database
    */
-  await this.read({ id: parseInt(params.id) })
+  await this.read({ uuid: params.uuid })
 
   /*
    * Only admins can update other people's patterns
    */
-  if (this.record.userId !== user.uid && !this.rbac.admin(user)) {
+  if (!this.record || (this.record.userId !== user.id && !this.rbac.admin(user))) {
     return this.setResponse(403, 'insufficientAccessLevel')
   }
 
@@ -320,12 +319,12 @@ PatternModel.prototype.guardedDelete = async function ({ params, user }) {
   /*
    * Attempt to read record from database
    */
-  await this.read({ id: parseInt(params.id) })
+  await this.read({ uuid: params.uuid })
 
   /*
    * Only admins can delete other user's patterns
    */
-  if (this.record.userId !== user.uid && !this.rbac.admin(user)) {
+  if (this.record.userId !== user.id && !this.rbac.admin(user)) {
     return this.setResponse(403, 'insufficientAccessLevel')
   }
 
@@ -344,10 +343,11 @@ PatternModel.prototype.guardedDelete = async function ({ params, user }) {
  * Returns record data
  */
 PatternModel.prototype.asPattern = function () {
-  return {
-    ...this.record,
-    ...this.clear,
-  }
+  const data = { ...this.record, ...this.clear }
+  delete data.id
+  delete data.userId
+
+  return data
 }
 
 /*
