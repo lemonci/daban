@@ -82,7 +82,7 @@ const baseConfig = {
   api,
   apikeys: {
     levels: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9],
-    expiryMaxSeconds: 365 * 24 * 3600,
+    expiryMaxSeconds: 732 * 24 * 3600,
   },
   avatars: {
     user: process.env.BACKEND_AVATAR_USER || 'default-avatar',
@@ -102,6 +102,7 @@ const baseConfig = {
     bcc: ['FreeSewing records <records@freesewing.eu>'],
     token: process.env.BACKEND_SCALEWAY_EMAIL_TOKEN,
     project: process.env.BACKEND_SCALEWAY_PROJECT_ID,
+    domain: process.env.BACKEND_NOTIFICATIONS_DOMAIN,
   },
   encryption: {
     key: encryptionKey,
@@ -180,7 +181,7 @@ const baseConfig = {
     production: envToBool(process.env.BACKEND_ALLOW_TESTS_IN_PRODUCTION),
   },
   website: {
-    domain: process.env.BACKEND_WEBSITE_DOMAIN || 'freesewing.org',
+    domain: process.env.BACKEND_WEBSITE_DOMAIN || 'freesewing.eu',
     scheme: process.env.BACKEND_WEBSITE_SCHEME || 'https',
   },
 }
