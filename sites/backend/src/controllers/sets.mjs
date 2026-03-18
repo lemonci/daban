@@ -30,7 +30,7 @@ SetsController.prototype.read = async (req, res, tools) => {
  */
 SetsController.prototype.list = async (req, res, tools) => {
   const Set = new SetModel(tools)
-  const sets = await Set.userSets(req.user.uid)
+  const sets = await Set.userSets(req.user)
 
   if (sets) Set.setResponse(200, 'success', { sets })
   else Set.setResponse(404)
