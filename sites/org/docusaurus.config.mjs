@@ -50,9 +50,11 @@ const config = {
   title: 'FreeSewing',
   tagline: 'FreeSewing documentation for makers',
   favicon: 'img/favicon.ico',
-
   url: 'https://freesewing.eu',
   baseUrl: '/',
+  customFields: {
+    backendUrl: process.env.BACKEND_URL ?? 'https://backend.freesewing.eu',
+  },
   // Not time to look into this now
   onBrokenLinks: 'warn',
   onBrokenMarkdownLinks: 'warn',
