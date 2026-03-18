@@ -22,9 +22,7 @@ export function usersRoutes(tools) {
   app.post('/signinlink', authRateLimit, (req, res) => Users.signinlink(req, res, tools))
 
   // Login via sign-in link (aka magic link)
-  app.post('/signinlink/:id/:check', authRateLimit, (req, res) =>
-    Users.signinvialink(req, res, tools)
-  )
+  app.post('/signinlink/:uuid', authRateLimit, (req, res) => Users.signinvialink(req, res, tools))
 
   // Read current jwt This gets special treatment as it is a route that we allow
   // even when the account status or consent would normally prohibit access.
@@ -34,7 +32,7 @@ export function usersRoutes(tools) {
     Users.whoami(req, res, tools)
   )
 
-  // Read the accound data
+  // Read the account data
   app.get('/account/jwt', passport.authenticate(...jwt), (req, res) =>
     Users.whoami(req, res, tools)
   )

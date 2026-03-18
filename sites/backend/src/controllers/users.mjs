@@ -99,7 +99,7 @@ UsersController.prototype.update = async (req, res, tools) => {
  */
 UsersController.prototype.updateConsent = async (req, res, tools) => {
   const User = new UserModel(tools)
-  await User.guardedRead({ id: req.user.uid }, req)
+  await User.guardedRead({ id: req.user.id }, req)
   await User.updateConsent(req)
 
   return User.sendResponse(res)
@@ -112,7 +112,7 @@ UsersController.prototype.updateConsent = async (req, res, tools) => {
  */
 UsersController.prototype.updateMfa = async (req, res, tools) => {
   const User = new UserModel(tools)
-  await User.guardedRead({ id: req.user.uid }, req)
+  await User.guardedRead({ id: req.user.id }, req)
   await User.guardedMfaUpdate(req)
 
   return User.sendResponse(res)

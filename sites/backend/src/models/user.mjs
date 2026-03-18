@@ -28,9 +28,9 @@ export function UserModel(tools) {
  */
 UserModel.prototype.profile = async function ({ params }) {
   /*
-   * Is id set?
+   * Is uuid set?
    */
-  if (typeof params.id === 'undefined') return this.setResponse(403, 'idMissing')
+  if (typeof params.uuid === 'undefined') return this.setResponse(403, 'idMissing')
 
   /*
    * Try to find the record in the database
@@ -38,7 +38,7 @@ UserModel.prototype.profile = async function ({ params }) {
    * pass it in the username value as that's what the login
    * route does
    */
-  await this.find({ username: params.id })
+  await this.find({ username: params.uuid })
 
   /*
    * If it does not exist, return 404
@@ -67,9 +67,9 @@ UserModel.prototype.allData = async function ({ params, user }) {
 
   /*
    * Is this the user's own data?
-   * params.uuid is a string from the URL; user.uid is the numeric id from the JWT.
+   * params.uuid is a string from the URL; user.id is the numeric id from the JWT.
    */
-  if (Number(params.id) !== user.uuid) return this.setResponse(403, 'idMismatch')
+  if (params.uuid !== user.uuid) return this.setResponse(403, 'idMismatch')
 
   /*
    * Try to find the record in the database
@@ -78,7 +78,7 @@ UserModel.prototype.allData = async function ({ params, user }) {
    * route does
    */
   await this.read(
-    { uuid: Number(params.uuid) },
+    { uuid: params.uuid },
     { apikeys: true, bookmarks: true, patterns: true, sets: true }
   )
 
@@ -129,7 +129,10 @@ UserModel.prototype.restrictAccount = async function ({ user }) {
   /*
    * Read the record from the database
    */
-  await this.read({ id: user.uid }, { apikeys: true, bookmarks: true, patterns: true, sets: true })
+  await this.read(
+    { uuid: user._id },
+    { apikeys: true, bookmarks: true, patterns: true, sets: true }
+  )
 
   /*
    * If it does not exist, return 404
@@ -157,7 +160,10 @@ UserModel.prototype.removeAccount = async function ({ user }) {
   /*
    * Read the record from the database
    */
-  await this.read({ id: user.uid }, { apikeys: true, bookmarks: true, patterns: true, sets: true })
+  await this.read(
+    { uuid: user._id },
+    { apikeys: true, bookmarks: true, patterns: true, sets: true }
+  )
 
   /*
    * If it does not exist, return 404
@@ -171,18 +177,33 @@ UserModel.prototype.removeAccount = async function ({ user }) {
   //await removeImage(`user-${this.record.ihash}`)
 
   /*
+   * Store email before we trash the account
+   */
+  const email = this.clear.email
+
+  /*
    * Remove account
    */
   try {
-    await this.prisma.pattern.deleteMany({ where: { userId: user.uid } })
-    await this.prisma.set.deleteMany({ where: { userId: user.uid } })
-    await this.prisma.bookmark.deleteMany({ where: { userId: user.uid } })
-    await this.prisma.apikey.deleteMany({ where: { userId: user.uid } })
-    await this.prisma.confirmation.deleteMany({ where: { userId: user.uid } })
+    await this.prisma.pattern.deleteMany({ where: { userId: user.id } })
+    await this.prisma.set.deleteMany({ where: { userId: user.id } })
+    await this.prisma.bookmark.deleteMany({ where: { userId: user.id } })
+    await this.prisma.apikey.deleteMany({ where: { userId: user.id } })
+    await this.prisma.confirmation.deleteMany({ where: { userId: user.id } })
     await this.delete()
   } catch (err) {
     log.warn(err, 'Error while removing account')
   }
+
+  /*
+   * Send email
+   */
+  await this.mailer.send({
+    template: 'goodbye',
+    language: 'en',
+    to: email,
+    replacements: {},
+  })
 
   return this.setResponse200({
     result: 'success',
@@ -355,7 +376,7 @@ UserModel.prototype.loadAuthenticatedUser = async function (user) {
    */
   try {
     this.authenticatedUser = await this.prisma.user.findUnique({
-      where: { id: user.uid },
+      where: { id: user.id },
       include: {
         apikeys: true,
       },
@@ -364,7 +385,7 @@ UserModel.prototype.loadAuthenticatedUser = async function (user) {
     /*
      * Failed to run database query. Log warning and return 404
      */
-    log.warn({ err, user }, `Error while trying to find user: ${user.uid}`)
+    log.warn({ err, user }, `Error while trying to find user: ${user.id}`)
     return this.setResponse(404)
   }
 
@@ -388,7 +409,7 @@ UserModel.prototype.revealAuthenticatedUser = async function (user) {
    */
   try {
     this.record = await this.prisma.user.findUnique({
-      where: { id: user.uid },
+      where: { id: user.id },
       include: {
         apikeys: true,
       },
@@ -397,7 +418,7 @@ UserModel.prototype.revealAuthenticatedUser = async function (user) {
     /*
      * Failed to run database query. Log warning and return 404
      */
-    log.warn({ err, user }, `Error while trying to find and reveal user: ${user.uid}`)
+    log.warn({ err, user }, `Error while trying to find and reveal user: ${user.id}`)
     return this.setResponse(404)
   }
 
@@ -489,7 +510,6 @@ UserModel.prototype.guardedCreate = async function ({ body }) {
       to: this.clear.email,
       replacements: {
         actionUrl,
-        whyUrl: i18nUrl('en', `/docs/faq/email/why-${type}`),
         supportUrl: i18nUrl('en', `/patrons/join`),
         check,
       },
@@ -597,7 +617,6 @@ UserModel.prototype.guardedCreate = async function ({ body }) {
     to: this.clear.email,
     replacements: {
       actionUrl: i18nUrl('en', `/confirm/signup?id=${this.Confirmation.record.id}`),
-      whyUrl: i18nUrl('en', `/docs/faq/email/why-signup`),
       supportUrl: i18nUrl('en', `/patrons/join`),
       check,
     },
@@ -719,17 +738,17 @@ UserModel.prototype.linkSignIn = async function (req) {
   /*
    * Is the uuid set?
    */
-  if (!req.params.id) return this.setResponse(400, 'signInIdMissing')
+  if (!req.params.uuid) return this.setResponse(400, 'signInIdMissing')
 
   /*
    * Is the check set?
    */
-  if (!req.params.check) return this.setResponse(400, 'signInCheckMissing')
+  if (!req.body.check) return this.setResponse(400, 'signInCheckMissing')
 
   /*
    * Attempt to retrieve confirmation record
    */
-  await this.Confirmation.read({ id: req.params.id })
+  await this.Confirmation.read({ id: req.params.uuid })
 
   /*
    * If the confirmation does not exist, return 404
@@ -739,14 +758,14 @@ UserModel.prototype.linkSignIn = async function (req) {
   /*
    * If the confirmation is not of of the right type, return 404
    */
-  if (!['signinlink', 'signup-aea'].includes(this.Confirmation.record.type)) {
+  if (!['signin', 'signup-aea'].includes(this.Confirmation.record.type)) {
     return this.setResponse(404)
   }
 
   /*
    * If the confirmation check is not valid, return 404
    */
-  if (this.Confirmation.clear.data.check !== req.params.check) {
+  if (this.Confirmation.clear.data.check !== req.body.check) {
     return this.setResponse(404)
   }
 
@@ -822,20 +841,20 @@ UserModel.prototype.sendSigninlink = async function (req) {
   await this.find(req.body)
 
   /*
-   * If we could not find it, log a warning but send a 401
+   * If we could not find it, log a warning but send a 200
    * to not reveal such a user does not exist.
    */
   if (!this.exists) {
     log.warn(`Magic link attempt for non-existing user: ${req.body.username} from ${req.ip}`)
-    return this.setResponse(401, 'signInFailed')
+    return this.setResponse200({ result: 'emailSent' })
   }
 
   /*
    * Account found, generate random check and create the confirmation
    */
-  const check = randomString()
+  const check = randomOtp(4)
   this.confirmation = await this.Confirmation.createRecord({
-    type: 'signinlink',
+    type: 'signin',
     data: {
       language: this.record.language,
       check,
@@ -847,15 +866,12 @@ UserModel.prototype.sendSigninlink = async function (req) {
    * Send sign-in link email
    */
   await this.mailer.send({
-    template: 'signinlink',
+    template: 'signin',
     language: this.record.language,
     to: this.clear.email,
     replacements: {
-      actionUrl: i18nUrl(
-        this.record.language,
-        `/confirm/signin?id=${this.Confirmation.record.id}&check=${check}`
-      ),
-      whyUrl: i18nUrl(this.record.language, `/docs/faq/email/why-signin-link`),
+      check,
+      actionUrl: i18nUrl(this.record.language, `/confirm/signin?id=${this.Confirmation.record.id}`),
       supportUrl: i18nUrl(this.record.language, `/patrons/join`),
     },
   })
@@ -1128,7 +1144,6 @@ UserModel.prototype.guardedUpdate = async function ({ body, user }) {
           this.record.language,
           `/confirm/emailchange?id=${this.Confirmation.record.id}&check=${check}`
         ),
-        whyUrl: i18nUrl(this.record.language, `/docs/faq/email/why-emailchange`),
         supportUrl: i18nUrl(this.record.language, `/patrons/join`),
       },
     })
@@ -1246,7 +1261,7 @@ UserModel.prototype.guardedMfaUpdate = async function ({ body, user, ip }) {
      * If the password is not correct, log a warning including the IP and reutrn 401
      */
     if (!valid) {
-      log.warn(`Wrong password for existing user while disabling MFA: ${user.uid} from ${ip}`)
+      log.warn(`Wrong password for existing user while disabling MFA: ${user.id} from ${ip}`)
       return this.setResponse(401, 'authenticationFailed')
     }
 
@@ -1523,6 +1538,7 @@ UserModel.prototype.getToken = function () {
   return jwt.sign(
     {
       _id: this.record.uuid,
+      id: this.record.id,
       username: this.record.username,
       role: this.record.role,
       status: this.record.status,
