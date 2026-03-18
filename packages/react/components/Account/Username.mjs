@@ -29,7 +29,7 @@ export const Username = ({ welcome = false, Link = false }) => {
   if (!Link) Link = WebLink
 
   // Hooks
-  const { account, setAccount } = useAccount()
+  const { account, setAccount, setSeenUser } = useAccount()
   const backend = useBackend()
   const { setLoadingStatus } = useContext(LoadingStatusContext)
   const [username, setUsername] = useState(account.username)
@@ -48,6 +48,7 @@ export const Username = ({ welcome = false, Link = false }) => {
     const [status, body] = await backend.updateAccount({ username })
     if (status === 200 && body.result === 'success') {
       setAccount(body.account)
+      setSeenUser(body.account.username)
       setLoadingStatus([true, 'Username updated', true, true])
     } else setLoadingStatus([true, 'Something went wrong. Please report this', true, true])
   }
