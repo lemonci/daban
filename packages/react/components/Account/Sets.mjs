@@ -52,10 +52,10 @@ export const Sets = ({ Link = false }) => {
   const selCount = Object.keys(selected).length
 
   // Helper method to toggle single selection
-  const toggleSelect = (id) => {
+  const toggleSelect = (uuid) => {
     const newSelected = { ...selected }
-    if (newSelected[id]) delete newSelected[id]
-    else newSelected[id] = 1
+    if (newSelected[uuid]) delete newSelected[uuid]
+    else newSelected[uuid] = 1
     setSelected(newSelected)
   }
 
@@ -64,7 +64,7 @@ export const Sets = ({ Link = false }) => {
     if (selCount === sets.length) setSelected({})
     else {
       const newSelected = {}
-      for (const set of sets) newSelected[set.id] = 1
+      for (const set of sets) newSelected[set.uuid] = 1
       setSelected(newSelected)
     }
   }
@@ -72,9 +72,9 @@ export const Sets = ({ Link = false }) => {
   // Helper to delete one or more measurements sets
   const removeSelectedSets = async () => {
     let i = 0
-    for (const id in selected) {
+    for (const uuid in selected) {
       i++
-      await backend.removeSet(id)
+      await backend.removeSet(uuid)
       setLoadingStatus([
         true,
         <LoadingProgress val={i} max={selCount} msg="Removing measurements sets" key="linter" />,
@@ -132,7 +132,7 @@ export const Sets = ({ Link = false }) => {
             key={i}
             className={`tw:flex tw:flex-row tw:items-start tw:gap-1 tw:border-2
           ${
-            selected[set.id]
+            selected[set.uuid]
               ? 'tw:border-solid tw:border-secondary'
               : 'tw:border-dotted tw:border-base-300'
           } tw:rounded-lg p-2`}
@@ -140,15 +140,15 @@ export const Sets = ({ Link = false }) => {
             <label className="tw:w-8 tw:h-full tw:shrink-0">
               <input
                 type="checkbox"
-                checked={selected[set.id] ? true : false}
+                checked={selected[set.uuid] ? true : false}
                 className="tw:daisy-checkbox tw:daisy-checkbox-secondary"
-                onClick={() => toggleSelect(set.id)}
+                onClick={() => toggleSelect(set.uuid)}
               />
             </label>
             <div className="tw:w-full">
               <MsetCard
                 control={control}
-                href={`/account/data/sets/set?id=${set.id}`}
+                href={`/account/data/sets/set?uuid=${set.uuid}`}
                 set={set}
                 size="md"
               />

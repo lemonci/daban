@@ -68,7 +68,7 @@ import { MiniNote, MiniTip } from '../Mini/index.mjs'
  * @param {bool} [props.publicOnly = false] - If the set should be used with the backend.getPublicSet method
  * @param {function} [props.Link = false] - An optional framework-specific Link component to use for client-side routing
  */
-export const Set = ({ id, publicOnly = false, Link = false }) => {
+export const Set = ({ uuid, publicOnly = false, Link = false }) => {
   if (!Link) Link = WebLink
 
   // Hooks
@@ -97,7 +97,7 @@ export const Set = ({ id, publicOnly = false, Link = false }) => {
   useEffect(() => {
     const getSet = async () => {
       setLoadingStatus([true, 'Contacting the backend'])
-      const [status, body] = await backend.getSet(id)
+      const [status, body] = await backend.getSet(uuid)
       if (status === 200 && body.result === 'success') {
         setMset(body.set)
         setName(body.set.name)
@@ -112,7 +112,7 @@ export const Set = ({ id, publicOnly = false, Link = false }) => {
     }
     const getPublicSet = async () => {
       setLoadingStatus([true, 'Contacting the backend'])
-      const [status, body] = await backend.getPublicSet(id)
+      const [status, body] = await backend.getPublicSet(uuid)
       if (status === 200 && body.result === 'success') {
         const isImperial = body.units === 'imperial'
         setMset({
@@ -137,16 +137,16 @@ export const Set = ({ id, publicOnly = false, Link = false }) => {
           false,
         ])
     }
-    if (id) {
+    if (uuid) {
       if (publicOnly) getPublicSet()
       else getSet()
     }
-  }, [id, publicOnly])
+  }, [uuid, publicOnly])
 
   const filterMeasurements = () =>
     filter ? designMeasurements[filter].sort() : measurements.sort()
 
-  if (!id || !mset) return null
+  if (!uuid || !mset) return null
 
   const updateMeasies = (m, val) => {
     const newMeasies = { ...measies }
@@ -168,7 +168,7 @@ export const Set = ({ id, publicOnly = false, Link = false }) => {
       if (measies[m] || measies[m] !== mset.measies[m]) data.measies[m] = measies[m]
     }
     setLoadingStatus([true, 'Saving measurements set'])
-    const [status, body] = await backend.updateSet(mset.id, data)
+    const [status, body] = await backend.updateSet(mset.uuid, data)
     if (status === 200 && body.result === 'success') {
       setMset(body.set)
       setEdit(false)
@@ -179,7 +179,7 @@ export const Set = ({ id, publicOnly = false, Link = false }) => {
 
   const togglePublic = async () => {
     setLoadingStatus([true, 'Getting ready'])
-    const [status, body] = await backend.updateSet(mset.id, { public: !mset.public })
+    const [status, body] = await backend.updateSet(mset.uuid, { public: !mset.public })
     if (status === 200 && body.result === 'success') {
       setMset(body.set)
       setLoadingStatus([true, 'Alright, done!', true, true])
@@ -191,14 +191,13 @@ export const Set = ({ id, publicOnly = false, Link = false }) => {
     // Compile data
     const data = {
       ...mset,
-      userId: account.id,
       measies: { ...mset.measies },
     }
     delete data.img
     const [status, body] = await backend.createSet(data)
     if (status === 201 && body.result === 'created') {
       setLoadingStatus([true, 'Loading newly created set', true, true])
-      window.location = `/account/data/sets/set?id=${body.set.id}`
+      window.location = `/account/data/sets/set?uuid=${body.set.uuid}`
     } else setLoadingStatus([true, 'We failed to create this measurements set', true, false])
   }
 
@@ -209,17 +208,17 @@ export const Set = ({ id, publicOnly = false, Link = false }) => {
           <MsetCard set={mset} control={control} Link={Link} />
         </div>
         <div className="tw:flex tw:flex-col tw:justify-end tw:gap-2 tw:mb-2 tw:grow">
-          {account.control > 2 && mset.public && mset.userId !== account.id ? (
+          {account.control > 2 && mset.public && mset.userUuid !== account.uuid ? (
             <div className="tw:flex tw:flex-row tw:gap-2 tw:items-center">
               <a
                 className="tw:daisy-badge tw:daisy-badge-secondary tw:font-bold tw:daisy-badge-lg"
-                href={`${urls.backend}/sets/${mset.id}.json`}
+                href={`${urls.backend}/sets/${mset.uuid}.json`}
               >
                 JSON
               </a>
               <a
                 className="tw:daisy-badge tw:daisy-badge-success tw:font-bold tw:daisy-badge-lg"
-                href={`${urls.backend}/sets/${mset.id}.yaml`}
+                href={`${urls.backend}/sets/${mset.uuid}.yaml`}
               >
                 YAML
               </a>
@@ -227,7 +226,7 @@ export const Set = ({ id, publicOnly = false, Link = false }) => {
           ) : (
             <span></span>
           )}
-          {account.control > 3 && mset.userId === account.id ? (
+          {account.control > 3 && mset.userUuid === account.uuid ? (
             <div className="tw:flex tw:flex-row tw:gap-2 tw:items-center">
               <button
                 className="tw:daisy-badge tw:daisy-badge-secondary tw:font-bold tw:daisy-badge-lg"
@@ -257,7 +256,7 @@ export const Set = ({ id, publicOnly = false, Link = false }) => {
           ) : (
             <span></span>
           )}
-          {account.id && account.control > 2 && mset.public && mset.userId !== account.id ? (
+          {account.uuid && account.control > 2 && mset.public && mset.userUuid !== account.uuid ? (
             <button
               className="tw:daisy-btn tw:daisy-btn-primary"
               title="Import measurements set"
@@ -270,7 +269,12 @@ export const Set = ({ id, publicOnly = false, Link = false }) => {
             </button>
           ) : null}
           {account.control > 2 ? (
-            <BookmarkButton slug={`set?id=${mset.id}`} title={mset.name} type="set" thing="set" />
+            <BookmarkButton
+              slug={`set?uuid=${mset.uuid}`}
+              title={mset.name}
+              type="set"
+              thing="set"
+            />
           ) : null}
           <button
             onClick={() =>
@@ -349,7 +353,7 @@ export const Set = ({ id, publicOnly = false, Link = false }) => {
               </div>
             </button>
           ) : null}
-          {account.control > 2 && mset.userId === account.id ? (
+          {account.control > 2 && mset.userUuid === account.uuid ? (
             <button
               className="tw:daisy-btn tw:daisy-btn-neutral"
               title="Clone measurements set"
@@ -398,7 +402,7 @@ export const Set = ({ id, publicOnly = false, Link = false }) => {
         )}
         {control >= controlConfig.account.sets.public && (
           <>
-            {mset.userId === account.id && (
+            {mset.userUuid === account.uuid && (
               <DisplayRow title="Public">
                 <div className="tw:flex tw:flex-row tw:gap-2 tw:items-center tw:justify-between">
                   {mset.public ? (
@@ -418,9 +422,9 @@ export const Set = ({ id, publicOnly = false, Link = false }) => {
             {mset.public && (
               <DisplayRow title="Permalink">
                 <Link
-                  href={`/set?id=${mset.id}`}
+                  href={`/set?uuid=${mset.uuid}`}
                   className={linkClasses}
-                >{`/set?id=${mset.id}`}</Link>
+                >{`/set?uuid=${mset.uuid}`}</Link>
               </DisplayRow>
             )}
           </>
@@ -437,7 +441,9 @@ export const Set = ({ id, publicOnly = false, Link = false }) => {
             <span className="tw:text-sm tw:pl-2">({shortDate(mset.updatedAt, false)})</span>
           </DisplayRow>
         )}
-        {control >= controlConfig.account.sets.id && <DisplayRow title="ID">{mset.id}</DisplayRow>}
+        {control >= controlConfig.account.sets.uuid && (
+          <DisplayRow title="UUID">{mset.uuid}</DisplayRow>
+        )}
 
         {Object.keys(mset.measies).length > 0 && (
           <>
@@ -654,7 +660,7 @@ const SuggestCset = ({ mset, Link }) => {
   // Method to submit the form
   const suggestSet = async () => {
     setLoadingStatus([true, 'Contacting backend'])
-    const result = await backend.suggestCset({ set: mset.id, height, img, name, notes })
+    const result = await backend.suggestCset({ set: mset.uuid, height, img, name, notes })
     if (result.success && result.data.submission) {
       setSubmission(result.data.submission)
       setLoadingStatus([true, 'Nailed it', true, true])
@@ -667,7 +673,7 @@ const SuggestCset = ({ mset, Link }) => {
   }
 
   if (submission) {
-    const url = `/curate/sets/suggested/${submission.id}`
+    const url = `/curate/sets/suggested/${submission.uuid}`
 
     return (
       <>
@@ -896,7 +902,7 @@ export const NewSet = () => {
     const [status, body] = await backend.createSet({ name, imperial })
     if (status === 201 && body.result === 'created') {
       setLoadingStatus([true, 'Nailed it', true, true])
-      window.location = `/account/data/sets/set?id=${body.set.id}`
+      window.location = `/account/data/sets/set?uuid=${body.set.uuid}`
     } else
       setLoadingStatus([
         true,
