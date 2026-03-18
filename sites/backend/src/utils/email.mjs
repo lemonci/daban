@@ -118,7 +118,7 @@ async function sendEmailViaScaleway(config, { template, to, replacements = {} })
           email: 'no-reply@notifications.freesewing.eu',
         },
         to: [{ name: to, email: to }],
-        subject,
+        subject: subject || replace.subject,
         text: mustache.render(text, replace),
         html: mustache.render(html, replace),
         project_id: config.email.project,

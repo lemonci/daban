@@ -24,7 +24,7 @@ PS: {{{ text-ps }}} : {{{ supportUrl }}}
 `),
   replacements: {
     ...replacements,
-    subject: '[FreeSewing] Here is your sign-up link for FreeSewing.org',
+    subject: '[FreeSewing] Here is your sign-up link for FreeSewing.eu',
     heading: 'Join FreeSewing',
     lead: 'To create a FreeSewing account linked to this email address, click the big black rectangle below:',
     'text-lead':
