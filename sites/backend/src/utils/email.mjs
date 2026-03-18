@@ -42,7 +42,7 @@ async function sendEmailViaScaleway(config, { template, to, replacements = {} })
 
   let result
   try {
-    result = axios.post(
+    result = await axios.post(
       `https://api.scaleway.com/transactional-email/v1alpha1/regions/fr-par/emails`,
       {
         from: {
