@@ -50,18 +50,18 @@ export const SaveView = ({ config, state, update }) => {
     }
     if (withNotes) patternData.notes = notes
     const result = await backend.createPattern(patternData)
-    if (result[0] === 201 && result[1].pattern.id) {
-      const id = result[1].pattern.id
+    if (result[0] === 201 && result[1].pattern.uuid) {
+      const uuid = result[1].pattern.uuid
       update.stopLoading(loadingId)
       update.view('draft')
-      update.pid(id)
+      update.pid(uuid)
       update.notifySuccess(
         <span>
           {' '}
           Pattern saved as:{' '}
-          <SuccessLink href={`/account/data/patterns/pattern?id=${id}`}> #{id} </SuccessLink>
+          <SuccessLink href={`/account/data/patterns/pattern?uuid=${uuid}`}>{uuid}</SuccessLink>
         </span>,
-        id
+        uuid
       )
     } else update.notifyFailure('oops', loadingId)
   }
