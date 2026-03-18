@@ -35,6 +35,12 @@ BookmarkModel.prototype.guardedCreate = async function ({ body, user }) {
   }
 
   /*
+   * Is it not too long?
+   */
+  if (body.title.length > 255) return this.setResponse(400, `titleTooLong`)
+  if (body.url.length > 1023) return this.setResponse(400, `urlTooLong`)
+
+  /*
    * Is type set and valid?
    */
   if (!body.type || !this.config.bookmarks.types.includes(body.type))
@@ -47,7 +53,7 @@ BookmarkModel.prototype.guardedCreate = async function ({ body, user }) {
     type: body.type,
     title: body.title,
     url: body.url,
-    userId: user.uid,
+    userId: user.id,
   })
 
   //await this.read({ id: this.record.id })
@@ -75,7 +81,7 @@ BookmarkModel.prototype.guardedRead = async function ({ params, user }) {
   /*
    * Attempt to read the record from the database
    */
-  await this.read({ id: parseInt(params.id) })
+  await this.read({ uuid: params.uuid })
 
   /*
    * If it does not exist, send a 404
@@ -85,7 +91,7 @@ BookmarkModel.prototype.guardedRead = async function ({ params, user }) {
   /*
    * You cannot read other people's bookmarks
    */
-  if (this.record.userId !== user.uid) return this.setResponse(403, 'insufficientAccessLevel')
+  if (this.record.userId !== user.id) return this.setResponse(403, 'insufficientAccessLevel')
 
   /*
    * Return 200 and send the bookmark data
@@ -113,12 +119,12 @@ BookmarkModel.prototype.guardedUpdate = async function ({ params, body, user }) 
   /*
    * Attempt to read record from database
    */
-  await this.read({ id: parseInt(params.id) })
+  await this.read({ uuid: params.uuid })
 
   /*
    * You cannot update other user's bookmarks
    */
-  if (this.record.userId !== user.uid) return this.setResponse(403, 'insufficientAccessLevel')
+  if (this.record.userId !== user.id) return this.setResponse(403, 'insufficientAccessLevel')
 
   /*
    * Prepare data to update the record
@@ -160,12 +166,12 @@ BookmarkModel.prototype.guardedDelete = async function ({ params, user }) {
   /*
    * Attempt to read the record from the database
    */
-  await this.read({ id: parseInt(params.id) })
+  await this.read({ uuid: params.uuid })
 
   /*
    * You cannot remove other user's data
    */
-  if (this.record.userId !== user.uid) return this.setResponse(403, 'insufficientAccessLevel')
+  if (this.record.userId !== user.id) return this.setResponse(403, 'insufficientAccessLevel')
 
   /*
    * Delete the record
@@ -181,23 +187,32 @@ BookmarkModel.prototype.guardedDelete = async function ({ params, user }) {
 /*
  * Returns a list of bookmarks for the user making the API call
  */
-BookmarkModel.prototype.userBookmarks = async function (uid) {
-  if (!uid) return false
+BookmarkModel.prototype.userBookmarks = async function (id) {
+  if (!id) return false
   let bookmarks
   try {
-    bookmarks = await this.prisma.bookmark.findMany({ where: { userId: uid } })
+    bookmarks = await this.prisma.bookmark.findMany({ where: { userId: id } })
   } catch (err) {
-    log.warn(`Failed to search bookmarks for user ${uid}: ${err}`)
+    log.warn(`Failed to search bookmarks for user ${id}: ${err}`)
   }
-  const list = []
-  for (const bookmark of bookmarks) list.push(bookmark)
 
-  return list
+  return bookmarks.map((bookmark) => bookmarkData(bookmark))
 }
 
 /*
  * Returns record data
  */
 BookmarkModel.prototype.asBookmark = function () {
-  return { ...this.record }
+  return bookmarkData(this.record)
+}
+
+/*
+ * Strip internal IDs
+ */
+function bookmarkData(bookmark) {
+  const data = { ...bookmark }
+  delete data.id
+  delete data.userId
+
+  return data
 }
