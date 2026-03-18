@@ -64,7 +64,7 @@ ApikeyModel.prototype.guardedRead = async function ({ params, user }) {
   /*
    * Attempt to read record from database
    */
-  await this.read({ id: params.id })
+  await this.read({ id: params.uuid })
 
   /*
    * If it's not found, return 404
@@ -74,7 +74,7 @@ ApikeyModel.prototype.guardedRead = async function ({ params, user }) {
   /*
    * Only admins can read other users
    */
-  if (this.record.userId !== user.uid && !this.rbac.admin(user)) {
+  if (this.record.userId !== user.id && !this.rbac.admin(user)) {
     return this.setResponse(403, 'insufficientAccessLevel')
   }
 
@@ -90,7 +90,6 @@ ApikeyModel.prototype.guardedRead = async function ({ params, user }) {
       createdAt: this.record.createdAt,
       expiresAt: this.record.expiresAt,
       name: this.clear.name,
-      userId: this.record.userId,
     },
   })
 }
@@ -112,7 +111,7 @@ ApikeyModel.prototype.guardedDelete = async function ({ params, user }) {
   /*
    * Attempt to read record from database
    */
-  await this.read({ id: params.id })
+  await this.read({ id: params.uuid })
 
   /*
    * If it's not found, return 404
@@ -122,7 +121,7 @@ ApikeyModel.prototype.guardedDelete = async function ({ params, user }) {
   /*
    * Only admins can delete other users
    */
-  if (this.record.userId !== user.uid && !this.rbac.admin(user)) {
+  if (this.record.userId !== user.id && !this.rbac.admin(user)) {
     return this.setResponse(403, 'insufficientAccessLevel')
   }
 
@@ -135,17 +134,17 @@ ApikeyModel.prototype.guardedDelete = async function ({ params, user }) {
 }
 
 /*
- * Returns all API keys for a user with uid
+ * Returns all API keys for a user with id
  *
  * @param {uid} string - The uid of the user
- * Note that the uid is the ID, but we user uid when it comes from middleware
+ * Note that the uid is the ID, but we user id when it comes from middleware
  * @returns {keys} array - An array of Apikeys
  */
-ApikeyModel.prototype.userApikeys = async function (uid) {
+ApikeyModel.prototype.userApikeys = async function (id) {
   /*
    * Guard against missing input
    */
-  if (!uid) return false
+  if (!id) return false
 
   /*
    * Wrap async code with try ... catch
@@ -155,12 +154,12 @@ ApikeyModel.prototype.userApikeys = async function (uid) {
     /*
      * Attempt to read records from database
      */
-    keys = await this.prisma.apikey.findMany({ where: { userId: uid } })
+    keys = await this.prisma.apikey.findMany({ where: { userId: id } })
   } catch (err) {
     /*
      * Something went wrong, log a warning and return 404
      */
-    log.warn(`Failed to search apikeys for user ${uid}: ${err}`)
+    log.warn(`Failed to search apikeys for user ${id}: ${err}`)
     return this.setResponse(404)
   }
 
@@ -207,7 +206,7 @@ ApikeyModel.prototype.create = async function ({ body, user }) {
   /*
    * Is the level set?
    */
-  if (!body.level) return this.setResponse(400, 'levelMissing')
+  if (typeof body.level === 'undefined') return this.setResponse(400, 'levelMissing')
 
   /*
    * Is level numeric?
@@ -271,7 +270,7 @@ ApikeyModel.prototype.create = async function ({ body, user }) {
         name: body.name,
         level: body.level,
         secret: asJson(hashPassword(secret)),
-        userId: user.uid,
+        userId: user.id,
       }),
     })
   } catch (err) {
@@ -290,7 +289,6 @@ ApikeyModel.prototype.create = async function ({ body, user }) {
       createdAt: this.record.createdAt,
       expiresAt: this.record.expiresAt,
       name: body.name,
-      userId: this.record.userId,
     },
   })
 }

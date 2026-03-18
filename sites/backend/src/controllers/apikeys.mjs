@@ -24,7 +24,7 @@ ApikeysController.prototype.create = async (req, res, tools) => {
  */
 ApikeysController.prototype.list = async (req, res, tools) => {
   const Apikey = new ApikeyModel(tools)
-  const apikeys = await Apikey.userApikeys(req.user.uid)
+  const apikeys = await Apikey.userApikeys(req.user.id)
 
   if (apikeys) Apikey.setResponse(200, 'success', { apikeys })
   else Apikey.setResponse(404)
@@ -68,7 +68,6 @@ ApikeysController.prototype.whoami = async (req, res, tools) => {
         level: key[0].level,
         expiresAt: key[0].expiresAt,
         name: Apikey.decrypt(key[0].name),
-        userId: key[0].userId,
       },
     })
   else Apikey.setResponse(404)
