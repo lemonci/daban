@@ -97,6 +97,12 @@ const baseConfig = {
   bookmarks: {
     types: ['set', 'cset', 'pattern', 'design', 'doc', 'custom'],
   },
+  email: {
+    from: 'FreeSewing <no-reply@notifications.freesewing.eu>',
+    bcc: ['FreeSewing records <records@freesewing.eu>'],
+    token: process.env.BACKEND_SCALEWAY_EMAIL_TOKEN,
+    project: process.env.BACKEND_SCALEWAY_PROJECT_ID,
+  },
   encryption: {
     key: encryptionKey,
   },
@@ -329,6 +335,9 @@ const vars = {
   BACKEND_ENABLE_TESTS: 'optional',
   BACKEND_ALLOW_TESTS_IN_PRODUCTION: 'optional',
   BACKEND_ENABLE_DUMP_CONFIG_AT_STARTUP: 'optional',
+  // Email
+  BACKEND_SCALEWAY_PROJECT_ID: 'required',
+  BACKEND_SCALEWAY_EMAIL_TOKEN: 'requiredSecret',
 }
 
 // Vars for AWS SES integration
