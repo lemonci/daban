@@ -17,7 +17,7 @@
     "build": "NO_MINIFY=1 node build.mjs",
     "build:container": "./scripts/build-container.sh",
     "ship:container": "npm run build:container && ./scripts/ship-container.sh",
-    "dev": "node --watch src/index.mjs",
+    "dev": "node --watch --watch-path src src/index.mjs",
     "initdb": "node ./scripts/initdb.mjs",
     "prettier": "npx prettier --write 'src/*.mjs' 'tests/*.mjs'",
     "citest": "node --no-warnings --test-concurrency=1 --test",
