@@ -61,7 +61,7 @@ FlowModel.prototype.uploadImage = async function ({ body, user }, anon = false) 
    */
   const data = {
     id: `${body.type}-${body.slug}${body.subId !== 'main' ? '-' + body.subId : ''}`,
-    metadata: { uploadedBy: anon ? 'anonymous' : user.uid },
+    metadata: { uploadedBy: anon ? 'anonymous' : user.id },
   }
   if (body.img) data.b64 = body.img
   else if (body.url) data.url = body.url
@@ -108,7 +108,7 @@ FlowModel.prototype.createPostPr = async function ({ body, user }, type) {
   /*
    * Load user from the database
    */
-  await this.User.read({ id: user.uid })
+  await this.User.read({ id: user.id })
 
   /*
    * First upload the main image
@@ -116,7 +116,7 @@ FlowModel.prototype.createPostPr = async function ({ body, user }, type) {
   const imgs = {
     main: {
       id: `${type}-${body.slug}`,
-      metadata: { uploadedBy: user.uid },
+      metadata: { uploadedBy: user.uuid },
       data: body.img,
     },
     extra: {},
@@ -129,7 +129,7 @@ FlowModel.prototype.createPostPr = async function ({ body, user }, type) {
   for (const [key, data] of Object.entries(body.extraImages || {})) {
     imgs.extra[key] = {
       id: `${type}-${body.slug}-${key}`,
-      metadata: { uploadedBy: user.uid },
+      metadata: { uploadedBy: user.uuid },
       data,
     }
     await ensureImage(imgs.extra[key])
