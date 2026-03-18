@@ -22,6 +22,9 @@ export const KeyVal = ({
   small = false,
   href = false,
   onClick = false,
+  copyVal = false,
+  copyKey = false,
+  Link = false,
 }) => {
   const setCopied = useState(false)[1]
   const { setLoadingStatus } = useContext(LoadingStatusContext)
@@ -43,7 +46,8 @@ export const KeyVal = ({
   else if (color === 'success') colorClasses2 = successClasses2
   else if (color === 'error') colorClasses2 = errorClasses2
 
-  if (href) return <LinkKeyVal {...{ k, val, color, small, href, colorClasses1, colorClasses2 }} />
+  if (href)
+    return <LinkKeyVal {...{ k, val, color, small, href, colorClasses1, colorClasses2, Link }} />
 
   const inner = (
     <>
@@ -62,10 +66,10 @@ export const KeyVal = ({
 
   return onClick === false ? (
     <button
-      className="tw:daisy-btn-ghost tw:p-0"
+      className="tw:daisy-btn-ghost tw:p-0 tw:hover:cursor-pointer"
       onClick={() => {
-        copyToClipboard(val)
-        handleCopied(setCopied, setLoadingStatus, k)
+        copyToClipboard(copyVal ? copyVal : val)
+        handleCopied(setCopied, setLoadingStatus, copyKey ? copyKey : k)
       }}
     >
       {inner}
