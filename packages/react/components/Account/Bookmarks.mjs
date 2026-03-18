@@ -54,10 +54,10 @@ export const Bookmarks = () => {
   }, [refresh])
 
   // Helper method to toggle single selection
-  const toggleSelect = (id) => {
+  const toggleSelect = (uuid) => {
     const newSelected = { ...selected }
-    if (newSelected[id]) delete newSelected[id]
-    else newSelected[id] = 1
+    if (newSelected[uuid]) delete newSelected[uuid]
+    else newSelected[uuid] = 1
     setSelected(newSelected)
   }
 
@@ -66,7 +66,7 @@ export const Bookmarks = () => {
     if (selCount === bookmarks.length) setSelected({})
     else {
       const newSelected = {}
-      for (const bookmark of bookmarks) newSelected[bookmark.id] = 1
+      for (const bookmark of bookmarks) newSelected[bookmark.uuid] = 1
       setSelected(newSelected)
     }
   }
@@ -74,9 +74,9 @@ export const Bookmarks = () => {
   // Helper to delete one or more bookmarks
   const removeSelectedBookmarks = async () => {
     let i = 0
-    for (const id in selected) {
+    for (const uuid in selected) {
       i++
-      await backend.removeBookmark(id)
+      await backend.removeBookmark(uuid)
       setLoadingStatus([
         true,
         <LoadingProgress val={i} max={selCount} msg="Removing Bookmarks" key="linter" />,
@@ -151,9 +151,9 @@ export const Bookmarks = () => {
                       <td className="tw:text-base tw:font-medium">
                         <input
                           type="checkbox"
-                          checked={selected[bookmark.id] ? true : false}
+                          checked={selected[bookmark.uuid] ? true : false}
                           className="tw:daisy-checkbox tw:daisy-checkbox-secondary"
-                          onClick={() => toggleSelect(bookmark.id)}
+                          onClick={() => toggleSelect(bookmark.uuid)}
                         />
                       </td>
                       <td className="tw:text-base tw:font-medium">{bookmark.title}</td>
