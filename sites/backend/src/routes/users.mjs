@@ -1,5 +1,4 @@
 import { UsersController } from '../controllers/users.mjs'
-import { authRateLimit } from '../middleware.mjs'
 
 const Users = new UsersController()
 const jwt = ['jwt', { session: false }]
@@ -7,22 +6,22 @@ const guest = ['jwt-guest', { session: false }]
 const bsc = ['basic', { session: false }]
 
 export function usersRoutes(tools) {
-  const { app, passport } = tools
+  const { app, passport, limit } = tools
 
   // Sign Up
-  app.post('/signup', authRateLimit, (req, res) => Users.signup(req, res, tools))
+  app.post('/signup', limit.auth, (req, res) => Users.signup(req, res, tools))
 
   // Confirm account
-  app.post('/confirm/signup/:uuid', authRateLimit, (req, res) => Users.confirm(req, res, tools))
+  app.post('/confirm/signup/:uuid', limit.auth, (req, res) => Users.confirm(req, res, tools))
 
   // Sign In
-  app.post('/signin', authRateLimit, (req, res) => Users.signin(req, res, tools))
+  app.post('/signin', limit.auth, (req, res) => Users.signin(req, res, tools))
 
   // Send sign-in link (aka magic link)
-  app.post('/signinlink', authRateLimit, (req, res) => Users.signinlink(req, res, tools))
+  app.post('/signinlink', limit.auth, (req, res) => Users.signinlink(req, res, tools))
 
   // Login via sign-in link (aka magic link)
-  app.post('/signinlink/:uuid', authRateLimit, (req, res) => Users.signinvialink(req, res, tools))
+  app.post('/signinlink/:uuid', limit.auth, (req, res) => Users.signinvialink(req, res, tools))
 
   // Read current jwt This gets special treatment as it is a route that we allow
   // even when the account status or consent would normally prohibit access.

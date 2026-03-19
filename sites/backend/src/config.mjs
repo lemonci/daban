@@ -3,7 +3,8 @@ import chalk from 'chalk'
 import dotenv from 'dotenv'
 import { asJson } from './utils/index.mjs'
 import { randomString } from './utils/crypto.mjs'
-import get from 'lodash.get'
+import set from 'lodash/set.js'
+import get from 'lodash/get.js'
 import { readFileSync, writeFileSync } from 'node:fs'
 import { postConfig } from '../local-config.mjs'
 import { measurements, roles } from '@freesewing/config'
@@ -169,6 +170,11 @@ const baseConfig = {
     expiresIn: process.env.BACKEND_JWT_EXPIRY || '7d',
   },
   languages,
+  // Rate limits
+  limits: {
+    auth: 10,
+    all: 600,
+  },
   translations: languages.filter((lang) => lang !== 'en'),
   measies: measurements,
   mfa: {
@@ -300,6 +306,7 @@ export const codeberg = config.codeberg
 export const instance = config.instance
 export const exports = config.exports
 export const imgConfig = config.img
+export const getLimits = () => config.limits
 
 const vars = {
   BACKEND_DB_PATH: ['required', 'db.path'],
@@ -366,8 +373,11 @@ if (envToBool(process.env.BACKEND_ENABLE_TESTS)) {
  * It will verify whether whether everyting is setup correctly
  * which is not a given since there's a number of environment
  * variables that need to be set for this backend to function.
+ *
+ * @param {function|boolean} [transformConfig] - An optional config transformer function
+ * @param {boolean} [silent] - Set this to true to silence startup logs (non-JSON logs)
  */
-export function verifyConfig(silent = false) {
+export function verifyConfig(transformConfig = false, silent = false) {
   const emptyString = (input) => {
     if (typeof input === 'string' && input.length > 0) return false
     return true
@@ -442,7 +452,7 @@ export function verifyConfig(silent = false) {
     console.log(chalk.cyan.bold('Dumping configuration:\n'), asJson(dump, null, 2))
   }
 
-  return config
+  return typeof transformConfig === 'function' ? transformConfig(config) : config
 }
 
 /*

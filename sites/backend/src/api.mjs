@@ -28,9 +28,15 @@ import { openapi } from '../openapi/index.mjs'
 // Catch-all page
 import { html as catchAll } from './html/catch-all.mjs'
 
-export const api = () => {
+/**
+ * This is the main entrypoint. Call this to start the API.
+ *
+ * @param {function|boolean} [transformConfig] - An optional config transformer function
+ * @param {boolean} [silent] - Set this to true to silence startup logs (non-JSON logs)
+ */
+export const api = (transformConfig = false, silent = false) => {
   // Bootstrap
-  const config = verifyConfig()
+  const config = verifyConfig(transformConfig, silent)
   const dbPath = config.db.path
   const prisma = createDb(dbPath)
   const app = express()
@@ -58,7 +64,7 @@ export const api = () => {
   }
 
   // Load middleware
-  loadExpressMiddleware(app, config)
+  loadExpressMiddleware(app, tools)
   loadPassportMiddleware(passport, tools)
 
   // Load routes

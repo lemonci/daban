@@ -4,30 +4,7 @@ import http from 'passport-http'
 import jwt from 'passport-jwt'
 import { ApikeyModel } from './models/apikey.mjs'
 import { UserModel } from './models/user.mjs'
-import { api, instance } from './config.mjs'
-
-/*
- * Rate limiter for authentication endpoints (signup, signin, magic link).
- * Tight window to slow brute-force and credential-stuffing attacks.
- */
-export const authRateLimit = rateLimit({
-  windowMs: 15 * 60 * 1000, // 15 minutes
-  max: 10, // 10 attempts per window per IP
-  standardHeaders: true,
-  legacyHeaders: false,
-  message: { result: 'error', error: 'tooManyRequests' },
-})
-
-/*
- * Rate limiter for general unauthenticated public endpoints.
- */
-export const publicRateLimit = rateLimit({
-  windowMs: 15 * 60 * 1000, // 15 minutes
-  max: 60,
-  standardHeaders: true,
-  legacyHeaders: false,
-  message: { result: 'error', error: 'tooManyRequests' },
-})
+import { api, instance, getLimits } from './config.mjs'
 
 /*
  * In v2 we ended up with a bug where we did not properly track the last login
@@ -48,7 +25,37 @@ async function checkAccess(payload, tools, type) {
   return [ok, err]
 }
 
-function loadExpressMiddleware(app, config) {
+function loadExpressMiddleware(app, tools) {
+  // Save us some typing
+  const config = tools.config
+
+  /*
+   * We set rate limits dynamically, so they don't bother us during unit tests
+   */
+  tools.limit = {
+    /*
+     * Rate limiter for authentication endpoints (signup, signin, magic link).
+     * Tight window to slow brute-force and credential-stuffing attacks.
+     */
+    auth: rateLimit({
+      windowMs: 15 * 60 * 1000, // 15 minutes
+      max: config.limits.auth,
+      standardHeaders: true,
+      legacyHeaders: false,
+      message: { result: 'error', error: 'tooManyRequests' },
+    }),
+    /*
+     * Rate limiter for general unauthenticated public endpoints.
+     */
+    all: rateLimit({
+      windowMs: 15 * 60 * 1000, // 15 minutes
+      max: config.limits.all,
+      standardHeaders: true,
+      legacyHeaders: false,
+      message: { result: 'error', error: 'tooManyRequests' },
+    }),
+  }
+
   /*
    * Build the list of allowed CORS origins from configuration.
    * We always allow the configured website domain plus the known

@@ -510,7 +510,6 @@ UserModel.prototype.guardedCreate = async function ({ body }) {
       to: this.clear.email,
       replacements: {
         actionUrl,
-        supportUrl: i18nUrl('en', `/patrons/join`),
         check,
       },
     })
@@ -617,7 +616,6 @@ UserModel.prototype.guardedCreate = async function ({ body }) {
     to: this.clear.email,
     replacements: {
       actionUrl: i18nUrl('en', `/confirm/signup?id=${this.Confirmation.record.id}`),
-      supportUrl: i18nUrl('en', `/patrons/join`),
       check,
     },
   })
@@ -872,7 +870,6 @@ UserModel.prototype.sendSigninlink = async function (req) {
     replacements: {
       check,
       actionUrl: i18nUrl(this.record.language, `/confirm/signin?id=${this.Confirmation.record.id}`),
-      supportUrl: i18nUrl(this.record.language, `/patrons/join`),
     },
   })
 
@@ -1144,7 +1141,6 @@ UserModel.prototype.guardedUpdate = async function ({ body, user }) {
           this.record.language,
           `/confirm/emailchange?id=${this.Confirmation.record.id}&check=${check}`
         ),
-        supportUrl: i18nUrl(this.record.language, `/patrons/join`),
       },
     })
   } else if (

@@ -18,10 +18,11 @@
     "build:container": "./scripts/build-container.sh",
     "ship:container": "npm run build:container && ./scripts/ship-container.sh",
     "dev": "node --watch --watch-path src src/index.mjs",
+    "dev:test": "node --watch --watch-path src tests/run-test-backend.mjs",
     "initdb": "node ./scripts/initdb.mjs",
     "prettier": "npx prettier --write 'src/*.mjs' 'tests/*.mjs'",
     "citest": "node --no-warnings --test-concurrency=1 --test",
-    "test": "echo \"Use npm run citest to run tests, but it requires running the backend service (npm run dev)\"",
+    "test": "echo \"Use npm run  to run tests, but it requires running the backend service in test mode (npm run test:backend)\"",
     "ctest": "c8 --reporter=html --reports-dir=coverage node --no-warnings --test-concurrency=1 --test tests/all.mjs"
   },
   "dependencies": {
@@ -35,6 +36,7 @@
     "express-rate-limit": "^8.3.0",
     "helmet": "^8.1.0",
     "js-yaml": "4.1.0",
+    "lodash": "^4.17.23",
     "lodash.get": "4.4.2",
     "mustache": "4.2.0",
     "node-jose": "^2.2.0",

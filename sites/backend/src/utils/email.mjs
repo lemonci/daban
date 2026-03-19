@@ -17,7 +17,13 @@ export const mailer = (config) => ({
         return false
       }
 
-      return sendEmailViaScaleway(config, params)
+      /*
+       * We allow overriding this in settings to load a different email provider
+       * We also use this same mechanism to mock this in unit tests
+       */
+      return typeof config.email.handler === 'function'
+        ? config.email.handler(config, params)
+        : sendEmailViaScaleway(config, params)
     },
   },
 })
