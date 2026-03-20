@@ -86,7 +86,7 @@ UsersController.prototype.whoami = async (req, res, tools) => {
  */
 UsersController.prototype.update = async (req, res, tools) => {
   const User = new UserModel(tools)
-  await User.guardedRead({ uuid: req.user._id }, req)
+  await User.guardedRead(whereFromUser(req.user), req)
   await User.guardedUpdate(req)
 
   return User.sendResponse(res)
@@ -99,7 +99,7 @@ UsersController.prototype.update = async (req, res, tools) => {
  */
 UsersController.prototype.updateConsent = async (req, res, tools) => {
   const User = new UserModel(tools)
-  await User.guardedRead({ id: req.user.id }, req)
+  await User.guardedRead(whereFromUser(req.user), req)
   await User.updateConsent(req)
 
   return User.sendResponse(res)
@@ -112,7 +112,7 @@ UsersController.prototype.updateConsent = async (req, res, tools) => {
  */
 UsersController.prototype.updateMfa = async (req, res, tools) => {
   const User = new UserModel(tools)
-  await User.guardedRead({ id: req.user.id }, req)
+  await User.guardedRead(whereFromUser(req.user), req)
   await User.guardedMfaUpdate(req)
 
   return User.sendResponse(res)
@@ -196,4 +196,11 @@ UsersController.prototype.isUsernameAvailable = async (req, res, tools) => {
   else User.setResponse(404)
 
   return User.sendResponse(res)
+}
+
+function whereFromUser(user) {
+  if (user.apiKey === true && user.userId) return { id: user.userId }
+  if (user.uuid) return { uuid: user.uuid }
+
+  return false
 }
