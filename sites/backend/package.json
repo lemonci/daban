@@ -20,6 +20,7 @@
     "dev": "node --watch --watch-path src src/index.mjs",
     "dev:test": "node --watch --watch-path src tests/run-test-backend.mjs",
     "initdb": "node ./scripts/initdb.mjs",
+    "lint": "npx eslint 'src/*.mjs' 'tests/*.mjs'",
     "prettier": "npx prettier --write 'src/*.mjs' 'tests/*.mjs'",
     "citest": "node --no-warnings --test-concurrency=1 --test",
     "test": "echo \"Use npm run  to run tests, but it requires running the backend service in test mode (npm run test:backend)\"",
