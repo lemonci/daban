@@ -22,6 +22,8 @@ export function FlowModel(tools) {
  * @returns {FlowModel} object - The FlowModel
  */
 FlowModel.prototype.uploadImage = async function ({ body, user }) {
+  // TODO: Migrate to the new image hosting
+  // TODO: Sanitize input
   /*
    * Enforce RBAC
    */
