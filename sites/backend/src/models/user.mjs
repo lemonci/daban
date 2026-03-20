@@ -270,6 +270,11 @@ UserModel.prototype.guardedRead = async function (where, { user }) {
    */
   await this.read(where)
 
+  /*
+   * Did we find it?
+   */
+  if (!this.exists) return this.setResponse(404)
+
   return this.setResponse200({
     result: 'success',
     account: this.asAccount(),
@@ -1660,7 +1665,6 @@ UserModel.prototype.papersPlease = async function (id, type, payload) {
     /*
      * An error means it's not good. Return false
      */
-    console.log(err)
     log.warn({ id }, 'Could not update lastSeen field from middleware')
     return [false, 'failedToUpdateLastSeen']
   }
