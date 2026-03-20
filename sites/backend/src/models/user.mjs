@@ -295,7 +295,7 @@ UserModel.prototype.find = async function (body) {
         OR: [
           { lusername: { equals: clean(body.username) } },
           { ehash: { equals: hash(clean(body.username)) } },
-          { id: { equals: parseInt(body.username) || -1 } },
+          { uuid: { equals: clean(body.username) || -1 } },
         ],
       },
     })
