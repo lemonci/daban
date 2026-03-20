@@ -69,7 +69,7 @@ describe(`Signup flow and authentication`, async () => {
     assert.equal(data.account.username, data.account.lusername)
     assert.equal(typeof data.account.id, 'undefined')
     // Store
-    store.account = { ...store.account, ...data.account }
+    store.account = { ...store.account, ...data.account, token: data.token }
   })
 
   it(`Should not sign in with the wrong password`, async () => {
@@ -78,36 +78,21 @@ describe(`Signup flow and authentication`, async () => {
       password: store.account.username,
     })
     assert.equal(status, 401)
-    console.log(data)
     assert.equal(data.result, 'error')
     assert.equal(data.error, 'signInFailed')
   })
 
-  /*
   // Note that password was not set at account creation
   it(`Should set the password`, async () => {
     const [status, data] = await api.patch(
       '/account/jwt',
       { password: store.account.password },
-      auth.jwt
+      auth.jwt()
     )
     assert.equal(status, 200)
     assert.equal(data.result, 'success')
     for (const key of ['email', 'username', 'id']) {
       assert.equal(data.account[key], store.account[key])
-    }
-  })
-
-  it(`Should set the password (altaccount)`, async () => {
-    const [status, data] = await api.patch(
-      '/account/jwt',
-      { password: store.altaccount.password },
-      auth.altjwt
-    )
-    assert.equal(status, 200)
-    assert.equal(data.result, 'success')
-    for (const key of ['email', 'username', 'id']) {
-      assert.equal(data.account[key], store.altaccount[key])
     }
   })
 
@@ -159,55 +144,53 @@ describe(`Signup flow and authentication`, async () => {
     }
   })
 
-  it(`Should sign in with ID and password`, async () => {
+  it(`Should sign in with UUID and password`, async () => {
     const [status, data] = await api.post('/signin', {
-      username: store.account.id,
+      username: store.account.uuid,
       password: store.account.password,
     })
     assert.equal(status, 200)
     assert.equal(data.result, 'success')
-    for (const key of ['email', 'username', 'id']) {
+    for (const key of ['email', 'username', 'uuid']) {
       assert.equal(data.account[key], store.account[key])
     }
   })
 
   it(`Should load the account data (jwt)`, async () => {
-    const [status, data] = await api.get(`/account/jwt`, auth.jwt)
+    const [status, data] = await api.get(`/account/jwt`, auth.jwt())
     assert.equal(status, 200)
     assert.equal(data.result, 'success')
-    for (const key of ['email', 'username', 'id']) {
+    // FIXME: Should not include sets, patterns, and so on
+    for (const key of ['email', 'username', 'uuid']) {
       assert.equal(data.account[key], store.account[key])
     }
   })
 
   it(`Should load the account data via whoami (jwt)`, async () => {
-    const [status, data] = await api.get(`/whoami/jwt`, auth.jwt)
+    const [status, data] = await api.get(`/whoami/jwt`, auth.jwt())
     assert.equal(status, 200)
     assert.equal(data.result, 'success')
     for (const key of ['email', 'username', 'id']) {
       assert.equal(data.account[key], store.account[key])
     }
   })
-*/
 })
-/*
+
 describe(`Check for available usernames`, () => {
   it(`Should find an available username (jwt)`, async () => {
     const [status, data] = await api.post(
       `/available/username/jwt`,
       { username: 'haichi' },
-      auth.jwt
+      auth.jwt()
     )
     assert.equal(status, 404)
   })
-
   it(`Should find a non-available username (jwt)`, async () => {
     const [status, data] = await api.post(
       `/available/username/jwt`,
       { username: store.account.username },
-      auth.jwt
+      auth.jwt()
     )
     assert.equal(status, 200)
   })
 })
-*/

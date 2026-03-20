@@ -4,8 +4,6 @@ import helmet from 'helmet'
 import chalk from 'chalk'
 import { createDb } from './utils/db.mjs'
 import passport from 'passport'
-import path from 'node:path'
-import { fileURLToPath } from 'url'
 // Routes
 import { routes } from './routes/index.mjs'
 // Config

@@ -13,19 +13,15 @@ export const api = new restClient(`http://localhost:3001`)
 export const store = await setup()
 
 // Authentication data
-export const auth = () => ({
-  jwt: { headers: { Authorization: `Bearer ${store.account.token}` } },
-  altjwt: { headers: { Authorization: `Bearer ${store.altaccount.token}` } },
-  key: {
-    headers: { Authorization: basicAuth(store.account.apikey.key, store.account.apikey.secret) },
-  },
-  altkey: {
-    headers: {
-      Authorization: basicAuth(store.altaccount.apikey.key, store.altaccount.apikey.secret),
-    },
-  },
-  basic: ({ key, secret }) => ({ headers: { Authorization: basicAuth(key, secret) } }),
-})
+export const auth = {
+  jwt: () => ({ headers: { Authorization: `Bearer ${store.account.token}` } }),
+  key: () => ({
+    headers: { Authorization: basicAuth(store.account.apikey?.key, store.account.apikey?.secret) },
+  }),
+  basic:
+    () =>
+    ({ key, secret }) => ({ headers: { Authorization: basicAuth(key, secret) } }),
+}
 
 function basicAuth(u, p) {
   return 'Basic ' + Buffer.from(`${u}:${p}`).toString('base64')
@@ -112,11 +108,6 @@ async function setup() {
   const store = {
     randomString,
     account: {
-      email: `test_${randomString()}@freesewing.dev`,
-      password: randomString(),
-      sets: {},
-    },
-    altaccount: {
       email: `test_${randomString()}@freesewing.dev`,
       password: randomString(),
       sets: {},
