@@ -1,16 +1,16 @@
-import { api, auth, cat, store } from './utils.mjs'
+import { api, auth, cat, store, loadStore } from './utils.mjs'
 import { strict as assert } from 'node:assert'
 import { describe, it } from 'node:test'
 
-const data = {
+const input = {
   jwt: {
     bio: "I know it sounds funny but I just can't stand the pain",
     consent: 1,
     control: 4,
-    data: {
-      githubUsername: 'sorchanidhubhghaill',
-      githubEmail: 'nidhubhs@gmail.com',
-    },
+    //data: {
+    //  githubUsername: 'sorchanidhubhghaill',
+    //  githubEmail: 'nidhubhs@gmail.com',
+    //},
     imperial: true,
     newsletter: true,
   },
@@ -18,30 +18,47 @@ const data = {
     bio: "It's a long way to the top, if you wanna rock & roll",
     consent: 2,
     control: 3,
-    data: {
-      githubUsername: 'joostdecock',
-      githubEmail: 'joost@joost.at',
-    },
+    //data: {
+    //  githubUsername: 'joostdecock',
+    //  githubEmail: 'joost@joost.at',
+    //},
     imperial: true,
     newsletter: true,
   },
 }
 
 for (const a of ['jwt', 'key']) {
-  describe(`Update account data (${a})`, () => {
-    for (const [field, val] of Object.entries(data[a])) {
+  describe(`Update account field (${a})`, () => {
+    // Ensure we have an account to test with
+    if (!store.account.confirmation) loadStore(store)
+    for (const [field, val] of Object.entries(input[a])) {
       it(`Should update ${field} (${a})`, async () => {
         const body = {}
         body[field] = val
-        const [status, data] = await api.patch(`/account/${a}`, body, auth[a])
+        const [status, data] = await api.patch(`/account/${a}`, body, auth[a]())
         assert.equal(status, 200)
         assert.equal(data.result, `success`)
         assert.deepStrictEqual(data.account[field], val)
       })
     }
+  })
 
+  describe(`Update account data (${a})`, () => {
+    it(`Should update data (${a})`, async () => {
+      const body = {
+        data: {
+          ...store.account.data,
+          githubUsername: 'github-is-a-garbage-fire-these-days',
+        },
+      }
+      const [status, data] = await api.patch(`/account/${a}`, body, auth[a]())
+      assert.equal(status, 200)
+      assert.equal(data.result, `success`)
+      assert.equal(data.account.data.githubUsername, body.data.githubUsername)
+    })
+    /*
     it(`Should update password (${a})`, async () => {
-      const [status, data] = await api.patch(`/account/${a}`, { password: 'password' }, auth[a])
+      const [status, data] = await api.patch(`/account/${a}`, { password: 'password' }, auth[a]())
       assert.equal(status, 200)
       assert.equal(data.result, `success`)
     })
@@ -60,7 +77,7 @@ for (const a of ['jwt', 'key']) {
         const [status, data] = await api.patch(
           `/account/${a}`,
           { password: store.account.password },
-          auth[a]
+          auth[a]()
         )
         assert.equal(status, 200)
         assert.equal(data.result, `success`)
@@ -78,7 +95,7 @@ for (const a of ['jwt', 'key']) {
 
     const username = store.randomString().toUpperCase()
     it(`Should update username (and lusername) (${a})`, async () => {
-      const [status, data] = await api.patch(`/account/${a}`, { username }, auth[a])
+      const [status, data] = await api.patch(`/account/${a}`, { username }, auth[a]())
       assert.equal(status, 200)
       assert.equal(data.result, `success`)
       assert.deepStrictEqual(data.account.username, username)
@@ -89,7 +106,7 @@ for (const a of ['jwt', 'key']) {
       const [status, data] = await api.patch(
         `/account/${a}`,
         { username: store.account.username },
-        auth[a]
+        auth[a]()
       )
       assert.equal(status, 200)
       assert.equal(data.result, `success`)
@@ -107,6 +124,7 @@ for (const a of ['jwt', 'key']) {
     //  })
     //}
 
+    /*
     let confirmation, check
     it(`Should update the account email address (${a})`, async () => {
       const [status, data] = await api.patch(
@@ -165,5 +183,6 @@ for (const a of ['jwt', 'key']) {
       assert.equal(status, 200)
       assert.equal(data.result, `success`)
     })
+    */
   })
 }

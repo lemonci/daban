@@ -1,4 +1,13 @@
-import { api, auth, cat, store, startEmailTrap, stopEmailTrap, readEmail } from './utils.mjs'
+import {
+  api,
+  auth,
+  cat,
+  store,
+  startEmailTrap,
+  stopEmailTrap,
+  readEmail,
+  saveStore,
+} from './utils.mjs'
 import { strict as assert } from 'node:assert'
 import { describe, it } from 'node:test'
 
@@ -192,5 +201,31 @@ describe(`Check for available usernames`, () => {
       auth.jwt()
     )
     assert.equal(status, 200)
+  })
+})
+
+describe(`Create API key`, () => {
+  it(`Create API Key (jwt)`, async () => {
+    const input = {
+      name: 'Test API key :)',
+      level: 4,
+      expiresIn: 60,
+    }
+    const [status, data] = await api.post(`/apikeys/jwt`, input, auth.jwt())
+    assert.equal(status, 201)
+    assert.equal(data.result, `created`)
+    assert.equal(typeof data.apikey.key, `string`)
+    assert.equal(typeof data.apikey.secret, `string`)
+    assert.equal(typeof data.apikey.expiresAt, `string`)
+    assert.equal(data.apikey.level, input.level)
+    assert.equal(data.apikey.name, input.name)
+    // Store API key
+    store.account.apikey = data.apikey
+
+    /*
+     * Keep this on disk so we can run other tests
+     * without having to create an account again
+     */
+    saveStore(store)
   })
 })

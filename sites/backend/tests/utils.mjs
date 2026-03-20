@@ -1,3 +1,4 @@
+import fs from 'node:fs'
 import HTTP from 'node:http'
 import axios from 'axios'
 import { randomBytes } from 'crypto'
@@ -133,6 +134,17 @@ const server = HTTP.createServer((req, res) => {
 
 // A poor man's mailtrap
 export const startEmailTrap = async () => server.listen(3002)
+// A poor man's way to run 1 set of tests without the other
+const jsonStore = './tests/unit-test-store.json'
+export const saveStore = (data) => fs.writeFileSync(jsonStore, JSON.stringify(data))
+export const loadStore = (store) => {
+  const data = JSON.parse(fs.readFileSync(jsonStore))
+  for (const [key, val] of Object.entries(data)) store[key] = val
+
+  // We are mutating the passed-in object here, but let's return it anyway
+  return store
+}
+
 export const stopEmailTrap = async () => server.close()
 export const readEmail = () => [...emails].pop()
 export const readEmails = () => [...emails]
