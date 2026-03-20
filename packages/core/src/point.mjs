@@ -404,9 +404,9 @@ export function pointsProxy(points, log) {
       // Constructor checks
       if (value instanceof Point !== true)
         log.warn(`\`points.${name}\` was set with a value that is not a \`Point\` object`)
-      if (value.x == null || !__isCoord(value.x))
+      if (value?.x == null || !__isCoord(value.x))
         log.warn(`\`points.${name}\` was set with a \`x\` parameter that is not a \`number\``)
-      if (value.y == null || !__isCoord(value.y))
+      if (value?.y == null || !__isCoord(value.y))
         log.warn(`\`points.${name}\` was set with a \`y\` parameter that is not a \`number\``)
       try {
         value.name = name
