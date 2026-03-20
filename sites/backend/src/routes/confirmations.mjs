@@ -6,14 +6,16 @@ const jwt = ['jwt', { session: false }]
 const bsc = ['basic', { session: false }]
 
 export function confirmationsRoutes(tools) {
-  const { app, passport } = tools
+  const { app, passport, limit } = tools
 
   /*
    * Confirmations cannot be created through the API
    * They are created internally, and the only endpoint it this one that
    * lets you read a confirmation if you know it's ID and check value
    */
-  app.get('/confirmations/:id/:check', (req, res) => Confirmations.read(req, res, tools))
+  app.get('/confirmations/:id/:check', limit.auth, (req, res) =>
+    Confirmations.read(req, res, tools)
+  )
 
   /*
    * Actuallllyyyy.... there's also these endpoints that load suggested sets if you
