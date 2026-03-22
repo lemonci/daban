@@ -20,7 +20,10 @@ export const auth = {
   }),
   key: (prefix = '') => ({
     headers: {
-      Authorization: basicAuth(store.account.apikey?.key, store[prefix + 'account'].apikey?.secret),
+      Authorization: basicAuth(
+        store[prefix + 'account'].apikey?.key,
+        store[prefix + 'account'].apikey?.secret
+      ),
     },
   }),
   basic: ({ key, secret }) => ({ headers: { Authorization: basicAuth(key, secret) } }),

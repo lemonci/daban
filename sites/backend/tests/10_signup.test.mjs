@@ -5,6 +5,7 @@ import {
   store,
   startEmailTrap,
   stopEmailTrap,
+  randomString,
   readEmail,
   saveStore,
 } from './utils.mjs'
@@ -260,7 +261,44 @@ describe(`Create second account for cross-account tests`, () => {
     assert.equal(data.account.username, data.account.lusername)
     assert.equal(typeof data.account.id, 'undefined')
     // Store
-    store.altaccount = { ...store.altaccount, ...data.account, token: data.token }
+    store.altaccount = {
+      ...store.altaccount,
+      ...data.account,
+      token: data.token,
+      password: randomString(),
+    }
+  })
+
+  it(`Create API Key (jwt)`, async () => {
+    const input = {
+      name: 'Test API key :)',
+      level: 4,
+      expiresIn: 60,
+    }
+    const [status, data] = await api.post(`/apikeys/jwt`, input, auth.jwt('alt'))
+    assert.equal(status, 201)
+    assert.equal(data.result, `created`)
+    assert.equal(typeof data.apikey.key, `string`)
+    assert.equal(typeof data.apikey.secret, `string`)
+    assert.equal(typeof data.apikey.expiresAt, `string`)
+    assert.equal(data.apikey.level, input.level)
+    assert.equal(data.apikey.name, input.name)
+    // Store API key
+    store.altaccount.apikey = data.apikey
+  })
+
+  // Note that password was not set at account creation
+  it(`Should set the password`, async () => {
+    const [status, data] = await api.patch(
+      '/account/jwt',
+      { password: store.altaccount.password },
+      auth.jwt('alt')
+    )
+    assert.equal(status, 200)
+    assert.equal(data.result, 'success')
+    for (const key of ['email', 'username', 'id']) {
+      assert.equal(data.account[key], store.altaccount[key])
+    }
 
     /*
      * Keep this on disk so we can run other tests

@@ -62,11 +62,9 @@ for (const a of ['jwt', 'key']) {
         `/bookmarks/${store.bookmark[a].uuid}/${a}`,
         auth[a]('alt')
       )
-      if (a === 'jwt') {
-        assert.equal(status, 403)
-        assert.equal(data.result, `error`)
-        assert.equal(data.error, `insufficientAccessLevel`)
-      } else assert.equal(status, 401)
+      assert.equal(status, 403)
+      assert.equal(data.result, `error`)
+      assert.equal(data.error, `insufficientAccessLevel`)
     })
 
     it(`Disallow updating other user's bookmark (${a})`, async () => {
@@ -81,7 +79,7 @@ for (const a of ['jwt', 'key']) {
         `/bookmarks/${store.bookmark[a].uuid}/${a}`,
         auth[a]('alt')
       )
-      assert.equal(status, a === 'jwt' ? 403 : 401)
+      assert.equal(status, 403)
     })
   })
 }

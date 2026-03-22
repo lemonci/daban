@@ -1,8 +1,8 @@
-import { api, auth, cat, store } from './utils.mjs'
+import { api, auth, cat, store, loadStore } from './utils.mjs'
 import { strict as assert } from 'node:assert'
 import { describe, it } from 'node:test'
 
-const obj = {
+const input = {
   jwt: {
     test: true,
     nameEn: 'Example measurements A',
@@ -24,18 +24,12 @@ const obj = {
     },
   },
 }
-store.curatedSet = {
-  jwt: {},
-  key: {},
-}
-store.altset = {
-  jwt: {},
-  key: {},
-}
 
 for (const a of ['jwt', 'key']) {
   describe(`Curated Set Tests (${a})`, () => {
     it(`Create a new curated set (${a})`, async () => {
+      // Ensure we have an account to test with
+      if (!store.account.confirmation) loadStore(store)
       const [status, data] = await api.post(`/curated-sets/${a}`, obj[a], auth[a])
       assert.equal(status, 201)
       assert.equal(data.result, `created`)
