@@ -15,9 +15,13 @@ export const store = await setup()
 
 // Authentication data
 export const auth = {
-  jwt: () => ({ headers: { Authorization: `Bearer ${store.account.token}` } }),
-  key: () => ({
-    headers: { Authorization: basicAuth(store.account.apikey?.key, store.account.apikey?.secret) },
+  jwt: (prefix = '') => ({
+    headers: { Authorization: `Bearer ${store[prefix + 'account'].token}` },
+  }),
+  key: (prefix = '') => ({
+    headers: {
+      Authorization: basicAuth(store.account.apikey?.key, store[prefix + 'account'].apikey?.secret),
+    },
   }),
   basic: ({ key, secret }) => ({ headers: { Authorization: basicAuth(key, secret) } }),
 }
@@ -107,6 +111,11 @@ async function setup() {
   const store = {
     randomString,
     account: {
+      email: `test_${randomString()}@freesewing.dev`,
+      password: randomString(),
+      sets: {},
+    },
+    altaccount: {
       email: `test_${randomString()}@freesewing.dev`,
       password: randomString(),
       sets: {},

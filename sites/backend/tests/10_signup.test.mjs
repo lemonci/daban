@@ -221,6 +221,46 @@ describe(`Create API key`, () => {
     assert.equal(data.apikey.name, input.name)
     // Store API key
     store.account.apikey = data.apikey
+  })
+})
+
+describe(`Create second account for cross-account tests`, () => {
+  it(`Should signup`, async () => {
+    await startEmailTrap()
+    const [status, data] = await api.post('/signup', { email: store.altaccount.email })
+    assert.equal(status, 201)
+    assert.equal(data.result, 'created')
+    assert.equal(data.email, store.altaccount.email)
+    const msg = readEmail()
+    store.altaccount.confirmation = msg.replacements
+    store.altaccount.confirmation.uuid = store.altaccount.confirmation.actionUrl.split('id=').pop()
+    await stopEmailTrap()
+  })
+  it(`Should confirm the altaccount`, async () => {
+    const [status, data] = await api.post(`/confirm/signup/${store.altaccount.confirmation.uuid}`, {
+      consent: 1,
+      check: store.altaccount.confirmation.check,
+    })
+    assert.equal(status, 200)
+    assert.equal(data.result, 'success')
+    assert.equal(typeof data.token, 'string')
+    assert.equal(typeof data.account.uuid, 'string')
+    assert.equal(data.account.bio, '')
+    assert.equal(data.account.compare, true)
+    assert.equal(data.account.consent, 1)
+    assert.equal(data.account.control, 1)
+    assert.equal(data.account.email, store.altaccount.email)
+    assert.equal(typeof data.account.data, 'object')
+    assert.equal(data.account.imperial, false)
+    assert.equal(data.account.mfaEnabled, false)
+    assert.equal(data.account.newsletter, false)
+    assert.equal(data.account.role, 'user')
+    assert.equal(data.account.status, 1)
+    assert.equal(typeof data.account.username, 'string')
+    assert.equal(data.account.username, data.account.lusername)
+    assert.equal(typeof data.account.id, 'undefined')
+    // Store
+    store.altaccount = { ...store.altaccount, ...data.account, token: data.token }
 
     /*
      * Keep this on disk so we can run other tests
