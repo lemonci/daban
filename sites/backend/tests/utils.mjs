@@ -19,9 +19,7 @@ export const auth = {
   key: () => ({
     headers: { Authorization: basicAuth(store.account.apikey?.key, store.account.apikey?.secret) },
   }),
-  basic:
-    () =>
-    ({ key, secret }) => ({ headers: { Authorization: basicAuth(key, secret) } }),
+  basic: ({ key, secret }) => ({ headers: { Authorization: basicAuth(key, secret) } }),
 }
 
 function basicAuth(u, p) {
