@@ -83,9 +83,6 @@ export function decorateModel(Model, tools, modelConfig) {
    * Stores result in this.record
    */
   Model.read = async function (where, include = {}) {
-    if ((where.id && typeof where.id === 'number' && isNaN(where.id)) || where.id === null) {
-      return this.recordExists()
-    }
     try {
       this.record = await this.prisma[modelConfig.name].findUnique({ where, include })
     } catch (err) {
@@ -191,6 +188,7 @@ export function decorateModel(Model, tools, modelConfig) {
        * Some error occured. Log warning and return 500
        */
       log.warn(err, `Could not create ${modelConfig.name}`)
+      this.record = false
       return this.setResponse(500, `create${capitalize(modelConfig.name)}Failed`)
     }
 

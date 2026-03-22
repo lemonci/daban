@@ -49,14 +49,23 @@ BookmarkModel.prototype.guardedCreate = async function ({ body, user }) {
   /*
    * Create the initial record
    */
-  await this.createRecord({
-    type: body.type,
-    title: body.title,
-    url: body.url,
-    userId: user.id,
-  })
+  let result
+  try {
+    await this.createRecord({
+      type: body.type,
+      title: body.title,
+      url: body.url,
+      userId: user.apikey ? user.userId : user.id,
+    })
+  } catch (err) {
+    log.warn(`Failed to create bookmark: ${err.message}`)
+    return this.setResponse(500)
+  }
 
-  //await this.read({ id: this.record.id })
+  /*
+   * Re-read the record to pick up the UUID set by the database trigger
+   */
+  await this.read({ id: this.record.id })
 
   /*
    * Now return 201 and the data
@@ -91,7 +100,14 @@ BookmarkModel.prototype.guardedRead = async function ({ params, user }) {
   /*
    * You cannot read other people's bookmarks
    */
-  if (this.record.userId !== user.id) return this.setResponse(403, 'insufficientAccessLevel')
+  if (
+    // For an API key, we need to match record.userId to user.userId
+    ((user.apikey && this.record.userId !== user.userId) ||
+      // For a JWT, we need to match record.userId to user.id
+      (!user.apikey && this.record.userId !== user.id)) &&
+    !this.rbac.admin(user)
+  )
+    return this.setResponse(403, 'insufficientAccessLevel')
 
   /*
    * Return 200 and send the bookmark data
@@ -122,9 +138,21 @@ BookmarkModel.prototype.guardedUpdate = async function ({ params, body, user }) 
   await this.read({ uuid: params.uuid })
 
   /*
+   * If it does not exist, send a 404
+   */
+  if (!this.record) return this.setResponse(404)
+
+  /*
    * You cannot update other user's bookmarks
    */
-  if (this.record.userId !== user.id) return this.setResponse(403, 'insufficientAccessLevel')
+  if (
+    // For an API key, we need to match record.userId to user.userId
+    ((user.apikey && this.record.userId !== user.userId) ||
+      // For a JWT, we need to match record.userId to user.id
+      (!user.apikey && this.record.userId !== user.id)) &&
+    !this.rbac.admin(user)
+  )
+    return this.setResponse(403, 'insufficientAccessLevel')
 
   /*
    * Prepare data to update the record
