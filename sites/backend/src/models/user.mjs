@@ -1086,7 +1086,7 @@ UserModel.prototype.guardedUpdate = async function ({ body, user }) {
       data.username = body.username.trim()
       data.lusername = clean(body.username)
     } else {
-      log.info(`Rejected user name change from ${data.username} to ${body.username.trim()}`)
+      log.info(`Rejected user name change from ${this.record.username} to ${body.username}`)
     }
   }
 
