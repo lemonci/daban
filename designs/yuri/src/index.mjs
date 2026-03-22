@@ -6,8 +6,7 @@ import { back } from './back.mjs'
 import { front } from './front.mjs'
 import { sleeve } from './sleeve.mjs'
 import { gusset } from './gusset.mjs'
-import { hoodSide } from './hoodside.mjs'
-import { hoodCenter } from './hoodcenter.mjs'
+import { hoodSide, hoodCenter } from '@freesewing/library'
 
 // Setup our new design
 const Yuri = new Design({

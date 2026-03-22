@@ -10,8 +10,6 @@
     "sleeve": "Sleeve"
   },
   "s": {
-    "cutHoodCenter.t": "The hood center is not shown",
-    "cutHoodCenter.d": "The **Hood center** is a rectangular piece of fabric {{{ width }}} wide and {{{ length }}} long."
   },
   "o": {
     "hipsEase": {

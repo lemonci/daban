@@ -37,14 +37,16 @@ function yuriFront({
   // end Yuri points
 
   // Store length of the neck seam
-  store.set(
-    'frontNeckSeamLength',
-    new Path()
-      .move(points.neck)
-      .curve(points.neckCp2Front, points.cfNeckCp1, points.cfNeck)
-      .length()
-  )
-  store.set('neckCutoutFront', points.cfNeck.y)
+  const neckLength = new Path()
+    .move(points.neck)
+    .curve(points.neckCp2Front, points.cfNeckCp1, points.cfNeck)
+    .length()
+
+  const hoodParts = ['threePartHood', 'hoodSide', 'hoodCenter']
+  for (const hoodPart of hoodParts) {
+    store.set(`library.${hoodPart}.neckOpeningLenFront`, neckLength)
+    store.set(`library.${hoodPart}.neckCutoutFront`, points.cfNeck.y)
+  }
 
   // Paths
   paths.saBase = new Path()
