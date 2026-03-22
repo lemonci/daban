@@ -117,6 +117,13 @@ function hugoFront({
   )
   store.set('neckOpeningLenFront', neckOpening.length())
   store.set('neckCutoutFront', points.cfNeck.y)
+  const hoodParts = ['threePartHood', 'hoodSide', 'hoodCenter']
+  for (const hoodPart of hoodParts) {
+    store.set(`library.${hoodPart}.neckOpeningLenFront`, neckOpening.length())
+    store.set(`library.${hoodPart}.neckCutoutFront`, points.cfNeck.y)
+  }
+  store.set('library.hoodSide.title', { nr: 6 })
+  store.set('library.hoodCenter.title', { nr: 7 })
 
   if (sa) {
     paths.sa = paths.saBase.offset(sa).line(points.cfNeck).attr('class', 'fabric sa')

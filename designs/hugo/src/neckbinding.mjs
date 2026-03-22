@@ -1,12 +1,12 @@
 import { front } from './front.mjs'
 import { back } from './back.mjs'
-import { hoodCenter } from './hoodcenter.mjs'
+import { hoodCenter } from '@freesewing/library'
 
 function hugoNeckBinding({ store, sa, Point, points, Path, paths, macro, part, expand, units }) {
   const length =
     store.get('neckOpeningLenFront') * 2 +
     store.get('neckOpeningLenBack') * 2 +
-    store.get('hoodCenterWidth')
+    store.get('library.hood.hoodCenterWidth')
   const width = length / 44.2
 
   if (expand) {
