@@ -177,6 +177,9 @@ const baseConfig = {
   },
   translations: languages.filter((lang) => lang !== 'en'),
   measies: measurements,
+  media: {
+    rootFolder: process.env.BACKEND_MEDIA_ROOT_FOLDER || '/tmp/media',
+  },
   mfa: {
     service: process.env.BACKEND_MFA_SERVICE || 'FreeSewing',
   },

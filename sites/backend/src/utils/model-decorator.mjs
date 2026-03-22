@@ -2,6 +2,7 @@ import { log } from '../utils/log.mjs'
 import yaml from 'js-yaml'
 import { hashPassword } from '../utils/crypto.mjs'
 import { asJson, capitalize } from '../utils/index.mjs'
+import { imageHandlers } from '../utils/image.mjs'
 /*
  * Models will be attached on-demand
  */
@@ -38,6 +39,13 @@ export function decorateModel(Model, tools, modelConfig) {
   Model.mfa = tools.mfa
   Model.rbac = tools.rbac
   Model.mailer = tools.email
+
+  /*
+   * Attach image handlers only on models that need them
+   */
+  if (['user', 'pattern', 'set'].includes(Model.name)) {
+    Model.img = imageHandlers(Model.name, tools.config.media.rootFolder)
+  }
 
   /*
    * Set encrypted fields based on config

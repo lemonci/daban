@@ -23,6 +23,7 @@ sites/backend/coverage
 
 # unit test articats
 sites/backend/tests/unit-test-store.json
+sites/backend/tests/media
 
 # Any Yarn lock files
 designs/*/package-lock.json

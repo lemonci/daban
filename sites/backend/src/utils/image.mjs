@@ -5,8 +5,6 @@ import { join } from 'node:path'
 import { randomBytes } from 'node:crypto'
 import { log } from './log.mjs'
 
-const MEDIA_ROOT = '/media'
-
 /*
  * Maximum allowed size for a decoded image: 10 MB
  */
@@ -55,16 +53,29 @@ function hasImageMagicBytes(buf) {
 }
 
 /*
+ * Returns the on-disk folder for an image given type and uuid
+ *
+ * @param {string} type - 'user', 'set', or 'pattern'
+ * @param {string} uuid - The UUID of the record
+ * @param {string} rootFolder - The root folder to store media under
+ * @return {string} path - The absolute path to the folder holding the webp file
+ */
+export function imageFolder(type, uuid, rootFolder) {
+  const dir1 = uuid[0]
+  const dir2 = uuid.slice(0, 2)
+  return join(rootFolder, type, dir1, dir2)
+}
+
+/*
  * Returns the on-disk path for an image given type and uuid
  *
  * @param {string} type - 'user', 'set', or 'pattern'
  * @param {string} uuid - The UUID of the record
+ * @param {string} rootFolder - The root folder to store media under
  * @return {string} path - The absolute path to the webp file
  */
-export function imagePath(type, uuid) {
-  const dir1 = uuid[0]
-  const dir2 = uuid.slice(0, 2)
-  return join(MEDIA_ROOT, type, dir1, dir2, `${uuid}.webp`)
+export function imagePath(type, uuid, rootFolder) {
+  return join(imageFolder(type, uuid, rootFolder), `${uuid}.webp`)
 }
 
 /*
@@ -79,9 +90,10 @@ export function imagePath(type, uuid) {
  * @param {string} type - 'user', 'set', or 'pattern'
  * @param {string} uuid - The UUID of the record
  * @param {string} data - Base64 data URI or raw base64 string
+ * @param {string} rootFolder - The root folder to store media under
  * @return {string|false} - The output path on success, false on failure
  */
-export async function saveImage(type, uuid, data) {
+async function saveImage(type, uuid, data, rootFolder) {
   if (!uuid || !data || typeof data !== 'string') return false
 
   /*
@@ -130,8 +142,9 @@ export async function saveImage(type, uuid, data) {
     /*
      * Build the output path and ensure the directory exists
      */
-    const outPath = imagePath(type, uuid)
-    mkdirSync(join(MEDIA_ROOT, type, uuid[0], uuid.slice(0, 2)), { recursive: true })
+    const outPath = imagePath(type, uuid, rootFolder)
+    console.log(outPath)
+    mkdirSync(join(imageFolder(type, uuid, rootFolder)), { recursive: true })
 
     /*
      * Convert to webp via ffmpeg at quality 85
@@ -156,3 +169,14 @@ export async function saveImage(type, uuid, data) {
     }
   }
 }
+
+/**
+ * This will be attached to relevant models to save images
+ *
+ * @param {string} model - One of user, set, pattern
+ * @param {object} mediaRootFolder - The BACKEND_MEDIA_ROOT value from config
+ * @return {function} saveImage - A function that will save the image
+ */
+export const imageHandlers = (model, mediaRootFolder) => ({
+  save: (uuid, data) => saveImage(model, uuid, data, mediaRootFolder),
+})

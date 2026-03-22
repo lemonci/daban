@@ -1,7 +1,6 @@
 import jwt from 'jsonwebtoken'
 import { log } from '../utils/log.mjs'
 import { hash, hashPassword, randomString, randomOtp, verifyPassword } from '../utils/crypto.mjs'
-import { saveImage } from '../utils/image.mjs'
 import { clean, asJson, i18nUrl, writeExportedData } from '../utils/index.mjs'
 import { decorateModel } from '../utils/model-decorator.mjs'
 
@@ -1093,7 +1092,15 @@ UserModel.prototype.guardedUpdate = async function ({ body, user }) {
   /*
    * Image (img)
    */
-  if (typeof body.img === 'string') await saveImage('user', this.record.uuid, body.img)
+  if (typeof body.img === 'string') {
+    let imgResult = false
+    try {
+      imgResult = await this.img.save(this.record.uuid, body.img)
+    } catch (err) {
+      log.warn(`Failed to save user avatar: ${err.message}`)
+    }
+    if (!imgResult) return this.setResponse(500)
+  }
 
   /*
    * Now update the database record

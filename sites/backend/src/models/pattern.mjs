@@ -1,5 +1,4 @@
 import { log } from '../utils/log.mjs'
-import { saveImage } from '../utils/image.mjs'
 import { decorateModel } from '../utils/model-decorator.mjs'
 
 /*
@@ -112,7 +111,15 @@ PatternModel.prototype.guardedCreate = async function ({ body, user }) {
   /*
    * If an image was provided, save it to disk using the UUID
    */
-  if (body.img) await saveImage('pattern', this.record.uuid, body.img)
+  if (body.img) {
+    let imgResult = false
+    try {
+      imgResult = await this.img.save(this.record.uuid, body.img)
+    } catch (err) {
+      log.warn(`Failed to save pattern avatar: ${err.message}`)
+    }
+    if (!imgResult) return this.setResponse(500)
+  }
 
   /*
    * Now return 201 and the record data
@@ -290,7 +297,15 @@ PatternModel.prototype.guardedUpdate = async function ({ params, body, user }) {
   /*
    * img
    */
-  if (typeof body.img === 'string') await saveImage('pattern', this.record.uuid, body.img)
+  if (typeof body.img === 'string') {
+    let imgResult = false
+    try {
+      imgResult = await this.img.save(this.record.uuid, body.img)
+    } catch (err) {
+      log.warn(`Failed to save pattern avatar: ${err.message}`)
+    }
+    if (!imgResult) return this.setResponse(500)
+  }
 
   /*
    * Now update the record

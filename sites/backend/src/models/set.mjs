@@ -1,5 +1,4 @@
 import { log } from '../utils/log.mjs'
-import { saveImage } from '../utils/image.mjs'
 import { decorateModel } from '../utils/model-decorator.mjs'
 
 /*
@@ -62,7 +61,15 @@ SetModel.prototype.guardedCreate = async function ({ body, user }) {
   /*
    * If an image was provided, save it to disk using the UUID
    */
-  if (typeof body.img === 'string') await saveImage('set', this.record.uuid, body.img)
+  if (typeof body.img === 'string') {
+    let imgResult = false
+    try {
+      imgResult = await this.img.save(this.record.uuid, body.img)
+    } catch (err) {
+      log.warn(`Failed to save set avatar: ${err.message}`)
+    }
+    if (!imgResult) return this.setResponse(500)
+  }
 
   /*
    * Now return 201 and the data
@@ -275,7 +282,15 @@ SetModel.prototype.guardedUpdate = async function ({ params, body, user }) {
   /*
    * Image (img)
    */
-  if (typeof body.img === 'string') await saveImage('set', this.record.uuid, body.img)
+  if (typeof body.img === 'string') {
+    let imgResult = false
+    try {
+      imgResult = await this.img.save(this.record.uuid, body.img)
+    } catch (err) {
+      log.warn(`Failed to save set avatar: ${err.message}`)
+    }
+    if (!imgResult) return this.setResponse(500)
+  }
 
   /*
    * Now update the database record
