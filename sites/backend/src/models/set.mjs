@@ -44,7 +44,7 @@ SetModel.prototype.guardedCreate = async function ({ body, user }) {
     public: body.public === true ? true : false,
     measies: typeof body.measies === 'object' ? this.sanitizeMeasurements(body.measies) : {},
     imperial: body.imperial === true ? true : false,
-    userId: user.id,
+    userId: user.apikey ? user.userId : user.id,
     img: this.config.avatars.set,
   })
 
@@ -93,6 +93,11 @@ SetModel.prototype.guardedRead = async function ({ params, user }) {
   await this.read({ uuid: params.uuid })
 
   /*
+   * If it does not exist, send a 404
+   */
+  if (!this.record) return this.setResponse(404)
+
+  /*
    * If it's public, return early
    */
   if (this.record?.public)
@@ -107,16 +112,16 @@ SetModel.prototype.guardedRead = async function ({ params, user }) {
   if (!this.rbac.readSome(user)) return this.setResponse(403, 'insufficientAccessLevel')
 
   /*
-   * If it does not exist, send a 404
+   * You need to have at least the bughunter role to read other user's sets
    */
-  if (!this.record) return this.setResponse(404)
-
-  /*
-   * You need to have at least the bughunter role to read other user's patterns
-   */
-  if (this.record.userId !== user.id && !this.rbac.bughunter(user)) {
+  if (
+    // For an API key, we need to match record.userId to user.userId
+    ((user.apikey && this.record.userId !== user.userId) ||
+      // For a JWT, we need to match record.userId to user.id
+      (!user.apikey && this.record.userId !== user.id)) &&
+    !this.rbac.bughunter(user)
+  )
     return this.setResponse(403, 'insufficientAccessLevel')
-  }
 
   /*
    * Return 200 and send the pattern data
@@ -172,11 +177,22 @@ SetModel.prototype.guardedClone = async function ({ params, user }) {
   await this.read({ uuid: params.uuid })
 
   /*
+   * If it does not exist, send a 404
+   */
+  if (!this.record) return this.setResponse(404)
+
+  /*
    * You need at least the support role to clone another user's (non-public) set
    */
-  if (this.record.userId !== user.id && !this.record.public && !this.rbac.support(user)) {
+  if (
+    !this.record.public &&
+    // For an API key, we need to match record.userId to user.userId
+    ((user.apikey && this.record.userId !== user.userId) ||
+      // For a JWT, we need to match record.userId to user.id
+      (!user.apikey && this.record.userId !== user.id)) &&
+    !this.rbac.support(user)
+  )
     return this.setResponse(403, 'insufficientAccessLevel')
-  }
 
   /*
    * Now clone the set
@@ -336,9 +352,14 @@ SetModel.prototype.guardedDelete = async function ({ params, user }) {
   /*
    * You need to be admin to remove another user's data
    */
-  if (this.record.userId !== user.id && !this.rbac.admin(user)) {
+  if (
+    // For an API key, we need to match record.userId to user.userId
+    ((user.apikey && this.record.userId !== user.userId) ||
+      // For a JWT, we need to match record.userId to user.id
+      (!user.apikey && this.record.userId !== user.id)) &&
+    !this.rbac.admin(user)
+  )
     return this.setResponse(403, 'insufficientAccessLevel')
-  }
 
   /*
    * Delete the record

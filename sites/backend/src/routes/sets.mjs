@@ -27,7 +27,7 @@ export function setsRoutes(tools) {
     Sets.read(req, res, tools)
   )
 
-  // Get a list of measurments sets for the user
+  // Get a list of measurements sets for the user
   app.get('/sets/jwt', passport.authenticate(...jwt), (req, res) => Sets.list(req, res, tools))
   app.get('/sets/key', passport.authenticate(...bsc), (req, res) => Sets.list(req, res, tools))
 
