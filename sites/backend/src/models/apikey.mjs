@@ -1,6 +1,6 @@
 import { log } from '../utils/log.mjs'
 import { hashPassword, randomString, verifyPassword } from '../utils/crypto.mjs'
-import { asJson } from '../utils/index.mjs'
+import { asJson, whereFromUser } from '../utils/index.mjs'
 import { decorateModel } from '../utils/model-decorator.mjs'
 
 /*
@@ -72,9 +72,15 @@ ApikeyModel.prototype.guardedRead = async function ({ params, user }) {
   if (!this.record) return this.setResponse(404)
 
   /*
-   * Only admins can read other users
+   * Only admins can read other users' keys
    */
-  if (this.record.userId !== user.id && !this.rbac.admin(user)) {
+  if (
+    // For an API key, we need to match record.userId to user.userId
+    ((user.apikey && this.record.userId !== user.userId) ||
+      // For a JWT, we need to match record.userId to user.id
+      (!user.apikey && this.record.userId !== user.id)) &&
+    !this.rbac.admin(user)
+  ) {
     return this.setResponse(403, 'insufficientAccessLevel')
   }
 
@@ -119,9 +125,15 @@ ApikeyModel.prototype.guardedDelete = async function ({ params, user }) {
   if (!this.record) return this.setResponse(404)
 
   /*
-   * Only admins can delete other users
+   * Only admins can delete other users' keys
    */
-  if (this.record.userId !== user.id && !this.rbac.admin(user)) {
+  if (
+    // For an API key, we need to match record.userId to user.userId
+    ((user.apikey && this.record.userId !== user.userId) ||
+      // For a JWT, we need to match record.userId to user.id
+      (!user.apikey && this.record.userId !== user.id)) &&
+    !this.rbac.admin(user)
+  ) {
     return this.setResponse(403, 'insufficientAccessLevel')
   }
 

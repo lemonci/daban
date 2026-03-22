@@ -1,4 +1,5 @@
 import { UserModel } from '../models/user.mjs'
+import { whereFromUser } from '../utils/index.mjs'
 
 export function UsersController() {}
 
@@ -196,11 +197,4 @@ UsersController.prototype.isUsernameAvailable = async (req, res, tools) => {
   else User.setResponse(404)
 
   return User.sendResponse(res)
-}
-
-function whereFromUser(user) {
-  if (user.apiKey === true && user.userId) return { id: user.userId }
-  if (user.uuid) return { uuid: user.uuid }
-
-  return false
 }

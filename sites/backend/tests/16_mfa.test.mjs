@@ -1,5 +1,14 @@
 import { authenticator } from '@otplib/preset-default'
-import { api, auth, cat, store } from './utils.mjs'
+import {
+  api,
+  auth,
+  cat,
+  store,
+  loadStore,
+  startEmailTrap,
+  stopEmailTrap,
+  readEmail,
+} from './utils.mjs'
 import { strict as assert } from 'node:assert'
 import { describe, it } from 'node:test'
 
@@ -10,44 +19,41 @@ const secret = {
 
 for (const a of ['jwt']) {
   describe(`Setup Multi-Factor Authentication (MFA)`, () => {
+    // Ensure we have an account to test with
+    if (!store.account.confirmation) loadStore(store)
     it(`Should return 400 on MFA enable without proper value`, async () => {
-      const body = { mfa: 'test', test: true }
-      const [status, data] = await api.post(`/account/mfa/${a}`, body, auth[a])
+      const body = { mfa: 'test' }
+      const [status, data] = await api.post(`/account/mfa/${a}`, body, auth[a]())
       assert.equal(status, 400)
-      //assert.deepStrictEqual(data.account[field], val)
     })
-
     it(`Should return MFA secret and QR code`, async () => {
       const body = { mfa: true, test: true }
-      const [status, data] = await api.post(`/account/mfa/${a}`, body, auth[a])
+      const [status, data] = await api.post(`/account/mfa/${a}`, body, auth[a]())
       assert.equal(status, 200)
       assert.equal(data.result, `success`)
       assert.equal(typeof data.mfa.secret, 'string')
       assert.equal(typeof data.mfa.otpauth, 'string')
       assert.equal(typeof data.mfa.qrcode, 'string')
-      secret[a] = data.mfa.secret
+      store.account.mfaSecret = data.mfa.secret
     })
-
-    let scratchCodes = null
-
     it(`Should enable MFA after validating the token`, async () => {
       const body = {
         mfa: true,
         test: true,
-        secret: secret[a],
-        token: authenticator.generate(secret[a]),
+        secret: store.account.mfaSecret,
+        token: authenticator.generate(store.account.mfaSecret),
       }
-      const [status, data] = await api.post(`/account/mfa/${a}`, body, auth[a])
+      const [status, data] = await api.post(`/account/mfa/${a}`, body, auth[a]())
       assert.equal(status, 200)
       assert.equal(data.result, `success`)
       assert.equal(data.account.id, store.account.id)
       assert.equal(Array.isArray(data.scratchCodes), true)
-      scratchCodes = data.scratchCodes
+      store.account.scratchCodes = data.scratchCodes
     })
 
     it(`Should not request MFA when it is already active`, async () => {
-      const body = { mfa: true, test: true }
-      const [status, data] = await api.post(`/account/mfa/${a}`, body, auth[a])
+      const body = { mfa: true }
+      const [status, data] = await api.post(`/account/mfa/${a}`, body, auth[a]())
       assert.equal(status, 400)
       assert.equal(data.result, `error`)
     })
@@ -56,31 +62,17 @@ for (const a of ['jwt']) {
       const body = {
         mfa: true,
         test: true,
-        secret: secret[a],
-        token: authenticator.generate(secret[a]),
+        secret: store.account.mfaSecret,
+        token: authenticator.generate(store.account.mfaSecret),
       }
-      const [status, data] = await api.post(`/account/mfa/${a}`, body, auth[a])
+      const [status, data] = await api.post(`/account/mfa/${a}`, body, auth[a]())
       assert.equal(status, 400)
       assert.equal(data.result, `error`)
     })
 
-    // Note that password was not set at account creation
-    it(`Should set the password`, async () => {
-      const [status, data] = await api.patch(
-        '/account/jwt',
-        { password: store.account.password },
-        auth.jwt
-      )
-      assert.equal(status, 200)
-      assert.equal(data.result, 'success')
-      for (const key of ['email', 'username', 'id']) {
-        assert.equal(data.account[key], store.account[key])
-      }
-    })
-
     it(`Should not sign in with username/password only`, async () => {
       const body = {
-        username: store.account.username,
+        username: store.account.uuid,
         password: store.account.password,
       }
       const [status, data] = await api.post(`/signin`, body)
@@ -91,21 +83,21 @@ for (const a of ['jwt']) {
 
     it(`Should sign in with username/password/token`, async () => {
       const body = {
-        username: store.account.username,
+        username: store.account.uuid,
         password: store.account.password,
-        token: authenticator.generate(secret[a]),
+        token: authenticator.generate(store.account.mfaSecret),
       }
       const [status, data] = await api.post(`/signin`, body)
       assert.equal(status, 200)
       assert.equal(data.result, `success`)
-      for (const key of ['email', 'username', 'id']) {
+      for (const key of ['email', 'username', 'uuid']) {
         assert.equal(data.account[key], store.account[key])
       }
     })
 
     it(`Should not sign in with the wrong token`, async () => {
       const body = {
-        username: store.account.username,
+        username: store.account.uuid,
         password: store.account.password,
         token: 'wrong',
       }
@@ -117,9 +109,9 @@ for (const a of ['jwt']) {
 
     it(`Should sign in with a scratch code`, async () => {
       const body = {
-        username: store.account.username,
+        username: store.account.uuid,
         password: store.account.password,
-        token: scratchCodes[0],
+        token: store.account.scratchCodes[0],
       }
       const [status, data] = await api.post(`/signin`, body)
       assert.equal(status, 200)
@@ -133,9 +125,9 @@ for (const a of ['jwt']) {
       const body = {
         mfa: false,
         password: store.account.password,
-        token: scratchCodes[1],
+        token: store.account.scratchCodes[1],
       }
-      const [status, data] = await api.post(`/account/mfa/${a}`, body, auth[a])
+      const [status, data] = await api.post(`/account/mfa/${a}`, body, auth[a]())
       assert.equal(status, 200)
       assert.equal(data.result, `success`)
       for (const key of ['email', 'username', 'id']) {

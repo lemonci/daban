@@ -1,7 +1,7 @@
 import jwt from 'jsonwebtoken'
 import { log } from '../utils/log.mjs'
 import { hash, hashPassword, randomString, randomOtp, verifyPassword } from '../utils/crypto.mjs'
-import { clean, asJson, i18nUrl, writeExportedData } from '../utils/index.mjs'
+import { clean, asJson, i18nUrl, whereFromUser, writeExportedData } from '../utils/index.mjs'
 import { decorateModel } from '../utils/model-decorator.mjs'
 
 /*
@@ -380,7 +380,7 @@ UserModel.prototype.loadAuthenticatedUser = async function (user) {
    */
   try {
     this.authenticatedUser = await this.prisma.user.findUnique({
-      where: { id: user.id },
+      where: whereFromUser(user),
       include: {
         apikeys: true,
       },
