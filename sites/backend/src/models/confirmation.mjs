@@ -25,7 +25,6 @@ export function ConfirmationModel(tools) {
  * @returns {ConfirmationModel} object - The ConfirmationModel
  */
 ConfirmationModel.prototype.guardedRead = async function ({ params }) {
-  console.log(params)
   /*
    * Is the id set?
    */

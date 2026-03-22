@@ -1108,18 +1108,13 @@ UserModel.prototype.guardedUpdate = async function ({ body, user }) {
   await this.update(data)
 
   /*
-   * If it is, we'll need to raise this to a higher scope
-   */
-  let check
-
-  /*
    * If there's an email change, we need to trigger confirmation
    */
   if (typeof body.email === 'string' && this.clear.email !== clean(body.email)) {
     /*
      * Generate the check
      */
-    check = randomString()
+    const check = randomOtp(4)
 
     /*
      * Generate the confirmation record
@@ -1149,9 +1144,10 @@ UserModel.prototype.guardedUpdate = async function ({ body, user }) {
        */
       cc: this.clear.email,
       replacements: {
+        check,
         actionUrl: i18nUrl(
           this.record.language,
-          `/confirm/emailchange?id=${this.Confirmation.record.id}&check=${check}`
+          `/confirm/emailchange?id=${this.Confirmation.record.id}`
         ),
       },
     })
