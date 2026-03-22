@@ -12,6 +12,7 @@ function teaganSleeve({
   measurements,
   store,
   part,
+  snippets,
 }) {
   // Hide sleevecap from brian
   paths.sleevecap.hide()
@@ -100,6 +101,8 @@ function teaganSleeve({
     x: points.bicepsRight.x + sa + 30,
   })
 
+  delete snippets.logo // usually outside the main part outline
+
   return part
 }
 
@@ -111,6 +114,7 @@ export const sleeve = {
   options: {
     ...librarySleeve.options,
     sleeveEase: { pct: 15, min: 5, max: 35, menu: 'style' },
+    sleeveLengthBonus: 0, //unused
     libraryFitSleeve: true,
   },
   draft: teaganSleeve,
