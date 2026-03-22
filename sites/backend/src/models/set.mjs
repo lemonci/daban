@@ -52,7 +52,7 @@ SetModel.prototype.guardedCreate = async function ({ body, user }) {
    * Re-read the record to pick up the UUID set by the database trigger
    */
   try {
-    await this.read({ id: this.record.uuid })
+    await this.read({ id: this.record.id })
   } catch (err) {
     log.warn(err.message)
     return this.setResponse(500, {})
@@ -183,8 +183,10 @@ SetModel.prototype.guardedClone = async function ({ params, user }) {
    */
   const data = this.asSet()
   delete data.id
+  delete data.uuid
   data.name += ` (cloned from #${this.record.uuid})`
   data.notes += ` (Note: This measurements set was cloned from set ${this.record.uuid})`
+  data.userId = user.apikey ? user.userId : user.id
   await this.createRecord(data)
 
   /*
@@ -239,11 +241,21 @@ SetModel.prototype.guardedUpdate = async function ({ params, body, user }) {
   await this.read({ uuid: params.uuid })
 
   /*
+   * If it does not exist, send a 404
+   */
+  if (!this.record) return this.setResponse(404)
+
+  /*
    * Only admins can update other user's sets
    */
-  if (this.record.userId !== user.id && !this.rbac.admin(user)) {
+  if (
+    // For an API key, we need to match record.userId to user.userId
+    ((user.apikey && this.record.userId !== user.userId) ||
+      // For a JWT, we need to match record.userId to user.id
+      (!user.apikey && this.record.userId !== user.id)) &&
+    !this.rbac.admin(user)
+  )
     return this.setResponse(403, 'insufficientAccessLevel')
-  }
 
   /*
    * Prepare data to update the record
