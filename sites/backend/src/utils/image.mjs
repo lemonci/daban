@@ -143,7 +143,6 @@ async function saveImage(type, uuid, data, rootFolder) {
      * Build the output path and ensure the directory exists
      */
     const outPath = imagePath(type, uuid, rootFolder)
-    console.log(outPath)
     mkdirSync(join(imageFolder(type, uuid, rootFolder)), { recursive: true })
 
     /*
