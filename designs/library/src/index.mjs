@@ -4,16 +4,27 @@ import { i18n } from '../i18n/index.mjs'
 import { i18n as rectangleI18n } from '../i18n/rectangle/index.mjs'
 import { i18n as sleeveI18n } from '../i18n/sleeve/index.mjs'
 import { i18n as twoPartSleeveI18n } from '../i18n/two-part-sleeve/index.mjs'
+import { i18n as hoodI18n } from '../i18n/hood/index.mjs'
 
 // Parts
 import { rectangle } from './rectangle/index.mjs'
 import { sleeve } from './sleeve/index.mjs'
 import { topsleeve, undersleeve, twoPartSleeve } from './two-part-sleeve/index.mjs'
+import { threePartHood, hoodCenter, hoodSide } from './three-part-hood/index.mjs'
 
 // Setup our new design
 const Library = new Design({
   data: about,
-  parts: [rectangle, sleeve, topsleeve, undersleeve, twoPartSleeve],
+  parts: [
+    rectangle,
+    sleeve,
+    topsleeve,
+    undersleeve,
+    twoPartSleeve,
+    threePartHood,
+    hoodCenter,
+    hoodSide,
+  ],
 })
 
 // Named exports
@@ -23,11 +34,15 @@ export {
   topsleeve,
   undersleeve,
   twoPartSleeve,
+  threePartHood,
+  hoodCenter,
+  hoodSide,
   Library,
   i18n,
   rectangleI18n,
   sleeveI18n,
   twoPartSleeveI18n,
+  hoodI18n,
   about,
 }
 
