@@ -8,9 +8,9 @@ export function curatedSetsRoutes(tools) {
   const { app, passport } = tools
 
   // Read a curated measurements set (no need to authenticate for this)
-  app.get('/curated-sets/:id.json', (req, res) => CuratedSets.read(req, res, tools, 'json'))
-  app.get('/curated-sets/:id.yaml', (req, res) => CuratedSets.read(req, res, tools, 'yaml'))
-  app.get('/curated-sets/:id', (req, res) => CuratedSets.read(req, res, tools))
+  app.get('/curated-sets/:uuid.json', (req, res) => CuratedSets.read(req, res, tools, 'json'))
+  app.get('/curated-sets/:uuid.yaml', (req, res) => CuratedSets.read(req, res, tools, 'yaml'))
+  app.get('/curated-sets/:uuid', (req, res) => CuratedSets.read(req, res, tools))
 
   // Get a list of all curated measurments sets (no need to authenticate for this)
   app.get('/curated-sets.json', (req, res) => CuratedSets.list(req, res, tools, 'json'))
@@ -26,26 +26,26 @@ export function curatedSetsRoutes(tools) {
   )
 
   // Clone a curated measurements set
-  app.post('/curated-sets/:id/clone/jwt', passport.authenticate(...jwt), (req, res) =>
+  app.post('/curated-sets/:uuid/clone/jwt', passport.authenticate(...jwt), (req, res) =>
     CuratedSets.clone(req, res, tools)
   )
-  app.post('/curated-sets/:id/clone/key', passport.authenticate(...bsc), (req, res) =>
+  app.post('/curated-sets/:uuid/clone/key', passport.authenticate(...bsc), (req, res) =>
     CuratedSets.clone(req, res, tools)
   )
 
   // Update a curated measurements set
-  app.patch('/curated-sets/:id/jwt', passport.authenticate(...jwt), (req, res) =>
+  app.patch('/curated-sets/:uuid/jwt', passport.authenticate(...jwt), (req, res) =>
     CuratedSets.update(req, res, tools)
   )
-  app.patch('/curated-sets/:id/key', passport.authenticate(...bsc), (req, res) =>
+  app.patch('/curated-sets/:uuid/key', passport.authenticate(...bsc), (req, res) =>
     CuratedSets.update(req, res, tools)
   )
 
   // Delete a curated measurements set
-  app.delete('/curated-sets/:id/jwt', passport.authenticate(...jwt), (req, res) =>
+  app.delete('/curated-sets/:uuid/jwt', passport.authenticate(...jwt), (req, res) =>
     CuratedSets.delete(req, res, tools)
   )
-  app.delete('/curated-sets/:id/key', passport.authenticate(...bsc), (req, res) =>
+  app.delete('/curated-sets/:uuid/key', passport.authenticate(...bsc), (req, res) =>
     CuratedSets.delete(req, res, tools)
   )
 
@@ -58,10 +58,10 @@ export function curatedSetsRoutes(tools) {
   )
 
   // Create a curated measurements set from a suggested set
-  app.post('/curated-sets/from/:id/jwt', passport.authenticate(...jwt), (req, res) =>
+  app.post('/curated-sets/from/:uuid/jwt', passport.authenticate(...jwt), (req, res) =>
     CuratedSets.fromSuggestion(req, res, tools)
   )
-  app.post('/curated-sets/from/:id/key', passport.authenticate(...bsc), (req, res) =>
+  app.post('/curated-sets/from/:uuid/key', passport.authenticate(...bsc), (req, res) =>
     CuratedSets.fromSuggestion(req, res, tools)
   )
 }
