@@ -39,7 +39,7 @@ SubscriberModel.prototype.guardedCreate = async function ({ body }) {
   const ehash = hash(email)
 
   /*
-   * Lowecase the language
+   * Lowercase the language
    */
   const language = body.language.toLowerCase()
 
@@ -59,28 +59,27 @@ SubscriberModel.prototype.guardedCreate = async function ({ body }) {
    */
   const actionUrl = i18nUrl(
     body.language,
-    `/newsletter/${this.record.active ? 'un' : ''}subscribe?id=${this.record.id}&check=${ehash}`
+    `/newsletter/${this.record.active ? 'un' : ''}subscribe?id=${this.record.id}`
   )
 
   /*
    * Send out confirmation email
    */
-  const template = newSubscriber ? 'nlsub' : this.record.active ? 'nlsubact' : 'nlsubinact'
+  const template = newSubscriber ? 'nlsub' : this.record.active ? 'nlsubact' : 'nlsub'
   await this.mailer.send({
     template,
     language,
     to: email,
     replacements: {
+      email,
       actionUrl,
-      whyUrl: i18nUrl(body.language, `/docs/faq/email/why-${template}`),
-      supportUrl: i18nUrl(body.language, `/patrons/join`),
     },
   })
 
   /*
    * Prepare the return data
    */
-  const returnData = { language, email }
+  const returnData = { email }
 
   /*
    * Return 200 and the data
@@ -126,16 +125,16 @@ SubscriberModel.prototype.subscribeConfirm = async function ({ body }) {
  */
 SubscriberModel.prototype.unsubscribe = async function ({ params }) {
   /*
-   * Is ehash set?
+   * Is uuid set?
    */
-  if (!params.ehash) return this.setResponse(400, 'ehashMissing')
+  if (!params.uuid) return this.setResponse(400, 'uuidMissing')
 
-  const { ehash } = params
+  const { uuid } = params
 
   /*
-   * Find the subscription record
+   * Find the subscription record. Note that we use the UUID in the id field.
    */
-  await this.read({ ehash })
+  await this.read({ id: uuid })
 
   /*
    * If found, remove the record
@@ -146,9 +145,9 @@ SubscriberModel.prototype.unsubscribe = async function ({ params }) {
     return this.setResponse(204)
   } else {
     /*
-     * If not, perhaps it's an account ehash rather than subscriber ehash
+     * If not, perhaps it's an account uuid rather than subscriber id
      */
-    await this.User.read({ ehash })
+    await this.User.read({ uuid })
     if (this.User.record) {
       await this.User.update({ newsletter: false })
 
@@ -207,24 +206,19 @@ SubscriberModel.prototype.ocunsub = async function ({ params }) {
  */
 SubscriberModel.prototype.verifySubscription = async function (body) {
   /*
-   * Get the id and ehash from the body
+   * Get the uuid from the body
    */
-  const { id, ehash } = body
+  const { uuid } = body
 
   /*
    * Is id set?
    */
-  if (!id) return this.setResponse(400, 'idMissing')
-
-  /*
-   * Is ehash set?
-   */
-  if (!ehash) return this.setResponse(400, 'ehashMissing')
+  if (!uuid) return this.setResponse(400, 'uuidMissing')
 
   /*
    * Find the subscription record
    */
-  await this.read({ ehash })
+  await this.read({ id: uuid })
 
   /*
    * If it is not found, return 404
@@ -232,40 +226,6 @@ SubscriberModel.prototype.verifySubscription = async function (body) {
   if (!this.record) return this.setResponse(404)
 
   return this
-}
-
-/*
- * A helper method to start the unsubscribe flow manually
- * In other words, this sends an email with an unsubscribe link.
- *
- * @param {email} string - The email address to unsubscribe
- * @returns {SubscriberModal} object - The SubscriberModel
- */
-SubscriberModel.prototype.startUnsubscribe = async function (email) {
-  /*
-   * Find the subscription record
-   */
-  await this.read({ ehash: hash(clean(email)) })
-
-  if (this.record) {
-    console.log(`Sending email to start unsubscribe flow to ehash ${this.record.ehash}`)
-    await this.mailer.send({
-      template: 'nlunsub',
-      language: 'en',
-      to: this.clear.email,
-      replacements: {
-        actionUrl: websiteUrl(`/newsletter/unsubscribe?x=${this.record.ehash}`),
-        whyUrl: websiteUrl(`/docs/faq/email/why-nlunsub`),
-        supportUrl: websiteUrl(`/patrons/join`),
-      },
-    })
-
-    return true
-  } else if (found.length > 1) {
-    console.log(`Found more than 1 subscriber for ehash, this is unexpected`)
-  }
-
-  return false
 }
 
 /*
