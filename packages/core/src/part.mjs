@@ -284,7 +284,6 @@ Part.prototype.__boundary = function () {
       }
     } catch (err) {
       this.context.store.log.error(`Could not calculate boundary of \`paths.${key}\``)
-      return false
     }
   }
   for (let key in this.points) {
