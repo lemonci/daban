@@ -1,29 +1,22 @@
-import { api, auth, cat, store, loadStore } from './utils.mjs'
+import { api, auth, cat, store, loadStore, saveStore } from './utils.mjs'
 import { strict as assert } from 'node:assert'
 import { describe, it } from 'node:test'
+import { cisMaleAdult40, cisFemaleAdult40 } from '@freesewing/models'
 
 const input = {
   jwt: {
     name: 'Joost',
     notes: 'These are them notes',
-    measies: {
-      chest: 1000,
-      neck: 420,
-    },
+    measies: cisMaleAdult40,
     public: true,
-    test: true,
     imperial: true,
   },
   key: {
     name: 'Sorcha',
     notes: 'These are also notes',
-    measies: {
-      chest: 930,
-      neck: 360,
-    },
+    measies: cisFemaleAdult40,
     public: true,
     img: cat,
-    test: true,
     imperial: false,
   },
 }
@@ -51,6 +44,7 @@ for (const a of ['jwt', 'key']) {
         assert.equal(status, 200)
         assert.equal(data.set[field], val)
         store.set[a] = data.set
+        saveStore(store)
       })
     }
 
