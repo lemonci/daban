@@ -97,7 +97,7 @@ PatternModel.prototype.guardedCreate = async function ({ body, user }) {
       measurements:
         typeof body.settings.measurements === 'object' ? body.settings.measurements : {},
     },
-    userId: user.id,
+    userId: user.apikey ? user.userId : user.id,
     name: typeof body.name === 'string' && body.name.length > 0 ? body.name : '--',
     notes: typeof body.notes === 'string' && body.notes.length > 0 ? body.notes : '--',
     public: body.public === true ? true : false,
@@ -264,11 +264,22 @@ PatternModel.prototype.guardedUpdate = async function ({ params, body, user }) {
   await this.read({ uuid: params.uuid })
 
   /*
+   * If it is not found, return 404
+   */
+  if (!this.record) return this.setResponse(404)
+
+  /*
    * Only admins can update other people's patterns
    */
-  if (!this.record || (this.record.userId !== user.id && !this.rbac.admin(user))) {
+  if (
+    !this.record ||
+    // For an API key, we need to match record.userId to user.userId
+    (((user.apikey && this.record.userId !== user.userId) ||
+      // For a JWT, we need to match record.userId to user.id
+      (!user.apikey && this.record.userId !== user.id)) &&
+      !this.rbac.admin(user))
+  )
     return this.setResponse(403, 'insufficientAccessLevel')
-  }
 
   /*
    * Prepare data for updating the record
