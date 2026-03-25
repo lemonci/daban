@@ -1,8 +1,8 @@
 # See https://help.github.com/ignore-files/ for more about ignoring files.
 dump
-production.sqlite
-production.sqlite-shm
-production.sqlite-wal
+*.sqlite
+*.sqlite-shm
+*.sqlite-wal
 .husky
 local
 oidc-jwks.json
