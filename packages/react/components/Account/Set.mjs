@@ -743,6 +743,7 @@ const SuggestCset = ({ mset, Link }) => {
         current={img}
         update={setImg}
         valid={(val) => val.length > 1}
+        original=""
       />
       <h4 className="tw:flex tw:flex-row tw:items-center tw:gap-2 tw:mt-4">
         <BoolYesIcon />
