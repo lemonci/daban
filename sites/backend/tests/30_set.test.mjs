@@ -44,7 +44,7 @@ for (const a of ['jwt', 'key']) {
         assert.equal(status, 200)
         assert.equal(data.set[field], val)
         store.set[a] = data.set
-        saveStore(store)
+        await saveStore(store)
       })
     }
 

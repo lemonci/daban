@@ -3,7 +3,6 @@ import { mkdirSync, writeFileSync, unlinkSync, openSync, readSync, closeSync } f
 import { tmpdir } from 'node:os'
 import { join } from 'node:path'
 import { randomBytes } from 'node:crypto'
-import { log } from './log.mjs'
 
 /*
  * Maximum allowed size for a decoded image: 10 MB
@@ -93,7 +92,7 @@ export function imagePath(type, uuid, rootFolder) {
  * @param {string} rootFolder - The root folder to store media under
  * @return {string|false} - The output path on success, false on failure
  */
-async function saveImage(type, uuid, data, rootFolder) {
+async function saveImage(type, uuid, data, rootFolder, log) {
   if (!uuid || !data || typeof data !== 'string') return false
 
   /*
@@ -174,8 +173,9 @@ async function saveImage(type, uuid, data, rootFolder) {
  *
  * @param {string} model - One of user, set, pattern
  * @param {object} mediaRootFolder - The BACKEND_MEDIA_ROOT value from config
+ * @param {object} log - The instantiated logger object
  * @return {function} saveImage - A function that will save the image
  */
-export const imageHandlers = (model, mediaRootFolder) => ({
-  save: (uuid, data) => saveImage(model, uuid, data, mediaRootFolder),
+export const imageHandlers = (model, mediaRootFolder, log) => ({
+  save: (uuid, data) => saveImage(model, uuid, data, mediaRootFolder, log),
 })

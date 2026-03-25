@@ -53,15 +53,12 @@ AdminModel.prototype.loadUser = async function ({ params, user }) {
   /*
    * Is id set?
    */
-  if (!params.id) return this.setResponse(403, 'idMissing')
+  if (!params.uuid) return this.setResponse(403, 'idMissing')
 
   /*
    * Attempt to load the user from the database
    */
-  await this.User.read(
-    { id: Number(params.id) }
-    //{ patterns: true, sets: true, apikeys: true, bookmarks: true }
-  )
+  await this.User.read({ uuid: params.uuid })
 
   /*
    * If the user cannot be found, return 404
@@ -72,7 +69,7 @@ AdminModel.prototype.loadUser = async function ({ params, user }) {
    * Also fetch patterns and sets
    */
   const patterns = await this.Pattern.userPatterns(this.User.record.id)
-  const sets = await this.Set.userSets(this.User.record.id)
+  const sets = [] //await this.Set.userSets(this.User.record.id)
 
   /*
    * Return 200 and user data
@@ -101,12 +98,12 @@ AdminModel.prototype.updateUser = async function ({ params, body, user }) {
   /*
    * Is id set?
    */
-  if (!params.id) return this.setResponse(403, 'idMissing')
+  if (!params.uuid) return this.setResponse(403, 'uuidMissing')
 
   /*
    * Attempt to load the user from the database
    */
-  await this.User.read({ id: Number(params.id) })
+  await this.User.read({ uuid: params.uuid })
 
   /*
    * If the user cannot be found, return 404
@@ -123,11 +120,6 @@ AdminModel.prototype.updateUser = async function ({ params, body, user }) {
    */
   if (typeof body.consent !== 'undefined' && [0, 1, 2].includes(body.consent))
     data.consent = body.consent
-
-  /*
-   * Update role?
-   */
-  if (body.role && Object.keys(this.config.roles.levels).includes(body.role)) data.role = body.role
 
   /*
    * Update status? (reminder: 1 = active, -2 = administratively disabled)
@@ -168,14 +160,14 @@ AdminModel.prototype.impersonateUser = async function ({ params, user }) {
   if (!this.rbac.admin(user)) return this.setResponse(403, 'insufficientAccessLevel')
 
   /*
-   * Is id set?
+   * Is uuid set?
    */
-  if (!params.id) return this.setResponse(403, 'idMissing')
+  if (!params.uuid) return this.setResponse(403, 'uuidMissing')
 
   /*
    * Attempt to load the user from the database
    */
-  await this.User.read({ id: Number(params.id) })
+  await this.User.read({ uuid: params.uuid })
 
   /*
    * If the user cannot be found, return 404
@@ -200,12 +192,17 @@ AdminModel.prototype.getSubscribers = async function ({ user }) {
    */
   if (!this.rbac.support(user)) return this.setResponse(403, 'insufficientAccessLevel')
 
-  const all = {}
+  const all = new Set()
 
   /*
    * Load all subscribers from the database
    */
   const subscribers = await this.Subscriber.search()
+  for (const sub of subscribers) {
+    const email = await this.decrypt(sub.email)
+    // For subscribers, the UUID is the id field
+    all.add({ email, uuid: sub.id })
+  }
 
   /*
    * Load all subscribed users from the database
@@ -214,17 +211,16 @@ AdminModel.prototype.getSubscribers = async function ({ user }) {
   try {
     users = await this.prisma.user.findMany({ where: { newsletter: true } })
   } catch (err) {
-    console.log(err)
+    this.log(`Failed to load subscribers from database: ${err.message}`)
   }
-
-  for (const sub of [...subscribers, ...users]) {
-    const email = await this.decrypt(sub.email)
-    if (typeof all[sub.language] === 'undefined') all[sub.language] = []
-    all[sub.language].push({ email, ehash: sub.ehash })
+  for (const user of users) {
+    const email = await this.decrypt(user.email)
+    // For users, the UUID is the uuid field
+    all.add({ email, uuid: user.uuid })
   }
 
   /*
    * Return 200, and subscriber list
    */
-  return this.setResponse200({ subscribers: all })
+  return this.setResponse200({ subscribers: [...all] })
 }

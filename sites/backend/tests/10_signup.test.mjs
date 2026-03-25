@@ -31,7 +31,6 @@ describe(`Signup flow and authentication`, async () => {
     store.account.confirmation.uuid = store.account.confirmation.actionUrl.split('id=').pop()
     await stopEmailTrap()
   })
-
   it(`Should pretend to signup an existing email address`, async () => {
     await startEmailTrap()
     const [status, data] = await api.post('/signup', { email: store.account.email })
@@ -269,6 +268,23 @@ describe(`Create second account for cross-account tests`, () => {
     }
   })
 
+  it(`Should find an available username (jwt)`, async () => {
+    // Ensure we have an account to test with
+    if (!store.account.confirmation) loadStore(store)
+    const body = {
+      username: 'heixiaomao (better add some text in case someone registers this username)',
+    }
+    const [status, data] = await api.post(`/available/username/jwt`, body, auth.jwt())
+    assert.equal(status, 404)
+  })
+
+  it(`Should find an unavailable username (jwt)`, async () => {
+    const body = { username: store.account.username }
+    const [status, data] = await api.post(`/available/username/jwt`, body, auth.jwt())
+    assert.equal(status, 200)
+    assert.equal(data.available, false)
+  })
+
   it(`Create API Key (jwt)`, async () => {
     const input = {
       name: 'Test API key :)',
@@ -287,6 +303,13 @@ describe(`Create second account for cross-account tests`, () => {
     store.altaccount.apikey = data.apikey
   })
 
+  it(`Should subscribe to the newsletter (jwt)`, async () => {
+    const [status, data] = await api.patch(`/account/jwt`, { newsletter: true }, auth.jwt('alt'))
+    assert.equal(status, 200)
+    assert.equal(data.result, `success`)
+    assert.equal(data.account.newsletter, true)
+  })
+
   // Note that password was not set at account creation
   it(`Should set the password`, async () => {
     const [status, data] = await api.patch(
@@ -300,10 +323,8 @@ describe(`Create second account for cross-account tests`, () => {
       assert.equal(data.account[key], store.altaccount[key])
     }
 
-    /*
-     * Keep this on disk so we can run other tests
-     * without having to create an account again
-     */
-    saveStore(store)
+    // Keep this on disk so we can run other tests
+    // without having to create an account again
+    await saveStore(store)
   })
 })

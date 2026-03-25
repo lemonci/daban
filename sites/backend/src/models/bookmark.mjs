@@ -1,4 +1,3 @@
-import { log } from '../utils/log.mjs'
 import { decorateModel } from '../utils/model-decorator.mjs'
 
 /*
@@ -58,7 +57,7 @@ BookmarkModel.prototype.guardedCreate = async function ({ body, user }) {
       userId: user.apikey ? user.userId : user.id,
     })
   } catch (err) {
-    log.warn(`Failed to create bookmark: ${err.message}`)
+    this.log.warn(`Failed to create bookmark: ${err.message}`)
     return this.setResponse(500)
   }
 
@@ -221,7 +220,7 @@ BookmarkModel.prototype.userBookmarks = async function (id) {
   try {
     bookmarks = await this.prisma.bookmark.findMany({ where: { userId: id } })
   } catch (err) {
-    log.warn(`Failed to search bookmarks for user ${id}: ${err}`)
+    this.log.warn(`Failed to search bookmarks for user ${id}: ${err}`)
   }
 
   return bookmarks.map((bookmark) => bookmarkData(bookmark))

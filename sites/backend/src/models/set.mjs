@@ -1,4 +1,3 @@
-import { log } from '../utils/log.mjs'
 import { decorateModel } from '../utils/model-decorator.mjs'
 
 /*
@@ -45,7 +44,6 @@ SetModel.prototype.guardedCreate = async function ({ body, user }) {
     measies: typeof body.measies === 'object' ? this.sanitizeMeasurements(body.measies) : {},
     imperial: body.imperial === true ? true : false,
     userId: user.apikey ? user.userId : user.id,
-    img: this.config.avatars.set,
   })
 
   /*
@@ -54,7 +52,7 @@ SetModel.prototype.guardedCreate = async function ({ body, user }) {
   try {
     await this.read({ id: this.record.id })
   } catch (err) {
-    log.warn(err.message)
+    this.log.warn(`Failed to read set: ${err.message}`)
     return this.setResponse(500, {})
   }
 
@@ -66,7 +64,7 @@ SetModel.prototype.guardedCreate = async function ({ body, user }) {
     try {
       imgResult = await this.img.save(this.record.uuid, body.img)
     } catch (err) {
-      log.warn(`Failed to save set avatar: ${err.message}`)
+      this.log.warn(`Failed to save set avatar: ${err.message}`)
     }
     if (!imgResult) return this.setResponse(500)
   }
@@ -223,14 +221,14 @@ SetModel.prototype.revealSet = function (mset) {
     try {
       clear[field] = this.decrypt(mset[field])
     } catch (err) {
-      //console.log(err)
+      this.log.warn(`Failed to reveal set data: ${err.message}`)
     }
   }
   for (const field of this.jsonFields) {
     try {
       clear[field] = JSON.parse(clear[field])
     } catch (err) {
-      //console.log(err)
+      this.log.warn(`Failed to parse set field ${field} as JSON: ${err.message}`)
     }
   }
 
@@ -315,7 +313,7 @@ SetModel.prototype.guardedUpdate = async function ({ params, body, user }) {
     try {
       imgResult = await this.img.save(this.record.uuid, body.img)
     } catch (err) {
-      log.warn(`Failed to save set avatar: ${err.message}`)
+      this.log.warn(`Failed to save set avatar: ${err.message}`)
     }
     if (!imgResult) return this.setResponse(500)
   }
@@ -375,20 +373,23 @@ SetModel.prototype.guardedDelete = async function ({ params, user }) {
 /*
  * Returns a list of sets for the user making the API call
  */
-SetModel.prototype.userSets = async function (user) {
-  if (!user.id) return false
+SetModel.prototype.userSets = async function (id) {
+  /*
+   * No id no deal
+   */
+  if (!id) return []
+
   let sets
   try {
-    sets = await this.prisma.set.findMany({ where: { userId: user.id } })
+    sets = await this.prisma.set.findMany({ where: { id } })
   } catch (err) {
-    log.warn(`Failed to search sets for user ${user.id}: ${err}`)
+    this.log.warn(`Failed to search sets for user ${id}: ${err.message}`)
   }
 
   return sets.map((set) => {
     const val = this.revealSet(set)
     delete val.id
     delete val.userId
-    val.userUuid = user.uuid
 
     return val
   })

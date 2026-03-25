@@ -8,6 +8,8 @@ import passport from 'passport'
 import { routes } from './routes/index.mjs'
 // Config
 import { verifyConfig } from './config.mjs'
+// Logger
+import { logger } from './utils/log.mjs'
 // Middleware
 import { loadExpressMiddleware, loadPassportMiddleware } from './middleware.mjs'
 // Encryption
@@ -30,7 +32,7 @@ import { html as catchAll } from './html/catch-all.mjs'
  * This is the main entrypoint. Call this to start the API.
  *
  * @param {function|boolean} [transformConfig] - An optional config transformer function
- * @param {boolean} [silent] - Set this to true to silence startup logs (non-JSON logs)
+ * @param {boolean} [silent] - Set this to true to silence logs (for unit tests)
  */
 export const api = (transformConfig = false, silent = false) => {
   // Bootstrap
@@ -50,13 +52,15 @@ export const api = (transformConfig = false, silent = false) => {
   app.use(express.static('public'))
   app.use('/docs', swaggerUi.serve, swaggerUi.setup(openapi))
 
+  const log = logger(config)
   const tools = {
     app,
+    log,
     passport,
     prisma,
     ...encryption(config.encryption.key),
-    ...mfa(config.mfa),
-    ...mailer(config),
+    ...mfa(config.mfa, log),
+    ...mailer(config, log),
     ...rbac(config.roles),
     config,
   }

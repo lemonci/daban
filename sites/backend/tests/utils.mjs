@@ -1,13 +1,10 @@
 import fs from 'node:fs'
+import path from 'node:path'
 import HTTP from 'node:http'
 import axios from 'axios'
 import { randomBytes } from 'crypto'
-import {
-  cisFemaleAdult34 as her,
-  cisMaleAdult42 as him,
-} from '../../../packages/models/src/index.mjs'
+import { DatabaseSync } from 'node:sqlite'
 
-const sets = { her, him }
 export const api = new restClient(`http://localhost:3001`)
 
 // Store holds test accounts
@@ -157,9 +154,14 @@ export const loadStore = (store) => {
 
 export const stopEmailTrap = async () => await server.close()
 export const readEmail = () => [...emails].pop()
-export const readEmails = () => {
-  console.log('read emails')
-  return [...emails]
+export const readEmails = () => [...emails]
+
+// Cannot change a user role via the API,
+// but you can with write access to the database
+export function changeRole(uuid, role) {
+  const db = new DatabaseSync(path.resolve('./tests/database.sqlite'))
+  const update = db.prepare(`UPDATE User SET role = :role WHERE uuid = :uuid`).run({ uuid, role })
+  return db.prepare(`SELECT * FROM User WHERE uuid = :uuid`).get({ uuid })
 }
 
 export const cat =

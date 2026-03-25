@@ -1,5 +1,4 @@
 import { capitalize } from '../utils/index.mjs'
-import { log } from '../utils/log.mjs'
 import { decorateModel } from '../utils/model-decorator.mjs'
 
 /*
@@ -80,7 +79,7 @@ CuratedSetModel.prototype.guardedCreate = async function ({ body, user }) {
    * If it failed for some reason, bail out
    */
   if (!this.exists) {
-    log.warn(`Could not create suggested set`)
+    this.log.warn(`Could not create suggested set`)
     return this.setResponse(500)
   }
 
@@ -120,7 +119,7 @@ CuratedSetModel.prototype.guardedRead = async function ({ params }, format = fal
    * If it failed for some reason, bail out
    */
   if (!this.exists) {
-    log.warn(`Could not find curated set ${params.uuid}`)
+    this.log.warn(`Could not find curated set ${params.uuid}`)
     return this.setResponse(404)
   }
 
@@ -154,7 +153,7 @@ CuratedSetModel.prototype.allCuratedSets = async function () {
       orderBy: { height: 'asc' },
     })
   } catch (err) {
-    log.warn(`Failed to search curated sets: ${err}`)
+    this.log.warn(`Failed to search curated sets: ${err.message}`)
   }
 
   /*
@@ -379,7 +378,7 @@ CuratedSetModel.prototype.suggest = async function ({ body, user }) {
    * If it does not exist, log a warning and return 404
    */
   if (!this.Confirmation.exists) {
-    log.warn(`Could not find curated set ${body.set} for suggestion`)
+    this.log.warn(`Could not find curated set ${body.set} for suggestion`)
     return this.setResponse(400, 'setMissing')
   }
 
@@ -446,7 +445,7 @@ CuratedSetModel.prototype.fromSuggestion = async function ({ params, user }) {
    * If it does not exist, log a warning and return 404
    */
   if (!this.Confirmation.exists) {
-    log.warn(`Could not find confirmation id ${params.id}`)
+    this.log.warn(`Could not find confirmation id ${params.id}`)
     return this.setResponse(404)
   }
 
@@ -454,7 +453,7 @@ CuratedSetModel.prototype.fromSuggestion = async function ({ params, user }) {
    * If it is the wrong confirmation type, log a warning and return 404
    */
   if (this.Confirmation.record.type !== 'sugset') {
-    log.warn(`Confirmation mismatch; ${params.id} is not a subset id`)
+    this.log.warn(`Confirmation mismatch; ${params.id} is not a subset id`)
     return this.setResponse(404)
   }
 
@@ -467,7 +466,7 @@ CuratedSetModel.prototype.fromSuggestion = async function ({ params, user }) {
    * It it does not exist, return 404
    */
   if (!this.Set.exists) {
-    log.warn(`Suggested set ${this.Confirmation.clear.data.set} does not exist`)
+    this.log.warn(`Suggested set ${this.Confirmation.clear.data.set} does not exist`)
     return this.setResponse(404)
   }
 
@@ -507,7 +506,7 @@ CuratedSetModel.prototype.fromSuggestion = async function ({ params, user }) {
    * If it failed for some reason, bail out
    */
   if (!this.exists) {
-    log.warn(`Could not create set from suggested set`)
+    this.log.warn(`Could not create set from suggested set`)
     return this.setResponse(500)
   }
 

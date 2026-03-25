@@ -4,6 +4,7 @@ import {
   cat,
   store,
   loadStore,
+  saveStore,
   startEmailTrap,
   stopEmailTrap,
   readEmail,
@@ -18,14 +19,14 @@ const input = {
     consent: 1,
     control: 4,
     imperial: true,
-    newsletter: true,
+    newsletter: false,
   },
   key: {
     bio: "It's a long way to the top, if you wanna rock & roll",
     consent: 2,
     control: 3,
     imperial: true,
-    newsletter: true,
+    newsletter: false,
   },
 }
 
@@ -44,7 +45,6 @@ for (const a of ['jwt', 'key']) {
       })
     }
   })
-
   describe(`Update account data (${a})`, () => {
     it(`Should update data (${a})`, async () => {
       const body = {
@@ -60,13 +60,13 @@ for (const a of ['jwt', 'key']) {
       assert.equal(data.account.data.githubEmail, body.data.githubEmail)
     })
 
-    it(`Should update the password (${a})`, async () => {
-      const [status, data] = await api.patch(`/account/${a}`, { password: 'password' }, auth[a]())
-      assert.equal(status, 200)
-      assert.equal(data.result, `success`)
-    })
-
     if (a === 'jwt') {
+      it(`Should update the password (${a})`, async () => {
+        const [status, data] = await api.patch(`/account/${a}`, { password: 'password' }, auth[a]())
+        assert.equal(status, 200)
+        assert.equal(data.result, `success`)
+      })
+
       it(`Should be able to sign in with the updated password`, async () => {
         const [status, data] = await api.post(`/signin`, {
           // Using username here
@@ -202,6 +202,7 @@ for (const a of ['jwt', 'key']) {
       assert.equal(data.result, `success`)
       await stopEmailTrap()
     })
+
     it(`Should confirm the restore email change (${a})`, async () => {
       const [status, data] = await api.patch(
         `/account/${a}`,
@@ -214,6 +215,7 @@ for (const a of ['jwt', 'key']) {
       )
       assert.equal(status, 200)
       assert.equal(data.result, `success`)
+      await saveStore(store)
     })
   })
 }

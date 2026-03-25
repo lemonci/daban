@@ -1,5 +1,4 @@
 import jwt from 'jsonwebtoken'
-import { log } from '../utils/log.mjs'
 import { hash, hashPassword, randomString, randomOtp, verifyPassword } from '../utils/crypto.mjs'
 import { clean, asJson, i18nUrl, whereFromUser, writeExportedData } from '../utils/index.mjs'
 import { decorateModel } from '../utils/model-decorator.mjs'
@@ -191,7 +190,7 @@ UserModel.prototype.removeAccount = async function ({ user }) {
     await this.prisma.confirmation.deleteMany({ where: { userId: user.id } })
     await this.delete()
   } catch (err) {
-    log.warn(err, 'Error while removing account')
+    this.log.warn(err, `Error while removing account: ${err.message}`)
   }
 
   /*
@@ -307,7 +306,7 @@ UserModel.prototype.find = async function (body) {
     /*
      * Failed to run database query. Log warning and return 404
      */
-    log.warn({ err, body }, `Error while trying to find user: ${body.username}`)
+    this.log.warn({ err, body }, `Error while trying to find user ${body.username}: ${err.message}`)
     return this.setResponse(404)
   }
 
@@ -327,40 +326,77 @@ UserModel.prototype.find = async function (body) {
  */
 UserModel.prototype.search = async function (q) {
   /*
-   * Find users based on lusername
+   * Find users based on a variety of fields
    */
-  let usernames, emails
+  const ehash = hash(clean(q))
+  const results = {}
+
+  // ehash
   try {
-    usernames = await this.asAccountList(
+    results.ehash = await this.asAccountList(
       await this.prisma.user.findMany({
-        where: {
-          lusername: { contains: clean(q) },
-        },
+        where: { ehash: { equals: ehash } },
+        limit: 500,
       })
     )
   } catch (err) {
-    usernames = []
-  }
-  /*
-   * Find users based on ehash/ihash
-   */
-  try {
-    const ehash = hash(clean(q))
-    emails = await this.asAccountList(
-      await this.prisma.user.findMany({
-        where: {
-          OR: [{ ehash: { equals: ehash } }, { ihash: { equals: ehash } }],
-        },
-      })
-    )
-  } catch (err) {
-    emails = []
+    this.log.warn(err, `Failed to search users`)
+    results.ehash = []
   }
 
-  return {
-    email: emails,
-    username: usernames,
+  // ihash
+  try {
+    results.ihash = await this.asAccountList(
+      await this.prisma.user.findMany({
+        where: { ehash: { equals: ehash } },
+        limit: 500,
+      })
+    )
+  } catch (err) {
+    this.log.warn(err, `Failed to search users`)
+    results.ihash = []
   }
+
+  // username
+  try {
+    results.username = await this.asAccountList(
+      await this.prisma.user.findMany({
+        where: { username: { contains: clean(q) } },
+        limit: 500,
+      })
+    )
+  } catch (err) {
+    this.log.warn(err, `Failed to search users`)
+    results.username = []
+  }
+
+  // uuid
+  try {
+    results.uuid = await this.asAccountList(
+      await this.prisma.user.findMany({
+        where: { uuid: { equals: clean(q) } },
+        limit: 500,
+      })
+    )
+  } catch (err) {
+    this.log.warn(err, `Failed to search users`)
+    results.uuid = []
+  }
+
+  // id
+  try {
+    results.id = await this.asAccountList(
+      await this.prisma.user.findMany({
+        where: { id: { equals: clean(q) } },
+        limit: 500,
+      })
+    )
+  } catch (err) {
+    this.log.warn(err, `Failed to search users`)
+    results.id = []
+  }
+
+  return results
 }
 
 /*
@@ -389,7 +425,7 @@ UserModel.prototype.loadAuthenticatedUser = async function (user) {
     /*
      * Failed to run database query. Log warning and return 404
      */
-    log.warn({ err, user }, `Error while trying to find user: ${user.id}`)
+    this.log.warn({ err, user }, `Error while trying to find user: ${err.message}`)
     return this.setResponse(404)
   }
 
@@ -422,7 +458,7 @@ UserModel.prototype.revealAuthenticatedUser = async function (user) {
     /*
      * Failed to run database query. Log warning and return 404
      */
-    log.warn({ err, user }, `Error while trying to find and reveal user: ${user.id}`)
+    this.log.warn({ err, user }, `Error while trying to find and reveal user`)
     return this.setResponse(404)
   }
 
@@ -575,7 +611,7 @@ UserModel.prototype.guardedCreate = async function ({ body }) {
     /*
      * Could not create record. Log warning and return 500
      */
-    log.warn(err, 'Could not create user record')
+    this.log.warn(err, 'Could not create user record')
     return this.setResponse(500, 'createAccountFailed')
   }
 
@@ -593,7 +629,7 @@ UserModel.prototype.guardedCreate = async function ({ body }) {
      * Which is not really a problem, so we will swallow this error and
      * continue with the random username
      */
-    log.info(`Username collision for user-${this.record.id}`)
+    this.log.info(`Username collision for user-${this.record.id}`)
   }
 
   /*
@@ -665,20 +701,24 @@ UserModel.prototype.passwordSignIn = async function (req) {
    * account, which would be a privacy leak if we said 'not found' here'
    */
   if (!this.exists) {
-    log.warn(`Sign-in attempt for non-existing user: ${req.body.username} from ${req.ip}`)
+    this.log.warn(`Sign-in attempt for non-existing user: ${req.body.username} from ${req.ip}`)
     return this.setResponse(401, 'signInFailed')
   }
 
   /*
    * Account found, check the password
    */
-  const [valid, updatedPasswordField] = verifyPassword(req.body.password, this.record.password)
+  const [valid, updatedPasswordField] = verifyPassword(
+    req.body.password,
+    this.record.password,
+    this.log
+  )
 
   /*
    * If the password is incorrect, log a warning with IP and return 401
    */
   if (!valid) {
-    log.warn(`Wrong password for existing user: ${req.body.username} from ${req.ip}`)
+    this.log.warn(`Wrong password for existing user: ${req.body.username} from ${req.ip}`)
     return this.setResponse(401, 'signInFailed')
   }
 
@@ -847,7 +887,7 @@ UserModel.prototype.sendSigninlink = async function (req) {
    * to not reveal such a user does not exist.
    */
   if (!this.exists) {
-    log.warn(`Magic link attempt for non-existing user: ${req.body.username} from ${req.ip}`)
+    this.log.warn(`Magic link attempt for non-existing user: ${req.body.username} from ${req.ip}`)
     return this.setResponse200({ result: 'emailSent' })
   }
 
@@ -913,7 +953,7 @@ UserModel.prototype.confirm = async function ({ body, params }) {
    * If the confirmation does not exist, log a warning and return 404
    */
   if (!this.Confirmation.exists) {
-    log.warn(`Could not find confirmation id ${params.uuid}`)
+    this.log.warn(`Could not find confirmation id ${params.uuid}`)
     return this.setResponse(404)
   }
 
@@ -921,7 +961,7 @@ UserModel.prototype.confirm = async function ({ body, params }) {
    * If the confirmation is of the wrong type, log a warning and return 404
    */
   if (this.Confirmation.record.type !== 'signup') {
-    log.warn(`Confirmation mismatch; ${params.uuid} is not a signup id`)
+    this.log.warn(`Confirmation mismatch; ${params.uuid} is not a signup id`)
     return this.setResponse(404)
   }
 
@@ -1067,7 +1107,7 @@ UserModel.prototype.guardedUpdate = async function ({ body, user }) {
           ...this.clear[field],
           ...body[field],
         }
-      else log.warn(body, `Tried to set JDON field ${field} to a non-object`)
+      else this.log.warn(body, `Tried to set JDON field ${field} to a non-object`)
     }
   }
 
@@ -1085,7 +1125,7 @@ UserModel.prototype.guardedUpdate = async function ({ body, user }) {
       data.username = body.username.trim()
       data.lusername = clean(body.username)
     } else {
-      log.info(`Rejected user name change from ${this.record.username} to ${body.username}`)
+      this.log.info(`Rejected user name change from ${this.record.username} to ${body.username}`)
     }
   }
 
@@ -1097,7 +1137,7 @@ UserModel.prototype.guardedUpdate = async function ({ body, user }) {
     try {
       imgResult = await this.img.save(this.record.uuid, body.img)
     } catch (err) {
-      log.warn(`Failed to save user avatar: ${err.message}`)
+      this.log.warn(`Failed to save user avatar: ${err.message}`)
     }
     if (!imgResult) return this.setResponse(500)
   }
@@ -1168,7 +1208,7 @@ UserModel.prototype.guardedUpdate = async function ({ body, user }) {
      * If it does not exist, log a warning and return 404
      */
     if (!this.Confirmation.exists) {
-      log.warn(`Could not find confirmation id ${body.confirmation}`)
+      this.log.warn(`Could not find confirmation id ${body.confirmation}`)
       return this.setResponse(404)
     }
 
@@ -1176,7 +1216,7 @@ UserModel.prototype.guardedUpdate = async function ({ body, user }) {
      * If it is the wrong confirmation type, log a warning and return 404
      */
     if (this.Confirmation.record.type !== 'emailchange') {
-      log.warn(`Confirmation mismatch; ${body.confirmation} is not an emailchange id`)
+      this.log.warn(`Confirmation mismatch; ${body.confirmation} is not an emailchange id`)
       return this.setResponse(404)
     }
 
@@ -1259,13 +1299,13 @@ UserModel.prototype.guardedMfaUpdate = async function ({ body, user, ip }) {
     /*
      * Verify the password
      */
-    const [valid] = verifyPassword(body.password, this.record.password)
+    const [valid] = verifyPassword(body.password, this.record.password, this.log)
 
     /*
      * If the password is not correct, log a warning including the IP and reutrn 401
      */
     if (!valid) {
-      log.warn(`Wrong password for existing user while disabling MFA: ${user.id} from ${ip}`)
+      this.log.warn(`Wrong password for existing user while disabling MFA: ${user.id} from ${ip}`)
       return this.setResponse(401, 'authenticationFailed')
     }
 
@@ -1291,7 +1331,7 @@ UserModel.prototype.guardedMfaUpdate = async function ({ body, user, ip }) {
         /*
          * Problem occured while updating the record. Log warning and return 500
          */
-        log.warn(err, 'Could not disable MFA after token check')
+        this.log.warn(err, 'Could not disable MFA after token check')
         return this.setResponse(500, 'mfaDeactivationFailed')
       }
 
@@ -1338,7 +1378,7 @@ UserModel.prototype.guardedMfaUpdate = async function ({ body, user, ip }) {
         /*
          * Problem occured while updating the record. Log warning and reurn 500
          */
-        log.warn(err, 'Could not enable MFA after token check')
+        this.log.warn(err, 'Could not enable MFA after token check')
         return this.setResponse(500, 'mfaActivationFailed')
       }
 
@@ -1368,7 +1408,7 @@ UserModel.prototype.guardedMfaUpdate = async function ({ body, user, ip }) {
       /*
        * Problem occured while creating MFA setup. Return 500.
        */
-      log.warn(err, 'Failed to setup MFA')
+      this.log.warn(err, 'Failed to setup MFA')
       return this.setResponse(500, 'mfaSetupFailed')
     }
 
@@ -1381,7 +1421,7 @@ UserModel.prototype.guardedMfaUpdate = async function ({ body, user, ip }) {
       /*
        * Problem occured while updating record. Return 500.
        */
-      log.warn(err, 'Could not update MFA secret after setup')
+      this.log.warn(err, 'Could not update MFA secret after setup')
       return this.setResponse(500, 'mfaUpdateAfterSetupFailed')
     }
 
@@ -1504,14 +1544,13 @@ UserModel.prototype.asAccountList = async function (list) {
     }
     for (const field of [
       'id',
+      'uuid',
       'compare',
       'consent',
       'control',
       'createdAt',
-      'ihash',
       'jwtCalls',
       'keyCalls',
-      'language',
       'lastSeen',
       'mfaEnabled',
       'newsletter',
@@ -1524,6 +1563,7 @@ UserModel.prototype.asAccountList = async function (list) {
     ])
       clear[field] = record[field]
     clear.passwordType = JSON.parse(record.password).type
+    for (const field of ['mfaSecret', 'patron', 'lusername', 'passwordType']) delete clear[field]
     newList.push(clear)
   }
 
@@ -1620,7 +1660,7 @@ UserModel.prototype.isLusernameAvailable = async function (lusername) {
     /*
      * An error means it's not good. Return false
      */
-    log.warn({ err, lusername }, 'Could not search for free username')
+    this.log.warn({ err, lusername }, 'Could not search for free username')
     return false
   }
   /*
@@ -1660,16 +1700,19 @@ UserModel.prototype.papersPlease = async function (id, type, payload) {
   /*
    * Now update the dabatase record
    */
-  let user
+  let user = false
   try {
-    const where = type === 'key' ? { id } : { uuid: id }
-    user = await this.prisma.user.update({ where, data })
+    user = await this.prisma.user.update({ where: { id }, data })
   } catch (err) {
     /*
      * An error means it's not good. Return false
      */
-    log.warn({ id }, 'Could not update lastSeen field from middleware')
+    this.log.warn({ id }, 'Could not update lastSeen field from middleware')
     return [false, 'failedToUpdateLastSeen']
+  }
+  if (!user) {
+    this.log.warn({ id }, 'Could not load user from id')
+    return [false, 'failedToLoadUserInMiddleware']
   }
 
   /*
@@ -1686,7 +1729,7 @@ UserModel.prototype.papersPlease = async function (id, type, payload) {
       /*
        * An error means it's not good. Return false
        */
-      log.warn({ id }, 'Could not update apikey lastSeen field from middleware')
+      this.log.warn({ id }, 'Could not update apikey lastSeen field from middleware')
       return [false, 'failedToUpdateKeyCallCount']
     }
   }

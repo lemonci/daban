@@ -1,4 +1,3 @@
-import { log } from '../utils/log.mjs'
 import { decorateModel } from '../utils/model-decorator.mjs'
 
 /*
@@ -22,7 +21,7 @@ PatternModel.prototype.userPatterns = async function (id) {
   /*
    * No id no deal
    */
-  if (!id) return false
+  if (!id) return []
 
   /*
    * Run query returning all patterns from the database
@@ -33,7 +32,7 @@ PatternModel.prototype.userPatterns = async function (id) {
       where: { userId: id },
     })
   } catch (err) {
-    log.warn(`Failed to search patterns for user ${id}: ${err}`)
+    this.log.warn(`Failed to search patterns for user ${id}: ${err}`)
   }
 
   /*
@@ -91,7 +90,6 @@ PatternModel.prototype.guardedCreate = async function ({ body, user }) {
   await this.createRecord({
     data: typeof body.data === 'object' ? body.data : {},
     design: body.design,
-    img: this.config.avatars.pattern,
     settings: {
       ...body.settings,
       measurements:
@@ -116,7 +114,7 @@ PatternModel.prototype.guardedCreate = async function ({ body, user }) {
     try {
       imgResult = await this.img.save(this.record.uuid, body.img)
     } catch (err) {
-      log.warn(`Failed to save pattern avatar: ${err.message}`)
+      this.log.warn(`Failed to save pattern avatar: ${err.message}`)
     }
     if (!imgResult) return this.setResponse(500)
   }
@@ -183,9 +181,15 @@ PatternModel.prototype.guardedRead = async function ({ params, user }) {
   /*
    * You need at least the bughunter role to read another user's pattern
    */
-  if (this.record.userId !== user.id && !this.rbac.bughunter(user)) {
+  if (
+    !this.record ||
+    // For an API key, we need to match record.userId to user.userId
+    (((user.apikey && this.record.userId !== user.userId) ||
+      // For a JWT, we need to match record.userId to user.id
+      (!user.apikey && this.record.userId !== user.id)) &&
+      !this.rbac.bughunter(user))
+  )
     return this.setResponse(403, 'insufficientAccessLevel')
-  }
 
   /*
    * Return the loaded pattern
@@ -313,7 +317,7 @@ PatternModel.prototype.guardedUpdate = async function ({ params, body, user }) {
     try {
       imgResult = await this.img.save(this.record.uuid, body.img)
     } catch (err) {
-      log.warn(`Failed to save pattern avatar: ${err.message}`)
+      this.log.warn(`Failed to save pattern avatar: ${err.message}`)
     }
     if (!imgResult) return this.setResponse(500)
   }
@@ -388,7 +392,7 @@ PatternModel.prototype.revealPattern = function (pattern) {
     try {
       clear[field] = this.decrypt(pattern[field])
     } catch (err) {
-      //console.log(err)
+      this.log.error(`Failed to reveal pattern: ${err.message}`)
     }
   }
 

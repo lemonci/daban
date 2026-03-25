@@ -1,4 +1,3 @@
-import { log } from '../utils/log.mjs'
 import { hashPassword, randomString, verifyPassword } from '../utils/crypto.mjs'
 import { asJson, whereFromUser } from '../utils/index.mjs'
 import { decorateModel } from '../utils/model-decorator.mjs'
@@ -37,7 +36,7 @@ ApikeyModel.prototype.verify = async function (key, secret) {
   /*
    * Apikey secret is just like a password, and we verify it the same way
    */
-  const [valid] = verifyPassword(secret, this.record.secret)
+  const [valid] = verifyPassword(secret, this.record.secret, this.log)
 
   /*
    * Store result in the verified property
@@ -171,7 +170,7 @@ ApikeyModel.prototype.userApikeys = async function (id) {
     /*
      * Something went wrong, log a warning and return 404
      */
-    log.warn(`Failed to search apikeys for user ${id}: ${err}`)
+    this.log.warn(`Failed to search apikeys for user ${id}: ${err.message}`)
     return this.setResponse(404)
   }
 
@@ -289,7 +288,7 @@ ApikeyModel.prototype.create = async function ({ body, user }) {
     /*
      * That did not work. Log and error and return 500
      */
-    log.warn(err, 'Could not create apikey')
+    this.log.warn(err, `Could not create apikey: ${err.message}`)
     return this.setResponse(500, 'createApikeyFailed')
   }
 

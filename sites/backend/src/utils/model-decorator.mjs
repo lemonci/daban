@@ -1,4 +1,3 @@
-import { log } from '../utils/log.mjs'
 import yaml from 'js-yaml'
 import { hashPassword } from '../utils/crypto.mjs'
 import { asJson, capitalize } from '../utils/index.mjs'
@@ -39,12 +38,13 @@ export function decorateModel(Model, tools, modelConfig) {
   Model.mfa = tools.mfa
   Model.rbac = tools.rbac
   Model.mailer = tools.email
+  Model.log = tools.log
 
   /*
    * Attach image handlers only on models that need them
    */
   if (['user', 'pattern', 'set'].includes(Model.name)) {
-    Model.img = imageHandlers(Model.name, tools.config.media.rootFolder)
+    Model.img = imageHandlers(Model.name, tools.config.media.rootFolder, tools.log)
   }
 
   /*
@@ -86,7 +86,7 @@ export function decorateModel(Model, tools, modelConfig) {
     try {
       this.record = await this.prisma[modelConfig.name].findUnique({ where, include })
     } catch (err) {
-      log.warn({ err, where }, `Could not read ${modelConfig.name}`)
+      Model.log.warn({ err, where }, `Could not read ${modelConfig.name}`)
       return this.recordExists()
     }
 
@@ -120,7 +120,7 @@ export function decorateModel(Model, tools, modelConfig) {
           try {
             this.clear[field] = JSON.parse(this.clear[field])
           } catch (err) {
-            console.log({ err, val: this.clear[field] })
+            Model.log.warn({ err, val: this.clear[field] }, `Failed to reveal data`)
           }
         } else {
           this.record[field] = JSON.parse(this.record[field])
@@ -187,7 +187,7 @@ export function decorateModel(Model, tools, modelConfig) {
       /*
        * Some error occured. Log warning and return 500
        */
-      log.warn(err, `Could not create ${modelConfig.name}`)
+      Model.log.warn(err, `Could not create ${modelConfig.name}: ${err.message}`)
       this.record = false
       return this.setResponse(500, `create${capitalize(modelConfig.name)}Failed`)
     }
@@ -208,7 +208,7 @@ export function decorateModel(Model, tools, modelConfig) {
         data: cloaked,
       })
     } catch (err) {
-      log.warn(err, `Could not update ${modelConfig.name} record`)
+      Model.log.warn(err, `Could not update ${modelConfig.name} record: ${err.message}`)
       return this.setResponse(500, 'updateUserFailed')
     }
     await this.reveal()
@@ -276,7 +276,7 @@ export function decorateModel(Model, tools, modelConfig) {
     try {
       body = yaml.dump(this.response.body)
     } catch (err) {
-      console.log(err)
+      Model.log.warn(`Failed to dump YAML response: ${err.message}`)
     }
     return res.status(this.response.status).type('yaml').send(body)
   }
@@ -307,10 +307,10 @@ export function decorateModel(Model, tools, modelConfig) {
    */
   Model.time = function (key) {
     if (this.timer)
-      log.info(`Timer split [${key ? key : modelConfig.name}] ${Date.now() - this.timer}ms`)
+      Model.log.info(`Timer split [${key ? key : modelConfig.name}] ${Date.now() - this.timer}ms`)
     else {
       this.timer = Date.now()
-      log.info(`Timer start [${key ? key : modelConfig.name}] 0ms`)
+      Model.log.info(`Timer start [${key ? key : modelConfig.name}] 0ms`)
     }
 
     return this

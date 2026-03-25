@@ -16,23 +16,23 @@ export function adminRoutes(tools) {
   )
 
   // Load user
-  app.get('/admin/user/:id/jwt', passport.authenticate(...jwt), (req, res) =>
+  app.get('/admin/user/:uuid/jwt', passport.authenticate(...jwt), (req, res) =>
     Admin.loadUser(req, res, tools)
   )
-  app.get('/admin/user/:id/key', passport.authenticate(...bsc), (req, res) =>
+  app.get('/admin/user/:uuid/key', passport.authenticate(...bsc), (req, res) =>
     Admin.loadUser(req, res, tools)
   )
 
   // Update user
-  app.patch('/admin/user/:id/jwt', passport.authenticate(...jwt), (req, res) =>
+  app.patch('/admin/user/:uuid/jwt', passport.authenticate(...jwt), (req, res) =>
     Admin.updateUser(req, res, tools)
   )
-  app.patch('/admin/user/:id/key', passport.authenticate(...bsc), (req, res) =>
+  app.patch('/admin/user/:uuid/key', passport.authenticate(...bsc), (req, res) =>
     Admin.updateUser(req, res, tools)
   )
 
   // Impersonate user
-  app.get('/admin/impersonate/:id/jwt', passport.authenticate(...jwt), (req, res) =>
+  app.get('/admin/impersonate/:uuid/jwt', passport.authenticate(...jwt), (req, res) =>
     Admin.impersonateUser(req, res, tools)
   )
 

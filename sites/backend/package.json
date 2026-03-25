@@ -18,13 +18,16 @@
     "build:container": "./scripts/build-container.sh",
     "ship:container": "npm run build:container && ./scripts/ship-container.sh",
     "dev": "node --watch --watch-path src src/index.mjs",
-    "dev:test": "node --watch --watch-path src tests/run-test-backend.mjs",
+    "dev:dtest": "node --watch --watch-path src --experimental-test-coverage tests/start-dtest-backend.mjs",
     "initdb": "node ./scripts/initdb.mjs",
     "lint": "npx eslint 'src/*.mjs' 'tests/*.mjs'",
     "prettier": "npx prettier --write 'src/*.mjs' 'tests/*.mjs'",
-    "citest": "node --no-warnings --test-concurrency=1 --test",
-    "test": "echo \"Use npm run  to run tests, but it requires running the backend service in test mode (npm run test:backend)\"",
-    "ctest": "c8 --reporter=html --reports-dir=coverage node --no-warnings --test-concurrency=1 --test tests/all.mjs"
+    "pretest": "./tests/prepare-tests.sh",
+    "prectest": "./tests/prepare-tests.sh",
+    "predtest": "./tests/prepare-tests.sh",
+    "test": "node --no-warnings ./tests/run-tests.mjs",
+    "ctest": "c8 --reporter=html --reports-dir=coverage node ./tests/run-tests.mjs",
+    "dtest": "node --no-warnings --test-concurrency=1 --test"
   },
   "dependencies": {
     "@aws-sdk/client-sesv2": "3.592.0",

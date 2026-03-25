@@ -244,7 +244,7 @@ SubscriberModel.prototype.search = async function (q = {}) {
       where: q,
     })
   } catch (err) {
-    console.log(err)
+    this.log.error(`Error while searching subscriber: ${err.message}`)
     subscribers = []
   }
 

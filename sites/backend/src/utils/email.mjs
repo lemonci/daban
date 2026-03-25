@@ -1,13 +1,12 @@
 import axios from 'axios'
 import mustache from 'mustache'
-import { log } from './log.mjs'
 import { templates } from '../templates/email/index.mjs'
 
 /*
  * Exporting this closure that makes sure we have access to the
  * instantiated config
  */
-export const mailer = (config) => ({
+export const mailer = (config, log) => ({
   email: {
     send: (params) => {
       // Make sure we have what it takes
@@ -22,8 +21,8 @@ export const mailer = (config) => ({
        * We also use this same mechanism to mock this in unit tests
        */
       return typeof config.email.handler === 'function'
-        ? config.email.handler(config, params)
-        : sendEmailViaScaleway(config, params)
+        ? config.email.handler(config, params, log)
+        : sendEmailViaScaleway(config, params, log)
     },
   },
 })
@@ -34,7 +33,7 @@ export const mailer = (config) => ({
  * If you want to use another way to send email, change the mailer
  * assignment above to point to another method to deliver email
  */
-async function sendEmailViaScaleway(config, { template, to, replacements = {} }) {
+async function sendEmailViaScaleway(config, { template, to, replacements = {} }, log) {
   log.info(`Emailing template ${template} to ${to}`)
 
   // Load template
@@ -75,7 +74,7 @@ async function sendEmailViaScaleway(config, { template, to, replacements = {} })
       }
     )
   } catch (err) {
-    console.log(err)
+    log.error(`Failed to POST email data to Scaleway: ${err.message}`)
   }
 
   return result.status === 200

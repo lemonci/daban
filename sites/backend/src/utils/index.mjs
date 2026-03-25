@@ -1,4 +1,3 @@
-import { log } from './log.mjs'
 import { website, exports } from '../config.mjs'
 import { randomString } from './crypto.mjs'
 import fs from 'fs'
@@ -62,9 +61,7 @@ export const writeExportedData = (data) => {
   const name = randomString()
   try {
     fs.writeFileSync(`${exports.dir}${name}.json`, JSON.stringify(data, null, 2))
-  } catch (err) {
-    log.warn(err, 'Failed to write export file')
-  }
+  } catch (err) {}
 
   return exports.url + name + '.json'
 }
