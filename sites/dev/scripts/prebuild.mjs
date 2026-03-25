@@ -428,6 +428,11 @@ const mkDesignDocs = async (design) => {
 
 const ensureDesignDocs = async () => {
   for (const design of designs) {
+    const s = await readJsonFile(['..', '..', 'designs', design, 'about.json'])
+    if (!s) {
+      // skip empty design directories with leftover content from git rebases etc.
+      continue
+    }
     await mkdir(`docs/reference/designs/${design}`)
     await mkDesignDocs(design)
   }
