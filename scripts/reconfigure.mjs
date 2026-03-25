@@ -142,6 +142,9 @@ if (!SITEBUILD) {
   if (validate()) log.write(chalk.green(' Done\n'))
 }
 
+// write an empty designs.mjs file so the following steps don't fail on a fresh repository
+await writeFile('packages/i18n/src/designs.mjs', 'export const designs = {}')
+
 // Step 3: Generate package.json, README, and CHANGELOG
 log.write(chalk.blueBright('Generating package-specific files...'))
 for (const type of ['designs', 'packages', 'plugins']) {
