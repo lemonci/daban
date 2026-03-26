@@ -211,9 +211,7 @@ export const CuratedSetPicker = ({ clickHandler }) => {
       const [status, body] = await backend.getCuratedSets()
       if (status === 200 && body.result === 'success') {
         const allSets = {}
-        for (const set of body.curatedSets) {
-          if (set.published) allSets[set.id] = set
-        }
+        for (const set of body.curatedSets) allSets[set.uuid] = set
         setSets(allSets)
       }
     }
@@ -247,7 +245,7 @@ export const CuratedMeasurementsSetLineup = ({ sets = [], clickHandler }) => (
         className:
           'tw:aspect-1/3 tw:w-auto tw:h-96 tw:bg-transparent tw:border-0 tw:hover:cursor-pointer tw:hover:bg-secondary/20',
         style: {
-          backgroundImage: `url(${imageCdnUrl({ type: 'cset', id: set.id })})`,
+          backgroundImage: `url(${imageCdnUrl({ type: 'cset', id: set.uuid })})`,
           width: 'auto',
           backgroundSize: 'contain',
           backgroundRepeat: 'no-repeat',
