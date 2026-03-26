@@ -58,6 +58,7 @@ function Backend(token, url = false) {
   this.patch = this.restClient.patch
   this.put = this.restClient.put
   this.post = this.restClient.post
+  this.url = url
 }
 
 /**
