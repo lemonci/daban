@@ -1,12 +1,11 @@
 import React from 'react'
 import Link from '@docusaurus/Link'
-import { imgUrl } from '../BlogPostItem/index.js'
 import { useLocation } from '@docusaurus/router'
 import { tags as showcaseTags } from '@site/showcase-tags.mjs'
 import { Newsletter } from '@freesewing/react/components/Account'
 import { NewsletterSignup } from '@freesewing/react/components/Newsletter'
 import { UserVisitorContent } from '@freesewing/react/components/Role'
-import { linkClasses } from '@freesewing/utils'
+import { imageCdnUrl, linkClasses } from '@freesewing/utils'
 import { DocusaurusDoc } from '@freesewing/react/components/Docusaurus'
 import { PlusIcon } from '@freesewing/react/components/Icon'
 
@@ -27,7 +26,7 @@ export const BlogPostTeaser = ({ post }) => (
     href={post.content.metadata.permalink}
   >
     <img
-      src={imgUrl(post.content.metadata.permalink)}
+      src={imageCdnUrl({ type: 'blog', id: post.content.metadata.permalink.split('/').pop() })}
       loading="lazy"
       className={`
     "tw:rounded tw:md:rounded-lg tw:top-0 tw:left-0"
@@ -101,7 +100,10 @@ const ShowcasePostTeaser = ({ post }) => (
       href={post.content.metadata.permalink}
     >
       <img
-        src={imgUrl(post.content.metadata.permalink)}
+        src={imageCdnUrl({
+          type: 'showcase',
+          id: post.content.metadata.permalink.split('/').pop(),
+        })}
         loading="lazy"
         className={`
       "tw:rounded tw:md:rounded-lg tw:top-0 tw:left-0 tw:z-0 tw:drop-shadow-lg"
