@@ -46,12 +46,8 @@ const account = {
       password: 2,
     },
     identities: {
-      github: 3,
-      instagram: 3,
+      codeberg: 3,
       mastodon: 3,
-      reddit: 3,
-      twitch: 3,
-      tiktok: 3,
       website: 3,
     },
   },

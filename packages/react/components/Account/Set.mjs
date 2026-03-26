@@ -212,15 +212,15 @@ export const Set = ({ uuid, publicOnly = false, Link = false }) => {
             <div className="tw:flex tw:flex-row tw:gap-2 tw:items-center">
               <a
                 className="tw:daisy-badge tw:daisy-badge-secondary tw:font-bold tw:daisy-badge-lg"
-                href={`${urls.backend}/sets/${mset.uuid}.json`}
+                href={`${backend.url}/sets/${mset.uuid}.json`}
               >
-                JSON
+                <span className="tw:text-secondary-content">JSON</span>
               </a>
               <a
                 className="tw:daisy-badge tw:daisy-badge-success tw:font-bold tw:daisy-badge-lg"
-                href={`${urls.backend}/sets/${mset.uuid}.yaml`}
+                href={`${backend.url}/sets/${mset.uuid}.yaml`}
               >
-                YAML
+                <span className="tw:text-success-content">YAML</span>
               </a>
             </div>
           ) : (

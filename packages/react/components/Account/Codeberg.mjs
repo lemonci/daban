@@ -11,48 +11,50 @@ import { SaveIcon } from '@freesewing/react/components/Icon'
 import { StringInput } from '@freesewing/react/components/Input'
 
 /**
- * A component to manage the user's Github handle in their account data
+ * A component to manage the user's Codeberg handle in their account data
  *
  * @component
  * @returns {JSX.Element}
  */
-export const Github = () => {
+export const Codeberg = () => {
   // Hooks
   const { account, setAccount } = useAccount()
   const backend = useBackend()
   const { setLoadingStatus } = useContext(LoadingStatusContext)
 
   // State
-  const [githubUsername, setGithubUsername] = useState(account.data.githubUsername || '')
-  const [githubEmail, setGithubEmail] = useState(account.data.githubEmail || '')
+  const [codebergUsername, setCodebergUsername] = useState(account.data.codebergUsername || '')
+  const [codebergEmail, setCodebergEmail] = useState(account.data.codebergEmail || '')
 
   // Helper method to save changes
   const save = async () => {
-    setLoadingStatus([true, 'Saving bio'])
-    const [status, body] = await backend.updateAccount({ data: { githubUsername, githubEmail } })
+    setLoadingStatus([true, 'Saving Codeberg data'])
+    const [status, body] = await backend.updateAccount({
+      data: { codebergUsername, codebergEmail },
+    })
     if (status === 200 && body.result === 'success') {
       setAccount(body.account)
-      setLoadingStatus([true, 'GitHub info updated', true, true])
+      setLoadingStatus([true, 'Codeberg info updated', true, true])
     } else setLoadingStatus([true, 'Something went wrong. Please report this', true, true])
   }
 
   return (
     <div className="tw:w-full">
       <StringInput
-        id="account-github-email"
-        label="GitHub Email Address"
-        current={githubEmail}
-        update={setGithubEmail}
+        id="account-codeberg-email"
+        label="Codeberg Email Address"
+        current={codebergEmail}
+        update={setCodebergEmail}
         valid={(val) => val.length > 0}
-        placeholder={'joost@joost.at'}
+        placeholder={'scritchies@cat.co'}
       />
       <StringInput
-        id="account-github-username"
-        label="GitHub Username"
-        current={githubUsername}
-        update={setGithubUsername}
+        id="account-codeberg-username"
+        label="Codeberg Username"
+        current={codebergUsername}
+        update={setCodebergUsername}
         valid={(val) => val.length > 0}
-        placeholder={'joostdecock'}
+        placeholder={'scritchies'}
       />
       <p className="tw:text-right">
         <button
