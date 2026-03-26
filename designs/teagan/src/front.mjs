@@ -214,7 +214,7 @@ function teaganFront({
   snippets.logo = new Snippet('logo', points.logo)
 
   // Notches
-  snippets.armholeNotch = new Snippet('bnotch', points.armholeNotchFront)
+  snippets.armholeNotch = new Snippet('notch', points.armholeNotchFront)
 
   // Dimensions
   macro('hd', {
