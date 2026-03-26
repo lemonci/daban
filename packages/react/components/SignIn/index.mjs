@@ -126,8 +126,8 @@ export const SignIn = ({ onSuccess = false, silent = false }) => {
     // Bad request
     if (status === 400) {
       let msg
-      if (result.data.error === 'usernameMissing') msg = 'Please provide your username'
-      else if (result.data.error === 'passwordMissing') msg = 'Please provide your password'
+      if (body.error === 'usernameMissing') msg = 'Please provide your username'
+      else if (body.error === 'passwordMissing') msg = 'Please provide your password'
       setSignInFailed(msg)
       setLoadingStatus([true, msg, true, false])
     }
@@ -221,9 +221,9 @@ export const SignIn = ({ onSuccess = false, silent = false }) => {
                 <span className="tw:hidden tw:lg:block">
                   <EmailIcon />
                 </span>
-                <span className="tw:pl-2">Email me a login code</span>
+                <span className="tw:pl-2">Send Authentication Code</span>
                 <span className="tw:hidden tw:lg:block">
-                  <EmailIcon />
+                  <KeyIcon />
                 </span>
               </>
             )}
@@ -259,7 +259,7 @@ export const SignIn = ({ onSuccess = false, silent = false }) => {
           onClick={() => setMagicLink(!magicLink)}
         >
           <span className="tw:hidden tw:lg:block">{magicLink ? <LockIcon /> : <EmailIcon />}</span>
-          {magicLink ? 'Use your password' : 'Email me a login code'}
+          {magicLink ? 'Sign in with password' : 'Send Authentication Codee'}
           <span className="tw:hidden tw:lg:block">{magicLink ? <KeyIcon /> : <EmailIcon />}</span>
         </button>
       </fieldset>
