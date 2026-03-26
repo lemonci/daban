@@ -141,17 +141,18 @@ export function userAvatarUrl({ uuid = false }) {
  * @param {params} object - All params
  * @param {string} params.type - The image type
  * @param {string} params.id - The UUID or other id, depending on type
+ * @param {string} params.subId - The id for a sub-image of a post
  * @param {string} params.raw - A raw path url, takes precendence
  * @return {string} url - The full URL to the image on the CDN
  */
-export function imageCdnUrl({ type = 'user', id = false, raw = false }) {
+export function imageCdnUrl({ type = 'user', id = false, subId = false, raw = false }) {
   if (raw && typeof raw === 'string') return `${urls.cdn}/${raw}`
   let path = 'user/default-avatar'
   if (typeof id === 'string') {
     if (['cset', 'set', 'user', 'pattern'].includes(type)) {
       path = `${type}/${id.slice(0, 1)}/${id.slice(0, 2)}/${id}.webp`
-    } else if (type === 'showcase') {
-    } else if (type === 'blog') {
+    } else if (['blog', 'showcase'].includes(type)) {
+      path = `${type}/${id}/${subId ? subId : 'main'}.webp`
     }
   }
 
