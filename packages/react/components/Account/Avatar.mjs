@@ -75,7 +75,7 @@ export const Avatar = ({ welcome = false, Link = false }) => {
             <SaveIcon />
             Save
           </IconButton>
-          <IconButton href={nextHref} className="tw:mt-4">
+          <IconButton href={nextHref} className="tw:mt-4 tw:block">
             <RightIcon stroke={3} /> Continue
           </IconButton>
           {welcomeSteps[account.control].length > 0 ? (
