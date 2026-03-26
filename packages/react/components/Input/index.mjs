@@ -24,31 +24,6 @@ import { Popout } from '@freesewing/react/components/Popout'
 import Markdown from 'react-markdown'
 
 /*
- * A temporary compnent to let people know that image upload is
- * unavailable while we migrate image hosting away from Cloudflare
- */
-export const NoImageUploads = () => (
-  <Popout>
-    <h3>Image uploads are temporarily disabled</h3>
-    <p>
-      As part of <a href="/blog/us-and-eu">our migration away from US-based tech companies</a>{' '}
-      FreeSewing is in the process of migrating image hosting from Cloudflare to our own backend
-      systems, fronted by Bunny CDN.
-    </p>
-    <p>This migration will happen in a three steps:</p>
-    <ul className="list list-inside list-disc">
-      <li>Step 1: Freeze image uploads on the website</li>
-      <li>Step 2: Migrate all images, and implement the new upload logic</li>
-      <li>Step 3: Re-enable image uploads</li>
-    </ul>
-    <p>Please bear with us as we try to handle this migration with minimal service disruption.</p>
-    <p>
-      <b>If you have an image to upload, please check back in a few days.</b>
-    </p>
-  </Popout>
-)
-
-/*
  * A helper component to render the help link in formcontrol
  *
  * @param {string|function| help - The help href of onClick method
