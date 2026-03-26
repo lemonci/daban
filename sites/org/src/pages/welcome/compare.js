@@ -1,11 +1,13 @@
-import Layout from '@theme/Layout'
-import { DocusaurusDoc } from '@freesewing/react/components/Docusaurus'
+import DocusaurusPageWrapper from '@site/src/components/page.mjs'
 import { RoleBlock } from '@freesewing/react/components/Role'
 import { Compare } from '@freesewing/react/components/Account'
 
 export default function WelcomeComparePage() {
   return (
-    <Layout title="Welcome to FreeSewing" description="Just a few questions to set up your account">
+    <DocusaurusPageWrapper
+      title="Welcome to FreeSewing"
+      description="Just a few questions to set up your account"
+    >
       <div className="tw:text-base-content tw:max-w-prose tw:text-base-content tw:text-current tw:mx-auto tw:my-8">
         <h1>Measurements Comparison</h1>
         <p>
@@ -17,12 +19,10 @@ export default function WelcomeComparePage() {
             anyway
           </small>
         </p>
-        <DocusaurusDoc>
-          <RoleBlock role="user">
-            <Compare welcome />
-          </RoleBlock>
-        </DocusaurusDoc>
+        <RoleBlock role="user">
+          <Compare welcome />
+        </RoleBlock>
       </div>
-    </Layout>
+    </DocusaurusPageWrapper>
   )
 }

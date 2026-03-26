@@ -1,6 +1,8 @@
 import { useState } from 'react'
 import { BareLayout } from '@site/src/components/bare-layout.mjs'
 import { Editor } from '@freesewing/react/components/Editor'
+import useDocusaurusContext from '@docusaurus/useDocusaurusContext'
+import { BackendContextProvider } from '@freesewing/react/context/Backend'
 
 /*
  * This hinges on two things:
@@ -15,14 +17,19 @@ const EditorPage = () => {
    * page title from within the editor.
    */
   const [title, setTitle] = useState('Pattern Editor')
+  const {
+    siteConfig: { customFields },
+  } = useDocusaurusContext()
 
   return (
-    <BareLayout title={title}>
-      <Editor
-        setTitle={setTitle}
-        measurementHelpProvider={(m) => `/docs/measurements/${m.toLowerCase()}`}
-      />
-    </BareLayout>
+    <BackendContextProvider url={customFields.backendUrl}>
+      <BareLayout title={title}>
+        <Editor
+          setTitle={setTitle}
+          measurementHelpProvider={(m) => `/docs/measurements/${m.toLowerCase()}`}
+        />
+      </BareLayout>
+    </BackendContextProvider>
   )
 }
 

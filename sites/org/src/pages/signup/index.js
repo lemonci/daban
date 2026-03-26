@@ -1,6 +1,4 @@
-import DocusaurusLayout from '@theme/Layout'
-import { DocusaurusPage } from '@freesewing/react/components/Docusaurus'
-import { NoTitleLayout } from '@freesewing/react/components/Layout'
+import DocusaurusPageWrapper from '@site/src/components/page.mjs'
 import { SignUp } from '@freesewing/react/components/SignUp'
 import { MiniTip } from '@freesewing/react/components/Mini'
 
@@ -10,9 +8,7 @@ import { MiniTip } from '@freesewing/react/components/Mini'
  */
 export default function SignUpPage() {
   return (
-    <DocusaurusPage
-      DocusaurusLayout={DocusaurusLayout}
-      Layout={NoTitleLayout}
+    <DocusaurusPageWrapper
       title="Sign Up"
       description="Sign Up for a FreeSewing account to unlock all features"
     >
@@ -22,6 +18,6 @@ export default function SignUpPage() {
           <MiniTip>We do not share or sell your data. We are a community, not a business.</MiniTip>
         </div>
       </div>
-    </DocusaurusPage>
+    </DocusaurusPageWrapper>
   )
 }
