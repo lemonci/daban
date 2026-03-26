@@ -7,7 +7,7 @@ export const signin = {
       h2('Welcome back to FreeSewing'),
       p('Your login code is:'),
       check('{{{ check }}}'),
-      link({ link: '{{{ actionUrl }}}', text: 'Sign in toy your FreeSewing account' }),
+      link({ link: '{{{ actionUrl }}}', text: 'Sign in to your FreeSewing account' }),
       p(
         `To sign in to your account, click the link above, and enter your login code (<b>{{{ check }}}</b>).`
       ),

@@ -147,7 +147,7 @@ SetModel.prototype.publicRead = async function ({ params }) {
    * If it is not public, return 404 rather than
    * reveal that a non-public set exists
    */
-  if (this.record.public !== true) return this.setResponse(404)
+  if (this.record?.public !== true) return this.setResponse(404)
 
   /*
    * Return 200 and the set data
@@ -381,7 +381,7 @@ SetModel.prototype.userSets = async function (id) {
 
   let sets
   try {
-    sets = await this.prisma.set.findMany({ where: { id } })
+    sets = await this.prisma.set.findMany({ where: { userId: id } })
   } catch (err) {
     this.log.warn(`Failed to search sets for user ${id}: ${err.message}`)
   }
@@ -405,6 +405,7 @@ SetModel.prototype.asSet = function () {
   }
   delete data.id
   delete data.userId
+  delete data.img
 
   return data
 }

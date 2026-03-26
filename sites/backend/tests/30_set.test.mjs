@@ -122,11 +122,18 @@ for (const a of ['jwt', 'key']) {
       store.set[a] = data.set
     })
 
-    it(`Do allow reading a public set (${a})`, async () => {
+    it(`Do allow reading a public set as JSON (${a})`, async () => {
       const [status, data] = await api.get(`/sets/${store.set[a].uuid}.json`)
       assert.equal(status, 200)
       assert.equal(data.uuid, store.set[a].uuid)
     })
+
+    it(`Do allow reading a public set as YAML (${a})`, async () => {
+      const [status, data] = await api.get(`/sets/${store.set[a].uuid}.yaml`)
+      assert.equal(status, 200)
+      assert.equal(typeof data, 'string')
+    })
+
     it(`Do not allow updating another user's set (${a})`, async () => {
       const body = { measies: { ankle: 123 } }
       const [status, data] = await api.patch(
@@ -177,6 +184,13 @@ for (const a of ['jwt', 'key']) {
       )
       assert.equal(status, 403)
       assert.equal(data.result, `error`)
+    })
+
+    it(`List the current user's sets (${a})`, async () => {
+      const [status, data] = await api.get(`/sets/${a}`, auth[a]())
+      assert.equal(status, 200)
+      assert.equal(data.result, `success`)
+      assert.equal(data.sets.length, a === 'jwt' ? 2 : 4)
     })
   })
 }
