@@ -6,6 +6,8 @@ export const urls = {
   backend: 'https://backend.freesewing.eu',
   // FreeSewing CDN (content delivery network)
   cdn: 'https://cdn.freesewing.eu',
+  // Server that serves images directly without CDN
+  static: 'https://static.freesewing.eu',
   // FreeSewing website
   website: 'https://freesewing.eu',
   // FreeSewing monorepo

@@ -130,11 +130,33 @@ export function escapeSvgText(text) {
  * @return {string} url - The image URL
  */
 export function userAvatarUrl({ uuid = false }) {
-  // Defer to imageCdnUrl
-  return imageCdnUrl({ type: 'user', uuid })
+  // Defer to imageStaticUrl
+  return imageStaticUrl({ type: 'user', id: uuid })
 }
 
-/*
+/**
+ * Helper method to return the path of an image
+ *
+ * @param {params} object - All params
+ * @param {string} params.type - The image type
+ * @param {string} params.id - The UUID or other id, depending on type
+ * @param {string} params.subId - The id for a sub-image of a post
+ * @return {string} path - The path to the image
+ */
+function imagePath({ type = 'user', id = false, subId = false }) {
+  let path = 'user/default-avatar'
+  if (typeof id === 'string') {
+    if (['cset', 'set', 'user', 'pattern'].includes(type)) {
+      path = `${type}/${id.slice(0, 1)}/${id.slice(0, 2)}/${id}.webp`
+    } else if (['blog', 'showcase'].includes(type)) {
+      path = `${type}/${id}/${subId ? subId : 'main'}.webp`
+    }
+  }
+
+  return path
+}
+
+/**
  * Returns the URL of an image stored on the FreeSewing backend
  * (but cached by the FreeSewing CDN)
  *
@@ -147,16 +169,24 @@ export function userAvatarUrl({ uuid = false }) {
  */
 export function imageCdnUrl({ type = 'user', id = false, subId = false, raw = false }) {
   if (raw && typeof raw === 'string') return `${urls.cdn}/${raw}`
-  let path = 'user/default-avatar'
-  if (typeof id === 'string') {
-    if (['cset', 'set', 'user', 'pattern'].includes(type)) {
-      path = `${type}/${id.slice(0, 1)}/${id.slice(0, 2)}/${id}.webp`
-    } else if (['blog', 'showcase'].includes(type)) {
-      path = `${type}/${id}/${subId ? subId : 'main'}.webp`
-    }
-  }
 
-  return `${urls.cdn}/${path}`
+  return `${urls.cdn}/${imagePath({ type, id, subId })}`
+}
+
+/**
+ * Returns the URL of an image stored on the FreeSewing static server
+ *
+ * @param {params} object - All params
+ * @param {string} params.type - The image type
+ * @param {string} params.id - The UUID or other id, depending on type
+ * @param {string} params.subId - The id for a sub-image of a post
+ * @param {string} params.raw - A raw path url, takes precendence
+ * @return {string} url - The full URL to the image on the static server
+ */
+export function imageStaticUrl({ type = 'user', id = false, subId = false, raw = false }) {
+  if (raw && typeof raw === 'string') return `${urls.static}/${raw}`
+
+  return `${urls.static}/${imagePath({ type, id, subId })}`
 }
 
 /**

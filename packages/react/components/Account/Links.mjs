@@ -1,5 +1,5 @@
 // Config
-import { imageCdnUrl, capitalize } from '@freesewing/utils'
+import { imageStaticUrl, capitalize } from '@freesewing/utils'
 import { control as controlConfig } from '@freesewing/config'
 // Hooks
 import React, { useState, useEffect } from 'react'
@@ -132,7 +132,7 @@ export const Links = ({ Link = false }) => {
     bio: account.bio ? <span>{account.bio.slice(0, 15)}&hellip;</span> : '',
     img: (
       <img
-        src={imageCdnUrl({ type: 'user', id: account.uuid })}
+        src={imageStaticUrl({ type: 'user', id: account.uuid })}
         className="tw:w-8 tw:h-8 tw:aspect-square tw:rounded-full shadow"
       />
     ),
