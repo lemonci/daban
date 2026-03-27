@@ -1,5 +1,5 @@
 // Dependencies
-import { cloudflareImageUrl, horFlexClasses, patternUrlFromState } from '@freesewing/utils'
+import { imageCdnUrl, horFlexClasses, patternUrlFromState } from '@freesewing/utils'
 import { urls, control as controlConfig } from '@freesewing/config'
 // Context
 import { LoadingStatusContext } from '@freesewing/react/context/LoadingStatus'
@@ -22,11 +22,11 @@ import { BadgeLink, PatternCard } from '@freesewing/react/components/Account'
  *
  * @component
  * @param {object} props - All component props
- * @param {number} props.id - The pattern ID to load
+ * @param {number} props.uuid - The pattern ID to load
  * @param {React.Component} props.Link - A framework specific Link component for client-side routing
  * @returns {JSX.Element}
  */
-export const PublicPattern = ({ id, Link }) => {
+export const PublicPattern = ({ uuid, Link }) => {
   if (!Link) Link = WebLink
   // Hooks
   const { account, control } = useAccount()
@@ -43,7 +43,7 @@ export const PublicPattern = ({ id, Link }) => {
   useEffect(() => {
     const getPattern = async () => {
       setLoadingStatus([true, 'Loading pattern from backend'])
-      const [status, body] = await backend.getPublicPattern(id)
+      const [status, body] = await backend.getPublicPattern(uuid)
       if (status === 200) {
         setPattern(body)
         setLoadingStatus([true, 'Loaded pattern', true, true])
@@ -54,14 +54,14 @@ export const PublicPattern = ({ id, Link }) => {
         setLoadingStatus([true, 'An error occured. Please report this', true, false])
       }
     }
-    if (id) getPattern()
-  }, [id])
+    if (uuid) getPattern()
+  }, [uuid])
 
   const clone = async () => {
     setLoadingStatus([true, 'Cloning pattern'])
     // Compile data
     const data = { ...pattern }
-    delete data.id
+    delete data.uuid
     delete data.createdAt
     delete data.data
     delete data.userId
@@ -70,7 +70,7 @@ export const PublicPattern = ({ id, Link }) => {
     const [status, body] = await backend.createPattern(data)
     if (status === 201 && body.result === 'created') {
       setLoadingStatus([true, 'Loading newly created pattern', true, true])
-      window.location = `/account/data/patterns/pattern?id=${body.pattern.id}`
+      window.location = `/account/data/patterns/pattern?uuid=${body.pattern.uuid}`
     } else setLoadingStatus([true, 'We failed to create this pattern', true, false])
   }
 
@@ -78,7 +78,7 @@ export const PublicPattern = ({ id, Link }) => {
 
   if (!pattern) return null
 
-  const header = <PatternHeader {...{ pattern, Link, account, setModal, clone }} />
+  const header = <PatternHeader {...{ pattern, Link, account, setModal, clone, backend }} />
 
   return (
     <div className="tw:w-full">
@@ -96,11 +96,11 @@ export const PublicPattern = ({ id, Link }) => {
 /**
  * Helper component to show the pattern title, image, and various buttons
  */
-const PatternHeader = ({ pattern, Link, account, setModal, clone }) => (
+const PatternHeader = ({ pattern, Link, account, setModal, clone, backend }) => (
   <>
     <h2>{pattern.name}</h2>
     <div className="tw:flex tw:flex-row tw:flex-wrap tw:gap-2 tw:text-sm tw:items-center tw:mb-2">
-      <KeyVal k="ID" val={pattern.id} color="secondary" />
+      <KeyVal k="UUID" val={pattern.uuid} color="secondary" />
       <KeyVal k="Created" val={<TimeAgo iso={pattern.createdAt} />} color="secondary" />
       <KeyVal k="Updated" val={<TimeAgo iso={pattern.updatedAt} />} color="secondary" />
     </div>
@@ -111,8 +111,8 @@ const PatternHeader = ({ pattern, Link, account, setModal, clone }) => (
       <div className="tw:flex tw:flex-col tw:justify-end tw:gap-2 tw:mb-2 tw:grow">
         {account.control > 3 ? (
           <div className="tw:flex tw:flex-row tw:gap-2 tw:items-center">
-            <BadgeLink label="JSON" href={`${urls.backend}/patterns/${pattern.id}.json`} />
-            <BadgeLink label="YAML" href={`${urls.backend}/patterns/${pattern.id}.yaml`} />
+            <BadgeLink label="JSON" href={`${backend.url}/patterns/${pattern.uuid}.json`} />
+            <BadgeLink label="YAML" href={`${backend.url}/patterns/${pattern.uuid}.yaml`} />
           </div>
         ) : (
           <span></span>
@@ -121,7 +121,7 @@ const PatternHeader = ({ pattern, Link, account, setModal, clone }) => (
           onClick={() =>
             setModal(
               <ModalWrapper flex="col" justify="top tw:lg:justify-center" slideFrom="right">
-                <img src={cloudflareImageUrl({ type: 'public', id: pattern.img })} />
+                <img src={imageCdnUrl({ type: 'pattern', id: pattern.uuid })} />
               </ModalWrapper>
             )
           }

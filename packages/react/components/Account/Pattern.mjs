@@ -1,5 +1,5 @@
 // Dependencies
-import { cloudflareImageUrl, horFlexClasses, patternUrlFromState } from '@freesewing/utils'
+import { imageCdnUrl, horFlexClasses, patternUrlFromState } from '@freesewing/utils'
 import { urls, control as controlConfig } from '@freesewing/config'
 // Context
 import { LoadingStatusContext } from '@freesewing/react/context/LoadingStatus'
@@ -34,17 +34,18 @@ import { TimeAgo } from '@freesewing/react/components/Time'
 import { Popout } from '@freesewing/react/components/Popout'
 import { ModalWrapper } from '@freesewing/react/components/Modal'
 import { KeyVal } from '@freesewing/react/components/KeyVal'
+import { Uuid } from '@freesewing/react/components/Uuid'
 
 /**
  * A component to manage a pattern in the user's account data
  *
  * @component
  * @param {object} props - All component props
- * @param {number} props.id - The pattern ID to load
+ * @param {number} props.uuid - The pattern UUID to load
  * @param {React.Component} props.Link - A framework specific Link component for client-side routing
  * @returns {JSX.Element}
  */
-export const Pattern = ({ id, Link }) => {
+export const Pattern = ({ uuid, Link }) => {
   if (!Link) Link = WebLink
   // Hooks
   const { account, control } = useAccount()
@@ -66,7 +67,7 @@ export const Pattern = ({ id, Link }) => {
   useEffect(() => {
     const getPattern = async () => {
       setLoadingStatus([true, 'Loading pattern from backend'])
-      const [status, body] = await backend.getPattern(id)
+      const [status, body] = await backend.getPattern(uuid)
       if (status === 200) {
         setPattern(body.pattern)
         setName(body.pattern.name)
@@ -76,8 +77,8 @@ export const Pattern = ({ id, Link }) => {
         setLoadingStatus([true, 'Loaded pattern', true, true])
       } else setLoadingStatus([true, 'An error occured. Please report this', true, false])
     }
-    if (id) getPattern()
-  }, [id])
+    if (uuid) getPattern()
+  }, [uuid])
 
   const save = async () => {
     setLoadingStatus([true, 'Gathering info'])
@@ -88,7 +89,7 @@ export const Pattern = ({ id, Link }) => {
     if (notes || notes !== pattern.notes) data.notes = notes
     if ([true, false].includes(isPublic) && isPublic !== pattern.public) data.public = isPublic
     setLoadingStatus([true, 'Saving pattern'])
-    const [status, body] = await backend.updatePattern(pattern.id, data)
+    const [status, body] = await backend.updatePattern(pattern.uuid, data)
     if (status === 200 && body.result === 'success') {
       setPattern(body.pattern)
       setEdit(false)
@@ -100,7 +101,7 @@ export const Pattern = ({ id, Link }) => {
     setLoadingStatus([true, 'Cloning pattern'])
     // Compile data
     const data = { ...pattern }
-    delete data.id
+    delete data.uuid
     delete data.createdAt
     delete data.data
     delete data.userId
@@ -109,7 +110,7 @@ export const Pattern = ({ id, Link }) => {
     const [status, body] = await backend.createPattern(data)
     if (status === 201 && body.result === 'created') {
       setLoadingStatus([true, 'Loading newly created pattern', true, true])
-      window.location = `/account/data/patterns/pattern?id=${body.pattern.id}`
+      window.location = `/account/data/patterns/pattern?uuid=${body.pattern.uuid}`
     } else setLoadingStatus([true, 'We failed to create this pattern', true, false])
   }
 
@@ -117,7 +118,7 @@ export const Pattern = ({ id, Link }) => {
     setLoadingStatus([true, 'Updating pattern'])
     // Compile data
     const data = { public: !pattern.public }
-    const [status, body] = await backend.updatePattern(pattern.id, data)
+    const [status, body] = await backend.updatePattern(pattern.uuid, data)
     if (status === 200 && body.result === 'success') {
       setPattern(body.pattern)
       setLoadingStatus([true, 'Nailed it', true, true])
@@ -143,7 +144,7 @@ export const Pattern = ({ id, Link }) => {
             <p className="tw:text-right">
               <Link
                 className={`tw:daisy-btn tw:daisy-btn-secondary tw:hover:text-secondary-content tw:hover:no-underline`}
-                href={`/pattern?id=${pattern.id}`}
+                href={`/pattern?uuid=${pattern.uuid}`}
               >
                 <PatternIcon />
                 Public View
@@ -285,7 +286,7 @@ export const PatternCard = ({
   const wrapperProps = {
     className: `tw:bg-base-300 tw:w-full tw:mb-2 tw:mx-auto tw:flex tw:flex-col tw:items-start tw:text-center tw:justify-center tw:rounded tw:shadow tw:py-4 tw:w-${s} tw:aspect-square`,
     style: {
-      backgroundImage: `url(${cloudflareImageUrl({ type: 'w1000', id: pattern.img })})`,
+      backgroundImage: `url(${imageCdnUrl({ type: 'pattern', id: pattern.uuid })})`,
       backgroundSize: 'cover',
       backgroundRepeat: 'no-repeat',
       backgroundPosition: '50%',
@@ -339,7 +340,7 @@ const PatternHeader = ({ pattern, Link, account, setModal, setEdit, togglePublic
   <>
     <h2>{pattern.name}</h2>
     <div className="tw:flex tw:flex-row tw:flex-wrap tw:gap-2 tw:text-sm tw:items-center tw:mb-2">
-      <KeyVal k="ID" val={pattern.id} color="secondary" />
+      <Uuid uuid={pattern.uuid} />
       <KeyVal k="Created" val={<TimeAgo iso={pattern.createdAt} />} color="secondary" />
       <KeyVal k="Updated" val={<TimeAgo iso={pattern.updatedAt} />} color="secondary" />
       <KeyVal k="Public" val={pattern.public ? 'yes' : 'no'} color="secondary" />
@@ -351,8 +352,8 @@ const PatternHeader = ({ pattern, Link, account, setModal, setEdit, togglePublic
       <div className="tw:flex tw:flex-col tw:justify-end tw:gap-2 tw:mb-2 tw:grow">
         {account.control > 3 && pattern.public ? (
           <div className="tw:flex tw:flex-row tw:gap-2 tw:items-center">
-            <BadgeLink label="JSON" href={`${urls.backend}/patterns/${pattern.id}.json`} />
-            <BadgeLink label="YAML" href={`${urls.backend}/patterns/${pattern.id}.yaml`} />
+            <BadgeLink label="JSON" href={`${urls.backend}/patterns/${pattern.uuid}.json`} />
+            <BadgeLink label="YAML" href={`${urls.backend}/patterns/${pattern.uuid}.yaml`} />
           </div>
         ) : (
           <span></span>
@@ -361,7 +362,7 @@ const PatternHeader = ({ pattern, Link, account, setModal, setEdit, togglePublic
           onClick={() =>
             setModal(
               <ModalWrapper flex="col" justify="top tw:lg:justify-center" slideFrom="right">
-                <img src={cloudflareImageUrl({ type: 'public', id: pattern.img })} />
+                <img src={imageCdnUrl({ type: 'pattern', id: pattern.uuid })} />
               </ModalWrapper>
             )
           }

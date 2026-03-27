@@ -1,6 +1,4 @@
 import { capitalize } from '../utils/index.mjs'
-import { log } from '../utils/log.mjs'
-import { storeImage } from '../utils/cloudflare-images.mjs'
 import { decorateModel } from '../utils/model-decorator.mjs'
 
 /*
@@ -73,13 +71,27 @@ CuratedSetModel.prototype.guardedCreate = async function ({ body, user }) {
   await this.createRecord(data)
 
   /*
-   * Now that we have a record and ID, we can upload the image to cloudflare and set its id
+   * Re-read the record to pick up the UUID set by the database trigger
    */
-  await storeImage({
-    id: `cset-${this.record.id}`,
-    metadata: { user: user.uid },
-    b64: body.img,
-  })
+  await this.read({ id: this.record.id })
+
+  /*
+   * If it failed for some reason, bail out
+   */
+  if (!this.exists) {
+    this.log.warn(`Could not create suggested set`)
+    return this.setResponse(500)
+  }
+
+  /*
+   * Now that we have a record and ID, we can upload the image to cloudflare and set its id
+   * FIXME: To be migrated
+   */
+  //await storeImage({
+  //  id: `cset-${this.record.id}`,
+  //  metadata: { user: user.uid },
+  //  b64: body.img,
+  //})
 
   /*
    * Record created, return data in the proper format
@@ -96,10 +108,20 @@ CuratedSetModel.prototype.guardedCreate = async function ({ body, user }) {
  * @returns {CuratedSetModel} object - The CureatedSetModel
  */
 CuratedSetModel.prototype.guardedRead = async function ({ params }, format = false) {
+  if (!params.uuid) return this.setResponse(400, 'missingUuid')
+
   /*
    * Read record from database
    */
-  await this.read({ id: parseInt(params.id) })
+  await this.read({ uuid: params.uuid })
+
+  /*
+   * If it failed for some reason, bail out
+   */
+  if (!this.exists) {
+    this.log.warn(`Could not find curated set ${params.uuid}`)
+    return this.setResponse(404)
+  }
 
   /*
    * If no format is specified, return as object
@@ -124,9 +146,14 @@ CuratedSetModel.prototype.allCuratedSets = async function () {
    */
   let curatedSets
   try {
-    curatedSets = await this.prisma.curatedSet.findMany({ orderBy: { height: 'asc' } })
+    curatedSets = await this.prisma.curatedSet.findMany({
+      where: {
+        published: true,
+      },
+      orderBy: { height: 'asc' },
+    })
   } catch (err) {
-    log.warn(`Failed to search curated sets: ${err}`)
+    this.log.warn(`Failed to search curated sets: ${err.message}`)
   }
 
   /*
@@ -142,8 +169,7 @@ CuratedSetModel.prototype.allCuratedSets = async function () {
        */
       asPojo.measies = JSON.parse(asPojo.measies)
       asPojo.tags = JSON.parse(asPojo.tags)
-      delete asPojo.info
-      list.push(asPojo)
+      list.push(normalizeSetData(asPojo))
     }
   }
 
@@ -175,7 +201,7 @@ CuratedSetModel.prototype.guardedClone = async function ({ params, user, body },
   /*
    * Read record from database
    */
-  await this.read({ id: parseInt(params.id) })
+  await this.read({ uuid: params.uuid })
 
   /*
    * Create data for the cloned set
@@ -214,7 +240,7 @@ CuratedSetModel.prototype.guardedUpdate = async function ({ params, body, user }
   /*
    * Attempt to read database record
    */
-  await this.read({ id: parseInt(params.id) })
+  await this.read({ uuid: params.uuid })
 
   /*
    * Prepare data for updating the record
@@ -262,11 +288,12 @@ CuratedSetModel.prototype.guardedUpdate = async function ({ params, body, user }
    * Handle the image, if there is one
    */
   if (typeof body.img === 'string') {
-    await storeImage({
-      id: `cset-${this.record.id}`,
-      metadata: { user: user.uid },
-      b64: body.img,
-    })
+    // FIXME: replace
+    //await storeImage({
+    //  id: `cset-${this.record.id}`,
+    //  metadata: { user: user.uuid },
+    //  b64: body.img,
+    //})
   }
 
   /*
@@ -296,7 +323,7 @@ CuratedSetModel.prototype.guardedDelete = async function ({ params, user }) {
   /*
    * Find the database record
    */
-  await this.read({ id: parseInt(params.id) })
+  await this.read({ uuid: params.uuid })
 
   /*
    * Now delete it
@@ -325,7 +352,7 @@ CuratedSetModel.prototype.suggest = async function ({ body, user }) {
   /*
    * Is set set?
    */
-  if (!body.set || typeof body.set !== 'number') return this.setResponse(403, 'setMissing')
+  if (!body.set || typeof body.set !== 'string') return this.setResponse(400, 'setMissing')
 
   /*
    * Is height set?
@@ -343,6 +370,19 @@ CuratedSetModel.prototype.suggest = async function ({ body, user }) {
   if (!body.img) return this.setResponse(403, 'imgMissing')
 
   /*
+   * Load the suggested measurements set
+   */
+  await this.Set.read({ uuid: body.set })
+
+  /*
+   * If it does not exist, log a warning and return 404
+   */
+  if (!this.Confirmation.exists) {
+    this.log.warn(`Could not find curated set ${body.set} for suggestion`)
+    return this.setResponse(400, 'setMissing')
+  }
+
+  /*
    * Create confirmation to store the suggested data
    */
   const data = {
@@ -351,16 +391,21 @@ CuratedSetModel.prototype.suggest = async function ({ body, user }) {
     set: body.set,
     height: body.height,
   }
-  await this.Confirmation.createRecord({ type: 'sugset', data, userId: user.uid })
+  await this.Confirmation.createRecord({
+    type: 'sugset',
+    data,
+    userId: user.apikey ? user.userId : user.id,
+  })
 
   /*
    * Now the we have an id, upload the image
    */
-  const img = await storeImage({
-    id: `sugset-${this.Confirmation.record.id}`,
-    data: body.img,
-    metadata: { user: user.uid },
-  })
+  // FIXME: Replace
+  //const img = await storeImage({
+  //  id: `sugset-${this.Confirmation.record.id}`,
+  //  data: body.img,
+  //  metadata: { user: user.uuid },
+  //})
 
   /*
    * If an image was uploaded, update the record with the image ID
@@ -400,7 +445,7 @@ CuratedSetModel.prototype.fromSuggestion = async function ({ params, user }) {
    * If it does not exist, log a warning and return 404
    */
   if (!this.Confirmation.exists) {
-    log.warn(`Could not find confirmation id ${params.id}`)
+    this.log.warn(`Could not find confirmation id ${params.id}`)
     return this.setResponse(404)
   }
 
@@ -408,7 +453,7 @@ CuratedSetModel.prototype.fromSuggestion = async function ({ params, user }) {
    * If it is the wrong confirmation type, log a warning and return 404
    */
   if (this.Confirmation.record.type !== 'sugset') {
-    log.warn(`Confirmation mismatch; ${params.id} is not a subset id`)
+    this.log.warn(`Confirmation mismatch; ${params.id} is not a subset id`)
     return this.setResponse(404)
   }
 
@@ -421,7 +466,7 @@ CuratedSetModel.prototype.fromSuggestion = async function ({ params, user }) {
    * It it does not exist, return 404
    */
   if (!this.Set.exists) {
-    log.warn(`Suggested set ${this.Confirmation.clear.data.set} does not exist`)
+    this.log.warn(`Suggested set ${this.Confirmation.clear.data.set} does not exist`)
     return this.setResponse(404)
   }
 
@@ -453,10 +498,15 @@ CuratedSetModel.prototype.fromSuggestion = async function ({ params, user }) {
   })
 
   /*
+   * Re-read the record to pick up the UUID set by the database trigger
+   */
+  await this.read({ id: this.record.id })
+
+  /*
    * If it failed for some reason, bail out
    */
   if (!this.exists) {
-    log.warn(`Could not create set from suggested set`)
+    this.log.warn(`Could not create set from suggested set`)
     return this.setResponse(500)
   }
 
@@ -479,7 +529,7 @@ CuratedSetModel.prototype.asCuratedSet = function () {
   }
   delete data.info
 
-  return data
+  return normalizeSetData(data)
 }
 
 /*
@@ -489,14 +539,37 @@ CuratedSetModel.prototype.asCuratedSet = function () {
  */
 CuratedSetModel.prototype.asData = function () {
   const data = {
-    author: 'FreeSewing.org',
+    author: 'FreeSewing.eu',
     type: 'curatedMeasurementsSet',
     about: 'Contains measurements in mm as well as metadata',
     ...this.asCuratedSet(),
   }
-  data.measurements = data.measies
-  delete data.measies
   delete data.info
+
+  return normalizeSetData(data)
+}
+
+/*
+ * A helper function to strip language-specific data as we no longer support it
+ * At the next major release, we will adapt the database schema
+ */
+function normalizeSetData(data) {
+  // Do not leak ID
+  delete data.id
+
+  // Remove internal info
+  delete data.info
+  delete data.published
+
+  // Remove unused tags (unused for now)
+  delete data.tags
+
+  // Remove language prefixes
+  if (!data.name) data.name = data.nameEn
+  if (!data.notes) data.notes = data.notesEn
+  for (const lang of ['En', 'De', 'Es', 'Fr', 'Nl', 'Uk']) {
+    for (const field of ['name', 'notes']) delete data[`${field}${lang}`]
+  }
 
   return data
 }

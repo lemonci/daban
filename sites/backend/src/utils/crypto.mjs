@@ -1,7 +1,6 @@
 import bcrypt from 'bcryptjs' // Required for legacy password hashes
 import jose from 'node-jose'
 import { createHash, createCipheriv, createDecipheriv, scryptSync, randomBytes } from 'crypto'
-import { log } from './log.mjs'
 import { asJson } from './index.mjs'
 
 /*
@@ -46,6 +45,19 @@ export function randomString(bytes = 8) {
   return randomBytes(bytes).toString('hex')
 }
 
+export function randomDigit() {
+  const digits = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+
+  return digits[Math.floor(Math.random() * digits.length)]
+}
+
+export function randomOtp(length = 4) {
+  return Array(length)
+    .fill('')
+    .map((it) => randomDigit())
+    .join('')
+}
+
 /*
  * Returns an object holding encrypt() and decrypt() methods
  *
@@ -79,8 +91,7 @@ export function encryption(stringKey, salt = 'FreeSewing') {
       try {
         data = asJson(data)
       } catch (err) {
-        console.log({ type: 'encrypt', err, data })
-        throw 'Could not parse input to encrypt() call'
+        throw `Could not parse input to encrypt() call: ${err.message}`
       }
 
       /*
@@ -112,8 +123,7 @@ export function encryption(stringKey, salt = 'FreeSewing') {
       try {
         data = JSON.parse(data)
       } catch (err) {
-        console.log({ type: 'decrypt', err, data })
-        throw 'Could not parse encrypted data in decrypt() call'
+        throw `Could not parse encrypted data in decrypt() call: ${err.message}`
       }
       if (!data.iv || typeof data.ct === 'undefined') {
         throw 'Encrypted data passed to decrypt() was malformed'
@@ -165,15 +175,13 @@ export function hashPassword(input, salt = false) {
  *   prepared, by returning the new value for the password field as the
  *   second element in the returned array.
  */
-export function verifyPassword(input, passwordField) {
+export function verifyPassword(input, passwordField, log) {
   let data
   try {
     data = JSON.parse(passwordField)
-  } catch {
-    /*
-     * This should not happen. Let's just log a warning and return false
-     */
-    log.warn(passwordField, 'Unable to parse JSON in password field')
+  } catch (err) {
+    // This should not happen. Let's just log a warning and return false
+    log.warn(passwordField, `Unable to parse JSON in password field: ${err.message}`)
     return [false, false]
   }
   // Is this a legacy password field?

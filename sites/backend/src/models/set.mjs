@@ -1,5 +1,3 @@
-import { log } from '../utils/log.mjs'
-import { replaceImage, storeImage } from '../utils/cloudflare-images.mjs'
 import { decorateModel } from '../utils/model-decorator.mjs'
 
 /*
@@ -45,31 +43,31 @@ SetModel.prototype.guardedCreate = async function ({ body, user }) {
     public: body.public === true ? true : false,
     measies: typeof body.measies === 'object' ? this.sanitizeMeasurements(body.measies) : {},
     imperial: body.imperial === true ? true : false,
-    userId: user.uid,
-    img: this.config.avatars.set,
+    userId: user.apikey ? user.userId : user.id,
   })
 
   /*
-   * If an image was added, now update it since we have the record id now
+   * Re-read the record to pick up the UUID set by the database trigger
    */
-  const img =
-    typeof body.img === 'string'
-      ? await storeImage({
-          id: `set-${this.record.id}`,
-          metadata: {
-            user: user.uid,
-            name: this.clear.name,
-          },
-          b64: body.img,
-          requireSignedURLs: true,
-        })
-      : false
+  try {
+    await this.read({ id: this.record.id })
+  } catch (err) {
+    this.log.warn(`Failed to read set: ${err.message}`)
+    return this.setResponse(500, {})
+  }
 
   /*
-   * Either update the image, or refresh the record
+   * If an image was provided, save it to disk using the UUID
    */
-  if (img) await this.update({ img })
-  else await this.read({ id: this.record.id })
+  if (typeof body.img === 'string') {
+    let imgResult = false
+    try {
+      imgResult = await this.img.save(this.record.uuid, body.img)
+    } catch (err) {
+      this.log.warn(`Failed to save set avatar: ${err.message}`)
+    }
+    if (!imgResult) return this.setResponse(500)
+  }
 
   /*
    * Now return 201 and the data
@@ -90,7 +88,12 @@ SetModel.prototype.guardedRead = async function ({ params, user }) {
    * If the set is public, we do not need to enforce RBAC
    * So let's load it first
    */
-  await this.read({ id: parseInt(params.id) })
+  await this.read({ uuid: params.uuid })
+
+  /*
+   * If it does not exist, send a 404
+   */
+  if (!this.record) return this.setResponse(404)
 
   /*
    * If it's public, return early
@@ -107,16 +110,16 @@ SetModel.prototype.guardedRead = async function ({ params, user }) {
   if (!this.rbac.readSome(user)) return this.setResponse(403, 'insufficientAccessLevel')
 
   /*
-   * If it does not exist, send a 404
+   * You need to have at least the bughunter role to read other user's sets
    */
-  if (!this.record) return this.setResponse(404)
-
-  /*
-   * You need to have at least the bughunter role to read other user's patterns
-   */
-  if (this.record.userId !== user.uid && !this.rbac.bughunter(user)) {
+  if (
+    // For an API key, we need to match record.userId to user.userId
+    ((user.apikey && this.record.userId !== user.userId) ||
+      // For a JWT, we need to match record.userId to user.id
+      (!user.apikey && this.record.userId !== user.id)) &&
+    !this.rbac.bughunter(user)
+  )
     return this.setResponse(403, 'insufficientAccessLevel')
-  }
 
   /*
    * Return 200 and send the pattern data
@@ -138,13 +141,13 @@ SetModel.prototype.publicRead = async function ({ params }) {
   /*
    * Attemp to read the record from the database
    */
-  await this.read({ id: parseInt(params.id) })
+  await this.read({ uuid: params.uuid })
 
   /*
    * If it is not public, return 404 rather than
    * reveal that a non-public set exists
    */
-  if (this.record.public !== true) return this.setResponse(404)
+  if (this.record?.public !== true) return this.setResponse(404)
 
   /*
    * Return 200 and the set data
@@ -169,22 +172,35 @@ SetModel.prototype.guardedClone = async function ({ params, user }) {
   /*
    * Attempt to read the record from the database
    */
-  await this.read({ id: parseInt(params.id) })
+  await this.read({ uuid: params.uuid })
+
+  /*
+   * If it does not exist, send a 404
+   */
+  if (!this.record) return this.setResponse(404)
 
   /*
    * You need at least the support role to clone another user's (non-public) set
    */
-  if (this.record.userId !== user.uid && !this.record.public && !this.rbac.support(user)) {
+  if (
+    !this.record.public &&
+    // For an API key, we need to match record.userId to user.userId
+    ((user.apikey && this.record.userId !== user.userId) ||
+      // For a JWT, we need to match record.userId to user.id
+      (!user.apikey && this.record.userId !== user.id)) &&
+    !this.rbac.support(user)
+  )
     return this.setResponse(403, 'insufficientAccessLevel')
-  }
 
   /*
    * Now clone the set
    */
   const data = this.asSet()
   delete data.id
-  data.name += ` (cloned from #${this.record.id})`
-  data.notes += ` (Note: This measurements set was cloned from set #${this.record.id})`
+  delete data.uuid
+  data.name += ` (cloned from #${this.record.uuid})`
+  data.notes += ` (Note: This measurements set was cloned from set ${this.record.uuid})`
+  data.userId = user.apikey ? user.userId : user.id
   await this.createRecord(data)
 
   /*
@@ -205,14 +221,14 @@ SetModel.prototype.revealSet = function (mset) {
     try {
       clear[field] = this.decrypt(mset[field])
     } catch (err) {
-      //console.log(err)
+      this.log.warn(`Failed to reveal set data: ${err.message}`)
     }
   }
   for (const field of this.jsonFields) {
     try {
       clear[field] = JSON.parse(clear[field])
     } catch (err) {
-      //console.log(err)
+      this.log.warn(`Failed to parse set field ${field} as JSON: ${err.message}`)
     }
   }
 
@@ -236,14 +252,24 @@ SetModel.prototype.guardedUpdate = async function ({ params, body, user }) {
   /*
    * Attempt to read record from database
    */
-  await this.read({ id: parseInt(params.id) })
+  await this.read({ uuid: params.uuid })
+
+  /*
+   * If it does not exist, send a 404
+   */
+  if (!this.record) return this.setResponse(404)
 
   /*
    * Only admins can update other user's sets
    */
-  if (this.record.userId !== user.uid && !this.rbac.admin(user)) {
+  if (
+    // For an API key, we need to match record.userId to user.userId
+    ((user.apikey && this.record.userId !== user.userId) ||
+      // For a JWT, we need to match record.userId to user.id
+      (!user.apikey && this.record.userId !== user.id)) &&
+    !this.rbac.admin(user)
+  )
     return this.setResponse(403, 'insufficientAccessLevel')
-  }
 
   /*
    * Prepare data to update the record
@@ -282,15 +308,15 @@ SetModel.prototype.guardedUpdate = async function ({ params, body, user }) {
   /*
    * Image (img)
    */
-  if (typeof body.img === 'string')
-    data.img = await replaceImage({
-      id: `set-${this.record.id}`,
-      data: body.img,
-      metadata: {
-        user: user.uid,
-        name: this.clear.name,
-      },
-    })
+  if (typeof body.img === 'string') {
+    let imgResult = false
+    try {
+      imgResult = await this.img.save(this.record.uuid, body.img)
+    } catch (err) {
+      this.log.warn(`Failed to save set avatar: ${err.message}`)
+    }
+    if (!imgResult) return this.setResponse(500)
+  }
 
   /*
    * Now update the database record
@@ -319,14 +345,19 @@ SetModel.prototype.guardedDelete = async function ({ params, user }) {
   /*
    * Attempt to read the record from the database
    */
-  await this.read({ id: parseInt(params.id) })
+  await this.read({ uuid: params.uuid })
 
   /*
    * You need to be admin to remove another user's data
    */
-  if (this.record.userId !== user.uid && !this.rbac.admin(user)) {
+  if (
+    // For an API key, we need to match record.userId to user.userId
+    ((user.apikey && this.record.userId !== user.userId) ||
+      // For a JWT, we need to match record.userId to user.id
+      (!user.apikey && this.record.userId !== user.id)) &&
+    !this.rbac.admin(user)
+  )
     return this.setResponse(403, 'insufficientAccessLevel')
-  }
 
   /*
    * Delete the record
@@ -342,28 +373,41 @@ SetModel.prototype.guardedDelete = async function ({ params, user }) {
 /*
  * Returns a list of sets for the user making the API call
  */
-SetModel.prototype.userSets = async function (uid) {
-  if (!uid) return false
+SetModel.prototype.userSets = async function (id) {
+  /*
+   * No id no deal
+   */
+  if (!id) return []
+
   let sets
   try {
-    sets = await this.prisma.set.findMany({ where: { userId: uid } })
+    sets = await this.prisma.set.findMany({ where: { userId: id } })
   } catch (err) {
-    log.warn(`Failed to search sets for user ${uid}: ${err}`)
+    this.log.warn(`Failed to search sets for user ${id}: ${err.message}`)
   }
-  const list = []
-  for (const set of sets) list.push(this.revealSet(set))
 
-  return list
+  return sets.map((set) => {
+    const val = this.revealSet(set)
+    delete val.id
+    delete val.userId
+
+    return val
+  })
 }
 
 /*
  * Returns record data
  */
 SetModel.prototype.asSet = function () {
-  return {
+  const data = {
     ...this.record,
     ...this.clear,
   }
+  delete data.id
+  delete data.userId
+  delete data.img
+
+  return data
 }
 
 /*

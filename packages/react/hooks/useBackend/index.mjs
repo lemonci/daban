@@ -1,10 +1,13 @@
-import { useMemo } from 'react'
+import { useContext, useMemo } from 'react'
+import { BackendContext } from '@freesewing/react/context/Backend'
 import { urls } from '@freesewing/config'
 import { RestClient } from '@freesewing/react/lib/RestClient'
 import { useAccount } from '@freesewing/react/hooks/useAccount'
 
 /*
  * Get backend URL from config
+ * This is the default though.
+ * You can set a custom one via the BackendContext
  */
 const { backend } = urls
 
@@ -15,6 +18,10 @@ const { backend } = urls
  */
 export function useBackend() {
   /*
+   * Grab the URL from the context
+   */
+  const { url } = useContext(BackendContext)
+  /*
    * Load the token via the useAccount hook
    */
   const { token } = useAccount()
@@ -22,7 +29,7 @@ export function useBackend() {
   /*
    * Memoize this call for efficiency
    */
-  const backend = useMemo(() => new Backend(token), [token])
+  const backend = useMemo(() => new Backend(token, url), [token])
 
   return backend
 }
@@ -42,15 +49,16 @@ function authenticationHeaders(token) {
  *
  * @param {string} token - The JWT token to use for authentication to the backend
  */
-function Backend(token) {
+function Backend(token, url = false) {
   this.token = token
   this.headers = authenticationHeaders(token)
-  this.restClient = new RestClient(backend, this.headers)
+  this.restClient = new RestClient(url || backend, this.headers)
   this.delete = this.restClient.delete
   this.get = this.restClient.get
   this.patch = this.restClient.patch
   this.put = this.restClient.put
   this.post = this.restClient.post
+  this.url = url
 }
 
 /**
@@ -134,8 +142,8 @@ Backend.prototype.confirmMfa = async function (data) {
  * @param {string} data.consent - The consent data
  * @return {array} result - The REST response, a [status, data] array
  */
-Backend.prototype.confirmSignup = async function ({ id, consent }) {
-  return await this.post(`/confirm/signup/${id}`, { consent })
+Backend.prototype.confirmSignup = async function ({ id, consent, check }) {
+  return await this.post(`/confirm/signup/${id}`, { consent, check })
 }
 
 /**
@@ -398,11 +406,11 @@ Backend.prototype.getUserCount = async function () {
 /**
  * Get user data
  *
- * @param {number} uid - The user ID
+ * @param {number} uuid - The user UUID
  * @return {array} result - The REST response, a [status, data] array
  */
-Backend.prototype.getUserData = async function (uid) {
-  return await this.get(`/users/${uid}/jwt`)
+Backend.prototype.getUserData = async function (uuid) {
+  return await this.get(`/users/${uuid}/jwt`)
 }
 
 /**
@@ -601,7 +609,7 @@ Backend.prototype.removeSuggestedSet = async function (id) {
  * @return {array} result - The REST response, a [status, data] array
  */
 Backend.prototype.restrictAccount = async function () {
-  return await this.get(`/account/restrict/jwt`)
+  return await this.post(`/account/restrict/jwt`)
 }
 
 /**
@@ -628,7 +636,7 @@ Backend.prototype.signIn = async function ({ username, password = false, token =
  * @return {array} result - The REST response, a [status, data] array
  */
 Backend.prototype.signInFromLink = async function ({ id, check, token }) {
-  return await this.post(`/signinlink/${id}/${check}`, { token })
+  return await this.post(`/signinlink/${id}`, { token, check })
 }
 
 /**

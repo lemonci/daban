@@ -1,4 +1,5 @@
 // Dependencies
+import { domains } from '@freesewing/config'
 import { validateEmail, validateTld, getSearchParam } from '@freesewing/utils'
 
 // Hooks
@@ -13,11 +14,12 @@ import { ModalContext } from '@freesewing/react/context/Modal'
 import { Link } from '@freesewing/react/components/Link'
 import { LeftIcon, HelpIcon, KeyIcon, EmailIcon } from '@freesewing/react/components/Icon'
 import { ModalWrapper } from '@freesewing/react/components/Modal'
-import { EmailInput } from '@freesewing/react/components/Input'
+import { EmailInput, OtpInput } from '@freesewing/react/components/Input'
 import { IconButton } from '@freesewing/react/components/Button'
 import { Spinner } from '@freesewing/react/components/Spinner'
 import { Consent } from '@freesewing/react/components/Account'
 import { Popout } from '@freesewing/react/components/Popout'
+import { EmailHelp } from '@freesewing/react/components/Help'
 
 /**
  * The SignUp component holds the entire sign-up form
@@ -54,7 +56,33 @@ export const SignUp = ({ embed = false }) => {
     }
     const [status, body] = await backend.signUp({ email })
     if (status === 201 && body.result === 'created') setResult('success')
-    else {
+    else if (status === 429) {
+      setModal(
+        <ModalWrapper bg="tw:base-100 tw:lg:bg-base-300">
+          <div className="tw:bg-base-100 tw:rounded-lg tw:p-4 tw:lg:px-8 tw:max-w-xl">
+            <h3>Your sign up request was rate limited</h3>
+            <p className="tw:text-lg">
+              The backend returned status code 429 <b>Too Many Requests</b>
+            </p>
+            <p className="tw:text-lg">
+              This indicates that your request was <em>rate limited</em>. In other words, you have
+              sent too many sign up requests in a short period of time.
+            </p>
+            <p>
+              Your rate limits will be reset after a cooldown period, then you can try again. Note
+              that this is not an error, but a deliberate throttling of sign up requests to fight
+              bots and abuse.
+            </p>
+            <div className="tw:flex tw:flex-row tw:gap-4 tw:items-center tw:justify-center tw:p-8 tw:flex-wrap">
+              <IconButton onClick={() => setResult(false)}>
+                <LeftIcon />
+                Back
+              </IconButton>
+            </div>
+          </div>
+        </ModalWrapper>
+      )
+    } else {
       setModal(
         <ModalWrapper bg="tw:base-100 tw:lg:bg-base-300">
           <div className="tw:bg-base-100 tw:rounded-lg tw:p-4 tw:lg:px-8 tw:max-w-xl tw:lg:shadow-lg">
@@ -87,7 +115,7 @@ export const SignUp = ({ embed = false }) => {
     : ({ children }) => <h1 className="tw:text-inherit">{children}</h1>
 
   return (
-    <div className="tw:w-full">
+    <div className="tw:w-full tw:my-16">
       <Heading className="tw:text-inherit">
         {result ? (
           result === 'success' ? (
@@ -96,20 +124,15 @@ export const SignUp = ({ embed = false }) => {
             <span>An error occured while trying to process your request</span>
           )
         ) : (
-          <span>Create a FreeSewing account</span>
+          <span>Join FreeSewing</span>
         )}
       </Heading>
 
       {result ? (
         result === 'success' ? (
           <>
-            <p className="tw:text-inherit tw:text-lg">
-              Go check your inbox for an email from <b>FreeSewing.org</b>
-            </p>
-            <p className="tw:text-inherit tw:text-lg">
-              Click your personal signup link in that email to create your FreeSewing account.
-            </p>
-            <div className="tw:grid tw:grid-cols-1 tw:md:grid-cols-2 tw:gap-2">
+            <EmailHelp type="signup" />
+            <div className="tw:grid tw:grid-cols-1 tw:md:grid-cols-2 tw:gap-2 tw:mt-8">
               <IconButton onClick={() => setResult(false)}>
                 <LeftIcon />
                 Back
@@ -122,7 +145,6 @@ export const SignUp = ({ embed = false }) => {
           </>
         ) : (
           <>
-            robot here
             <p className="tw:text-inherit tw:text-lg">
               Unfortunately, we cannot recover from this error, we need a human being to look into
               this.
@@ -143,15 +165,15 @@ export const SignUp = ({ embed = false }) => {
       ) : (
         <>
           <fieldset className="tw:daisy-fieldset tw:border-base-300 tw:border tw:rounded-box tw:p-4 tw:mb-4">
-            <legend className="tw:daisy-fieldset-legend">Sign up for FreeSewing</legend>
+            <legend className="tw:daisy-fieldset-legend">Join FreeSewing</legend>
             <form onSubmit={signupHandler}>
               <EmailInput
                 id="signup-email"
-                label="Email address"
+                label="Your Email Address"
                 current={email}
                 original={''}
                 valid={() => emailValid}
-                placeholder="Email address"
+                placeholder="scritchies@cat.co"
                 update={updateEmail}
               />
               <IconButton
@@ -160,7 +182,7 @@ export const SignUp = ({ embed = false }) => {
                 className="tw:lg:w-full tw:grow tw:mt-2"
               >
                 <EmailIcon />
-                Email me a sign-up link
+                Send me an invite
               </IconButton>
             </form>
           </fieldset>
@@ -188,15 +210,22 @@ export const SignUpConfirmation = () => {
   const [id, setId] = useState()
   const [error, setError] = useState(false)
   const [check, setCheck] = useState()
+  const [checkConfirmed, setCheckConfirmed] = useState()
+
+  // Hooks
+  const backend = useBackend()
 
   // Effects
   useEffect(() => {
     const newId = getSearchParam('id')
     if (!newId) setError('noId')
-    const newCheck = getSearchParam('check')
     if (newId !== id) setId(newId)
-    if (newCheck !== check) setCheck(newCheck)
-  }, [id, check])
+  }, [id])
+
+  const checkOtp = (val) => {
+    setCheck(val)
+    confirmCheck(backend, id, val, setCheckConfirmed)
+  }
 
   // Short-circuit errors
   if (error === 'noId')
@@ -205,19 +234,46 @@ export const SignUpConfirmation = () => {
         You seem to have arrived on this page in a way that is not supported
       </Popout>
     )
-  // If we do not (yet) have the data, show a loader
-  if (!id || !check)
+
+  // Prompt for the check
+  if (!check || !checkConfirmed)
     return (
       <>
-        <h1>One moment please</h1>
-        <Spinner className="tw:w-8 tw:h-8 tw:m-auto tw:animate-spin" />
+        <h1 className="tw:mt-24">Enter your confirmation code</h1>
+        <OtpInput onComplete={checkOtp} valid={checkConfirmed} />
+        {check && check.length === 4 ? null : (
+          <p>Enter the 4-digit confirmation code that was included in your FreeSewing invite.</p>
+        )}
       </>
     )
 
+  // Show consent content
+  if (check && checkConfirmed)
+    return (
+      <>
+        <h1>One more thing</h1>
+        <Consent signUp={id} check={check} />
+      </>
+    )
+
+  // Show loader
   return (
     <>
-      <h1>One more thing</h1>
-      <Consent signUp={id} />
+      <h1>One moment please</h1>
+      <Spinner className="tw:w-8 tw:h-8 tw:m-auto tw:animate-spin" />
     </>
   )
+}
+
+export async function confirmCheck(backend, id, check, setResult) {
+  let result
+  try {
+    result = await backend.getConfirmation({ id, check })
+  } catch (err) {
+    console.log(err)
+    return false
+  }
+
+  if (result[0] === 200 && result[1]?.result === 'success') return setResult(true)
+  setResult(false)
 }

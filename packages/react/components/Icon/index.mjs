@@ -794,7 +794,7 @@ export const GaugeIcon = (props) => (
 )
 
 /**
- * An SVG icon that looks like the octocat
+ * An SVG icon that looks like the codeberg logo
  *
  * @component
  * @param {object} props - All component props
@@ -806,9 +806,13 @@ export const GaugeIcon = (props) => (
  * @param {string} [props.dashArray = null] - An optional stroke dashArray to apply to the stroke
  * @returns {JSX.Element}
  */
-export const GitHubIcon = (props) => (
+export const CodebergIcon = (props) => (
   <IconWrapper {...props} stroke={0} fill>
-    <path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12" />
+    <path d="M 12,0 C 5.372351,0 0,5.372491 0,11.999785 c 0,2.25434 0.634673,4.46316 1.832228,6.373327 L 11.83717,5.438765 c 0.07179,-0.09343 0.252828,-0.09343 0.32462,0 L 22.167252,18.373632 C 23.364807,16.463361 24,14.254333 24,11.999785 24,5.372491 18.62765,0 12,0 Z" />
+    <path
+      d="m 12.062994,5.384903 a 0.10644089,0.07944712 0 0 0 -0.103242,0.09427 l 4.698476,17.610828 a 12.196278,12.196128 0 0 0 5.509161,-4.723259 L 12.155883,5.423974 a 0.10644089,0.07944712 0 0 0 -0.09289,-0.03907 z"
+      fillOpacity="0.2"
+    />
   </IconWrapper>
 )
 
@@ -905,25 +909,6 @@ export const IncludeIcon = (props) => (
   <IconWrapper {...props}>
     <path d="M10.5 6a7.5 7.5 0 107.5 7.5h-7.5V6z" />
     <path d="M13.5 10.5H21A7.5 7.5 0 0013.5 3v7.5z" />
-  </IconWrapper>
-)
-
-/**
- * An SVG icon that looks like the Instagram logo
- *
- * @component
- * @param {object} props - All component props
- * @param {boolean} [props.className = 'tw:m-6 tw:h-6'] - The CSS classes to apply to the SVG element
- * @param {number} [props.stroke = 2] - The stroke width
- * @param {JSX.Element} props.children - The component childer, the inner content of the SVG tag
- * @param {boolean} [props.fill = false] - Whether or not to fill the icon
- * @param {number} [props.fillOpacity = 1] - The fillOpacity to apply
- * @param {string} [props.dashArray = null] - An optional stroke dashArray to apply to the stroke
- * @returns {JSX.Element}
- */
-export const InstagramIcon = (props) => (
-  <IconWrapper {...props} stroke={0} fill>
-    <path d="M12 0C8.74 0 8.333.015 7.053.072 5.775.132 4.905.333 4.14.63c-.789.306-1.459.717-2.126 1.384S.935 3.35.63 4.14C.333 4.905.131 5.775.072 7.053.012 8.333 0 8.74 0 12s.015 3.667.072 4.947c.06 1.277.261 2.148.558 2.913.306.788.717 1.459 1.384 2.126.667.666 1.336 1.079 2.126 1.384.766.296 1.636.499 2.913.558C8.333 23.988 8.74 24 12 24s3.667-.015 4.947-.072c1.277-.06 2.148-.262 2.913-.558.788-.306 1.459-.718 2.126-1.384.666-.667 1.079-1.335 1.384-2.126.296-.765.499-1.636.558-2.913.06-1.28.072-1.687.072-4.947s-.015-3.667-.072-4.947c-.06-1.277-.262-2.149-.558-2.913-.306-.789-.718-1.459-1.384-2.126C21.319 1.347 20.651.935 19.86.63c-.765-.297-1.636-.499-2.913-.558C15.667.012 15.26 0 12 0zm0 2.16c3.203 0 3.585.016 4.85.071 1.17.055 1.805.249 2.227.415.562.217.96.477 1.382.896.419.42.679.819.896 1.381.164.422.36 1.057.413 2.227.057 1.266.07 1.646.07 4.85s-.015 3.585-.074 4.85c-.061 1.17-.256 1.805-.421 2.227-.224.562-.479.96-.899 1.382-.419.419-.824.679-1.38.896-.42.164-1.065.36-2.235.413-1.274.057-1.649.07-4.859.07-3.211 0-3.586-.015-4.859-.074-1.171-.061-1.816-.256-2.236-.421-.569-.224-.96-.479-1.379-.899-.421-.419-.69-.824-.9-1.38-.165-.42-.359-1.065-.42-2.235-.045-1.26-.061-1.649-.061-4.844 0-3.196.016-3.586.061-4.861.061-1.17.255-1.814.42-2.234.21-.57.479-.96.9-1.381.419-.419.81-.689 1.379-.898.42-.166 1.051-.361 2.221-.421 1.275-.045 1.65-.06 4.859-.06l.045.03zm0 3.678c-3.405 0-6.162 2.76-6.162 6.162 0 3.405 2.76 6.162 6.162 6.162 3.405 0 6.162-2.76 6.162-6.162 0-3.405-2.76-6.162-6.162-6.162zM12 16c-2.21 0-4-1.79-4-4s1.79-4 4-4 4 1.79 4 4-1.79 4-4 4zm7.846-10.405c0 .795-.646 1.44-1.44 1.44-.795 0-1.44-.646-1.44-1.44 0-.794.646-1.439 1.44-1.439.793-.001 1.44.645 1.44 1.439z" />
   </IconWrapper>
 )
 
@@ -1416,25 +1401,6 @@ export const PrivacyIcon = (props) => (
 )
 
 /**
- * An SVG icon that looks like the Reddit alian
- *
- * @component
- * @param {object} props - All component props
- * @param {boolean} [props.className = 'tw:m-6 tw:h-6'] - The CSS classes to apply to the SVG element
- * @param {number} [props.stroke = 2] - The stroke width
- * @param {JSX.Element} props.children - The component childer, the inner content of the SVG tag
- * @param {boolean} [props.fill = false] - Whether or not to fill the icon
- * @param {number} [props.fillOpacity = 1] - The fillOpacity to apply
- * @param {string} [props.dashArray = null] - An optional stroke dashArray to apply to the stroke
- * @returns {JSX.Element}
- */
-export const RedditIcon = (props) => (
-  <IconWrapper {...props} stroke={0} fill>
-    <path d="M 11.710829,0.00384705 C 5.0683862,0.16990815 -0.16221405,5.6505729 0.00384705,12.293016 0.16990814,18.686369 5.3178021,23.833614 11.628124,24.082706 18.270567,24.248767 23.833939,19.018167 24,12.375723 V 11.710829 C 23.833939,5.0683862 18.353273,-0.16221404 11.710829,0.00384705 Z m 5.187788,5.10021625 c 0.15698,0.00649 0.313636,0.048326 0.458939,0.1313569 0.581214,0.3321223 0.912687,1.0793971 0.580565,1.660611 C 17.605998,7.4772452 16.858724,7.808718 16.27751,7.4765965 15.862357,7.3105352 15.614238,6.8947339 15.614238,6.3965506 L 13.038995,5.8159854 12.208689,9.55236 c 1.826672,0.08303 3.48858,0.664893 4.651007,1.495199 0.664245,-0.664245 1.826673,-0.664245 2.490917,0 0.332122,0.332121 0.49786,0.747274 0.49786,1.245457 0.249091,0.747275 -0.249092,1.327193 -0.830306,1.576284 v 0.49948 c 0,2.740009 -3.155161,4.897506 -7.057597,4.897506 -3.9024357,0 -7.0575963,-2.157497 -7.0575963,-4.897506 V 13.8693 C 3.9896377,13.454147 3.6578398,12.458754 3.989962,11.545418 c 0.2490916,-0.664245 0.9120387,-1.08037 1.5762832,-0.99734 0.4981831,0 0.9133359,0.167358 1.2454581,0.499481 C 8.2232228,10.134222 9.8848065,9.55236 11.545418,9.55236 l 0.913011,-4.1515273 c 0,-0.083031 0.08271,-0.1654124 0.08271,-0.1654125 0.08303,-0.08303 0.166711,-0.084328 0.249741,-0.084328 l 2.906069,0.664893 C 15.946037,5.3800751 16.427678,5.084603 16.898617,5.1040633 Z M 9.3026198,12.293016 c -0.6642443,0 -1.2454583,0.581214 -1.2454583,1.245458 0,0.664245 0.498183,1.245459 1.2454583,1.245459 0.6642442,0 1.2454582,-0.581214 1.2454582,-1.245459 0,-0.664244 -0.581214,-1.245458 -1.2454582,-1.245458 z m 5.4813132,0 c -0.664245,0 -1.245459,0.581214 -1.245459,1.245458 0,0.664245 0.581214,1.245459 1.245459,1.245459 0.664245,0 1.245458,-0.581214 1.245458,-1.245459 0,-0.664244 -0.581213,-1.245458 -1.245458,-1.245458 z m -5.3872557,3.943952 c -0.072653,0 -0.135249,0.04021 -0.1767645,0.123249 -0.1660605,0.16606 -0.1660605,0.332121 0,0.415152 0.8303052,0.830306 2.4905922,0.914633 2.9887762,0.914633 0.498183,0 2.077061,-0.08433 2.990396,-0.914633 -0.08303,-0.08303 -0.084,-0.249092 -0.167034,-0.415152 -0.166061,-0.166062 -0.332121,-0.166062 -0.415152,0 -0.498183,0.581213 -1.660611,0.747598 -2.490917,0.747598 -0.830305,0 -1.992733,-0.166385 -2.4909165,-0.747598 -0.08303,-0.08303 -0.1657365,-0.123249 -0.2383882,-0.123249 z" />
-  </IconWrapper>
-)
-
-/**
  * An SVG icon that looks like FIXME
  *
  * @component
@@ -1798,25 +1764,6 @@ export const SuccessIcon = ({ size = 6 }) => (
 )
 
 /**
- * An SVG icon that looks like the TikTok t
- *
- * @component
- * @param {object} props - All component props
- * @param {boolean} [props.className = 'tw:m-6 tw:h-6'] - The CSS classes to apply to the SVG element
- * @param {number} [props.stroke = 2] - The stroke width
- * @param {JSX.Element} props.children - The component childer, the inner content of the SVG tag
- * @param {boolean} [props.fill = false] - Whether or not to fill the icon
- * @param {number} [props.fillOpacity = 1] - The fillOpacity to apply
- * @param {string} [props.dashArray = null] - An optional stroke dashArray to apply to the stroke
- * @returns {JSX.Element}
- */
-export const TikTokIcon = (props) => (
-  <IconWrapper {...props}>
-    <path d="M 21.070629,5.6224629 A 5.7508474,5.7508474 0 0 1 16.547219,0.52913011 V 0 H 12.41376 v 16.404252 a 3.474745,3.474745 0 0 1 -6.2403831,2.091334 l -0.0024,-0.0012 0.0024,0.0012 A 3.4735455,3.4735455 0 0 1 9.9924767,13.084289 V 8.8848362 A 7.5938063,7.5938063 0 0 0 3.5205237,21.713559 7.5950059,7.5950059 0 0 0 16.547219,16.405452 V 8.0233494 a 9.8171151,9.8171151 0 0 0 5.72685,1.8309665 V 5.7472464 A 5.7964413,5.7964413 0 0 1 21.070637,5.6225887 Z" />
-  </IconWrapper>
-)
-
-/**
  * An SVG icon that looks like a light bulb
  *
  * @component
@@ -1851,25 +1798,6 @@ export const TipIcon = (props) => (
 export const TrashIcon = (props) => (
   <IconWrapper {...props} stroke={props.stroke || 2}>
     <path d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0" />
-  </IconWrapper>
-)
-
-/**
- * An SVG icon that looks like the twitch logo
- *
- * @component
- * @param {object} props - All component props
- * @param {boolean} [props.className = 'tw:m-6 tw:h-6'] - The CSS classes to apply to the SVG element
- * @param {number} [props.stroke = 2] - The stroke width
- * @param {JSX.Element} props.children - The component childer, the inner content of the SVG tag
- * @param {boolean} [props.fill = false] - Whether or not to fill the icon
- * @param {number} [props.fillOpacity = 1] - The fillOpacity to apply
- * @param {string} [props.dashArray = null] - An optional stroke dashArray to apply to the stroke
- * @returns {JSX.Element}
- */
-export const TwitchIcon = (props) => (
-  <IconWrapper {...props} stroke={0} fill>
-    <path d="M2.149 0l-1.612 4.119v16.836h5.731v3.045h3.224l3.045-3.045h4.657l6.269-6.269v-14.686h-21.314zm19.164 13.612l-3.582 3.582h-5.731l-3.045 3.045v-3.045h-4.836v-15.045h17.194v11.463zm-3.582-7.343v6.262h-2.149v-6.262h2.149zm-5.731 0v6.262h-2.149v-6.262h2.149z" />
   </IconWrapper>
 )
 

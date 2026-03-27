@@ -46,12 +46,8 @@ const account = {
       password: 2,
     },
     identities: {
-      github: 3,
-      instagram: 3,
+      codeberg: 3,
       mastodon: 3,
-      reddit: 3,
-      twitch: 3,
-      tiktok: 3,
       website: 3,
     },
   },
@@ -63,7 +59,7 @@ const account = {
     notes: 2,
     createdAt: 2,
     updatedAt: 2,
-    id: 4,
+    uuid: 4,
   },
   patterns: {
     name: 1,
@@ -72,7 +68,7 @@ const account = {
     notes: 2,
     createdAt: 2,
     updatedAt: 2,
-    id: 4,
+    uuid: 4,
   },
   statuses: {
     0: {

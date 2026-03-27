@@ -1,11 +1,5 @@
 import { i18nUrl } from '../utils/index.mjs'
 import { decorateModel } from '../utils/model-decorator.mjs'
-import {
-  ensureImage,
-  replaceImage,
-  removeImage,
-  cloudflareImageUrl,
-} from '../utils/cloudflare-images.mjs'
 import { codeberg } from '../config.mjs'
 import { createFile, createBranch, createPullRequest } from '../utils/codeberg.mjs'
 import { sluglist } from '../../sluglist.mjs'
@@ -21,18 +15,19 @@ export function FlowModel(tools) {
 }
 
 /*
- * Upload an image to cloudflare
+ * Upload an image
  *
  * @param {body} object - The request body
  * @param {user} object - The user as loaded by auth middleware
- * @param {anon} boolean - True if it is an anonymous upload (no auth)
  * @returns {FlowModel} object - The FlowModel
  */
-FlowModel.prototype.uploadImage = async function ({ body, user }, anon = false) {
+FlowModel.prototype.uploadImage = async function ({ body, user }) {
+  // TODO: Migrate to the new image hosting
+  // TODO: Sanitize input
   /*
    * Enforce RBAC
    */
-  if (!anon && !this.rbac.readSome(user)) return this.setResponse(403, 'insufficientAccessLevel')
+  if (!this.rbac.readSome(user)) return this.setResponse(403, 'insufficientAccessLevel')
 
   /*
    * Do we have a POST body?
@@ -67,7 +62,7 @@ FlowModel.prototype.uploadImage = async function ({ body, user }, anon = false) 
    */
   const data = {
     id: `${body.type}-${body.slug}${body.subId !== 'main' ? '-' + body.subId : ''}`,
-    metadata: { uploadedBy: anon ? 'anonymous' : user.uid },
+    metadata: { uploadedBy: user.uuid },
   }
   if (body.img) data.b64 = body.img
   else if (body.url) data.url = body.url
@@ -76,43 +71,15 @@ FlowModel.prototype.uploadImage = async function ({ body, user }, anon = false) 
    * You need to be a curator to overwrite (replace) an image.
    * Regular users can only update new images, not overwrite images.
    * If not, any user could overwrite any showcase image.
+   * FIXME: To be migrated
    */
-  if (!anon && this.rbac.curator(user)) await replaceImage(data)
-  else await ensureImage(data)
+  //if (this.rbac.curator(user)) await replaceImage(data)
+  //else await ensureImage(data)
 
   /*
    * Return 200 and the image ID
    */
   return this.setResponse200({ imgId: data.id })
-}
-
-/*
- * Remove an image from cloudflare
- *
- * @param {params} object - The request (URL) params
- * @param {user} object - The user as loaded by auth middleware
- * @returns {FlowModel} object - The FlowModel
- */
-FlowModel.prototype.removeImage = async function ({ params, user }) {
-  /*
-   * Enforce RBAC
-   */
-  if (!this.rbac.curator(user)) return this.setResponse(403, 'insufficientAccessLevel')
-
-  /*
-   * Is id set?
-   */
-  if (!params.id) return this.setResponse(400, 'idMissing')
-
-  /*
-   * Remove the image
-   */
-  const gone = await removeImage(params.id)
-
-  /*
-   * Return 204
-   */
-  return gone ? this.setResponse(204) : this.setResponse(500, 'unableToRemoveImage')
 }
 
 const nonEnWarning = `
@@ -142,7 +109,7 @@ FlowModel.prototype.createPostPr = async function ({ body, user }, type) {
   /*
    * Load user from the database
    */
-  await this.User.read({ id: user.uid })
+  await this.User.read({ id: user.id })
 
   /*
    * First upload the main image
@@ -150,7 +117,7 @@ FlowModel.prototype.createPostPr = async function ({ body, user }, type) {
   const imgs = {
     main: {
       id: `${type}-${body.slug}`,
-      metadata: { uploadedBy: user.uid },
+      metadata: { uploadedBy: user.uuid },
       data: body.img,
     },
     extra: {},
@@ -163,7 +130,7 @@ FlowModel.prototype.createPostPr = async function ({ body, user }, type) {
   for (const [key, data] of Object.entries(body.extraImages || {})) {
     imgs.extra[key] = {
       id: `${type}-${body.slug}-${key}`,
-      metadata: { uploadedBy: user.uid },
+      metadata: { uploadedBy: user.uuid },
       data,
     }
     await ensureImage(imgs.extra[key])

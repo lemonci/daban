@@ -1,4 +1,5 @@
 import { UserModel } from '../models/user.mjs'
+import { whereFromUser } from '../utils/index.mjs'
 
 export function UsersController() {}
 
@@ -74,7 +75,7 @@ UsersController.prototype.signinvialink = async function (req, res, tools) {
  */
 UsersController.prototype.whoami = async (req, res, tools) => {
   const User = new UserModel(tools)
-  await User.whoami({ id: req.user.uid }, req)
+  await User.whoami({ uuid: req.user._id }, req)
 
   return User.sendResponse(res)
 }
@@ -86,7 +87,7 @@ UsersController.prototype.whoami = async (req, res, tools) => {
  */
 UsersController.prototype.update = async (req, res, tools) => {
   const User = new UserModel(tools)
-  await User.guardedRead({ id: req.user.uid }, req)
+  await User.guardedRead(whereFromUser(req.user), req)
   await User.guardedUpdate(req)
 
   return User.sendResponse(res)
@@ -99,7 +100,7 @@ UsersController.prototype.update = async (req, res, tools) => {
  */
 UsersController.prototype.updateConsent = async (req, res, tools) => {
   const User = new UserModel(tools)
-  await User.guardedRead({ id: req.user.uid }, req)
+  await User.guardedRead(whereFromUser(req.user), req)
   await User.updateConsent(req)
 
   return User.sendResponse(res)
@@ -112,7 +113,7 @@ UsersController.prototype.updateConsent = async (req, res, tools) => {
  */
 UsersController.prototype.updateMfa = async (req, res, tools) => {
   const User = new UserModel(tools)
-  await User.guardedRead({ id: req.user.uid }, req)
+  await User.guardedRead(whereFromUser(req.user), req)
   await User.guardedMfaUpdate(req)
 
   return User.sendResponse(res)

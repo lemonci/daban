@@ -1,6 +1,4 @@
-import DocusaurusLayout from '@theme/Layout'
-import { DocusaurusPage } from '@freesewing/react/components/Docusaurus'
-import { NoTitleLayout } from '@freesewing/react/components/Layout'
+import DocusaurusPageWrapper from '@site/src/components/page.mjs'
 import { EmailChangeConfirmation } from '@freesewing/react/components/Account'
 
 /*
@@ -10,9 +8,7 @@ import { EmailChangeConfirmation } from '@freesewing/react/components/Account'
  */
 export default function EmailChangeConfirmationPage() {
   return (
-    <DocusaurusPage
-      DocusaurusLayout={DocusaurusLayout}
-      Layout={NoTitleLayout}
+    <DocusaurusPageWrapper
       title="Confirm your new E-mail address"
       description="This should only take a second"
     >
@@ -21,6 +17,6 @@ export default function EmailChangeConfirmationPage() {
           <EmailChangeConfirmation onSuccess={() => (window.location.href = '/account')} silent />
         </div>
       </div>
-    </DocusaurusPage>
+    </DocusaurusPageWrapper>
   )
 }

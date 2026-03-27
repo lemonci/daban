@@ -8,7 +8,7 @@ export function PatternsController() {}
  */
 PatternsController.prototype.list = async (req, res, tools) => {
   const Pattern = new PatternModel(tools)
-  const patterns = await Pattern.userPatterns(req.user.uid)
+  const patterns = await Pattern.userPatterns(req.user.id)
 
   if (patterns) Pattern.setResponse(200, 'success', { patterns })
   else Pattern.setResponse(404)

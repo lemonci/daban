@@ -1,11 +1,10 @@
+import fs from 'node:fs'
+import path from 'node:path'
+import HTTP from 'node:http'
 import axios from 'axios'
 import { randomBytes } from 'crypto'
-import {
-  cisFemaleAdult34 as her,
-  cisMaleAdult42 as him,
-} from '../../../packages/models/src/index.mjs'
+import { DatabaseSync } from 'node:sqlite'
 
-const sets = { her, him }
 export const api = new restClient(`http://localhost:3001`)
 
 // Store holds test accounts
@@ -13,16 +12,17 @@ export const store = await setup()
 
 // Authentication data
 export const auth = {
-  jwt: { headers: { Authorization: `Bearer ${store.account.token}` } },
-  altjwt: { headers: { Authorization: `Bearer ${store.altaccount.token}` } },
-  key: {
-    headers: { Authorization: basicAuth(store.account.apikey.key, store.account.apikey.secret) },
-  },
-  altkey: {
+  jwt: (prefix = '') => ({
+    headers: { Authorization: `Bearer ${store[prefix + 'account'].token}` },
+  }),
+  key: (prefix = '') => ({
     headers: {
-      Authorization: basicAuth(store.altaccount.apikey.key, store.altaccount.apikey.secret),
+      Authorization: basicAuth(
+        store[prefix + 'account'].apikey?.key,
+        store[prefix + 'account'].apikey?.secret
+      ),
     },
-  },
+  }),
   basic: ({ key, secret }) => ({ headers: { Authorization: basicAuth(key, secret) } }),
 }
 
@@ -120,82 +120,48 @@ async function setup() {
       password: randomString(),
       sets: {},
     },
-  }
-
-  for (const acc of ['account', 'altaccount']) {
-    // Get confirmation ID
-    let status, data
-    try {
-      ;[status, data] = await api.post(`/signup`, {
-        email: store[acc].email,
-        test: true,
-        role: 'curator',
-      })
-    } catch (err) {
-      console.log('Failed at first setup request', err)
-      process.exit()
-    }
-    store[acc].confirmation = data.confirmation
-
-    // Confirm account
-    try {
-      ;[status, data] = await api.post(`/confirm/signup/${store[acc].confirmation}`, {
-        consent: 1,
-      })
-    } catch (err) {
-      console.log('Failed at account confirmation request', err)
-      process.exit()
-    }
-    store[acc].token = data.token
-    store[acc].username = data.account.username
-    store[acc].id = data.account.id
-
-    // Create API key
-    try {
-      ;[status, data] = await api.post(
-        `/apikeys/jwt`,
-        {
-          name: 'Test API key',
-          level: 5,
-          expiresIn: 60,
-        },
-        {
-          headers: {
-            authorization: `Bearer ${store[acc].token}`,
-          },
-        }
-      )
-    } catch (err) {
-      console.log('Failed at API key creation request', err)
-      process.exit()
-    }
-    store[acc].apikey = data.apikey
-
-    // Create sets key
-    for (const name in sets) {
-      try {
-        ;[status, data] = await api.post(
-          `/sets/jwt`,
-          {
-            name: `This is ${name} name`,
-            notes: `These are ${name} notes`,
-            measies: sets[name],
-          },
-          {
-            headers: {
-              authorization: `Bearer ${store[acc].token}`,
-            },
-          }
-        )
-      } catch (err) {
-        console.log('Failed at API key creation request', err)
-        process.exit()
-      }
-      store[acc].sets[name] = data.set
-    }
+    emails: new Set(),
   }
 
   return store
+}
+
+// This will hold our emails
+const emails = new Set()
+
+// Our HTTP server that will get the emails
+const server = HTTP.createServer((req, res) => {
+  let body = ''
+  req.on('data', (chunk) => (body += chunk))
+  req.on('end', () => {
+    emails.add(JSON.parse(body))
+    res.writeHead(200).end()
+  })
+})
+
+// A poor man's mailtrap
+export const startEmailTrap = async () => await server.listen(3002)
+// A poor man's way to run 1 set of tests without the other
+const jsonStore = './tests/unit-test-store.json'
+export const saveStore = (data) => fs.writeFileSync(jsonStore, JSON.stringify(data))
+export const loadStore = (store) => {
+  const data = JSON.parse(fs.readFileSync(jsonStore))
+  for (const [key, val] of Object.entries(data)) store[key] = val
+
+  // We are mutating the passed-in object here, but let's return it anyway
+  return store
+}
+
+export const stopEmailTrap = async () => await server.close()
+export const readEmail = () => [...emails].pop()
+export const readEmails = () => [...emails]
+
+// Cannot change a user role via the API,
+// but you can with write access to the database
+export function changeRole(uuid, role) {
+  const db = new DatabaseSync(path.resolve('./tests/database.sqlite'))
+  const update = db.prepare(`UPDATE User SET role = :role WHERE uuid = :uuid`).run({ uuid, role })
+  return db.prepare(`SELECT * FROM User WHERE uuid = :uuid`).get({ uuid })
 }
 
 export const cat =

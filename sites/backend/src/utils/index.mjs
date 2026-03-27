@@ -1,4 +1,3 @@
-import { log } from './log.mjs'
 import { website, exports } from '../config.mjs'
 import { randomString } from './crypto.mjs'
 import fs from 'fs'
@@ -41,6 +40,20 @@ export const i18nUrl = (lang = 'en', path) => {
 export const websiteUrl = (path) => `${website.scheme}://${website.domain}${path}`
 
 /*
+ * Returns a where clause to find the authenticated user, regardless
+ * of whether an API key or JWT was used to authenticate
+ *
+ * @param {object} user - The user object as received from middleware
+ * @param {object} where - The where clause as an object
+ */
+export const whereFromUser = (user) => {
+  if (user.apikey === true && user.userId) return { id: user.userId }
+  if (user.uuid) return { uuid: user.uuid }
+
+  return false
+}
+
+/*
  * Writes a pojo to disk as JSON under a random name
  * It is used to export account data
  */
@@ -48,9 +61,7 @@ export const writeExportedData = (data) => {
   const name = randomString()
   try {
     fs.writeFileSync(`${exports.dir}${name}.json`, JSON.stringify(data, null, 2))
-  } catch (err) {
-    log.warn(err, 'Failed to write export file')
-  }
+  } catch (err) {}
 
   return exports.url + name + '.json'
 }

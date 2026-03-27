@@ -5,6 +5,7 @@
   "scripts": {
     "docusaurus": "docusaurus",
     "start": "docusaurus start",
+    "start:local": "BACKEND_URL=http://localhost:3001 docusaurus start",
     "build": "docusaurus build",
     "oombuild": "NODE_OPTIONS=\"--max-old-space-size=32000\" docusaurus build",
     "swizzle": "docusaurus swizzle",

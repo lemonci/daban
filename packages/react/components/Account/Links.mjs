@@ -1,5 +1,5 @@
 // Config
-import { cloudflareImageUrl, capitalize } from '@freesewing/utils'
+import { imageCdnUrl, capitalize } from '@freesewing/utils'
 import { control as controlConfig } from '@freesewing/config'
 // Hooks
 import React, { useState, useEffect } from 'react'
@@ -25,14 +25,10 @@ import {
   NewsletterIcon,
   ShieldIcon,
   FingerprintIcon,
-  GitHubIcon,
-  InstagramIcon,
+  CodebergIcon,
   MastodonIcon,
-  TwitchIcon,
-  TikTokIcon,
   LinkIcon,
   TrashIcon,
-  RedditIcon,
   CloseIcon,
   ReloadIcon,
   NoIcon,
@@ -62,14 +58,9 @@ const itemIcons = {
   mfa: <ShieldIcon />,
   newsletter: <NewsletterIcon />,
   password: <LockIcon />,
-  github: <GitHubIcon />,
-  instagram: <InstagramIcon />,
+  codeberg: <CodebergIcon />,
   mastodon: <MastodonIcon />,
-  twitter: <InstagramIcon />,
-  twitch: <TwitchIcon />,
-  tiktok: <TikTokIcon />,
   website: <LinkIcon />,
-  reddit: <RedditIcon />,
 }
 
 const btnClasses = 'tw:daisy-btn tw:capitalize tw:flex tw:flex-row tw:justify-between'
@@ -87,14 +78,14 @@ const titles = {
   compare: 'Measurements Comparison',
   consent: 'Consent & Privacy',
   control: 'User Experience',
-  github: 'GitHub',
+  codeberg: 'Codeberg',
   mfa: 'Multi-Factor Authentication',
 }
 
 const YesNo = ({ check }) => (check ? <BoolYesIcon /> : <BoolNoIcon />)
 
 /**
- * A component to manage the user's Instagram handle in their account data
+ * A component to manage the user's [platform] handle in their account data
  *
  * @component
  * @param {object} props - All component props
@@ -118,7 +109,7 @@ export const Links = ({ Link = false }) => {
   // Effects
   useEffect(() => {
     const getUserData = async () => {
-      const [status, body] = await backend.getUserData(account.id)
+      const [status, body] = await backend.getUserData(account.uuid)
       if (status === 200 && body.result === 'success') {
         setApikeys(body.data.apikeys)
         setBookmarks(body.data.bookmarks)
@@ -127,7 +118,7 @@ export const Links = ({ Link = false }) => {
       }
     }
     getUserData()
-  }, [account.id])
+  }, [account.uuid])
 
   if (!account.username) return null
 
@@ -141,7 +132,7 @@ export const Links = ({ Link = false }) => {
     bio: account.bio ? <span>{account.bio.slice(0, 15)}&hellip;</span> : '',
     img: (
       <img
-        src={cloudflareImageUrl({ type: 'sq100', id: `uid-${account.ihash}` })}
+        src={imageCdnUrl({ type: 'user', id: account.uuid })}
         className="tw:w-8 tw:h-8 tw:aspect-square tw:rounded-full shadow"
       />
     ),
@@ -150,12 +141,12 @@ export const Links = ({ Link = false }) => {
     compare: <YesNo check={account.compare} />,
     consent: <YesNo check={account.consent} />,
     control: <ControlScore control={account.control} />,
-    github: account.data.githubUsername || account.data.githubEmail || <NoIcon />,
+    codeberg: account.data.codebergUsername || account.data.codebergEmail || <NoIcon />,
     password: account.passwordType === 'v3' ? <BoolYesIcon /> : <NoIcon />,
     mfa: <YesNo check={account.mfaEnabled} />,
   }
   for (const social of Object.keys(controlConfig.account.fields.identities).filter(
-    (i) => i !== 'github'
+    (i) => i !== 'codeberg'
   ))
     itemPreviews[social] = account.data[social] || (
       <NoIcon className="tw:text-base-content tw:w-6 tw:h-6" stroke={2} />

@@ -1,5 +1,4 @@
 import { decorateModel } from '../utils/model-decorator.mjs'
-import { log } from '../utils/log.mjs'
 
 /*
  * This model handles all confirmation updates
@@ -33,7 +32,7 @@ ConfirmationModel.prototype.guardedRead = async function ({ params }) {
   /*
    * Is the check set?
    */
-  //if (typeof params.check === 'undefined') return this.setResponse(404)
+  if (typeof params.check === 'undefined') return this.setResponse(404)
 
   /*
    * Attempt to read record from the database
@@ -85,7 +84,7 @@ ConfirmationModel.prototype.getSuggested = async function ({ user }, type) {
   try {
     result = await this.prisma.confirmation.findMany({ where: { type } })
   } catch (err) {
-    log.warn(`Failed to search conifirmations with type ${type}`)
+    this.log.warn(`Failed to search conifirmations with type ${type}: ${err.message}`)
   }
   const list = []
   for (const confirmation of result) list.push(this.revealConfirmation(confirmation))
@@ -133,7 +132,7 @@ ConfirmationModel.prototype.removeSuggested = async function ({ user, params }, 
   try {
     await this.delete()
   } catch (err) {
-    log.warn(err, 'Error while removing confirmation')
+    this.log.warn(err, `Error while removing confirmation: ${err.message}`)
   }
 
   return this.setResponse200({
@@ -154,14 +153,14 @@ ConfirmationModel.prototype.revealConfirmation = function (confirmation) {
     try {
       clear[field] = this.decrypt(confirmation[field])
     } catch (err) {
-      //console.log(err)
+      this.log.warn(`Failed to reveal confirmation: ${err.message}`)
     }
   }
   for (const field of this.jsonFields) {
     try {
       clear[field] = JSON.parse(clear[field])
     } catch (err) {
-      //console.log(err)
+      this.log.warn(`Failed to parse confirmation field ${field} as JSON: ${err.message}`)
     }
   }
 

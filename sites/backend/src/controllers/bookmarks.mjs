@@ -30,7 +30,7 @@ BookmarksController.prototype.read = async (req, res, tools) => {
  */
 BookmarksController.prototype.list = async (req, res, tools) => {
   const Bookmark = new BookmarkModel(tools)
-  const bookmarks = await Bookmark.userBookmarks(req.user.uid)
+  const bookmarks = await Bookmark.userBookmarks(req.user.id)
 
   if (bookmarks) Bookmark.setResponse(200, 'success', { bookmarks })
   else Bookmark.setResponse(404)

@@ -6,9 +6,13 @@ sidebar_class_name: 'tw:hidden'
 import { RoleBlock } from '@freesewing/react/components/Role'
 import { CreatePost } from '@site/src/components/create-post.mjs'
 import { DocusaurusDoc } from '@freesewing/react/components/Docusaurus'
+import { Popout } from '@freesewing/react/components/Popout'
 
 <DocusaurusDoc>
   <RoleBlock role="user">
-    <CreatePost type="showcase" />
+    <Popout fixme title="This feature is currently not available">
+      <p>Please bear with us as we move some things around.</p>
+    </Popout>
+    {/*<CreatePost type="showcase" />*/}
   </RoleBlock>
 </DocusaurusDoc>

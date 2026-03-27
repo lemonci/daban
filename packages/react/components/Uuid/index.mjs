@@ -1,7 +1,6 @@
 import React from 'react'
 import { shortUuid } from '@freesewing/utils'
-import { Link as WebLink } from '@freesewing/react/components/Link'
-import { CopyToClipboardButton } from '@freesewing/react/components/Button'
+import { KeyVal } from '@freesewing/react/components/KeyVal'
 
 /**
  * A component to display a short version of a (v4) UUID
@@ -14,23 +13,14 @@ import { CopyToClipboardButton } from '@freesewing/react/components/Button'
  * @param {string} [props.label = false] - An optional label to pass to the CopyToClipboardButton
  * @returns {JSX.Element}
  */
-export const Uuid = ({ uuid, href = false, label = 'UUID', Link = false }) => {
-  if (!Link) Link = WebLink
-
-  if (href === false)
-    return (
-      <span className="flex flex-row items-center">
-        <span className="daisy-badge daisy-badge-secondary font-mono">{shortUuid(uuid)}</span>
-        <CopyToClipboardButton content={uuid} label={label} sup />
-      </span>
-    )
-
-  return (
-    <span className="flex flex-row items-center">
-      <Link href={href} title={uuid}>
-        <span className="daisy-badge daisy-badge-secondary font-mono">{shortUuid(uuid)}</span>
-      </Link>
-      <CopyToClipboardButton content={uuid} label={label} sup />
-    </span>
-  )
-}
+export const Uuid = ({ uuid, href = false, label = 'UUID', Link = false }) => (
+  <KeyVal
+    k="#"
+    val={shortUuid(uuid)}
+    color="neutral"
+    copyVal={uuid}
+    copyKey="UUID"
+    href={href}
+    Link={Link}
+  />
+)

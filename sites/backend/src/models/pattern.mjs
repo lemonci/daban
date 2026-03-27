@@ -1,5 +1,3 @@
-import { log } from '../utils/log.mjs'
-import { storeImage } from '../utils/cloudflare-images.mjs'
 import { decorateModel } from '../utils/model-decorator.mjs'
 
 /*
@@ -16,14 +14,14 @@ export function PatternModel(tools) {
 /*
  * Returns a list of patterns for the user making the API call
  *
- * @param {uid} string - uid of the user, as provided by the auth middleware
+ * @param {id} string - id of the user, as provided by the auth middleware
  * @returns {patterns} array - The list of patterns
  */
-PatternModel.prototype.userPatterns = async function (uid) {
+PatternModel.prototype.userPatterns = async function (id) {
   /*
-   * No uid no deal
+   * No id no deal
    */
-  if (!uid) return false
+  if (!id) return []
 
   /*
    * Run query returning all patterns from the database
@@ -31,10 +29,10 @@ PatternModel.prototype.userPatterns = async function (uid) {
   let patterns
   try {
     patterns = await this.prisma.pattern.findMany({
-      where: { userId: uid },
+      where: { userId: id },
     })
   } catch (err) {
-    log.warn(`Failed to search patterns for user ${uid}: ${err}`)
+    this.log.warn(`Failed to search patterns for user ${id}: ${err}`)
   }
 
   /*
@@ -92,34 +90,34 @@ PatternModel.prototype.guardedCreate = async function ({ body, user }) {
   await this.createRecord({
     data: typeof body.data === 'object' ? body.data : {},
     design: body.design,
-    img: this.config.avatars.pattern,
     settings: {
       ...body.settings,
       measurements:
         typeof body.settings.measurements === 'object' ? body.settings.measurements : {},
     },
-    userId: user.uid,
+    userId: user.apikey ? user.userId : user.id,
     name: typeof body.name === 'string' && body.name.length > 0 ? body.name : '--',
     notes: typeof body.notes === 'string' && body.notes.length > 0 ? body.notes : '--',
     public: body.public === true ? true : false,
   })
 
   /*
-   * Now that we have a record ID, we can update the image, but only if needed
+   * Re-read the record to pick up the UUID set by the database trigger
+   */
+  await this.read({ id: this.record.id })
+
+  /*
+   * If an image was provided, save it to disk using the UUID
    */
   if (body.img) {
-    const img = await storeImage({
-      id: `pattern-${this.record.id}`,
-      metadata: { user: user.uid },
-      b64: body.img,
-    })
-
-    /*
-     * If an image was created, update the record with its ID
-     * If not, just update the record from the database
-     */
-    await this.update({ img })
-  } else await this.read({ id: this.record.id })
+    let imgResult = false
+    try {
+      imgResult = await this.img.save(this.record.uuid, body.img)
+    } catch (err) {
+      this.log.warn(`Failed to save pattern avatar: ${err.message}`)
+    }
+    if (!imgResult) return this.setResponse(500)
+  }
 
   /*
    * Now return 201 and the record data
@@ -137,7 +135,7 @@ PatternModel.prototype.publicRead = async function ({ params }) {
   /*
    * Attempt to read the database record
    */
-  await this.read({ id: parseInt(params.id) })
+  await this.read({ uuid: params.uuid })
 
   /*
    * Ensure it is public and if it is not public, return 404
@@ -166,15 +164,14 @@ PatternModel.prototype.guardedRead = async function ({ params, user }) {
   if (!this.rbac.readSome(user)) return this.setResponse(403, 'insufficientAccessLevel')
 
   /*
-   * Is the id set?
+   * Is the uuid set?
    */
-  if (typeof params.id !== 'undefined' && !Number(params.id))
-    return this.setResponse(403, 'idNotNumeric')
+  if (!params.uuid || typeof params.uuid !== 'string') return this.setResponse(403, 'uuidNotValid')
 
   /*
    * Attempt to read record from database
    */
-  await this.read({ id: parseInt(params.id) })
+  await this.read({ uuid: params.uuid })
 
   /*
    * Return 404 if it cannot be found
@@ -184,9 +181,15 @@ PatternModel.prototype.guardedRead = async function ({ params, user }) {
   /*
    * You need at least the bughunter role to read another user's pattern
    */
-  if (this.record.userId !== user.uid && !this.rbac.bughunter(user)) {
+  if (
+    !this.record ||
+    // For an API key, we need to match record.userId to user.userId
+    (((user.apikey && this.record.userId !== user.userId) ||
+      // For a JWT, we need to match record.userId to user.id
+      (!user.apikey && this.record.userId !== user.id)) &&
+      !this.rbac.bughunter(user))
+  )
     return this.setResponse(403, 'insufficientAccessLevel')
-  }
 
   /*
    * Return the loaded pattern
@@ -211,12 +214,12 @@ PatternModel.prototype.guardedClone = async function ({ params, user }) {
   /*
    * Attempt to read record from database
    */
-  await this.read({ id: parseInt(params.id) })
+  await this.read({ uuid: params.uuid })
 
   /*
    * You need the support role to clone another user's pattern that is not public
    */
-  if (this.record.userId !== user.uid && !this.record.public && !this.rbac.support(user)) {
+  if (this.record.userId !== user.id && !this.record.public && !this.rbac.support(user)) {
     return this.setResponse(403, 'insufficientAccessLevel')
   }
 
@@ -225,8 +228,8 @@ PatternModel.prototype.guardedClone = async function ({ params, user }) {
    */
   const data = this.asPattern()
   delete data.id
-  data.name += ` (cloned from #${this.record.id})`
-  data.notes += ` (Note: This pattern was cloned from pattern #${this.record.id})`
+  data.name += ` (cloned from #${this.record.uuid})`
+  data.notes += ` (Note: This pattern was cloned from pattern ${this.record.uuid})`
 
   /*
    * Write it to the database
@@ -262,14 +265,25 @@ PatternModel.prototype.guardedUpdate = async function ({ params, body, user }) {
   /*
    * Attempt to read record from the database
    */
-  await this.read({ id: parseInt(params.id) })
+  await this.read({ uuid: params.uuid })
+
+  /*
+   * If it is not found, return 404
+   */
+  if (!this.record) return this.setResponse(404)
 
   /*
    * Only admins can update other people's patterns
    */
-  if (this.record.userId !== user.uid && !this.rbac.admin(user)) {
+  if (
+    !this.record ||
+    // For an API key, we need to match record.userId to user.userId
+    (((user.apikey && this.record.userId !== user.userId) ||
+      // For a JWT, we need to match record.userId to user.id
+      (!user.apikey && this.record.userId !== user.id)) &&
+      !this.rbac.admin(user))
+  )
     return this.setResponse(403, 'insufficientAccessLevel')
-  }
 
   /*
    * Prepare data for updating the record
@@ -299,11 +313,13 @@ PatternModel.prototype.guardedUpdate = async function ({ params, body, user }) {
    * img
    */
   if (typeof body.img === 'string') {
-    data.img = await storeImage({
-      id: `pattern-${this.record.id}`,
-      metadata: { user: user.uid },
-      b64: body.img,
-    })
+    let imgResult = false
+    try {
+      imgResult = await this.img.save(this.record.uuid, body.img)
+    } catch (err) {
+      this.log.warn(`Failed to save pattern avatar: ${err.message}`)
+    }
+    if (!imgResult) return this.setResponse(500)
   }
 
   /*
@@ -333,12 +349,12 @@ PatternModel.prototype.guardedDelete = async function ({ params, user }) {
   /*
    * Attempt to read record from database
    */
-  await this.read({ id: parseInt(params.id) })
+  await this.read({ uuid: params.uuid })
 
   /*
    * Only admins can delete other user's patterns
    */
-  if (this.record.userId !== user.uid && !this.rbac.admin(user)) {
+  if (this.record.userId !== user.id && !this.rbac.admin(user)) {
     return this.setResponse(403, 'insufficientAccessLevel')
   }
 
@@ -357,10 +373,11 @@ PatternModel.prototype.guardedDelete = async function ({ params, user }) {
  * Returns record data
  */
 PatternModel.prototype.asPattern = function () {
-  return {
-    ...this.record,
-    ...this.clear,
-  }
+  const data = { ...this.record, ...this.clear }
+  delete data.id
+  delete data.userId
+
+  return data
 }
 
 /*
@@ -375,7 +392,7 @@ PatternModel.prototype.revealPattern = function (pattern) {
     try {
       clear[field] = this.decrypt(pattern[field])
     } catch (err) {
-      //console.log(err)
+      this.log.error(`Failed to reveal pattern: ${err.message}`)
     }
   }
 

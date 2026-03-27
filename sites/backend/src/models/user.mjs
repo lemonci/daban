@@ -1,8 +1,6 @@
 import jwt from 'jsonwebtoken'
-import { log } from '../utils/log.mjs'
-import { hash, hashPassword, randomString, verifyPassword } from '../utils/crypto.mjs'
-import { replaceImage, removeImage } from '../utils/cloudflare-images.mjs'
-import { clean, asJson, i18nUrl, writeExportedData } from '../utils/index.mjs'
+import { hash, hashPassword, randomString, randomOtp, verifyPassword } from '../utils/crypto.mjs'
+import { clean, asJson, i18nUrl, whereFromUser, writeExportedData } from '../utils/index.mjs'
 import { decorateModel } from '../utils/model-decorator.mjs'
 
 /*
@@ -28,17 +26,17 @@ export function UserModel(tools) {
  */
 UserModel.prototype.profile = async function ({ params }) {
   /*
-   * Is id set?
+   * Is uuid set?
    */
-  if (typeof params.id === 'undefined') return this.setResponse(403, 'idMissing')
+  if (typeof params.uuid === 'undefined') return this.setResponse(403, 'idMissing')
 
   /*
    * Try to find the record in the database
-   * Note that find checks lusername, ehash, and id but we
+   * Note that find checks lusername, ehash, and uuid but we
    * pass it in the username value as that's what the login
-   * rout does
+   * route does
    */
-  await this.find({ username: params.id })
+  await this.find({ username: params.uuid })
 
   /*
    * If it does not exist, return 404
@@ -61,15 +59,15 @@ UserModel.prototype.profile = async function ({ params }) {
  */
 UserModel.prototype.allData = async function ({ params, user }) {
   /*
-   * Is id set?
+   * Is uuid set?
    */
-  if (typeof params.id === 'undefined') return this.setResponse(403, 'idMissing')
+  if (typeof params.uuid === 'undefined') return this.setResponse(403, 'uuidMissing')
 
   /*
    * Is this the user's own data?
-   * params.id is a string from the URL; user.uid is the numeric id from the JWT.
+   * params.uuid is a string from the URL; user.id is the numeric id from the JWT.
    */
-  if (Number(params.id) !== user.uid) return this.setResponse(403, 'idMismatch')
+  if (params.uuid !== user.uuid) return this.setResponse(403, 'idMismatch')
 
   /*
    * Try to find the record in the database
@@ -78,7 +76,7 @@ UserModel.prototype.allData = async function ({ params, user }) {
    * route does
    */
   await this.read(
-    { id: Number(params.id) },
+    { uuid: params.uuid },
     { apikeys: true, bookmarks: true, patterns: true, sets: true }
   )
 
@@ -103,7 +101,10 @@ UserModel.prototype.exportAccount = async function ({ user }) {
   /*
    * Read the record from the database
    */
-  await this.read({ id: user.uid }, { apikeys: true, bookmarks: true, patterns: true, sets: true })
+  await this.read(
+    { uuid: user.uuid },
+    { apikeys: true, bookmarks: true, patterns: true, sets: true }
+  )
 
   /*
    * If it does not exist, return 404
@@ -126,7 +127,10 @@ UserModel.prototype.restrictAccount = async function ({ user }) {
   /*
    * Read the record from the database
    */
-  await this.read({ id: user.uid }, { apikeys: true, bookmarks: true, patterns: true, sets: true })
+  await this.read(
+    { uuid: user._id },
+    { apikeys: true, bookmarks: true, patterns: true, sets: true }
+  )
 
   /*
    * If it does not exist, return 404
@@ -154,7 +158,10 @@ UserModel.prototype.removeAccount = async function ({ user }) {
   /*
    * Read the record from the database
    */
-  await this.read({ id: user.uid }, { apikeys: true, bookmarks: true, patterns: true, sets: true })
+  await this.read(
+    { uuid: user._id },
+    { apikeys: true, bookmarks: true, patterns: true, sets: true }
+  )
 
   /*
    * If it does not exist, return 404
@@ -163,22 +170,38 @@ UserModel.prototype.removeAccount = async function ({ user }) {
 
   /*
    * Remove user image
+   * FIXME: To be migrated
    */
-  await removeImage(`user-${this.record.ihash}`)
+  //await removeImage(`user-${this.record.ihash}`)
+
+  /*
+   * Store email before we trash the account
+   */
+  const email = this.clear.email
 
   /*
    * Remove account
    */
   try {
-    await this.prisma.pattern.deleteMany({ where: { userId: user.uid } })
-    await this.prisma.set.deleteMany({ where: { userId: user.uid } })
-    await this.prisma.bookmark.deleteMany({ where: { userId: user.uid } })
-    await this.prisma.apikey.deleteMany({ where: { userId: user.uid } })
-    await this.prisma.confirmation.deleteMany({ where: { userId: user.uid } })
+    await this.prisma.pattern.deleteMany({ where: { userId: user.id } })
+    await this.prisma.set.deleteMany({ where: { userId: user.id } })
+    await this.prisma.bookmark.deleteMany({ where: { userId: user.id } })
+    await this.prisma.apikey.deleteMany({ where: { userId: user.id } })
+    await this.prisma.confirmation.deleteMany({ where: { userId: user.id } })
     await this.delete()
   } catch (err) {
-    log.warn(err, 'Error while removing account')
+    this.log.warn(err, `Error while removing account: ${err.message}`)
   }
+
+  /*
+   * Send email
+   */
+  await this.mailer.send({
+    template: 'goodbye',
+    language: 'en',
+    to: email,
+    replacements: {},
+  })
 
   return this.setResponse200({
     result: 'success',
@@ -245,6 +268,11 @@ UserModel.prototype.guardedRead = async function (where, { user }) {
    */
   await this.read(where)
 
+  /*
+   * Did we find it?
+   */
+  if (!this.exists) return this.setResponse(404)
+
   return this.setResponse200({
     result: 'success',
     account: this.asAccount(),
@@ -270,7 +298,7 @@ UserModel.prototype.find = async function (body) {
         OR: [
           { lusername: { equals: clean(body.username) } },
           { ehash: { equals: hash(clean(body.username)) } },
-          { id: { equals: parseInt(body.username) || -1 } },
+          { uuid: { equals: clean(body.username) || -1 } },
         ],
       },
     })
@@ -278,7 +306,7 @@ UserModel.prototype.find = async function (body) {
     /*
      * Failed to run database query. Log warning and return 404
      */
-    log.warn({ err, body }, `Error while trying to find user: ${body.username}`)
+    this.log.warn({ err, body }, `Error while trying to find user ${body.username}: ${err.message}`)
     return this.setResponse(404)
   }
 
@@ -298,40 +326,77 @@ UserModel.prototype.find = async function (body) {
  */
 UserModel.prototype.search = async function (q) {
   /*
-   * Find users based on lusername
+   * Find users based on a variety of fields
    */
-  let usernames, emails
+  const ehash = hash(clean(q))
+  const results = {}
+
+  // ehash
   try {
-    usernames = await this.asAccountList(
+    results.ehash = await this.asAccountList(
       await this.prisma.user.findMany({
-        where: {
-          lusername: { contains: clean(q) },
-        },
+        where: { ehash: { equals: ehash } },
+        limit: 500,
       })
     )
   } catch (err) {
-    usernames = []
-  }
-  /*
-   * Find users based on ehash/ihash
-   */
-  try {
-    const ehash = hash(clean(q))
-    emails = await this.asAccountList(
-      await this.prisma.user.findMany({
-        where: {
-          OR: [{ ehash: { equals: ehash } }, { ihash: { equals: ehash } }],
-        },
-      })
-    )
-  } catch (err) {
-    emails = []
+    this.log.warn(err, `Failed to search users`)
+    results.ehash = []
   }
 
-  return {
-    email: emails,
-    username: usernames,
+  // ihash
+  try {
+    results.ihash = await this.asAccountList(
+      await this.prisma.user.findMany({
+        where: { ehash: { equals: ehash } },
+        limit: 500,
+      })
+    )
+  } catch (err) {
+    this.log.warn(err, `Failed to search users`)
+    results.ihash = []
   }
+
+  // username
+  try {
+    results.username = await this.asAccountList(
+      await this.prisma.user.findMany({
+        where: { username: { contains: clean(q) } },
+        limit: 500,
+      })
+    )
+  } catch (err) {
+    this.log.warn(err, `Failed to search users`)
+    results.username = []
+  }
+
+  // uuid
+  try {
+    results.uuid = await this.asAccountList(
+      await this.prisma.user.findMany({
+        where: { uuid: { equals: clean(q) } },
+        limit: 500,
+      })
+    )
+  } catch (err) {
+    this.log.warn(err, `Failed to search users`)
+    results.uuid = []
+  }
+
+  // id
+  try {
+    results.id = await this.asAccountList(
+      await this.prisma.user.findMany({
+        where: { id: { equals: clean(q) } },
+        limit: 500,
+      })
+    )
+  } catch (err) {
+    this.log.warn(err, `Failed to search users`)
+    results.id = []
+  }
+
+  return results
 }
 
 /*
@@ -351,7 +416,7 @@ UserModel.prototype.loadAuthenticatedUser = async function (user) {
    */
   try {
     this.authenticatedUser = await this.prisma.user.findUnique({
-      where: { id: user.uid },
+      where: whereFromUser(user),
       include: {
         apikeys: true,
       },
@@ -360,7 +425,7 @@ UserModel.prototype.loadAuthenticatedUser = async function (user) {
     /*
      * Failed to run database query. Log warning and return 404
      */
-    log.warn({ err, user }, `Error while trying to find user: ${user.uid}`)
+    this.log.warn({ err, user }, `Error while trying to find user: ${err.message}`)
     return this.setResponse(404)
   }
 
@@ -384,7 +449,7 @@ UserModel.prototype.revealAuthenticatedUser = async function (user) {
    */
   try {
     this.record = await this.prisma.user.findUnique({
-      where: { id: user.uid },
+      where: { id: user.id },
       include: {
         apikeys: true,
       },
@@ -393,7 +458,7 @@ UserModel.prototype.revealAuthenticatedUser = async function (user) {
     /*
      * Failed to run database query. Log warning and return 404
      */
-    log.warn({ err, user }, `Error while trying to find and reveal user: ${user.uid}`)
+    this.log.warn({ err, user }, `Error while trying to find and reveal user`)
     return this.setResponse(404)
   }
 
@@ -421,7 +486,7 @@ UserModel.prototype.guardedCreate = async function ({ body }) {
    * Create ehash and check
    */
   const ehash = hash(clean(body.email))
-  const check = randomString()
+  const check = randomOtp(4)
 
   /*
    * Check if we already have a user with this email address
@@ -472,9 +537,9 @@ UserModel.prototype.guardedCreate = async function ({ body }) {
      */
     let actionUrl = false
     if (this.record.status === 0)
-      actionUrl = i18nUrl('en', `/confirm/${type}?id=${this.Confirmation.record.id}&check=${check}`)
+      actionUrl = i18nUrl('en', `/confirm/${type}?id=${this.Confirmation.record.id}`)
     else if (this.record.status === 1)
-      actionUrl = i18nUrl('en', `/confirm/signin?id=${this.Confirmation.record.id}&check=${check}`)
+      actionUrl = i18nUrl('en', `/confirm/signin?id=${this.Confirmation.record.id}`)
 
     /*
      * Send email
@@ -485,8 +550,7 @@ UserModel.prototype.guardedCreate = async function ({ body }) {
       to: this.clear.email,
       replacements: {
         actionUrl,
-        whyUrl: i18nUrl('en', `/docs/faq/email/why-${type}`),
-        supportUrl: i18nUrl('en', `/patrons/join`),
+        check,
       },
     })
 
@@ -547,7 +611,7 @@ UserModel.prototype.guardedCreate = async function ({ body }) {
     /*
      * Could not create record. Log warning and return 500
      */
-    log.warn(err, 'Could not create user record')
+    this.log.warn(err, 'Could not create user record')
     return this.setResponse(500, 'createAccountFailed')
   }
 
@@ -565,7 +629,7 @@ UserModel.prototype.guardedCreate = async function ({ body }) {
      * Which is not really a problem, so we will swallow this error and
      * continue with the random username
      */
-    log.info(`Username collision for user-${this.record.id}`)
+    this.log.info(`Username collision for user-${this.record.id}`)
   }
 
   /*
@@ -591,9 +655,8 @@ UserModel.prototype.guardedCreate = async function ({ body }) {
     language: 'en',
     to: this.clear.email,
     replacements: {
-      actionUrl: i18nUrl('en', `/confirm/signup?id=${this.Confirmation.record.id}&check=${check}`),
-      whyUrl: i18nUrl('en', `/docs/faq/email/why-signup`),
-      supportUrl: i18nUrl('en', `/patrons/join`),
+      actionUrl: i18nUrl('en', `/confirm/signup?id=${this.Confirmation.record.id}`),
+      check,
     },
   })
 
@@ -638,20 +701,24 @@ UserModel.prototype.passwordSignIn = async function (req) {
    * account, which would be a privacy leak if we said 'not found' here'
    */
   if (!this.exists) {
-    log.warn(`Sign-in attempt for non-existing user: ${req.body.username} from ${req.ip}`)
+    this.log.warn(`Sign-in attempt for non-existing user: ${req.body.username} from ${req.ip}`)
     return this.setResponse(401, 'signInFailed')
   }
 
   /*
    * Account found, check the password
    */
-  const [valid, updatedPasswordField] = verifyPassword(req.body.password, this.record.password)
+  const [valid, updatedPasswordField] = verifyPassword(
+    req.body.password,
+    this.record.password,
+    this.log
+  )
 
   /*
    * If the password is incorrect, log a warning with IP and return 401
    */
   if (!valid) {
-    log.warn(`Wrong password for existing user: ${req.body.username} from ${req.ip}`)
+    this.log.warn(`Wrong password for existing user: ${req.body.username} from ${req.ip}`)
     return this.setResponse(401, 'signInFailed')
   }
 
@@ -711,19 +778,19 @@ UserModel.prototype.passwordSignIn = async function (req) {
  */
 UserModel.prototype.linkSignIn = async function (req) {
   /*
-   * Is the id set?
+   * Is the uuid set?
    */
-  if (!req.params.id) return this.setResponse(400, 'signInIdMissing')
+  if (!req.params.uuid) return this.setResponse(400, 'signInIdMissing')
 
   /*
    * Is the check set?
    */
-  if (!req.params.check) return this.setResponse(400, 'signInCheckMissing')
+  if (!req.body.check) return this.setResponse(400, 'signInCheckMissing')
 
   /*
    * Attempt to retrieve confirmation record
    */
-  await this.Confirmation.read({ id: req.params.id })
+  await this.Confirmation.read({ id: req.params.uuid })
 
   /*
    * If the confirmation does not exist, return 404
@@ -733,14 +800,14 @@ UserModel.prototype.linkSignIn = async function (req) {
   /*
    * If the confirmation is not of of the right type, return 404
    */
-  if (!['signinlink', 'signup-aea'].includes(this.Confirmation.record.type)) {
+  if (!['signin', 'signup-aea'].includes(this.Confirmation.record.type)) {
     return this.setResponse(404)
   }
 
   /*
    * If the confirmation check is not valid, return 404
    */
-  if (this.Confirmation.clear.data.check !== req.params.check) {
+  if (this.Confirmation.clear.data.check !== req.body.check) {
     return this.setResponse(404)
   }
 
@@ -816,20 +883,20 @@ UserModel.prototype.sendSigninlink = async function (req) {
   await this.find(req.body)
 
   /*
-   * If we could not find it, log a warning but send a 401
+   * If we could not find it, log a warning but send a 200
    * to not reveal such a user does not exist.
    */
   if (!this.exists) {
-    log.warn(`Magic link attempt for non-existing user: ${req.body.username} from ${req.ip}`)
-    return this.setResponse(401, 'signInFailed')
+    this.log.warn(`Magic link attempt for non-existing user: ${req.body.username} from ${req.ip}`)
+    return this.setResponse200({ result: 'emailSent' })
   }
 
   /*
    * Account found, generate random check and create the confirmation
    */
-  const check = randomString()
+  const check = randomOtp(4)
   this.confirmation = await this.Confirmation.createRecord({
-    type: 'signinlink',
+    type: 'signin',
     data: {
       language: this.record.language,
       check,
@@ -841,16 +908,12 @@ UserModel.prototype.sendSigninlink = async function (req) {
    * Send sign-in link email
    */
   await this.mailer.send({
-    template: 'signinlink',
+    template: 'signin',
     language: this.record.language,
     to: this.clear.email,
     replacements: {
-      actionUrl: i18nUrl(
-        this.record.language,
-        `/confirm/signin?id=${this.Confirmation.record.id}&check=${check}`
-      ),
-      whyUrl: i18nUrl(this.record.language, `/docs/faq/email/why-signin-link`),
-      supportUrl: i18nUrl(this.record.language, `/patrons/join`),
+      check,
+      actionUrl: i18nUrl(this.record.language, `/confirm/signin?id=${this.Confirmation.record.id}`),
     },
   })
 
@@ -868,12 +931,12 @@ UserModel.prototype.confirm = async function ({ body, params }) {
   /*
    * Is the id set?
    */
-  if (!params.id) return this.setResponse(404)
+  if (!params.uuid) return this.setResponse(404)
 
   /*
    * Do we have a POST body?
    */
-  if (Object.keys(body).length < 1) return this.setResponse(400, 'postBodyMissing')
+  if (Object.keys(body).length < 2) return this.setResponse(400, 'postBodyMissing')
 
   /*
    * Do we have consent from the user to process their data?
@@ -884,13 +947,13 @@ UserModel.prototype.confirm = async function ({ body, params }) {
   /*
    * Attempt to read the confirmation from the database
    */
-  await this.Confirmation.read({ id: params.id }, { user: true })
+  await this.Confirmation.read({ id: params.uuid }, { user: true })
 
   /*
    * If the confirmation does not exist, log a warning and return 404
    */
   if (!this.Confirmation.exists) {
-    log.warn(`Could not find confirmation id ${params.id}`)
+    this.log.warn(`Could not find confirmation id ${params.uuid}`)
     return this.setResponse(404)
   }
 
@@ -898,7 +961,7 @@ UserModel.prototype.confirm = async function ({ body, params }) {
    * If the confirmation is of the wrong type, log a warning and return 404
    */
   if (this.Confirmation.record.type !== 'signup') {
-    log.warn(`Confirmation mismatch; ${params.id} is not a signup id`)
+    this.log.warn(`Confirmation mismatch; ${params.uuid} is not a signup id`)
     return this.setResponse(404)
   }
 
@@ -913,9 +976,9 @@ UserModel.prototype.confirm = async function ({ body, params }) {
   const data = this.Confirmation.clear.data
 
   /*
-   * If the ehash does not match, return 404
+   * If the check does not match, return 404
    */
-  if (data.ehash !== this.Confirmation.record.user.ehash) return this.setResponse(404)
+  if (data.check !== body.check) return this.setResponse(404)
 
   /*
    * If the id does not match, return 404
@@ -1044,7 +1107,7 @@ UserModel.prototype.guardedUpdate = async function ({ body, user }) {
           ...this.clear[field],
           ...body[field],
         }
-      else log.warn(body, `Tried to set JDON field ${field} to a non-object`)
+      else this.log.warn(body, `Tried to set JDON field ${field} to a non-object`)
     }
   }
 
@@ -1062,28 +1125,27 @@ UserModel.prototype.guardedUpdate = async function ({ body, user }) {
       data.username = body.username.trim()
       data.lusername = clean(body.username)
     } else {
-      log.info(`Rejected user name change from ${data.username} to ${body.username.trim()}`)
+      this.log.info(`Rejected user name change from ${this.record.username} to ${body.username}`)
     }
   }
 
   /*
    * Image (img)
    */
-  if (typeof body.img === 'string')
-    await replaceImage({
-      id: `uid-${this.record.ihash}`,
-      data: body.img,
-    })
+  if (typeof body.img === 'string') {
+    let imgResult = false
+    try {
+      imgResult = await this.img.save(this.record.uuid, body.img)
+    } catch (err) {
+      this.log.warn(`Failed to save user avatar: ${err.message}`)
+    }
+    if (!imgResult) return this.setResponse(500)
+  }
 
   /*
    * Now update the database record
    */
   await this.update(data)
-
-  /*
-   * If it is, we'll need to raise this to a higher scope
-   */
-  let check
 
   /*
    * If there's an email change, we need to trigger confirmation
@@ -1092,7 +1154,7 @@ UserModel.prototype.guardedUpdate = async function ({ body, user }) {
     /*
      * Generate the check
      */
-    check = randomString()
+    const check = randomOtp(4)
 
     /*
      * Generate the confirmation record
@@ -1122,12 +1184,11 @@ UserModel.prototype.guardedUpdate = async function ({ body, user }) {
        */
       cc: this.clear.email,
       replacements: {
+        check,
         actionUrl: i18nUrl(
           this.record.language,
-          `/confirm/emailchange?id=${this.Confirmation.record.id}&check=${check}`
+          `/confirm/emailchange?id=${this.Confirmation.record.id}`
         ),
-        whyUrl: i18nUrl(this.record.language, `/docs/faq/email/why-emailchange`),
-        supportUrl: i18nUrl(this.record.language, `/patrons/join`),
       },
     })
   } else if (
@@ -1147,7 +1208,7 @@ UserModel.prototype.guardedUpdate = async function ({ body, user }) {
      * If it does not exist, log a warning and return 404
      */
     if (!this.Confirmation.exists) {
-      log.warn(`Could not find confirmation id ${body.confirmation}`)
+      this.log.warn(`Could not find confirmation id ${body.confirmation}`)
       return this.setResponse(404)
     }
 
@@ -1155,7 +1216,7 @@ UserModel.prototype.guardedUpdate = async function ({ body, user }) {
      * If it is the wrong confirmation type, log a warning and return 404
      */
     if (this.Confirmation.record.type !== 'emailchange') {
-      log.warn(`Confirmation mismatch; ${body.confirmation} is not an emailchange id`)
+      this.log.warn(`Confirmation mismatch; ${body.confirmation} is not an emailchange id`)
       return this.setResponse(404)
     }
 
@@ -1238,13 +1299,13 @@ UserModel.prototype.guardedMfaUpdate = async function ({ body, user, ip }) {
     /*
      * Verify the password
      */
-    const [valid] = verifyPassword(body.password, this.record.password)
+    const [valid] = verifyPassword(body.password, this.record.password, this.log)
 
     /*
      * If the password is not correct, log a warning including the IP and reutrn 401
      */
     if (!valid) {
-      log.warn(`Wrong password for existing user while disabling MFA: ${user.uid} from ${ip}`)
+      this.log.warn(`Wrong password for existing user while disabling MFA: ${user.id} from ${ip}`)
       return this.setResponse(401, 'authenticationFailed')
     }
 
@@ -1270,7 +1331,7 @@ UserModel.prototype.guardedMfaUpdate = async function ({ body, user, ip }) {
         /*
          * Problem occured while updating the record. Log warning and return 500
          */
-        log.warn(err, 'Could not disable MFA after token check')
+        this.log.warn(err, 'Could not disable MFA after token check')
         return this.setResponse(500, 'mfaDeactivationFailed')
       }
 
@@ -1317,7 +1378,7 @@ UserModel.prototype.guardedMfaUpdate = async function ({ body, user, ip }) {
         /*
          * Problem occured while updating the record. Log warning and reurn 500
          */
-        log.warn(err, 'Could not enable MFA after token check')
+        this.log.warn(err, 'Could not enable MFA after token check')
         return this.setResponse(500, 'mfaActivationFailed')
       }
 
@@ -1347,7 +1408,7 @@ UserModel.prototype.guardedMfaUpdate = async function ({ body, user, ip }) {
       /*
        * Problem occured while creating MFA setup. Return 500.
        */
-      log.warn(err, 'Failed to setup MFA')
+      this.log.warn(err, 'Failed to setup MFA')
       return this.setResponse(500, 'mfaSetupFailed')
     }
 
@@ -1360,7 +1421,7 @@ UserModel.prototype.guardedMfaUpdate = async function ({ body, user, ip }) {
       /*
        * Problem occured while updating record. Return 500.
        */
-      log.warn(err, 'Could not update MFA secret after setup')
+      this.log.warn(err, 'Could not update MFA secret after setup')
       return this.setResponse(500, 'mfaUpdateAfterSetupFailed')
     }
 
@@ -1405,28 +1466,22 @@ UserModel.prototype.asAccount = function () {
    * Nothing to do here but construct the object to return
    */
   const data = this.clear.data
-  if (data.mfaScratchCodes) delete data.mfaScratchCodes
+  if (data?.mfaScratchCodes) delete data.mfaScratchCodes
 
   return {
-    id: this.record.id,
+    //id: this.record.id,
+    uuid: this.record.uuid,
     bio: this.clear.bio,
     compare: this.record.compare,
     consent: this.record.consent,
     control: this.record.control,
-    createdAt: this.record.createdAt,
     email: this.clear.email,
     data,
     imperial: this.record.imperial,
-    jwtCalls: this.record.jwtCalls,
-    keyCalls: this.record.keyCalls,
-    language: this.record.language,
-    lastSeen: this.record.lastSeen,
     mfaEnabled: this.record.mfaEnabled,
     newsletter: this.record.newsletter,
-    patron: this.record.patron,
     role: this.record.role,
     status: this.record.status,
-    updatedAt: this.record.updatedAt,
     username: this.record.username,
     lusername: this.record.lusername,
   }
@@ -1489,14 +1544,13 @@ UserModel.prototype.asAccountList = async function (list) {
     }
     for (const field of [
       'id',
+      'uuid',
       'compare',
       'consent',
       'control',
       'createdAt',
-      'ihash',
       'jwtCalls',
       'keyCalls',
-      'language',
       'lastSeen',
       'mfaEnabled',
       'newsletter',
@@ -1509,6 +1563,7 @@ UserModel.prototype.asAccountList = async function (list) {
     ])
       clear[field] = record[field]
     clear.passwordType = JSON.parse(record.password).type
+    for (const field of ['mfaSecret', 'patron', 'lusername', 'passwordType']) delete clear[field]
     newList.push(clear)
   }
 
@@ -1526,7 +1581,8 @@ UserModel.prototype.getToken = function () {
    */
   return jwt.sign(
     {
-      _id: this.record.id,
+      _id: this.record.uuid,
+      id: this.record.id,
       username: this.record.username,
       role: this.record.role,
       status: this.record.status,
@@ -1604,7 +1660,7 @@ UserModel.prototype.isLusernameAvailable = async function (lusername) {
     /*
      * An error means it's not good. Return false
      */
-    log.warn({ err, lusername }, 'Could not search for free username')
+    this.log.warn({ err, lusername }, 'Could not search for free username')
     return false
   }
   /*
@@ -1629,7 +1685,7 @@ UserModel.prototype.isLusernameAvailable = async function (lusername) {
  *
  * If this returns false, the request will never make it past the middleware.
  *
- * @param {id} string - The user ID
+ * @param {id} string - The user UUID
  * @param {type} string - The authentication type (one of 'jwt' or 'key')
  * @param {type} string - The middleware auth payload
  * @returns {success} boolean - True if it worked, false if not
@@ -1644,16 +1700,19 @@ UserModel.prototype.papersPlease = async function (id, type, payload) {
   /*
    * Now update the dabatase record
    */
-  let user
+  let user = false
   try {
     user = await this.prisma.user.update({ where: { id }, data })
   } catch (err) {
     /*
      * An error means it's not good. Return false
      */
-    console.log(err)
-    log.warn({ id }, 'Could not update lastSeen field from middleware')
+    this.log.warn({ id }, 'Could not update lastSeen field from middleware')
     return [false, 'failedToUpdateLastSeen']
+  }
+  if (!user) {
+    this.log.warn({ id }, 'Could not load user from id')
+    return [false, 'failedToLoadUserInMiddleware']
   }
 
   /*
@@ -1670,7 +1729,7 @@ UserModel.prototype.papersPlease = async function (id, type, payload) {
       /*
        * An error means it's not good. Return false
        */
-      log.warn({ id }, 'Could not update apikey lastSeen field from middleware')
+      this.log.warn({ id }, 'Could not update apikey lastSeen field from middleware')
       return [false, 'failedToUpdateKeyCallCount']
     }
   }

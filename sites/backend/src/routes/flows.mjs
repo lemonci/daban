@@ -15,8 +15,10 @@ export function flowsRoutes(tools) {
     Flow.uploadImage(req, res, tools)
   )
 
-  // Upload an image - anonymous route for support requests
-  app.post('/images', (req, res) => Flow.uploadImage(req, res, tools, true))
+  // Upload an image
+  app.post('/images', passport.authenticate(...jwt), (req, res) =>
+    Flow.uploadImage(req, res, tools, true)
+  )
 
   // Remove an image
   app.delete('/images/:id/jwt', passport.authenticate(...jwt), (req, res) =>

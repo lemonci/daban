@@ -68,8 +68,6 @@ import { Waralee as waralee } from '@freesewing/waralee'
 import { Yuri as yuri } from '@freesewing/yuri'
 // Translations
 import { i18n as translations } from './i18n.mjs'
-// Examples
-import { designExampleIds, designExampleHrefs } from './examples.mjs'
 
 /*
  * Export the designs themselves
@@ -201,6 +199,9 @@ export const i18n = translations
  * These are examples
  */
 export const examples = {
-  id: designExampleIds,
-  href: designExampleHrefs,
+  id: Object.keys(designs),
+  href: {},
 }
+// Create URLs
+for (const design of Object.keys(designs))
+  examples.href[design] = `https://cdn.freesewing.eu/design/${design}.webp`

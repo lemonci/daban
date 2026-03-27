@@ -1,5 +1,5 @@
 // Dependencies
-import { cloudflareImageUrl, getSearchParam } from '@freesewing/utils'
+import { imageCdnUrl, getSearchParam } from '@freesewing/utils'
 // Context
 import { ModalContext } from '@freesewing/react/context/Modal'
 // Hooks
@@ -25,7 +25,7 @@ import Markdown from 'react-markdown'
 export const OwnProfile = (props) => {
   const { account } = useAccount()
 
-  return <UserProfile {...props} uid={account.id} />
+  return <UserProfile {...props} uuid={account.uuid} />
 }
 
 /**
@@ -39,16 +39,16 @@ export const OwnProfile = (props) => {
  * @param {number} [props.uid = false] - The user ID for which to show the profile
  * @returns {JSX.Element}
  */
-export const UserProfile = ({ Link = false, setTitle = false, uid = false, fromUrl = false }) => {
-  if (!uid && !fromUrl)
+export const UserProfile = ({ Link = false, setTitle = false, uuid = false, fromUrl = false }) => {
+  if (!uuid && !fromUrl)
     return (
       <MiniWarning>
-        You must provide either a <code>uid</code> or <code>fromUrl</code> prop
+        You must provide either a <code>uuid</code> or <code>fromUrl</code> prop
       </MiniWarning>
     )
   if (!Link) Link = WebLink
 
-  const [ruid, setRuid] = useState()
+  const [ruuid, setRuuid] = useState()
 
   // Hooks
   const backend = useBackend()
@@ -58,18 +58,18 @@ export const UserProfile = ({ Link = false, setTitle = false, uid = false, fromU
 
   // Effect
   useEffect(() => {
-    if (uid && uid !== ruid) setRuid(uid)
+    if (uuid && uuid !== ruuid) setRuuid(uuid)
     if (fromUrl) {
       const urlId = getSearchParam(fromUrl)
-      if (urlId && urlId !== ruid) setRuid(urlId)
+      if (urlId && urlId !== ruuid) setRuuid(urlId)
     }
-    if (ruid) loadProfileData(ruid, backend, setData, setTitle)
-  }, [uid, fromUrl, ruid])
+    if (ruuid) loadProfileData(ruuid, backend, setData, setTitle)
+  }, [uuid, fromUrl, ruuid])
 
   return (
     <>
       <div className="tw:w-full tw:flex tw:flex-row tw:flex-wrap tw:items-center tw:gap-4">
-        <Avatar ihash={data.ihash} />
+        <Avatar uuid={ruuid} />
         <div className="tw:flex tw:flex-col tw:items-start tw:gap-1">
           <h2>{data.username}</h2>
           <KeyVal k="role" val={data.role} />
@@ -77,7 +77,7 @@ export const UserProfile = ({ Link = false, setTitle = false, uid = false, fromU
       </div>
       <div className="tw:my-4 tw:border-l-4 tw:pl-2">
         <b>Permalink: </b>
-        <Link href={`/users?id=${ruid}`}>{`freesewing.eu/users?id=${ruid}`}</Link>
+        <Link href={`/users?id=${ruuid}`}>{`freesewing.eu/users?id=${ruuid}`}</Link>
       </div>
       <Markdown>{data.bio}</Markdown>
     </>
@@ -88,10 +88,10 @@ export const UserProfile = ({ Link = false, setTitle = false, uid = false, fromU
  * A component to render an avatar image
  *
  * @component
- * @param {string} ihash - The ihash of the account
+ * @param {string} uuid - The uuid of the account
  * @returns {JSX.Element}
  */
-export const Avatar = ({ ihash }) => {
+export const Avatar = ({ uuid }) => {
   const { setModal } = useContext(ModalContext)
 
   return (
@@ -100,7 +100,7 @@ export const Avatar = ({ ihash }) => {
         setModal(
           <ModalWrapper>
             <img
-              src={cloudflareImageUrl({ id: `uid-${ihash}`, variant: 'public' })}
+              src={imageCdnUrl({ type: 'user', id: uuid })}
               className="tw:max-w-full tw:max-h-screen"
             />
           </ModalWrapper>
@@ -108,7 +108,7 @@ export const Avatar = ({ ihash }) => {
       }
     >
       <img
-        src={cloudflareImageUrl({ id: `uid-${ihash}`, variant: 'sq500' })}
+        src={imageCdnUrl({ type: 'user', id: uuid })}
         className="tw:w-32 tw:h-32 tw:rounded-full tw:shadow tw:border-current tw:border-4"
       />
     </button>

@@ -1,6 +1,6 @@
 // Dependencies
 import { welcomeSteps } from './shared.mjs'
-import { cloudflareImageUrl } from '@freesewing/utils'
+import { imageCdnUrl } from '@freesewing/utils'
 
 // Context
 import { LoadingStatusContext } from '@freesewing/react/context/LoadingStatus'
@@ -57,7 +57,7 @@ export const Avatar = ({ welcome = false, Link = false }) => {
       {!welcome || img !== false ? (
         <img
           alt="img"
-          src={img || cloudflareImageUrl({ id: `uid-${account.ihash}`, variant: 'public' })}
+          src={img || imageCdnUrl({ type: 'user', id: account.uuid })}
           className="tw:shadow tw:mb-4"
         />
       ) : null}
@@ -68,14 +68,14 @@ export const Avatar = ({ welcome = false, Link = false }) => {
         update={setImg}
         current={img}
         valid={(val) => val.length > 0}
-      />
+      />{' '}
       {welcome ? (
         <>
           <IconButton onClick={save} btnProps={{ disabled: !img }}>
             <SaveIcon />
             Save
           </IconButton>
-          <IconButton href={nextHref} className="tw:mt-4">
+          <IconButton href={nextHref} className="tw:mt-4 tw:block">
             <RightIcon stroke={3} /> Continue
           </IconButton>
           {welcomeSteps[account.control].length > 0 ? (

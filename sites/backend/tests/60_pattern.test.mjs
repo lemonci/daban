@@ -1,17 +1,21 @@
-import { api, auth, cat, store } from './utils.mjs'
+import { api, auth, cat, store, loadStore } from './utils.mjs'
 import { strict as assert } from 'node:assert'
 import { describe, it } from 'node:test'
+import { cisFemaleAdult34 as her, cisMaleAdult42 as him } from '@freesewing/models'
+
+const sets = { her, him }
 
 describe(`Pattern tests`, () => {
-  store.account.patterns = {}
   for (const a of ['jwt', 'key']) {
     it(`Create a new pattern (${a})`, async () => {
+      // Ensure we have an account to test with
+      if (!store.account.confirmation) loadStore(store)
+      store.account.patterns = {}
       const body = {
-        test: true,
         design: 'aaron',
         settings: {
           sa: 5,
-          measurements: store.account.sets.her.measurements,
+          measurements: sets.her.measurements,
         },
         name: 'Just a test',
         notes: 'These are my notes',
@@ -21,14 +25,27 @@ describe(`Pattern tests`, () => {
         },
         img: cat,
       }
-      const [status, data] = await api.post(`/patterns/${a}`, body, auth[a])
+      const [status, data] = await api.post(`/patterns/${a}`, body, auth[a]())
       assert.equal(status, 201)
       assert.equal(data.result, 'created')
-      assert.equal(typeof data.pattern.id, 'number')
-      assert.equal(data.pattern.userId, store.account.id)
+      assert.equal(typeof data.pattern.data, 'object')
       assert.equal(data.pattern.design, body.design)
+      assert.equal(data.pattern.name, body.name)
+      assert.equal(data.pattern.notes, body.notes)
       assert.equal(data.pattern.public, body.public)
+      assert.equal(typeof data.pattern.settings, 'object')
+      assert.equal(data.pattern.settings.sa, body.settings.sa)
+      assert.equal(typeof data.pattern.uuid, 'string')
       store.account.patterns[a] = data.pattern
+    })
+
+    it(`Should not update a non-existing pattern (${a})`, async () => {
+      const [status, data] = await api.patch(
+        `/patterns/non-existing/${a}`,
+        { notes: 'New notes' },
+        auth[a]()
+      )
+      assert.equal(status, 404)
     })
 
     for (const field of ['name', 'notes']) {
@@ -37,9 +54,9 @@ describe(`Pattern tests`, () => {
         const val = store.account.patterns[a][field] + '_updated'
         body[field] = val
         const [status, data] = await api.patch(
-          `/patterns/${store.account.patterns[a].id}/${a}`,
+          `/patterns/${store.account.patterns[a].uuid}/${a}`,
           body,
-          auth[a]
+          auth[a]()
         )
         assert.equal(status, 200)
         assert.equal(data.result, 'success')
@@ -50,9 +67,9 @@ describe(`Pattern tests`, () => {
     it(`Update the pattern public field (${a})`, async () => {
       const body = { public: !store.account.patterns[a].public }
       const [status, data] = await api.patch(
-        `/patterns/${store.account.patterns[a].id}/${a}`,
+        `/patterns/${store.account.patterns[a].uuid}/${a}`,
         body,
-        auth[a]
+        auth[a]()
       )
       assert.equal(status, 200)
       assert.equal(data.result, 'success')
@@ -62,9 +79,9 @@ describe(`Pattern tests`, () => {
     it(`Do not update the pattern design field (${a})`, async () => {
       const body = { design: 'updated' }
       const [status, data] = await api.patch(
-        `/patterns/${store.account.patterns[a].id}/${a}`,
+        `/patterns/${store.account.patterns[a].uuid}/${a}`,
         body,
-        auth[a]
+        auth[a]()
       )
       assert.equal(status, 200)
       assert.equal(data.result, 'success')
@@ -76,9 +93,9 @@ describe(`Pattern tests`, () => {
         const body = {}
         body[field] = { test: { value: 'hello' } }
         const [status, data] = await api.patch(
-          `/patterns/${store.account.patterns[a].id}/${a}`,
+          `/patterns/${store.account.patterns[a].uuid}/${a}`,
           body,
-          auth[a]
+          auth[a]()
         )
         assert.equal(status, 200)
         assert.equal(data.result, 'success')
@@ -89,8 +106,8 @@ describe(`Pattern tests`, () => {
     it(`Read a pattern (${a})`, async () => {
       const body = { design: 'updated' }
       const [status, data] = await api.get(
-        `/patterns/${store.account.patterns[a].id}/${a}`,
-        auth[a]
+        `/patterns/${store.account.patterns[a].uuid}/${a}`,
+        auth[a]()
       )
       assert.equal(status, 200)
       assert.equal(data.result, 'success')
@@ -100,8 +117,8 @@ describe(`Pattern tests`, () => {
     it(`Do not allow read another user's non-public pattern (${a})`, async () => {
       const body = { design: 'updated' }
       const [status, data] = await api.get(
-        `/patterns/${store.account.patterns[a].id}/${a}`,
-        auth[`alt${a}`]
+        `/patterns/${store.account.patterns[a].uuid}/${a}`,
+        auth[a]('alt')
       )
       assert.equal(status, 403)
     })
@@ -109,17 +126,17 @@ describe(`Pattern tests`, () => {
     it(`Do not allow updating another user's non-public pattern (${a})`, async () => {
       const body = { name: 'changed' }
       const [status, data] = await api.patch(
-        `/patterns/${store.account.patterns[a].id}/${a}`,
+        `/patterns/${store.account.patterns[a].uuid}/${a}`,
         body,
-        auth[`alt${a}`]
+        auth[a]('alt')
       )
       assert.equal(status, 403)
     })
 
     it(`Do not allow removing another user's pattern (${a})`, async () => {
       const [status, data] = await api.delete(
-        `/patterns/${store.account.patterns[a].id}/${a}`,
-        auth[`alt${a}`]
+        `/patterns/${store.account.patterns[a].uuid}/${a}`,
+        auth[a]('alt')
       )
       assert.equal(status, 403)
     })

@@ -1,6 +1,6 @@
 // Dependencies
 import orderBy from 'lodash/orderBy.js'
-import { capitalize, shortDate } from '@freesewing/utils'
+import { capitalize, shortDate, shortUuid } from '@freesewing/utils'
 // Context
 import { LoadingStatusContext } from '@freesewing/react/context/LoadingStatus'
 // Hooks
@@ -11,6 +11,7 @@ import { useSelection } from '@freesewing/react/hooks/useSelection'
 import { TableWrapper } from '@freesewing/react/components/Table'
 import { PatternCard } from '@freesewing/react/components/Account'
 import { Link as WebLink } from '@freesewing/react/components/Link'
+import { Uuid } from '@freesewing/react/components/Uuid'
 import {
   BoolNoIcon,
   BoolYesIcon,
@@ -46,7 +47,6 @@ export const Patterns = ({ Link = false }) => {
     const getPatterns = async () => {
       setLoadingStatus([true, 'Loading patterns from backend'])
       const [status, body] = await backend.getPatterns()
-      console.log({ status, body })
       if (status === 200) {
         setPatterns(body.patterns)
         setLoadingStatus([true, 'Patterns loaded', true, true])
@@ -72,7 +72,7 @@ export const Patterns = ({ Link = false }) => {
   }
 
   const fields = {
-    id: '#',
+    uuid: '#',
     img: 'Image',
     name: 'Name',
     design: 'Design',
@@ -134,15 +134,17 @@ export const Patterns = ({ Link = false }) => {
                 <td className="tw:text-base tw:font-medium">
                   <input
                     type="checkbox"
-                    checked={selection[pattern.id] ? true : false}
+                    checked={selection[pattern.uuid] ? true : false}
                     className="tw:daisy-checkbox tw:daisy-checkbox-secondary"
-                    onClick={() => toggle(pattern.id)}
+                    onClick={() => toggle(pattern.uuid)}
                   />
                 </td>
-                <td className="tw:text-base tw:font-medium">{pattern.id}</td>
+                <td className="tw:text-base tw:font-medium">
+                  <Uuid uuid={pattern.uuid} />
+                </td>
                 <td className="tw:text-base tw:font-medium">
                   <PatternCard
-                    href={`/account/data/patterns/pattern?id=${pattern.id}`}
+                    href={`/account/data/patterns/pattern?uuid=${pattern.uuid}`}
                     pattern={pattern}
                     size="xs"
                     Link={Link}
@@ -150,7 +152,7 @@ export const Patterns = ({ Link = false }) => {
                 </td>
                 <td className="tw:text-base tw:font-medium">
                   <Link
-                    href={`/account/data/patterns/pattern?id=${pattern.id}`}
+                    href={`/account/data/patterns/pattern?uuid=${pattern.uuid}`}
                     className="tw:text-secondary tw:underline tw:decoration-2 tw:hover:decoration-4"
                   >
                     {pattern.name}

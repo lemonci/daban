@@ -8,7 +8,7 @@ const light = '#EEEEEE'
  * Exporting this closure that makes sure we have access to the
  * instantiated config
  */
-export const mfa = ({ service }) => ({
+export const mfa = ({ service }, log) => ({
   mfa: {
     enroll: async (user) => {
       const secret = authenticator.generateSecret()
@@ -20,7 +20,7 @@ export const mfa = ({ service }) => ({
           color: { dark, light },
         })
       } catch (err) {
-        console.log(err)
+        log.warn(`Failed to generated QR code: ${err.message}`)
       }
       svg = svg
         .replace(dark, 'currentColor')

@@ -1,18 +1,13 @@
-import DocusaurusLayout from '@theme/Layout'
-import { DocusaurusPage } from '@freesewing/react/components/Docusaurus'
-import { NoTitleLayout } from '@freesewing/react/components/Layout'
+import DocusaurusPageWrapper from '@site/src/components/page.mjs'
 import { SignInConfirmation } from '@freesewing/react/components/SignIn'
 
 /*
  * This is the sign in confirmation page (via email).
- * Each page MUST be wrapped in the DocusaurusPage component.
- * You also MUST pass in the DocusaurusLayout compoment.
+ * Each page that is not a DocItem MUST be wrapped in the (local) DocusaurusLayout component.
  */
 export default function SignInPage() {
   return (
-    <DocusaurusPage
-      DocusaurusLayout={DocusaurusLayout}
-      Layout={NoTitleLayout}
+    <DocusaurusPageWrapper
       title="Sign In"
       description="Sign In to your FreeSewing account to unlock all features"
     >
@@ -21,6 +16,6 @@ export default function SignInPage() {
           <SignInConfirmation onSuccess={() => (window.location.href = '/account')} silent />
         </div>
       </div>
-    </DocusaurusPage>
+    </DocusaurusPageWrapper>
   )
 }

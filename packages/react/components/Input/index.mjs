@@ -1,19 +1,18 @@
 // Dependencies
 import {
   capitalize,
-  cloudflareImageUrl,
+  imageCdnUrl,
   measurementAsMm,
   measurementAsUnits,
   distanceAsMm,
   validateEmail,
 } from '@freesewing/utils'
-import { cloudflare } from '@freesewing/config'
 import { collection } from '@freesewing/collection'
 import { measurements as measurementsTranslations } from '@freesewing/i18n'
 // Context
 import { LoadingStatusContext } from '@freesewing/react/context/LoadingStatus'
 // Hooks
-import React, { useState, useCallback, useContext } from 'react'
+import React, { useState, useCallback, useContext, useRef } from 'react'
 import { useDropzone } from 'react-dropzone'
 import { useBackend } from '@freesewing/react/hooks/useBackend'
 // Components
@@ -21,6 +20,7 @@ import { Link as WebLink } from '@freesewing/react/components/Link'
 import { TrashIcon, ResetIcon, UploadIcon, HelpIcon } from '@freesewing/react/components/Icon'
 import { isDegreeMeasurement } from '@freesewing/config'
 import { Tabs, Tab } from '@freesewing/react/components/Tab'
+import { Popout } from '@freesewing/react/components/Popout'
 import Markdown from 'react-markdown'
 
 /*
@@ -259,6 +259,91 @@ export const StringInput = ({
     />
   </Fieldset>
 )
+
+/**
+ * A component to handle input of one-time codes
+ *
+ * @component
+ * @param {object} props - All component props
+ * @param {number} props.length - The length of the code
+ * @param {function} props.onComplete - The function to call when input is complete
+ * @returns {JSX.Element}
+ */
+
+export const OtpInput = ({ length = 4, onComplete, label = 'Confirmation Code', valid = null }) => {
+  const [values, setValues] = useState(Array(length).fill(''))
+  const inputs = useRef([])
+
+  const focusBox = (i) => inputs.current[i]?.focus()
+
+  const handleChange = (e, i) => {
+    const char = e.target.value.replace(/\D/g, '').slice(-1)
+    const next = [...values]
+    next[i] = char
+    setValues(next)
+    if (char && i < length - 1) focusBox(i + 1)
+    if (next.every(Boolean)) onComplete?.(next.join(''))
+  }
+
+  const handleKeyDown = (e, i) => {
+    if (e.key === 'Backspace') {
+      if (!values[i] && i > 0) {
+        focusBox(i - 1)
+        const next = [...values]
+        next[i - 1] = ''
+        setValues(next)
+      }
+    }
+    if (e.key === 'ArrowLeft' && i > 0) focusBox(i - 1)
+    if (e.key === 'ArrowRight' && i < length - 1) focusBox(i + 1)
+  }
+
+  const handlePaste = (e) => {
+    e.preventDefault()
+    const text = e.clipboardData.getData('text').replace(/\D/g, '').slice(0, length)
+    const next = Array(length).fill('')
+    ;[...text].forEach((char, j) => (next[j] = char))
+    setValues(next)
+    focusBox(Math.min(text.length, length - 1))
+    if (text.length === length) onComplete?.(text)
+  }
+
+  return (
+    <Fieldset {...{ label }} box={false}>
+      <div className="tw:flex tw:gap-3 tw:items-baseline">
+        {values.map((val, i) => (
+          <input
+            key={i}
+            ref={(el) => (inputs.current[i] = el)}
+            type="text"
+            inputMode="numeric"
+            maxLength={1}
+            value={val}
+            autoComplete={i === 0 ? 'one-time-code' : 'off'}
+            onChange={(e) => handleChange(e, i)}
+            onKeyDown={(e) => handleKeyDown(e, i)}
+            onPaste={handlePaste}
+            onFocus={(e) => e.target.select()}
+            className={`tw:daisy-input tw:daisy-input-bordered tw:w-14 tw:h-16 tw:text-center tw:text-2xl tw:font-medium
+            ${valid === true ? 'tw:daisy-input-success' : ''}
+            ${valid === false ? 'tw:daisy-input-error' : ''}
+            `}
+          />
+        ))}
+        {valid === true ? (
+          <span role="img" className="tw:h-16 tw:display-block tw:text-4xl">
+            ✅
+          </span>
+        ) : null}
+        {valid === false ? (
+          <span role="img" className="tw:h-16 tw:display-block tw:text-4xl">
+            ⛔
+          </span>
+        ) : null}
+      </div>
+    </Fieldset>
+  )
+}
 
 /**
  * A component to handle input of MFA codes. Essentially a NumberInput with some default props set.
@@ -543,18 +628,16 @@ export const ImageInput = ({
 }) => {
   const backend = useBackend()
   const { setLoadingStatus } = useContext(LoadingStatusContext)
-  const [url, setUrl] = useState(false)
   const [uploadedId, setUploadedId] = useState(false)
 
-  const upload = async (img, fromUrl = false) => {
+  const upload = async (img) => {
     setLoadingStatus([true, 'uploadingImage'])
     const data = {
       type: imgType,
       subId: imgSubid,
       slug: imgSlug,
+      img: img,
     }
-    if (fromUrl) data.url = img
-    else data.img = img
     const [status, body] = await backend.uploadImage(data)
     setLoadingStatus([true, 'allDone', true, true])
     if (status === 200 && body.result === 'success') {
@@ -584,7 +667,7 @@ export const ImageInput = ({
           className="tw:bg-base-100 tw:w-full tw:h-36 tw:mb-2 tw:mx-auto tw:flex tw:flex-col tw:items-center tw:text-center tw:justify-center"
           style={{
             backgroundImage: `url(${
-              uploadedId ? cloudflareImageUrl({ type: 'public', id: uploadedId }) : current
+              uploadedId ? imageCdnUrl({ type: imgType, id: uploadedId }) : current
             })`,
             backgroundSize: 'contain',
             backgroundRepeat: 'no-repeat',
@@ -618,26 +701,6 @@ export const ImageInput = ({
         >
           Select an image to use
         </button>
-      </div>
-      <p className="tw:p-0 tw:my-2 tw:text-center">or</p>
-      <div className="tw:flex tw:flex-row tw:items-center">
-        <input
-          id={id}
-          type="url"
-          className="tw:daisy-input tw:daisy-input-secondary tw:w-full tw:daisy-input-bordered"
-          placeholder="Paste an image URL here"
-          value={current}
-          onChange={active ? (evt) => setUrl(evt.target.value) : (evt) => update(evt.target.value)}
-        />
-        {active && (
-          <button
-            className="tw:daisy-btn tw:daisy-btn-secondary tw:ml-2 tw:capitalize"
-            disabled={!url || url.length < 1}
-            onClick={() => upload(url, true)}
-          >
-            <UploadIcon /> Upload
-          </button>
-        )}
       </div>
     </Fieldset>
   )
@@ -1212,7 +1275,7 @@ const SuggestedUser = ({ id, username, avatar, q, confirmUser }) => {
 const SuggestedUserInner = ({ id, username, avatar, q }) => (
   <>
     <object
-      data={cloudflareImageUrl({ id: `uid-${avatar}`, variant: 'sq500' })}
+      data={imageCdnUrl({ type: 'user', id: `uid-${avatar}` })}
       type="image/jpeg"
       className="tw:shadow tw:rounded-full tw:w-10 tw:h-10 tw:bg-base-300"
     >

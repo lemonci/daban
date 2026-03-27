@@ -4,12 +4,12 @@ import helmet from 'helmet'
 import chalk from 'chalk'
 import { createDb } from './utils/db.mjs'
 import passport from 'passport'
-import path from 'node:path'
-import { fileURLToPath } from 'url'
 // Routes
 import { routes } from './routes/index.mjs'
 // Config
 import { verifyConfig } from './config.mjs'
+// Logger
+import { logger } from './utils/log.mjs'
 // Middleware
 import { loadExpressMiddleware, loadPassportMiddleware } from './middleware.mjs'
 // Encryption
@@ -28,9 +28,15 @@ import { openapi } from '../openapi/index.mjs'
 // Catch-all page
 import { html as catchAll } from './html/catch-all.mjs'
 
-export const api = () => {
+/**
+ * This is the main entrypoint. Call this to start the API.
+ *
+ * @param {function|boolean} [transformConfig] - An optional config transformer function
+ * @param {boolean} [silent] - Set this to true to silence logs (for unit tests)
+ */
+export const api = (transformConfig = false, silent = false) => {
   // Bootstrap
-  const config = verifyConfig()
+  const config = verifyConfig(transformConfig, silent)
   const dbPath = config.db.path
   const prisma = createDb(dbPath)
   const app = express()
@@ -46,19 +52,21 @@ export const api = () => {
   app.use(express.static('public'))
   app.use('/docs', swaggerUi.serve, swaggerUi.setup(openapi))
 
+  const log = logger(config)
   const tools = {
     app,
+    log,
     passport,
     prisma,
     ...encryption(config.encryption.key),
-    ...mfa(config.mfa),
-    ...mailer(config),
+    ...mfa(config.mfa, log),
+    ...mailer(config, log),
     ...rbac(config.roles),
     config,
   }
 
   // Load middleware
-  loadExpressMiddleware(app, config)
+  loadExpressMiddleware(app, tools)
   loadPassportMiddleware(passport, tools)
 
   // Load routes

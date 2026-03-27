@@ -109,18 +109,10 @@ export const Newsletter = ({ welcome = false, Link = false }) => {
       ) : null}
       {welcome ? null : (
         <Popout type="tip">
-          <h5>You can unsubscribe at any time with the link below</h5>
+          <h5>You can unsubscribe at any time from every newsletter edition</h5>
           <p>
-            This unsubscribe link will also be included at the bottom of every newsletter we send
-            you, so you do not need to bookmark it, but you can if you want to.
-          </p>
-          <p>
-            <Link href={`/newsletter/unsubscribe?x=${account?.ehash}`} className={linkClasses}>
-              Unsubscribe link
-            </Link>
-          </p>
-          <p className="tw:text-sm">
-            This link is to unsubscribe you specifically, do not share it with other subscribers.
+            An unsubscribe link will also be included at the bottom of every newsletter we send you,
+            so you do not need to come here to unsubscribe.
           </p>
         </Popout>
       )}

@@ -1,8 +1,8 @@
 # See https://help.github.com/ignore-files/ for more about ignoring files.
 dump
-production.sqlite
-production.sqlite-shm
-production.sqlite-wal
+*.sqlite
+*.sqlite-shm
+*.sqlite-wal
 .husky
 local
 oidc-jwks.json
@@ -20,6 +20,10 @@ plugins/plugin-theme/css
 packages/core/coverage
 packages/*/report
 sites/backend/coverage
+
+# unit test articats
+sites/backend/tests/unit-test-store.json
+sites/backend/tests/media
 
 # Any Yarn lock files
 designs/*/package-lock.json

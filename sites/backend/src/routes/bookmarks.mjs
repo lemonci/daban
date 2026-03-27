@@ -16,10 +16,10 @@ export function bookmarksRoutes(tools) {
   )
 
   // Read a bookmark
-  app.get('/bookmarks/:id/jwt', passport.authenticate(...jwt), (req, res) =>
+  app.get('/bookmarks/:uuid/jwt', passport.authenticate(...jwt), (req, res) =>
     Bookmarks.read(req, res, tools)
   )
-  app.get('/bookmarks/:id/key', passport.authenticate(...bsc), (req, res) =>
+  app.get('/bookmarks/:uuid/key', passport.authenticate(...bsc), (req, res) =>
     Bookmarks.read(req, res, tools)
   )
 
@@ -32,18 +32,18 @@ export function bookmarksRoutes(tools) {
   )
 
   // Update a bookmark
-  app.patch('/bookmarks/:id/jwt', passport.authenticate(...jwt), (req, res) =>
+  app.patch('/bookmarks/:uuid/jwt', passport.authenticate(...jwt), (req, res) =>
     Bookmarks.update(req, res, tools)
   )
-  app.patch('/bookmarks/:id/key', passport.authenticate(...bsc), (req, res) =>
+  app.patch('/bookmarks/:uuid/key', passport.authenticate(...bsc), (req, res) =>
     Bookmarks.update(req, res, tools)
   )
 
   // Delete a bookmark
-  app.delete('/bookmarks/:id/jwt', passport.authenticate(...jwt), (req, res) =>
+  app.delete('/bookmarks/:uuid/jwt', passport.authenticate(...jwt), (req, res) =>
     Bookmarks.delete(req, res, tools)
   )
-  app.delete('/bookmarks/:id/key', passport.authenticate(...bsc), (req, res) =>
+  app.delete('/bookmarks/:uuid/key', passport.authenticate(...bsc), (req, res) =>
     Bookmarks.delete(req, res, tools)
   )
 }

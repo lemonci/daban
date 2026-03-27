@@ -4,6 +4,9 @@ FROM node:lts-alpine AS builder
 ## Set workdir
 WORKDIR /backend
 
+## We need ffmpeg to convert images to webp
+RUN apk add ffmpeg
+
 ## Install node dependencies
 COPY package.json ./
 RUN npm install

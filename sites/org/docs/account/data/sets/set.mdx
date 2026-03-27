@@ -13,7 +13,7 @@ import Link from '@docusaurus/Link'
   <RoleBlock role="user">
     <Set
       Link={Link}
-      id={getSearchParam('id')}
+      uuid={getSearchParam('uuid')}
       measurementHelpProvider={(m) => `/docs/measurements/${m.toLowerCase()}`}
     />
   </RoleBlock>

@@ -1,6 +1,6 @@
 import React from 'react'
 import { examples } from '@site/design-examples.mjs'
-import { cloudflareImageUrl } from '@freesewing/utils'
+import { imageCdnUrl } from '@freesewing/utils'
 import Link from '@docusaurus/Link'
 import { Popout } from '@freesewing/react/components/Popout'
 
@@ -22,7 +22,7 @@ function DesignExamples({ design }) {
           title={example.title}
           className="tw:w-full tw:aspect-square tw:rounded-lg tw:shadow"
           style={{
-            backgroundImage: `url(${cloudflareImageUrl({ id: 'showcase-' + example.id })})`,
+            backgroundImage: `url(${imageCdnUrl({ type: 'showcase', id: example.id })})`,
             backgroundSize: 'cover',
             backgroundPosition: 'center center',
           }}

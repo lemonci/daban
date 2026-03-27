@@ -1,5 +1,4 @@
 import { UsersController } from '../controllers/users.mjs'
-import { authRateLimit } from '../middleware.mjs'
 
 const Users = new UsersController()
 const jwt = ['jwt', { session: false }]
@@ -7,24 +6,22 @@ const guest = ['jwt-guest', { session: false }]
 const bsc = ['basic', { session: false }]
 
 export function usersRoutes(tools) {
-  const { app, passport } = tools
+  const { app, passport, limit } = tools
 
   // Sign Up
-  app.post('/signup', authRateLimit, (req, res) => Users.signup(req, res, tools))
+  app.post('/signup', limit.auth, (req, res) => Users.signup(req, res, tools))
 
   // Confirm account
-  app.post('/confirm/signup/:id', authRateLimit, (req, res) => Users.confirm(req, res, tools))
+  app.post('/confirm/signup/:uuid', limit.auth, (req, res) => Users.confirm(req, res, tools))
 
   // Sign In
-  app.post('/signin', authRateLimit, (req, res) => Users.signin(req, res, tools))
+  app.post('/signin', limit.auth, (req, res) => Users.signin(req, res, tools))
 
   // Send sign-in link (aka magic link)
-  app.post('/signinlink', authRateLimit, (req, res) => Users.signinlink(req, res, tools))
+  app.post('/signinlink', limit.auth, (req, res) => Users.signinlink(req, res, tools))
 
   // Login via sign-in link (aka magic link)
-  app.post('/signinlink/:id/:check', authRateLimit, (req, res) =>
-    Users.signinvialink(req, res, tools)
-  )
+  app.post('/signinlink/:uuid', limit.auth, (req, res) => Users.signinvialink(req, res, tools))
 
   // Read current jwt This gets special treatment as it is a route that we allow
   // even when the account status or consent would normally prohibit access.
@@ -34,7 +31,7 @@ export function usersRoutes(tools) {
     Users.whoami(req, res, tools)
   )
 
-  // Read the accound data
+  // Read the account data
   app.get('/account/jwt', passport.authenticate(...jwt), (req, res) =>
     Users.whoami(req, res, tools)
   )
@@ -72,16 +69,15 @@ export function usersRoutes(tools) {
   )
 
   // Load full user data
-  app.get('/users/:id/jwt', passport.authenticate(...jwt), (req, res) =>
+  app.get('/users/:uuid/jwt', passport.authenticate(...jwt), (req, res) =>
     Users.allData(req, res, tools)
   )
-  app.get('/users/:id/key', passport.authenticate(...bsc), (req, res) =>
+  app.get('/users/:uuid/key', passport.authenticate(...bsc), (req, res) =>
     Users.allData(req, res, tools)
   )
 
   // Load a user profile
-  // We removed this to prevent user enumeration
-  //app.get('/users/:id', (req, res) => Users.profile(req, res, tools))
+  app.get('/users/:uuid', (req, res) => Users.profile(req, res, tools))
 
   // Export account data
   app.get('/account/export/jwt', passport.authenticate(...jwt), (req, res) =>

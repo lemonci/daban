@@ -24,10 +24,10 @@ export function apikeysRoutes(tools) {
   )
 
   // Read Apikey
-  app.get('/apikeys/:id/jwt', passport.authenticate(...jwt), (req, res) =>
+  app.get('/apikeys/:uuid/jwt', passport.authenticate(...jwt), (req, res) =>
     Apikeys.read(req, res, tools)
   )
-  app.get('/apikeys/:id/key', passport.authenticate(...bsc), (req, res) =>
+  app.get('/apikeys/:uuid/key', passport.authenticate(...bsc), (req, res) =>
     Apikeys.read(req, res, tools)
   )
 
@@ -37,10 +37,10 @@ export function apikeysRoutes(tools) {
   )
 
   // Remove Apikey
-  app.delete('/apikeys/:id/jwt', passport.authenticate(...jwt), (req, res) =>
+  app.delete('/apikeys/:uuid/jwt', passport.authenticate(...jwt), (req, res) =>
     Apikeys.delete(req, res, tools)
   )
-  app.delete('/apikeys/:id/key', passport.authenticate(...bsc), (req, res) =>
+  app.delete('/apikeys/:uuid/key', passport.authenticate(...bsc), (req, res) =>
     Apikeys.delete(req, res, tools)
   )
 }

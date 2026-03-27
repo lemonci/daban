@@ -1,5 +1,5 @@
 import tlds from 'tlds/index.json' with { type: 'json' }
-import { cloudflare as cloudflareConfig } from '@freesewing/config'
+import { urls } from '@freesewing/config'
 import _get from 'lodash/get.js'
 import _set from 'lodash/set.js'
 import _unset from 'lodash/unset.js'
@@ -124,49 +124,39 @@ export function escapeSvgText(text) {
 }
 
 /*
- * Returns the URL of a user avatar (on cloudflare)
- * based on the ihash and Variant
+ * Returns the URL of a user avatar based on the uuid
  *
- * @param {string} ihash - The user's ihash
- * @param {string} variant - One of the cloudflare image variants
+ * @param {string} uuid - The user's uuid
  * @return {string} url - The image URL
  */
-export function userAvatarUrl({ ihash = false, variant = 'public' }) {
-  /*
-   * If the variant is invalid, set it to the smallest thumbnail so
-   * people don't load enourmous images by accident
-   */
-  if (!cloudflareConfig.variants.includes(variant)) variant = 'sq100'
-
-  /*
-   * Without an ihash, return something default
-   */
-  return ihash
-    ? cloudflareImageUrl({ id: `uid-${ihash}`, variant })
-    : cloudflareImageUrl({ id: `default-avatar`, variant })
+export function userAvatarUrl({ uuid = false }) {
+  // Defer to imageCdnUrl
+  return imageCdnUrl({ type: 'user', uuid })
 }
 
 /*
- * Returns the URL of a cloudflare image
- * based on the ID and Variant
+ * Returns the URL of an image stored on the FreeSewing backend
+ * (but cached by the FreeSewing CDN)
  *
- * @param {string} id - The image ID
- * @param {string} variant - One of the cloudflare image variants
- * @return {string} url - The image URL
+ * @param {params} object - All params
+ * @param {string} params.type - The image type
+ * @param {string} params.id - The UUID or other id, depending on type
+ * @param {string} params.subId - The id for a sub-image of a post
+ * @param {string} params.raw - A raw path url, takes precendence
+ * @return {string} url - The full URL to the image on the CDN
  */
-export function cloudflareImageUrl({ id = 'default-avatar', variant = 'public' }) {
-  /*
-   * Return something default so that people will actually change it
-   */
-  if (!id || id === 'default-avatar') return cloudflareConfig.dflt
+export function imageCdnUrl({ type = 'user', id = false, subId = false, raw = false }) {
+  if (raw && typeof raw === 'string') return `${urls.cdn}/${raw}`
+  let path = 'user/default-avatar'
+  if (typeof id === 'string') {
+    if (['cset', 'set', 'user', 'pattern'].includes(type)) {
+      path = `${type}/${id.slice(0, 1)}/${id.slice(0, 2)}/${id}.webp`
+    } else if (['blog', 'showcase'].includes(type)) {
+      path = `${type}/${id}/${subId ? subId : 'main'}.webp`
+    }
+  }
 
-  /*
-   * If the variant is invalid, set it to the smallest thumbnail so
-   * people don't load enourmous images by accident
-   */
-  if (!cloudflareConfig.variants.includes(variant)) variant = 'sq100'
-
-  return `${cloudflareConfig.url}${id}/${variant}`
+  return `${urls.cdn}/${path}`
 }
 
 /**

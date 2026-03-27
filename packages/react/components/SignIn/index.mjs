@@ -1,3 +1,4 @@
+import { confirmCheck } from '../SignUp/index.mjs'
 // Utils
 import { horFlexClasses, horFlexClassesNoSm, getSearchParam, navigate } from '@freesewing/utils'
 // Context
@@ -18,8 +19,9 @@ import {
   FreeSewingIcon,
   UserIcon,
 } from '@freesewing/react/components/Icon'
-import { MfaInput, StringInput, PasswordInput } from '@freesewing/react/components/Input'
+import { OtpInput, MfaInput, StringInput, PasswordInput } from '@freesewing/react/components/Input'
 import { H1 } from '@freesewing/react/components/Heading'
+import { EmailHelp } from '@freesewing/react/components/Help'
 
 /*
  *
@@ -124,8 +126,8 @@ export const SignIn = ({ onSuccess = false, silent = false }) => {
     // Bad request
     if (status === 400) {
       let msg
-      if (result.data.error === 'usernameMissing') msg = 'Please provide your username'
-      else if (result.data.error === 'passwordMissing') msg = 'Please provide your password'
+      if (body.error === 'usernameMissing') msg = 'Please provide your username'
+      else if (body.error === 'passwordMissing') msg = 'Please provide your password'
       setSignInFailed(msg)
       setLoadingStatus([true, msg, true, false])
     }
@@ -155,13 +157,7 @@ export const SignIn = ({ onSuccess = false, silent = false }) => {
   if (magicLinkSent)
     return (
       <WrapForm>
-        <H1>Email Sent</H1>
-        <p className="tw:text-inherit tw:text-lg tw:text-center">
-          Go check your inbox for an email from <b>FreeSewing.org</b>
-        </p>
-        <p className="tw:text-inherit tw:text-lg tw:text-center">
-          Click the sign-in link in that email to sign in to your FreeSewing account.
-        </p>
+        <EmailHelp type="signin" />
         <div className="tw:flex tw:flex-row tw:gap-4 tw:items-center tw:justify-center tw:p-8">
           <button
             className="tw:daisy-btn tw:daisy-btn-outline tw:daisy-btn-sm"
@@ -204,9 +200,9 @@ export const SignIn = ({ onSuccess = false, silent = false }) => {
         <legend className="tw:daisy-fieldset-legend">Sign in to FreeSewing</legend>
         {!seenBefore && (
           <StringInput
-            label="Your Email address, Username, or User #"
+            label="Your Email address or Username"
             update={setUsername}
-            placeholder="Your Email address, Username, or User #"
+            placeholder="Your Email address or Username"
             value={username}
             valid={(val) => val.length > 1}
           />
@@ -225,9 +221,9 @@ export const SignIn = ({ onSuccess = false, silent = false }) => {
                 <span className="tw:hidden tw:lg:block">
                   <EmailIcon />
                 </span>
-                <span className="tw:pl-2">Email me a sign-in link</span>
+                <span className="tw:pl-2">Send Authentication Code</span>
                 <span className="tw:hidden tw:lg:block">
-                  <EmailIcon />
+                  <KeyIcon />
                 </span>
               </>
             )}
@@ -263,7 +259,7 @@ export const SignIn = ({ onSuccess = false, silent = false }) => {
           onClick={() => setMagicLink(!magicLink)}
         >
           <span className="tw:hidden tw:lg:block">{magicLink ? <LockIcon /> : <EmailIcon />}</span>
-          {magicLink ? 'Use your password' : 'Email me a sign-in link'}
+          {magicLink ? 'Sign in with password' : 'Send Authentication Codee'}
           <span className="tw:hidden tw:lg:block">{magicLink ? <KeyIcon /> : <EmailIcon />}</span>
         </button>
       </fieldset>
@@ -334,6 +330,7 @@ export const SignInConfirmation = ({ onSuccess = false }) => {
   const [error, setError] = useState(false)
   const [id, setId] = useState()
   const [check, setCheck] = useState()
+  const [checkConfirmed, setCheckConfirmed] = useState()
   const [mfa, setMfa] = useState()
   const [mfaCode, setMfaCode] = useState()
 
@@ -348,15 +345,13 @@ export const SignInConfirmation = ({ onSuccess = false }) => {
   useEffect(() => {
     const newId = getSearchParam('id')
     if (!newId) setError('noId')
-    const newCheck = getSearchParam('check')
     if (newId !== id) setId(newId)
-    if (newCheck !== check) setCheck(newCheck)
-  }, [id, check])
+  }, [id])
 
   useEffect(() => {
     // Call async method
-    if (id) getConfirmation()
-  }, [id])
+    if (id && check && checkConfirmed) getConfirmation()
+  }, [id, check, checkConfirmed])
 
   // Gets the confirmation
   const getConfirmation = async () => {
@@ -394,6 +389,11 @@ export const SignInConfirmation = ({ onSuccess = false }) => {
     }
   }
 
+  const checkOtp = (val) => {
+    setCheck(val)
+    confirmCheck(backend, id, val, setCheckConfirmed)
+  }
+
   // Short-circuit errors
   if (error === 'noId')
     return (
@@ -401,6 +401,19 @@ export const SignInConfirmation = ({ onSuccess = false }) => {
         You seem to have arrived on this page in a way that is not supported
       </Popout>
     )
+
+  // Prompt for the check
+  if (!check || !checkConfirmed)
+    return (
+      <>
+        <h1 className="tw:mt-24">Enter your one-time code</h1>
+        <OtpInput onComplete={checkOtp} valid={checkConfirmed} />
+        {check && check.length === 4 ? null : (
+          <p>Enter the 4-digit one-time code that was included in the email.</p>
+        )}
+      </>
+    )
+
   if (error && mfa)
     return error === 'signInFailed' ? (
       <>
@@ -428,5 +441,10 @@ export const SignInConfirmation = ({ onSuccess = false }) => {
       </>
     )
 
-  return <p>fixme</p>
+  return (
+    <p>
+      This should never get rendered. Please report this with error code:
+      signin-confirmation-fallthrough.
+    </p>
+  )
 }

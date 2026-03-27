@@ -7,7 +7,7 @@ import { useLocation } from '@docusaurus/router'
 import BlogPostItemHeaderInfo from '@theme/BlogPostItem/Header/Info'
 import BlogPostItemHeaderAuthors from '@theme/BlogPostItem/Header/Authors'
 import { Breadcrumbs } from '../BlogPostItems/index.js'
-import { capitalize } from '@site/src/lib/utils.mjs'
+import { imageCdnUrl, capitalize } from '@freesewing/utils'
 import { ModalContext, ModalContextProvider } from '@freesewing/react/context/Modal'
 import { Markdown } from '@freesewing/react/components/Markdown'
 
@@ -48,9 +48,9 @@ const BlogPostHeader = ({ type }) => {
         <BlogPostItemHeaderInfo />
         {false ? <BlogPostItemHeaderAuthors /> : null}
       </header>
-      {true || type === 'newsletter' ? null : (
+      {type === 'newsletter' ? null : (
         <figure>
-          <img src={imgUrl(metadata.permalink)} />
+          <img src={imageCdnUrl({ type, id: metadata.permalink.split('/').pop() })} />
           <figcaption
             style={{
               fontSize: '1rem',
@@ -67,12 +67,6 @@ const BlogPostHeader = ({ type }) => {
     </>
   )
 }
-
-/*
- * Get blog post image from permalink
- */
-export const imgPrefix = 'https://imagedelivery.net/ouSuR9yY1bHt-fuAokSA5Q/'
-export const imgUrl = (permalink) => `${imgPrefix}${permalink.slice(1).split('/').join('-')}/public`
 
 export default function BlogPostItem(props) {
   const { children, className } = props

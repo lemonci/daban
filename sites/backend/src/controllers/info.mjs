@@ -9,7 +9,7 @@ InfoController.prototype.getUserCount = async (req, res, tools) => {
   try {
     result = await tools.prisma.user.count()
   } catch (err) {
-    console.log(err)
+    tools.log.error(`Failed to get user count: ${err.message}`)
   }
 
   return result?.errors ? res.status(500).send(result) : res.send({ users: result })
@@ -43,7 +43,7 @@ InfoController.prototype.getStats = async (req, res, tools) => {
       result = await tools.prisma[model].count()
       stats[model] = result
     } catch (err) {
-      console.log(err)
+      tools.log.error(`Failed to get ${model} count: ${err.message}`)
       error = err
     }
   }
@@ -56,7 +56,7 @@ InfoController.prototype.getStats = async (req, res, tools) => {
     users = await tools.prisma.user.count({ where: { newsletter: true } })
     stats.subscriber += users
   } catch (err) {
-    console.log(err)
+    tools.log.error(`Failed to get user count: ${err.message}`)
     error = err
   }
 
@@ -77,7 +77,7 @@ InfoController.prototype.getStats = async (req, res, tools) => {
     stats.designs = {}
     for (const d of designs) stats.designs[d.design] = d._count.design
   } catch (err) {
-    console.log(err)
+    tools.log.error(`Failed to get per-design count: ${err.message}`)
     error = err
   }
 
@@ -92,7 +92,7 @@ InfoController.prototype.getStats = async (req, res, tools) => {
     })
     stats.activity.jwt = jwt._sum.jwtCalls
   } catch (err) {
-    console.log(err)
+    tools.log.error(`Failed to get JWT connection count: ${err.message}`)
     error = err
   }
 
@@ -107,7 +107,7 @@ InfoController.prototype.getStats = async (req, res, tools) => {
     })
     stats.activity.key = key._sum.keyCalls
   } catch (err) {
-    console.log(err)
+    tools.log.error(`Failed to get KEY connection count: ${err.message}`)
     error = err
   }
 
