@@ -4,9 +4,6 @@ FROM node:lts-alpine AS builder
 ## Set workdir
 WORKDIR /backend
 
-## We need ffmpeg to convert images to webp
-RUN apk add ffmpeg
-
 ## Install node dependencies
 COPY package.json ./
 RUN npm install
@@ -25,6 +22,13 @@ FROM node:lts-alpine AS app
 
 ## Set workdir
 WORKDIR /backend
+
+## Install all the latest updates
+## We need to bust the cache for this, or we'll get stale images
+## We also need ffmpeg to convert images to webp
+ARG CACHEBUST=1
+RUN apk update && apk upgrade
+RUN apk add ffmpeg
 
 # Install PM2
 RUN npm install pm2
