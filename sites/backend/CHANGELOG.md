@@ -1,6 +1,43 @@
 # Change log for: @freesewing/backend
 
 
+## 4.7.0 (2026-03-27)
+
+### Added
+
+ - Implemented rate-limiting
+ - Added database schema to the repository
+ - Added notifications domain to config
+
+### Changed
+
+ - Refactored the OIDC flow code
+ - Removed the profile find endpoint
+ - Removed the optionPack code
+ - Updated email templates
+ - Migrated transactional email from AWS to Scaleway
+ - Migrated image hosting from Cloudflare to self-hosting fronted by Bunny CDN
+ - Ported API key implementation to UUIDs
+ - Ported Pattern implementation to UUIDs
+ - Ported Bookmark implementation to UUIDs
+ - Ported Set implementation to UUIDs
+ - Ported User implementation to UUIDs
+ - Ported CureatedSet implementation to UUIDs
+ - Ported flow endpoints to UUIDs
+ - Ported subscriber endpoints to UUIDs
+ - Disabled anonymous image uploads
+ - Allow login with UUID
+ - Remove support for login with ID
+ - Keep check and confirmation ID seperate in URL/body of email
+ - Remove img field from Set data
+
+### Fixed
+
+ - Added config for reverse proxy setups
+ - Typo in config lookup for max api key expiry
+ - Await email sending
+ - Detection logic for admin user in API keys
+
 ## 4.6.0 (2026-03-08)
 
 ### Changed

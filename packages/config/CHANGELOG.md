@@ -1,6 +1,14 @@
 # Change log for: @freesewing/config
 
 
+## 4.7.0 (2026-03-27)
+
+### Changed
+
+ - Updated control levels to UUID changes
+ - Set production backend URL
+ - Set new email domains in config
+
 ## 4.0.0 (2025-04-01)
 
 ### Added

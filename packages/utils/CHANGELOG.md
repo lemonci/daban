@@ -1,6 +1,12 @@
 # Change log for: @freesewing/utils
 
 
+## 4.7.0 (2026-03-27)
+
+### Added
+
+ - Added imageCndUrl function
+
 ## 4.5.0 (2026-02-21)
 
 ### Added

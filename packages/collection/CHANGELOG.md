@@ -1,6 +1,12 @@
 # Change log for: @freesewing/collection
 
 
+## 4.7.0 (2026-03-27)
+
+### Changed
+
+ - Removed individual example design URLs in favor of self-hosting them with a deterministic URL
+
 ## 4.0.0 (2025-04-01)
 
 ### Added

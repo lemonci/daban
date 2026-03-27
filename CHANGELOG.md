@@ -4,6 +4,67 @@
 ## Unreleased
 
 
+## 4.7.0 (2026-03-27)
+
+### sunny
+
+#### Fixed
+
+ - Make skirts tag plural in line with other designs
+
+### collection
+
+#### Changed
+
+ - Removed individual example design URLs in favor of self-hosting them with a deterministic URL
+
+### config
+
+#### Changed
+
+ - Updated control levels to UUID changes
+ - Set production backend URL
+ - Set new email domains in config
+
+### react
+
+#### Added
+
+ - Added new backend context to allow setting a custom backed URL
+ - Allow custom key/val for clipboard copy in KeyVal component
+ - Add support for codeberg in user profile data
+ - Export backend URL from useBackend hook
+
+#### Changed
+
+ - Updated Bookmark component to UUID changes
+ - Updated Pattern component to UUID changes
+ - Updated Patterns component to UUID changes
+ - Updated PublicPattern component to UUID changes
+ - Updated Profile component to UUID changes
+ - Updated Set component to UUID changes
+ - Updated Sets component to UUID changes
+ - Update SignIn compnent to the new sign in flow
+ - Update SignUp compnent to the new sign up flow
+ - Updated UUID component
+ - Make backend URL configurable in the useBackend hook
+ - Drop support for github/twitch/tiktok/instagram in user profile data
+ - Update measurements picker to UUIDs
+ - Tweak language of signin/signup components
+
+#### Fixed
+
+ - Fixed incorrect status code check in the SignUp component
+ - Updated seenUser on username change
+ - Set spacing on avatar upload button in welcome view
+
+### utils
+
+#### Added
+
+ - Added imageCndUrl function
+
+
 ## 4.6.0 (2026-03-08)
 
 ### brian

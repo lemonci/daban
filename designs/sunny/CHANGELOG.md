@@ -1,6 +1,12 @@
 # Change log for: @freesewing/sunny
 
 
+## 4.7.0 (2026-03-27)
+
+### Fixed
+
+ - Make skirts tag plural in line with other designs
+
 ## 4.6.0 (2026-03-08)
 
 ### Fixed
