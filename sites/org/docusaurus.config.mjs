@@ -204,14 +204,14 @@ const config = {
     ],
   ],
   themeConfig: {
-    //announcementBar: {
-    //  id: 'stampede_notice',
-    //  content:
-    //    'We are currently under heavy load, which is causing issues. Check back in a week or so.',
-    //  backgroundColor: '#663399',
-    //  textColor: '#ffffff',
-    //  isCloseable: false,
-    //},
+    announcementBar: {
+      id: 'stampede_notice',
+      content:
+        'We are migrating our backend service. You might see some errors. Please bear with us.',
+      backgroundColor: '#663399',
+      textColor: '#ffffff',
+      isCloseable: true,
+    },
     colorMode: {
       // Do not be tempted to change these
       disableSwitch: true,
