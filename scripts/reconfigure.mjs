@@ -450,6 +450,7 @@ function globalChangelog() {
       ...Object.keys(repo.software.designs),
       ...Object.keys(repo.software.plugins),
       ...Object.keys(repo.software.packages),
+      'backend',
     ]) {
       let changed = false
       for (let type of repo.changetypes) {

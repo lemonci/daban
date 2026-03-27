@@ -70,6 +70,43 @@
 
  - Added imageCndUrl function
 
+### backend
+
+#### Added
+
+ - Implemented rate-limiting
+ - Added database schema to the repository
+ - Added notifications domain to config
+
+#### Changed
+
+ - Refactored the OIDC flow code
+ - Removed the profile find endpoint
+ - Removed the optionPack code
+ - Updated email templates
+ - Migrated transactional email from AWS to Scaleway
+ - Migrated image hosting from Cloudflare to self-hosting fronted by Bunny CDN
+ - Ported API key implementation to UUIDs
+ - Ported Pattern implementation to UUIDs
+ - Ported Bookmark implementation to UUIDs
+ - Ported Set implementation to UUIDs
+ - Ported User implementation to UUIDs
+ - Ported CureatedSet implementation to UUIDs
+ - Ported flow endpoints to UUIDs
+ - Ported subscriber endpoints to UUIDs
+ - Disabled anonymous image uploads
+ - Allow login with UUID
+ - Remove support for login with ID
+ - Keep check and confirmation ID seperate in URL/body of email
+ - Remove img field from Set data
+
+#### Fixed
+
+ - Added config for reverse proxy setups
+ - Typo in config lookup for max api key expiry
+ - Await email sending
+ - Detection logic for admin user in API keys
+
 
 ## 4.6.0 (2026-03-08)
 
@@ -152,6 +189,25 @@
  - Ensure the flag title is translated before placeholders are replaced
  - Fix links in the DraftErrorHandler component
  - Fix translations in flag menu
+
+### backend
+
+#### Changed
+
+ - Removed user card endpoint
+ - Removed all code unit test code paths
+ - Remove anonymous user profile access
+ - Remove unused flow routed
+ - Remove Prisma dependency, refactor to use NodeJS native SQLite bindings (#765)
+ - Run backend in container image freesewing/backend (#765)
+
+#### Fixed
+
+ - Sanitize usernames in SVG output | Reported by Alen Sarang
+ - Enforce authenticated user ID check in account data endpoint, prevent cross-account data access | Reported by Alen Sarang
+ - Removed an admin signup bug that abused unit test code paths to create admin accounts | Reported by Alen Sarang
+ - Limit data returned from account endpoint | Reported by Alen Sarang
+ - Handle various time formats in OIDC provider
 
 
 ## 4.5.0 (2026-02-21)
@@ -986,6 +1042,12 @@
 
  - Remove submenus from account sets and patterns pages (#355)
  - Use a dedicated logo image for dark mode
+
+### backend
+
+#### Fixed
+
+ - Newsletter unsubscribe links lead to 404
 
 
 ## 4.0.0 (2025-04-01)
@@ -2223,6 +2285,12 @@
 #### Fixed
 
  - Fix bug in Svg.escapeText() that only escaped the first quote
+
+### backend
+
+#### Fixed
+
+ - Mitigate risk of denial-of-service attacks in catch-all route
 
 
 ## 2.20.4 (2022-01-28)
