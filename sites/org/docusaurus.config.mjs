@@ -207,7 +207,7 @@ const config = {
     announcementBar: {
       id: 'stampede_notice',
       content:
-        'We are migrating our backend service. You might see some errors. Please bear with us.',
+        'We have migrated our backend service. Please re-authenticate before you contact support.',
       backgroundColor: '#663399',
       textColor: '#ffffff',
       isCloseable: true,
