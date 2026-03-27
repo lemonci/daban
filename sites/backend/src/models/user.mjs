@@ -494,6 +494,7 @@ UserModel.prototype.guardedCreate = async function ({ body }) {
   await this.read({ ehash })
 
   if (this.exists) {
+    this.log.debug(`Signup attempt for ${body.email} but this user exists.`)
     /*
      * User already exists. However, if we return an error, then baddies can
      * spam the signup endpoint to figure out who has a FreeSewing account
@@ -537,9 +538,9 @@ UserModel.prototype.guardedCreate = async function ({ body }) {
      */
     let actionUrl = false
     if (this.record.status === 0)
-      actionUrl = i18nUrl('en', `/confirm/${type}?id=${this.Confirmation.record.id}`)
+      actionUrl = i18nUrl('en', `/confirm/${type}/?id=${this.Confirmation.record.id}`)
     else if (this.record.status === 1)
-      actionUrl = i18nUrl('en', `/confirm/signin?id=${this.Confirmation.record.id}`)
+      actionUrl = i18nUrl('en', `/confirm/signin/?id=${this.Confirmation.record.id}`)
 
     /*
      * Send email
@@ -635,17 +636,23 @@ UserModel.prototype.guardedCreate = async function ({ body }) {
   /*
    * Now create the confirmation
    */
-  this.confirmation = await this.Confirmation.createRecord({
-    type: 'signup',
-    data: {
+  try {
+    const data = {
       language: 'en',
       email: this.clear.email,
       id: this.record.id,
       ehash: ehash,
       check,
-    },
-    userId: this.record.id,
-  })
+    }
+    this.confirmation = await this.Confirmation.createRecord({
+      type: 'signup',
+      data,
+      userId: this.record.id,
+    })
+  } catch (err) {
+    this.log.warn(`Failed to create signup confirmation for ${body.email}`)
+    return this.setResponse(500, 'createAccountFailed')
+  }
 
   /*
    * And send out the signup email
@@ -655,7 +662,7 @@ UserModel.prototype.guardedCreate = async function ({ body }) {
     language: 'en',
     to: this.clear.email,
     replacements: {
-      actionUrl: i18nUrl('en', `/confirm/signup?id=${this.Confirmation.record.id}`),
+      actionUrl: i18nUrl('en', `/confirm/signup/?id=${this.Confirmation.record.id}`),
       check,
     },
   })
@@ -841,7 +848,7 @@ UserModel.prototype.linkSignIn = async function (req) {
     if (Array.isArray(check)) [result, mfaScratchCodes] = check
     else result = check
     if (!result) return this.setResponse(401, 'signInFailed')
-    if (mfaScratchCodes.length !== this.clear.data.mfaScratchCodes.length) {
+    if (mfaScratchCodes && mfaScratchCodes.length !== this.clear.data.mfaScratchCodes.length) {
       // Scratch code was used, update record to remove it
       await this.update({ data: { ...this.clear.data, mfaScratchCodes } })
     }
@@ -913,7 +920,10 @@ UserModel.prototype.sendSigninlink = async function (req) {
     to: this.clear.email,
     replacements: {
       check,
-      actionUrl: i18nUrl(this.record.language, `/confirm/signin?id=${this.Confirmation.record.id}`),
+      actionUrl: i18nUrl(
+        this.record.language,
+        `/confirm/signin/?id=${this.Confirmation.record.id}`
+      ),
     },
   })
 
@@ -1187,7 +1197,7 @@ UserModel.prototype.guardedUpdate = async function ({ body, user }) {
         check,
         actionUrl: i18nUrl(
           this.record.language,
-          `/confirm/emailchange?id=${this.Confirmation.record.id}`
+          `/confirm/emailchange/?id=${this.Confirmation.record.id}`
         ),
       },
     })

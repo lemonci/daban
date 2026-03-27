@@ -42,7 +42,10 @@ ConfirmationModel.prototype.guardedRead = async function ({ params }) {
   /*
    * Does it exist?
    */
-  if (!this.record) return this.setResponse(404)
+  if (!this.record) {
+    this.log.debug(`Confirmation ${params.id} not found`)
+    return this.setResponse(404)
+  }
 
   /*
    * For types that do not require a check (submissions) return data
@@ -54,14 +57,19 @@ ConfirmationModel.prototype.guardedRead = async function ({ params }) {
   /*
    * Return data only if the check matches
    */
-  return this.clear.data.check === params.check
-    ? this.setResponse200({
-        confirmation: {
-          id: this.record.id,
-          check: this.clear.data.check,
-        },
-      })
-    : this.setResponse(404)
+  if (!this.clear.data.check === params.check) {
+    this.log.debug(
+      `Check did not match for ${this.record.type}. ${params.check} (${typeof params.check})  provided, ${this.clear.data.check} (${typeof this.clear.data.check}) expected`
+    )
+    return this.setResponse(404)
+  }
+
+  return this.setResponse200({
+    confirmation: {
+      id: this.record.id,
+      check: this.clear.data.check,
+    },
+  })
 }
 
 /*
