@@ -1,0 +1,648 @@
+---
+title: 'Post-Disclosure Report: FreeSewing v4.7.0 fixes several security issues in FreeSewing backend code'
+caption: 'Picture of _A Pink And Teal Painted Surface_ (with a crack in it), by Engin Akyurt via Pexels'
+date: '2026-03-27'
+intro: "A security audit of the FreeSewing backend code revealed several issues. Here's what we've done about that."
+authors: 1
+---
+
+Earlier today, we have migrated our backend service to run our new
+[@freesewing/backend:v4.7.0](https://hub.docker.com/r/freesewing/backend/tags)
+container image.
+
+This minor release of FreeSewing (v4.7.0) is almost exclusively dedicated to
+changes in our backend code (and flanking changes required to adapt
+our frontend code to those backend changes).
+
+As far as we know, we are the only people who run a production FreeSewing
+backend, but the world is a big place, and we do make our Docker images freely
+available for anyone to use. So:
+
+**If you are running FreeSewing backend code, upgrade to v4.7.0 now.**
+
+We'll get to the details below, but let's first set the stage.
+
+## Security audit of the FreeSewing backend code
+
+The sweeping range of changes rolled out today were triggered by a security
+audit of our backend code by Alen Sarang Satheesh
+(alensarangsatheesh@gmail.com).
+
+Alen is a freelance security researcher based in Kerala, India, who
+volunteered their time to perform this audit.
+
+Any security audit is a
+particularly valuable contribution to make to an open source project. In this
+case, it also allowed us to address some issues that we frankly are relieved to
+see fixed, but more on that below.
+
+We would like to thank Alen for their valuable contributions to FreeSewing.
+We are also truly appreciative of the responsible disclosure, not to mention
+the professional manner in which we were able to cooperate on mitigations.
+
+### Your data is safe
+
+Before we dive into the various things that came up in the audit, and the steps
+we have taken to address those issues, I want to be clear about the impact:
+
+While the audit did reveal issues that could have been abused to allow data
+leakage or privilege escalation, we are unaware of any of these issues being
+exploited. We are also unaware of any data being leaked, and we have -- apart
+from the accounts used by the security researcher themselves -- not found any
+account with a privilege level that was not what it should be.
+
+In other words, while there were some real issues, those issues seem to have
+remained dormant prior to the audit. The data of our users, and the
+security of our systems, has thus not been impacted.
+
+There is one caveat, and that is that this is as far as we can tell.
+It is always hard to prove a negative, but we are confident no harm was done.
+
+### We made mistakes. And when we say we, we mean Joost
+
+As FreeSewing's maintainer any problems are ultimately my responsibility.
+However, in this particular case, the matter is much more clear-cut since our
+backend code is not an area that typically attracts a lot of contributions.
+
+So I (joost) take full responsibility. Not merely in a _I'm in charge so I'll
+take the blame_ way, but in a much simpler _I wrote all the problematic code
+myself_ way.
+
+That being said, I don't think that assigning blame is very useful.
+Instead, we will use this as an opportunity for growth.
+
+We're in a much better place today than we were last month. Lessons were
+learned, short-term fixes were rolled out as soon as possible, mid-term
+fixes were deployed earlier today, and we have already started working
+on implementing long-term changes to ensure we are better prepared going
+forward.
+
+## Summary of noticeable changes
+
+I will unpack the various changes with a security impact below, but for the
+casual reader, I have summarized the changes that will be most noticable to
+FreeSewing users below:
+
+### Migration of transactional email from AWS to Scaleway
+
+We have migrated our transactional email provider (transactional emails are
+emails you receive to confirm a sign-up request, an email change, and so on)
+from Amazon Web Services (AWS) to Scaleway.
+
+This is part of our overarching migration from US-based tech companies to
+EU-based alternatives. A migration that -- in combination with the image
+hosting changes outlined below -- is now complete.
+
+As a result, transactional emails from FreeSewing will be sent out from the
+**no-reply@notifications.freesewing.eu** address. Feel free to allow-list
+that address if you are concerned that our emails might get tangled in your
+SPAM filter.
+
+The _Reply-to_ address will be _support@freesewing.eu_ so that you can still
+simply reply to the email to reach a human being.
+
+### Migration of image hosting from Cloudflare to Scaleway with Bunny CDN
+
+The final service to migrate away from US-based tech companies was our image
+hosting, which until today was handled by Cloudflare.
+
+There was no drop-in replacement for Cloudflare's Image API in the EU, as it is
+a rather custom setup. So instead, we have decided to take matters into our
+own hands, and host the images ourselves on our backend systems.
+
+To protect our backend from the incurred bandwidth costs, we have furthermore
+opted to deploy Bunny CDN in front to allow caching of these images.
+
+### Migration to UUIDs to identify database records
+
+We have migrated all monotonically increasing IDs to UUIDs to identify database
+records, like users, patterns, and so on.
+
+A _monotonically increasing ID_ is a difficult way to say that the ID is an
+ever-increasing number. The first user gets ID `1`, the second gets ID `2`,
+the 100.000th user gets ID `100000` and so on.
+
+Such numbers work fine, but they have the disadvantage that they are
+predictable. This is especially relevant when you expose some data via API
+endpoints. For example, if the backend returns (public) info about a user by
+polling the `/users/[id]` endpoint, then one could just loop through numbers 1
+to 100.000 to scrape data about 100.000 users.
+
+To prevent this, we have added UUID fields and those are now required to pass
+as identifier, which blocks such scraping attempts.
+
+For the most part, this will be transparent to users. Except if you have
+bookmarked any URLs that have a record ID in them.
+
+### Implemented rate-limiting
+
+To prevent brute-force attacks on authorization endpoints, and to prevent abuse
+in general, we have implemented rate-limiting on our backend.
+
+This should not impact regular users, but will guard against bots, scrapers,
+as well as malicious use of the API, such as brute-force attempts to break
+into accounts.
+
+## Vulnerabilities found in the audit
+
+The remainder of this report outlines the steps that we've taken in light of the responsible
+disclosure of several security issues in the FreeSewing backend by independent
+security researcher Alen Sarang Satheesh.
+
+**Notes**:
+
+- All fixes are present in the latest v4.7.0 release
+- The most sensitive fixes were already fixed in the v4.6.0 release
+- Those sensitive fixes have also been backported to the v4.5.0 release
+- All times in this report are CET.
+
+### 1. Stored XSS vulnerability
+
+This was due to a lack of sanitization on usernames prior to embedding them
+into an SVG. Given that an SVG image can also include Javascript, this opened
+the door to XSS attacks by a malicious user through careful manipulation of
+their username.
+
+We initially fixed this -- as an out-of-band quick fix -- in:
+
+- [[backend] security: Sanitize username in SVG
+  output](https://codeberg.org/freesewing/freesewing/commit/6b09a13d1bab3e4a0b91bf8ef40cb10a50aad62d)
+
+But given that the original use-case for this endpoint is no longer valid, we
+later decided to remove this endpoint altogether:
+
+- [[backend] chore: Remove user card
+  endpoint](https://codeberg.org/freesewing/freesewing/commit/19a7c8548af18421ef43bb9058751ce548f0b4e2)
+
+**Timeline**
+
+- Disclosure: Thursday, March 05, 2026 06:52
+- Fixed: Thursday, March 05, 2026 12:40
+
+### 2. Critical IDOR Vulnerability Allowing Unauthorized Access to User Data
+
+This was due to a bug where we did not enforce a check that the data being
+accessed matched the authenticated user.
+The bug was thankfully limited by the fact that this endpoint does not decrypt
+data. So the returned data was only data that was not deemed sensitive enough
+to be decrypted at rest in the first place.
+
+Fixed in:
+
+- [[backend]: Enforce authenticated user ID check in account data
+  endpoint](https://codeberg.org/freesewing/freesewing/commit/0bf3e7b1bc89dabad650f0124f1d161412249783)
+
+**Timeline**
+
+- Disclosure: Thursday, March 05, 2026 16:03
+- Fixed: Thursday, March 05, 2026 17:54
+
+### 3. User Enumeration via /users/:id/card
+
+As a short-term fix, we have removed this endpoint altogether:
+
+- [[backend] chore: Remove user card
+  endpoint](https://codeberg.org/freesewing/freesewing/commit/19a7c8548af18421ef43bb9058751ce548f0b4e2)
+
+**Timeline**
+
+- Disclosure: Friday, March 06, 2026 03:53
+- Fixed: Saturday, March 07, 2026 16:29
+
+### 4. Confused Deputy via Cloudflare Images API
+
+This reported issue is that users can not only upload images, but also specify
+a URL to fetch the image from. That in turn triggers a request to fetch the
+image from that URL, a URL that is controlled by a potential attacker.
+
+However, this is a feature of the Cloudflare Image API. FreeSewing does not
+fetch the image, cloudflare does. And although this request is on our behalf,
+it does not contain any privileged information.
+
+Given that the root cause is in the Cloudflare codebase we can only implement
+guardrails. As such, we have decided to prioritize our migration away from
+Cloudflare, a migration that is now completed.
+
+Also note that we have changed the way we manage images so that we only
+accept uploads, and do not support fetching images from an URL.
+
+Fixed in:
+
+- [wip: Work on refactor of backend code](https://codeberg.org/freesewing/freesewing/commit/10d1bcb2919509e663bae92c38bc20e043a1df4c)
+- [[backend] chore: Handle image uploads after migration, support tests](https://codeberg.org/freesewing/freesewing/commit/f7df4ca6e333cd1ac84a88bb838a68a95d543010)
+
+**Timeline**
+
+- Disclosure: Friday, March 06, 2026 03:53
+- Fixed: Friday, March 27, 2026 08:52
+
+### 5. Unauthenticated privilege escalation to site administrator
+
+This reported issue exploits the special exemptions carved out for unit tests in the
+code base. To trigger the exploit, it leverages an operator precedence bug in
+the code that is used to test whether a particular request is part of a unit
+test. Once the system is tricked into believing it is a test, it then goes on
+to exploit some of the logic that only applies to the unit tests:
+
+- Allowing users to sign up with any role
+- Forgoing the need for email confirmation
+
+When you string this all together, the end result is that an attacker can
+create an admin account by manipulating the request to the signup endpoint.
+
+This one is real bad, although it does have the advantage that it allows us to
+check for unexpected accounts with an admin role in the database.
+We found 8 of them, all created close to each other, and we confirmed that they
+were all created by the researcher who reported the issue.
+
+We initially fixed this -- as a production hot-fix -- by making the isTest()
+method always return false.
+
+We then proceeded to remove all unit-test specific code paths from the code base:
+
+- [[backend] chore: Remove all unit-test code
+  paths](https://codeberg.org/freesewing/freesewing/commit/2a6c317d05f94cd04035a415133b3e21e34f8112)
+
+Today, we no longer have any special code paths for unit tests.
+
+**Timeline**
+
+- Disclosure: Friday, March 06, 2026 15:55
+- Fixed: Friday, March 06, 2026 16:28
+
+### 6. Wildcard CORS configuration
+
+The FreeSewing backend accepts cross-origin resource sharing (CORS) requests
+from any site.
+
+This is by design. The FreeSewing backend API is a public, open API that
+explicitly supports third-party integrations.
+
+The risks of liberal CORS headers are predominantly tied to browser-managed
+credentials -- such as cookies, basic authentication or TLS client certificates
+-- as they are automatically included in requests.
+But the FreeSewing backend relies on JWT bearer tokens, which need to be
+explicitly set.
+
+As this CORS configuration is by design and stems from our commitment to
+openness, we do not want to change it.
+
+However, while we were addressing the various issues in this report, we
+have decided to lock down CORS as a cautionary measure. Even if doing so
+broke user's development environments, as well as community-lead initiatives
+that publish alternative FreeSewing frontends with early-access designs.
+
+Now that all issues are resolved, we have gone back to be an open API that
+can be used by anyone.
+
+**Timeline**
+
+- Disclosure: Friday, March 06, 2026 03:53
+
+### 7. JWT Misconfiguration
+
+This reported issue bundles two different points:
+
+- Information Disclosure
+- Excessive Token Expiry
+
+The information disclosure report points out that the inclusion of
+`http://localhost:3000` in the token leaks information about the internet
+configuration. While that does not grant any access as-such, it provides
+_valuable reconnaissance data_.
+
+We'd like to point out that as an open source project with a commitment to
+transparency, this information is available in our repository for anyone who
+takes an interest in how things work under the hood.
+
+As for the _excessive token expiry_, the current expiration is 28 days.
+Shortening it, especially significantly shortening it, would impose a real
+inconvenience cost on all of our regular users for little gain in security
+posture. An attacker gaining access to a token can do damage in minutes. No
+amount of shortening the length of the token is an effective strategy to guard
+against that.
+
+There are of course the issues that are inherent in the choice for JWT,
+in particular the inability to revoke them. As such, there is certainly
+room for improvement here, and as such we have added [the implementation of
+refresh token rotation to our
+todo-list](https://codeberg.org/freesewing/freesewing/issues/778) so that we
+can use short-lived tokens without sacrificing our user's convenience.
+
+As this would require a good bit of engineering, we have added it as
+a todo, but we have not completed (or even started) that work at this time.
+
+**Timeline**
+
+- Disclosure: Friday, March 06, 2026 03:53
+
+### 8. Magic link account takeover via token leakage
+
+FreeSewing offers a 'magic link' sign-in mechanism. Since all the information
+to sign-in if included in the URL, this allows anyone who has access to the URL
+to sign in as the user in question.
+
+This is not a surprise as-such, that's the way it's supposed to work.
+It is also worth pointing out that once-consumed, these URLs will no longer
+function.
+
+The report suggests to implement strict referrer-policy headers to avoid the URL
+_leaking_ during pageload in the referrer header when loading third-party
+resources.
+
+While that does provide some limits to the URL leaking out, it does not address
+other places where the URL can leak, such as intermediate proxies and access
+logs.
+
+As such, we feel the better approach here is to move away from having all
+information contained in the URL, and instead require a flanking one-time code
+that we would include in the email. We had initially [added this more
+in-depth defense to our
+todo-list](https://codeberg.org/freesewing/freesewing/issues/779). However,
+we have since implemented it, and it is part of the v4.7.0 release.
+
+Fixed in:
+
+- [wip: Work on refactor of backend code](https://codeberg.org/freesewing/freesewing/commit/10d1bcb2919509e663bae92c38bc20e043a1df4c)
+
+**Timeline**
+
+- Disclosure: Friday, March 06, 2026 03:53
+
+### 9. Sensitive Data Over-Exposure
+
+The endpoint returning user's account data includes data that -- according to
+the report -- should not be shared with the user. Specifically:
+
+- ehash: An _unsalted_ hash of the user's current email address
+- ihash: An _unsalted_ hash of the user's initial email address
+- intial: The user's initial email address
+- mfaEnabled: Whether or not MFA is enabled on the account
+- passwordType: The underlying type of password -- to support migrating old accounts
+
+We have removed ehash, ihash, intitial, and passwordType from the returned data.
+We did not remove mfaEnabled as we need it to let the user know whether they
+have MFA enabled or not.
+
+As the report mentions that ehash and ihash are the _unsalted_ hash, we feel
+we need to clarify their use.
+
+As we practice encryption-at-rest, we cannot do things that
+one would take for granted, like finding a user based on their email address,
+as that data is encrypted.
+
+This is where ehash comes in. It is a hash of the email address, which allows
+us to search for a user based on (a hash of) their email address. While it is
+true that this allows an attacker with access to the account data to confirm
+the email address, an attacker with access to the account data already has the
+email address, so this seems like a moot point.
+
+The ihash field serves the same purpose as the ehash field, but for the
+'initial' field. This field holds the email that the account was initially
+created with. The report flags this as a risk, saying that users who want to
+change their email address to a _burner address_ will still have their initial
+email in their account data, thus undermining their anonymity.
+
+While that is the case, if you want an anonymous account, you should create one
+with a burner email address, and not turn a nominative account into an
+anonymous one. In addition, the reason we keep the initial/ihash fields and do
+not allow users to change them is to protect against account take-over and
+resolve disputes about account ownership. In practical terms, when an attacker
+succeeds in taking over an account and change their email address, the initial
+field allows us to know what email address was used to initially create the
+account.
+
+**Timeline**
+
+- Disclosure: Friday, March 06, 2026 03:53
+- Fixed: Saturday, March 07, 2026 16:29
+
+### 10. No rate-limiting on any endpoint
+
+The FreeSewing backend does not implement rate-limiting.
+
+We have not implemented rate limiting because we have not observed abuse
+patterns that would necessitate this. Still, we recognize it is good advice.
+
+We had initially [added rate limiting to our todo
+list](https://codeberg.org/freesewing/freesewing/issues/782).
+But we have since implemented it and it is part of the v4.7.0 release.
+
+Fixed in:
+
+- [[backend] chore: Hardening and rate-limiting](https://codeberg.org/freesewing/freesewing/commit/490002cede8e3a3a84c62f102cdb24a76285e435)
+
+**Timeline**
+
+- Disclosure: Friday, March 06, 2026 03:53
+- Fixed: Friday, March 27, 2026 08:52
+
+### 11. Encryption key reused as JWT secret
+
+The same key is used for AES encryption and JWT signing.
+A compromise of the key would compromise both encryption and authentication
+tokens.
+
+A compromise of FreeSewing backend encryption would be a significant incident.
+It seems difficult to imagine a scenario where the encryption key would be
+compromised but the JWT signing key would somehow not be. As such, this risk
+feels theoretic.
+
+Nevertheless, we have implemented the suggested change and created a different
+key for JWT signing.
+
+Fixed in:
+
+- [[backend] chore: Hardening and rate-limiting](https://codeberg.org/freesewing/freesewing/commit/490002cede8e3a3a84c62f102cdb24a76285e435)
+  **Timeline**
+
+- Disclosure: Friday, March 06, 2026 03:53
+- Fixed: Friday, March 27, 2026 08:52
+
+### 12. Missing common security headers
+
+The following headers are listed in the report as missing:
+
+- Strict-Transport-Security (HSTS)
+- Content-Security-Policy (CSP)
+- X-Content-Type-Options
+- X-Frame-Options
+- Permissions-Policy
+
+Most of these headers are relevant in the context of an HTML page.
+As a REST API the returns `application/json` several of these are
+not relevant.
+
+The ones that are:
+
+- X-Content-Type-Options: This has minimal practical impact for an API that
+  always returns JSON, but adding it is also not a problem. So we will.
+- Strict-Transport-Security (HSTS): This enforces TLS. Note that we already
+  enforce TLS server-side by redirecting all HTTP requests to HTTPS. However,
+  as HSTS impacts the client side, it would be an improvement to add it. That
+  being said, adding this to the backend code would also impact the developer
+  experience as running the backend API in development mode on localhost would
+  also require a TLS certificate. So, rather than add this to the backend code,
+  we will add these headers at the reverse proxy level.
+
+We have added these headers on our reverse proxy.
+
+**Timeline**
+
+- Disclosure: Friday, March 06, 2026 03:53
+- Fixed: Sunday, March 08, 2026 09:22
+
+### 13. Account modification without re-authentication
+
+Once logged in, users can change account settings such as email, username, bio,
+and password without re-entering their password.
+
+Note that changing MFA settings does require re-authentication, and email
+changes do require email confirmation. What account properties require
+re-authentication is a choice to be made. We do not feel that re-authentication
+is required to change one's bio or username.
+
+Requiring the password to change one's password would be a problem as we do
+not create a password for FreeSewing users when they sign up, instead relying
+on a _magic link_ and confirmation code.
+
+Users _can_ set a password if they do choose, but asking for a (non-existing)
+password at this time would break that.
+
+Still, we take note of the remark. Support for passkeys is on our
+roadmap, so we will re-visit this matter at that time.
+
+**Timeline**
+
+- Disclosure: Friday, March 06, 2026 03:53
+
+### 14. No CSRF protection
+
+CSRF (cross-site request forgery) tokens are a mitigation for cookie-based
+session authentication, where the browser automatically sends the
+authentication with the request.
+
+As our backend uses JWT bearer tokens, it sidesteps CSRF entirely.
+As such, CSRF protection is not relevant in our case.
+
+**Timeline**
+
+- Disclosure: Friday, March 06, 2026 03:53
+
+### 15. Universal input sanitization failure
+
+User provided data is stored without sanitation.
+
+This is about data such as usernames, bio, titles of bookmarks and so on.
+
+Note that this data is properly escaped to handle SQL-injection and is escaped
+in FreeSewing's React-based frontend. As such, the issue is predominantly a
+a risk for future or non-official API clients.
+
+Still, we should not let a footgun like this linger and we will take this
+remark into account for future refactoring of our backend code -- an effort we
+have already started, having recently removed the Prisma dependency in favor of
+native NodeJS sqlite bindings.
+
+**Timeline**
+
+- Disclosure: Friday, March 06, 2026 03:53
+
+### 16. Sequential/Predictable user IDs
+
+FreeSewing uses numeric account IDs which allows account enumeration.
+
+As a short-term fix, we have removed the profile access endpoint:
+
+- [[backend] fix: Disable anonymous profile data
+  endpoint](https://codeberg.org/freesewing/freesewing/commit/f8b2e388c7bd38a0a7a72c452b09bcbefcc495b8)
+
+As a more in-depth defence, we have migrated to UUIDv4 as record identifiers.
+As this required changes in many different parts of the codebase,
+we have opted to forego a list of relevant commits as it would be too long.
+
+**Timeline**
+
+- Disclosure: Friday, March 06, 2026 03:53
+- Fixed: Friday, March 27, 2026 08:52
+
+### 17. Account spoofing via record cloning
+
+A bug in the cloning logic for patterns, measurements sets, and curated
+measurements sets failed to re-assign ownership of the data to the user
+initiated the clone operation. This caused data to be stored in the user who
+originally owned the data, rather than the user who initiated the clone.
+
+Fixed in:
+
+- [[backend] chore: Port patterns to UUIDs](https://codeberg.org/freesewing/freesewing/commit/f85b1602abc2df462d9ac2ae604d2961647a1d44)
+
+**Timeline**
+
+- Disclosure: Sunday, March 08, 2026 16:18
+- Fixed: Sunday, March 08, 2026 16:23
+
+### 18. Authorization Bypass Vulnerability due to insecure OIDC session handling
+
+Due to an incorrect handling of the OIDC state, it was possible for an OIDC
+flow initiated by user A to be completed by user B.
+This opens the door to tricking users to complete an OIDC flow they did not
+initiate.
+
+The OIDC flow is (only) used to authenticate users on the FreeSewing forum, as
+such the scope was limited to the forum.
+
+Fixed in:
+
+- [[backend] security: Refactor OIDC implementation](https://codeberg.org/freesewing/freesewing/commit/39185bc470b7c5d1457173705cfa230cd7229ef1)
+
+**Timeline**
+
+- Disclosure: Monday, March 09, 2026 05:53
+- Fixed: Monday, March 09, 2026 07:26
+
+### 19. No upper bound on API key expiry
+
+A bug in the lookup for the maximum expiry of user-created API keys allowed
+users to create API keys that expire so far in the future they are de-facto
+never expiring.
+
+This was a minor issue, caused by a typo in the configuration lookup for the
+maximum expiry.
+
+Fixed in:
+
+- [[backend] fix: Incorrect config lookup for api key max expiry](https://codeberg.org/freesewing/freesewing/commit/91fe00e6c1728dcd0cbf63ccec5c2e90bd1b0a3b)
+
+**Timeline**
+
+- Disclosure: Tuesday, March 10, 2026 17:59
+- Fixed: Wednesday, March 11, 2026 08:19
+
+## Summary
+
+The security research performed by Alen Sarang Satheesh revealed a range of
+security issues in the FreeSewing backend code, including a particularly
+dangerous admin account creation bug, as well as a cross-account data access
+bug.
+
+Other issues were less problematic, and some were not particularly relevant to
+our specific setup. But overall, the research was extremely valuable.
+
+We have implemented fixes for the most urgent matters as soon as possible,
+and have worked over the last three weeks to implement those fixes
+that required a more substantial change in approach.
+We have also implemented the various recommendations insofar as they were
+relevant.
+
+While we have strived to do all this with as little disruption as possible
+to our users, the last couple of weeks we have had an increased error rate
+due to the temporary fixes we had put in place prioritizing security over
+functionality or user experience.
+
+We would like to thank Alen once again for their excellent work, and we
+would also like to thank our users for their continued trust in FreeSewing.
+
+If you've read this far, you will have realized that we are not perfect.
+But we do our best, and you can count on us to be honest and open
+when we get it wrong.
