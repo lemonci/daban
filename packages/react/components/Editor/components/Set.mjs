@@ -26,7 +26,7 @@ export const UserSetPicker = ({
       const [status, body] = await backend.getSets()
       if (status === 200 && body.result === 'success') {
         const all = {}
-        for (const set of body.sets) all[set.id] = set
+        for (const set of body.sets) all[set.uuid] = set
         setSets(all)
       }
     }
