@@ -2,6 +2,7 @@
 import {
   capitalize,
   imageCdnUrl,
+  imageStaticUrl,
   measurementAsMm,
   measurementAsUnits,
   distanceAsMm,
@@ -667,7 +668,7 @@ export const ImageInput = ({
           className="tw:bg-base-100 tw:w-full tw:h-36 tw:mb-2 tw:mx-auto tw:flex tw:flex-col tw:items-center tw:text-center tw:justify-center"
           style={{
             backgroundImage: `url(${
-              uploadedId ? imageCdnUrl({ type: imgType, id: uploadedId }) : current
+              uploadedId ? imageStaticUrl({ type: imgType, id: uploadedId }) : current
             })`,
             backgroundSize: 'contain',
             backgroundRepeat: 'no-repeat',
@@ -1275,7 +1276,7 @@ const SuggestedUser = ({ id, username, avatar, q, confirmUser }) => {
 const SuggestedUserInner = ({ id, username, avatar, q }) => (
   <>
     <object
-      data={imageCdnUrl({ type: 'user', id: `uid-${avatar}` })}
+      data={imageStaticUrl({ type: 'user', id: `uid-${avatar}` })}
       type="image/jpeg"
       className="tw:shadow tw:rounded-full tw:w-10 tw:h-10 tw:bg-base-300"
     >

@@ -1,5 +1,5 @@
 // Dependencies
-import { imageCdnUrl, getSearchParam } from '@freesewing/utils'
+import { imageStaticUrl, getSearchParam } from '@freesewing/utils'
 // Context
 import { ModalContext } from '@freesewing/react/context/Modal'
 // Hooks
@@ -100,7 +100,7 @@ export const Avatar = ({ uuid }) => {
         setModal(
           <ModalWrapper>
             <img
-              src={imageCdnUrl({ type: 'user', id: uuid })}
+              src={imageStaticUrl({ type: 'user', id: uuid })}
               className="tw:max-w-full tw:max-h-screen"
             />
           </ModalWrapper>
@@ -108,7 +108,7 @@ export const Avatar = ({ uuid }) => {
       }
     >
       <img
-        src={imageCdnUrl({ type: 'user', id: uuid })}
+        src={imageStaticUrl({ type: 'user', id: uuid })}
         className="tw:w-32 tw:h-32 tw:rounded-full tw:shadow tw:border-current tw:border-4"
       />
     </button>

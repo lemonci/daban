@@ -1,6 +1,6 @@
 // Dependencies
 import { welcomeSteps } from './shared.mjs'
-import { imageCdnUrl } from '@freesewing/utils'
+import { imageStaticUrl } from '@freesewing/utils'
 
 // Context
 import { LoadingStatusContext } from '@freesewing/react/context/LoadingStatus'
@@ -57,7 +57,7 @@ export const Avatar = ({ welcome = false, Link = false }) => {
       {!welcome || img !== false ? (
         <img
           alt="img"
-          src={img || imageCdnUrl({ type: 'user', id: account.uuid })}
+          src={img || imageStaticUrl({ type: 'user', id: account.uuid })}
           className="tw:shadow tw:mb-4"
         />
       ) : null}
