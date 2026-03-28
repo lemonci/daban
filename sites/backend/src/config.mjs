@@ -63,6 +63,7 @@ const baseConfig = {
         forum: envToBool(process.env.BACKEND_ENABLE_OIDC_CLIENT_FORUM),
       },
     },
+    noCORS: envToBool(process.env.BACKEND_ENABLE_OPEN_API),
   },
   // Config
   api,
@@ -232,6 +233,7 @@ const vars = {
   BACKEND_JWT_EXPIRY: 'optional',
   // Feature flags
   BACKEND_ENABLE_CODEBERG: 'optional',
+  BACKEND_ENABLE_OPEN_API: 'optional',
   // Email
   BACKEND_SCALEWAY_PROJECT_ID: 'required',
   BACKEND_SCALEWAY_EMAIL_TOKEN: 'requiredSecret',

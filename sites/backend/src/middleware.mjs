@@ -79,7 +79,7 @@ function loadExpressMiddleware(app, tools) {
          * Allow requests with no Origin header (e.g. server-to-server, curl)
          * and any origin that is on the allow-list.
          */
-        if (!origin || allowedOrigins.has(origin)) return cb(null, true)
+        if (!origin || allowedOrigins.has(origin) || config?.use?.noCORS) return cb(null, true)
         cb(new Error(`CORS: origin '${origin}' is not allowed`))
       },
       methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
