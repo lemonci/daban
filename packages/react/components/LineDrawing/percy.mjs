@@ -39,31 +39,29 @@ export const PercyFront = Percy
 const Front = ({ stroke }) => (
   <>
     <path
-      stroke="#000"
       strokeWidth="4.1286947000000005"
       d="M55.596 858.969v74.27l408.74 25.036V887.34m560.07-28.356v74.254L615.649 958.26v-70.936"
     ></path>
     <path
-      stroke="#999"
+      opacity={0.3}
       strokeWidth="0.114"
       d="M64.523 107.992s1.114.051 1.11.21c-.005.16-1.112.162-1.112.162m13.265-.372s-1.114.051-1.11.21c.004.16 1.112.162 1.112.162"
       style={{ fontVariationSettings: 'normal', InkscapeStroke: 'none' }}
       transform="translate(-568.585 -1636.43)scale(15.57998)"
     ></path>
     <path
-      stroke="#000"
       strokeWidth="4.1286947000000005"
       d="M362.755 10.857s-49.7-.717-181.335-8.678L163.986 137.88M717.23 10.857s49.715-.717 181.35-8.678l17.435 135.701"
     ></path>
     <path
-      stroke="#999"
+      opacity={0.3}
       strokeWidth="0.114"
       d="M64.424 112.292s1.114.05 1.11.21-1.112.161-1.112.161m13.463-.371s-1.114.05-1.11.21 1.112.161 1.112.161"
       style={{ fontVariationSettings: 'normal', InkscapeStroke: 'none' }}
       transform="translate(-568.585 -1636.43)scale(15.57998)"
     ></path>
     <path
-      stroke="#999"
+      opacity={0.3}
       strokeLinejoin="round"
       strokeWidth="0.132"
       markerEnd="url(#CapTriangle)"
@@ -74,7 +72,7 @@ const Front = ({ stroke }) => (
       transform="translate(-568.585 -1636.43)scale(15.57998)"
     ></path>
     <path
-      stroke="#999"
+      opacity={0.3}
       strokeLinejoin="round"
       strokeWidth="0.132"
       markerEnd="url(#CapTriangle)"
@@ -85,7 +83,6 @@ const Front = ({ stroke }) => (
       transform="translate(-568.585 -1636.43)scale(15.57998)"
     ></path>
     <path
-      stroke="#000"
       strokeLinejoin="round"
       strokeWidth="0.265"
       markerEnd="url(#CapTriangle)"
@@ -96,19 +93,17 @@ const Front = ({ stroke }) => (
       transform="translate(-568.585 -1636.43)scale(15.57998)"
     ></path>
     <path
-      stroke="#000"
       strokeWidth="4.1286947000000005"
       d="M349.683 158.353s-76.139 183.22-210.205 182.8m590.84-182.8s76.14 183.22 210.205 182.8"
     ></path>
     <path
-      stroke="#000"
       strokeWidth="0.265"
       d="M62.64 156.385a.966.966 0 1 1-1.932 0 .966.966 0 0 1 1.932 0zm55.151-6.681a.966.966 0 1 0 1.876-.462.966.966 0 0 0-1.876.462z"
       style={{ fontVariationSettings: 'normal', InkscapeStroke: 'none' }}
       transform="rotate(6.908 13272.865 -5528.712)scale(15.57998)"
     ></path>
     <path
-      stroke="#999"
+      opacity={0.3}
       strokeLinejoin="round"
       strokeWidth="0.132"
       markerEnd="url(#CapTriangle)"
@@ -119,7 +114,7 @@ const Front = ({ stroke }) => (
       transform="translate(-568.585 -1636.43)scale(15.57998)"
     ></path>
     <path
-      stroke="#999"
+      opacity={0.3}
       strokeLinejoin="round"
       strokeWidth="0.132"
       markerEnd="url(#CapTriangle)"
@@ -130,7 +125,7 @@ const Front = ({ stroke }) => (
       transform="translate(-568.585 -1636.43)scale(15.57998)"
     ></path>
     <path
-      stroke="#999"
+      opacity={0.3}
       strokeLinejoin="round"
       strokeWidth="0.132"
       markerEnd="url(#CapTriangle)"
@@ -141,7 +136,7 @@ const Front = ({ stroke }) => (
       transform="translate(-568.585 -1636.43)scale(15.57998)"
     ></path>
     <path
-      stroke="#999"
+      opacity={0.3}
       strokeLinejoin="round"
       strokeWidth="0.132"
       markerEnd="url(#CapTriangle)"
@@ -152,7 +147,7 @@ const Front = ({ stroke }) => (
       transform="translate(-568.585 -1636.43)scale(15.57998)"
     ></path>
     <path
-      stroke="#999"
+      opacity={0.3}
       strokeLinejoin="round"
       strokeWidth="0.132"
       markerEnd="url(#CapTriangle)"
@@ -163,12 +158,11 @@ const Front = ({ stroke }) => (
       transform="translate(-568.585 -1636.43)scale(15.57998)"
     ></path>
     <path
-      stroke="#000"
       strokeWidth="4.1286947000000005"
       d="m541.676 8.77-179.482-.032-12.884 148.898 193.254 2.368M538.31 8.769l179.482-.031 12.9 148.898-193.254 2.368"
     ></path>
     <path
-      stroke="#999"
+      opacity={0.3}
       strokeLinejoin="round"
       strokeWidth="0.132"
       markerEnd="url(#CapTriangle)"
@@ -179,7 +173,7 @@ const Front = ({ stroke }) => (
       transform="translate(-568.585 -1636.43)scale(15.57998)"
     ></path>
     <path
-      stroke="#999"
+      opacity={0.3}
       strokeLinejoin="round"
       strokeWidth="0.132"
       markerEnd="url(#CapTriangle)"
@@ -190,7 +184,6 @@ const Front = ({ stroke }) => (
       transform="translate(-568.585 -1636.43)scale(15.57998)"
     ></path>
     <path
-      stroke="#000"
       strokeWidth="0.265"
       markerEnd="url(#marker29)"
       markerMid="url(#marker28)"
@@ -199,7 +192,6 @@ const Front = ({ stroke }) => (
       transform="translate(-568.585 -1636.43)scale(15.57998)"
     ></path>
     <path
-      stroke="#000"
       strokeWidth="0.265"
       d="M64.543 108.233a1.167 1.167 0 1 1-2.334 0 1.167 1.167 0 0 1 2.334 0zm13.222 0a1.167 1.167 0 1 0 2.335 0 1.167 1.167 0 0 0-2.335 0zm-13.321 4.3a1.167 1.167 0 1 1-2.335 0 1.167 1.167 0 0 1 2.335 0zm13.42 0a1.167 1.167 0 1 0 2.335 0 1.167 1.167 0 0 0-2.334 0z"
       style={{ fontVariationSettings: 'normal', InkscapeStroke: 'none' }}
