@@ -246,6 +246,8 @@ export const HeaderMenuDraftViewFlags = (props) => {
   const flatFlags = flattenFlags(props.flags)
   const count = Object.keys(flatFlags).length
 
+  const hasError = Object.values(flatFlags).some((it) => it.type === 'error')
+  const hasWarning = Object.values(flatFlags).some((it) => it.type === 'warn')
   return (
     <HeaderMenuDropdown
       {...props}
@@ -258,9 +260,7 @@ export const HeaderMenuDraftViewFlags = (props) => {
             Flags
             <NumberBadge
               value={count}
-              color={
-                Object.values(flatFlags).some((it) => it.type === 'error') ? 'error' : 'secondary'
-              }
+              color={hasError ? 'error' : hasWarning ? 'warning' : 'secondary'}
             />
           </span>
         </>

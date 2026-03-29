@@ -9,7 +9,18 @@ import he from 'he'
 import yaml from 'js-yaml'
 
 export const exportTypes = {
-  exportForPrinting: ['a4', 'a3', 'a2', 'a1', 'a0', 'letter', 'legal', 'tabloid', 'arch d', 'arch e'],
+  exportForPrinting: [
+    'a4',
+    'a3',
+    'a2',
+    'a1',
+    'a0',
+    'letter',
+    'legal',
+    'tabloid',
+    'arch d',
+    'arch e',
+  ],
   exportForEditing: ['svg', 'pdf'],
   exportAsData: ['json', 'yaml'],
 }
@@ -153,7 +164,7 @@ export const handleExport = async ({
       pattern.draft()
       workerArgs.svg = pattern.render()
 
-      // Get coversheet info: setName, settings YAML, version, notes, warnings
+      // Get coversheet info: setName, settings YAML, version, flags
       const store = pattern.setStores[pattern.activeSet]
       workerArgs.strings.setName = settings?.metadata?.setName
         ? settings.metadata.setName
@@ -162,14 +173,10 @@ export const handleExport = async ({
       delete settingsWithoutLayout.layout
       workerArgs.strings.yaml = yaml.dump(settingsWithoutLayout)
       workerArgs.strings.version = store?.data?.version ? store.data.version : ''
-      const notes = store?.plugins?.['plugin-annotations']?.flags?.note
-        ? store?.plugins?.['plugin-annotations']?.flags?.note
-        : []
-      const warns = store?.plugins?.['plugin-annotations']?.flags?.warn
-        ? store?.plugins?.['plugin-annotations']?.flags?.warn
-        : []
-      workerArgs.strings.notes = flagsToString(notes, mustache, t)
-      workerArgs.strings.warns = flagsToString(warns, mustache, t)
+      const flags = store?.plugins?.['plugin-annotations']?.flags || {}
+      for (const type of ['note', 'warn', 'error', 'tip', 'fixme', 'info']) {
+        workerArgs.strings[type + 's'] = flagsToString(flags[type] || [], mustache, t)
+      }
 
       if (format === 'pdf') pageSettings.size = [pattern.width, pattern.height]
 

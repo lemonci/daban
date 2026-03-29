@@ -149,12 +149,19 @@ export class PdfMaker {
     this.pdf.text('(Measurement values are in mm.)', savedWidth, savedLineLevel)
     this.addText(this.strings.yaml, 8)
 
-    // Notes and Warnings
-    if (this.strings.notes) {
-      this.addText('Notes:', 10).addText(this.strings.notes, 8)
+    // Notes, Warnings, and other flags
+    const flagLabels = {
+      errors: 'Errors:',
+      warns: 'Warnings:',
+      notes: 'Notes:',
+      infos: 'Information:',
+      tips: 'Tips:',
+      fixmes: 'Fixme:',
     }
-    if (this.strings.warns) {
-      this.addText('Warnings:', 10).addText(this.strings.warns, 8)
+    for (const [key, label] of Object.entries(flagLabels)) {
+      if (this.strings[key]) {
+        this.addText(label, 10).addText(this.strings[key], 8)
+      }
     }
 
     await SVGtoPDF(this.pdf, logoSvg, this.pdf.page.width - lineStart - 50, lineStart, {
