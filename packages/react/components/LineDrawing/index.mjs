@@ -38,8 +38,11 @@ import { Penelope, PenelopeFront /*, PenelopeBack*/ } from './penelope.mjs'
 import { Sabrina, SabrinaFront, SabrinaBack } from './sabrina.mjs'
 import { Sarah, SarahFront, SarahBack } from './sarah.mjs'
 import { Sophie, SophieFront, SophieBack } from './sophie.mjs'
+import { Shelly, ShellyFront } from './shelly.mjs'
 import { Simon, SimonFront, SimonBack } from './simon.mjs'
 import { Teagan, TeaganFront, TeaganBack } from './teagan.mjs'
+import { Titan, TitanFront } from './titan.mjs'
+import { Trayvon, TrayvonFront } from './trayvon.mjs'
 import { Tristan, TristanFront, TristanBack } from './tristan.mjs'
 import { Uma, UmaFront, UmaBack } from './uma.mjs'
 import { Umbra, UmbraFront, UmbraBack } from './umbra.mjs'
@@ -95,10 +98,11 @@ export const lineDrawingsFront = {
   sophie: SophieFront,
   sarah: SarahFront,
   sabrina: SabrinaFront,
+  shelly: ShellyFront,
   simon: SimonFront,
-
   teagan: TeaganFront,
-
+  titan: TitanFront,
+  trayvon: TrayvonFront,
   tristan: TristanFront,
   uma: UmaFront,
   umbra: UmbraFront,
@@ -198,8 +202,11 @@ export const lineDrawings = {
   sarah: Sarah,
   sophie: Sophie,
   sabrina: Sabrina,
+  shelly: Shelly,
   simon: Simon,
   teagan: Teagan,
+  titan: Titan,
+  trayvon: Trayvon,
   tristan: Tristan,
   uma: Uma,
   umbra: Umbra,
@@ -352,6 +359,9 @@ export {
   Sarah,
   SarahFront,
   SarahBack,
+  //Shelly
+  Shelly,
+  ShellyFront,
   // Sophie
   Sophie,
   SophieFront,
@@ -364,6 +374,12 @@ export {
   Teagan,
   TeaganFront,
   TeaganBack,
+  //Titan
+  Titan,
+  TitanFront,
+  //Trayvon
+  Trayvon,
+  TrayvonFront,
   // Tristan
   Tristan,
   TristanFront,
