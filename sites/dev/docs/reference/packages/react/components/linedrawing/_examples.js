@@ -54,7 +54,7 @@ export const Generate = () => {
 
 const NotFound = () => <p>No such linedrawing</p>
 
-const LineDrawingExample = ({ design, side=false }) => {
+const LineDrawingExample = ({ design, side = false }) => {
   let Component = NotFound
   if (side === 'back' && lineDrawingsBack[design]) Component = lineDrawingsBack[design]
   else if (side === 'front' && lineDrawingsFront[design]) Component = lineDrawingsFront[design]
@@ -145,6 +145,8 @@ export const LunetiusExample = () => <LineDrawingExample design="lunetius" />
 export const LunetiusFrontExample = () => <LineDrawingExample design="lunetius" side="front" />
 export const NobleBackExample = () => <LineDrawingExample design="noble" side="back" />
 export const NobleExample = () => <LineDrawingExample design="noble" />
+export const OnyxFrontExample = () => <LineDrawingExample design="onyx" side="front" />
+
 export const NobleFrontExample = () => <LineDrawingExample design="noble" side="front" />
 export const SimonBackExample = () => <LineDrawingExample design="simon" side="back" />
 export const SimonExample = () => <LineDrawingExample design="simon" />

@@ -31,17 +31,21 @@ import { Lucy, LucyFront } from './lucy.mjs'
 import { Lumina, LuminaFront, LuminaBack } from './lumina.mjs'
 import { Lumira, LumiraFront, LumiraBack } from './lumira.mjs'
 import { Lunetius, LunetiusFront } from './lunetius.mjs'
-import { Percy, PercyFront } from './percy.mjs'
 import { Noble, NobleFront, NobleBack } from './noble.mjs'
 import { Octoplushy, OctoplushyFront /*, OctoplushyBack*/ } from './octoplushy.mjs'
 import { Otis, OtisFront /*, OtisBack*/ } from './otis.mjs'
+import { Onyx, OnyxFront } from './onyx.mjs'
 import { Penelope, PenelopeFront /*, PenelopeBack*/ } from './penelope.mjs'
+import { Percy, PercyFront } from './percy.mjs'
 import { Sabrina, SabrinaFront, SabrinaBack } from './sabrina.mjs'
+import { Sandy, SandyFront } from './sandy.mjs'
 import { Sarah, SarahFront, SarahBack } from './sarah.mjs'
-import { Skully, SkullyFront /*, SkullyBack*/ } from './skully.mjs'
-import { Sophie, SophieFront, SophieBack } from './sophie.mjs'
 import { Shelly, ShellyFront } from './shelly.mjs'
 import { Simon, SimonFront, SimonBack } from './simon.mjs'
+import { Shin, ShinFront } from './shin.mjs'
+import { Skully, SkullyFront /*, SkullyBack*/ } from './skully.mjs'
+import { Sophie, SophieFront, SophieBack } from './sophie.mjs'
+import { Sven, SvenFront } from './sven.mjs'
 import { Teagan, TeaganFront, TeaganBack } from './teagan.mjs'
 import { Titan, TitanFront } from './titan.mjs'
 import { Trayvon, TrayvonFront } from './trayvon.mjs'
@@ -50,6 +54,7 @@ import { Uma, UmaFront, UmaBack } from './uma.mjs'
 import { Umbra, UmbraFront, UmbraBack } from './umbra.mjs'
 import { Wahid, WahidFront, WahidBack } from './wahid.mjs'
 import { Waralee, WaraleeFront /*, WaraleeBack*/ } from './waralee.mjs'
+import { Yuri, YuriFront, YuriBack } from './yuri.mjs'
 
 /**
  * An object where the key is the design name and the value the front LineDrawing component
@@ -91,17 +96,21 @@ export const lineDrawingsFront = {
   lumina: LuminaFront,
   lumira: LumiraFront,
   lunetius: LunetiusFront,
-  percy: PercyFront,
   noble: NobleFront,
   octoplushy: OctoplushyFront,
+  onyx: OnyxFront,
   otis: OtisFront,
   penelope: PenelopeFront,
-  sophie: SophieFront,
-  sarah: SarahFront,
+  percy: PercyFront,
   sabrina: SabrinaFront,
+  sandy: SandyFront,
+  sarah: SarahFront,
   shelly: ShellyFront,
-  skully: SkullyFront,
+  shin: ShinFront,
   simon: SimonFront,
+  skully: SkullyFront,
+  sven: SvenFront,
+  sophie: SophieFront,
   teagan: TeaganFront,
   titan: TitanFront,
   trayvon: TrayvonFront,
@@ -110,6 +119,7 @@ export const lineDrawingsFront = {
   umbra: UmbraFront,
   wahid: WahidFront,
   waralee: WaraleeFront,
+  yuri: YuriFront,
 }
 
 /**
@@ -146,17 +156,18 @@ export const lineDrawingsBack = {
   /*octoplushy: OctoplushyBack,*/
   /*otis: OtisBack,*/
   /*penelope: PenelopeBack,*/
-  sarah: SarahBack,
-  sophie: SophieBack,
   sabrina: SabrinaBack,
-  /* skully: SkullyBack, */
+  sarah: SarahBack,
   simon: SimonBack,
+  /* skully: SkullyBack, */
+  sophie: SophieBack,
   teagan: TeaganBack,
   tristan: TristanBack,
   uma: UmaBack,
   umbra: UmbraBack,
   wahid: WahidBack,
   /*waralee: WaraleeBack,*/
+  yuri: YuriBack,
 }
 
 /**
@@ -202,14 +213,18 @@ export const lineDrawings = {
   percy: Percy,
   noble: Noble,
   octoplushy: Octoplushy,
+  onyx: Onyx,
   otis: Otis,
   penelope: Penelope,
   sarah: Sarah,
-  sophie: Sophie,
+  shin: Shin,
   sabrina: Sabrina,
+  sandy: Sandy,
   shelly: Shelly,
   skully: Skully,
   simon: Simon,
+  sophie: Sophie,
+  sven: Sven,
   teagan: Teagan,
   titan: Titan,
   trayvon: Trayvon,
@@ -218,6 +233,7 @@ export const lineDrawings = {
   umbra: Umbra,
   wahid: Wahid,
   waralee: Waralee,
+  yuri: Yuri,
 }
 
 /*
@@ -357,6 +373,9 @@ export {
   Octoplushy,
   OctoplushyFront,
   /*OctoplushyBack,*/
+  //Onyx
+  Onyx,
+  OnyxFront,
   // Otis
   Otis,
   OtisFront,
@@ -365,6 +384,9 @@ export {
   Penelope,
   PenelopeFront,
   /*PenelopeBack,*/
+  //Sandy
+  Sandy,
+  SandyFront,
   // Sarah
   Sarah,
   SarahFront,
@@ -372,6 +394,13 @@ export {
   //Shelly
   Shelly,
   ShellyFront,
+  //Shin
+  Shin,
+  ShinFront,
+  // Simon
+  Simon,
+  SimonFront,
+  SimonBack,
   // Sophie
   Sophie,
   SophieFront,
@@ -380,10 +409,9 @@ export {
   Skully,
   SkullyFront,
   // SkullyBack,
-  // Simon
-  Simon,
-  SimonFront,
-  SimonBack,
+  //Sven
+  Sven,
+  SvenFront,
   // Teagan
   Teagan,
   TeaganFront,
@@ -414,4 +442,8 @@ export {
   Waralee,
   WaraleeFront,
   /*WaraleeBack,*/
+  //Yuri
+  Yuri,
+  YuriFront,
+  YuriBack,
 }
