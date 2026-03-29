@@ -14,6 +14,7 @@ import { Carlton, CarltonFront, CarltonBack } from './carlton.mjs'
 import { Cathrin, CathrinFront, CathrinBack } from './cathrin.mjs'
 import { Charlie, CharlieFront, CharlieBack } from './charlie.mjs'
 import { Cornelius, CorneliusFront, CorneliusBack } from './cornelius.mjs'
+import { Crux, CruxFront /*, CruxBack*/ } from './crux.mjs'
 import { Devon, DevonFront /*, DevonBack*/ } from './devon.mjs'
 import { Diana, DianaFront, DianaBack } from './diana.mjs'
 import { Florence, FlorenceFront } from './florence.mjs'
@@ -37,6 +38,7 @@ import { Otis, OtisFront /*, OtisBack*/ } from './otis.mjs'
 import { Penelope, PenelopeFront /*, PenelopeBack*/ } from './penelope.mjs'
 import { Sabrina, SabrinaFront, SabrinaBack } from './sabrina.mjs'
 import { Sarah, SarahFront, SarahBack } from './sarah.mjs'
+import { Skully, SkullyFront /*, SkullyBack*/ } from './skully.mjs'
 import { Sophie, SophieFront, SophieBack } from './sophie.mjs'
 import { Shelly, ShellyFront } from './shelly.mjs'
 import { Simon, SimonFront, SimonBack } from './simon.mjs'
@@ -72,6 +74,7 @@ export const lineDrawingsFront = {
   cathrin: CathrinFront,
   charlie: CharlieFront,
   cornelius: CorneliusFront,
+  crux: CruxFront,
   devon: DevonFront,
   diana: DianaFront,
   florence: FlorenceFront,
@@ -84,7 +87,6 @@ export const lineDrawingsFront = {
   hugo: HugoFront,
   jane: JaneFront,
   jett: JettFront,
-
   lucy: LucyFront,
   lumina: LuminaFront,
   lumira: LumiraFront,
@@ -94,11 +96,11 @@ export const lineDrawingsFront = {
   octoplushy: OctoplushyFront,
   otis: OtisFront,
   penelope: PenelopeFront,
-
   sophie: SophieFront,
   sarah: SarahFront,
   sabrina: SabrinaFront,
   shelly: ShellyFront,
+  skully: SkullyFront,
   simon: SimonFront,
   teagan: TeaganFront,
   titan: TitanFront,
@@ -130,6 +132,7 @@ export const lineDrawingsBack = {
   cathrin: CathrinBack,
   charlie: CharlieBack,
   cornelius: CorneliusBack,
+  /*crux: CruxBack,*/
   /*devon: DevonBack,*/
   diana: DianaBack,
   gozer: GozerBack,
@@ -146,6 +149,7 @@ export const lineDrawingsBack = {
   sarah: SarahBack,
   sophie: SophieBack,
   sabrina: SabrinaBack,
+  /* skully: SkullyBack, */
   simon: SimonBack,
   teagan: TeaganBack,
   tristan: TristanBack,
@@ -178,6 +182,7 @@ export const lineDrawings = {
   cathrin: Cathrin,
   charlie: Charlie,
   cornelius: Cornelius,
+  crux: Crux,
   devon: Devon,
   diana: Diana,
   florence: Florence,
@@ -203,6 +208,7 @@ export const lineDrawings = {
   sophie: Sophie,
   sabrina: Sabrina,
   shelly: Shelly,
+  skully: Skully,
   simon: Simon,
   teagan: Teagan,
   titan: Titan,
@@ -279,6 +285,10 @@ export {
   Cornelius,
   CorneliusFront,
   CorneliusBack,
+  // Crux
+  Crux,
+  CruxFront,
+  /*CruxBack,*/
   // Devon
   Devon,
   DevonFront,
@@ -366,6 +376,10 @@ export {
   Sophie,
   SophieFront,
   SophieBack,
+  // Skully
+  Skully,
+  SkullyFront,
+  // SkullyBack,
   // Simon
   Simon,
   SimonFront,
