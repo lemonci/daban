@@ -1,0 +1,189 @@
+---
+date: '2026-04-01'
+edition: '2026q2'
+intro: 'Welcome to the 2026 Spring edition of the FreeSewing newsletter.'
+title: '2026 Spring edition'
+authors:
+  - 1
+toc_max_heading_level: 2
+---
+
+Welcome to the 2026 Spring edition of the FreeSewing newsletter.
+
+Here's what we have put together for you on this first day of April:
+
+- 📺 (video of) The FreeSewing talk at FOSDEM 2026 (1-minute read by joost)
+- 🏁 FreeSewing's migration away from US-based tech companies is complete (2-minute read by joost)
+- 🪪 Age-verification, and sovereign online chat (2-minute read by joost)
+- 🚣 FreeSewing backend security audit: Lessons learned (2-minute read by joost)
+
+<!-- truncate -->
+
+Let's go.
+
+&nbsp;
+
+&nbsp;
+
+## 📺 (video of) The FreeSewing talk at FOSDEM 2026
+
+As we mentioned in our previous edition of the FreeSewing newsletter:
+
+> _Held every year in Brussels, [FOSDEM](https://fosdem.org/2026/) (Free and Open
+> source Software Developers' European Meeting ) is a conference entirely
+> dedicated to free and open source software. It's also a non-commercial event
+> run by volunteers, so it has nothing to do with your run-of-the-mill tech
+> conference, it's really something special._
+
+We held a talk about FreeSewing at FOSDEM with the title [FreeSewing: How to
+buy less, create more, and feel great about
+it](https://fosdem.org/2026/schedule/event/FVQVTA-freesewing/).
+
+For those who are interested, audio/video of this talk is available online:
+
+- At the [FOSDEM Video Archives](https://video.fosdem.org/2026/k1105/) (search
+  for `freesewing` within the page)
+- Or [on YouTube](https://youtu.be/ec7vgHoHwqQ) (for convenience)
+
+&nbsp;
+
+&nbsp;
+
+## 🏁 FreeSewing's migration away from US-based tech companies is complete
+
+We wrote about [our migration away from US-based tech companies
+before](https://freesewing.eu/newsletter/2025q2#-putting-some-distance-between-our-users-and-the-new-us-administration),
+but a limited number of items remained on our todo-list.
+Specifically:
+
+- Transactional & newsletter emails
+- Image hosting
+
+During the first quarter of 2026, we were able to complete those last couple
+of items, thus marking the completion of a migration that started last year.
+
+**Email**
+
+Transactional emails are emails sent out as a response to something a user does
+on the website. These include sign-ups, password resets, and email changes,
+and so on. These were handled by Amazon Web Services (AWS). Just as the emails
+that are sent out to deliver this newsletter to your inbox.
+
+A migration to Scaleway's transactional email service has been in the works
+for a while --- with emails from the FreeSewing forum already being sent
+out through the EU-based Scaleway --- and now we have completed the
+migration for all our emails.
+
+While this is mostly an under-the-hood change, we've also used this opportunity
+to implement some changes to make it easier for people to filter our emails.
+
+Specifically, transactional email is now sent from the
+`no-reply@notifications.freesewing.eu` address, whereas (this and future)
+newsletters are sent from `no-reply@newsletter.freesewing.eu`.
+
+Note that the `reply-to` address is set to `support@freesewing.eu` so you can
+still just hit reply if you want to reach a human being.
+
+**Images**
+
+The final service to migrate away from US-based tech companies was our image
+hosting, which until recently was handled by Cloudflare.
+
+There was no drop-in replacement for Cloudflare’s Image API in the EU, as it is
+a rather custom setup. So instead, we have decided to take matters into our own
+hands, and host images ourselves on our backend systems.
+
+User-provided images --- avatars and so on --- are hosted directly from our
+backend systems on the `static.freesewing.eu` domain. More commonly served
+images --- for blog posts, showcases and so on --- are also hosted by our
+backend systems, but we have deployed a caching layer leveraging Bunny CDN to
+protect our backend from the incurred bandwidth costs. These images are hosted
+on the `cdn.freesewing.eu` domain.
+
+&nbsp;
+
+&nbsp;
+
+## 🪪 Age-verification, and sovereign online chat
+
+There's been a recent push in some countries or jurisdictions to enforce age
+verification for access to (certain) online services. This has ruffled some
+feathers in general, but it is the moves by Discord that have caused the most
+debate in the FreeSewing community, as a number of FreeSewing users use Discord
+as their communications platform of choice.
+
+This has raised some questions about what FreeSewing is going to do about this,
+if anything.
+
+First of all, the FreeSewing community exists wherever people will it into existence.
+Some people are on Facebook, others on Reddit, some are on Discord.
+Others prefer face-to-face interactions and hands-on experience with FreeSewing,
+like at [De WAR](https://www.dewar.nl/) in the Netherlands.
+
+There is no right or wrong way to interact with others, and we are not in the
+business of telling people what to do, or where to go. You do you.
+
+That being said, a subset of our users like the direct and synchronous
+communication provided by an online chat platform. Within the FreeSewing
+community, that functionality is --- at least today --- de facto provided by
+Discord.
+
+People who like using Discord are free to continue doing so, that's not up for
+debate. Instead, the discussion is about whether people who merely want _some
+form of online chat_ to communicate with the FreeSewing community would like to
+have an option that does not require using Discord.
+
+Within that context, we are currently considering whether or not to run [a
+FreeSewing Matrix homeserver](https://matrix.org/ecosystem/servers/) to answer
+this need.
+
+Of course, for every other service we run, it comes with overheads, costs,
+work, and so on. So we are trying to figure out what the best choice would be.
+
+Long story short: If you would like to see this become reality, make your voice
+heard.
+
+&nbsp;
+
+&nbsp;
+
+## 🚣 FreeSewing backend security audit: Lessons learned
+
+In case you missed it, we published a [post-disclosure
+report](https://freesewing.eu/blog/backend-vuln-202603) after a security audit
+found several issues in the FreeSewing backend code.
+
+While the audit did reveal issues that could have been abused to allow data
+leakage or privilege escalation, we are unaware of any of these issues being
+exploited. We are also unaware of any data being leaked, and we have not found
+any account with a privilege level that was not what it should be.
+
+If you'd like to learn more, we encourage you to [read the
+report](https://freesewing.eu/blog/backend-vuln-202603). We've done our best to
+explain everything in detail, so we will not rehash that here.
+Instead we'd like to focus on the _how did this happen_ question, and the
+lessons we can learn from it.
+
+Our main take-away is that we are spread too thin. Despite our best efforts, we
+struggle to keep up with everything that needs doing. This is not really a new
+development, nor is it unusual for an open source project, but it has only
+gotten worse in light of our newfound popularity and increased user growth.
+
+There is also a somewhat unbalanced competition for time and resources between
+what we would like to do and what we have to do. The fact that we lament
+being _spread too thin_ mere paragraphs after floating the idea of
+running our own Matrix homeserver illustrates this tension.
+
+We have reached a point where _do less_ is no longer a viable strategy.
+That's because the things we do, we want to do them right, and for the right reasons.
+
+So instead, we will try to _be more_. Specifically, be more people. We will
+make an effort to grow horizontally, and remove or reduce bottle necks in our
+team of contributors by spreading the workload over more people, building a
+bigger and stronger team of contributors, and in general try to meet the
+demands of a growing open source project by simply growing with those demands
+regarding infrastructure, maturity, and personnel.
+
+In summary: We're going to need a bigger boat.
+
+joost
