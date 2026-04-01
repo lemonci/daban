@@ -106,6 +106,7 @@
  - Typo in config lookup for max api key expiry
  - Await email sending
  - Detection logic for admin user in API keys
+ - Adapt OIDC flow to UUID changes
 
 
 ## 4.6.0 (2026-03-08)

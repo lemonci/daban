@@ -26,7 +26,7 @@ export async function loadOidcProvider(tools) {
   const config = {
     ...tools.config.oidc.provider,
     jwks,
-    findAccount: (ctx, id) => findAccount(ctx, id, tools),
+    findAccount: (ctx, uuid) => findAccount(ctx, uuid, tools),
     loadExistingGrant,
   }
 
@@ -64,33 +64,28 @@ async function loadOrCreateJwks() {
  * Looks up a FreeSewing user by id and returns an OIDC account object.
  * Called by the provider when it needs to include claims in tokens.
  */
-async function findAccount(ctx, id, tools) {
+async function findAccount(ctx, uuid, tools) {
   const User = new UserModel(tools)
-  await User.read({ id: Number(id) })
+  await User.read({ uuid })
 
   // Return undefined if the user doesn't exist so the provider rejects the request
   if (!User.exists) return undefined
 
   const account = User.asAccount()
-  // ihash is not included in asAccount() but is needed for the avatar URL
-  const ihash = User.record.ihash
 
   return {
-    accountId: id,
+    accountId: account.uuid,
     async claims(use, scope) {
       // sub claim is always returned
-      const claims = { sub: id.toString() }
+      const claims = { sub: uuid }
 
       // profile claims
       if (scope.includes('profile')) {
         claims.name = account.username
         claims.preferred_username = account.username
-        claims.picture = `https://imagedelivery.net/ouSuR9yY1bHt-fuAokSA5Q/uid-${ihash}/sq500`
+        claims.picture = `https://static.freesewing.eu/user/${uuid.slice(0, 1)}/${uuid.slice(0, 2)}/${uuid}.webp`
         // updatedAt must be a Unix timestamp (seconds)
-        claims.updated_at =
-          typeof account.updatedAt === 'string'
-            ? Math.floor(new Date(account.updatedAt).getTime() / 1e3)
-            : Math.floor(account.updatedAt.getTime() / 1e3)
+        claims.updated_at = Math.floor(new Date(User.record.updatedAt).getTime() / 1e3)
         claims.bio = account.bio
         claims.moderator = account.role === 'admin'
       }
