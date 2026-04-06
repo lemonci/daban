@@ -205,14 +205,14 @@ const config = {
     ],
   ],
   themeConfig: {
-    announcementBar: {
-      id: 'stampede_notice',
-      content:
-        'We have migrated our backend service. Please re-authenticate before you contact support.',
-      backgroundColor: '#663399',
-      textColor: '#ffffff',
-      isCloseable: true,
-    },
+    //announcementBar: {
+    //  id: 'stampede_notice',
+    //  content:
+    //    'We have migrated our backend service. Please re-authenticate before you contact support.',
+    //  backgroundColor: '#663399',
+    //  textColor: '#ffffff',
+    //  isCloseable: true,
+    //},
     colorMode: {
       // Do not be tempted to change these
       disableSwitch: true,
