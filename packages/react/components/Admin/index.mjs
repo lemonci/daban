@@ -167,27 +167,25 @@ export const UserAdministration = ({ Link = false }) => {
 }
 
 const Hits = ({ results, Link = false }) => {
+  if (!results) return null
   if (!Link) Link = WebLink
+  const types = {
+    ehash: 'Current Email Address',
+    ihash: 'Initial Email Address',
+    username: 'Username',
+    uuid: 'UUID',
+    id: 'Numeric ID',
+  }
 
-  return (
-    <>
-      {results && results.username && results.username.length > 0 && (
-        <>
-          <h2>Results based on username</h2>
-          {results.username.map((user) => (
-            <User user={user} key={user.id} Link={Link} />
-          ))}
-        </>
-      )}
-      {results && results.email && results.email.length > 0 && (
-        <>
-          <h2>Results based on E-mail address</h2>
-          {results.email.map((user) => (
-            <User user={user} key={user.id} Link={Link} />
-          ))}
-        </>
-      )}
-    </>
+  return Object.entries(types).map(([type, label]) =>
+    results[type] && results[type].length > 0 ? (
+      <div key={type}>
+        <h2>Results based on {label}</h2>
+        {results[type].map((user) => (
+          <User user={user} key={user.id} Link={Link} />
+        ))}
+      </div>
+    ) : null
   )
 }
 
@@ -273,7 +271,7 @@ const User = ({ user, Link }) => {
           >
             Details
           </button>
-          <ImpersonateButton userId={user.id} />
+          <ImpersonateButton userId={user.uuid} />
           {user.mfaEnabled ? (
             <button
               className="tw:daisy-btn tw:daisy-btn-warning tw:daisy-btn-sm"
