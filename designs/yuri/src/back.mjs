@@ -20,11 +20,12 @@ function yuriBack({ store, macro, Path, Point, points, paths, sa, options, measu
   // end Yuri points
 
   // Store length of the neck seam
-  store.set(
-    'backNeckSeamLength',
-    new Path().move(points.neck).curve_(points.neckCp2, points.cbNeck).length()
-  )
-  store.set('neckCutoutBack', points.cbNeck.y)
+  const hoodParts = ['threePartHood', 'hoodSide', 'hoodCenter']
+  for (const hoodPart of hoodParts) {
+    const neckLength = new Path().move(points.neck).curve_(points.neckCp2, points.cbNeck).length()
+    store.set(`library.${hoodPart}.neckOpeningLenBack`, neckLength)
+    store.set(`library.${hoodPart}.neckCutoutBack`, points.cbNeck.y)
+  }
 
   // Paths
   paths.gussetBase = new Path()

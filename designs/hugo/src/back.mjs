@@ -61,6 +61,11 @@ function hugoBack({
   store.set('neckOpeningAnchorBack', points.neck)
   store.set('neckOpeningLenBack', neckOpening.length())
   store.set('neckCutoutBack', points.cbNeck.y)
+  const hoodParts = ['threePartHood', 'hoodSide', 'hoodCenter']
+  for (const hoodPart of hoodParts) {
+    store.set(`library.${hoodPart}.neckOpeningLenBack`, neckOpening.length())
+    store.set(`library.${hoodPart}.neckCutoutBack`, points.cbNeck.y)
+  }
 
   if (complete) {
     macro('banner', {

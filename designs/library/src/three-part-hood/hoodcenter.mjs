@@ -1,8 +1,28 @@
-import { hoodSide } from './hoodside.mjs'
+import { threePartHood } from './shared.mjs'
+import { ensureStoreValues } from '../shared.mjs'
 
-function yuriHoodCenter({ store, sa, Point, points, Path, paths, expand, macro, units, part }) {
-  const width = store.get('hoodCenterWidth')
-  const length = store.get('hoodCenterLength')
+function libraryHoodCenter({
+  store,
+  sa,
+  Point,
+  points,
+  Path,
+  paths,
+  expand,
+  macro,
+  units,
+  part,
+  options,
+  measurements,
+}) {
+  /*
+   * If things are missing in the store, flag a warning and return early.
+   * Unless we are asked to mock these values.
+   */
+  if (!ensureStoreValues(threePartHood, 'mockThreePartHood', store, options)) return part
+
+  const width = measurements.head / 10
+  const length = paths.hoodCenter.length()
 
   if (expand) {
     store.flag.preset('expandIsOn')
@@ -10,11 +30,12 @@ function yuriHoodCenter({ store, sa, Point, points, Path, paths, expand, macro, 
     // Expand is off, do not draw the part but flag this to the user
     const extraSa = sa ? 2 * sa : 0
     store.flag.note({
-      msg: `yuri:cutHoodCenter`,
+      msg: `library:cutHoodCenter`,
       notes: [sa ? 'flag:saIncluded' : 'flag:saExcluded', 'flag:partHiddenByExpand'],
       replace: {
         width: units(width + extraSa),
         length: units(length + extraSa),
+        nr: store.pget('title', {})?.nr ?? 6,
       },
       suggest: {
         text: 'flag:show',
@@ -46,15 +67,15 @@ function yuriHoodCenter({ store, sa, Point, points, Path, paths, expand, macro, 
 
   if (sa) paths.sa = paths.seam.offset(sa).addClass('fabric sa')
 
-  /*
-   * Annotations
-   */
-  // Cutlist
-  store.cutlist.setCut({ cut: 2, from: 'fabric' })
+  // Cut list
+  let cuts = store.pget('cutlist', {})
+  if (!Array.isArray(cuts)) cuts = [cuts]
+  for (const cut of cuts) store.cutlist.addCut({ cut: 2, from: 'fabric', ...cut })
 
   // Title
+  const title = store.pget('title', {})
   points.title = points.bottomLeft.shiftFractionTowards(points.topRight, 0.5)
-  macro('title', { at: points.title, nr: 6, title: 'hoodCenter' })
+  macro('title', { at: points.title, nr: 6, title: 'hoodCenter', ...title })
 
   // Grainline
   macro('grainline', {
@@ -68,7 +89,6 @@ function yuriHoodCenter({ store, sa, Point, points, Path, paths, expand, macro, 
     from: points.bottomLeft,
     to: points.bottomRight,
     y: points.bottomRight.y + sa + 15,
-    text: units(store.get('hoodCenterLength')),
   })
   macro('vd', {
     id: 'hFull',
@@ -81,7 +101,14 @@ function yuriHoodCenter({ store, sa, Point, points, Path, paths, expand, macro, 
 }
 
 export const hoodCenter = {
-  name: 'yuri.hoodCenter',
-  after: hoodSide,
-  draft: yuriHoodCenter,
+  library: true,
+  name: 'library.hoodCenter',
+  from: threePartHood,
+  options: {
+    mockThreePartHood: false,
+  },
+  store: {
+    reads: ['cutlist', 'title'],
+  },
+  draft: libraryHoodCenter,
 }
