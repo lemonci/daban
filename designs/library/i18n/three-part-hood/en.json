@@ -1,8 +1,8 @@
 {
-  "t": "Library/Hood",
-  "d": "A hood from the library of FreeSewing design parts",
+  "t": "Library/ThreePartHood",
+  "d": "A three-part hood from the library of FreeSewing design parts",
   "p": {
-    "hood": "Hood",
+    "threePartHood": "Three-Part Hood (base)",
     "hoodCenter": "Hood center",
     "hoodSide": "Hood side"
   },

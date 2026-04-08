@@ -283,7 +283,9 @@ Part.prototype.__boundary = function () {
         if (path.bottomRight.y > bottomRight.y) bottomRight.y = path.bottomRight.y
       }
     } catch (err) {
-      this.context.store.log.error(`Could not calculate boundary of \`paths.${key}\``)
+      this.context.store.log.error(
+        `Could not calculate boundary of \`paths.${key}\` in part ${this.name}: ${err}`
+      )
     }
   }
   for (let key in this.points) {

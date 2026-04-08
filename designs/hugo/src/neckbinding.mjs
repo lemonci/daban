@@ -6,7 +6,7 @@ function hugoNeckBinding({ store, sa, Point, points, Path, paths, macro, part, e
   const length =
     store.get('neckOpeningLenFront') * 2 +
     store.get('neckOpeningLenBack') * 2 +
-    store.get('library.hood.hoodCenterWidth')
+    store.get('library.threePartHood.hoodCenterWidth')
   const width = length / 44.2
 
   if (expand) {

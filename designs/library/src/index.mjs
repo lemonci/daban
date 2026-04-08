@@ -4,7 +4,7 @@ import { i18n } from '../i18n/index.mjs'
 import { i18n as rectangleI18n } from '../i18n/rectangle/index.mjs'
 import { i18n as sleeveI18n } from '../i18n/sleeve/index.mjs'
 import { i18n as twoPartSleeveI18n } from '../i18n/two-part-sleeve/index.mjs'
-import { i18n as hoodI18n } from '../i18n/hood/index.mjs'
+import { i18n as threePartHoodI18n } from '../i18n/three-part-hood/index.mjs'
 
 // Parts
 import { rectangle } from './rectangle/index.mjs'
@@ -42,7 +42,7 @@ export {
   rectangleI18n,
   sleeveI18n,
   twoPartSleeveI18n,
-  hoodI18n,
+  threePartHoodI18n,
   about,
 }
 

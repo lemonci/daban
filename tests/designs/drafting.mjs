@@ -14,7 +14,7 @@ const ciTimeout = 10000
  */
 export const testPatternDrafting = (Pattern, log = false) => {
   const design = getShortName(Pattern.designConfig.data.name)
-
+  log = true
   // Helper method to try/catch pattern drafting
   const doesItDraftAndRender = (pattern, log = false) => {
     try {
