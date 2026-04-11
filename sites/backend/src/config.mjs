@@ -155,7 +155,7 @@ if (baseConfig.use.oidc.provider) {
       proxy: true,
       clients: [],
       pkce: {
-        required: false,
+        required: () => false,
       },
       features: {
         devInteractions: { enabled: false },
