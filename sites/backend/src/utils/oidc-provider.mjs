@@ -117,8 +117,9 @@ async function loadExistingGrant(ctx) {
 
   if (grantId) return ctx.oidc.provider.Grant.find(grantId)
 
-  // Auto-approve consent for the first-party forum client only
-  if (ctx.oidc.client.clientId === 'forum') {
+  // Auto-approve consent for first-party clients
+  const firstPartyClients = ['forum', 'support']
+  if (firstPartyClients.includes(ctx.oidc.client.clientId)) {
     const grant = new ctx.oidc.provider.Grant({
       clientId: ctx.oidc.client.clientId,
       accountId: ctx.oidc.session?.accountId || ctx.oidc.account?.accountId,
