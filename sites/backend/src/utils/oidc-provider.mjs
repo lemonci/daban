@@ -75,6 +75,7 @@ async function findAccount(ctx, uuid, tools) {
 
   return {
     accountId: account.uuid,
+    role: account.role,
     async claims(use, scope) {
       // sub claim is always returned
       const claims = { sub: uuid }
@@ -124,6 +125,12 @@ async function loadExistingGrant(ctx) {
       clientId: ctx.oidc.client.clientId,
       accountId: ctx.oidc.session?.accountId || ctx.oidc.account?.accountId,
     })
+
+    // If this is the support client, only allow users with the support role
+    if (ctx.oidc.client.clientId === 'support') {
+      // This will break the flow, but it's required because freescout does not handle this
+      if (!['support', 'admin'].includes(ctx.oidc.account?.role)) return undefined
+    }
 
     // Grant exactly the scopes that were requested
     if (ctx.oidc.params?.scope) {
