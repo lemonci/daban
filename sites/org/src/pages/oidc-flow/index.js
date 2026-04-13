@@ -17,14 +17,19 @@ import { useAccount } from '@freesewing/react/hooks/useAccount'
  */
 export default function SignInPage() {
   const [uid, setUid] = useState('')
+  const [client, setClient] = useState('')
   const { token, account } = useAccount()
+
+  const clients = ['forum', 'support']
 
   useEffect(() => {
     const interaction = getSearchParam('uid')
+    const client_id = getSearchParam('client')
     setUid(interaction || false)
+    setClient(client_id || false)
   }, [])
 
-  if (uid === false) return <InvalidUrlWarning />
+  if (uid === false || client === false || !clients.includes(client)) return <InvalidUrlWarning />
   if (!uid) return <OneMomentPlease />
 
   return (
@@ -47,8 +52,8 @@ export default function SignInPage() {
             </h5>
             <div className="tw:w-full tw:p-4">
               <h3 className="tw:text-center">
-                <a href="https://forum.freesewing.eu/" title="forum.freesewing.eu">
-                  forum.freesewing.eu
+                <a href={`https://${client}.freesewing.eu/`} title={`${client}.freesewing.eu`}>
+                  {client}.freesewing.eu
                 </a>
                 <br />
                 <span className="tw:font-medium tw:text-xl">
@@ -75,7 +80,7 @@ export default function SignInPage() {
                 <input type="hidden" name="token" value={token} />
                 <div className="tw:grid tw:grid-cols-2 tw:gap-2 tw:mt-2">
                   <a
-                    href="https://forum.freesewing.eu/"
+                    href={`https://${client}.freesewing.eu/`}
                     className="tw:daisy-btn tw:daisy-btn-primary tw:daisy-btn-outline"
                   >
                     Deny
@@ -87,7 +92,7 @@ export default function SignInPage() {
               </form>
               <MiniTip>
                 You should only share your FreeSewing account data with sites you trust. In this
-                case, as <b>forum.freesewing.eu</b> is an official FreeSewing site, there is no
+                case, as <b>{client}.freesewing.eu</b> is an official FreeSewing site, there is no
                 risk.
               </MiniTip>
             </div>
