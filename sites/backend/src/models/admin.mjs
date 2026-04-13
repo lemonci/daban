@@ -157,7 +157,7 @@ AdminModel.prototype.impersonateUser = async function ({ params, user }) {
   /*
    * Enforce RBAC
    */
-  if (!this.rbac.admin(user)) return this.setResponse(403, 'insufficientAccessLevel')
+  if (!this.rbac.support(user)) return this.setResponse(403, 'insufficientAccessLevel')
 
   /*
    * Is uuid set?
