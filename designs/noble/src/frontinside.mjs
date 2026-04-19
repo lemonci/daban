@@ -32,35 +32,34 @@ export const frontInside = {
 
     if (options.dartPosition === 'shoulder') {
       paths.insideSeam = new Path()
-        .move(points.cfHem)
-        .line(points.waistDartLeft)
+        .move(points.waistDartLeft)
         .curve(points.waistDartLeftCp, points.shoulderDartTipCpDownInside, points.shoulderDartTip)
+
+      store.set('shoulderDartTipNotch', paths.insideSeam.length())
+
+      paths.insideSeam = paths.insideSeam
         .line(points.shoulderDartInside)
         .line(points.hps)
         .curve(points.hpsCp2, points.cfNeckCp1, points.cfNeck)
 
       paths.seam = paths.insideSeam
         .join(new Path().move(points.cfNeck).line(points.cfHem))
+        .line(points.waistDartLeft)
         .close()
         .attr('class', 'fabric')
-
-      store.set(
-        'shoulderDartTipNotch',
-        new Path()
-          .move(points.waistDartLeft)
-          .curve(points.waistDartLeftCp, points.shoulderDartTipCpDownInside, points.shoulderDartTip)
-          .length()
-      )
     } else {
       if (options.armholeDartCurved) {
         paths.insideSeam = new Path()
-          .move(points.cfHem)
-          .line(points.waistDartLeft)
+          .move(points.waistDartLeft)
           .curve(
             points.waistDartLeftCp,
             points.armholeDartTipCpDownInside,
             points.armholeDartTipInside
           )
+
+        store.set('shoulderDartTipNotch', paths.insideSeam.length())
+
+        paths.insideSeam = paths.insideSeam
           .curve(
             points.waistCircleInsideCp1,
             points.armholeCircleInsideCp1,
@@ -72,30 +71,22 @@ export const frontInside = {
 
         paths.seam = paths.insideSeam
           .join(new Path().move(points.cfNeck).line(points.cfHem))
+          .line(points.waistDartLeft)
           .close()
           .attr('class', 'fabric')
-
-        store.set(
-          'shoulderDartTipNotch',
-          new Path()
-            .move(points.waistDartLeft)
-            .curve(
-              points.waistDartLeftCp,
-              points.armholeDartTipCpDownInside,
-              points.armholeDartTipInside
-            )
-            .length()
-        )
       } else {
         paths.insideSeam = new Path()
-          .move(points.cfHem)
-          .line(points.waistDartLeft)
+          .move(points.waistDartLeft)
           .line(points.waistToBustInside)
           .curve(
             points.aboveBustPointInside,
             points.aboveBustPointInside,
             points.armholeToBustInside
           )
+
+        store.set('shoulderDartTipNotch', paths.insideSeam.length())
+
+        paths.insideSeam = paths.insideSeam
           .line(points.armholeDartInside)
           .join(paths.armholeInside)
           .line(points.hps)
@@ -103,23 +94,16 @@ export const frontInside = {
 
         paths.seam = paths.insideSeam
           .join(new Path().move(points.cfNeck).line(points.cfHem))
+          .line(points.waistDartLeft)
           .close()
           .attr('class', 'fabric')
-
-        store.set(
-          'shoulderDartTipNotch',
-          new Path()
-            .move(points.waistDartLeft)
-            .line(points.waistToBustInside)
-            .curve(
-              points.aboveBustPointInside,
-              points.aboveBustPointInside,
-              points.armholeToBustInside
-            )
-            .length()
-        )
       }
     }
+
+    points.bustInside = paths.insideSeam.intersectsY(points.bustA.y)[0]
+    snippets.bustInside = new Snippet('notch', points.bustInside)
+
+    store.set('bustInside', paths.insideSeam.split(points.bustInside)[0].length())
 
     macro('cutonfold', {
       from: points.cfNeck,
@@ -127,15 +111,6 @@ export const frontInside = {
       grainline: true,
     })
 
-    if (options.dartPosition === 'shoulder') {
-      snippets.shoulderDartTip = new Snippet('notch', points.shoulderDartTip)
-    } else {
-      if (options.armholeDartCurved) {
-        snippets.shoulderDartTip = new Snippet('notch', points.armholeDartTipInside)
-      } else {
-        snippets.shoulderDartTip = new Snippet('notch', points.armholeToBustInside)
-      }
-    }
     points.titleAnchor = new Point(points.hpsCp2.x * 0.75, points.cfNeckCp1.y * 1.5)
     macro('title', {
       at: points.titleAnchor,

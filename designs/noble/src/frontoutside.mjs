@@ -85,10 +85,10 @@ export const frontOutside = {
     store.cutlist.removeCut()
     store.cutlist.addCut()
 
-    points.snippet = paths.princessSeam.shiftAlong(
-      paths.princessSeam.length() - store.get('shoulderDartTipNotch')
+    points.bustOutside = paths.princessSeam.shiftAlong(
+      paths.princessSeam.length() - store.get('bustInside')
     )
-    snippets.shoulderDartTip = new Snippet('notch', points.snippet)
+    snippets.bustOutside = new Snippet('notch', points.bustOutside)
 
     points.titleAnchor = points.waistDartRight
       .shiftFractionTowards(points.armhole, 0.3)
@@ -143,7 +143,7 @@ export const frontOutside = {
         id: 'dartToShoulder',
       })
       macro('hd', {
-        from: points.snippet,
+        from: points.bustOutside,
         to: points.shoulder,
         y: points.shoulderDartOutside.y - sa - 25,
         id: 'dartPointToShoulder',
@@ -179,7 +179,7 @@ export const frontOutside = {
         id: 'hemToShoulderDart',
       })
       macro('vd', {
-        from: points.snippet,
+        from: points.bustOutside,
         to: points.shoulderDartOutside,
         x: pLeft.x - sa - 15,
         id: 'shoulderDartToDartPoint',
@@ -219,7 +219,7 @@ export const frontOutside = {
         id: 'hemToTop',
       })
       macro('vd', {
-        from: points.snippet,
+        from: points.bustOutside,
         to: pTop,
         x: pLeft.x - sa - 15,
         id: 'topToDartPoint',

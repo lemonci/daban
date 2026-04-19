@@ -61,7 +61,47 @@ const createTopRightDartPoints = (points, Path, options) => {
     .curve(points.shoulderDartPart4cp1, points.shoulderDartPart4cp2, points.shoulderDartPart4to)
 }
 
-const createRightDartPoints = (points, Path, paths, diff, utils, options) => {
+const createOutsideSeam = (log, points, Path, paths, utils, options) => {
+  let diff = 0
+  let iteration = 0
+
+  points.nearBust = utils.projectPointOntoCurve(
+    points.bustA,
+    points.waistDartRight,
+    points.bustAcp,
+    points.shoulderDartTipCpDownOutside,
+    points.shoulderDartOutside
+  )
+
+  do {
+    iteration++
+    const angle = points.bustA.angle(points.nearBust)
+    points.bustAcp = points.bustAcp.shift(angle + 180, diff)
+    points.shoulderDartTipCpDownOutside = points.shoulderDartTipCpDownOutside.shift(
+      angle + 180,
+      diff
+    )
+
+    points.nearBust = utils.projectPointOntoCurve(
+      points.bustA,
+      points.waistDartRight,
+      points.bustAcp,
+      points.shoulderDartTipCpDownOutside,
+      points.shoulderDartOutside
+    )
+
+    diff = points.bustA.dist(points.nearBust)
+  } while (diff > 2 && iteration < 100)
+  if (iteration >= 100) {
+    log.error('Could not find the bust point!')
+  }
+
+  return new Path()
+    .move(points.waistDartRight)
+    .curve(points.bustAcp, points.shoulderDartTipCpDownOutside, points.shoulderDartOutside)
+}
+
+const createRightDartPoints = (log, points, Path, paths, diff, utils, options) => {
   const radius = points.waistDartRight.dist(points.sideHemInitial)
 
   points.waistDartRight = points.waistDartRight.rotate(
@@ -69,9 +109,7 @@ const createRightDartPoints = (points, Path, paths, diff, utils, options) => {
     points.sideHemInitial
   )
 
-  let outsideSeam = new Path()
-    .move(points.waistDartRight)
-    .curve(points.bustAcp, points.shoulderDartTipCpDownOutside, points.shoulderDartOutside)
+  let outsideSeam = createOutsideSeam(log, points, Path, paths, utils, options)
 
   points.waistUpDartRight = outsideSeam.shiftAlong(
     points.waistDartRight.dist(points.waistDartRightCp) * 0.5
@@ -91,6 +129,7 @@ const createRightDartPoints = (points, Path, paths, diff, utils, options) => {
     points.armholeDartTipCpDownInside,
     -0.5 * cbqc * points.armholeDartInside.dist(points.armholeDartTip)
   )
+
   paths.princessSeam = new Path()
     .move(points.waistDartRight)
     .curve(points.waistCpUp, points.waistUpDartRightCpDown, points.waistUpDartRight)
@@ -394,9 +433,9 @@ export const frontPoints = {
       let iteration = 1
       let diff = 0
 
-      let rightDartLength = createRightDartPoints(points, Path, paths, diff, utils, options)
+      let rightDartLength = createRightDartPoints(log, points, Path, paths, diff, utils, options)
       do {
-        rightDartLength = createRightDartPoints(points, Path, paths, diff, utils, options)
+        rightDartLength = createRightDartPoints(log, points, Path, paths, diff, utils, options)
 
         diff = shoulderInsideSeam.length() - rightDartLength
         iteration++
@@ -429,7 +468,7 @@ export const frontPoints = {
       let iteration = 1
       let diff = 0
 
-      let rightDartLength = createRightDartPoints(points, Path, paths, diff, utils, options)
+      let rightDartLength = createRightDartPoints(log, points, Path, paths, diff, utils, options)
       points.waistCircleOutsideCp1 = points.waistUpDartRight.shiftTowards(
         points.waistDartRight,
         -1 * cbqc * points.armholeDartOutside.dist(points.armholeDartTip)
@@ -442,7 +481,7 @@ export const frontPoints = {
         .line(points.armholeDartInside)
 
       do {
-        rightDartLength = createRightDartPoints(points, Path, paths, diff, utils, options)
+        rightDartLength = createRightDartPoints(log, points, Path, paths, diff, utils, options)
 
         const princessSeam = new Path()
           .move(points.armholeDartOutside)
