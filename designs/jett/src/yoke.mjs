@@ -15,8 +15,9 @@ function draftYoke({
   macro,
   part,
   store,
+  expand,
 }) {
-  if (!options.yoke) {
+  if (!options.yoke || !expand) {
     return part.hide()
   }
   points.armholesplit = paths.backArmhole.shiftFractionAlong(options.yokesplit)

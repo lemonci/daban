@@ -1,5 +1,6 @@
 import { front as brianFront } from '@freesewing/brian'
 import { hidePresets } from '@freesewing/core'
+import { pctBasedOn } from '@freesewing/core'
 
 function draftfront({
   options,
@@ -16,6 +17,7 @@ function draftfront({
   store,
   log,
   utils,
+  expand,
 }) {
   store.set('Test', 'test')
 
@@ -261,20 +263,6 @@ function draftfront({
 
     let waistTarget = (measurements.waist * (1 + options.waistEase) - 2 * waistOriginal) / 2
 
-    /*
-    points.waistTargetBottom = new Point(waistTarget, points.hem.y*1.2)
-    points.waistTargetTop = new Point(waistTarget, points.armhole.y)
-    paths.waistTarget = new Path()
-      .move(points.waistTargetBottom)
-      .line(points.waistTargetTop)
-      .setClass('lining')
-    paths.originalSeamOutline = new Path() 
-      .move(points.cfHem)
-      .line(points.hem)
-      .line(points.armhole)
-      .setClass('lining')
-    */
-
     let waistY = points.waist.y
 
     if (points.sideSeamIntercept) points.rotatePoint = points.sideSeamIntercept
@@ -322,6 +310,8 @@ function draftfront({
     )
     points.outerPlacketBottom.y = points.bellyEdge.y
     points.cfHem.y = points.bellyEdge.y
+    points.innerPlacketBottom.y = points.bellyEdge.y
+    points.centerPlacketBottom.y = points.bellyEdge.y
 
     if (!options.bustDart) {
       paths.sideSeam = new Path().move(points.hem).line(points.armhole).hide()
@@ -333,6 +323,13 @@ function draftfront({
         .line(points.armhole)
         .hide()
     }
+
+    points.hemCp1 = points.hem.shiftFractionTowards(points.bellyEdge, 0.8)
+    points.centerCp = points.cfHem.shiftFractionTowards(points.bellyEdge, 0.8)
+
+    paths.bottomHem = new Path()
+      .move(points.cfHem)
+      .curve(points.centerCp, points.hemCp1, points.hem)
   }
 
   //Draw vertical guidelines for placket
@@ -367,10 +364,49 @@ function draftfront({
     snippets[b + '_button'] = new Snippet('button', closurePoints[b])
   }
 
+  //Shift armscye point for lining
+  const armShiftAngle = 90 * options.armholeShiftAngle
+  const armShiftDistance = options.liningArmscyeShift * measurements.chest
+  points.armholeShift = points.armhole.shift(armShiftAngle, armShiftDistance)
+  points.armholeCp2Shift = points.armholeCp2.shift(armShiftAngle, armShiftDistance)
+
+  points.armholeHollowCp1Shift = points.armholeHollowCp1.shift(
+    armShiftAngle,
+    armShiftDistance * 0.5
+  )
+  points.armholeHollowShift = points.armholeHollow.shift(armShiftAngle, armShiftDistance * 0.5)
+  points.armholeHollowCp2Shift = points.armholeHollowCp2.shift(
+    armShiftAngle,
+    armShiftDistance * 0.5
+  )
+  paths.armholeNormal = new Path()
+    .move(points.armhole)
+    .curve(points.armholeCp2, points.armholeHollowCp1, points.armholeHollow)
+    .curve(points.armholeHollowCp2, points.frontArmholePitchCp1, points.frontArmholePitch)
+    .hide()
+  paths.armholeLining = new Path()
+    .move(points.armholeShift)
+    .curve(points.armholeCp2Shift, points.armholeHollowCp1Shift, points.armholeHollowShift)
+    .curve(points.armholeHollowCp2Shift, points.frontArmholePitchCp1, points.frontArmholePitch)
+    .hide()
+
+  if (!expand) {
+    store.flag.note({ msg: 'jett:cutFrontLining' })
+
+    if (options.bustDart && options.draftForHighBust)
+      paths.liningOutline = new Path().move(points.dartTopEdge)
+    else paths.liningOutline = new Path().move(points.hem)
+
+    paths.liningOutline = paths.liningOutline
+      .line(points.armholeShift)
+      .join(paths.armholeLining)
+      .setClass('lining')
+  }
+
   //Redefine base seam and seam allowance to respect placket
   paths.saBase = new Path().move(points.outerPlacketBottom)
   if (options.useBellyAdjustment) {
-    paths.saBase = paths.saBase.line(points.bellyEdge)
+    paths.saBase = paths.saBase.join(paths.bottomHem)
   }
   paths.saBase = paths.saBase
     .line(points.hem)
@@ -450,7 +486,6 @@ function draftfront({
   macro('rmtitle')
   store.cutlist.addCut({ cut: false })
   store.cutlist.addCut({ cut: 2, from: 'fabric', identical: false })
-  store.cutlist.addCut({ cut: 2, from: 'lining', identical: false })
 
   points.title = points.outerPlacketTop.shiftFractionTowards(points.hem, 0.5)
   points.title.y = points.title.shiftFractionTowards(points.hem, 0.5).y
@@ -585,12 +620,12 @@ function draftfront({
   macro('vd', {
     id: 'hChestToArmHollow',
     from: points.armhole,
-    to: points.backArmholePitch,
+    to: points.frontArmholePitch,
     x: points.armhole.x + sa + 15,
   })
   macro('vd', {
     id: 'hArmHollowToShoulder',
-    from: points.backArmholePitch,
+    from: points.frontArmholePitch,
     to: points.s3ArmholeSplit,
     x: points.armhole.x + sa + 15,
   })
@@ -671,7 +706,7 @@ export const front = {
     chestEase: { pct: 15, min: 0, max: 50, menu: 'fit' },
 
     placketwidth: { pct: 3, min: 0, max: 10, menu: 'style.placket' },
-    neckShiftForward: { pct: 0, min: 0, max: 40, menu: 'style' },
+    neckShiftForward: { pct: 0, min: 0, max: 40, menu: 'style', ...pctBasedOn('neck') },
     collarEase: { pct: 2, min: 0, max: 50, menu: 'fit' },
 
     draftForHighBust: { bool: false, menu: 'fit.bust' },
@@ -699,6 +734,13 @@ export const front = {
     waistEase: { pct: 10, min: 0, max: 50, menu: 'fit.belly' },
     bellyAdjustmentX: { pct: 40, min: 5, max: 95, menu: 'fit.belly' },
     useBellyAdjustment: { bool: false, menu: 'fit.belly' },
+
+    lengthBonus: {
+      pct: 8,
+      min: -4,
+      max: 60,
+      menu: 'style',
+    },
   },
   draft: draftfront,
 }

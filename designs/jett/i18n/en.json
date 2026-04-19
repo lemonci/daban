@@ -20,7 +20,15 @@
       "bustWarning.t": "The bust dart won't be generated",
       "bustWarning.d": "Chest is smaller than high bust. If these measurements are accurate, you don't need a bust dart.",
       "waistWarning.t": "The bust dart won't be generated",
-      "waistWarning.d": "HPS to waist front is smaller than HPS to waist back.\nDid you take the HPS to waist front measurement down over the bust?"
+      "waistWarning.d": "HPS to waist front is smaller than HPS to waist back.\nDid you take the HPS to waist front measurement down over the bust?",
+      "armLiningDistance.t": "The sleeve lining is identical to the sleeve piece.",
+      "armLiningDistance.d": "Because of the angle of the lining armscye adjustment, there's no extra length on the sleeve lining curve for this pattern. Trace the **sleeve** (3) to cut out the **sleeve lining** (13) from the lining material.",
+      "cutFrontLining.t": "The front lining is not shown.",
+      "cutFrontLining.d": "The **front lining** (11) is not shown, but you can trace it from the Front part (1), which has the lining boundary on it (not including seam allowance).",
+      "cutBackLining.t": "The back lining is not shown.",
+      "cutBackLining.d": "The **back lining** (12) is not shown, but you can trace it from the Back part (2), which has the lining boundary on it (not including seam allowance). The back lining extends further at the center than the back piece itself.",
+      "expandSplitBack.t": "The back and yoke are drawn together.",
+      "expandSplitBack.d": "The **back** (3) and **yoke** (4) are drawn together as a single piece. Trace the two halves split at the horizontal boundary (not including seam allowance). Note that the back lining piece (12) extends further at the center back than the back or yoke."
    },
   "o": {
     "hipsEase": {
@@ -151,8 +159,8 @@
       "d": "Do not include belly adjustment"
     },
     "bellyAdjustmentX": {
-      "t": "FIXME",
-      "d": "FIXME -- Check with Gawain_CCBR"
+      "t": "Belly Adjustment X",
+      "d": "Determines the horizontal placement of the belly adjustment"
     },
     "armCutAngle": {
       "t": "Armhole cut angle",
@@ -189,6 +197,18 @@
     "pocketWeltWidth": {
       "t": "Pocket welt width",
       "d": "How wide to make the pocket welt piece"
+    },
+    "armholeShiftAngle": {
+      "t": "Armscye shift angle",
+      "d": "The angle at which to add some extra space to the armscye of the lining"
+    },
+    "centerPleatWidth": {
+      "t": "Center pleat width",
+      "d": "How much extra space to add to the center back of the lining in a pleat"
+    },
+    "liningArmscyeShift": {
+      "t": "Armscye shift amount",
+      "d": "How much extra space to add to the armscye of the lining"
     }
    }
 }

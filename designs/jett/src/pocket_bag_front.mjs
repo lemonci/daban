@@ -71,13 +71,16 @@ function draft_pocket_bag_front({
     .line(points.bagBottomRight)
     .line(points.bagBottomLeft)
     .reverse()
-    .close()
+    .hide()
+  //.close()
 
   //This isn't working. fix later
   if (sa) {
-    paths.sa = paths.saBase.offset(sa).setClass('fabric sa')
+    paths.sa = paths.saBase.clone().offset(sa).setClass('fabric sa')
     paths.sa.line(paths.sa.start())
   }
+
+  paths.seam = paths.saBase.unhide().close().setClass('fabric')
 
   paths.pocketOutline = new Path()
     .move(points.pocketTopInner)

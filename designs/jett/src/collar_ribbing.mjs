@@ -36,12 +36,12 @@ function draftJettCollarRibbing({
     .line(points.centerBottom)
     .reverse()
     .hide()
-  paths.seam = paths.saBase.unhide().close()
 
   if (sa) {
-    paths.sa = paths.saBase.offset(sa).setClass('fabric sa')
+    paths.sa = paths.saBase.clone().offset(sa).setClass('various sa')
     paths.sa.line(paths.sa.start())
   }
+  paths.seam = paths.saBase.unhide().close().setClass('various')
 
   macro('hd', {
     id: 'wTotal',

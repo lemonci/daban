@@ -20,6 +20,10 @@ import { collar_ribbing } from './collar_ribbing.mjs'
 import { pocket_bag_front } from './pocket_bag_front.mjs'
 import { cuff } from './cuff.mjs'
 
+import { lining_front } from './lining_front.mjs'
+import { lining_back } from './lining_back.mjs'
+import { lining_sleeve } from './lining_sleeve.mjs'
+
 // Create new design
 const Jett = new Design({
   data: about,
@@ -34,6 +38,9 @@ const Jett = new Design({
     collar_ribbing,
     pocket_bag_front,
     cuff,
+    lining_front,
+    lining_back,
+    lining_sleeve,
   ],
 })
 
@@ -49,6 +56,9 @@ export {
   cuff,
   collar_ribbing,
   pocket_bag_front,
+  lining_front,
+  lining_back,
+  lining_sleeve,
   about,
   i18n,
   Jett,

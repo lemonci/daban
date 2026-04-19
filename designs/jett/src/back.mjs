@@ -16,6 +16,7 @@ function draftBack({
   measurements,
   store,
   log,
+  expand,
 }) {
   // Shorten body to take ribbing into account
   if (options.ribbing) {
@@ -25,8 +26,23 @@ function draftBack({
 
     for (let p of ['cbHips', 'hem', 'cbHem']) points[p] = points[p].shift(90, rh)
   }
-
   points.hem.x = (measurements.hips * (1 + options.hipsEase)) / 4
+  //Redrawing the seam to reflect the shifted hem points
+  paths.saBase = new Path()
+    .move(points.cbHem)
+    .line(points.hem)
+    .line(points.armhole)
+    .curve(points.armholeCp2, points.armholeHollowCp1, points.armholeHollow)
+    .curve(points.armholeHollowCp2, points.armholePitchCp1, points.armholePitch)
+    .join(paths.backArmhole)
+    .line(points.s3CollarSplit)
+    .join(paths.backCollar)
+    .hide()
+  paths.seam = new Path()
+    .move(points.cbNeck)
+    .line(points.cbHips)
+    .join(paths.saBase)
+    .setClass('fabric')
 
   //If using the yoke option, have to redraw a significant chunk of the path
 
@@ -34,31 +50,56 @@ function draftBack({
     points.armholesplit = paths.backArmhole.shiftFractionAlong(options.yokesplit)
     points.centertop = new Point(0, points.armholesplit.y)
 
-    delete paths.saBase
-
-    paths.saBase = new Path()
-      .move(points.cbHem)
-      .line(points.hem)
-      .line(points.armhole)
-      .curve(points.armholeCp2, points.armholeHollowCp1, points.armholeHollow)
-      .curve(points.armholeHollowCp2, points.armholePitchCp1, points.armholePitch)
-      .line(points.armholesplit)
-
-      //.join(paths.backArmhole)
+    paths.yokesplitline = new Path()
+      .move(points.armholesplit)
       .line(points.centertop)
+      .setClass('lining')
 
-      .hide()
+    if (expand) {
+      //If yoke is true and expand is true, cut the back piece down to just display the
+      //bottom section
 
-    paths.seam = new Path()
-      .move(points.centertop)
-      .line(points.cbHips)
-      .join(paths.saBase)
-      .setClass('fabric')
-      .unhide()
+      delete paths.saBase
+
+      paths.saBase = new Path()
+        .move(points.cbHem)
+        .line(points.hem)
+        .line(points.armhole)
+        .curve(points.armholeCp2, points.armholeHollowCp1, points.armholeHollow)
+        .curve(points.armholeHollowCp2, points.armholePitchCp1, points.armholePitch)
+        .line(points.armholesplit)
+
+        //.join(paths.backArmhole)
+        .line(points.centertop)
+
+        .hide()
+
+      paths.seam = new Path()
+        .move(points.centertop)
+        .line(points.cbHips)
+        .join(paths.saBase)
+        .setClass('fabric')
+        .unhide()
+
+      //Remove unneeded paperless macros
+      macro('rmHd', 'lShoulder')
+      macro('rmHd', 'wCFrontToHps')
+      macro('rmLd', 'lShoulder')
+      macro('rmVd', 'hTotal')
+      macro('rmVd', 'hHemToNeckOpeningBottom')
+      macro('rmVd', 'hHemToShoulder')
+      macro('rmVd', 'hHemToArmholePitch')
+      macro('rmVd', 'hHemToArmhole')
+      macro('rmHd', 'wHem')
+      macro('rmVd', 'hHemToWaist')
+      macro('rmPd', 'lShoulderToArmholePitch')
+      macro('rmPd', 'lArmhole')
+      delete paths.waist
+    }
 
     if (sa) {
       paths.sa = paths.saBase.offset(sa).setClass('fabric sa').move(points.cbHips)
-      paths.sa.line(paths.sa.start())
+      paths.sa.close()
     }
 
     macro('cutonfold', {
@@ -66,21 +107,6 @@ function draftBack({
       to: points.cbHem,
       grainline: true,
     })
-
-    //Remove unneeded paperless macros
-    macro('rmHd', 'lShoulder')
-    macro('rmHd', 'wCFrontToHps')
-    macro('rmLd', 'lShoulder')
-    macro('rmVd', 'hTotal')
-    macro('rmVd', 'hHemToNeckOpeningBottom')
-    macro('rmVd', 'hHemToShoulder')
-    macro('rmVd', 'hHemToArmholePitch')
-    macro('rmVd', 'hHemToArmhole')
-    macro('rmHd', 'wHem')
-    macro('rmVd', 'hHemToWaist')
-    macro('rmPd', 'lShoulderToArmholePitch')
-    macro('rmPd', 'lArmhole')
-    delete paths.waist
 
     //Make new paperless macros
     macro('hd', {
@@ -198,24 +224,66 @@ function draftBack({
     delete paths.waist
 
     points.title = points.cbNeck.shiftFractionTowards(points.hem, 0.5)
+  }
 
-    //Redrawing the seam to reflect the shifted hem points
+  //Shift armscye point for lining
+  const armShiftAngle = 90 * options.armholeShiftAngle
+  const armShiftDistance = options.liningArmscyeShift * measurements.chest
+  points.armholeShift = points.armhole.shift(armShiftAngle, armShiftDistance)
+  points.armholeCp2Shift = points.armholeCp2.shift(armShiftAngle, armShiftDistance)
 
-    paths.saBase = new Path()
+  points.armholeHollowCp1Shift = points.armholeHollowCp1.shift(
+    armShiftAngle,
+    armShiftDistance * 0.5
+  )
+  points.armholeHollowShift = points.armholeHollow.shift(armShiftAngle, armShiftDistance * 0.5)
+  points.armholeHollowCp2Shift = points.armholeHollowCp2.shift(
+    armShiftAngle,
+    armShiftDistance * 0.5
+  )
+
+  paths.armholeNormal = new Path()
+    .move(points.armhole)
+    .curve(points.armholeCp2, points.armholeHollowCp1, points.armholeHollow)
+    .curve(points.armholeHollowCp2, points.backArmholePitchCp1, points.backArmholePitch)
+    .hide()
+
+  paths.armholeLining = new Path()
+    .move(points.armholeShift)
+    .curve(points.armholeCp2Shift, points.armholeHollowCp1Shift, points.armholeHollowShift)
+    .curve(points.armholeHollowCp2Shift, points.backArmholePitchCp1, points.backArmholePitch)
+    .hide()
+
+  const armscyeShiftDifference = paths.armholeLining.length() - paths.armholeNormal.length()
+  store.set('armscyeShiftDifference', armscyeShiftDifference)
+  if (armscyeShiftDifference < measurements.biceps * 0.02) {
+    store.flag.note({ msg: `jett:armLiningDistance` })
+  }
+
+  if (!expand) {
+    store.flag.note({ msg: 'jett:cutBackLining' })
+
+    if (options.yoke) {
+      store.flag.note({ msg: 'jett:expandSplitBack' })
+    }
+
+    paths.liningGreen = new Path()
+      .move(points.hem)
+      .line(points.armholeShift)
+      .join(paths.armholeLining)
+      .setClass('lining')
+
+    const centerPleatDistance = options.centerPleatWidth * measurements.chest
+
+    points.liningCenterTop = points.cbNeck.shift(180, centerPleatDistance)
+    points.liningCenterBottom = points.cbHem.shift(180, centerPleatDistance)
+
+    paths.liningCenterDistance = new Path()
       .move(points.cbHem)
-      .line(points.hem)
-      .line(points.armhole)
-      .curve(points.armholeCp2, points.armholeHollowCp1, points.armholeHollow)
-      .curve(points.armholeHollowCp2, points.armholePitchCp1, points.armholePitch)
-      .join(paths.backArmhole)
-      .line(points.s3CollarSplit)
-      .join(paths.backCollar)
-      .hide()
-    paths.seam = new Path()
-      .move(points.cbNeck)
-      .line(points.cbHips)
-      .join(paths.saBase)
-      .setClass('fabric')
+      .line(points.liningCenterBottom)
+      .line(points.liningCenterTop)
+      .line(points.cbNeck)
+      .setClass('lining')
   }
 
   macro('rmtitle')
@@ -223,7 +291,6 @@ function draftBack({
   store.cutlist.addCut({ cut: false })
   store.cutlist.addCut({ cut: false, from: 'lining' })
   store.cutlist.addCut({ cut: 1, from: 'fabric', onFold: true })
-  store.cutlist.addCut({ cut: 1, from: 'lining', onFold: true })
 
   macro('ld', {
     id: 'sideSeamLength',
@@ -243,7 +310,7 @@ export const back = {
   after: front,
 
   hide: hidePresets.HIDE_TREE,
-  measurements: ['hips'],
+  measurements: ['hips', 'biceps'],
   options: {
     chestEase: { pct: 10, min: -15, max: 50, menu: 'fit' },
     hipsEase: { pct: 10, min: -15, max: 50, menu: 'fit' },
