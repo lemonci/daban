@@ -80,8 +80,6 @@ function waraleeWaistband(
     return part.hide()
   }
 
-  store.cutlist.addCut({ cut: 1, from: 'fabric' })
-
   points.tl = new Point(0, 0)
   points.bl = new Point(0, waistBandLength)
   points.tm = new Point(waistBand, 0)

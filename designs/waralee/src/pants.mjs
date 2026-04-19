@@ -86,37 +86,49 @@ export const pants = {
       y: fWaistSide.y - sa - 15,
     })
     macro('hd', {
-      id: 2,
+      id: 3,
       from: points.mWaist,
       to: bWaistSide,
       y: bWaistSide.y,
     })
     macro('hd', {
-      id: 3,
+      id: 4,
       from: points.mWaist1,
       to: separateWaistband ? points.bWaistBackSeam : points.bWaistBack,
       y: bWaistSide.y - sa - 15,
     })
     macro('hd', {
-      id: 4,
+      id: 5,
       from: points.mWaist1,
       to: separateWaistband ? points.bWaistBackSeam : points.bWaistBackOverlap,
       y: bWaistSide.y - sa - 30,
     })
+    macro('hd', {
+      id: 6,
+      from: points.fLegFrontOverlap,
+      to: points.bLegBackOverlap,
+      y: bWaistSide.y - sa - 40,
+    })
+    macro('hd', {
+      id: 7,
+      from: points.fLegFrontOverlap,
+      to: points.bLegBackOverlap,
+      y: points.bLegBackOverlap.y + sa + 15,
+    })
     macro('vd', {
-      id: 5,
+      id: 8,
       from: points.mWaist1,
       to: points.mHip,
       x: points.mWaist.x,
     })
     macro('vd', {
-      id: 6,
+      id: 9,
       from: bWaistSide,
       to: separateWaistband ? points.bWaistBackSeam : points.bWaistBack,
       x: bWaistSide.x + 15,
     })
     macro('vd', {
-      id: 7,
+      id: 10,
       from: separateWaistband ? points.bWaistBackSeam : points.bWaistBackOverlap,
       to: points.bLegBackOverlap,
       x: points.bLegBackOverlap.x - 30,
@@ -124,7 +136,7 @@ export const pants = {
 
     if (false == separateWaistband) {
       macro('vd', {
-        id: 8,
+        id: 11,
         from: points.fWaistSide,
         to: points.fWaistSideHem,
         x: points.fWaistSide.x + 10,
@@ -132,25 +144,25 @@ export const pants = {
 
       if (options.frontPocket && 'welt' == options.frontPocketStyle) {
         macro('vd', {
-          id: 9,
+          id: 12,
           from: fWaistSide,
           to: points.frontPocketTop,
           x: points.frontPocketTop.x,
         })
         macro('vd', {
-          id: 10,
+          id: 13,
           from: fWaistSide,
           to: points.frontPocketBottom,
           x: points.frontPocketBottom.x,
         })
         macro('hd', {
-          id: 11,
+          id: 14,
           from: points.frontPocketTop,
           to: fWaistSide,
           y: points.frontPocketTop.y,
         })
         macro('hd', {
-          id: 12,
+          id: 15,
           from: points.frontPocketBottom,
           to: fWaistSide,
           y: points.frontPocketBottom.y,
@@ -159,25 +171,25 @@ export const pants = {
 
       if (options.backPocket) {
         macro('vd', {
-          id: 13,
+          id: 16,
           from: bWaistSide,
           to: points.backPocketLeft,
           x: points.backPocketLeft.x,
         })
         macro('vd', {
-          id: 14,
+          id: 17,
           from: bWaistSide,
           to: points.backPocketRight,
           x: points.backPocketRight.x,
         })
         macro('hd', {
-          id: 15,
+          id: 18,
           from: bWaistSide,
           to: points.backPocketLeft,
           y: points.backPocketLeft.y,
         })
         macro('hd', {
-          id: 16,
+          id: 19,
           from: bWaistSide,
           to: points.backPocketRight,
           y: points.backPocketRight.y,
