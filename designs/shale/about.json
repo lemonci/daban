@@ -1,0 +1,18 @@
+{
+  "id": "shale",
+  "code": "Jonathan Haas",
+  "design": "Jonathan Haas",
+  "description": "A FreeSewing pattern for shorts",
+  "name": "Shale Shorts",
+  "difficulty": 1,
+  "tags": [
+    "bottoms",
+    "trousers",
+    "pajamas",
+    "underwear"
+  ],
+  "techniques": [],
+  "version": "4.7.2",
+  "pkg": "@freesewing/shale",
+  "collection": true
+}

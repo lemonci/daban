@@ -1,0 +1,509 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="210mm"
+   height="297mm"
+   viewBox="0 0 210 297"
+   version="1.1"
+   id="svg1"
+   inkscape:version="1.4.3 (0d15f75042, 2025-12-25)"
+   sodipodi:docname="template.svg"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview1"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:document-units="mm"
+     inkscape:zoom="0.70710678"
+     inkscape:cx="-168.29141"
+     inkscape:cy="506.28846"
+     inkscape:window-width="2560"
+     inkscape:window-height="1371"
+     inkscape:window-x="0"
+     inkscape:window-y="0"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="fs-container" />
+  <defs
+     id="defs1">
+    <pattern
+       inkscape:collect="always"
+       xlink:href="#Polkadots-large"
+       preserveAspectRatio="xMidYMid"
+       id="pattern2"
+       patternTransform="scale(2)"
+       x="0"
+       y="0" />
+    <pattern
+       patternUnits="userSpaceOnUse"
+       width="10"
+       height="10"
+       patternTransform="translate(0,0) scale(10,10)"
+       preserveAspectRatio="xMidYMid"
+       style="fill:#575757"
+       id="Polkadots-large"
+       inkscape:stockid="Polka dots, large"
+       inkscape:label="Polka dots large"
+       inkscape:collect="always"
+       inkscape:isstock="true">
+      <circle
+         style="stroke:none"
+         cx="2.567"
+         cy="0.810"
+         r="0.45"
+         id="circle584" />
+      <circle
+         style="stroke:none"
+         cx="3.048"
+         cy="2.33"
+         r="0.45"
+         id="circle586" />
+      <circle
+         style="stroke:none"
+         cx="4.418"
+         cy="2.415"
+         r="0.45"
+         id="circle588" />
+      <circle
+         style="stroke:none"
+         cx="1.844"
+         cy="3.029"
+         r="0.45"
+         id="circle590" />
+      <circle
+         style="stroke:none"
+         cx="6.08"
+         cy="1.363"
+         r="0.45"
+         id="circle592" />
+      <circle
+         style="stroke:none"
+         cx="5.819"
+         cy="4.413"
+         r="0.45"
+         id="circle594" />
+      <circle
+         style="stroke:none"
+         cx="4.305"
+         cy="4.048"
+         r="0.45"
+         id="circle596" />
+      <circle
+         style="stroke:none"
+         cx="5.541"
+         cy="3.045"
+         r="0.45"
+         id="circle598" />
+      <circle
+         style="stroke:none"
+         cx="4.785"
+         cy="5.527"
+         r="0.45"
+         id="circle600" />
+      <circle
+         style="stroke:none"
+         cx="2.667"
+         cy="5.184"
+         r="0.45"
+         id="circle602" />
+      <circle
+         style="stroke:none"
+         cx="7.965"
+         cy="1.448"
+         r="0.45"
+         id="circle604" />
+      <circle
+         style="stroke:none"
+         cx="7.047"
+         cy="5.049"
+         r="0.45"
+         id="circle606" />
+      <circle
+         style="stroke:none"
+         cx="4.340"
+         cy="0.895"
+         r="0.45"
+         id="circle608" />
+      <circle
+         style="stroke:none"
+         cx="7.125"
+         cy="0.340"
+         r="0.45"
+         id="circle610" />
+      <circle
+         style="stroke:none"
+         cx="7.125"
+         cy="10.340"
+         r="0.45"
+         id="circle612" />
+      <circle
+         style="stroke:none"
+         cx="9.550"
+         cy="1.049"
+         r="0.45"
+         id="circle614" />
+      <circle
+         style="stroke:none"
+         cx="7.006"
+         cy="2.689"
+         r="0.45"
+         id="circle616" />
+      <circle
+         style="stroke:none"
+         cx="8.909"
+         cy="2.689"
+         r="0.45"
+         id="circle618" />
+      <circle
+         style="stroke:none"
+         cx="9.315"
+         cy="4.407"
+         r="0.45"
+         id="circle620" />
+      <circle
+         style="stroke:none"
+         cx="7.820"
+         cy="3.870"
+         r="0.45"
+         id="circle622" />
+      <circle
+         style="stroke:none"
+         cx="8.270"
+         cy="5.948"
+         r="0.45"
+         id="circle624" />
+      <circle
+         style="stroke:none"
+         cx="7.973"
+         cy="7.428"
+         r="0.45"
+         id="circle626" />
+      <circle
+         style="stroke:none"
+         cx="9.342"
+         cy="8.072"
+         r="0.45"
+         id="circle628" />
+      <circle
+         style="stroke:none"
+         cx="8.206"
+         cy="9.315"
+         r="0.45"
+         id="circle630" />
+      <circle
+         style="stroke:none"
+         cx="9.682"
+         cy="9.475"
+         r="0.45"
+         id="circle632" />
+      <circle
+         style="stroke:none"
+         cx="-0.318"
+         cy="9.475"
+         r="0.45"
+         id="circle634" />
+      <circle
+         style="stroke:none"
+         cx="9.688"
+         cy="6.186"
+         r="0.45"
+         id="circle636" />
+      <circle
+         style="stroke:none"
+         cx="-0.312"
+         cy="6.186"
+         r="0.45"
+         id="circle638" />
+      <circle
+         style="stroke:none"
+         cx="3.379"
+         cy="6.296"
+         r="0.45"
+         id="circle640" />
+      <circle
+         style="stroke:none"
+         cx="2.871"
+         cy="8.204"
+         r="0.45"
+         id="circle642" />
+      <circle
+         style="stroke:none"
+         cx="4.59"
+         cy="8.719"
+         r="0.45"
+         id="circle644" />
+      <circle
+         style="stroke:none"
+         cx="3.181"
+         cy="9.671"
+         r="0.45"
+         id="circle646" />
+      <circle
+         style="stroke:none"
+         cx="3.181"
+         cy="-0.329"
+         r="0.45"
+         id="circle648" />
+      <circle
+         style="stroke:none"
+         cx="5.734"
+         cy="7.315"
+         r="0.45"
+         id="circle650" />
+      <circle
+         style="stroke:none"
+         cx="6.707"
+         cy="6.513"
+         r="0.45"
+         id="circle652" />
+      <circle
+         style="stroke:none"
+         cx="5.730"
+         cy="9.670"
+         r="0.45"
+         id="circle654" />
+      <circle
+         style="stroke:none"
+         cx="5.730"
+         cy="-0.330"
+         r="0.45"
+         id="circle656" />
+      <circle
+         style="stroke:none"
+         cx="6.535"
+         cy="8.373"
+         r="0.45"
+         id="circle658" />
+      <circle
+         style="stroke:none"
+         cx="4.37"
+         cy="7.154"
+         r="0.45"
+         id="circle660" />
+      <circle
+         style="stroke:none"
+         cx="0.622"
+         cy="7.25"
+         r="0.45"
+         id="circle662" />
+      <circle
+         style="stroke:none"
+         cx="0.831"
+         cy="5.679"
+         r="0.45"
+         id="circle664" />
+      <circle
+         style="stroke:none"
+         cx="1.257"
+         cy="8.519"
+         r="0.45"
+         id="circle666" />
+      <circle
+         style="stroke:none"
+         cx="1.989"
+         cy="6.877"
+         r="0.45"
+         id="circle668" />
+      <circle
+         style="stroke:none"
+         cx="0.374"
+         cy="3.181"
+         r="0.45"
+         id="circle670" />
+      <circle
+         style="stroke:none"
+         cx="10.374"
+         cy="3.181"
+         r="0.45"
+         id="circle672" />
+      <circle
+         style="stroke:none"
+         cx="1.166"
+         cy="1.664"
+         r="0.45"
+         id="circle674" />
+      <circle
+         style="stroke:none"
+         cx="1.151"
+         cy="0.093"
+         r="0.45"
+         id="circle676" />
+      <circle
+         style="stroke:none"
+         cx="1.151"
+         cy="10.093"
+         r="0.45"
+         id="circle678" />
+      <circle
+         style="stroke:none"
+         cx="1.302"
+         cy="4.451"
+         r="0.45"
+         id="circle680" />
+      <circle
+         style="stroke:none"
+         cx="3.047"
+         cy="3.763"
+         r="0.45"
+         id="circle682" />
+    </pattern>
+    <marker
+       style="overflow:visible"
+       id="Triangle"
+       refX="0"
+       refY="0"
+       orient="auto-start-reverse"
+       inkscape:stockid="Triangle arrow"
+       markerWidth="1"
+       markerHeight="1"
+       viewBox="0 0 1 1"
+       inkscape:isstock="true"
+       inkscape:collect="always"
+       preserveAspectRatio="xMidYMid">
+      <path
+         transform="scale(0.5)"
+         style="fill:context-stroke;fill-rule:evenodd;stroke:context-stroke;stroke-width:1pt"
+         d="M 5.77,0 -2.88,5 V -5 Z"
+         id="path135" />
+    </marker>
+  </defs>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <g
+       id="fs-container"
+       transform="matrix(0.25,0,0,0.25,-8.6259058,-8.0979167)">
+      <!-- Start of group #fs-stack-shale.front -->
+      <path
+         class="fabric"
+         id="fs-1"
+         d="m 764.2266,12 h -197.66 c 0,40.05 -2.76,93.47 -3.94,133.5 -1.31,44.25 -1.97,104.7 -86.28,110.05 l 9.43,118.42 c 86.91,-5.55 137.33,-21.17 238.13,-21.17 h 40.32 z"
+         style="fill:none;stroke:#212121;stroke-width:0.6;stroke-linecap:round;stroke-linejoin:round;stroke-opacity:1" />
+      <path
+         class="various help"
+         id="fs-2"
+         d="m 486.4066,383.95 c 51.65,-3.3 90.4,-10.15 134.5,-15.17 30.28,-3.43 62.54,-5.98 103,-5.98 h 40.32"
+         style="fill:none;stroke:#ef4444;stroke-width:0.2;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:15, 1.5, 1, 1.5;stroke-opacity:1" />
+      <path
+         class="fabric sa"
+         id="fs-3"
+         d="M 774.2266,12 V 2 h -10 -197.66 -10 v 10 c 0,40.05 -2.76,93.47 -3.94,133.5 v -0.3 c -0.01,0.34 -0.02,0.68 -0.03,1.02 -0.27,9.51 -0.54,19.76 -1.69,30 -2.66,23.77 -9.9,48.13 -36.74,60.64 -10.04,4.67 -22.66,7.7 -38.45,8.71 l -10.14,0.64 0.8,10.13 9.43,118.42 1.57,19.79 9.67,-0.62 c 51.64,-3.3 90.4,-10.15 134.49,-15.17 l 0.99,-0.09 c 29.46,-3.35 61.36,-5.87 101.38,-5.87 v 0 h 40.32 10 V 352.8 12"
+         style="fill:none;stroke:#212121;stroke-width:0.6;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:0.4, 0.8;stroke-opacity:1" />
+      <!-- end of group #fs-stack-shale.front -->
+      <!-- Start of group #fs-stack-shale.back -->
+      <path
+         class="fabric"
+         id="fs-7"
+         d="M 12,43.110238 V 383.91024 h 60.48 c 151.2,0 243.5,22.76 369.46,30.56 l 8.9,-118.47 c -122.05,-7.5 -134.48,-75.14 -136.44,-119.39 L 307.13,12.430238 c -88.42,3.92 -206.59,30.68 -295.13,30.68 z"
+         style="fill:none;stroke:#212121;stroke-width:0.6;stroke-linecap:round;stroke-linejoin:round;stroke-opacity:1" />
+      <path
+         class="various help"
+         id="fs-8"
+         d="m 12,393.91024 h 60.48 c 90.76,0 160.19,8.26 228.51,16.5 3.75,0.45 7.49,0.91 11.24,1.36 41.35,4.98 82.71,9.79 128.51,12.63"
+         style="fill:none;stroke:#ef4444;stroke-width:0.2;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:15, 1.5, 1, 1.5;stroke-opacity:1" />
+      <path
+         class="fabric sa"
+         id="fs-9"
+         d="m 439.54,434.33024 10.88,0.67 1.49,-19.78 8.9,-118.47 0.76,-10.1 -10.12,-0.63 c -68.4,-4.2 -100.6,-27.94 -115.01,-56.11 -2.59,-5.06 -4.61,-10.23 -6.19,-15.39 -4.1,-13.36 -5.34,-26.72 -5.86,-38.35 v 0 l -7.27,-164.180002 -0.45,-9.99 -9.99,0.44 c -59.65,2.65 -132.81,15.62 -201.35,23.86 -32.87,3.96 -64.67,6.81 -93.33,6.81 H 2 v 10 340.800002 20 h 10 60.48 v 0 c 90.29,0 159.35,8.23 227.31,16.43 3.75,0.45 7.49,0.9 11.24,1.36 41.36,4.98 82.71,9.79 128.51,12.63"
+         style="fill:none;stroke:#212121;stroke-width:0.6;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:0.4, 0.8;stroke-opacity:1" />
+      <!-- end of group #fs-stack-shale.back -->
+      <!-- Start of group #fs-stack-shale.waistband-back -->
+      <path
+         id="fs-11"
+         class="fabric"
+         d="m 263.99135,623.125 v 110.00053 h 296.8997 296.90178 V 623.125 H 560.89105 Z"
+         style="fill:none;stroke:#212121;stroke-width:0.6;stroke-linecap:round;stroke-linejoin:round;stroke-opacity:1" />
+      <path
+         id="fs-13"
+         class="fabric sa"
+         d="m 253.99299,613.12458 v 10.00042 110.00053 9.99835 h 9.99836 296.8997 296.90178 9.99835 V 733.12553 623.125 613.12458 h -9.99835 -296.90178 -296.8997 z"
+         style="fill:none;stroke:#212121;stroke-width:0.6;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:0.4, 0.8;stroke-opacity:1" />
+      <!-- end of group #fs-stack-shale.waistband-back -->
+      <!-- Start of group #fs-stack-shale.waistband-front -->
+      <path
+         class="fabric"
+         id="fs-15"
+         d="m 196.05503,504.62867 c 64.39,14.27 130.14,21.47 196.09,21.47 65.95,0 131.7,-7.2 196.09,-21.47 l -11.9,-53.7 c -60.48,13.41 -122.24,20.17 -184.19,20.17 -61.95,0 -123.71,-6.76 -184.19,-20.17 z"
+         style="fill:none;stroke:#212121;stroke-width:0.6;stroke-linecap:round;stroke-linejoin:round;stroke-opacity:1" />
+      <path
+         class="fabric sa"
+         id="fs-16"
+         d="m 186.28503,502.45867 -2.16,9.76 9.76,2.17 c 65.1,14.43 131.58,21.71 198.26,21.71 v 0 c 66.68,0 133.16,-7.28 198.26,-21.71 l 9.76,-2.17 -2.16,-9.76 -11.91,-53.7 -2.16,-9.76 -9.77,2.17 c -59.76,13.25 -120.8,19.93 -182.02,19.93 v 0 c -61.22,0 -122.26,-6.68 -182.02,-19.93 l -9.77,-2.17 -2.16,9.76 -11.91,53.7"
+         style="fill:none;stroke:#212121;stroke-width:0.6;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:0.4, 0.8;stroke-opacity:1" />
+      <!-- end of group #fs-stack-shale.waistband-front -->
+      <!-- Start of group #fs-stack-shale.pocket -->
+      <path
+         class="fabric"
+         id="fs-19"
+         d="m 170.12529,626.75061 c -26.68,-25.29 -88.95,-102.99 -88.95,-177.75 h -69.18 v 309.12 h 158.13 v -131.37"
+         style="fill:none;stroke:#212121;stroke-width:0.6;stroke-linecap:round;stroke-linejoin:round;stroke-opacity:1" />
+      <path
+         class="fabric sa"
+         id="fs-20"
+         d="m 180.12529,626.75061 v -4.3 l -3.12,-2.96 c -25.6,-24.26 -85.83,-98.63 -85.83,-170.49 v -10 h -10 -69.18 -10 v 10 309.12 10 h 10 158.13 10 v -10 -131.37"
+         style="fill:none;stroke:#212121;stroke-width:0.6;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:0.4, 0.8;stroke-opacity:1" />
+      <!-- end of group #fs-stack-shale.pocket -->
+      <path
+         id="path55"
+         class="various help"
+         d="m 857.79196,678.12486 h -593.8"
+         sodipodi:nodetypes="cc"
+         style="fill:none;stroke:#ef4444;stroke-width:0.2;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:15, 1.5, 1, 1.5;stroke-opacity:1" />
+      <rect
+         style="fill:#37c8ab;stroke:none;stroke-width:1.208;stroke-dasharray:4.832, 4.832;paint-order:stroke fill markers"
+         id="rect1"
+         width="120"
+         height="40"
+         x="648.04529"
+         y="386.4021" />
+      <path
+         id="rect2"
+         style="opacity:0.5;fill:url(#pattern2);stroke:none;stroke-width:1.208;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:4.832, 4.832;stroke-opacity:1;paint-order:normal"
+         d="m 687.01425,509.21668 82.16458,5.07373 34.925,61.43125 -150.1625,8.73125 z"
+         sodipodi:nodetypes="ccccc" />
+      <rect
+         style="fill:#739d91;stroke:none;stroke-width:1.208;stroke-dasharray:4.832, 4.832;paint-order:stroke fill markers;fill-opacity:1"
+         id="rect3"
+         width="120"
+         height="40"
+         x="655.7182"
+         y="443.55209" />
+      <rect
+         style="fill:#ffe680;stroke:none;stroke-width:1.208;stroke-dasharray:4.832, 4.832;paint-order:stroke fill markers"
+         id="rect1-9"
+         width="120"
+         height="40"
+         x="369.9953"
+         y="138.22501" />
+      <rect
+         style="fill:#c5bda3;fill-opacity:1;stroke:none;stroke-width:1.208;stroke-dasharray:4.832, 4.832;paint-order:stroke fill markers"
+         id="rect3-0"
+         width="120"
+         height="40"
+         x="377.66821"
+         y="195.37503" />
+      <path
+         style="fill:none;stroke:#ff0000;stroke-width:2;stroke-linecap:butt;stroke-linejoin:round;stroke-dasharray:11.99999921,4;stroke-dashoffset:0;stroke-opacity:1"
+         d="m 300.83362,814.5 v 9.49681 c 0,74.76 62.27,152.46 88.95,177.74999 l 11.20296,11.203"
+         id="path6" />
+      <path
+         style="fill:none;stroke:#ff0000;stroke-width:2;stroke-linecap:butt;stroke-linejoin:round;stroke-dasharray:11.99999921,4;stroke-dashoffset:0;stroke-opacity:1;marker-end:url(#Triangle)"
+         d="m 231.65362,814.5 v 318.6168 h 103.83074"
+         id="fs-19-8" />
+      <path
+         id="path1"
+         style="opacity:0.6;fill:#ffd42a;stroke:none;stroke-width:1.208;stroke-dasharray:4.832, 4.832;paint-order:stroke fill markers"
+         d="m 476.73118,812.79055 v 127.71107 c 0,5.99896 2.35434,12.63192 5.84977,20.66436 3.49543,8.0324 8.30551,17.018 13.80588,25.56124 5.50037,8.54324 11.65891,16.62088 18.10122,22.82028 6.44231,6.1994 13.15943,11.0242 21.13979,11.0402 l 0.0164,-5.9986 0.0164,5.9986 c 7.98037,-0.016 14.6975,-4.8408 21.1398,-11.0402 6.44231,-6.1994 12.60085,-14.27704 18.10122,-22.82028 5.50037,-8.54324 10.31045,-17.52884 13.80588,-25.56124 3.49542,-8.03244 5.84977,-14.6654 5.84977,-20.66436 V 812.79055 h -58.91293 z m 11.99927,11.99927 h 30.91491 v 76.04704 a 29.329082,29.329082 0 0 0 -13.08034,24.41608 29.329082,29.329082 0 0 0 29.32947,29.3274 29.329082,29.329082 0 0 0 29.32948,-29.3274 29.329082,29.329082 0 0 0 -13.58057,-24.74268 v -75.72044 h 30.91491 v 115.7118 c 0,1.93852 -1.66555,8.535 -4.85965,15.875 -3.1941,7.34 -7.73898,15.872 -12.8819,23.86004 -5.14292,7.98804 -10.91698,15.44972 -16.33596,20.66434 -5.40736,5.2035 -10.46678,7.6722 -12.83642,7.6874 -2.36995,-0.016 -7.42962,-2.4845 -12.83642,-7.6874 -5.41898,-5.21462 -11.19304,-12.6763 -16.33596,-20.66434 -5.14292,-7.98804 -9.6878,-16.52004 -12.8819,-23.86004 -3.1941,-7.34 -4.85965,-13.93648 -4.85965,-15.875 z" />
+    </g>
+  </g>
+</svg>

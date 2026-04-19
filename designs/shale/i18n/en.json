@@ -1,0 +1,131 @@
+{
+  "t": "Shale Shorts",
+  "d": "A FreeSewing pattern for shorts",
+  "p": {
+    "leg": "Leg",
+    "front": "Front",
+    "back": "Back",
+    "waistband": "Waistband",
+    "waistband-front": "Waistband (Front)",
+    "waistband-back": "Waistband (Back)",
+    "pocket": "Pocket",
+    "pocket-lining": "Pocket Lining",
+    "pocket-facing": "Pocket Facing"
+  },
+  "s": {
+    "cutWaistband-back.t": "The waistband is not shown",
+    "cutWaistband-back.d": "The **Waistband** (3) is a rectangular piece of fabric {{{ w }}} wide and {{{ l }}} long.",
+    "cutElasticLength.t": "Elastic estimate",
+    "cutElasticLength.d": "You will need about {{{ length }}}, but definitely less than {{{ max }}} of an elastic band for your waistband. The elastic will need to be able to stretch an additional {{ fac }}% of its original length.\n\n(This does not include seam allowance)",
+    "waistbandAngle.t": "Waist angle",
+    "waistbandAngle.d": "Based on our (very rough) estimation, your optimal front waistband angle is {{ angle }}°.",
+    "waistHipsRatio.t": "Waist larger than hips",
+    "waistHipsRatio.d": "This pattern assumes that your waist is smaller than your hips. If you have a larger waist than hips, the waistband may slip easily and you may need to do manual changes to the pattern to fit your body.",
+    "hipsSeatRatio.t": "Hips are larger than seat",
+    "hipsSeatRatio.d": "This pattern assumes that your hips are smaller than your seat. If you have a larger hips than seat, the waistband might not fit over your hips and you may need to do manual changes to the pattern to fit your body.",
+    "badWaistbandHeight.t": "Could not fit waistband",
+    "badWaistbandHeight.d": "We could not fit the waistband to your specifications. Try to increase the waist height option or reduce the width of the waistband elastic.",
+    "badCrotchDepth.t": "Crotch depth unclear",
+    "badCrotchDepth.d": "We use the waist-to-upper-leg measurement, the crotch depth measurement and the difference between waist-to-floor and inseam measurements (if given) to estimate a minimum depth of the crotch seam. Based on your measurements, our estimations for the correct crotch depth vary significantly, ranging from {{ min }} to {{ max }} with {{ cur }} as the assumed correct value.\n\nYou may wish to verify your measurements.",
+    "badCrotchDepth2.t": "Crotch depth was adjusted",
+    "badCrotchDepth2.d": "Our estimated crotch depth of {{ cd }} was smaller than your waist-to-seat measurement of {{ ws }}.\n\nPlease measure the seat around the widest part of your bum, even if your body is wider below that. The waist-to-upper-leg measurement and the crotch depth measurement must physically both be larger than waist-to-seat.",
+    "legCircumference.t": "Leg circumference",
+    "legCircumference.d": "The leg holes in this pattern have a circumference of {{ circ }}, which is {{ pct }} more than your upper leg circumference measurement of {{ measurement }}.",
+    "waistbandAngleNotes": "This calculation assumes that your body has a constant slope between the waist and hips. Most bodies don't work that way, so take this suggestion with a grain of salt.",
+    "setWaistAngle": "Set suggested waist angle"
+  },
+  "o": {
+    "elasticHeight":  {
+      "t": "Elastic height",
+      "d": "Height of the elastic used in the waistband"
+    },
+    "legBalance": {
+      "t": "Leg balance",
+      "d": "Balance between front and back leg width"
+    },
+    "inseam":  {
+      "t": "Inseam",
+      "d": "Length of the inseam from crotch to hem"
+    },
+    "crotchLower": {
+      "t": "Crotch lower",
+      "d": "Lower the crotch depth for a more relaxed fit"
+    },
+    "ease":  {
+      "t": "Ease",
+      "d": "Amount of ease added to the waist and hips"
+    },
+    "waistReduction": {
+      "t": "Waist reduction",
+      "d": "Reduction of the ease around the waist"
+    },
+    "crossSeamEase":  {
+      "t": "Cross seam ease",
+      "d": "Amount of ease added to the cross seam for comfort"
+    },
+    "waistHeight": {
+      "t": "Waist height",
+      "d": "Height of the waistband relative to natural waist"
+    },
+    "fitLegs":  {
+      "t": "Fit legs",
+      "d": "Adjust the fit of the legs from loose to tight"
+    },
+    "splitParts": {
+      "t": "Split parts",
+      "d": "Split the front and back parts into separate pattern pieces"
+    },
+    "splitPartsYes":  {
+      "t": "Split parts",
+      "d": "Front and back are separate pattern pieces"
+    },
+    "splitPartsNo": {
+      "t": "Don't split parts",
+      "d": "Front and back are combined in one pattern piece"
+    },
+    "sideSplit": {
+      "t": "Side split",
+      "d": "Create a slit on the side"
+    },
+    "sideSplitYes":  {
+      "t": "With split",
+      "d": "Add a slit on the side"
+    },
+    "sideSplitNo": {
+      "t": "Without split",
+      "d": "Use a full height side seam"
+    },
+    "sideSplitOffset": {
+      "t": "Side split offset",
+      "d": "Determines the height at which the split starts"
+    }   ,
+    "pocket": {
+      "t": "Pocket",
+      "d": "Which type of front pockets you want"
+    },
+    "pocket.patch":  {
+      "t": "Patch pockets",
+      "d": "Add patch pockets at the front"
+    },
+    "pocket.inset":  {
+      "t": "Inset pockets",
+      "d": "Add inset pockets at the front"
+    },
+    "pocket.none": {
+      "t": "Without pockets",
+      "d": "Don't add pockets"
+    },
+    "waistbandFrontAngle": {
+      "t": "Waistband front angle",
+      "d": "How curved the waistband is at the front"
+    },
+    "elasticOnlyOnBack": {
+      "t": "Elastic only on back",
+      "d": "Keep the front free of elastic, only use elastic on the back"
+    },
+    "waistbandExtraWidth": {
+      "t": "Waistband extra width",
+      "d": "Make the waistband tunnel a bit wider than the elastic for easier sewing"
+    }
+  }
+}
