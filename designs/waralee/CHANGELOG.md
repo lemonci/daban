@@ -1,6 +1,12 @@
 # Change log for: @freesewing/waralee
 
 
+## 4.8.0 (2026-04-18)
+
+### Fixed
+
+ - Fix double cutting instructions on straps
+
 ## 3.1.0 (2023-12-26)
 
 ### Fixed

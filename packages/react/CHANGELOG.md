@@ -1,6 +1,12 @@
 # Change log for: @freesewing/react
 
 
+## 4.8.0 (2026-04-18)
+
+### Added
+
+ - Implement measurement set import and redirect old import page
+
 ## 4.7.0 (2026-03-27)
 
 ### Added

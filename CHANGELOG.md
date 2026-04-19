@@ -3,11 +3,72 @@
 
 ## Unreleased
 
+
+## 4.8.0 (2026-04-18)
+
+### ashley
+
+#### Added
+
+ - First release of the Ashley A-Line Shorts design
+
+### devon
+
+#### Added
+
+ - Add notches to sleevecap
+
+### library
+
+#### Fixed
+
+ - Fix missed occurrences when hood was renamed to threePartHood
+
+### noble
+
+#### Fixed
+
+ - Fix chest ease problem
+
+### shale
+
+#### Added
+
+ - First release of the Shale Shorts design
+
+### waralee
+
+#### Fixed
+
+ - Fix double cutting instructions on straps
+
 ### collection
 
 #### Fixed
 
  - Fix template for auto-generated examples code
+
+### react
+
+#### Added
+
+ - Implement measurement set import and redirect old import page
+
+### backend
+
+#### Added
+
+ - Added support for support, morio, and supermorio OIDC clients
+
+#### Changed
+
+ - Limit support OIDC client to support role
+ - Allow support role to impersonate users
+ - Pass OIDC client ID to frontend
+
+#### Fixed
+
+ - pkce.required needs to be a function
 
 
 ## 4.7.0 (2026-03-27)

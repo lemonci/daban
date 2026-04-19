@@ -1,6 +1,12 @@
 # Change log for: @freesewing/noble
 
 
+## 4.8.0 (2026-04-18)
+
+### Fixed
+
+ - Fix chest ease problem
+
 ## 4.6.0 (2026-03-08)
 
 ### Fixed

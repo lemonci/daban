@@ -1,6 +1,12 @@
 # Change log for: @freesewing/devon
 
 
+## 4.8.0 (2026-04-18)
+
+### Added
+
+ - Add notches to sleevecap
+
 ## 4.5.0 (2026-02-21)
 
 ### Fixed

@@ -1,6 +1,12 @@
 # Change log for: @freesewing/shale
 
 
+## 4.8.0 (2026-04-18)
+
+### Added
+
+ - First release of the Shale Shorts design
+
 ## 3.0.0 (2023-09-30)
 
 ### Changed

@@ -1,6 +1,12 @@
 # Change log for: @freesewing/collection
 
 
+## 4.8.0 (2026-04-18)
+
+### Fixed
+
+ - Fix template for auto-generated examples code
+
 ## 4.7.0 (2026-03-27)
 
 ### Changed

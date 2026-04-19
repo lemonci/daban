@@ -1,6 +1,22 @@
 # Change log for: @freesewing/backend
 
 
+## 4.8.0 (2026-04-18)
+
+### Added
+
+ - Added support for support, morio, and supermorio OIDC clients
+
+### Changed
+
+ - Limit support OIDC client to support role
+ - Allow support role to impersonate users
+ - Pass OIDC client ID to frontend
+
+### Fixed
+
+ - pkce.required needs to be a function
+
 ## 4.7.0 (2026-03-27)
 
 ### Added

@@ -1,6 +1,6 @@
 {
   "name": "@freesewing/simone",
-  "version": "4.7.2",
+  "version": "4.8.0",
   "description": "A FreeSewing pattern for a button down shirt (Simone = Simon for people with breasts)",
   "author": "Joost De Cock <joost@joost.at> (https://codeberg.org/joostdecock)",
   "homepage": "https://freesewing.eu/",
@@ -38,18 +38,18 @@
     "testci": "NODE_OPTIONS=\"--conditions=internal\" npx mocha tests/*.test.mjs --reporter ../../tests/reporters/terse.js"
   },
   "peerDependencies": {
-    "@freesewing/core": "4.7.2",
-    "@freesewing/brian": "4.7.2",
-    "@freesewing/simon": "4.7.2",
-    "@freesewing/plugin-flip": "4.7.2",
-    "@freesewing/plugin-bust": "4.7.2"
+    "@freesewing/core": "4.8.0",
+    "@freesewing/brian": "4.8.0",
+    "@freesewing/simon": "4.8.0",
+    "@freesewing/plugin-flip": "4.8.0",
+    "@freesewing/plugin-bust": "4.8.0"
   },
   "dependencies": {},
   "devDependencies": {
     "mocha": "10.4.0",
     "chai": "5.1.1",
-    "@freesewing/models": "4.7.2",
-    "@freesewing/plugin-timing": "4.7.2"
+    "@freesewing/models": "4.8.0",
+    "@freesewing/plugin-timing": "4.8.0"
   },
   "files": [
     "src/",

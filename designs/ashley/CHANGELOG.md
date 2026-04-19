@@ -1,6 +1,12 @@
 # Change log for: @freesewing/ashley
 
 
+## 4.8.0 (2026-04-18)
+
+### Added
+
+ - First release of the Ashley A-Line Shorts design
+
 ## 3.0.0 (2023-09-30)
 
 ### Changed
