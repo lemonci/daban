@@ -1,10 +1,14 @@
 import { sleeve } from './sleeve.mjs'
 import { dim } from './shared.mjs'
+import { backYoke } from './backyoke.mjs'
+import { frontYoke } from './frontyoke.mjs'
 
 export const underSleeve = {
   name: 'devon.underSleeve',
   from: sleeve,
-  draft: ({ macro, points, paths, snippets, Snippet, sa, store, part }) => {
+  after: [backYoke, frontYoke],
+
+  draft: ({ macro, points, paths, Path, snippets, Snippet, sa, store, complete, part }) => {
     // Extract seamline from sleeve
     delete paths.ts
     delete paths.topSleeve
@@ -45,6 +49,43 @@ export const underSleeve = {
       from: points.usGrainFrom,
       to: points.usGrainTo,
     })
+
+    if (complete) {
+      paths.undersleeveArmhole = new Path()
+        .move(points.usTip)
+        .curve(points.usTipCpBottom, points.usLeftEdgeCpRight, points.usLeftEdgeRight)
+        .line(points.usLeftEdge)
+        .hide()
+      paths.topSleeveTemp = new Path()
+        .move(points.top)
+        .curve(points.topCpRight, points.backPitchPoint, points.backPitchPoint)
+        .hide()
+
+      if (
+        store.get('backYokeArmhole') - store.get('sss') - paths.topSleeveTemp.length() <
+        paths.undersleeveArmhole.length()
+      ) {
+        points.backYokeSnippet = paths.undersleeveArmhole.shiftAlong(
+          store.get('backYokeArmhole') - store.get('sss') - paths.topSleeveTemp.length()
+        )
+        snippets.backYokeSnippet = new Snippet('notch', points.backYokeSnippet)
+      }
+      if (
+        store.get('backYokeArmhole') -
+          store.get('sss') -
+          paths.topSleeveTemp.length() +
+          store.get('armholeYokeBack') <
+        paths.undersleeveArmhole.length()
+      ) {
+        points.bottomSnippet = paths.undersleeveArmhole.shiftAlong(
+          store.get('backYokeArmhole') -
+            store.get('sss') -
+            paths.topSleeveTemp.length() +
+            store.get('armholeYokeBack')
+        )
+        snippets.bottomSnippet = new Snippet('notch', points.bottomSnippet)
+      }
+    }
 
     dim(part, [
       ['h', 'usLeftEdge', 'backPitchPoint', 'usTip', -30],

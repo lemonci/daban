@@ -27,6 +27,7 @@ export const frontYoke = {
     part,
   }) => {
     macro('rmcutonfold')
+
     for (const i in paths) {
       if (['frontArmholeComplete', 'frontCollar'].indexOf(i) === -1) delete paths[i]
     }
@@ -36,6 +37,7 @@ export const frontYoke = {
       .attr('class', 'fabric')
 
     paths.frontYokeArmhole = paths.frontArmholeComplete.split(points.frontArmholeYoke)[1].hide()
+    store.set('frontYokeArmhole', paths.frontYokeArmhole.length())
 
     paths.seam = new Path()
       .move(points.frontArmholeYoke)

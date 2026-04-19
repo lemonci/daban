@@ -27,6 +27,8 @@ export const backYoke = {
 
     paths.backYokeArmhole = paths.backArmholeComplete.split(points.backArmholeYoke)[1].hide()
 
+    store.set('backYokeArmhole', paths.backYokeArmhole.length())
+
     paths.seamBase = new Path()
       .move(points.cbYoke)
       .join(paths.backYokeSeam)

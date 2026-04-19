@@ -1,11 +1,13 @@
 import { sleeve } from './sleeve.mjs'
 import { dim } from './shared.mjs'
 import { back } from './back.mjs'
+import { backYoke } from './backyoke.mjs'
+import { frontYoke } from './frontyoke.mjs'
 
 export const topSleeve = {
   name: 'devon.topSleeve',
   from: sleeve,
-  after: back,
+  after: [back, backYoke, frontYoke],
   draft: ({ macro, points, Path, paths, snippets, Snippet, sa, store, complete, part }) => {
     // Extract seamline from sleeve
     delete paths.us
@@ -60,6 +62,24 @@ export const topSleeve = {
       points.s3 = paths.topSleeveText.shiftAlong(store.get('sss'))
 
       snippets.s3 = new Snippet('notch', points.s3)
+
+      if (store.get('frontYokeArmhole') + store.get('sss') < paths.topSleeveText.length()) {
+        points.frontYokeSnippet = paths.topSleeveText.shiftAlong(
+          store.get('frontYokeArmhole') + store.get('sss')
+        )
+        snippets.frontYokeSnippet = new Snippet('notch', points.frontYokeSnippet)
+      }
+      paths.topSleeveTemp = new Path()
+        .move(points.top)
+        .curve(points.topCpRight, points.backPitchPoint, points.backPitchPoint)
+        .hide()
+
+      if (store.get('backYokeArmhole') - store.get('sss') < paths.topSleeveTemp.length()) {
+        points.backYokeSnippet = paths.topSleeveTemp.shiftAlong(
+          store.get('backYokeArmhole') - store.get('sss')
+        )
+        snippets.backYokeSnippet = new Snippet('notch', points.backYokeSnippet)
+      }
     }
 
     dim(part, [
