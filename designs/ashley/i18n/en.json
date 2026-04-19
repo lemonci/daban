@@ -1,0 +1,134 @@
+{
+  "t": "Ashley",
+  "d": "A description for Ashley",
+  "p": {
+    "front": "Front",
+    "back": "Back",
+    "beltLoops": "Belt Loops",
+    "flyExtension": "Fly Extension",
+    "flyFacing": "Fly Facing",
+    "pocket": "Front Pocket",
+    "pocket_back": "Back Pocket",
+    "pocket_facing": "Pocket Facing",
+    "waist_back": "Waistband Back",
+    "waistband_left": "Waistband Left",
+    "waistband_right": "Waistband Right",
+    "yoke": "Yoke"
+  },
+  "s": {
+    "cutBeltloops.t": "The belt loops are not shown",
+    "cutBeltloops.d": "The **Belt loops** are {{{ count }}} rectangular piece of fabric {{{ width }}} wide and {{{ length }}} long.",
+    "cutPocketFacing.t": "The pocket facing is not shown",
+    "cutPocketFacing.d": "The **Pocket facing** (8) is not shown, but you can trace it from the Pocket part (7), which has the facing/lining boundary on it (not including seam allowance).",
+    "cutWaistbandLeft.t": "The left waistband is not shown",
+    "cutWaistbandLeft.d": "The **Waistband Left** is a rectangular piece of fabric {{{ width }}} wide and {{{ length }}} long.",
+    "cutWaistbandRight.t": "The right waistband is not shown",
+    "cutWaistbandRight.d": "The **Waistband Right** is a rectangular piece of fabric {{{ width }}} wide and {{{ length }}} long."
+
+   },
+  "o": { 
+    "lengthInseam": {
+      "t": "Length at Inseam",
+      "d": "Controls the total length of the shorts at the inseam, relative to the total inseam measurement"
+    },
+    "outseamShorter": {
+      "t": "Shorten the Outseam",
+      "d": "Cuts the outseam shorter to create an angle at the hem"
+    },
+    "pocketDepth": {
+      "t": "Pocket Depth",
+      "d": "How far below the waist the pockets should end. Measure from your waist to where your fingertips fall on your side."
+    },
+    "pocketOpeningDepth": {
+      "t": "Pocket Opening Depth",
+      "d": "How deep the pocket openings should be. They can't be shallower than the necessary front opening."
+    },
+    "pocketBottomCurve": {
+      "t": "Pocket Bottom Curve",
+      "d": "Adjusts the curve of the bottom of the pocket opening"
+    },
+    "pocketCurveControl": {
+      "t": "Pocket Curve Control",
+      "d": "Adjust the curve of the bottom of the pocket bag"
+    },
+    "pocketFacingUnderlap": {
+      "t": "Pocket Bag Inner Width",
+      "d": "How far the pocket bag extends horizontally beyond the pocket opening, on the inside of the shorts."
+    },
+    "outseamAngle": {
+      "t": "Angle Outseam",
+      "d": "How far to rotate the outseam"
+    },
+    "inseamAngle": {
+      "t": "Angle Inseam",
+      "d": "How far to rotate the inseam"
+    },
+    "backPocketDepth": {
+      "t": "Back Pocket Depth",
+      "d": "The depth (vertical) of the back pocket"
+    },
+    "backPocketWidth": {
+      "t": "Back Pocket Width",
+      "d": "The width of the back pocket"
+    },
+    "backPocketTopHemAllowance": {
+      "t": "Back Pocket Hem Allowance",
+      "d": "How much extra fabric to fold over at the top of the back pocket"
+    },
+    "frontPanelPercentage": {
+      "t": "Pocket opening width",
+      "d": "How wide to draft the opening of the front pocket"
+    },
+    "beltLoops": {
+      "t": "Belt loops",
+      "d": "Controls the amount of belt loops"
+    },
+
+    "yokeAngle": {
+      "t": "Yoke Angle",
+      "d": "How far the yoke should be curved to create butt shaping"
+    },
+
+    "yokeDepth": {
+      "t": "Yoke Depth",
+      "d": "How deep the yoke should be at the center back"
+    },
+    "waistbandCurve": {
+      "t": "Waistband Curve",
+      "d": "Controls how curved the waistband is, if it's not determined automatically"
+    },
+    "waistbandAngleAutomatic": {
+      "t": "Automatic Waistband Angle",
+      "d": "How to determine the waistband angle"
+    },
+    "waistbandAngleAutomaticYes": {
+      "t": "Automatic",
+      "d": "Determine the waistband angle automatically"
+    },
+    "waistbandAngleAutomaticNo": {
+      "t": "Manual",
+      "d": "Set the waistband angle manually"
+    },
+    "flyCurve": {
+      "t": "Fly curve",
+      "d": "Controls the curvature of the fly J-seam"
+    },
+    "flyLength": {
+      "t": "Fly length",
+      "d": "Controls the length of the fly"
+    },
+    "flyWidth": {
+      "t": "Fly width",
+      "d": "Controls how far the J-seam of offset from the fly edge"
+    },
+    "hemExtraSeamAllowance": {
+      "t": "Hem allowance",
+      "d": "How much space to leave at the bottoms of the legs for the hem, as a percentage of the seam allowance elsewhere"
+    },
+    "yokeRecoveryShift": {
+      "t": "Yoke Recovery Shift",
+      "d": "Tweak this if the corners at the top of the yoke are too far from right angles"
+    }
+
+  }
+}

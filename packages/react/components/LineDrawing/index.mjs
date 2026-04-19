@@ -1,5 +1,6 @@
 import { Aaron, AaronFront, AaronBack } from './aaron.mjs'
 import { Albert, AlbertFront } from './albert.mjs'
+import { Ashley, AshleyFront, AshleyBack } from './ashley.mjs'
 import { Bee, BeeFront } from './bee.mjs'
 import { Bella, BellaFront, BellaBack } from './bella.mjs'
 import { Benjamin, BenjaminFront } from './benjamin.mjs'
@@ -65,6 +66,7 @@ import { Yuri, YuriFront, YuriBack } from './yuri.mjs'
 export const lineDrawingsFront = {
   aaron: AaronFront,
   albert: AlbertFront,
+  ashley: AshleyFront,
   bee: BeeFront,
   bella: BellaFront,
   benjamin: BenjaminFront,
@@ -130,6 +132,7 @@ export const lineDrawingsFront = {
  */
 export const lineDrawingsBack = {
   aaron: AaronBack,
+  ashley: AshleyBack,
   bella: BellaBack,
   bent: BentBack,
   bibi: BibiBack,
@@ -179,6 +182,7 @@ export const lineDrawingsBack = {
 export const lineDrawings = {
   aaron: Aaron,
   albert: Albert,
+  ashley: Ashley,
   bee: Bee,
   bella: Bella,
   benjamin: Benjamin,
@@ -247,6 +251,9 @@ export {
   // Albert
   Albert,
   AlbertFront,
+  //Ashley
+  Ashley,
+  AshleyFront,
   // Bee
   Bee,
   BeeFront,

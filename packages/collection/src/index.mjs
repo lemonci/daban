@@ -1,6 +1,7 @@
 // Designs
 import { Aaron as aaron } from '@freesewing/aaron'
 import { Albert as albert } from '@freesewing/albert'
+import { Ashley as ashley } from '@freesewing/ashley'
 import { Bee as bee } from '@freesewing/bee'
 import { Bella as bella } from '@freesewing/bella'
 import { Benjamin as benjamin } from '@freesewing/benjamin'
@@ -76,6 +77,7 @@ import { i18n as translations } from './i18n.mjs'
 export const designs = {
   aaron,
   albert,
+  ashley,
   bee,
   bella,
   benjamin,

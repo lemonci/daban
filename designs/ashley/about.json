@@ -1,0 +1,26 @@
+{
+  "id": "ashley",
+  "code": "Gawain CCBR",
+  "design": "Gawain CCBR",
+  "description": "A FreeSewing pattern for A-line shorts",
+  "name": "Ashley A-Line Shorts",
+  "difficulty": 3,
+  "tags": [
+    "bottoms",
+    "trousers"
+  ],
+  "techniques": [
+    "button",
+    "buttonhole",
+    "curved-seam",
+    "flat-felled-seam",
+    "fly",
+    "hem",
+    "interfacing",
+    "pocket",
+    "zipper"
+  ],
+  "version": "4.7.2",
+  "pkg": "@freesewing/ashley",
+  "collection": true
+}
