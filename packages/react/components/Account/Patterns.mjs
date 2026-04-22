@@ -48,7 +48,15 @@ export const Patterns = ({ Link = false }) => {
       setLoadingStatus([true, 'Loading patterns from backend'])
       const [status, body] = await backend.getPatterns()
       if (status === 200) {
-        setPatterns(body.patterns)
+        const normalizedPatterns = body.patterns.map((pattern) => ({
+          ...pattern,
+          createdAt:
+            typeof pattern.createdAt === 'number'
+              ? new Date(pattern.createdAt).toISOString()
+              : pattern.createdAt,
+        }))
+        setPatterns(normalizedPatterns)
+
         setLoadingStatus([true, 'Patterns loaded', true, true])
       } else setLoadingStatus([false, 'Failed to load patterns from backend', true, true])
     }
