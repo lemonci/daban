@@ -195,7 +195,15 @@ if (baseConfig.use.oidc.provider) {
       claims: {
         openid: ['sub'],
         email: ['email', 'email_verified'],
-        profile: ['name', 'preferred_username', 'picture', 'updated_at', 'bio', 'moderator'],
+        profile: [
+          'name',
+          'preferred_username',
+          'picture',
+          'updated_at',
+          'bio',
+          'moderator',
+          'role',
+        ],
       },
     },
     clients: [],
@@ -225,7 +233,7 @@ if (baseConfig.use.oidc.provider) {
     baseConfig.oidc.provider.clients.push({
       client_id: 'morio',
       client_secret: process.env['BACKEND_OIDC_CLIENT_MORIO_SECRET'],
-      redirect_uris: ['https://morio.freesewing.eu/-/api/callback/oidc/morio'],
+      redirect_uris: ['https://morio.freesewing.eu/-/api/callback/oidc/freesewing'],
       grant_types: ['authorization_code'],
       response_types: ['code'],
       scope: 'openid email profile',
@@ -234,7 +242,7 @@ if (baseConfig.use.oidc.provider) {
     baseConfig.oidc.provider.clients.push({
       client_id: 'supermorio',
       client_secret: process.env['BACKEND_OIDC_CLIENT_SUPERMORIO_SECRET'],
-      redirect_uris: ['https://morio.freesewing.eu/-/api/callback/oidc/supermorio'],
+      redirect_uris: ['https://morio.freesewing.eu/-/api/callback/oidc/support'],
       grant_types: ['authorization_code'],
       response_types: ['code'],
       scope: 'openid email profile',

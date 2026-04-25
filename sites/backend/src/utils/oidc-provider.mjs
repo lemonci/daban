@@ -89,6 +89,7 @@ async function findAccount(ctx, uuid, tools) {
         claims.updated_at = Math.floor(new Date(User.record.updatedAt).getTime() / 1e3)
         claims.bio = account.bio
         claims.moderator = account.role === 'admin'
+        claims.role = account.role
       }
 
       // email claims
