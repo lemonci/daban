@@ -10,6 +10,30 @@ import { MiniTip } from '@freesewing/react/components/Mini'
 import Link from '@docusaurus/Link'
 import { useAccount } from '@freesewing/react/hooks/useAccount'
 
+// Official OIDC clients
+const clients = {
+  forum: {
+    title: 'FreeSewing Forum',
+    href: 'https://forum.freesewing.eu/',
+    fqdn: 'forum.freesewing.eu',
+  },
+  support: {
+    title: 'FreeSewing Support Backend',
+    href: 'https://support.freesewing.eu/',
+    fqdn: 'support.freesewing.eu',
+  },
+  morio: {
+    title: 'FreeSewing Morio Instance',
+    href: 'https://morio.freesewing.eu/',
+    fqdn: 'morio.freesewing.eu',
+  },
+  supermorio: {
+    title: 'FreeSewing Morio Instance',
+    href: 'https://morio.freesewing.eu/',
+    fqdn: 'morio.freesewing.eu',
+  },
+}
+
 /*
  * This is the OIDC flow sign in page.
  * Each page MUST be wrapped in the DocusaurusPage component.
@@ -20,8 +44,6 @@ export default function SignInPage() {
   const [client, setClient] = useState('')
   const { token, account } = useAccount()
 
-  const clients = ['forum', 'support']
-
   useEffect(() => {
     const interaction = getSearchParam('uid')
     const client_id = getSearchParam('client')
@@ -29,8 +51,12 @@ export default function SignInPage() {
     setClient(client_id || false)
   }, [])
 
-  if (uid === false || client === false || !clients.includes(client)) return <InvalidUrlWarning />
+  if (uid === false || client === false || !Object.keys(clients).includes(client))
+    return <InvalidUrlWarning />
   if (!uid) return <OneMomentPlease />
+
+  // Client data
+  const cd = clients[client]
 
   return (
     <DocusaurusPage
@@ -47,14 +73,21 @@ export default function SignInPage() {
               className={`tw:flex tw:flex-row tw:items-center tw:gap-2 tw:px-4 tw:bg-primary
             tw:rounded-t-lg tw:text-primary-content tw:justify-between`}
             >
-              <span>Sign in with FreeSewing</span>
-              <FingerprintIcon />
+              <span className="tw:text-primary-content">Sign in with FreeSewing</span>
+              <span className="tw:text-primary-content">
+                <FingerprintIcon />
+              </span>
             </h5>
             <div className="tw:w-full tw:p-4">
               <h3 className="tw:text-center">
-                <a href={`https://${client}.freesewing.eu/`} title={`${client}.freesewing.eu`}>
-                  {client}.freesewing.eu
-                </a>
+                <span className="tw:font-medium tw:text-xl">The {cd.title}</span>
+                <span className="tw:font-medium tw:text-l">
+                  (
+                  <a href={cd.href} title={cd.fqdn}>
+                    {cd.fqdn}
+                  </a>
+                  )
+                </span>
                 <br />
                 <span className="tw:font-medium tw:text-xl">
                   wants to access your FreeSewing account
@@ -80,7 +113,7 @@ export default function SignInPage() {
                 <input type="hidden" name="token" value={token} />
                 <div className="tw:grid tw:grid-cols-2 tw:gap-2 tw:mt-2">
                   <a
-                    href={`https://${client}.freesewing.eu/`}
+                    href={cd.href}
                     className="tw:daisy-btn tw:daisy-btn-primary tw:daisy-btn-outline"
                   >
                     Deny
@@ -92,8 +125,7 @@ export default function SignInPage() {
               </form>
               <MiniTip>
                 You should only share your FreeSewing account data with sites you trust. In this
-                case, as <b>{client}.freesewing.eu</b> is an official FreeSewing site, there is no
-                risk.
+                case, as <b>{cd.title}</b> is an official FreeSewing site, there is no risk.
               </MiniTip>
             </div>
           </div>
