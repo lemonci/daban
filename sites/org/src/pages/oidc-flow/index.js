@@ -32,6 +32,11 @@ const clients = {
     href: 'https://morio.freesewing.eu/',
     fqdn: 'morio.freesewing.eu',
   },
+  semaphoreui: {
+    title: 'FreeSewing Ansible UI',
+    href: 'https://ansible.freesewing.eu/',
+    fqdn: 'ansible.freesewing.eu',
+  },
 }
 
 /*

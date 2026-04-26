@@ -64,6 +64,7 @@ const baseConfig = {
         support: envToBool(process.env.BACKEND_ENABLE_OIDC_CLIENT_SUPPORT),
         morio: envToBool(process.env.BACKEND_ENABLE_OIDC_CLIENT_MORIO),
         supermorio: envToBool(process.env.BACKEND_ENABLE_OIDC_CLIENT_SUPERMORIO),
+        semaphoreui: envToBool(process.env.BACKEND_ENABLE_OIDC_CLIENT_SEMAPHOREUI),
       },
     },
     noCORS: envToBool(process.env.BACKEND_ENABLE_OPEN_API),
@@ -243,6 +244,15 @@ if (baseConfig.use.oidc.provider) {
       client_id: 'supermorio',
       client_secret: process.env['BACKEND_OIDC_CLIENT_SUPERMORIO_SECRET'],
       redirect_uris: ['https://morio.freesewing.eu/-/api/callback/oidc/support'],
+      grant_types: ['authorization_code'],
+      response_types: ['code'],
+      scope: 'openid email profile',
+    })
+  if (baseConfig.use.oidc.clients.semaphoreui)
+    baseConfig.oidc.provider.clients.push({
+      client_id: 'semaphoreui',
+      client_secret: process.env['BACKEND_OIDC_CLIENT_SEMAPHOREUI_SECRET'],
+      redirect_uris: ['https://ansible.freesewing.eu/api/auth/oidc/freesewing/redirect'],
       grant_types: ['authorization_code'],
       response_types: ['code'],
       scope: 'openid email profile',
