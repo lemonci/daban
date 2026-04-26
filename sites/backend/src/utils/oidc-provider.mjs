@@ -127,8 +127,8 @@ async function loadExistingGrant(ctx) {
       accountId: ctx.oidc.session?.accountId || ctx.oidc.account?.accountId,
     })
 
-    // If this is the support client, only allow users with the support role
-    if (ctx.oidc.client.clientId === 'support') {
+    // If this is a privileged client, only allow users with the support role
+    if (['support', 'supermorio', 'semaphoreui'].includes(ctx.oidc.client.clientId)) {
       // This will break the flow, but it's required because freescout does not handle this
       if (!['support', 'admin'].includes(ctx.oidc.account?.role)) return undefined
     }
