@@ -206,6 +206,8 @@ if (baseConfig.use.oidc.provider) {
           'role',
         ],
       },
+      // This is required for the SemaphoreUI OIDC client
+      conformIdTokenClaims: false,
     },
     clients: [],
   }
