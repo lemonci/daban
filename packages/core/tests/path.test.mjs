@@ -638,12 +638,12 @@ describe('Path', () => {
     expect(round(test.edge('topRight').x)).to.equal(90)
     expect(round(test.edge('topRight').y)).to.equal(0.97)
     expect(round(test.edge('left').x)).to.equal(7.7)
-    expect(round(test.edge('left').y)).to.equal(91.8)
-    expect(round(test.edge('bottom').x)).to.equal(40.63)
+    expect(round(test.edge('left').y)).to.equal(91.7)
+    expect(round(test.edge('bottom').x)).to.equal(40.75)
     expect(round(test.edge('bottom').y)).to.equal(118.46)
-    expect(round(test.edge('right').x)).to.equal(89.76)
-    expect(round(test.edge('right').y)).to.equal(29.64)
-    expect(round(test.edge('top').x)).to.equal(55.98)
+    expect(round(test.edge('right').x)).to.equal(90)
+    expect(round(test.edge('right').y)).to.equal(30)
+    expect(round(test.edge('top').x)).to.equal(55.97)
     expect(round(test.edge('top').y)).to.equal(0.97)
   })
 
@@ -673,7 +673,7 @@ describe('Path', () => {
       .move(new Point(-109.7, 77))
       .curve(new Point(-27.33, 99.19), new Point(-39.45, 137.4), new Point(-61.52, 219.77))
     expect(round(test.edge('right').x)).to.equal(-45.22)
-    expect(round(test.edge('right').y)).to.equal(139.4)
+    expect(round(test.edge('right').y)).to.equal(139.3)
   })
 
   it('Should find where a path intersects with an X value', () => {

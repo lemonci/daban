@@ -233,19 +233,28 @@ export function circlesIntersect(c1, r1, c2, r2, sort = 'x') {
 /**
  * Finds the edge of a cubic Bezier curve
  *
- * @param {BezierJs} curve - A BezierJs curve instance
+ * @param {Bezier} curve - A BezierJs curve instance
  * @param {string} edge - The edge to find: top, bottom, right, or left
- * @param {int} steps - The number of steps to divide the curve in while walking it
  * @return {Point} edgepoint - A Point object located on the edge of the curve. Returns the first point found, if more than one lies on the edge.
  */
-export function curveEdge(curve, edge, steps = 500) {
+export function curveEdge(curve, edge) {
+  // We look at both endpoints and the extrema points of the bezier library.
+  // Ordering is according to the function documentation:
+  // First the start point of the curve,
+  // then the extrema points (which are returned sorted by the bezierjs library),
+  // then the end point of the curve
+  const extremaPoints = [
+    curve.point(0),
+    ...curve.extrema().values.map((e) => curve.get(e)),
+    curve.point(3),
+  ]
+
   let x = Infinity
   let y = Infinity
-  let p
   if (edge === 'bottom') y = -Infinity
   if (edge === 'right') x = -Infinity
-  for (let i = 0; i < steps; i++) {
-    p = curve.get(i / steps)
+
+  for (const p of extremaPoints) {
     if (
       (edge === 'top' && p.y < y) ||
       (edge === 'bottom' && p.y > y) ||
