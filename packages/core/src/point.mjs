@@ -45,7 +45,7 @@ Point.prototype.addCircle = function (radius = false, className = false) {
  * @return {Point} this - The Point instance
  */
 Point.prototype.addText = function (text = '', className = false) {
-  this.attributes.add('data-text', text)
+  this.attributes.add('data-text', `${text}`)
   if (className) this.attributes.add('data-text-class', className)
 
   return this.__check()

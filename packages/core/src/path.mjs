@@ -81,7 +81,7 @@ Path.prototype.addClass = function (className = false) {
  * @return {Path} this - The Path instance
  */
 Path.prototype.addText = function (text = '', className = false) {
-  this.attributes.add('data-text', text)
+  this.attributes.add('data-text', `${text}`)
   if (className) this.attributes.add('data-text-class', className)
 
   return this
