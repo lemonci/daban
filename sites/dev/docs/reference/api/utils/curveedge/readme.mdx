@@ -3,32 +3,32 @@ title: utils.curveEdge()
 ---
 
 The `utils.curveEdge()` function finds the edge of a cubic Bézier curve,
-given the curve, the edge to find ("top", "bottom", "left", or "right"),
-and the number of steps to divide the curve into while walking it.
+given the curve and the edge to find ("top", "bottom", "left", or "right").
+
+:::note
+This function is used by the [Path.edge()](/reference/api/path/edge/) function.
+:::
 
 ## Signature
 
 ```js
 Point utils.curveEdge(
   Bezier curve,
-  string edge,
-  int steps = 500)
+  string edge)
 ```
 
 ## Example
 
 <Example caption="A Utils.curveEdge() example">
-```js
-({ Point, points, Path, paths, Snippet, snippets, utils, Bezier, part }) => {
 
+```js
+;({ Point, points, Path, paths, Snippet, snippets, utils, Bezier, part }) => {
   points.A = new Point(20, 10)
   points.Acp = new Point(310, 40)
   points.Bcp = new Point(-210, 40)
   points.B = new Point(100, 70)
 
-  paths.pathA = new Path()
-    .move(points.A)
-    .curve(points.Acp, points.Bcp, points.B)
+  paths.pathA = new Path().move(points.A).curve(points.Acp, points.Bcp, points.B)
 
   const curveA = new Bezier(
     { x: points.A.x, y: points.A.y },
@@ -37,10 +37,11 @@ Point utils.curveEdge(
     { x: points.B.x, y: points.B.y }
   )
 
-  points.edge = utils.curveEdge(curveA, "left")
-  snippets.edge = new Snippet("notch", points.edge)
+  points.edge = utils.curveEdge(curveA, 'left')
+  snippets.edge = new Snippet('notch', points.edge)
 
   return part
 }
 ```
+
 </Example>
