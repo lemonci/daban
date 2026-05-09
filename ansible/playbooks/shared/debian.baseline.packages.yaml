@@ -1,0 +1,15 @@
+# This installs base packages that should be present on every Debian 12 system
+- name: Install baseline packages through apt
+  become: true
+  apt:
+    name: "{{ item }}"
+    state: present
+  loop:
+    - ipset
+    - iptables
+    - iptables-persistent
+    - ipset-persistent
+    - rsync
+    - systemd-timesyncd
+    - tmux
+

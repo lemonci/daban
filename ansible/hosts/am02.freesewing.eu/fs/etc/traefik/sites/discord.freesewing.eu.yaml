@@ -1,0 +1,16 @@
+http:
+  routers:
+    discord:
+      priority: 666
+      service: noop@internal
+      entrypoints: https
+      tls:
+        certResolver: letsencrypt
+      rule: Host(`discord.freesewing.eu`)
+      middlewares:
+        - redirect-to-discord
+  middlewares:
+    redirect-to-discord:
+      redirectRegex:
+        regex: ".*"
+        replacement: "https://discord.gg/vRxUTse6qf"

@@ -1,0 +1,10 @@
+# All private IP ranges
+create -exist network.private hash:net family inet hashsize 8 maxelem 32
+# RFC 1918
+add network.private 10.0.0.0/8
+add network.private 172.16.0.0/12
+add network.private 192.168.0.0/16
+# Loopback
+add network.private 127.0.0.0/8
+# Link-local
+add network.private 169.254.0.0/16

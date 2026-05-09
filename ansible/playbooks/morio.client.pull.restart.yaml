@@ -1,0 +1,29 @@
+# Pulls Morio config and restarts the Morio client
+---
+- name: Pull Morio config from cluster
+  hosts: '!localhost'
+  # Speed up playbook run by disabling facts gathering
+  gather_facts: false
+  tasks:
+    - name: Pull Morio config
+      become: true
+      shell: /usr/sbin/morio pull
+
+- name: Restart Morio client agent services
+  hosts: '!localhost'
+  # Speed up playbook run by disabling facts gathering
+  gather_facts: false
+  tasks:
+    - name: Restart Morio agent services
+      become: true
+      ansible.builtin.systemd_service:
+        state: restarted
+        enabled: true
+        daemon_reload: true
+        name: "{{ item }}"
+      loop:
+        - morio-audit
+        - morio-logs
+        - morio-metrics
+
+

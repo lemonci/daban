@@ -1,0 +1,12 @@
+http:
+  routers:
+
+    # Expose dashboard for observability
+    dashboard:
+      rule: "Host(`traefik.freesewing.eu`)"
+      priority: 66
+      service: api@internal
+      entryPoints:
+        - https
+      tls:
+        certResolver: letsencrypt

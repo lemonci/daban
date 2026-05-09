@@ -1,0 +1,33 @@
+[Unit]
+Description=FreeSewing Webserver
+Documentation=https://freesewing.dev/
+# Make sure the Docker service is available
+After=docker.service
+Requires=docker.service
+
+[Service]
+# Load environment file to allow changing presets
+EnvironmentFile=/etc/nginx/service.env
+
+# Make sure to stop & remove the container if it's running
+ExecStartPre=-/usr/bin/docker rm -f $SERVICE_NAME
+
+# Start the container
+ExecStart=/usr/bin/docker run --rm \
+  --name="${SERVICE_NAME}" \
+  --hostname="${SERVICE_NAME}" \
+  --network="${SERVICE_NETWORK}" \
+  --network-alias="${SERVICE_NAME}.internal" \
+  -v "${SERVICE_CONFIG_ROOT}/default.conf:/etc/nginx/conf.d/default.conf" \
+  -v "${SERVICE_LOG_ROOT}:/var/log/nginx" \
+  -v "${SERVICE_DATA_ROOT}:/data" \
+  ${CONTAINER_NAME}:${CONTAINER_TAG}
+
+# Always restart
+Restart=always
+
+# Identifier for syslog
+SyslogIdentifier=nginx
+
+[Install]
+WantedBy=default.target

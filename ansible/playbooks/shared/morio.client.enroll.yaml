@@ -1,0 +1,26 @@
+# A reusable task to enroll a Morio client which means to join it to the cluster
+---
+- name: Join client to cluster
+  become: true
+  shell: "/usr/sbin/morio join morio.freesewing.eu"
+  failed_when: false
+
+- name: Join client to inventory group
+  become: true
+  shell: "/usr/sbin/morio join-group  {{ FSIAC_MORIO_GROUP | default('orphans') }}"
+
+- name: Enable the linux-system Morio module
+  become: true
+  shell: /usr/sbin/morio modules enable-remote linux-system
+
+- name: Pull config from the server
+  become: true
+  shell: /usr/sbin/morio pull
+
+- name: Restart Morio client services
+  vars:
+    FSIAC_SYSTEMD_SERVICE:
+      - morio-logs
+      - morio-metrics
+      - morio-audit
+  include_tasks: debian.systemd.service.restart.yaml

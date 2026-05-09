@@ -1,0 +1,10 @@
+# Installs the Morio client
+---
+- name: Debian baseline playbook
+  hosts: '!localhost'
+  # Speed up playbook run by disabling facts gathering
+  gather_facts: false
+  tasks:
+    - name: Install Morio client
+      include_tasks: shared/morio.client.install.yaml
+

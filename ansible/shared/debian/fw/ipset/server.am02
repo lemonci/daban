@@ -1,0 +1,3 @@
+# Server am02, runs the FreeSewing backend
+create -exist server.am02 hash:net family inet hashsize 8 maxelem 32
+add server.am02 51.159.238.59

@@ -1,0 +1,35 @@
+# A reusable task to ensure a Debian system has our baseline configuration
+---
+# Load/Install updates first
+- name: Install system updates
+  include_tasks: debian.apt.update.yaml
+
+# Make sure to keep this here (almost) at the top because
+# other tasks rely on packages installed here
+- name: Install baseline packages through apt
+  include_tasks: debian.baseline.packages.yaml
+
+# Push local fs structure
+- name: Push filesystem data
+  include_tasks: fsiac.fs.push.yaml
+
+- name: Configure cron
+  include_tasks: debian.baseline.cron.yaml
+
+#- name: Set up firewall
+  include_tasks: debian.baseline.firewall.yaml
+  when: FSIAC_FIREWALL_BYPASS is not defined
+
+- name: Set sysctl parameters
+  include_tasks: debian.baseline.sysctl.yaml
+
+- name: Reload SSH daemon
+  vars:
+    FSIAC_SYSTEMD_SERVICE: sshd
+  include_tasks: debian.systemd.service.reload.yaml
+
+- name: Disable audit logs in journald
+  include_tasks: debian.baseline.journald.yaml
+
+- name: Report to Morio cluster for inventory update
+  include_tasks: debian.baseline.morio.report.yaml

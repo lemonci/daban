@@ -1,0 +1,3 @@
+# Server am03, runs the FreeSewing Morio instance and support service (freescout)
+create -exist server.am03 hash:net family inet hashsize 8 maxelem 32
+add server.am03 51.159.232.6

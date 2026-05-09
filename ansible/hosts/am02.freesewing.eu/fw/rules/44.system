@@ -1,0 +1,14 @@
+# Allow outgoing HTTP for APT updates
+iptables -A OUTPUT \
+  -m set --match-set server.am02 src \
+  -p tcp -m tcp --dport 80 \
+  -m comment --comment "Allow outgoing HTTP for APT" \
+  -j ACCEPT
+
+# Allow outgoing HTTPS for APT updates
+iptables -A OUTPUT \
+  -m set --match-set server.am02 src \
+  -p tcp -m tcp --dport 443 \
+  -m comment --comment "Allow outgoing HTTPS for APT" \
+  -j ACCEPT
+

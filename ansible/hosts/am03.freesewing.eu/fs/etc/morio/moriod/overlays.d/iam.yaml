@@ -1,0 +1,57 @@
+set:
+  iam:
+    providers:
+      mrt: {}
+      freesewing:
+        provider: oidc
+        label: FreeSewing User
+        about: Sign in with any FreeSewing account
+        issuer: https://backend.freesewing.eu
+        client_secret: "{|{ MORIO_SSO_CLIENT_SECRET }|}"
+        client_id: morio
+        token_endpoint_auth_method: "client_secret_basic"
+        username_field: preferred_username
+        rbac:
+          user:
+            attribute: preferred_username
+            regex: "."
+        autodiscovery_url: "https://backend.freesewing.eu/.well-known/openid-configuration"
+        label_attributes:
+          email: email
+          name: name
+          role: role
+          sub: uuid
+          username: preferred_username
+          uuid: sub
+      support:
+        provider: oidc
+        label: FreeSewing Support
+        about: Limited to the FreeSewing Support Team
+        issuer: https://backend.freesewing.eu
+        client_secret: "{|{ SUPERMORIO_SSO_CLIENT_SECRET }|}"
+        client_id: supermorio
+        username_field: preferred_username
+        rbac:
+          manager:
+            attribute: role
+            regex: "^(admin|support)$"
+          engineer:
+            attribute: role
+            regex: "^admin$"
+        autodiscovery_url: "https://backend.freesewing.eu/.well-known/openid-configuration"
+        label_attributes:
+          email: email
+          name: name
+          role: role
+          sub: uuid
+          username: preferred_username
+          uuid: sub
+    ui:
+      order:
+        - freesewing
+        - support
+        - mrt
+      visibility:
+        mrt: icon
+        morio: tab
+        supermorio: tab

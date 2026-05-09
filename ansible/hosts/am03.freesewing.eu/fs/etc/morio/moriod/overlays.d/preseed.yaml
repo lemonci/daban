@@ -1,0 +1,15 @@
+set:
+  preseed:
+    git:
+      moriohub:
+        url: "https://codeberg.org/certeu/moriohub.git"
+        ref: develop
+    modules:
+      - glob: "git:modules/**@moriohub"
+        root: "/modules/"
+    processors:
+      - glob: "git:processors/**@moriohub"
+        root: "/processors/"
+    charts:
+      - glob: "git:charts/**@moriohub"
+        root: "/charts/"

@@ -1,0 +1,21 @@
+http:
+  routers:
+    ansible:
+      priority: 666
+      service: ansible
+      entrypoints: https
+      tls:
+        certResolver: letsencrypt
+      rule: Host(`ansible.freesewing.eu`)
+      middlewares:
+        - redirect-uggo-background
+  middlewares:
+    redirect-uggo-background:
+      redirectRegex:
+        regex: "https://ansible.freesewing.eu/img/background.b49c1f41.svg"
+        replacement: "https://static.freesewing.eu/ui/semaphore-bg.svg"
+  services:
+    ansible:
+      loadBalancer:
+        servers:
+          - url: http://semaphore.internal:3000

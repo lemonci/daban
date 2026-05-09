@@ -1,0 +1,6 @@
+---
+collections:
+  - netbox.netbox
+  - community.general
+  - name: community.docker
+    version: ">=3.10.2"

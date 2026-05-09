@@ -1,0 +1,61 @@
+# Allow established connections back through
+iptables -A DOCKER-USER \
+  -m conntrack --ctstate ESTABLISHED,RELATED \
+  -j ACCEPT
+
+# Allow traffic on the local docker network
+iptables -A DOCKER-USER \
+  -m set --match-set traefiknet src \
+  -m set --match-set traefiknet dst \
+  -m comment --comment "Allow internal container traffic" \
+  -j ACCEPT
+iptables -A INPUT \
+  -m set --match-set traefiknet src \
+  -m set --match-set traefiknet dst \
+  -m comment --comment "Allow internal container traffic" \
+  -j ACCEPT
+iptables -A OUTPUT \
+  -m set --match-set traefiknet src \
+  -m set --match-set traefiknet dst \
+  -m comment --comment "Allow internal container traffic" \
+  -j ACCEPT
+
+# DOCKER-USER: Allow DNS queries
+iptables -A DOCKER-USER \
+  -m set --match-set infra.dns dst -p udp -m udp --dport 53 \
+  -m comment --comment "DNS to scaleway DNS servers" \
+  -j ACCEPT
+
+# DOCKER-USER: Allow outgoing SMTP to Scaleway for transactional email
+iptables -A DOCKER-USER \
+  -m set --match-set scaleway.smtp dst \
+  -p tcp -m tcp --dport 2587 \
+  -m comment --comment "Outgoing SMTP to Scaleway for backend" \
+  -j ACCEPT
+
+# DOCKER-USER: Allow incoming HTTP for ACME (Let's Encrypt HTTP challenge)
+iptables -A DOCKER-USER \
+  -p tcp -m tcp --dport 80 \
+  -m comment --comment "Incoming HTTP for ACME" \
+  -j ACCEPT
+
+# DOCKER-USER: Allow incoming HTTPS for access to the backend
+iptables -A DOCKER-USER \
+  -p tcp -m tcp --dport 443 \
+  -m comment --comment "Incoming HTTPS" \
+  -j ACCEPT
+
+# DOCKER-USER: Allow incoming HTTPS/3 (QUIC) for access to the backend
+iptables -A DOCKER-USER \
+  -p tcp -m udp --dport 443 \
+  -m comment --comment "Incoming HTTPS/3 aka QUIC" \
+  -j ACCEPT
+
+# Log denied packages in DOCKER-USER chain
+iptables -A DOCKER-USER \
+  -m limit --limit 5/min \
+  -m comment --comment "Log denied DOCKER-USER packages" \
+  -j LOG --log-prefix "fwdrop.docker: "
+
+# Drop everything else
+iptables -A DOCKER-USER -j DROP

@@ -1,0 +1,16 @@
+http:
+  routers:
+    support:
+      priority: 666
+      service: support
+      entrypoints: https
+      tls:
+        certResolver: letsencrypt
+        domains:
+          - main: support.freesewing.eu
+      rule: Host(`support.freesewing.eu`)
+  services:
+    support:
+      loadBalancer:
+        servers:
+          - url: http://freescout-app.internal:80

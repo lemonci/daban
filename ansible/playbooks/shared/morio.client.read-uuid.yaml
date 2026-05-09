@@ -1,0 +1,12 @@
+# This reads the Morio UUID from disk and stores it in the MORIO_CLIENT_UUID fact
+#
+---
+- name: Read MORIO_CLIENT_UUID from file
+  slurp:
+    src: /etc/morio/vars.d/MORIO_CLIENT_UUID
+  register: morio_uuid_file
+  become: true
+
+- name: Set morio_client_uuid fact
+  set_fact:
+    MORIO_CLIENT_UUID: "{{ morio_uuid_file.content | b64decode | trim }}"

@@ -1,0 +1,6 @@
+# A reusable task to prune docker images and containers
+---
+- name: Prune containers and images
+  community.general.docker_prune:
+    containers: yes
+    images: yes

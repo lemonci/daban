@@ -1,0 +1,6 @@
+# A reusable task to reload systemd on a Debian host
+---
+- name: Reload systemd daemon
+  become: true
+  ansible.builtin.systemd:
+    daemon_reload: yes

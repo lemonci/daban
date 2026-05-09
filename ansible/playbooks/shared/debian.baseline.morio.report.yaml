@@ -1,0 +1,10 @@
+# A reusable task to run `sudo morio report`
+---
+- name: Let morio client report to the Morio cluster
+  become: yes
+  shell: "/usr/sbin/morio report"
+  register: output
+  changed_when: false
+  failed_when: "'Successfully reported to cluster' not in output.stdout"
+  when: FSIAC_SKIP_MORIO_REPORT is not defined
+

@@ -1,0 +1,54 @@
+# A reusable task to configure cron on a Debian 12 host
+---
+- name: Locate cron files and folders
+  become: true
+  ansible.builtin.find:
+    paths:
+      - /etc
+    patterns:
+      - cron.hourly
+      - cron.daily
+      - cron.weekly
+      - cron.monthly
+      - cron.d
+    file_type: directory
+  register: cron_directories
+
+- name: Set permissions on cron files
+  become: true
+  ansible.builtin.file:
+    path: "{{ item.path }}"
+    owner: root
+    group: root
+    mode: "0700"
+  loop: "{{ cron_directories.files }}"
+  loop_control:
+    label: "{{ item.path }}"
+
+- name: Set permissions on cron folders
+  become: true
+  ansible.builtin.file:
+    path: /etc/crontab
+    owner: root
+    group: root
+    mode: "0600"
+
+- name: Remove cron.deny
+  become: true
+  ansible.builtin.file:
+    path: /etc/cron.deny
+    state: absent
+
+- name: Remove at.deny
+  become: true
+  ansible.builtin.file:
+    path: /etc/at.deny
+    state: absent
+
+- name: Ensure cron is enabled and running
+  become: true
+  ansible.builtin.systemd:
+    name: cron.service
+    state: started
+    enabled: true
+

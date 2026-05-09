@@ -1,0 +1,10 @@
+# A reusable task to create a user with sudo rights on a Debian 12 host
+---
+- name: Creating user
+  ansible.builtin.user:
+    name: "{{ USER.NAME }}"
+    groups: sudo
+    append: yes
+    shell: /bin/bash
+    password: '*' # Disable the password
+

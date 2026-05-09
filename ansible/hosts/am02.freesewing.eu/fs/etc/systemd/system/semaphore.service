@@ -1,0 +1,39 @@
+[Unit]
+Description=Semaphore Ansible UI
+Documentation=https://semaphoreui.com/docs/
+# Make sure the Docker service is available
+After=docker.service
+Requires=docker.service
+
+[Service]
+# Load environment file to allow changing presets
+EnvironmentFile=/etc/semaphore/service.env
+# Load secrets file
+EnvironmentFile=/etc/semaphore/secrets.env
+
+# Make sure to stop & remove the traefik container if it's running
+ExecStartPre=-/usr/bin/docker rm -f $SERVICE_NAME
+
+# Start the container
+ExecStart=/usr/bin/docker run --rm \
+  --name="${SERVICE_NAME}" \
+  --hostname="${SERVICE_NAME}" \
+  --network="${SERVICE_NETWORK}" \
+  --network-alias="${SERVICE_NAME}.internal" \
+  -v "/etc/semaphore/config.json:/home/semaphore/config.json" \
+  -v "/etc/semaphore/oidc_client_secret:/home/semaphore/oidc_client_secret" \
+  -v "/data/semaphore:/data" \
+  -e "SEMAPHORE_COOKIE_HASH=${SEMAPHORE_COOKIE_HASH}" \
+  -e "SEMAPHORE_COOKIE_ENCRYPTION=${SEMAPHORE_COOKIE_ENCRYPTION}" \
+  -e "SEMAPHORE_ACCESS_KEY_ENCRYPTION=${SEMAPHORE_ACCESS_KEY_ENCRYPTION}" \
+  ${CONTAINER_NAME}:${CONTAINER_TAG} \
+  semaphore server --config ./config.json
+
+# Always restart
+Restart=always
+
+# Identifier for syslog
+SyslogIdentifier=semaphore
+
+[Install]
+WantedBy=default.target

@@ -1,0 +1,18 @@
+# Log denied packages in INPUT chain
+iptables -A INPUT \
+  -m limit --limit 5/min \
+  -m comment --comment "Log denied INPUT packages" \
+  -j LOG --log-prefix "fwdrop.in: "
+
+# Log denied packages in OUTPUT chain
+iptables -A OUTPUT \
+  -m limit --limit 5/min \
+  -m comment --comment "Log denied OUTPUT packages" \
+  -j LOG --log-prefix "fwdrop.out: "
+
+# Log denied packages in FORWARD chain
+iptables -A FORWARD \
+  -m limit --limit 5/min \
+  -m comment --comment "Log denied FORWARD packages" \
+  -j LOG --log-prefix "fwdrop.fwd: "
+

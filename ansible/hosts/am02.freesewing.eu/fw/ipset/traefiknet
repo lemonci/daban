@@ -1,0 +1,2 @@
+create -exist traefiknet hash:net family inet hashsize 8 maxelem 32
+add traefiknet 192.168.144.32/28

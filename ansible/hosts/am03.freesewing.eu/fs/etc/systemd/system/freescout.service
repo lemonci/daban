@@ -1,0 +1,45 @@
+After=docker.service
+Requires=docker.service
+
+[Service]
+# Load environment file to allow changing presets
+EnvironmentFile=-/etc/freescout/app.env
+# Load credentials as we don't want those in git
+EnvironmentFile=-/etc/freescout/credentials.env
+
+# Make sure to stop & remove the container if it's running
+ExecStartPre=/usr/bin/docker rm -f freescout-app
+
+# Start the container
+ExecStart=/usr/bin/docker run --rm \
+  --name=freescout-app \
+  --hostname=app \
+  --label freescout.service=app \
+  --log-driver=journald \
+  --log-opt labels=freescout.service \
+  --network=morionet \
+  --network-alias=freescout-app.internal \
+  -v "${FREESCOUT_CONFIG_ROOT}:/etc/freescout:ro" \
+  -v "${FREESCOUT_DATA_ROOT}:/data" \
+  -v "${FREESCOUT_LOGS_ROOT}:/www/logs" \
+  -e "TIMEZONE=Europe/Brussels" \
+  -e "CONTAINER_NAME=freescout-app" \
+  -e "DB_HOST=freescout-db" \
+  -e "DB_NAME=freescout" \
+  -e "DB_USER=${FREESCOUT_DATABASE_USER}" \
+  -e "DB_PASS=${FREESCOUT_DATABASE_PASSWORD}" \
+  -e "SITE_URL=https://support.freesewing.eu" \
+  -e "ADMIN_EMAIL=admin@freesewing.eu" \
+  -e "ADMIN_PASS=${FREESCOUT_ADMIN_PASSWORD}" \
+  -e "DISPLAY_ERRORS=FALSE" \
+  -e "ENABLE_SSL_PROXY=TRUE" \
+  ${FREESCOUT_CONTAINER_IMAGE}:${FREESCOUT_CONTAINER_TAG}
+
+# Always restart
+Restart=always
+
+# Identifier for syslog
+SyslogIdentifier=freescoutapp
+
+[Install]
+WantedBy=default.target

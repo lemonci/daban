@@ -1,0 +1,46 @@
+# /etc/systemd/system/freescoutdb.service
+[Unit]
+Description=FreeScout database
+Documentation=https://freescout.net/
+# Make sure the Docker service is available
+After=docker.service
+Requires=docker.service
+
+[Service]
+# Load environment file to allow changing presets
+EnvironmentFile=-/etc/freescout/db.env
+# Load credentials as we don't want those in git
+EnvironmentFile=-/etc/freescout/credentials.env
+
+# Make sure to stop & remove the container if it's running
+ExecStartPre=/usr/bin/docker rm -f freescout-db
+
+# Start the container
+ExecStart=/usr/bin/docker run --rm \
+  --name=freescout-db \
+  --hostname=db \
+  --label freescout.service=db \
+  --log-driver=journald \
+  --log-opt labels=freescout.service \
+  --network=morionet \
+  --network-alias=freescout-db.internal \
+  -v "${FREESCOUT_DATABASE_CONFIG_ROOT}:/etc/freescout" \
+  -v "${FREESCOUT_DATABASE_DATA_ROOT}:/data" \
+  -v "${FREESCOUT_DATABASE_LOGS_ROOT}:/var/log" \
+  -e "TIMEZONE=Europe/Brussels" \
+  -e "CONTAINER_NAME=freescout-db" \
+  -e "DB_NAME=freescout" \
+  -e "DB_USER=${FREESCOUT_DATABASE_USER}" \
+  -e "DB_PASS=${FREESCOUT_DATABASE_PASSWORD}" \
+  -e "ROOT_PASS=${FREESCOUT_DATABASE_ROOT_PASSWORD}" \
+  ${FREESCOUT_DATABASE_CONTAINER_IMAGE}:${FREESCOUT_DATABASE_CONTAINER_TAG}
+
+# Always restart
+Restart=always
+
+# Identifier for syslog
+SyslogIdentifier=freescoutdb
+
+[Install]
+WantedBy=default.target
+

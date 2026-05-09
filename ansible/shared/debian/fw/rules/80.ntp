@@ -1,0 +1,5 @@
+# OUTPUT: Allow getting time from Scaleway NTP servers
+iptables -A OUTPUT \
+  -m set --match-set infra.dns dst -p udp -m udp --dport 123 \
+  -m comment --comment "NTP to Scaleway NTP servers" \
+  -j ACCEPT

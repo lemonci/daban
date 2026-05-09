@@ -1,0 +1,12 @@
+#
+# This is a minimal inventory file for FreeSewing infrastructure.
+#
+# It is a fallback for when the Morio inventory is not available.
+#
+all:
+  children:
+    servers:
+      hosts:
+        forum.freesewing.eu: {}
+        backend.freesewing.eu: {}
+        morio.freesewing.eu: {}

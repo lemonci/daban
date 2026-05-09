@@ -1,0 +1,29 @@
+{
+  "sqlite": {
+    "host": "/data/semaphore.sqlite"
+  },
+  "dialect": "sqlite",
+  "web_host": "https://ansible.freesewing.eu/",
+  "schedule.timezone": "CET",
+  "password_login_disable": true,
+  "oidc_providers": {
+    "freesewing": {
+      "display_name": "Sign in with FreeSewing",
+      "color": "black",
+      "icon": "shield-key-outline",
+      "client_id": "semaphoreui",
+      "client_secret_file": "/home/semaphore/oidc_client_secret",
+      "username_claim": "preferred_username",
+      "email_claim": "email",
+      "name_claim": "name",
+      "redirect_url": "https://ansible.freesewing.eu/api/auth/oidc/freesewing/redirect",
+      "endpoint": {
+        "auth": "https://backend.freesewing.eu/oidc/auth",
+        "issuer":  "https://backend.freesewing.eu",
+        "token": "https://backend.freesewing.eu/oidc/token",
+        "userinfo": "https://backend.freesewing.eu/oidc/me",
+        "jwks": "https://backend.freesewing.eu/jwks"
+      }
+    }
+  }
+}

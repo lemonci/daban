@@ -1,0 +1,45 @@
+http:
+  routers:
+    backend:
+      priority: 666
+      service: backend
+      entrypoints: https
+      tls:
+        certResolver: letsencrypt
+      rule: Host(`backend.freesewing.eu`)
+      middlewares:
+        - size-limit
+        - rate-limit
+        - security-headers
+  services:
+    backend:
+      loadBalancer:
+        servers:
+          - url: http://backend.internal:3000
+  middlewares:
+    # Limit request body to 20MB
+    size-limit:
+      buffering:
+        maxRequestBodyBytes: 20000000
+    # Rate-Limit requests
+    rate-limit:
+      rateLimit:
+        average: 5
+        period: 1s
+        burst: 20
+    # Add security headers
+    security-headers:
+      headers:
+        # STS
+        stsSeconds: 31536000
+        stsIncludeSubdomains: true
+        stsPreload: true
+        forceSTSHeader: true
+
+        # Content Type
+        contentTypeNosniff: true
+
+        # Not really relevant for an API, but why not
+        frameDeny: true
+        contentSecurityPolicy: "default-src 'none'"
+        permissionsPolicy: "camera=(), microphone=(), geolocation=()"

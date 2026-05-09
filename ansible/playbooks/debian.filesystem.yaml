@@ -1,0 +1,11 @@
+# Debian filesystem playbook.
+# For when all you want is to update/sync the filesystem config.
+# This is faster than running the entire baseline playbook.
+---
+- name: Debian filesystem sync playbook
+  hosts: '!localhost'
+  # Speed up playbook run by disabling facts gathering
+  gather_facts: false
+  tasks:
+    # Push local fs structure
+    - include_tasks: shared/fsiac.fs.push.yaml

@@ -1,0 +1,17 @@
+set:
+  "access.dashboard_traefik":
+    when:
+      method: GET
+      # Any role goes
+      role:
+        or:
+          - user
+          - manager
+          - operator
+          - engineer
+          - root
+      url:
+        or:
+          - startsWith: "/dashboard"
+          - startsWith: "/api/"
+    then: allow

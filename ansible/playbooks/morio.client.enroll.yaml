@@ -1,0 +1,10 @@
+# Enrolls the Morio client (joins it to the cluster)
+---
+- name: Morio enroll/join playbook
+  hosts: '!localhost'
+  # Speed up playbook run by disabling facts gathering
+  gather_facts: false
+  tasks:
+    - name: Join Morio client to cluster
+      include_tasks: shared/morio.client.enroll.yaml
+

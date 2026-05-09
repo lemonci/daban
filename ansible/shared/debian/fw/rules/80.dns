@@ -1,0 +1,5 @@
+# OUTPUT: Allow DNS queries
+iptables -A OUTPUT \
+  -m set --match-set infra.dns dst -p udp -m udp --dport 53 \
+  -m comment --comment "DNS to scaleway DNS servers" \
+  -j ACCEPT

@@ -1,0 +1,19 @@
+# Installs the Morio client
+---
+- name: Restart Morio client agent services
+  hosts: '!localhost'
+  # Speed up playbook run by disabling facts gathering
+  gather_facts: false
+  tasks:
+    - name: Restart Morio agent services
+      become: true
+      ansible.builtin.systemd_service:
+        state: restarted
+        enabled: true
+        daemon_reload: true
+        name: "{{ item }}"
+      loop:
+        - morio-audit
+        - morio-logs
+        - morio-metrics
+

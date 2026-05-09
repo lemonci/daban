@@ -1,0 +1,12 @@
+# Debian journald playbooks.
+# For when all you want is to reconfigure journald.
+# This is faster than running the entire baseline playbook.
+---
+- name: Debian journald playbook
+  hosts: '!localhost'
+  # Speed up playbook run by disabling facts gathering
+  gather_facts: false
+  tasks:
+    # Include baseline tasks
+    - name: Configure journald
+      include_tasks: shared/debian.baseline.journald.yaml

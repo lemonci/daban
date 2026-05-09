@@ -1,0 +1,5 @@
+# FreeSewing servers
+create -exist servers hash:net family inet hashsize 8 maxelem 32
+add servers 51.159.237.249
+add servers 51.159.238.59
+add servers 51.159.232.6

@@ -1,0 +1,50 @@
+# A reusable task to configure sysctl on a Debian host
+---
+- name: Set kernel.randomize_va_space in sysctl
+  become: true
+  ansible.posix.sysctl:
+    name: kernel.randomize_va_space
+    value: '2'
+    state: present
+    sysctl_set: true
+
+- name: Disable certain networking flags in sysctl
+  become: true
+  ansible.posix.sysctl:
+    name: "{{ item }}"
+    value: '0'
+    state: present
+    sysctl_set: true
+  loop:
+    - net.ipv6.conf.all.forwarding
+    - net.ipv4.conf.all.send_redirects
+    - net.ipv4.conf.default.send_redirects
+    - net.ipv4.conf.all.accept_source_route
+    - net.ipv4.conf.default.accept_source_route
+    - net.ipv6.conf.all.accept_source_route
+    - net.ipv6.conf.default.accept_source_route
+    - net.ipv4.conf.all.accept_redirects
+    - net.ipv4.conf.default.accept_redirects
+    - net.ipv6.conf.all.accept_redirects
+    - net.ipv6.conf.default.accept_redirects
+    - net.ipv4.conf.default.secure_redirects
+    - net.ipv4.conf.all.secure_redirects
+    - net.ipv6.conf.all.accept_ra
+    - net.ipv6.conf.default.accept_ra
+
+- name: Enable certain networking flags in sysctl
+  become: true
+  ansible.posix.sysctl:
+    name: "{{ item }}"
+    value: '1'
+    state: present
+    sysctl_set: true
+  loop:
+    - net.ipv4.ip_forward # Required for docker
+    - net.ipv4.conf.all.log_martians
+    - net.ipv4.conf.default.log_martians
+    - net.ipv4.icmp_echo_ignore_broadcasts
+    - net.ipv4.icmp_ignore_bogus_error_responses
+    - net.ipv4.conf.all.rp_filter
+    - net.ipv4.conf.default.rp_filter
+    - net.ipv4.tcp_syncookies

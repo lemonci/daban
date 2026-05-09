@@ -1,0 +1,3 @@
+create -exist scaleway.smtp hash:net family inet hashsize 8 maxelem 32
+add scaleway.smtp 51.159.84.239
+

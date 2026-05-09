@@ -1,0 +1,70 @@
+# A reusable task to install Morio
+# Note: We run the canary channel
+---
+- name: Check if morio-client is installed
+  command: dpkg-query -W -f='${Status}' morio-client
+  register: morio_client_check
+  failed_when: false
+  changed_when: false
+
+- name: Set morio-client installation status
+  set_fact:
+    morio_client_installed: "{{ morio_client_check.rc == 0 and 'install ok installed' in morio_client_check.stdout }}"
+
+- name: Set Morio release channel
+  set_fact:
+    MORIO_CHANNEL: "canary"
+  when: MORIO_CHANNEL is not defined
+
+- name: Download morio-repo package
+  get_url:
+    url: "https://apt.repo.morio.it/setup-morio-repo_{{ MORIO_CHANNEL }}.deb"
+    dest: "/tmp/setup-morio-repo.deb"
+    mode: '0644'
+    timeout: 30
+    use_proxy: yes
+  environment:
+    # Since this playbook runs before the host is in the inventory
+    # the vars for the proxies will not be available.
+    http_proxy: "{{ SERVER_PROXY_URL | default('http://serverproxy.in.cert.europa.eu:3128') }}"
+    https_proxy: "{{ SERVER_PROXY_URL | default('http://serverproxy.in.cert.europa.eu:3128') }}"
+
+- name: Install morio-repo package
+  become: true
+  apt:
+    deb: "/tmp/setup-morio-repo.deb"
+    state: present
+    update_cache: yes
+  environment:
+    DEBIAN_FRONTEND: noninteractive
+  when: not morio_client_installed
+
+- name: Update the package
+  become: true
+  ansible.builtin.apt:
+    name: "morio-repo"
+    state: latest
+    update_cache: yes
+
+- name: Update package cache
+  become: true
+  ansible.builtin.apt:
+    update_cache: yes
+  when: not morio_client_installed
+
+- name: Install morio-client package
+  become: true
+  apt:
+    name: morio-client
+    state: present
+    update_cache: yes
+  environment:
+    DEBIAN_FRONTEND: noninteractive
+  when: not morio_client_installed
+
+- name: Clean up temporary files
+  file:
+    path: "/tmp/setup-morio-repo.deb"
+    state: absent
+  when: not morio_client_installed
+

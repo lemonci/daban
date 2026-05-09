@@ -1,0 +1,21 @@
+#
+# These are shared firewall rules for Morio clients
+#
+
+# OUTPUT: Morio client traffic to Morio node (HTTPS)
+iptables -A OUTPUT \
+  -m set --match-set server.am03 dst -p tcp -m tcp --dport 443 \
+  -m comment --comment "Connect to Morio API" \
+  -j ACCEPT
+
+# OUTPUT: Morio agent traffic to broker node (KAFKA)
+iptables -A OUTPUT \
+  -m set --match-set server.am03 dst -p tcp -m tcp --dport 9092 \
+  -m comment --comment "Kafka to morio broker" \
+  -j ACCEPT
+
+# INPUT: Morio ICMP healthcheck
+iptables -A INPUT \
+  -m set --match-set server.am03 src -p icmp -m icmp --icmp-type 8 \
+  -m comment --comment "Allow Morio to ping this host for monitoring" \
+  -j ACCEPT

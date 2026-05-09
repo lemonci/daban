@@ -1,0 +1,9 @@
+# Allow loopback traffic
+iptables -A INPUT \
+  -i lo \
+  -m comment --comment "Allow ingress loopback traffic" \
+  -j ACCEPT
+iptables -A OUTPUT \
+  -o lo \
+  -m comment --comment "Allow egress loopback traffic" \
+  -j ACCEPT

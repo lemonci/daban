@@ -1,0 +1,6 @@
+set:
+  cluster:
+    name: Morio for FreeSewing
+    fqdn: morio.freesewing.eu
+    broker_nodes:
+      - morio.freesewing.eu

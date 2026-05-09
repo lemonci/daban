@@ -1,0 +1,14 @@
+http:
+  routers:
+    static:
+      priority: 666
+      service: static
+      entrypoints: https
+      tls:
+        certResolver: letsencrypt
+      rule: Host(`static.freesewing.eu`)
+  services:
+    static:
+      loadBalancer:
+        servers:
+          - url: http://nginx.internal:80

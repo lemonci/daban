@@ -1,0 +1,4 @@
+set:
+  tap.instances:
+    morio.freesewing.eu:
+      threads: 1

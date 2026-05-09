@@ -1,0 +1,4 @@
+# DNS servers (also the NTP servers)
+create -exist infra.dns hash:net family inet hashsize 8 maxelem 32
+add infra.dns 51.159.253.3
+add infra.dns 51.159.253.11

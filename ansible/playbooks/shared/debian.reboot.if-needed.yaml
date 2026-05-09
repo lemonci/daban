@@ -1,0 +1,12 @@
+# A reusable task to reboot a Debian 12 host, but only if it's needed
+---
+- name: Check whether reboot is needed
+  shell: "needs-restarting  -r ; echo $?"
+  ignore_errors: true
+  register: needs_reboot
+
+- name: Reboot system
+  throttle: 1
+  become: true
+  reboot:
+  when: needs_reboot.rc == 1

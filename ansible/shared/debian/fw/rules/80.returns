@@ -1,0 +1,11 @@
+# INPUT: Allow return traffic for outgoing connections
+iptables -A INPUT \
+  -m conntrack --ctstate ESTABLISHED,RELATED \
+  -m comment --comment "Allow return traffic for established egress connections" \
+  -j ACCEPT
+
+# OUTPUT: Allow return traffic for incoming connections
+iptables -A OUTPUT \
+  -m conntrack --ctstate ESTABLISHED,RELATED \
+  -m comment --comment "Allow return traffic for established ingress connections" \
+  -j ACCEPT

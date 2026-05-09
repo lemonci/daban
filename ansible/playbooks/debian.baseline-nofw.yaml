@@ -1,0 +1,12 @@
+# Debian12 baseline playbooks (no local firewall)
+---
+- name: Debian baseline playbook (nofw)
+  hosts: '!localhost'
+  # Disable the automated firewall configuration
+  vars:
+    FSIAC_FIREWALL_BYPASS: true
+  gather_facts: true
+  tasks:
+    # Include baseline tasks
+    - name: Baseline tasks
+      include_tasks: shared/debian.baseline.yaml

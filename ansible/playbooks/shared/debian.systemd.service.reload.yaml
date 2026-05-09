@@ -1,0 +1,17 @@
+#
+# An reusable task to ensure a service is reloaded and enabled on a debian host
+#
+# To use this task, set the FSIAC_SYSTEMD_SERVICE variable to:
+# - string: the name of the service to enable & start (.service suffix is optional)
+# - array: a list of names of services to enable & start (.service suffix is optional)
+#
+---
+- name: Make sure a systemd service unit is reloaded (and enabled)
+  become: true
+  ansible.builtin.systemd_service:
+    state: reloaded
+    enabled: true
+    daemon_reload: true
+    name: "{{ item }}"
+  # Support passing in both a string and an array
+  loop: "{{ FSIAC_SYSTEMD_SERVICE if FSIAC_SYSTEMD_SERVICE is sequence and FSIAC_SYSTEMD_SERVICE is not string else [FSIAC_SYSTEMD_SERVICE] }}"

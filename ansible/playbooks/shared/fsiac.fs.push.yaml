@@ -1,0 +1,116 @@
+# A reusable task to copy local files to a debian host
+#
+# Keep in mind:
+# - We copy all files from:
+#   - ansible/hosts/{{ inventory_hostname }}/fs
+#   - ansible/shared/debian/fs
+# - Any .gitkeep files will be ignored
+# - Any *.j2 files will be templated out and the .j2 suffix removed
+# - This will ensure folders exist
+# - What's under ansible/shared/debian/fs with ALSO be included
+---
+- name: Store shared source path
+  set_fact:
+    FSIAC_FS_SHARED_PATH: "../shared/debian/fs"
+
+- name: Store host source path
+  set_fact:
+    FSIAC_FS_HOST_PATH: "../hosts/{{ inventory_hostname}}/fs"
+
+- name: Store source paths we should push
+  set_fact:
+    FSIAC_FS_SRC_PATHS:
+      - "{{ FSIAC_FS_SHARED_PATH }}"
+      - "{{ FSIAC_FS_HOST_PATH }}"
+
+- name: Find all files in the local filesystem structure
+  become: false # Do not escalate privileges on localhost
+  find:
+    paths: "{{ FSIAC_FS_SRC_PATHS }}"
+    recurse: yes
+    file_type: "any"
+    excludes: '.permissions'
+  register: source_files
+  delegate_to: localhost
+
+- name: Find all permissions files in the local filesystem structure
+  become: false # Do not escalate privileges on localhost
+  find:
+    paths: "{{ FSIAC_FS_SRC_PATHS }}"
+    recurse: yes
+    file_type: "any"
+    patterns:
+      - '*.permissions'
+  register: permission_files
+  delegate_to: localhost
+
+# Create a lookup dictionary for permissions
+- name: Create permissions lookup dictionary
+  set_fact:
+    permissions_lookup: "{{ permissions_lookup | default({}) | combine({item.path | regex_replace('\\.permissions$', ''): item.path}) }}"
+  loop: "{{ permission_files.files }}"
+  loop_control:
+    label: "{{ item.path }}"
+  delegate_to: localhost
+  run_once: true
+
+# Helper task to read and parse permissions file content
+- name: Read permissions file content
+  become: false
+  slurp:
+    src: "{{ permissions_lookup[item] }}"
+  register: permissions_content
+  loop: "{{ permissions_lookup.keys() | list }}"
+  delegate_to: localhost
+  when: permissions_lookup is defined and permissions_lookup | length > 0
+
+# Create parsed permissions lookup
+- name: Parse permissions data
+  set_fact:
+    parsed_permissions: "{{ parsed_permissions | default({}) | combine({item.item: (item.content | b64decode | trim).split(':')}) }}"
+  loop: "{{ permissions_content.results }}"
+  loop_control:
+    label: "{{ item.source }}"
+  when: permissions_content is defined and permissions_content.results is defined and not item.skipped | default(false)
+
+- name: Ensure all folders exist
+  become: true
+  file:
+    path: "/{{ item.path | regex_replace('^' + FSIAC_FS_SHARED_PATH + '/?', '') | regex_replace('^' + FSIAC_FS_HOST_PATH + '/?', '') | regex_replace('\\.j2$', '') }}"
+    state: directory
+    owner: "{{ parsed_permissions[item.path][0] if parsed_permissions is defined and item.path in parsed_permissions else omit }}"
+    group: "{{ parsed_permissions[item.path][1] if parsed_permissions is defined and item.path in parsed_permissions else omit }}"
+    mode: "{{ parsed_permissions[item.path][2] if parsed_permissions is defined and item.path in parsed_permissions else omit }}"
+  loop: "{{ source_files.files }}"
+  loop_control:
+    label: "/{{ item.path | regex_replace('^' + FSIAC_FS_SHARED_PATH + '/?', '') | regex_replace('^' + FSIAC_FS_HOST_PATH + '/?', '') | regex_replace('\\.j2$', '') }}"
+  when: item.isdir is true
+
+- name: Template files with .j2 extension
+  become: true
+  template:
+    src: "{{ item.path }}"
+    dest: "/{{ item.path | regex_replace('^' + FSIAC_FS_SHARED_PATH + '/?', '') | regex_replace('^' + FSIAC_FS_HOST_PATH + '/?', '') | regex_replace('\\.j2$', '') }}"
+    owner: "{{ parsed_permissions[item.path][0] if parsed_permissions is defined and item.path in parsed_permissions else omit }}"
+    group: "{{ parsed_permissions[item.path][1] if parsed_permissions is defined and item.path in parsed_permissions else omit }}"
+    mode: "{{ parsed_permissions[item.path][2] if parsed_permissions is defined and item.path in parsed_permissions else omit }}"
+  loop: "{{ source_files.files }}"
+  loop_control:
+    label: "/{{ item.path | regex_replace('^' + FSIAC_FS_SHARED_PATH + '/?', '') | regex_replace('^' + FSIAC_FS_HOST_PATH + '/?', '') | regex_replace('\\.j2$', '') }}"
+  when: not (item.isdir is true) and (item.path is regex('.*\\.j2$'))
+
+- name: Copy all other files
+  become: true
+  copy:
+    src: "{{ item.path }}"
+    dest: "/{{ item.path | regex_replace('^' + FSIAC_FS_SHARED_PATH + '/?', '') | regex_replace('^' + FSIAC_FS_HOST_PATH + '/?', '') }}"
+    # Let links be links
+    local_follow: false
+    follow: true
+    owner: "{{ parsed_permissions[item.path][0] if parsed_permissions is defined and item.path in parsed_permissions else omit }}"
+    group: "{{ parsed_permissions[item.path][1] if parsed_permissions is defined and item.path in parsed_permissions else omit }}"
+    mode: "{{ parsed_permissions[item.path][2] if parsed_permissions is defined and item.path in parsed_permissions else omit }}"
+  loop: "{{ source_files.files }}"
+  loop_control:
+    label: "/{{ item.path | regex_replace('^' + FSIAC_FS_SHARED_PATH + '/?', '') | regex_replace('^' + FSIAC_FS_HOST_PATH + '/?', '') }}"
+  when: not (item.isdir is true) and not (item.path is match('.*\\.j2$')) and not (item.path is match('.*\\.gitkeep$')) and not (item.path is match('.*\\.permissions$'))

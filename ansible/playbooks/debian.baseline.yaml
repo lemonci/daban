@@ -1,0 +1,7 @@
+---
+- name: Debian baseline playbook
+  hosts: '!localhost'
+  gather_facts: false
+  tasks:
+    - name: Baseline tasks
+      include_tasks: shared/debian.baseline.yaml

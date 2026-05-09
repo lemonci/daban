@@ -1,0 +1,2 @@
+create -exist morionet hash:net family inet hashsize 8 maxelem 32
+add morionet 192.168.144.0/26

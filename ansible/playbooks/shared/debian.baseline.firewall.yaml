@@ -1,0 +1,193 @@
+# A reusable task to configure the local firewall on a Debian 12 host
+---
+#
+# Part 1: Default location
+#
+- name: Check if the default local firewall directory exists
+  stat:
+    path: "../hosts/{{ inventory_hostname}}/fw"
+  register: default_firewall_dir
+  delegate_to: localhost
+  become: false
+
+- name: Set DEFAULT_FSIAC_FIREWALL_FOLDER
+  set_fact:
+    DEFAULT_FSIAC_FIREWALL_FOLDER: "hosts/{{ inventory_hostname}}/fw"
+  when:
+    - DEFAULT_FSIAC_FIREWALL_FOLDER is not defined
+    - default_firewall_dir.stat.exists
+
+- name: Check if the default local firewall ipset directory exists
+  stat:
+    path: "../{{ DEFAULT_FSIAC_FIREWALL_FOLDER }}/ipset"
+  register: default_firewall_ipset_dir
+  delegate_to: localhost
+  become: false
+  when:
+    - DEFAULT_FSIAC_FIREWALL_FOLDER is defined
+
+- name: Check if the default local firewall rules directory exists
+  stat:
+    path: "../{{ DEFAULT_FSIAC_FIREWALL_FOLDER }}/rules"
+  register: default_firewall_rules_dir
+  delegate_to: localhost
+  become: false
+  when:
+    - DEFAULT_FSIAC_FIREWALL_FOLDER is defined
+
+#
+# Part 2: Custom location
+#
+- name: Check if a custom local firewall directory exists
+  stat:
+    path: "../{{ FSIAC_FIREWALL_FOLDER }}"
+  register: custom_firewall_dir
+  delegate_to: localhost
+  become: false
+  when:
+    - FSIAC_FIREWALL_FOLDER is defined
+
+- name: Set CUSTOM_FSIAC_FIREWALL_FOLDER
+  set_fact:
+    CUSTOM_FSIAC_FIREWALL_FOLDER: "../{{ FSIAC_FIREWALL_FOLDER }}"
+  when:
+    - FSIAC_FIREWALL_FOLDER is defined
+    - custom_firewall_dir.stat.exists
+
+- name: Check if a custom local firewall ipset directory exists
+  stat:
+    path: "{{ CUSTOM_FSIAC_FIREWALL_FOLDER }}/ipset"
+  register: custom_firewall_ipset_dir
+  delegate_to: localhost
+  become: false
+  when:
+    - CUSTOM_FSIAC_FIREWALL_FOLDER is defined
+
+- name: Check if a custom local firewall rules directory exists
+  stat:
+    path: "{{ CUSTOM_FSIAC_FIREWALL_FOLDER }}/rules"
+  register: custom_firewall_rules_dir
+  delegate_to: localhost
+  become: false
+  when:
+    - CUSTOM_FSIAC_FIREWALL_FOLDER is defined
+
+#
+# Part 3: Prepare staging directory locally
+#
+- name: Create local staging directory
+  file:
+    path: "/tmp/ansible-fw-staging-{{ inventory_hostname }}"
+    state: directory
+    mode: '0755'
+  delegate_to: localhost
+  become: false
+
+- name: Copy baseline firewall structure to staging
+  shell: |
+    rsync -a ../shared/debian/fw/ /tmp/ansible-fw-staging-{{ inventory_hostname }}/
+  delegate_to: localhost
+  become: false
+  changed_when: false
+
+- name: Merge default firewall ipset files to staging
+  shell: |
+    rsync -a ../{{ DEFAULT_FSIAC_FIREWALL_FOLDER }}/ipset/ /tmp/ansible-fw-staging-{{ inventory_hostname }}/ipset/
+  delegate_to: localhost
+  become: false
+  changed_when: false
+  when:
+    - DEFAULT_FSIAC_FIREWALL_FOLDER is defined
+    - default_firewall_ipset_dir is defined
+    - default_firewall_ipset_dir.stat.exists
+
+- name: Merge default firewall rules files to staging
+  shell: |
+    rsync -a ../{{ DEFAULT_FSIAC_FIREWALL_FOLDER }}/rules/ /tmp/ansible-fw-staging-{{ inventory_hostname }}/rules/
+  delegate_to: localhost
+  become: false
+  changed_when: false
+  when:
+    - DEFAULT_FSIAC_FIREWALL_FOLDER is defined
+    - default_firewall_rules_dir is defined
+    - default_firewall_rules_dir.stat.exists
+
+- name: Merge custom firewall ipset files to staging
+  shell: |
+    rsync -a {{ CUSTOM_FSIAC_FIREWALL_FOLDER }}/ipset/ /tmp/ansible-fw-staging-{{ inventory_hostname }}/ipset/
+  delegate_to: localhost
+  become: false
+  changed_when: false
+  when:
+    - CUSTOM_FSIAC_FIREWALL_FOLDER is defined
+    - custom_firewall_ipset_dir is defined
+    - custom_firewall_ipset_dir.stat.exists
+
+- name: Merge custom firewall rules files to staging
+  shell: |
+    rsync -a {{ CUSTOM_FSIAC_FIREWALL_FOLDER }}/rules/ /tmp/ansible-fw-staging-{{ inventory_hostname }}/rules/
+  delegate_to: localhost
+  become: false
+  changed_when: false
+  when:
+    - CUSTOM_FSIAC_FIREWALL_FOLDER is defined
+    - custom_firewall_rules_dir is defined
+    - custom_firewall_rules_dir.stat.exists
+
+#
+# Part 4: Deploy to remote host
+#
+- name: Remove firewall configuration from host
+  become: true
+  file:
+    state: absent
+    path: "/etc/fw"
+
+- name: Ensure /etc/fw directory exists
+  become: true
+  file:
+    path: "/etc/fw"
+    state: directory
+    mode: '0755'
+    owner: root
+    group: root
+
+- name: Sync all firewall files to remote host in one operation
+  become: true
+  synchronize:
+    src: "/tmp/ansible-fw-staging-{{ inventory_hostname }}/"
+    dest: "/etc/fw/"
+    delete: yes
+
+- name: Fix firewall directory permissions
+  become: true
+  file:
+    path: "/etc/fw"
+    state: directory
+    recurse: yes
+    owner: root
+    group: root
+    mode: '0755'
+
+- name: Cleanup local staging directory
+  file:
+    path: "/tmp/ansible-fw-staging-{{ inventory_hostname }}"
+    state: absent
+  delegate_to: localhost
+  become: false
+
+#
+# Part 5: Apply firewall configuration
+#
+- name: "Configure firewall"
+  become: true
+  shell: bash /etc/fw/deploy.sh
+  async: 45
+  poll: 15
+  register: fw_update_result
+  failed_when: fw_update_result.rc != 0
+  changed_when: false
+
+- name: Make firewall changes persistent
+  become: true
+  shell: netfilter-persistent save

@@ -1,0 +1,14 @@
+http:
+  routers:
+    notifications:
+      priority: 666
+      service: notifications
+      entrypoints: https
+      tls:
+        certResolver: letsencrypt
+      rule: Host(`notifications.freesewing.eu`)
+  services:
+    notifications:
+      loadBalancer:
+        servers:
+          - url: http://nginx.internal:80

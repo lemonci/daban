@@ -1,0 +1,11 @@
+# Allow incoming Kafka traffic to the broker from Morio clients
+iptables -A INPUT \
+  -m set --match-set servers dst -p tcp -m tcp --dport 9092 \
+  -m comment --comment "Kafka to morio broker" \
+  -j ACCEPT
+
+# Allow incoming Kafka traffic to the broker from private networks (local containers)
+iptables -A INPUT \
+  -m set --match-set network.private src -p tcp -m tcp --dport 9092 \
+  -m comment --comment "Kafka to morio broker" \
+  -j ACCEPT

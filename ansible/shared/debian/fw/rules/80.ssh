@@ -1,0 +1,5 @@
+# INPUT: SSH access | Perhaps we should lock this down a bit?
+iptables -A INPUT \
+  -p tcp -m tcp --dport 22 \
+  -m comment --comment "SSH access" \
+  -j ACCEPT

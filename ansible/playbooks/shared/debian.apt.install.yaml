@@ -1,0 +1,12 @@
+# A reusable task to install software through APT, the Debian package manager
+# To use this task, set the FSIAC_APT_INSTALL variable to:
+# - string: the name of the package to install
+# - array: the list of names of packages to install
+- name: Install software through apt
+  become: true
+  apt:
+    name: "{{ item }}"
+    state: present
+  # Support passing in both a string and an array of strings
+  loop: "{{ FSIAC_APT_INSTALL if FSIAC_APT_INSTALL is sequence and FSIAC_APT_INSTALL is not string else [FSIAC_APT_INSTALL] }}"
+

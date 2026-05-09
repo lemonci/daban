@@ -1,0 +1,51 @@
+# Create ansible user and make sure that the sudoers configuration is correct
+# After this playbook is run, you should be able to connect to the host from Semaphore
+# This playbook is not supposed to be run from Semaphore
+---
+- name: Debian ansible enrollment
+  hosts: '!localhost'
+  gather_facts: false
+  become: true
+  vars:
+    FSIAC_SYSTEMD_SERVICE: sshd
+    USER:
+      NAME: "ansible"
+  tasks:
+    - name: Allow sudo group to run any command without password
+      lineinfile:
+        path: /etc/sudoers
+        regexp: '^%sudo'
+        line: '%sudo ALL=(ALL:ALL) NOPASSWD:ALL'
+        state: present
+        validate: '/usr/sbin/visudo -cf %s'
+
+    - name: Creating users
+      ansible.builtin.include_tasks:
+        file: shared/debian.user.create.yaml
+
+    - name: Create SSH folder
+      ansible.builtin.file:
+        path: /home/ansible/.ssh/
+        state: directory
+        recurse: yes
+        owner: ansible
+        group: ansible
+
+    - name: Add the key
+      ansible.builtin.lineinfile:
+        path: /home/ansible/.ssh/authorized_keys
+        line: ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJZ++7j+Zl1V7vgU5uSi8j9ijg+YOkjuqlbwELUSKZ8q ansible@freesewing.eu
+        owner: ansible
+        group: ansible
+        mode: "0600"
+        create: true
+
+    - name: Disable SSH login with password
+      ansible.builtin.lineinfile:
+        path: /etc/ssh/sshd_config
+        regexp: "PasswordAuthentication "
+        line: "PasswordAuthentication no"
+        state: present
+
+    - name: Reload SSHd
+      include_tasks: shared/debian.systemd.service.reload.yaml

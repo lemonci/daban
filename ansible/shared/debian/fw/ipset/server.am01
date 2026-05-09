@@ -1,0 +1,3 @@
+# Server am01, runs the FreeSewing forum
+create -exist server.am01 hash:net family inet hashsize 8 maxelem 32
+add server.am01 51.159.237.249

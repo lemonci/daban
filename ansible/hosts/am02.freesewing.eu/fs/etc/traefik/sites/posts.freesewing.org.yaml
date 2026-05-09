@@ -1,0 +1,14 @@
+http:
+  routers:
+    posts:
+      priority: 666
+      service: posts
+      entrypoints: https
+      tls:
+        certResolver: letsencrypt
+      rule: Host(`posts.freesewing.org`)
+  services:
+    posts:
+      loadBalancer:
+        servers:
+          - url: http://nginx.internal:80

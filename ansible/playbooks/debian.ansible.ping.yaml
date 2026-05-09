@@ -1,0 +1,9 @@
+# This playbook just ping the machine to confirm if Ansible can connect and run with sudo rights
+---
+- name: Debian ansible ping
+  hosts: '!localhost'
+  gather_facts: false
+  become: true
+  tasks:
+    - name: Ping
+      ansible.builtin.ping:

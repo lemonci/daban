@@ -1,0 +1,4 @@
+create -exist fastmail.smtp hash:net family inet hashsize 8 maxelem 32
+add fastmail.smtp 103.168.172.45
+add fastmail.smtp 103.168.172.60
+

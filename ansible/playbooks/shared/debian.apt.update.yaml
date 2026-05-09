@@ -1,0 +1,19 @@
+# A reusable task to update software on a Debian 12 (bookworm) host
+---
+- name: Install Debian updates
+  become: true
+  ansible.builtin.apt:
+    name: "*"
+    state: latest
+    update_cache: yes
+  # This can fail when apt repos are not allowed in the server proxy
+  register: result
+  failed_when:
+    - result is failed
+    - IGNORE_APT_ERRORS is not defined
+
+- name: Autoremove outdated Debian packages
+  become: true
+  ansible.builtin.apt:
+    autoremove: yes
+

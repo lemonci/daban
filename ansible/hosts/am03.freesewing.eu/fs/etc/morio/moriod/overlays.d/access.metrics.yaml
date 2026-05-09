@@ -1,0 +1,28 @@
+set:
+  "access.boards_metrics_get":
+    when:
+      method: GET
+      # Roles operator and up have access to this data via the default RBAC
+      # so we only need this policy to cover the user and manager roles
+      role: &notOperator # We're using a YAML anchor here
+        or:
+          - user
+          - manager
+      url:
+        or:
+          # Access to the glob search that lists metrics cache keys
+          # Note that URL matches need to be URL-encoded (this ends with: check|*)
+          - is: "/-/api/cache/glob/metric%7C%2A"
+          # Access to hostname lookup based on an inventory UUID
+          - startsWith: "/-/api/inventory/hostnames/*"
+          # Access to the cached dataset for the healthcheck itself
+          - startsWith: "/-/api/cache/keys/metric%7C"
+    then: allow
+
+  "access.boards_metrics_post":
+    when:
+      method: POST
+      # Access to the bulk prefixed healthchecks cache keys
+      url: "/-/api/cache/prefixed-keys/metric%7C"
+      role: *notOperator # Yaml anchor
+    then: allow
