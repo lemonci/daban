@@ -6,7 +6,7 @@ export const backPanel = {
   draft: ({
     Point,
     points,
-
+    Path,
     paths,
     snippets,
     Snippet,
@@ -33,7 +33,19 @@ export const backPanel = {
     /*
      * Construct the path
      */
-    paths.seam = paths.shared.clone().line(points.topCenterpoint).close().addClass('fabric')
+    paths.seam = paths.shared.clone().line(points.topCenterpoint).addClass('fabric')
+
+    /*
+     * Add seam allowance if enabled
+     */
+    if (sa) {
+      paths.sa = new Path()
+        .move(points.bottomCenterpoint)
+        .join(paths.seam.offset(sa))
+        .line(points.topCenterpoint.shift(90, sa))
+        .line(points.topCenterpoint)
+        .addClass('fabric sa')
+    }
 
     macro('cutonfold', {
       from: points.topCenterpoint,
@@ -42,16 +54,16 @@ export const backPanel = {
     })
 
     /*
-     * Add seam allowance if enabled
+     * Add folded edge
      */
-    if (sa) {
-      paths.sa = paths.seam.offset(sa).addClass('fabric sa')
-    }
+    paths.backFold = new Path()
+      .move(points.topCenterpoint)
+      .line(points.bottomCenterpoint)
+      .addClass('fabric fold')
 
     /*
      * Add paperless if enabled
      */
-
     if (paperless) {
       //vertical distances
       macro('vd', {
