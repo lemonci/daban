@@ -37,11 +37,7 @@ export const CuratedSetLineup = ({ href = false, clickHandler = false, Link = fa
     const getSets = async () => {
       const [status, body] = await backend.getCuratedSets()
       if (status === 200 && body.result === 'success') {
-        const allSets = []
-        for (const set of body.curatedSets) {
-          if (set.published) allSets.push(set)
-        }
-        setSets(orderBy(allSets, 'height', 'asc'))
+        setSets(orderBy(body.curatedSets, 'height', 'asc'))
       }
     }
     getSets()
@@ -73,7 +69,7 @@ export const CuratedSetLineup = ({ href = false, clickHandler = false, Link = fa
             'tw:aspect-1/3 tw:w-auto tw:h-96 tw:bg-transparent tw:border-0 tw:hover:cursor-pointer tw:hover:bg-secondary/20',
           style: {
             backgroundImage: `url(${imageCdnUrl({
-              id: set.id,
+              id: set.uuid,
               type: 'cset',
             })})`,
             width: 'auto',
@@ -81,11 +77,11 @@ export const CuratedSetLineup = ({ href = false, clickHandler = false, Link = fa
             backgroundRepeat: 'no-repeat',
             backgroundPosition: 'center',
           },
-          key: set.id,
+          key: set.uuid,
         }
 
         return (
-          <div className="tw:flex tw:flex-col tw:items-center" key={set.id}>
+          <div className="tw:flex tw:flex-col tw:items-center" key={set.uuid}>
             {typeof clickHandler === 'function' ? (
               <button {...props} onClick={() => clickHandler(set)}></button>
             ) : null}
@@ -104,24 +100,24 @@ export const CuratedSetLineup = ({ href = false, clickHandler = false, Link = fa
  * @component
  * @param {object} props - All component props
  * @param {React.Component} props.Link - A framework specific Link component for client-side routing
- * @param {number} props.id - The ID of the curated set
+ * @param {number} props.uuid - The UUID of the curated set
  * @returns {JSX.Element}
  */
-export const CuratedSet = ({ Link = false, id = false }) => {
+export const CuratedSet = ({ Link = false, uuid = false }) => {
   if (!Link) Link = WebLink
   // Hooks
   const backend = useBackend()
 
   // State (local)
   const [set, setSet] = useState(false)
-  const [setId, setSetId] = useState(false)
+  const [setUuid, setSetUuid] = useState(false)
 
   // Effects
   useEffect(() => {
-    if (id) setSetId(id)
-    else setSetId(getSearchParam('id'))
+    if (uuid) setSetUuid(uuid)
+    else setSetUuid(getSearchParam('uuid'))
     const getSet = async () => {
-      const [status, body] = await backend.getCuratedSet(setId)
+      const [status, body] = await backend.getCuratedSet(setUuid)
       if (status === 200 && body.result === 'success') {
         setSet({
           ...body.curatedSet,
@@ -132,19 +128,19 @@ export const CuratedSet = ({ Link = false, id = false }) => {
         })
       }
     }
-    if (setId) getSet()
-  }, [setId, id])
+    if (setUuid) getSet()
+  }, [setUuid, uuid])
 
   if (!set) return <Spinner />
 
   return (
     <>
       <h2 className="tw:flex tw:flex-row tw:items-center tw:gap-2">
-        {set.nameEn} <KeyVal k="id" val={set.id} />
+        {set.nameEn} <KeyVal k="uuid" val={set.uuid} />
       </h2>
       <Markdown>{set.notesEn}</Markdown>
       <h2>Image</h2>
-      <img src={imageCdnUrl({ id: set.id, type: 'cset' })} />
+      <img src={imageCdnUrl({ id: set.uuid, type: 'cset' })} />
       <h2>Measurements</h2>
       <table className="tw:table">
         <thead>
