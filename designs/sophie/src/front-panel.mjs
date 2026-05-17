@@ -5,6 +5,7 @@ export const frontPanel = {
   from: base,
   draft: ({
     Point,
+    Path,
     points,
     paths,
     snippets,
@@ -34,20 +35,33 @@ export const frontPanel = {
     /*
      * Construct the path
      */
-    paths.seam = paths.shared.clone().line(points.topCenterpoint).close().addClass('fabric')
+    paths.seam = paths.shared.clone().line(points.topCenterpoint).addClass('fabric')
+
+    /*
+     * Add seam allowance if enabled
+     */
+    if (sa) {
+      paths.sa = new Path()
+        .move(points.bottomCenterpoint)
+        .join(paths.seam.offset(sa))
+        .line(points.topCenterpoint.shift(90, sa))
+        .line(points.topCenterpoint)
+        .addClass('fabric sa')
+    }
+
+    /*
+     * Add folded edge
+     */
+    paths.frontFold = new Path()
+      .move(points.topCenterpoint)
+      .line(points.bottomCenterpoint)
+      .addClass('fabric fold')
 
     macro('cutonfold', {
       from: points.topCenterpoint,
       to: points.bottomCenterpoint,
       id: 'front',
     })
-
-    /*
-     * Add seam allowance if enabled
-     */
-    if (sa) {
-      paths.sa = paths.seam.offset(sa).addClass('fabric sa')
-    }
 
     /*
      * Add paperless if enabled
