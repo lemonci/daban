@@ -1,0 +1,153 @@
+---
+title: "Polly Plush: Design Options"
+sidebar_label: Design Options
+sidebar_position: 10
+toc_max_heading_level: 5
+---
+
+import Armlength from '@site/docs/docs/designs/polly/options/armlength/readme.mdx'
+import Facetype from '@site/docs/docs/designs/polly/options/facetype/readme.mdx'
+import Footuppersize from '@site/docs/docs/designs/polly/options/footuppersize/readme.mdx'
+import Headscale from '@site/docs/docs/designs/polly/options/headscale/readme.mdx'
+import Helptext from '@site/docs/docs/designs/polly/options/helptext/readme.mdx'
+import Hipextrawidth from '@site/docs/docs/designs/polly/options/hipextrawidth/readme.mdx'
+import Legflare from '@site/docs/docs/designs/polly/options/legflare/readme.mdx'
+import Leglength from '@site/docs/docs/designs/polly/options/leglength/readme.mdx'
+import Legtype from '@site/docs/docs/designs/polly/options/legtype/readme.mdx'
+import Paperlesscurves from '@site/docs/docs/designs/polly/options/paperlesscurves/readme.mdx'
+import Proportionpreview from '@site/docs/docs/designs/polly/options/proportionpreview/readme.mdx'
+import Torsolength from '@site/docs/docs/designs/polly/options/torsolength/readme.mdx'
+import Totalsize from '@site/docs/docs/designs/polly/options/totalsize/readme.mdx'
+
+## Conditional Options {#conditional}
+### Anthro foot size {#footuppersize}
+
+**Size of the foot on the anthro legs**
+- Type: **Percentage**
+- Default: **100%**
+- Minimum: **50%**
+- Maximum: **150%**
+
+<Footuppersize />
+
+### Leg flare {#legflare}
+
+**Flares out the bottom of the cylindrical legs**
+- Type: **Percentage**
+- Default: **100%**
+- Minimum: **20%**
+- Maximum: **200%**
+
+<Legflare />
+
+### Leg length {#leglength}
+
+**Lengthens or shortens the cylindrical legs**
+- Type: **Percentage**
+- Default: **100%**
+- Minimum: **50%**
+- Maximum: **150%**
+
+<Leglength />
+
+## help {#help}
+### Display help text {#helptext}
+
+**Add letters and notes to matching curves**
+- Type: **Boolean**
+- Default: **false**
+
+<Helptext />
+
+### Additional paperless measurements {#paperlesscurves}
+
+**Add extra information to paperless view**
+- Type: **Boolean**
+- Default: **false**
+
+<Paperlesscurves />
+
+### Proportion preview {#proportionpreview}
+
+**Draws a digital homunculus to show you the scale and proportions of the finished doll. Note: Scales on this are approximate**
+- Type: **Boolean**
+- Default: **false**
+
+<Proportionpreview />
+
+## parts {#parts}
+### Face type {#facetype}
+
+**Switch between different ways to assemble the face**
+- Type: **List**
+- Default: **split**
+- options:
+  - split
+  - mirrored
+  - snout
+  - hairline
+
+<Facetype />
+
+### Leg type {#legtype}
+
+**Switch between different ways to assemble the legs**
+- Type: **List**
+- Default: **cylinder**
+- options:
+  - cylinder
+  - anthro
+
+<Legtype />
+
+## scale {#scale}
+### Total size {#totalsize}
+
+**Basic scale for the whole doll**
+- Type: **Percentage**
+- Default: **33.5%**
+- Minimum: **5%**
+- Maximum: **200%**
+
+<Totalsize />
+
+## Style {#style}
+### Arm length {#armlength}
+
+**Lengthens or shortens the arms**
+- Type: **Percentage**
+- Default: **100%**
+- Minimum: **70%**
+- Maximum: **200%**
+
+<Armlength />
+
+### Head scale {#headscale}
+
+**Scales the head**
+- Type: **Percentage**
+- Default: **100%**
+- Minimum: **50%**
+- Maximum: **200%**
+
+<Headscale />
+
+### Hip width {#hipextrawidth}
+
+**Widens the hips**
+- Type: **Percentage**
+- Default: **0%**
+- Minimum: **0%**
+- Maximum: **50%**
+
+<Hipextrawidth />
+
+### Torso length {#torsolength}
+
+**Lengthens or shortens the torso**
+- Type: **Percentage**
+- Default: **0%**
+- Minimum: **-50%**
+- Maximum: **50%**
+
+<Torsolength />

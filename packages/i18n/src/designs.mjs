@@ -7027,6 +7027,124 @@ export const designs = {
       }
     }
   },
+  "polly": {
+    "t": "Polly Plush",
+    "d": "Polly is a humanoid plush doll.",
+    "p": {
+      "arm_bottom": "Arm bottom",
+      "arm_top": "Arm top",
+      "body_back": "Body back",
+      "body_front": "Body front",
+      "face": "Face",
+      "foot": "Foot",
+      "head_back": "Head back",
+      "leg": "Leg",
+      "snout_nose_top": "Snout top",
+      "snout_forehead": "Snout forehead",
+      "snout_head_side": "Snout head side",
+      "anthro_leg_inner": "Anthro leg inner",
+      "anthro_leg_outer": "Anthro leg outer",
+      "anthro_foot_sole": "Anthro foot sole",
+      "anthro_foot_upper": "Anthro foot upper",
+      "preview": "Preview",
+      "faceForelock": "Face with hairline",
+      "hairBack": "Hair back",
+      "neckBack": "Neck back",
+      "hairForelockTriangle": "Forehead hair"
+    },
+    "s": {
+      "seamBetweenLegs": "A",
+      "seamLegsFront": "B",
+      "seamLegsBack": "C",
+      "seamArmscye": "D",
+      "seamRaglanFront": "E",
+      "seamRaglanBack": "F",
+      "seamAnthroAnkle": "G",
+      "noseTop": "H",
+      "hairline": "I",
+      "noseEnd": "J",
+      "templeCurve": "K",
+      "openToTurn": "open for turning"
+    },
+    "o": {
+      "footUpperSize": {
+        "t": "Anthro foot size",
+        "d": "Size of the foot on the anthro legs"
+      },
+      "armLength": {
+        "t": "Arm length",
+        "d": "Lengthens or shortens the arms"
+      },
+      "hipExtraWidth": {
+        "t": "Hip width",
+        "d": "Widens the hips"
+      },
+      "torsoLength": {
+        "t": "Torso length",
+        "d": "Lengthens or shortens the torso"
+      },
+      "totalSize": {
+        "t": "Total size",
+        "d": "Basic scale for the whole doll"
+      },
+      "helpText": {
+        "t": "Display help text",
+        "d": "Add letters and notes to matching curves"
+      },
+      "paperlessCurves": {
+        "t": "Additional paperless measurements",
+        "d": "Add extra information to paperless view"
+      },
+      "faceType": {
+        "t": "Face type",
+        "d": "Switch between different ways to assemble the face"
+      },
+      "faceType.split": {
+        "t": "Split",
+        "d": "Draft a face with a curved seam down the center"
+      },
+      "faceType.mirrored": {
+        "t": "Mirrored",
+        "d": "Draft a face in one symmetrical piece"
+      },
+      "faceType.snout": {
+        "t": "Snout",
+        "d": "Draft a face with a protruding snout for animal characters"
+      },
+      "faceType.hairline": {
+        "t": "Hairline",
+        "d": "Draft a face with separate pieces for faux fur hair"
+      },
+      "headScale": {
+        "t": "Head scale",
+        "d": "Scales the head"
+      },
+      "legFlare": {
+        "t": "Leg flare",
+        "d": "Flares out the bottom of the cylindrical legs"
+      },
+      "legLength": {
+        "t": "Leg length",
+        "d": "Lengthens or shortens the cylindrical legs"
+      },
+      "legType": {
+        "t": "Leg type",
+        "d": "Switch between different ways to assemble the legs"
+      },
+      "legType.cylinder": {
+        "t": "Cylinder",
+        "d": "Basic tube legs, simple to sew"
+      },
+      "legType.anthro": {
+        "t": "Anthro",
+        "d": "Stylized digitigrade legs for animal characters"
+      },
+      "proportionPreview": {
+        "t": "Proportion preview",
+        "d": "Draws a digital homunculus to show you the scale and proportions of the finished doll. Note: Scales on this are approximate"
+      }
+    }
+  },
   "rendertest": {
     "t": "Render Test",
     "d": "A FreeSewing pattern to showcase how various elements are rendered/themed",

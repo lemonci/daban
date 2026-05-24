@@ -32,12 +32,13 @@ import { Lucy, LucyFront } from './lucy.mjs'
 import { Lumina, LuminaFront, LuminaBack } from './lumina.mjs'
 import { Lumira, LumiraFront, LumiraBack } from './lumira.mjs'
 import { Lunetius, LunetiusFront } from './lunetius.mjs'
+import { Percy, PercyFront } from './percy.mjs'
+import { Polly, PollyFront } from './polly.mjs'
 import { Noble, NobleFront, NobleBack } from './noble.mjs'
 import { Octoplushy, OctoplushyFront /*, OctoplushyBack*/ } from './octoplushy.mjs'
 import { Otis, OtisFront /*, OtisBack*/ } from './otis.mjs'
 import { Onyx, OnyxFront } from './onyx.mjs'
 import { Penelope, PenelopeFront /*, PenelopeBack*/ } from './penelope.mjs'
-import { Percy, PercyFront } from './percy.mjs'
 import { Sabrina, SabrinaFront, SabrinaBack } from './sabrina.mjs'
 import { Sandy, SandyFront } from './sandy.mjs'
 import { Sarah, SarahFront, SarahBack } from './sarah.mjs'
@@ -98,6 +99,8 @@ export const lineDrawingsFront = {
   lumina: LuminaFront,
   lumira: LumiraFront,
   lunetius: LunetiusFront,
+  percy: PercyFront,
+  polly: PollyFront,
   noble: NobleFront,
   octoplushy: OctoplushyFront,
   onyx: OnyxFront,
@@ -215,6 +218,7 @@ export const lineDrawings = {
   lumira: Lumira,
   lunetius: Lunetius,
   percy: Percy,
+  polly: Polly,
   noble: Noble,
   octoplushy: Octoplushy,
   onyx: Onyx,
@@ -372,6 +376,9 @@ export {
   // Percy
   Percy,
   PercyFront,
+  // Polly
+  Polly,
+  PollyFront,
   // Noble
   Noble,
   NobleFront,

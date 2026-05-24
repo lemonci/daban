@@ -1,0 +1,20 @@
+{
+  "id": "polly",
+  "code": "Gawain CCBR",
+  "design": "Gawain CCBR",
+  "description": "A FreeSewing pattern for a humanoid plush doll",
+  "name": "Polly Plush",
+  "difficulty": 3,
+  "version": "4.8.0",
+  "tags": [
+    "accessories",
+    "toys"
+  ],
+  "techniques": [
+    "curved-seam",
+    "dart",
+    "precision"
+  ],
+  "pkg": "@freesewing/polly",
+  "collection": true
+}
