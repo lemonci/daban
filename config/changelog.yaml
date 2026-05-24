@@ -4,6 +4,8 @@ Unreleased:
       - Initial release of the Hannah design
     polly:
       - Initial release of the Polly design
+    studio:
+      - Add run script to run studio with network support
     tina:
       - Initial release of the Tina design
     toni:
@@ -12,6 +14,8 @@ Unreleased:
   Fixed:
     core:
       - Ensure text added to Point or Path is always a string
+    studio:
+      - Ensure compatibility with current Docusaurus release
 
 4.8.0:
   date: 2026-04-18

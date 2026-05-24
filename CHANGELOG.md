@@ -33,6 +33,16 @@
 
  - Ensure text added to Point or Path is always a string
 
+### studio
+
+#### Added
+
+ - Add run script to run studio with network support
+
+#### Fixed
+
+ - Ensure compatibility with current Docusaurus release
+
 
 ## 4.8.0 (2026-04-18)
 
