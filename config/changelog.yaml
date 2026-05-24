@@ -1,5 +1,17 @@
 Unreleased:
   Added:
+    hannah:
+      - Initial release of the Hannah design
+    polly:
+      - Initial release of the Polly design
+    tina:
+      - Initial release of the Tina design
+    toni:
+      - Initial release of the Toni design
+
+  Fixed:
+    core:
+      - Ensure text added to Point or Path is always a string
 
 4.8.0:
   date: 2026-04-18
