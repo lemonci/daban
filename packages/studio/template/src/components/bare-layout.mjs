@@ -1,7 +1,6 @@
 import React from 'react'
 import ErrorBoundary from '@docusaurus/ErrorBoundary'
 import { PageMetadata, SkipToContentFallbackId, ThemeClassNames } from '@docusaurus/theme-common'
-import { useKeyboardNavigation } from '@docusaurus/theme-common/internal'
 import SkipToContent from '@theme/SkipToContent'
 import AnnouncementBar from '@theme/AnnouncementBar'
 import Navbar from '@theme/Navbar'
@@ -28,7 +27,6 @@ export function BareLayout({
   title = 'FreeSewing.org',
   description = 'Free bespoke sewing patterns',
 }) {
-  useKeyboardNavigation()
   return (
     <LayoutProvider>
       <PageMetadata title={title} description={description} />
