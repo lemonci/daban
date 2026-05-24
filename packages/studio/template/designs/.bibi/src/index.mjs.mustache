@@ -3,12 +3,11 @@ import { i18n as bibiI18n } from '@freesewing/bibi'
 import { i18n as {{ name }}I18n } from '../i18n/index.mjs'
 import { front } from './front.mjs'
 import { back } from './back.mjs'
-import { sleeve } from './sleeve.mjs'
-import { neckBinding } from './neckBinding.mjs'
-import { shared } from './shared.mjs'
 import { waistband } from './waistband.mjs'
 import { cuff } from './cuff.mjs'
 import { armholeBinding } from './armholeBinding.mjs'
+import { neckBinding } from './neckBinding.mjs'
+import { sleeve } from './sleeve.mjs'
 import about from '../about.json' with { type: 'json' }
 
 // Setup our new design
@@ -18,7 +17,20 @@ const {{ Name }} = new Design({
 })
 
 // Merge translations
-const i18n = mergeI18n([bibiI18n, {{ name }}I18n])
+const i18n = mergeI18n([bibiI18n, {{ name }}I18n], {
+  o: { drop: ['sleeveLengthBonus'] },
+})
 
 // Named exports
-export { front, back, sleeve, {{ Name }}, neckBinding, shared, waistband, cuff, armholeBinding, i18n, about }
+export {
+  front,
+  back,
+  sleeve,
+  waistband,
+  neckBinding,
+  armholeBinding,
+  cuff,
+  {{ Name }},
+  i18n,
+  about,
+}

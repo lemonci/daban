@@ -65,12 +65,16 @@ export const getInput = async () => {
       message: ' What template would you like to start from?',
       choices: [
         { title: 'Create a design from scratch', value: 'base' },
-        { title: 'Extend the Brian block (flat-sleeve block for menswear)', value: 'brian' },
-        { title: 'Extend the Bent block (two-part-sleeve block for menswear)', value: 'bent' },
-        { title: 'Extend the Bella block (womenswear bodice block)', value: 'bella' },
-        { title: 'Extend the Breanna block (womenswear bodice block)', value: 'breanna' },
-        { title: 'Extend the Sarah block (unisex skirt block)', value: 'sarah' },
-        { title: 'Extend the Titan block (unisex trouser block)', value: 'titan' },
+        { title: 'Extend Brian: A flat-sleeve menswear block (gor woven fabrics)', value: 'brian' },
+        { title: 'Extend Bibi: A flat-sleeve menswear block (for knit fabrics)', value: 'bibi' },
+        { title: 'Extend Bent: A two-part-sleeve menswear block', value: 'bent' },
+        {
+          title: 'Extend Bella: A womenswear bodice block used in the garment industry',
+          value: 'bella',
+        },
+        { title: 'Extend Breanna: A womenswear alteration of the Brian block', value: 'breanna' },
+        { title: 'Extend Sarah: A unisex skirt block', value: 'sarah' },
+        { title: 'Extend Titan: A unisex trouser block', value: 'titan' },
       ],
       initial: 0,
     })

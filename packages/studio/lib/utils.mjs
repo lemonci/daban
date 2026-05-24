@@ -207,6 +207,7 @@ async function copyTemplateFiles(config) {
     ...(await globDir(join(newDesignDir, `template`, `designs`, `.base`))),
     ...(await globDir(join(newDesignDir, `template`, `designs`, `.bella`))),
     ...(await globDir(join(newDesignDir, `template`, `designs`, `.bent`))),
+    ...(await globDir(join(newDesignDir, `template`, `designs`, `.bibi`))),
     ...(await globDir(join(newDesignDir, `template`, `designs`, `.breanna`))),
     ...(await globDir(join(newDesignDir, `template`, `designs`, `.brian`))),
     ...(await globDir(join(newDesignDir, `template`, `designs`, `.titan`))),
