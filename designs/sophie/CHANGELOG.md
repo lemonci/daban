@@ -1,7 +1,7 @@
 # Change log for: @freesewing/sophie
 
 
-## 4.9.0 (NaN-NaN-NaN)
+## 4.9.0 (2026-05-25)
 
 ### Changed
 
