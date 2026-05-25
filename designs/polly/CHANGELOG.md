@@ -1,6 +1,12 @@
 # Change log for: @freesewing/polly
 
 
+## 4.9.0 (NaN-NaN-NaN)
+
+### Added
+
+ - Initial release of the Polly design
+
 ## 3.0.0 (2023-09-30)
 
 ### Changed

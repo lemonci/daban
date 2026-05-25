@@ -3,6 +3,9 @@
 
 ## Unreleased
 
+
+## 4.9.0 (NaN-NaN-NaN)
+
 ### hannah
 
 #### Added
@@ -14,6 +17,16 @@
 #### Added
 
  - Initial release of the Polly design
+
+### sophie
+
+#### Changed
+
+ - Change how seam allowance is drawn on front and back panels
+
+#### Fixed
+
+ - Fix seam allowance showing up on the fold
 
 ### tina
 
@@ -29,19 +42,43 @@
 
 ### core
 
+#### Changed
+
+ - Refactor curveEdge function to re-use extrama function from bezierjs library (#847)
+ - Fix part hiding in stack when a part is only hidden in some instances of the stack
+
 #### Fixed
 
  - Ensure text added to Point or Path is always a string
+
+### react
+
+#### Fixed
+
+ - Fix uuid in CuratedSet component
 
 ### studio
 
 #### Added
 
  - Add run script to run studio with network support
+ - Add Bibi as an available block in the studio
 
 #### Fixed
 
  - Ensure compatibility with current Docusaurus release
+
+### backend
+
+#### Added
+
+ - Added OIDC client for Morio
+ - Added OIDC client for SemaphoreUI
+
+#### Changed
+
+ - Include role in OIDC claims
+ - Limit privileged OIDC clients to specific roles
 
 
 ## 4.8.0 (2026-04-18)

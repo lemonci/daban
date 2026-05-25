@@ -1,6 +1,18 @@
 # Change log for: @freesewing/backend
 
 
+## 4.9.0 (NaN-NaN-NaN)
+
+### Added
+
+ - Added OIDC client for Morio
+ - Added OIDC client for SemaphoreUI
+
+### Changed
+
+ - Include role in OIDC claims
+ - Limit privileged OIDC clients to specific roles
+
 ## 4.8.0 (2026-04-18)
 
 ### Added

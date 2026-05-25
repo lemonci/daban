@@ -1,6 +1,17 @@
 # Change log for: @freesewing/studio
 
 
+## 4.9.0 (NaN-NaN-NaN)
+
+### Added
+
+ - Add run script to run studio with network support
+ - Add Bibi as an available block in the studio
+
+### Fixed
+
+ - Ensure compatibility with current Docusaurus release
+
 ## 4.5.0 (2026-02-21)
 
 ### Added

@@ -1,6 +1,17 @@
 # Change log for: @freesewing/core
 
 
+## 4.9.0 (NaN-NaN-NaN)
+
+### Changed
+
+ - Refactor curveEdge function to re-use extrama function from bezierjs library (#847)
+ - Fix part hiding in stack when a part is only hidden in some instances of the stack
+
+### Fixed
+
+ - Ensure text added to Point or Path is always a string
+
 ## 4.6.0 (2026-03-08)
 
 ### Added

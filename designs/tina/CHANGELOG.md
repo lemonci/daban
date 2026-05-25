@@ -1,6 +1,12 @@
 # Change log for: @freesewing/tina
 
 
+## 4.9.0 (NaN-NaN-NaN)
+
+### Added
+
+ - Initial release of the Tina design
+
 ## 3.0.0 (2023-09-30)
 
 ### Changed

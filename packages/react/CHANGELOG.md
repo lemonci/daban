@@ -1,6 +1,12 @@
 # Change log for: @freesewing/react
 
 
+## 4.9.0 (NaN-NaN-NaN)
+
+### Fixed
+
+ - Fix uuid in CuratedSet component
+
 ## 4.8.0 (2026-04-18)
 
 ### Added

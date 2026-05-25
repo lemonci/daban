@@ -1,6 +1,16 @@
 # Change log for: @freesewing/sophie
 
 
+## 4.9.0 (NaN-NaN-NaN)
+
+### Changed
+
+ - Change how seam allowance is drawn on front and back panels
+
+### Fixed
+
+ - Fix seam allowance showing up on the fold
+
 ## 4.5.0 (2026-02-21)
 
 ### Fixed
