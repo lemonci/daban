@@ -20,7 +20,7 @@
     "pocket",
     "zipper"
   ],
-  "version": "4.8.0",
+  "version": "4.9.0",
   "pkg": "@freesewing/ashley",
   "collection": true
 }

@@ -1,6 +1,6 @@
 {
   "name": "@freesewing/plugintest",
-  "version": "4.8.0",
+  "version": "4.9.0",
   "description": "A FreeSewing pattern to test (y)our plugins",
   "author": "Joost De Cock <joost@joost.at> (https://codeberg.org/joostdecock)",
   "homepage": "https://freesewing.eu/",
@@ -38,25 +38,25 @@
     "testci": "NODE_OPTIONS=\"--conditions=internal\" npx mocha tests/*.test.mjs --reporter ../../tests/reporters/terse.js"
   },
   "peerDependencies": {
-    "@freesewing/core": "4.8.0",
-    "@freesewing/plugin-annotations": "4.8.0",
-    "@freesewing/plugin-bust": "4.8.0",
-    "@freesewing/plugin-flip": "4.8.0",
-    "@freesewing/plugin-gore": "4.8.0",
-    "@freesewing/plugin-i18n": "4.8.0",
-    "@freesewing/plugin-measurements": "4.8.0",
-    "@freesewing/plugin-mirror": "4.8.0",
-    "@freesewing/plugin-round": "4.8.0",
-    "@freesewing/plugin-sprinkle": "4.8.0",
-    "@freesewing/plugin-svgattr": "4.8.0",
-    "@freesewing/plugin-theme": "4.8.0"
+    "@freesewing/core": "4.9.0",
+    "@freesewing/plugin-annotations": "4.9.0",
+    "@freesewing/plugin-bust": "4.9.0",
+    "@freesewing/plugin-flip": "4.9.0",
+    "@freesewing/plugin-gore": "4.9.0",
+    "@freesewing/plugin-i18n": "4.9.0",
+    "@freesewing/plugin-measurements": "4.9.0",
+    "@freesewing/plugin-mirror": "4.9.0",
+    "@freesewing/plugin-round": "4.9.0",
+    "@freesewing/plugin-sprinkle": "4.9.0",
+    "@freesewing/plugin-svgattr": "4.9.0",
+    "@freesewing/plugin-theme": "4.9.0"
   },
   "dependencies": {},
   "devDependencies": {
     "mocha": "10.4.0",
     "chai": "5.1.1",
-    "@freesewing/models": "4.8.0",
-    "@freesewing/plugin-timing": "4.8.0"
+    "@freesewing/models": "4.9.0",
+    "@freesewing/plugin-timing": "4.9.0"
   },
   "files": [
     "src/",

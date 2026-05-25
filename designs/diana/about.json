@@ -13,7 +13,7 @@
     "flat-sleeve",
     "hem"
   ],
-  "version": "4.8.0",
+  "version": "4.9.0",
   "pkg": "@freesewing/diana",
   "collection": true
 }
