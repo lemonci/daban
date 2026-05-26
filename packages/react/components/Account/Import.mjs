@@ -30,7 +30,7 @@ export const ImportSet = () => {
     try {
       const chunks = upload.split(',')
       if (chunks[0].includes('json')) data = JSON.parse(atob(chunks[1]))
-      else data = yaml.parse(atob(chunks[1]))
+      else data = yaml.load(atob(chunks[1]))
       if (!Array.isArray(data)) data = [data]
       /*
        * Treat each set
