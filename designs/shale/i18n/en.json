@@ -20,7 +20,7 @@
     "waistbandAngle.t": "Waist angle",
     "waistbandAngle.d": "Based on our (very rough) estimation, your optimal front waistband angle is {{ angle }}°.",
     "waistHipsRatio.t": "Waist larger than hips",
-    "waistHipsRatio.d": "This pattern assumes that your waist is smaller than your hips. If you have a larger waist than hips, the waistband may slip easily and you may need to do manual changes to the pattern to fit your body.",
+    "waistHipsRatio.d": "This pattern assumes that your waist is smaller than your hips. If you have a larger waist than hips, the waistband may slip easily and you may need to either lower the Waist Height option to make the waistband sit on your hips or do other manual changes to the pattern to fit your body.",
     "hipsSeatRatio.t": "Hips are larger than seat",
     "hipsSeatRatio.d": "This pattern assumes that your hips are smaller than your seat. If you have a larger hips than seat, the waistband might not fit over your hips and you may need to do manual changes to the pattern to fit your body.",
     "badWaistbandHeight.t": "Could not fit waistband",
