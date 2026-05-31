@@ -177,7 +177,7 @@ function draftBack({
   points.backPocket = new Point(
     -pocketMetric * options.pocketBackPositionX,
     pocketMetric * options.pocketBackPositionY
-  ).addText('opal:pocketBack', 'center')
+  ).addText('pocketBack', 'center')
   points.backPocketFrontTop = points.backPocket.translate(
     (pocketMetric * options.pocketBackWidth) / 2,
     (-pocketMetric * options.pocketBackHeight) / 2
@@ -242,10 +242,10 @@ function draftBack({
   )
   points.carpenterPocketLabel = points.carpenterPocketTopBack
     .shiftFractionTowards(points.carpenterPocketOutseamBottom, 0.4)
-    .addText('opal:pocketCarpenter', 'center')
+    .addText('pocketCarpenter', 'center')
   points.carpenterPocketExtraLabel = points.carpenterPocketBottomBack
     .shiftFractionTowards(points.carpenterPocketExtraOutseamTop, 1 / 2)
-    .addText('opal:pocketCarpenterExtra', 'center')
+    .addText('pocketCarpenterExtra', 'center')
   store.set('carpenterPocketLabel', points.carpenterPocketLabel)
   store.set('carpenterPocketExtraLabel', points.carpenterPocketExtraLabel)
 
@@ -347,7 +347,7 @@ function draftBack({
       .move(points.hammerLoopTop)
       .curve(points.hammerLoopCp1, points.hammerLoopCp2, points.hammerLoopOutseam)
       .addClass('various dotted')
-      .addText('opal:hammerLoop', 'center')
+      .addText('hammerLoop', 'center')
     paths.hammerLoopLeft = paths.hammerLoopCenter
       .offset(hammerLoopWidth / 2)
       .addClass('fabric dashed')
@@ -624,7 +624,7 @@ function draftBack({
   points.title = points.cfWaist
     .shiftFractionTowards(points.outseamHem, 0.5)
     .shiftFractionTowards(points.inseamHem, 0.5)
-  macro('title', { at: points.title, nr: 2, title: 'opal:back' })
+  macro('title', { at: points.title, nr: 2, title: 'back' })
   points.logo = points.title.translate(scale * -20, scale * 35)
   snippets.logo = new Snippet('logo', points.logo)
   points.scalebox = points.title.translate(scale * -10, scale * -80)

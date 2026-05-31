@@ -85,7 +85,7 @@ function draftPocketCarpenter({
     points.carpenterPocketOutseamBottom,
     0.5
   )
-  macro('title', { at: points.title, nr: 8, title: 'opal:pocketCarpenter', align: 'center' })
+  macro('title', { at: points.title, nr: 8, title: 'pocketCarpenter', align: 'center' })
   points.logo = points.title.translate(scale * 20, scale * 120)
   snippets.logo = new Snippet('logo', points.logo)
 

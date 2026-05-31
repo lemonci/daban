@@ -106,7 +106,7 @@ function draftPocketSlash({
   paths.fold = new Path()
     .move(points.centerTop)
     .line(points.centerBottom)
-    .addText('opal:fold')
+    .addText('fold')
     .addClass('various dashed')
 
   paths.shield = new Path()
@@ -122,7 +122,7 @@ function draftPocketSlash({
   points.shieldText = points.shieldTop
     .shiftFractionTowards(points.shieldSide, 1 / 2)
     .shiftFractionTowards(points.topLeft, 3 / 4)
-    .addText('opal:pocketShield')
+    .addText('pocketSlashShield')
   points.shieldCenter = points.shieldTop
     .shiftFractionTowards(points.shieldSide, 1 / 2)
     .shiftFractionTowards(points.topLeft, 1 / 2)
@@ -193,7 +193,7 @@ function draftPocketSlash({
   points.title = points.centerTop
     .shiftFractionTowards(points.centerBottom, 1 / 2)
     .translate(scale * 10, scale * 25)
-  macro('title', { at: points.title, nr: 5, title: 'opal:pocketSlash' })
+  macro('title', { at: points.title, nr: 5, title: 'pocketSlash' })
   points.logo = points.title.translate(-scale * 20, scale * 35)
   snippets.logo = new Snippet('logo', points.logo)
 

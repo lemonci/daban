@@ -71,7 +71,7 @@ function draftPocketSlashShield({
   }
 
   points.title = points.shieldCenter.translate(scale * -10, scale * 10)
-  macro('title', { at: points.title, nr: 6, title: 'opal:pocketShield', scale: 0.6 })
+  macro('title', { at: points.title, nr: 6, title: 'pocketSlashShield', scale: 0.6 })
   store.cutlist.removeCut('lining')
   store.cutlist.addCut({ cut: 2, from: 'fabric' })
 

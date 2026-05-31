@@ -107,7 +107,7 @@ function draftPocketBib({
   points.title = points.pocketCenterTop
     .shiftFractionTowards(points.pocketCenterBottom, 1 / 2)
     .translate(scale * 10, scale * 10)
-  macro('title', { at: points.title, nr: 4, title: 'opal:pocketBib' })
+  macro('title', { at: points.title, nr: 4, title: 'pocketBib' })
   options.bibPocketOnFold
     ? delete snippets.logo
     : (snippets.logo = new Snippet(

@@ -104,7 +104,7 @@ function draftWaistband({
   store.cutlist.addCut({ cut: 1, from: 'fabric' })
 
   points.title = new Point(scale * 30, scale * 5)
-  macro('title', { at: points.title, nr: 11, title: 'opal:waistband', scale: 0.75 })
+  macro('title', { at: points.title, nr: 11, title: 'waistband', scale: 0.75 })
 
   return part
 }

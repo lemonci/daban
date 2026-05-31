@@ -107,7 +107,7 @@ function draftBibPlacket({
   store.cutlist.addCut({ cut: 1, from: 'fabric' })
 
   points.title = new Point(scale * 30, scale * 15)
-  macro('title', { at: points.title, nr: 12, title: 'opal:bibPlacket', scale: 0.75 })
+  macro('title', { at: points.title, nr: 12, title: 'bibPlacket', scale: 0.75 })
 
   return part
 }

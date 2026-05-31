@@ -129,7 +129,7 @@ function draftHammerLoop({ options, Point, Path, points, paths, sa, macro, part,
   points.title = points.topLeftFold2
     .shiftFractionTowards(points.bottomLeftFold1, 0.5)
     .translate(scale * 5, 0)
-  macro('title', { at: points.title, nr: 10, title: 'opal:hammerLoop', scale: 0.4 })
+  macro('title', { at: points.title, nr: 10, title: 'hammerLoop', scale: 0.4 })
 
   return part
 }

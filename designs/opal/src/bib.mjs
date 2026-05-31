@@ -83,7 +83,7 @@ function draftBib({
       .move(points.placketSideBottom.flipX(points.placketCenterBottom))
       .line(points.placketSideBottom)
     paths.placket.setClass('fabric dashed')
-    paths.placket.addText('opal:bibPlacket', 'center')
+    paths.placket.addText('bibPlacket', 'center')
 
     store.set('bibPlacketLengthTop', points.cfTop.dist(points.topSide) * 2)
     store.set(
@@ -236,7 +236,7 @@ function draftBib({
 
   points.bibPocketText = points.pocketCenterTop
     .shiftFractionTowards(points.pocketCenterBottom, 1 / 16)
-    .addText('opal:pocketBib', 'center')
+    .addText('pocketBib', 'center')
 
   if (sa) {
     paths.sa = paths.seam
@@ -313,7 +313,7 @@ function draftBib({
   points.title = points.cfTop
     .shiftFractionTowards(points.cfWaist, 1 / 2)
     .translate(scale * 20, scale * 15)
-  macro('title', { at: points.title, nr: 3, title: 'opal:bib' })
+  macro('title', { at: points.title, nr: 3, title: 'bib' })
   points.logo = points.title.translate(-scale * 35, scale * 35)
   snippets.logo = new Snippet('logo', points.logo)
 

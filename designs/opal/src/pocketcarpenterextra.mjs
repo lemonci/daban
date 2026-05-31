@@ -60,7 +60,7 @@ function draftPocketCarpenterExtra({
     points.carpenterPocketOutseamBottom,
     0.5
   )
-  macro('title', { at: points.title, nr: 9, title: 'opal:pocketCarpenterExtra', align: 'center' })
+  macro('title', { at: points.title, nr: 9, title: 'pocketCarpenterExtra', align: 'center' })
   points.logo = points.title.translate(scale * -10, scale * 35)
 
   return part

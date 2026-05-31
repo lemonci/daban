@@ -85,7 +85,7 @@ function draftPocketBack({
     to: points.grainlineBottom,
   })
 
-  macro('title', { at: points.title, nr: 7, title: 'opal:pocketBack' })
+  macro('title', { at: points.title, nr: 7, title: 'pocketBack' })
   points.logo = points.title.translate(-scale * 20, scale * 35)
   snippets.logo = new Snippet('logo', points.logo)
 
