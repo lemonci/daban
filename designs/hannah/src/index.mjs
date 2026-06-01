@@ -13,7 +13,7 @@ const Hannah = new Design({
   parts: [hood, hoodCenter, front, back, sleeve, cuff, waistband],
 })
 
-const i18n = mergeI18n([hannahI18n, toniI18n, libraryI18n], {})
+const i18n = mergeI18n([libraryI18n, toniI18n, hannahI18n], {})
 
 // Named exports
 export { hood, front, back, Hannah, i18n, about }

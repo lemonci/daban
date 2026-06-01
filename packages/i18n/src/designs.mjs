@@ -3463,10 +3463,9 @@ export const designs = {
     "o": {}
   },
   "hannah": {
-    "t": "Library",
-    "d": "A library of FreeSewing design parts",
+    "t": "Hannah hoodie",
+    "d": "A FreeSewing pattern for a fitted hoodie",
     "s": {
-      "overlap": "Overlap",
       "backArmholeLength": "The length of the armhole at the back of the garment",
       "backArmholeToArmholePitch": "The length along the armhole from the bottom of the armhole to the back armhole pitch point",
       "frontArmholeLength": "The length of the armhole at the front of the garment",
@@ -3476,6 +3475,8 @@ export const designs = {
       "sleevecapTarget": "The theoretical length of the sleevecap we strive for",
       "sleevecapEase": "The mount of sleevecap ease",
       "__sleevecapFactor": "An internal variable that is used to tweak the sleevecap draft",
+      "cutHoodCenter.t": "The hood center is not shown",
+      "cutHoodCenter.d": "The **Hood center** ({{{ nr }}}) is a rectangular piece of main fabric {{{ width }}} wide and {{{ length }}} long, with the grainline parallel to the width.",
       "largeShoulderWidth.t": "Shoulder Width larger than anticipated",
       "largeShoulderWidth.d": "The pattern was not able to generate an optimal armhole shape using the given measurements and options.\n\nPlease be aware that the generated pattern may not be correct.\n\nPlease retake your measurements and verify that they are correct.",
       "waistLine": "Waist Line",
@@ -3492,61 +3493,40 @@ export const designs = {
       "neckFittingFailed.d": "The pattern was not able to make the neck opening large enough to match the requested neck opening circumference of {{{ circ }}}.",
       "hipsFittingFailed.t": "Could not fit hips",
       "hipsFittingFailed.d": "The pattern was not able to get an optimal side seam shape to fit your waist and hips measurements at the same time using the given measurements and options.\n\nThis is likely because your waist-to-hips measurement is small and the difference between the waist and hips measurements is large.\n\nPlease retake your measurements and verify that they are correct.\n\nIf this doesn't help, increase the waist ease option to make more room for fitting the hips.",
-      "cutHoodCenter.t": "The hood center is not shown",
-      "cutHoodCenter.d": "The **Hood center** ({{{ nr }}}) is a rectangular piece of main fabric {{{ width }}} wide and {{{ length }}} long, with the grainline parallel to the width."
+      "overlap": "Overlap"
     },
     "p": {
-      "hood": "Hood",
-      "sleeve": "Sleeve",
-      "back": "Back",
-      "front": "Front",
-      "base": "Base",
-      "waistband": "Waistband",
-      "cuff": "Cuff",
       "rectangle": "Rectangle",
+      "sleeve": "Sleeve",
       "topsleeve": "Topsleeve",
       "undersleeve": "Undersleeve",
       "twoPartSleeve": "Two-Part Sleeve (base)",
       "threePartHood": "Three-Part Hood (base)",
       "hoodCenter": "Hood center",
-      "hoodSide": "Hood side"
+      "hoodSide": "Hood side",
+      "back": "Back",
+      "front": "Front",
+      "base": "Base",
+      "waistband": "Waistband",
+      "cuff": "Cuff",
+      "hood": "Hood"
     },
     "o": {
-      "hoodHeight": {
-        "t": "Hood height",
-        "d": "How high the hood is"
+      "noSa": {
+        "t": "No Seam Allowance",
+        "d": "Explicitly disabled seam allowance on this part, regardless of the pattern settings"
       },
-      "hoodDepth": {
-        "t": "Hood depth",
-        "d": "How deep the hood is"
+      "rectangleHeight": {
+        "t": "Rectangle height",
+        "d": "Height of the rectangle"
       },
-      "hoodCutback": {
-        "t": "Hood cutback",
-        "d": "How open the hood is at the front"
+      "rectangleWidth": {
+        "t": "Rectangle width",
+        "d": "Width of the rectangle"
       },
-      "hoodShape": {
-        "t": "Hood shape",
-        "d": "How the hood joins the main body"
-      },
-      "hoodOverlap": {
-        "t": "Hood overlap",
-        "d": "How much the hood overlaps at the front"
-      },
-      "neckBasedOn.neck": {
-        "t": "Neck",
-        "d": "Ensure the neck fits through the neck opening"
-      },
-      "neckBasedOn.head": {
-        "t": "Head",
-        "d": "Ensure the head fits through the neck opening"
-      },
-      "neckBasedOn.waist": {
-        "t": "Waist",
-        "d": "Ensure the waist fits through the neck opening"
-      },
-      "neckBasedOn.seat": {
-        "t": "Seat",
-        "d": "Ensure the seat fits through the neck opening"
+      "cuffEase": {
+        "t": "Cuff ease",
+        "d": "The amount of ease at your wrist."
       },
       "sleevecapEase": {
         "t": "Sleevecap ease",
@@ -3631,6 +3611,14 @@ export const designs = {
       "sleeveWidthGuarantee": {
         "t": "Sleeve width guarantee",
         "d": "Controls how much of the sleeve width will be guaranteed. This determines how much we can alter the sleeve width to fit the sleeve in the armhole."
+      },
+      "sleevecapHeight": {
+        "t": "Sleevecap height",
+        "d": "Controls the height of the sleevecap."
+      },
+      "sleeveBend": {
+        "t": "Sleeve bend",
+        "d": "Controls the bend of the sleeve at the elbow."
       },
       "acrossBackFactor": {
         "t": "Across back factor",
@@ -3743,6 +3731,22 @@ export const designs = {
       "neckBasedOn": {
         "t": "Neck opening based on",
         "d": "Which measurement to use for the neck opening"
+      },
+      "neckBasedOn.neck": {
+        "t": "Neck",
+        "d": "Ensure the neck fits through the neck opening"
+      },
+      "neckBasedOn.head": {
+        "t": "Head",
+        "d": "Ensure the head fits through the neck opening"
+      },
+      "neckBasedOn.waist": {
+        "t": "Waist",
+        "d": "Ensure the waist fits through the neck opening"
+      },
+      "neckBasedOn.seat": {
+        "t": "Seat",
+        "d": "Ensure the seat fits through the neck opening"
       },
       "sleeveLength": {
         "t": "Sleeve length",
@@ -3860,29 +3864,25 @@ export const designs = {
         "t": "Disabled",
         "d": "Skip creating a dart"
       },
-      "noSa": {
-        "t": "No Seam Allowance",
-        "d": "Explicitly disabled seam allowance on this part, regardless of the pattern settings"
+      "hoodHeight": {
+        "t": "Hood height",
+        "d": "How high the hood is"
       },
-      "rectangleHeight": {
-        "t": "Rectangle height",
-        "d": "Height of the rectangle"
+      "hoodDepth": {
+        "t": "Hood depth",
+        "d": "How deep the hood is"
       },
-      "rectangleWidth": {
-        "t": "Rectangle width",
-        "d": "Width of the rectangle"
+      "hoodCutback": {
+        "t": "Hood cutback",
+        "d": "How open the hood is at the front"
       },
-      "cuffEase": {
-        "t": "Cuff ease",
-        "d": "The amount of ease at your wrist."
+      "hoodShape": {
+        "t": "Hood shape",
+        "d": "How the hood joins the main body"
       },
-      "sleevecapHeight": {
-        "t": "Sleevecap height",
-        "d": "Controls the height of the sleevecap."
-      },
-      "sleeveBend": {
-        "t": "Sleeve bend",
-        "d": "Controls the bend of the sleeve at the elbow."
+      "hoodOverlap": {
+        "t": "Hood overlap",
+        "d": "How much the hood overlaps at the front"
       }
     }
   },
