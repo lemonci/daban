@@ -4,14 +4,18 @@
   "design": "Jonathan Haas",
   "description": "A FreeSewing pattern for shorts",
   "name": "Shale Shorts",
-  "difficulty": 1,
+  "difficulty": 2,
   "tags": [
     "bottoms",
     "trousers",
     "pajamas",
     "underwear"
   ],
-  "techniques": [],
+  "techniques": [
+    "elastic",
+    "pocket",
+    "hem"
+  ],
   "version": "4.9.0",
   "pkg": "@freesewing/shale",
   "collection": true

@@ -7,7 +7,7 @@
    viewBox="0 0 105.62116 40.129684"
    version="1.1"
    id="svg1"
-   inkscape:version="1.4.3 (0d15f75042, 2025-12-25)"
+   inkscape:version="1.4.4 (dcaf3e7d9e, 2026-05-05)"
    sodipodi:docname="step9.svg"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
@@ -25,10 +25,10 @@
      inkscape:deskcolor="#d1d1d1"
      inkscape:document-units="mm"
      inkscape:zoom="2"
-     inkscape:cx="189"
+     inkscape:cx="188.75"
      inkscape:cy="0"
-     inkscape:window-width="2560"
-     inkscape:window-height="1371"
+     inkscape:window-width="1692"
+     inkscape:window-height="1059"
      inkscape:window-x="0"
      inkscape:window-y="0"
      inkscape:window-maximized="1"
@@ -553,12 +553,6 @@
        id="path3"
        style="fill:#37c8ab;stroke-width:0.302;stroke-dasharray:1.208, 1.208;paint-order:stroke fill markers"
        d="m 126.76158,134.64765 c -0.13294,-0.16939 -0.3268,-0.32023 -0.56257,-0.45473 l -0.003,-0.006 c 8.8e-4,0.001 9e-4,0.003 0.002,0.005 -0.13678,-0.078 -0.29102,-0.14866 -0.45207,-0.21591 -0.029,-0.0123 -0.0575,-0.0248 -0.0872,-0.0367 -0.0804,-0.032 -0.1682,-0.059 -0.25267,-0.0886 -0.12416,-0.0433 -0.25092,-0.0847 -0.3816,-0.12309 -0.17922,-0.0527 -0.3653,-0.0901 -0.55053,-0.13398 -0.29392,-0.0692 -0.58566,-0.13383 -0.87068,-0.18374 -0.26067,-0.045 -0.48098,-0.0753 -0.71035,-0.10587 -0.58958,-0.0732 -1.25587,-0.14736 -1.25587,-0.14736 8.7e-4,-0.002 0.32149,-0.73894 0.59119,-1.371 0.13401,-0.32191 0.26654,-0.6631 0.40266,-1.03672 0.10808,-0.29812 0.21076,-0.59526 0.30128,-0.89675 0.0592,-0.19807 0.12016,-0.39605 0.16603,-0.58645 0.0321,-0.13531 0.0651,-0.27023 0.0886,-0.39854 0.0162,-0.085 0.0326,-0.17116 0.0439,-0.25219 0.006,-0.0441 0.0117,-0.0879 0.0164,-0.13073 0.0168,-0.15333 0.0274,-0.3014 0.0233,-0.43369 -0.006,-0.18338 -0.0334,-0.34372 -0.0876,-0.47383 z" />
-    <path
-       class="fabric"
-       id="fs-15-6"
-       d="m 122.75699,145.0264 -2.45455,-1.12537 c -14.08027,-6.44979 -28.822171,-11.3412 -43.965054,-14.59019 -15.142862,-3.24898 -30.593827,-4.8356 -46.080675,-4.72959 l -2.499511,0.0186"
-       style="fill:none;stroke:#808080;stroke-width:0.5;stroke-linecap:butt;stroke-linejoin:round;stroke-dasharray:3, 1;stroke-dashoffset:0;stroke-opacity:1"
-       sodipodi:nodetypes="ccscc" />
     <path
        style="fill:none;stroke:#ff0000;stroke-width:0.5;stroke-linecap:butt;stroke-linejoin:round;stroke-dasharray:3, 1;stroke-dashoffset:0;stroke-opacity:1"
        d="m 30.145626,108.33155 0.11102,16.24987"

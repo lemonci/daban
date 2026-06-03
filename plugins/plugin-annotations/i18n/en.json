@@ -22,7 +22,7 @@
   "plugin-annotations:onFold": "on the fold",
   "plugin-annotations:onFoldAndBias": "on the fold, and on bias",
   "plugin-annotations:ribbing": "ribbing",
-  "plugin-annotations:rigidinterfacing": "rigid interfacing",
+  "plugin-annotations:rigidInterfacing": "rigid interfacing",
   "plugin-annotations:sewTogether": "Sew together",
   "plugin-annotations:specialty": "specialty fabric (see pattern instructions)",
   "plugin-annotations:underside": "underside fabric",
