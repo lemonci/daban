@@ -1764,3 +1764,24 @@ UserModel.prototype.papersPlease = async function (id, type, payload) {
    */
   return [true, false]
 }
+
+/*
+ * Loads a list of users who are authors, returns byline data on thme
+ *
+ * @returns {UserModel} object - The UserModel
+ */
+UserModel.prototype.getAuthors = async function () {
+  const all = new Set()
+
+  /*
+   * Load all authors from the database
+   */
+  const authors = await this.prisma.user.findMany({
+    where: { author: { equals: true } },
+    limit: 500,
+  })
+
+  console.log(authors)
+
+  return authors
+}

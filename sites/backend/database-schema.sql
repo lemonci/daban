@@ -99,7 +99,8 @@ CREATE TABLE IF NOT EXISTS "User" (
     "updatedAt" DATETIME,
     "username" TEXT NOT NULL,
     "uuid" TEXT,
-    "nlid" TEXT
+    "nlid" TEXT,
+    "author" BOOLEAN NOT NULL DEFAULT false
 );
 
 -- Pattern table

@@ -113,3 +113,32 @@ InfoController.prototype.getStats = async (req, res, tools) => {
 
   return error ? res.status(500).send({ errors: ['Failed to run query'] }) : res.send(stats)
 }
+
+/*
+ * Get info on authors
+ */
+InfoController.prototype.getAuthorInfo = async (req, res, tools) => {
+  let result = { errors: ['Failed to run query'] }
+
+  /*
+   * Load all authors from the database
+   */
+  try {
+    result = await tools.prisma.user.findMany({
+      where: { author: { equals: true } },
+      limit: 500,
+    })
+  } catch (err) {
+    tools.log.error(`Failed to get author info: ${err.message}`)
+  }
+
+  return result?.errors
+    ? res.status(500).send(result)
+    : res.send(
+        result.map((user) => ({
+          id: user.id,
+          uuid: user.uuid,
+          username: user.username,
+        }))
+      )
+}
