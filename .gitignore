@@ -8,6 +8,7 @@ oidc-jwks.json
 .env
 *.key
 *.env
+!ansible/hosts/am02.freesewing.eu/fs/etc/backend/service.env
 
 # Plugins
 plugins/plugin-theme/src/bundle.css.js
