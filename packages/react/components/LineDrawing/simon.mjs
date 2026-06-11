@@ -5,7 +5,7 @@ import { LineDrawingWrapper, thin, dashed } from './shared.mjs'
  * This strokeScale factor is used to normalize the stroke across
  * designs so we have a consistent look when showing our collection
  */
-const strokeScale = 0.15
+const strokeScale = 0.35
 
 /**
  * A linedrawing component for Simon
@@ -16,12 +16,16 @@ const strokeScale = 0.15
  * @param {number} props.stroke - The stroke width to apply
  * @returns {JSX.Element}
  */
-export const Simon = ({ className, stroke = 1 }) => (
-  <LineDrawingWrapper viewBox="0 0 157 121" {...{ className, stroke }}>
-    <Front stroke={stroke * strokeScale} />
-    <Back stroke={stroke * strokeScale} />
-  </LineDrawingWrapper>
-)
+export const Simon = ({ className, stroke = 1 }) => {
+  // Normalize stroke across designs
+  stroke = stroke * strokeScale
+  return (
+    <LineDrawingWrapper viewBox="0 0 157 121" {...{ className, stroke }}>
+      <Front stroke={stroke} />
+      <Back stroke={stroke} />
+    </LineDrawingWrapper>
+  )
+}
 
 /**
  * A linedrawing component for the front of Simon
@@ -32,11 +36,16 @@ export const Simon = ({ className, stroke = 1 }) => (
  * @param {number} props.stroke - The stroke width to apply
  * @returns {JSX.Element}
  */
-export const SimonFront = ({ className, stroke = 1 }) => (
-  <LineDrawingWrapper viewBox="-20 0 122 122" {...{ className, stroke }}>
-    <Front stroke={stroke * strokeScale} />
-  </LineDrawingWrapper>
-)
+export const SimonFront = ({ className, stroke = 1 }) => {
+  // Normalize stroke across designs
+  stroke = stroke * strokeScale
+
+  return (
+    <LineDrawingWrapper viewBox="-20 0 122 122" {...{ className, stroke }}>
+      <Front stroke={strokeScale} />
+    </LineDrawingWrapper>
+  )
+}
 
 /**
  * A linedrawing component for the back of Simon
@@ -48,14 +57,14 @@ export const SimonFront = ({ className, stroke = 1 }) => (
  * @returns {JSX.Element}
  */
 export const SimonBack = ({
-  className = 'w-64', // CSS classes to apply
+  className, // CSS classes to apply
   stroke = 1, // Stroke width to use
 }) => {
   // Normalize stroke across designs
   stroke = stroke * strokeScale
 
   return (
-    <LineDrawingWrapper viewBox="79 0 79 121" {...{ className, stroke }}>
+    <LineDrawingWrapper viewBox="58 0 122 122" {...{ className, stroke }}>
       <Back stroke={stroke} />
     </LineDrawingWrapper>
   )

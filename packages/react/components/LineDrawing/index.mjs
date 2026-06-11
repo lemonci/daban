@@ -24,6 +24,7 @@ import { Gozer, GozerFront, GozerBack } from './gozer.mjs'
 import { Hi, HiFront } from './hi.mjs'
 import { Holmes, HolmesFront } from './holmes.mjs'
 import { Hortensia, HortensiaFront } from './hortensia.mjs'
+import { Hannah, HannahFront, HannahBack } from './hannah.mjs'
 import { Huey, HueyFront, HueyBack } from './huey.mjs'
 import { Hugo, HugoFront, HugoBack } from './hugo.mjs'
 import { Jane, JaneFront, JaneBack } from './jane.mjs'
@@ -44,6 +45,8 @@ import { Sandy, SandyFront } from './sandy.mjs'
 import { Sarah, SarahFront, SarahBack } from './sarah.mjs'
 import { Shelly, ShellyFront } from './shelly.mjs'
 import { Simon, SimonFront, SimonBack } from './simon.mjs'
+import { Simone, SimoneFront } from './simone.mjs'
+import { Shale, ShaleFront, ShaleBack } from './shale.mjs'
 import { Shin, ShinFront } from './shin.mjs'
 import { Skully, SkullyFront /*, SkullyBack*/ } from './skully.mjs'
 import { Sophie, SophieFront, SophieBack } from './sophie.mjs'
@@ -90,6 +93,7 @@ export const lineDrawingsFront = {
   florence: FlorenceFront,
   florent: FlorentFront,
   gozer: GozerFront,
+  hannah: HannahFront,
   hi: HiFront,
   holmes: HolmesFront,
   hortensia: HortensiaFront,
@@ -108,13 +112,14 @@ export const lineDrawingsFront = {
   onyx: OnyxFront,
   otis: OtisFront,
   penelope: PenelopeFront,
-  percy: PercyFront,
   sabrina: SabrinaFront,
   sandy: SandyFront,
   sarah: SarahFront,
+  shale: ShaleFront,
   shelly: ShellyFront,
   shin: ShinFront,
   simon: SimonFront,
+  simone: SimoneFront,
   skully: SkullyFront,
   sven: SvenFront,
   sophie: SophieFront,
@@ -156,6 +161,7 @@ export const lineDrawingsBack = {
   /*devon: DevonBack,*/
   diana: DianaBack,
   gozer: GozerBack,
+  hannah: HannahBack,
   huey: HueyBack,
   hugo: HugoBack,
   jane: JaneBack,
@@ -168,7 +174,9 @@ export const lineDrawingsBack = {
   /*penelope: PenelopeBack,*/
   sabrina: SabrinaBack,
   sarah: SarahBack,
+  shale: ShaleBack,
   simon: SimonBack,
+  simone: SimonBack,
   /* skully: SkullyBack, */
   sophie: SophieBack,
   teagan: TeaganBack,
@@ -212,6 +220,7 @@ export const lineDrawings = {
   florence: Florence,
   florent: Florent,
   gozer: Gozer,
+  hannah: Hannah,
   hi: Hi,
   holmes: Holmes,
   hortensia: Hortensia,
@@ -234,9 +243,11 @@ export const lineDrawings = {
   shin: Shin,
   sabrina: Sabrina,
   sandy: Sandy,
+  shale: Shale,
   shelly: Shelly,
   skully: Skully,
   simon: Simon,
+  simone: Simone,
   sophie: Sophie,
   sven: Sven,
   teagan: Teagan,
@@ -342,6 +353,10 @@ export {
   Gozer,
   GozerFront,
   GozerBack,
+  // Hannah
+  Hannah,
+  HannahFront,
+  HannahBack,
   // Hi
   Hi,
   HiFront,
@@ -413,6 +428,10 @@ export {
   Sarah,
   SarahFront,
   SarahBack,
+  //Shale
+  Shale,
+  ShaleFront,
+  ShaleBack,
   //Shelly
   Shelly,
   ShellyFront,
@@ -423,6 +442,9 @@ export {
   Simon,
   SimonFront,
   SimonBack,
+  // Simone
+  Simone,
+  SimoneFront,
   // Sophie
   Sophie,
   SophieFront,
