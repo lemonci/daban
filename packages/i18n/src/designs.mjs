@@ -7905,12 +7905,9 @@ export const designs = {
     }
   },
   "sasha": {
-    "t": "Library/Sleeve",
-    "d": "A sleeve from the library of FreeSewing design parts",
+    "t": "Sasha skater dress",
+    "d": "Sasha is a skater dress with prince(ess) seams, based on the Noble block",
     "s": {
-      "adjustCuffEase.t": "Adjust cuff ease",
-      "adjustCuffEase.d": "Cuff ease is based on wrist measurement and predicted to result in negative ease at this sleeve length; click the button to set ease to {{{ ease }}}% for a circumference of {{{ circ }}}, which is predicted to result in neutral ease.",
-      "adjustCuffEase": "adjust ease",
       "backArmholeLength": "The length of the armhole at the back of the garment",
       "backArmholeToArmholePitch": "The length along the armhole from the bottom of the armhole to the back armhole pitch point",
       "frontArmholeLength": "The length of the armhole at the front of the garment",
@@ -7919,7 +7916,10 @@ export const designs = {
       "sleeveLength": "The length of the sleeve",
       "sleevecapTarget": "The theoretical length of the sleevecap we strive for",
       "sleevecapEase": "The mount of sleevecap ease",
-      "__sleevecapFactor": "An internal variable that is used to tweak the sleevecap draft"
+      "__sleevecapFactor": "An internal variable that is used to tweak the sleevecap draft",
+      "adjustCuffEase.t": "Adjust cuff ease",
+      "adjustCuffEase.d": "Cuff ease is based on wrist measurement and predicted to result in negative ease at this sleeve length; click the button to set ease to {{{ ease }}}% for a circumference of {{{ circ }}}, which is predicted to result in neutral ease.",
+      "adjustCuffEase": "adjust ease"
     },
     "p": {
       "back": "Back",
@@ -7930,13 +7930,13 @@ export const designs = {
       "frontInside": "Front inside",
       "frontOutside": "Front outside",
       "frontPoints": "Front base",
+      "sleeve": "Sleeve",
       "backOutsideTop": "Back outside top",
       "backOutsideSkirt": "Back outside skirt",
       "frontOutsideAbove": "Front outside (upper)",
       "frontOutsideBelow": "Front outside (lower)",
       "pocket": "Pocket bag",
-      "sleevecap": "Sleeve cap",
-      "sleeve": "Sleeve"
+      "sleevecap": "Sleeve cap"
     },
     "o": {
       "dartPosition": {
@@ -8051,45 +8051,9 @@ export const designs = {
         "t": "Full chest ease reduction",
         "d": "Allows you to independently reduce the ease around the chest to make it fit tight(er) in that area"
       },
-      "armholeDartPositionBackOffset": {
-        "t": "Armhole dart position back offset",
-        "d": "Controls the position of the back armhole dart relative to that of the front"
-      },
-      "bicepsEase": {
-        "t": "Biceps ease",
-        "d": "The amount of ease at your upper arm. Note that while we try to respect this, fitting the sleeve to the armhole takes precedence over respecting the exact amount of ease."
-      },
       "cuffEase": {
         "t": "Cuff ease",
-        "d": "The amount of ease at your wrist."
-      },
-      "lengthBonus": {
-        "t": "Length bonus",
-        "d": "Increase or decrease the skirt length with respect to knee length"
-      },
-      "necklineDepth": {
-        "t": "Neckline depth",
-        "d": "Control the depth of the neckline"
-      },
-      "necklineWidth": {
-        "t": "Neckline width",
-        "d": "Control the width of the neckline"
-      },
-      "necklineBend": {
-        "t": "Neckline bend",
-        "d": "Change the shape of the neckline from V-neck to rounded to boxy"
-      },
-      "pocketCurve": {
-        "t": "Pocket opening curve",
-        "d": "Controls the curvature of the pocket opening"
-      },
-      "pocketOpeningHeight": {
-        "t": "Pocket opening Height",
-        "d": "Controls the vertical dimension of the pocket opening"
-      },
-      "skirtWidthBonus": {
-        "t": "Skirt width bonus",
-        "d": "Increase or decrease the additional skirt width with respect to hip circumference"
+        "d": "The amount of ease around the wrist (or arm, for shorter sleeves)"
       },
       "sleevecapEase": {
         "t": "Sleevecap ease",
@@ -8174,6 +8138,42 @@ export const designs = {
       "sleeveWidthGuarantee": {
         "t": "Sleeve width guarantee",
         "d": "Controls how much of the sleeve width will be guaranteed. This determines how much we can alter the sleeve width to fit the sleeve in the armhole."
+      },
+      "armholeDartPositionBackOffset": {
+        "t": "Armhole dart position back offset",
+        "d": "Controls the position of the back armhole dart relative to that of the front"
+      },
+      "bicepsEase": {
+        "t": "Biceps ease",
+        "d": "The amount of ease at your upper arm. Note that while we try to respect this, fitting the sleeve to the armhole takes precedence over respecting the exact amount of ease."
+      },
+      "lengthBonus": {
+        "t": "Length bonus",
+        "d": "Increase or decrease the skirt length with respect to knee length"
+      },
+      "necklineDepth": {
+        "t": "Neckline depth",
+        "d": "Control the depth of the neckline"
+      },
+      "necklineWidth": {
+        "t": "Neckline width",
+        "d": "Control the width of the neckline"
+      },
+      "necklineBend": {
+        "t": "Neckline bend",
+        "d": "Change the shape of the neckline from V-neck to rounded to boxy"
+      },
+      "pocketCurve": {
+        "t": "Pocket opening curve",
+        "d": "Controls the curvature of the pocket opening"
+      },
+      "pocketOpeningHeight": {
+        "t": "Pocket opening Height",
+        "d": "Controls the vertical dimension of the pocket opening"
+      },
+      "skirtWidthBonus": {
+        "t": "Skirt width bonus",
+        "d": "Increase or decrease the additional skirt width with respect to hip circumference"
       },
       "withPocket": {
         "t": "With pocket",

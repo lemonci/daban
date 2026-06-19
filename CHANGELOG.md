@@ -3,6 +3,12 @@
 
 ## Unreleased
 
+### sasha
+
+#### Fixed
+
+ - Fixed incorrect translation order causing the wrong translation to be used
+
 
 ## 4.10.0 (2026-06-19)
 

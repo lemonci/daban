@@ -32,7 +32,7 @@ const Sasha = new Design({
 })
 
 // Merge translations
-const i18n = mergeI18n([nobleI18n, sashaI18n, sleeveI18n], {
+const i18n = mergeI18n([nobleI18n, sleeveI18n, sashaI18n], {
   o: {
     drop: ['dartPosition.armhole', 'dartPosition.shoulder'],
   },
