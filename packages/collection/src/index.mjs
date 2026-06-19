@@ -49,6 +49,7 @@ import { Polly as polly } from '@freesewing/polly'
 import { Sabrina as sabrina } from '@freesewing/sabrina'
 import { Sandy as sandy } from '@freesewing/sandy'
 import { Sarah as sarah } from '@freesewing/sarah'
+import { Sasha as sasha } from '@freesewing/sasha'
 import { Shale as shale } from '@freesewing/shale'
 import { Shelly as shelly } from '@freesewing/shelly'
 import { Shin as shin } from '@freesewing/shin'
@@ -129,6 +130,7 @@ export const designs = {
   sabrina,
   sandy,
   sarah,
+  sasha,
   shale,
   shelly,
   shin,

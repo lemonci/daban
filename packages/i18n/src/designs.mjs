@@ -7904,6 +7904,143 @@ export const designs = {
       }
     }
   },
+  "sasha": {
+    "t": "Sasha",
+    "d": "A description for Sasha",
+    "s": {},
+    "p": {
+      "back": "Back",
+      "backInside": "Back Inside",
+      "backOutside": "Back Outside",
+      "backPoints": "Back Points",
+      "front": "Front",
+      "frontInside": "Front Inside",
+      "frontOutside": "Front Outside",
+      "frontPoints": "Front Points"
+    },
+    "o": {
+      "dartPosition": {
+        "t": "Dart position",
+        "d": "Controls whether to split at the shoulder or armhole"
+      },
+      "dartPosition.armhole": {
+        "t": "Dart position at the armhole",
+        "d": "This moves the prince(ss) seam to the armhole"
+      },
+      "dartPosition.shoulder": {
+        "t": "Dart position at the shoulder",
+        "d": "This moves the prince(ss) seam to the shoulder"
+      },
+      "chestEase": {
+        "t": "Chest ease",
+        "d": "Controls the amount of ease at the chest"
+      },
+      "waistEase": {
+        "t": "Waist ease",
+        "d": "Controls the amount of ease at the waist"
+      },
+      "bustSpanEase": {
+        "t": "Bust span ease",
+        "d": "Controls the amount of ease along the bust span"
+      },
+      "waistdartposition": {
+        "t": "Waist dart position",
+        "d": "Controls the position of the waist 'dart', moving it to the center (negative) or side (positive)"
+      },
+      "backDartHeight": {
+        "t": "Controls the height of the back dart",
+        "d": "Back dart height"
+      },
+      "waistDartLength": {
+        "t": "Waist dart length",
+        "d": "Controls the length of the waist dart"
+      },
+      "shoulderDartCurvature": {
+        "t": "Shoulder dart curvature",
+        "d": "Controls the curvature of the upper part of the shoulder dart"
+      },
+      "shoulderDartPosition": {
+        "t": "Shoulder dart position",
+        "d": "Controls the position of the shoulder dart"
+      },
+      "upperDartLength": {
+        "t": "Upper dart length",
+        "d": "Controls the length of the upper dart"
+      },
+      "armholeDartPosition": {
+        "t": "Armhole dart position",
+        "d": "Controls the position of the armhole dart"
+      },
+      "armholeDepth": {
+        "t": "Armhole depth",
+        "d": "Controls the depth of the armhole"
+      },
+      "armholeDartCurved": {
+        "t": "Princess Seam Curviness",
+        "d": "Controls the curvature of the princess seam"
+      },
+      "armholeDartCurvedYes": {
+        "t": "Cruved princess seam",
+        "d": "The princess seam will have the v1 curvature"
+      },
+      "armholeDartCurvedNo": {
+        "t": "Straighter princess seam",
+        "d": "The princess seam will have the v2 curvature"
+      },
+      "armholeDartCurvePoint": {
+        "t": "Armhole princess seam curve point",
+        "d": "This controls where (vertically) the curve of the princess seam starts"
+      },
+      "armholeDartCurveWidth": {
+        "t": "Armhole princess seam curve width",
+        "d": "This controls the radius of the curve of the princess seam"
+      },
+      "backArmholeSlant": {
+        "t": "Back armhole slant",
+        "d": "Controls the slant of the armhole at the back"
+      },
+      "backArmholeCurvature": {
+        "t": "Back armhole curvature",
+        "d": "Controls how deep the armhole is scooped out at the back"
+      },
+      "frontArmholeCurvature": {
+        "t": "Front armhole curvature",
+        "d": "Controls how deep the armhole is scooped out at the front bottom"
+      },
+      "frontArmholePitchDepth": {
+        "t": "Front armhole pitch depth",
+        "d": "Controls how deep the armhole cuts into the front"
+      },
+      "backArmholePitchDepth": {
+        "t": "Back armhole pitch depth",
+        "d": "Controls how deep the armhole cuts into the back"
+      },
+      "backNeckCutout": {
+        "t": "Back neck cutout",
+        "d": "Controls how deep the neck is cutout in the back"
+      },
+      "backHemSlope": {
+        "t": "Back hem slope",
+        "d": "Controls the slope of the back hem"
+      },
+      "frontShoulderWidth": {
+        "t": "Front shoulder width",
+        "d": "Controls how much width is added to the shoulder in the front"
+      },
+      "highBustWidth": {
+        "t": "High bust width",
+        "d": "Controls the width of the high bust"
+      },
+      "shoulderToShoulderEase": {
+        "t": "Shoulder to shoulder ease",
+        "d": "Controls the amount of ease along the shoulder to shoulder measurement"
+      },
+      "fullChestEaseReduction": {
+        "t": "Full chest ease reduction",
+        "d": "Allows you to independently reduce the ease around the chest to make it fit tight(er) in that area"
+      }
+    }
+  },
   "shale": {
     "t": "Shale Shorts",
     "d": "A FreeSewing pattern for shorts",

@@ -1,0 +1,255 @@
+{
+  "t": "Sasha skater dress",
+  "d": "Sasha is a skater dress with prince(ess) seams, based on the Noble block",
+  "p": {
+    "back": "Back",
+    "backInside": "Back inside",
+    "backOutsideTop": "Back outside top",
+    "backOutsideSkirt": "Back outside skirt",
+    "backOutside": "Back outside",
+    "backPoints": "Back base",
+    "frontInside": "Front inside",
+    "frontOutside": "Front outside",
+    "frontOutsideAbove": "Front outside (upper)",
+    "frontOutsideBelow": "Front outside (lower)",
+    "frontPoints": "Front base",
+    "pocket": "Pocket bag",
+    "sleevecap": "Sleeve cap",
+    "sleeve": "Sleeve"
+  },
+  "s": {
+    "adjustCuffEase.t": "Adjust cuff ease",
+    "adjustCuffEase.d": "Cuff ease is based on wrist measurement and predicted to result in negative ease at this sleeve length; click the button to set ease to {{{ ease }}}% for a circumference of {{{ circ }}}, which is predicted to result in neutral ease.",
+    "adjustCuffEase": "adjust ease"
+  },
+  "o": {
+    "armholeDartCurved": {
+      "t": "Princess Seam Curviness",
+      "d": "Controls the curvature of the princess seam"
+    },
+    "armholeDartCurvePoint": {
+      "t": "Armhole princess seam curve point",
+      "d": "This controls where (vertically) the curve of the princess seam starts"
+    },
+    "armholeDartCurveWidth": {
+      "t": "Armhole princess seam curve width",
+      "d": "This controls the radius of the curve of the princess seam"
+    },
+    "armholeDartPosition": {
+      "t": "Armhole dart position",
+      "d": "Controls the position of the armhole dart"
+    },
+    "armholeDartPositionBackOffset": {
+      "t": "Armhole dart position back offset",
+      "d": "Controls the position of the back armhole dart relative to that of the front"
+    },
+    "armholeDepth": {
+      "t": "Armhole depth",
+      "d": "Controls the depth of the armhole. Higher values make a deeper armhole."
+    },
+    "backArmholeSlant": {
+      "t": "Back armhole slant",
+      "d": "Controls the slant of the armhole at the back"
+    },
+    "backArmholeCurvature": {
+      "t": "Back armhole curvature",
+      "d": "Controls how deep the armhole is scooped out at the back"
+    },
+    "backArmholePitchDepth": {
+      "t": "Back armhole pitch depth",
+      "d": "Controls how deep the armhole cuts into the back"
+    },
+    "backDartHeight": {
+      "t": "Back dart height",
+      "d": "Controls the height of the back dart"
+    },
+    "backHemSlope": {
+      "t": "Back hem slope",
+      "d": "Constrols the slope of the back hem"
+    },
+    "backNeckCutout": {
+      "t": "Back neck cutout",
+      "d": "How deep the neck is cut out at the back"
+    },
+    "bicepsEase": {
+      "t": "Biceps ease",
+      "d": "The amount of ease at your upper arm. Note that while we try to respect this, fitting the sleeve to the armhole takes precedence over respecting the exact amount of ease."
+    },
+    "bustSpanEase": {
+      "t": "Bust span ease",
+      "d": "Controls the amount of ease along the bust span"
+    },
+    "chestEase": {
+      "t": "Chest ease",
+      "d": "Controls the amount of ease at the chest"
+    },
+    "cuffEase": {
+      "t": "Cuff ease",
+      "d": "The amount of ease around the wrist (or arm, for shorter sleeves)"
+    },
+    "frontShoulderWidth": {
+      "t": "Front shoulder width",
+      "d": "Controls how much width is added to the shoulder in the front"
+    },
+    "frontArmholeCurvature": {
+      "t": "Front armhole curvature",
+      "d": "Controls how deep the armhole is scooped out at the front bottom"
+    },
+    "frontArmholePitchDepth": {
+      "t": "Front armhole pitch depth",
+      "d": "Controls how deep the armhole cuts into the front"
+    },
+    "fullChestEaseReduction": {
+      "t": "Full chest ease reduction",
+      "d": "Allows you to independently reduce the ease around the chest to make it fit tight(er) in that area"
+    },
+    "highBustWidth": {
+      "t": "High bust width",
+      "d": "Controls the width of the high bust"
+    },
+    "lengthBonus": {
+      "t": "Length bonus",
+      "d": "Increase or decrease the skirt length with respect to knee length"
+    },
+    "necklineDepth": {
+      "t": "Neckline depth",
+      "d": "Control the depth of the neckline"
+    },
+    "necklineWidth": {
+      "t": "Neckline width",
+      "d": "Control the width of the neckline"
+    },
+    "necklineBend": {
+      "t": "Neckline bend",
+      "d": "Change the shape of the neckline from V-neck to rounded to boxy"
+    },
+    "pocketCurve": {
+      "t": "Pocket opening curve",
+      "d": "Controls the curvature of the pocket opening"
+    },
+    "pocketOpeningHeight": {
+      "t": "Pocket opening Height",
+      "d": "Controls the vertical dimension of the pocket opening"
+    },
+  "shoulderDartPosition": {
+      "t": "Shoulder dart position",
+      "d": "Controls the position of the shoulder dart"
+    },
+    "shoulderDartCurvature": {
+      "t": "Shoulder dart curvature",
+      "d": "Controls the curvature of the upper part of the shoulder dart"
+    },
+    "shoulderToShoulderEase": {
+      "t": "Shoulder to shoulder ease",
+      "d": "Controls the amount of ease along the shoulder to shoulder measurement"
+    },
+    "skirtWidthBonus": {
+      "t": "Skirt width bonus",
+      "d": "Increase or decrease the additional skirt width with respect to hip circumference"
+    },
+    "sleevecapEase": {
+      "t": "Sleevecap ease",
+      "d": "The amount by which the sleevecap seam is longer than the armhole seam."
+    },
+    "sleevecapTopFactorX": {
+      "t": "Sleevecap top X",
+      "d": "Controls the horizontal location of the sleevecap top."
+    },
+    "sleevecapTopFactorY": {
+      "t": "Sleevecap top Y",
+      "d": "Controls the height of the sleevecap. A higher value results in a higher and more narrow sleevecap."
+    },
+    "sleevecapBackFactorX": {
+      "t": "Sleevecap back X",
+      "d": "Controls the placement of the sleevecap back pitchpoint on the X-axis (horizontal)"
+    },
+    "sleevecapBackFactorY": {
+      "t": "Sleevecap back Y",
+      "d": "Controls the placement of the sleevecap back pitchpoint on the Y-axis (vertical)"
+    },
+    "sleevecapFrontFactorX": {
+      "t": "Sleevecap front X",
+      "d": "Controls the placement of the sleevecap front pitchpoint on the X-axis (horizontal)"
+    },
+    "sleevecapFrontFactorY": {
+      "t": "Sleevecap front Y",
+      "d": "Controls the placement of the sleevecap front pitchpoint on the Y-axis (vertical)"
+    },
+    "sleevecapQ1Offset": {
+      "t": "Sleevecap Q1 offset",
+      "d": "Controls the curvature of the sleevecap in the first quadrant (front armhole)"
+    },
+    "sleevecapQ2Offset": {
+      "t": "Sleevecap Q2 offset",
+      "d": "Controls the curvature of the sleevecap in the second quadrant (front shoulder)"
+    },
+    "sleevecapQ3Offset": {
+      "t": "Sleevecap Q3 offset",
+      "d": "Controls the curvature of the sleevecap in the third quadrant (back shoulder)"
+    },
+    "sleevecapQ4Offset": {
+      "t": "Sleevecap Q4 offset",
+      "d": "Controls the curvature of the sleevecap in the fourth quadrant (back armhole)"
+    },
+    "sleevecapQ1Spread1": {
+      "t": "Sleevecap Q1 downward spread",
+      "d": "Controls the spread of the sleevecap first quadrant curvature towards the armhole"
+    },
+    "sleevecapQ1Spread2": {
+      "t": "Sleevecap Q1 upward spread",
+      "d": "Controls the spread of the sleevecap first quadrant curvature towards the shoulder"
+    },
+    "sleevecapQ2Spread1": {
+      "t": "Sleevecap Q2 downward spread",
+      "d": "Controls the spread of the sleevecap second quadrant curvature towards the armhole"
+    },
+    "sleevecapQ2Spread2": {
+      "t": "Sleevecap Q2 upward spread",
+      "d": "Controls the spread of the sleevecap second quadrant curvature towards the shoulder"
+    },
+    "sleevecapQ3Spread1": {
+      "t": "Sleevecap Q3 upward spread",
+      "d": "Controls the spread of the sleevecap third quadrant curvature towards the shoulder"
+    },
+    "sleevecapQ3Spread2": {
+      "t": "Sleevecap Q3 downward spread",
+      "d": "Controls the spread of the sleevecap third quadrant curvature towards the armhole"
+    },
+    "sleevecapQ4Spread1": {
+      "t": "Sleevecap Q4 upward spread",
+      "d": "Controls the spread of the sleevecap fourth quadrant curvature towards the shoulder"
+    },
+    "sleevecapQ4Spread2": {
+      "t": "Sleevecap Q4 downward spread",
+      "d": "Controls the spread of the sleevecap fourth quadrant curvature towards the armhole"
+    },
+    "sleeveLengthBonus": {
+      "t": "Sleeve length bonus",
+      "d": "The amount to lengthen the sleeve. A negative value will shorten it."
+    },
+    "sleeveWidthGuarantee": {
+      "t": "Sleeve width guarantee",
+      "d": "Controls how much of the sleeve width will be guaranteed. This determines how much we can alter the sleeve width to fit the sleeve in the armhole."
+    },
+    "upperDartLength": {
+      "t": "Upper dart length",
+      "d": "Controls the length of the upper dart"
+    },
+    "waistDartLength": {
+      "t": "Waist dart length",
+      "d": "Controls the length of the waist dart"
+    },
+    "waistdartposition": {
+      "t": "Waist dart position",
+      "d": "Controls the position of the waist 'dart', moving it to the center (negative) or side (positive)"
+    },
+    "waistEase": {
+      "t": "Waist ease",
+      "d": "Controls the amount of ease at the waist"
+    },
+    "withPocket": {
+      "t": "With pocket",
+      "d": "Splits the front outside part to add a pocket"
+    }
+  }
+}
