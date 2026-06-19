@@ -7905,31 +7905,43 @@ export const designs = {
     }
   },
   "sasha": {
-    "t": "Sasha",
-    "d": "A description for Sasha",
-    "s": {},
+    "t": "Library/Sleeve",
+    "d": "A sleeve from the library of FreeSewing design parts",
+    "s": {
+      "adjustCuffEase.t": "Adjust cuff ease",
+      "adjustCuffEase.d": "Cuff ease is based on wrist measurement and predicted to result in negative ease at this sleeve length; click the button to set ease to {{{ ease }}}% for a circumference of {{{ circ }}}, which is predicted to result in neutral ease.",
+      "adjustCuffEase": "adjust ease",
+      "backArmholeLength": "The length of the armhole at the back of the garment",
+      "backArmholeToArmholePitch": "The length along the armhole from the bottom of the armhole to the back armhole pitch point",
+      "frontArmholeLength": "The length of the armhole at the front of the garment",
+      "frontArmholeToArmholePitch": "The length along the armhole from the bottom of the armhole to the front armhole pitch point",
+      "sleevecapLength": "The length of the sleevecap",
+      "sleeveLength": "The length of the sleeve",
+      "sleevecapTarget": "The theoretical length of the sleevecap we strive for",
+      "sleevecapEase": "The mount of sleevecap ease",
+      "__sleevecapFactor": "An internal variable that is used to tweak the sleevecap draft"
+    },
     "p": {
       "back": "Back",
-      "backInside": "Back Inside",
-      "backOutside": "Back Outside",
-      "backPoints": "Back Points",
+      "backInside": "Back inside",
+      "backOutside": "Back outside",
+      "backPoints": "Back base",
       "front": "Front",
-      "frontInside": "Front Inside",
-      "frontOutside": "Front Outside",
-      "frontPoints": "Front Points"
+      "frontInside": "Front inside",
+      "frontOutside": "Front outside",
+      "frontPoints": "Front base",
+      "backOutsideTop": "Back outside top",
+      "backOutsideSkirt": "Back outside skirt",
+      "frontOutsideAbove": "Front outside (upper)",
+      "frontOutsideBelow": "Front outside (lower)",
+      "pocket": "Pocket bag",
+      "sleevecap": "Sleeve cap",
+      "sleeve": "Sleeve"
     },
     "o": {
       "dartPosition": {
         "t": "Dart position",
         "d": "Controls whether to split at the shoulder or armhole"
-      },
-      "dartPosition.armhole": {
-        "t": "Dart position at the armhole",
-        "d": "This moves the prince(ss) seam to the armhole"
-      },
-      "dartPosition.shoulder": {
-        "t": "Dart position at the shoulder",
-        "d": "This moves the prince(ss) seam to the shoulder"
       },
       "chestEase": {
         "t": "Chest ease",
@@ -7948,8 +7960,8 @@ export const designs = {
         "d": "Controls the position of the waist 'dart', moving it to the center (negative) or side (positive)"
       },
       "backDartHeight": {
-        "t": "Controls the height of the back dart",
-        "d": "Back dart height"
+        "t": "Back dart height",
+        "d": "Controls the height of the back dart"
       },
       "waistDartLength": {
         "t": "Waist dart length",
@@ -7973,7 +7985,7 @@ export const designs = {
       },
       "armholeDepth": {
         "t": "Armhole depth",
-        "d": "Controls the depth of the armhole"
+        "d": "Controls the depth of the armhole. Higher values make a deeper armhole."
       },
       "armholeDartCurved": {
         "t": "Princess Seam Curviness",
@@ -8017,11 +8029,11 @@ export const designs = {
       },
       "backNeckCutout": {
         "t": "Back neck cutout",
-        "d": "Controls how deep the neck is cutout in the back"
+        "d": "How deep the neck is cut out at the back"
       },
       "backHemSlope": {
         "t": "Back hem slope",
-        "d": "Controls the slope of the back hem"
+        "d": "Constrols the slope of the back hem"
       },
       "frontShoulderWidth": {
         "t": "Front shoulder width",
@@ -8038,6 +8050,134 @@ export const designs = {
       "fullChestEaseReduction": {
         "t": "Full chest ease reduction",
         "d": "Allows you to independently reduce the ease around the chest to make it fit tight(er) in that area"
+      },
+      "armholeDartPositionBackOffset": {
+        "t": "Armhole dart position back offset",
+        "d": "Controls the position of the back armhole dart relative to that of the front"
+      },
+      "bicepsEase": {
+        "t": "Biceps ease",
+        "d": "The amount of ease at your upper arm. Note that while we try to respect this, fitting the sleeve to the armhole takes precedence over respecting the exact amount of ease."
+      },
+      "cuffEase": {
+        "t": "Cuff ease",
+        "d": "The amount of ease at your wrist."
+      },
+      "lengthBonus": {
+        "t": "Length bonus",
+        "d": "Increase or decrease the skirt length with respect to knee length"
+      },
+      "necklineDepth": {
+        "t": "Neckline depth",
+        "d": "Control the depth of the neckline"
+      },
+      "necklineWidth": {
+        "t": "Neckline width",
+        "d": "Control the width of the neckline"
+      },
+      "necklineBend": {
+        "t": "Neckline bend",
+        "d": "Change the shape of the neckline from V-neck to rounded to boxy"
+      },
+      "pocketCurve": {
+        "t": "Pocket opening curve",
+        "d": "Controls the curvature of the pocket opening"
+      },
+      "pocketOpeningHeight": {
+        "t": "Pocket opening Height",
+        "d": "Controls the vertical dimension of the pocket opening"
+      },
+      "skirtWidthBonus": {
+        "t": "Skirt width bonus",
+        "d": "Increase or decrease the additional skirt width with respect to hip circumference"
+      },
+      "sleevecapEase": {
+        "t": "Sleevecap ease",
+        "d": "The amount by which the sleevecap seam is longer than the armhole seam."
+      },
+      "sleevecapTopFactorX": {
+        "t": "Sleevecap top X",
+        "d": "Controls the horizontal location of the sleevecap top."
+      },
+      "sleevecapTopFactorY": {
+        "t": "Sleevecap top Y",
+        "d": "Controls the height of the sleevecap. A higher value results in a higher and more narrow sleevecap."
+      },
+      "sleevecapBackFactorX": {
+        "t": "Sleevecap back X",
+        "d": "Controls the placement of the sleevecap back pitchpoint on the X-axis (horizontal)"
+      },
+      "sleevecapBackFactorY": {
+        "t": "Sleevecap back Y",
+        "d": "Controls the placement of the sleevecap back pitchpoint on the Y-axis (vertical)"
+      },
+      "sleevecapFrontFactorX": {
+        "t": "Sleevecap front X",
+        "d": "Controls the placement of the sleevecap front pitchpoint on the X-axis (horizontal)"
+      },
+      "sleevecapFrontFactorY": {
+        "t": "Sleevecap front Y",
+        "d": "Controls the placement of the sleevecap front pitchpoint on the Y-axis (vertical)"
+      },
+      "sleevecapQ1Offset": {
+        "t": "Sleevecap Q1 offset",
+        "d": "Controls the curvature of the sleevecap in the first quadrant (front armhole)"
+      },
+      "sleevecapQ2Offset": {
+        "t": "Sleevecap Q2 offset",
+        "d": "Controls the curvature of the sleevecap in the second quadrant (front shoulder)"
+      },
+      "sleevecapQ3Offset": {
+        "t": "Sleevecap Q3 offset",
+        "d": "Controls the curvature of the sleevecap in the third quadrant (back shoulder)"
+      },
+      "sleevecapQ4Offset": {
+        "t": "Sleevecap Q4 offset",
+        "d": "Controls the curvature of the sleevecap in the fourth quadrant (back armhole)"
+      },
+      "sleevecapQ1Spread1": {
+        "t": "Sleevecap Q1 downward spread",
+        "d": "Controls the spread of the sleevecap first quadrant curvature towards the armhole"
+      },
+      "sleevecapQ1Spread2": {
+        "t": "Sleevecap Q1 upward spread",
+        "d": "Controls the spread of the sleevecap first quadrant curvature towards the shoulder"
+      },
+      "sleevecapQ2Spread1": {
+        "t": "Sleevecap Q2 downward spread",
+        "d": "Controls the spread of the sleevecap second quadrant curvature towards the armhole"
+      },
+      "sleevecapQ2Spread2": {
+        "t": "Sleevecap Q2 upward spread",
+        "d": "Controls the spread of the sleevecap second quadrant curvature towards the shoulder"
+      },
+      "sleevecapQ3Spread1": {
+        "t": "Sleevecap Q3 upward spread",
+        "d": "Controls the spread of the sleevecap third quadrant curvature towards the shoulder"
+      },
+      "sleevecapQ3Spread2": {
+        "t": "Sleevecap Q3 downward spread",
+        "d": "Controls the spread of the sleevecap third quadrant curvature towards the armhole"
+      },
+      "sleevecapQ4Spread1": {
+        "t": "Sleevecap Q4 upward spread",
+        "d": "Controls the spread of the sleevecap fourth quadrant curvature towards the shoulder"
+      },
+      "sleevecapQ4Spread2": {
+        "t": "Sleevecap Q4 downward spread",
+        "d": "Controls the spread of the sleevecap fourth quadrant curvature towards the armhole"
+      },
+      "sleeveLengthBonus": {
+        "t": "Sleeve length bonus",
+        "d": "The amount to lengthen the sleeve. A negative value will shorten it."
+      },
+      "sleeveWidthGuarantee": {
+        "t": "Sleeve width guarantee",
+        "d": "Controls how much of the sleeve width will be guaranteed. This determines how much we can alter the sleeve width to fit the sleeve in the armhole."
+      },
+      "withPocket": {
+        "t": "With pocket",
+        "d": "Splits the front outside part to add a pocket"
       }
     }
   },
@@ -8063,7 +8203,7 @@ export const designs = {
       "waistbandAngle.t": "Waist angle",
       "waistbandAngle.d": "Based on our (very rough) estimation, your optimal front waistband angle is {{ angle }}°.",
       "waistHipsRatio.t": "Waist larger than hips",
-      "waistHipsRatio.d": "This pattern assumes that your waist is smaller than your hips. If you have a larger waist than hips, the waistband may slip easily and you may need to do manual changes to the pattern to fit your body.",
+      "waistHipsRatio.d": "This pattern assumes that your waist is smaller than your hips. If you have a larger waist than hips, the waistband may slip easily and you may need to either lower the Waist Height option to make the waistband sit on your hips or do other manual changes to the pattern to fit your body.",
       "hipsSeatRatio.t": "Hips are larger than seat",
       "hipsSeatRatio.d": "This pattern assumes that your hips are smaller than your seat. If you have a larger hips than seat, the waistband might not fit over your hips and you may need to do manual changes to the pattern to fit your body.",
       "badWaistbandHeight.t": "Could not fit waistband",

@@ -1,6 +1,14 @@
 # Change log for: @freesewing/react
 
 
+## 4.10.0 (2026-06-19)
+
+### Fixed
+
+ - Replace non-existing yaml.parse with yaml.load in Import component
+ - Change bookmark URL parsing RegExp to use new UUID format
+ - Linedrawings of Simon, Simone, Hugo, Shale, Hannah
+
 ## 4.9.0 (2026-05-25)
 
 ### Fixed

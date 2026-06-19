@@ -1,6 +1,12 @@
 # Change log for: @freesewing/shale
 
 
+## 4.10.0 (2026-06-19)
+
+### Added
+
+ - Improve waistband diagnostics and flag message
+
 ## 4.8.0 (2026-04-18)
 
 ### Added

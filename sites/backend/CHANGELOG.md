@@ -1,6 +1,12 @@
 # Change log for: @freesewing/backend
 
 
+## 4.10.0 (2026-06-19)
+
+### Added
+
+ - Added authors endpoint
+
 ## 4.9.0 (2026-05-25)
 
 ### Added

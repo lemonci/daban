@@ -1,6 +1,12 @@
 # Change log for: @freesewing/opal
 
 
+## 4.10.0 (2026-06-19)
+
+### Fixed
+
+ - Fixes in part i18n data
+
 ## 4.5.0 (2026-02-21)
 
 ### Fixed

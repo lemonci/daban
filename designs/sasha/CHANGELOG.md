@@ -1,6 +1,12 @@
 # Change log for: @freesewing/sasha
 
 
+## 4.10.0 (2026-06-19)
+
+### Added
+
+ - Initial release of Sasha, a skater dress based on Noble
+
 ## 3.0.0 (2023-09-30)
 
 ### Changed

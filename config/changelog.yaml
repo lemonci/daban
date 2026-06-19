@@ -1,6 +1,26 @@
 Unreleased:
   Added:
 
+4.10.0:
+  date: 2026-06-19
+
+  Added:
+    backend:
+      - Added authors endpoint
+    sasha:
+      - Initial release of Sasha, a skater dress based on Noble
+    shale:
+      - Improve waistband diagnostics and flag message
+
+  Fixed:
+    hannah:
+      - Fix i18n data
+    opal:
+      - Fixes in part i18n data
+    react:
+      - Replace non-existing yaml.parse with yaml.load in Import component
+      - Change bookmark URL parsing RegExp to use new UUID format
+      - Linedrawings of Simon, Simone, Hugo, Shale, Hannah
 
 4.9.0:
   date: 2026-05-25
