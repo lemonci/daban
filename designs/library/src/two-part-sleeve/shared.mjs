@@ -125,7 +125,7 @@ function draftTwoPartSleeve({ Path, paths, points, store, options, part }) {
       .curve(points.usTipCpBottom, points.usLeftEdgeCpRight, points.usLeftEdgeRight)
       .line(points.usLeftEdge)
       .length()
-    store.set('sleevecapLength', lenTop + lenUnder)
+    store.pset('sleevecapLength', lenTop + lenUnder)
   }
 
   /*
@@ -136,8 +136,8 @@ function draftTwoPartSleeve({ Path, paths, points, store, options, part }) {
 
   let armholeLength = store.pget('frontArmholeLength', 200) + store.pget('backArmholeLength', 200)
   let sleevecapEase = armholeLength * options.sleevecapEase
-  store.set('sleevecapEase', sleevecapEase)
-  store.set('sleevecapTarget', armholeLength + sleevecapEase)
+  store.pset('sleevecapEase', sleevecapEase)
+  store.pset('sleevecapTarget', armholeLength + sleevecapEase)
 
   let delta = 0
   let runs = 0
@@ -149,7 +149,7 @@ function draftTwoPartSleeve({ Path, paths, points, store, options, part }) {
     delta = store.pget('sleevecapLength') - target
     if (delta > 0) tweak = tweak * 0.99
     else tweak = tweak * 1.02
-  } while (Math.abs(delta) > 2 && runs < 25)
+  } while (Math.abs(delta) > 2 && runs < 50)
 
   // Paths
   paths.ts = new Path()
