@@ -1,0 +1,232 @@
+---
+date: '2026-07-01'
+edition: '2026q3'
+intro: 'Welcome to the 2026 Summer edition of the FreeSewing newsletter.'
+title: '2026 Summer edition'
+authors:
+  - 1
+toc_max_heading_level: 2
+---
+
+Welcome to the 2026 Summer edition of the FreeSewing newsletter.
+
+As the calendar ticks over to July, here's the roundup of last quarter:
+
+- 🤔 Why did you join FreeSewing? (1-minute read by joost)
+- 👕 Ashley, Hannah, Polly, Tina and Toni: Our five latest designs (2-minute read by joost)
+- 🪂 Wired lists FreeSewing as an example of _All the Ways Europe Is Ditching American Technology_ (1-minute read by joost)
+- 🏗️ Infrastructure as (open source) code (2-minute read by joost)
+- 🎨 The ongoing rewrite of FreeSewing.eu (2-minute read by joost)
+- 🤝 The FreeSewing fellowship (3-minute read by joost)
+
+Let's go.
+
+&nbsp;
+
+&nbsp;
+
+## 🤔 Why did you join FreeSewing?
+
+I've been working on our website a bit (see below) and as I was fixing some
+positioning issues on the _Reasons to join_ section, I realized that all these
+reasons are written from our vantage point. But people probably have
+their own reasons, and those are just as valid, if not more so.
+
+So, we've added space for an additional reason that is randomly picked from
+a list of reasons submitted by our users. Obviously, that makes most sense
+when we have a diverse list of reasons, so that's where you come in.
+
+We'd like to hear why you decided to join FreeSewing, or in retrospect, why do
+you think it’s a good idea for others to do so?
+
+You can share your input [on our
+forum](https://forum.freesewing.eu/t/why-did-you-join-freesewing/1124), or just
+hit reply, that works too.
+
+&nbsp;
+
+&nbsp;
+
+## 👕 Ashley, Hannah, Polly, Tina and Toni: Our five latest designs
+
+Over the last 3 months, we've seen 3 minor releases of FreeSewing: versions 4.8, 4.9, and 4.10.
+Together, they combine for 5 new designs:
+
+- [Ashley A-Line Shorts](https://freesewing.eu/designs/ashley/) by Gawain:
+  > _Ashley extends the Titan block. Much of its code is directly lifted from
+  > Percy, for cutting the legs short, drafting the pockets, and automatically
+  > setting a curve for the waistband (though Ashley adds a more dramatic curve
+  > to the back waistband only instead of curving all the waistband pieces).
+  > The fly pieces and belt loops are pilfered from Charlie. The big new thing
+  > Ashley does is add a yoke to the back pieces for some extra shaping at your
+  > butt. This is a common detail on jeans._
+- [Hannah Hoodie](https://freesewing.eu/designs/hannah/) by Jonathan:
+  > _Hannah is a relatively fitted hoodie pattern with optional support for
+  > fitting curvy bodies and larger busts, bums and bellies and different
+  > sleeve style options._ > _Hannah is based on Toni Top and the hood from Hugo and Yuri._
+- [Polly Plush](https://freesewing.eu/designs/polly/) by Gawain:
+  > _Polly is a base to make simple humanoid or anthropomorphic fabric dolls.
+  > It has many options to change the size and proportions of the doll, and a
+  > couple of alternate heads and legs to allow for more animal-like
+  > characters_
+- [Toni Top](https://freesewing.eu/designs/toni/) by Jonathan:
+  > _Toni is a configurable t-shirt or top design that supports different
+  > sleeve styles. It has basic support for fitting large busts, bellies and
+  > bums. These special adjustments are only enabled if you provide the related
+  > optional measurements._
+- [Tina Top](https://freesewing.eu/designs/tina/) by Jonathan:
+  > _Tina is a simple overlap/faux wrap top based on the Toni top._
+
+&nbsp;
+
+&nbsp;
+
+## 🪂 Wired lists FreeSewing as an example of _All the Ways Europe Is Ditching American Technology_
+
+Wired published an article about all the ways Europe is moving away from US tech:
+
+- [www.wired.com/story/all-the-ways-europe-is-ditching-american-technology/](https://www.wired.com/story/all-the-ways-europe-is-ditching-american-technology/)
+
+As a flanking resource to go along with the article, they have compiled a
+chronological timeline of migrations which includes -- as its very second entry
+-- the migration of FreeSewing from US tech providers to EU-based alternatives.
+
+It is of course not a surprise to us that we did that migration, but it was a
+surprise to have been included on this list. So thanks for the shout-out, Wired.
+
+## 🏗️ Infrastructure as (open source) code
+
+If sewing or sewing pattern is all you care about, then I guess you can stop
+reading here, for the remainder of this newsletter will be dedicated to the
+questions raised in our previous edition, and in particular, what steps we've
+taken in the mean time.
+
+As a reminder, in our previous edition of this newsletter, I talked about being
+spread too thin, and how we wanted to grow the project horizontally to ensure
+that we cannot merely cope, but continue to thrive, offer more designs, a
+better service, and so on.
+
+As part of that endeavor, in May [we have open-sourced FreeSewing's
+infrastructure](https://codeberg.org/freesewing/freesewing/src/branch/develop/ansible).
+The configuration of various servers and the services running
+on them, how the systems are set up, Ansible playbooks to manage them, and so
+on.
+
+At a time when other people and organizations are actively closing off
+repositories because of the threat of vulnerability discoveries by AI models,
+this is perhaps counter-intuitive, if not ill-advised.
+
+However, our aim here is clear: We want to get more people actively involved.
+So this is why we are dragging more of what goes on behind the scenes into the
+sunlight, in the hopes that it attracts contributors who have an interest in
+that behind-the-scenes stuff.
+
+If you are one of those people who are interested in learning by doing, then
+please keep reading, there's more to come.
+
+&nbsp;
+
+&nbsp;
+
+## 🎨 The ongoing rewrite of FreeSewing.eu
+
+Another area where we need to find more help is in maintaining our website. To
+facilitate that, we have embarked on a refactor to port our website from
+Docusaurus/webpack to Vite in an effort to slash build times and memory
+consumption. This should make it easier for people to dip their toes in, since
+currently even getting the website's development environment to run is
+something that simply won't work for some contributors due to memory
+constraints.
+
+We're not there yet, but we've got most of the functionality up and running,
+and the results are rather satisfying.
+
+On the build infrastructure, which gives us a good comparison for total build time (prebuild + build), here's the speed-up:
+
+- `develop` branch (Docusaurus): 814 seconds (13:34)
+- `eusite` branch (Vite): 44 seconds
+
+There's one big catch though: We (currently) do not generate SSR output for the vite site.
+This is something we might add later, although these days I'm not certain that
+it's all that important. I mean, it's important for SEO but to what extent is
+that relevant in the age of LLMs. Even people who use Google are not seeing
+traditional search results.
+
+As I mentioned, this is a work-in-progress. There's an [open pull
+request](https://codeberg.org/freesewing/freesewing/pulls/871) for it, and
+perhaps more importantly, we publish preview builds at
+[preview.freesewing.eu](https://preview.freesewing.eu/).
+
+So feel free to check it out and kick the tires, even though we know there are
+still sharp edges, we appreciate the feedback. Oh, and some of you will be
+happy to hear that we've brought back themes, including the _hax0r_ theme,
+which was a fan favorite.
+
+&nbsp;
+
+&nbsp;
+
+## 🤝 The FreeSewing Fellowship
+
+There is, in the academic, professional, or vocational contexts, this concept
+of a _fellowship_. It's basically an exchange where one party wants to learn,
+and the other could use some help. And so they make a deal that benefits them
+both. For example, if you wanted to learn to be a blacksmith, you would try to
+find a blacksmith who would take you under their wing and learn the trade, in
+return for you helping out.
+
+In the same way, we would like to launch a _FreeSewing fellowship_. The idea
+being that if you are somebody -- or know somebody -- who is interested in what we
+do, then please step forward. We will teach you everything we know in
+exchange for your help.
+
+Here's some food for thought:
+
+- This FreeSewing newsletter goes out to over 63K subscribers. Have you ever
+  sent an email to 63K people, or tried to? How would you do that? And how
+  much would it cost?
+- Our backend database holds just over 520K user accounts. Are you involved in
+  a project that has half a million user accounts? What database would you use?
+  How would you structure it?
+- Our main website consumes about 7 to 9 terabytes of traffic every month. Does
+  that seem like a lot? Where would you host it? And what sort of bill can you
+  expect for that amount of traffic?
+- The editor on our preview site is currently broken due to an issue that is
+  known as _the temporal dead zone_ in JavaScript. Have you ever heard
+  of it? Does it sound kinda intriguing? Or rather boring?
+- Our editor is called as a single React component, but under the hood there's
+  plenty of _prop-drilling_ which tends to trigger frequent re-renders.
+  Would a React context be better, or should we switch to something like
+  Zustand for state management? Maybe we should be glad it works at all and not
+  touch it?
+
+There are no right or wrong answers to these questions. Chances are, these are
+not even questions that you find particularly interesting. And that's fine.
+You're here for the sewing patterns, right?
+
+I am including these questions for the people who do find (some of) them
+interesting. Because those are the people we are hoping will want to consider
+our fellowship.
+
+To be clear, it would be great to have people step forward who know the answers
+to all of these questions. But that is probably not very realistic.
+
+So instead, we're looking for people who do not know (all) the answers, but do
+find the questions interesting, and would like to learn more.
+
+> _Fellowships that are unpaid are typically seen as a *bad thing* because it's
+> understood that only people with wealth (or wealthy parents) can undertake such a
+> fellowship._
+>
+> _FreeSewing does not have the financial means to offer a paid fellowship.
+> But, we also do not expect the kind of time commitment of a (full-time) job.
+> Rather, this is something you would do on the side, as a hobby or learning track._
+
+In summary, this is the deal: We'll teach you everything we know, in return for your help.
+
+- If you're interested, please hit reply and let us know.
+- If you know somebody who could be interested, feel free to forward this open invitation.
+
+Thank you for considering it.
+
+joost
