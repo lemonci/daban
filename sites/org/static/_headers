@@ -1,0 +1,5 @@
+/blog/rss.xml
+  Cache-Control: public, max-age=3600, must-revalidate
+
+/newsletter/rss.xml
+  Cache-Control: public, max-age=3600, must-revalidate

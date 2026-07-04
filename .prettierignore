@@ -26,6 +26,7 @@ yarn.lock
 .eslintignore
 .gitkeep
 .all-contributorsrc
+_headers
 .nvmrc
 ansible.cfg
 sites/org/docs/docs/designs/*/options/readme.mdx
