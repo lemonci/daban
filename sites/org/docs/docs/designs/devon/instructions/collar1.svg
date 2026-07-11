@@ -2,9 +2,9 @@
 <!-- Created with Inkscape (http://www.inkscape.org/) -->
 
 <svg
-   width="128.78612mm"
-   height="25.221443mm"
-   viewBox="0 0 128.78612 25.221443"
+   width="128.786mm"
+   height="29.221001mm"
+   viewBox="0 0 128.786 29.221"
    version="1.1"
    id="svg1"
    inkscape:version="1.4 (86a8ad7, 2024-10-11)"
@@ -24,17 +24,23 @@
      inkscape:pagecheckerboard="0"
      inkscape:deskcolor="#d1d1d1"
      inkscape:document-units="mm"
-     inkscape:zoom="0.73512619"
-     inkscape:cx="-64.614757"
-     inkscape:cy="200.64583"
+     inkscape:zoom="2.9405048"
+     inkscape:cx="260.66953"
+     inkscape:cy="94.371553"
      inkscape:window-width="2560"
      inkscape:window-height="1369"
      inkscape:window-x="-8"
      inkscape:window-y="-8"
      inkscape:window-maximized="1"
-     inkscape:current-layer="layer1" />
+     inkscape:current-layer="g2" />
   <defs
      id="defs1">
+    <pattern
+       inkscape:collect="always"
+       xlink:href="#pattern1"
+       preserveAspectRatio="xMidYMid"
+       id="pattern2"
+       patternTransform="matrix(0.3,0,0,0.3,2450.7643,1422.3726)" />
     <marker
        style="overflow:visible"
        id="marker5"
@@ -198,8 +204,8 @@
         <path
            class="fabric"
            id="fs-18"
-           d="m 171.03018,76.445006 c 26.13,0 52.26,-7.49 52.26,-7.49 l 22.47,-65.1699999 c 0,0 -126.98,-3.75000003 -245.67845258,-3.76565714 C -118.61673,0.00369185 -245.59673,3.7536918 -245.59673,3.7536918 l 22.47,65.1700002 c 0,0 26.13,7.49 52.26,7.49 26.12,0 52.25,-3.74 170.94845742,-3.724343 C 118.78018,72.705006 144.91018,76.445006 171.03018,76.445006 Z"
-           style="fill:url(#pattern1);fill-opacity:1;stroke:#212121;stroke-width:0.6;stroke-linecap:round;stroke-linejoin:round;stroke-opacity:1"
+           d="m 172.13191,60.286334 c 26.13,0 52.26,-7.49 52.26,-7.49 l 22.47,-65.169999 c 0,0 -126.98,-3.75 -245.678455,-3.765658 C -117.515,-16.15498 -244.495,-12.40498 -244.495,-12.40498 l 22.47,65.17 c 0,0 26.13,7.49 52.26,7.49 26.12,0 52.25,-3.74 170.948455,-3.724343 118.698455,0.01566 144.828455,3.755657 170.948455,3.755657 z"
+           style="fill:url(#pattern2);fill-opacity:1;stroke:#212121;stroke-width:0.6;stroke-linecap:round;stroke-linejoin:round;stroke-opacity:1"
            sodipodi:nodetypes="scccccscs" />
       </g>
       <!-- end of group #fs-stack-devon.upperCollar-part-devon.upperCollar -->
@@ -223,9 +229,9 @@
         <path
            class="fabric"
            id="path1"
-           d="m -285.18662,-2.6836878 24.46559,69.5474188 c 0,0 40.26766,11.370727 89.8543,6.460019 25.99285,-2.574147 50.70503,-3.22501 169.4034863,-3.209353 118.6984537,0.01566 142.9728637,2.056367 173.3100837,4.546442 40.11187,3.292377 73.07294,-7.765794 73.07294,-7.765794 l 24.01497,-69.4830448"
+           d="m -251.48463,54.42335 -25.942,-66.724833 c 138.99831,-5.979249 413.9158,-3.17112 540.39585,-1.16714 l -22.72457,68.9379"
            style="fill:none;fill-opacity:1;stroke:#d3ab1d;stroke-width:3.22554;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:12.191, 8.12731;stroke-dashoffset:0.696716;stroke-opacity:1;marker-start:url(#Legs);marker-end:url(#marker5)"
-           sodipodi:nodetypes="ccscscc" />
+           sodipodi:nodetypes="cccc" />
       </g>
       <!-- end of group #fs-stack-devon.upperCollar-part-devon.upperCollar -->
     </g>
