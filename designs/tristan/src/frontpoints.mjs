@@ -37,7 +37,7 @@ export const frontPoints = {
     hemSize: {
       pct: 5.62,
       min: 1,
-      max: 25,
+      max: 23,
       // eslint-disable-next-line no-unused-vars
       menu: (settings, mergedOptions) =>
         mergedOptions.hem === false || mergedOptions.peplum === true ? false : 'options',
@@ -211,7 +211,7 @@ export const frontPoints = {
         points.sideWaistHemIn,
         waistDartRightHemInTemp,
         points.waistDartRight,
-        points.waistDartRightCp,
+        points.waistCpUp,
         points.waistUpDartRightCpDown,
         points.waistUpDartRight
       )
