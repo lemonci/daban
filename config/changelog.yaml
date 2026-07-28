@@ -1,5 +1,7 @@
 Unreleased:
   Fixed:
+    carlton:
+      - Get sleevecapEase in topSleeve from library's twoPartSleeve part
     sasha:
       - Fixed incorrect translation order causing the wrong translation to be used
 

@@ -110,7 +110,8 @@ function draftCarltonTopsleeve({
     .curve(points.topCpLeft, points.frontPitchPointCpTop, points.frontPitchPoint)
     .length()
   const frontDist =
-    store.get('library.twoPartSleeve.frontArmholePitchToShoulder') + store.get('sleevecapEase') / 2
+    store.get('library.twoPartSleeve.frontArmholePitchToShoulder') +
+    store.get('library.twoPartSleeve.sleevecapEase') / 2
   if (frontDist === frontMax) points.sleeveNotchFront = points.frontPitchPoint.copy()
   else if (frontDist > frontMax)
     points.sleeveNotchFront = new Path()
