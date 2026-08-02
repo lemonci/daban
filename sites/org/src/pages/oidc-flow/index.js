@@ -37,6 +37,11 @@ const clients = {
     href: 'https://ansible.freesewing.eu/',
     fqdn: 'ansible.freesewing.eu',
   },
+  zulip: {
+    title: 'FreeSewing Chat',
+    href: 'https://chat.freesewing.eu/',
+    fqdn: 'chat.freesewing.eu',
+  },
 }
 
 /*
