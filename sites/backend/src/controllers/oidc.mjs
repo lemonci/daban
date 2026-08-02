@@ -42,8 +42,7 @@ OidcController.prototype.init = async (req, res, tools) => {
  * 2. AUTHENTICATION — the user's JWT must be provided as a standard Bearer
  *    token in the Authorization header, NOT in the request body. Accepting
  *    tokens in the body would allow CSRF attacks and makes it trivial to
- *    replay a stolen token against an arbitrary interaction uid (especially
- *    combined with the swallowed-error bug that previously existed here).
+ *    replay a stolen token against an arbitrary interaction uid.
  *
  * 3. SEPARATION OF CONCERNS — the login result only sets the accountId.
  *    Consent/grant approval is handled by the loadExistingGrant callback
@@ -51,10 +50,8 @@ OidcController.prototype.init = async (req, res, tools) => {
  */
 OidcController.prototype.login = async (req, res, tools) => {
   // Step 1: Validate the OIDC interaction session.
-  // This is the session-fixation guard: if the _interaction cookie is missing,
+  // This is the session-fixation guard: if the interaction cookie is missing,
   // does not match the uid in the URL, or has expired, we reject immediately.
-  // Errors must NOT be swallowed here — doing so is what created the original
-  // vulnerability where the session binding could be entirely bypassed.
   let interactionDetails
   try {
     interactionDetails = await tools.oidcProvider.interactionDetails(req, res)
