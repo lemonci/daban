@@ -2981,6 +2981,8 @@ export const designs = {
       "pocketflap": "Pocket flap",
       "underCollar": "Under collar",
       "upperCollar": "Upper collar",
+      "topSleeve": "Topsleeve",
+      "underSleeve": "Undersleeve",
       "waistband": "Waistband"
     },
     "o": {

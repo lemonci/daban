@@ -3,6 +3,12 @@
 
 ## Unreleased
 
+### carlton
+
+#### Fixed
+
+ - Get sleevecapEase in topSleeve from library's twoPartSleeve part
+
 ### sasha
 
 #### Fixed
