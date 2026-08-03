@@ -258,7 +258,7 @@ export async function copyFolderRecursively(srcDir, dstDir) {
    */
   const files = (await globDir(srcDir, '**/*'))
     .sort()
-    .map((target) => target.split(root).pop().slice(1).split('/'))
+    .map((target) => path.relative(root, path.resolve(root, target)).split(path.sep))
     .map((target) => ({
       from: target,
       to: [...dstDir, ...target.slice(srcDir.length)],

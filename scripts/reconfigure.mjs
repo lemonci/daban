@@ -10,6 +10,7 @@ import {
   readJsonFile,
   writeJsonFile,
 } from './fs.mjs'
+import { pathToFileURL } from 'node:url'
 import yaml from 'js-yaml'
 import chalk from 'chalk'
 import mustache from 'mustache'
@@ -219,7 +220,9 @@ await writeFile(
 async function bundleDesignTranslations() {
   const strings = {}
   for (const design of Object.keys(repo.software.designs).sort()) {
-    strings[design] = (await import(`${root}/designs/${design}/src/index.mjs`)).i18n.en
+    strings[design] = (
+      await import(pathToFileURL(path.join(root, 'designs', design, 'src', 'index.mjs')).href)
+    ).i18n.en
   }
   await writeFile(
     ['packages', 'i18n', 'src', 'designs.mjs'],
