@@ -103,7 +103,7 @@
     "@babel/plugin-syntax-import-assertions": "^7.22.5",
     "@babel/preset-react": "^7.22.15",
     "c8": "^10.1.2",
-    "glob": "^11.0.1",
+    "glob": "^13.0.6",
     "global": "^4.4.0",
     "kill-port": "^2.0.1",
     "rehype-format": "^5.0.0",
