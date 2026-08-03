@@ -63,12 +63,18 @@ average height, structure lines may shift for extreme heights, p.147), knee line
    Front and back outlines are congruent; they differ in darts only. Each part:
    center edge (CB/CF) straight and vertical, one hinge at 130 from center, outer
    strip rotated θ.
-6. **Waist reduction (WR)**: measure `waist/2` (350) along the waist edge; the
-   surplus is WR = 482.6 − 350 ≈ **132.6** ("13~14 cm" typical, p.150). Distribute
-   (modern rule, p.150): **half at the side seam** (66.3 total → 33.15 removed at
-   each part's side-waist corner), **remainder 2/3 into the two back darts**
-   (22.1 each), **1/3 into the front dart** (22.1). Book ranges: side 6–7 cm
-   (max 8, min ~4), back darts 2–2.5 cm each, front 2–3 cm (Fig 11-6 p.149, p.150).
+6. **Waist reduction (WR)**: per the book's procedure (p.149), measure `waist/2`
+   (350) along the **drawn waist edge**; the remainder is WR. The traced edge per
+   part is the polyline from center-waist along the fixed strip's top to where the
+   rotated strip's top edge crosses it (x ≈ 123.8), then along that rotated edge
+   to the side-waist corner: ≈ **247.5 per part**, so WR = 2×247.5 − 350 ≈
+   **145.1**. (The book's commentary "13~14 cm" uses a rougher chord estimate,
+   482.6−350 ≈ 132.6 — see Ambiguity 5.) Distribute (modern rule, p.150): **half
+   at the side seam** (72.5 total → 36.27 removed at each part's side-waist
+   corner along the rotated top edge), **remainder 2/3 into the two back darts**
+   (24.18 each), **1/3 into the front dart** (24.18). Book ranges: side 6–7 cm
+   nominal, max 8, min ~4 → 7.25 ✓; back darts 2–2.5 each → 2.42 ✓; front 2–3 →
+   2.42 ✓ (Fig 11-6 p.149, p.150).
 7. **Back darts**: guide lines parallel to CB at **80 mm** from CB and **65 mm**
    further (6–7 cm; p.150), from waist to the yoke line; darts centered on the
    guide lines, tips on the yoke line (see Ambiguity 3). Straight legs.
@@ -92,30 +98,30 @@ average height, structure lines may shift for extreme heights, p.147), knee line
 | 3 | CB/CF length (waist→hem) | 65 | 650 |
 | 4 | Waist→hip depth on center edge | 22 | 220 |
 | 5 | Knee gap per boundary (at knee line) | 1.7 | 17 |
-| 6 | Waist overlap per boundary | 1.247 | 12.47 |
-| 7 | Half-pattern waist edge before shaping | 48.26 | 482.6 |
-| 8 | Waist reduction WR | 13.26 | 132.6 |
-| 9 | Side-seam removal (total / per part) | 6.63 / 3.315 | 66.3 / 33.15 |
-| 10 | Back dart intake (each of two) | 2.21 | 22.1 |
-| 11 | Front dart intake | 2.21 | 22.1 |
-| 12a | Net back waist after shaping (24.13 − 3.315 − 2×2.21) | 16.39 | 163.9 |
-| 12b | Net front waist after shaping (24.13 − 3.315 − 2.21) | 18.61 | 186.1 |
-| 12c | Net waist, both parts (= waist/2) | 35 | 350 |
+| 6 | Rotated side-waist corner (x, y from center/waist origin) | (24.73, −0.70) | (247.3, −7.0) |
+| 7 | Traced waist edge per part (polyline, before shaping) | 24.75 | 247.5 |
+| 8 | Waist reduction WR (2×247.5 − 350) | 14.51 | 145.1 |
+| 9 | Side-seam removal (total / per part) | 7.25 / 3.63 | 72.5 / 36.27 |
+| 10 | Back dart intake (each of two) | 2.42 | 24.18 |
+| 11 | Front dart intake | 2.42 | 24.18 |
+| 12a | Net back waist after shaping (247.5 − 36.3 − 2×24.2) | 16.28 | 162.8 |
+| 12b | Net front waist after shaping (247.5 − 36.3 − 24.2) | 18.70 | 187.0 |
+| 12c | Net waist, both parts (= waist/2) | 35 | 349.8 ≈ 350 |
 | 13 | Yoke line depth (dart tip line) | 15 | 150 |
 | 14 | Back dart guide lines from CB | 8 and 14.5 | 80 / 145 |
 | 15 | Knee half-width | 57.1 | 571 |
 | 16 | Hem half-width | 59.31 | 593.1 |
 
 Checks against the book's own statements: finished hip 98+6=104 (p.146) ✓ (2×52);
-WR within "13~14 cm" (p.150) ✓; side 6.63 within 6–7 ✓; back darts 2.21 within
-2–2.5 ✓; front 2.21 within 2–3 ✓. Note the asymmetry: the back quarter is
-suppressed more than the front (two darts vs one — Fig 11-6), so net back waist <
-net front waist; only the sum equals waist/2.
+WR 14.51 vs commentary "13~14" (see Ambiguity 5 — procedural measure chosen);
+side 7.25 within "6–7, max 8" ✓; back darts 2.42 within 2–2.5 ✓; front 2.42
+within 2–3 ✓. Note the asymmetry: the back quarter is suppressed more than the
+front (two darts vs one — Fig 11-6), so net back waist < net front waist; only
+the sum equals waist/2.
 
-Model note: rows 6–8 use the book's own chord arithmetic (overlap = depth × θ).
-The drawn waist line is a smoothed curve (as the book's tracing-wheel step
-produces); dart intakes and removals are applied from the arithmetic, so the
-smoothing latitude (~a few mm of curve length) does not touch rows 1–16.
+Model note: suppression amounts are computed arithmetically on the traced
+polyline edge (deterministic), then the waist is drawn as the book's smoothed
+curve; the ~1 mm smoothing latitude does not touch the oracle rows.
 
 ## Construction notes
 
@@ -144,7 +150,13 @@ confirmation:
    line** (腹围线/育克线misprint reading).
 4. **Front dart position**: no numeric position in text; Fig 11-6 shows it about
    a third of the way from the side seam toward CF. **Chosen: guide line at 1/3
-   of side→CF distance from the side seam.**
+   of side→CF distance from the side seam** (tip x = 2/3 × side-waist x ≈ 141).
+5. **WR arithmetic**: the book's commentary says WR is typically "13~14 cm"
+   (chord estimate 482.6−350 = 13.26), but its procedure (p.149: measure 35 cm
+   along the drawn waist line, the remainder is WR) yields 14.51 on the traced
+   polyline edge. **Chosen: the procedural measure** — it makes the finished
+   waist equal waist/2 exactly, and all resulting intakes stay within the book's
+   own ranges.
 
 ## Review
 
