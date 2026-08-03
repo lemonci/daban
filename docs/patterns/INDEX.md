@@ -60,8 +60,8 @@ where the garment's name is itself a loanword in English (Qipao).
 | Design | Garment | Primary source | Printed pp. | Status | Notes |
 |---|---|---|---|---|---|
 | `skirtblock` | Standard skirt block | 英国经典服装纸样设计基础篇 (Bray) | 140–150 | **merged** | Shipped. Straight variant (p.152) is the `silhouette` option. Spec: `skirtblock.md` |
-| — | Bodice block | 英国经典服装纸样设计基础篇 (Bray) | 13–35 | candidate | ⭐ **Next port.** Underpins nearly everything else. Cross-check against Aldrich's fitted block below — two independent systems for the same garment is a strong verification asset |
-| — | Straight sleeve block | 英国经典服装纸样设计基础篇 (Bray) | 92–100 | candidate | ⭐ **Next port, pairs with the bodice.** Cap height ≤ outer-arm − inner-arm per the principles gate |
+| `bodiceblock` | Bodice block | 英国经典服装纸样设计基础篇 (Bray) | 13–35 | **specified** | ⭐ Underpins nearly everything else. Cross-check against Aldrich's fitted block below — two independent systems for the same garment is a strong verification asset. Spec: `bodiceblock.md` |
+| `sleeveblock` | Straight sleeve block | 英国经典服装纸样设计基础篇 (Bray) | 92–100 | **specified** | ⭐ Drafted from biceps/shoulderToWrist/shoulderToElbow, not the armhole directly; cap arc is cross-checked against the bodice's total armhole curve (+2–2.5 cm ease) after both blocks are drafted. Fitted/semi-fitted variants (弯袖) documented but not implemented (need elbow circumference, no FreeSewing measurement). Spec: `sleeveblock.md` |
 | — | Dress block | 英国经典服装纸样设计基础篇 (Bray) | 157+ | candidate | Depends on bodice + skirt blocks |
 | — | Supplementary skirt block | 英国经典服装纸样设计基础篇 (Bray) | 151 | candidate | Assess against `skirtblock` — may fold in as an option rather than a design |
 | — | Full-circle skirt block | 英国经典服装纸样设计基础篇 (Bray) | 153–154 | candidate | Radial construction, genuinely distinct from `skirtblock` |

@@ -36,3 +36,28 @@ Terms encountered while extracting; FreeSewing measurement names in `code`.
 | 颈侧点 (NP) | side neck point (HPS) | |
 | 肩端点 (SP) | shoulder point | 肩宽 NP→SP ("量小肩") |
 | BP点 | bust point | |
+| 衣片原型 | bodice block | design `bodiceblock` |
+| 背宽 (XB) | back width | no FreeSewing measurement; `backWidthPct` option in `bodiceblock` |
+| 胸宽 (CH) | chest/bust width | no FreeSewing measurement; `chestWidthPct` option in `bodiceblock` |
+| 袖窿底点 (UP) | armhole base point | sits on the bust/armhole-depth line |
+| 臀围点 (HP) | hip point | on the hip line; WP on a short (waist-length) bodice |
+| 腰围点 (WP) | waist point | side-seam point on the waist line |
+| 胸宽点 (CHP) | chest-width point | on the chest-width line; anchors the front armhole curve |
+| 肩省 | shoulder dart | front bust dart routed through the shoulder seam |
+| 看不见的省道 / 隐形省 | invisible dart | back shoulder dart, normally not drawn — absorbed by trimming the seam |
+| 收腰量 (WR) | waist reduction | `bodiceblock`'s usage: CB/CF slant + side intake + darts, distinct from `skirtblock`'s WR |
+| 直袖 | straight sleeve | design `sleeveblock`; loose, doesn't hug the arm |
+| 弯袖 | curved/bent sleeve | fitted sleeve family (紧身袖/半合体袖); not implemented in v1 |
+| 袖根肥 | sleeve root width | at the underarm (DC) line; = `biceps` + ease |
+| 袖山高 | (sleeve) cap height | DC line to T (cap apex) |
+| 袖根线 / DC线 | sleeve root line | horizontal underarm line, ends at U points |
+| 袖窿围 / 袖窿大 | (total) armhole circumference | front + back armhole curve length, summed; target = `biceps` + 12–13 cm |
+| 吃势 | cap ease | cap-arc-vs-armhole surplus, distributed mostly above the B/F points |
+| 对位点 | notch / set-in match point | T (shoulder point), B (back), F (front) |
+| 袖肘高 | elbow height | FreeSewing `shoulderToElbow` |
+| 肘围 | elbow circumference | no FreeSewing measurement; fitted-variant input only |
+| 腕围 | wrist circumference | FreeSewing `wrist`; fitted-variant input only |
+| UP点 | armhole/scye base point | on the bodice back panel, at the bust line |
+| 袖中线 | sleeve center line | runs through T and the elbow point E |
+| 外袖缝 / 内袖缝 | outer (back) / inner (front) sleeve seam | the sleeve's only two cut side seams |
+| 后袖线 / 前袖线 | back / front cap reference line | internal quarter lines locating B and F, not seams |
