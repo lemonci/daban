@@ -1,0 +1,18 @@
+{
+  "id": "bodiceblock",
+  "code": "lemonci",
+  "design": "纳塔莉·布雷 (Natalie Bray)",
+  "description": "A bodice block (bodice sloper) drafted with the classic British Bray method",
+  "name": "Bodice Block",
+  "difficulty": 3,
+  "tags": [
+    "women",
+    "tops"
+  ],
+  "techniques": [
+    "darts"
+  ],
+  "version": "4.10.0",
+  "pkg": "@freesewing/bodiceblock",
+  "collection": true
+}

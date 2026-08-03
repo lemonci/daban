@@ -1340,6 +1340,45 @@ export const designs = {
       }
     }
   },
+  "bodiceblock": {
+    "t": "Bodice Block",
+    "d": "A bodice block (bodice sloper) drafted with the classic British Bray method",
+    "p": {
+      "back": "Back",
+      "front": "Front"
+    },
+    "s": {},
+    "o": {
+      "chestEase": {
+        "t": "Chest ease",
+        "d": "How much ease to add at the bust line. The book drafts 10 cm, of which shaping the waist takes back a few centimetres"
+      },
+      "seatEase": {
+        "t": "Hip ease",
+        "d": "How much ease to add at the hip line. The book drafts 6 cm, and puts all of it on the front panel"
+      },
+      "waistEase": {
+        "t": "Waist ease",
+        "d": "How much ease to leave at the waist before the darts are shaped. The book allows 3 to 6 cm on the full pattern"
+      },
+      "waistFit": {
+        "t": "Waist shaping",
+        "d": "Whether to shape the waist with center-line slant, side-seam intake and darts, or to leave the plain block with its simple side-seam taper"
+      },
+      "backWidthPct": {
+        "t": "Back width",
+        "d": "The across-back width, as a fraction of the chest measurement. Round-shouldered figures need more, erect figures less"
+      },
+      "chestWidthPct": {
+        "t": "Chest width",
+        "d": "The across-chest width, as a fraction of the chest measurement. It moves opposite to the back width as posture changes"
+      },
+      "bustDartWidth": {
+        "t": "Bust dart width",
+        "d": "How wide the shoulder/bust dart is where it opens on the shoulder seam, as a fraction of the chest measurement"
+      }
+    }
+  },
   "bonny": {
     "t": "Bonny",
     "d": "A FreeSewing pattern that draws a body silhouette",

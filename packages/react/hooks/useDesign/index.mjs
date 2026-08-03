@@ -7,6 +7,7 @@ import { Benjamin as benjamin } from '@freesewing/benjamin'
 import { Bent as bent } from '@freesewing/bent'
 import { Bibi as bibi } from '@freesewing/bibi'
 import { Bob as bob } from '@freesewing/bob'
+import { Bodiceblock as bodiceblock } from '@freesewing/bodiceblock'
 import { Breanna as breanna } from '@freesewing/breanna'
 import { Brian as brian } from '@freesewing/brian'
 import { Bruce as bruce } from '@freesewing/bruce'
@@ -84,6 +85,7 @@ export const designs = {
   bent,
   bibi,
   bob,
+  bodiceblock,
   breanna,
   brian,
   bruce,

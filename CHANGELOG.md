@@ -3,6 +3,12 @@
 
 ## Unreleased
 
+### bodiceblock
+
+#### Added
+
+ - Initial release of Bodice Block, a bodice block from classic British pattern cutting
+
 ### carlton
 
 #### Fixed
