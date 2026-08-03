@@ -1,4 +1,8 @@
 Unreleased:
+  Added:
+    qun:
+      - Initial release of Qun, a standard skirt block from classic British pattern cutting
+
   Fixed:
     carlton:
       - Get sleevecapEase in topSleeve from library's twoPartSleeve part
