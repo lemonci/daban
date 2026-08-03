@@ -40,6 +40,7 @@ import { Octoplushy, OctoplushyFront /*, OctoplushyBack*/ } from './octoplushy.m
 import { Otis, OtisFront /*, OtisBack*/ } from './otis.mjs'
 import { Onyx, OnyxFront } from './onyx.mjs'
 import { Penelope, PenelopeFront /*, PenelopeBack*/ } from './penelope.mjs'
+import { Qun, QunFront, QunBack } from './qun.mjs'
 import { Sabrina, SabrinaFront, SabrinaBack } from './sabrina.mjs'
 import { Sandy, SandyFront } from './sandy.mjs'
 import { Sarah, SarahFront, SarahBack } from './sarah.mjs'
@@ -112,6 +113,7 @@ export const lineDrawingsFront = {
   onyx: OnyxFront,
   otis: OtisFront,
   penelope: PenelopeFront,
+  qun: QunFront,
   sabrina: SabrinaFront,
   sandy: SandyFront,
   sarah: SarahFront,
@@ -172,6 +174,7 @@ export const lineDrawingsBack = {
   /*octoplushy: OctoplushyBack,*/
   /*otis: OtisBack,*/
   /*penelope: PenelopeBack,*/
+  qun: QunBack,
   sabrina: SabrinaBack,
   sarah: SarahBack,
   shale: ShaleBack,
@@ -239,6 +242,7 @@ export const lineDrawings = {
   onyx: Onyx,
   otis: Otis,
   penelope: Penelope,
+  qun: Qun,
   sarah: Sarah,
   shin: Shin,
   sabrina: Sabrina,
@@ -421,6 +425,10 @@ export {
   Penelope,
   PenelopeFront,
   /*PenelopeBack,*/
+  // Qun
+  Qun,
+  QunFront,
+  QunBack,
   //Sandy
   Sandy,
   SandyFront,
