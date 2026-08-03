@@ -18,7 +18,7 @@ full every-book triage (~85 files) is Phase 3 of the implementation plan.
 
 | Design | Garment | Source book | Printed pages | Status | Notes |
 |---|---|---|---|---|---|
-| qun | Standard skirt block (标准裙原型) | 英国经典服装纸样设计基础篇.pdf | 140–150 | specified | Pilot. Spec: `qun.md`. Straight variant (直裙原型, p.152) included as `silhouette` option, not a separate design |
+| qun | Standard skirt block (标准裙原型) | 英国经典服装纸样设计基础篇.pdf | 140–150 | implemented | Pilot. Spec: `qun.md`. Straight variant (直裙原型, p.152) included as `silhouette` option, not a separate design. Verified 4 layers 2026-08-03 |
 | — | Bodice block (衣片原型) | 英国经典服装纸样设计基础篇.pdf | 13–35 | candidate | Primary block; next after pilot per plan Phase 3 |
 | — | Straight sleeve block (直袖) | 英国经典服装纸样设计基础篇.pdf | 92–100 | candidate | Pairs with bodice block |
 | — | Supplementary skirt block (附加裙原型) | 英国经典服装纸样设计基础篇.pdf | 151 | candidate | Assess vs qun once implemented; likely cross-ref |

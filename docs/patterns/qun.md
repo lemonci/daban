@@ -171,3 +171,16 @@ Principles gate (spec review, 2026-08-03) against `pattern-making-principles`:
 - Hem (593) wider than hip (520): movement allowance per Bray p.7 ✓
 
 Result: **pass** — no principle violations; proceed to implementation.
+
+Drafted-output review (gate #3, 2026-08-03, post-implementation):
+
+1. Shared suites: 136 passing (config/i18n/drafting/sampling + oracle).
+2. Numeric oracle: 18/18 within ±2 mm of the worked example (rows 1–16).
+3. Visual: rendered draft compared against Fig 11-6 (p.149) — dart count and
+   placement (2 back / 1 front), waist curve, hip-to-hem flare and proportions
+   match; studio collection listing confirmed by the user.
+4. Principles: suppression sums exactly absorb the waist–hip surplus (net waist
+   = waist/2); hip ease 6 cm within cited range; front/back side seams congruent
+   by construction; hem wider than hip line (movement, Bray p.7).
+
+Result: **pass** — approved for merge.
