@@ -86,6 +86,21 @@ where the garment's name is itself a loanword in English (Qipao).
 | — | Close-fitting stretch block | 159–166 | candidate | Negative ease; needs a stretch-factor option |
 | — | Loose-fit knit block | 167–176 | candidate | |
 
+### Foundation blocks — 原型法 proportional system (independent third system)
+
+*熊能 Vol. 1 — `世界经典服装设计与纸样基础原理篇(上).pdf`, offset printed = pdf − 14.
+Design spec: `docs/superpowers/specs/2026-08-03-proportional-block-measurement-driven-corrections.md`.*
+
+| Design | Garment | Printed pp. | Status | Notes |
+|---|---|---|---|---|
+| — | Women's bodice block (原型) | 108–120 | candidate · specified | ⭐ Two inputs only (B, 背长). The spec adds measurement-driven Ch.9 corrections on top |
+| — | Women's sleeve block | 111–113 | candidate | Drafted from the finished armhole — depends on the corrected bodice |
+| — | Body-type corrections, bodice | 168–180 | candidate | Six types: 挺胸/驼背/瘦/胖/平肩/溜肩. Slash-and-pivot; amount left to the wearer, which is what the spec computes |
+| — | Body-type corrections, sleeve | 181–183 | candidate | Cap height insufficient / excessive |
+| — | Body-type corrections, skirt | 184–188 | candidate | 腹凸体, 翘臀体 — folds into the shipped `skirtblock`, not a new design |
+| — | Men's bodice block | 121–123 | candidate | ⚠ Different formula family (`B/6+8.5`, `B/12`) — a separate design, never an option on the women's block. Book states there is no men's sleeve or trouser block |
+| — | Women's trouser block | 116–120 | candidate | Cross-ref Aldrich pp.75–90 |
+
 ### Skirts, trousers, culottes
 
 | Design | Garment | Primary source | Printed pp. | Status | Notes |
@@ -194,7 +209,7 @@ Every source in `clothing_books`, grouped by what it actually is.
 | 世界2011.现代工业化成衣制板-高国利.pdf | 154 | printed = pdf − 1 | candidate | sampled | 现代成衣制板, 高国利、吴继辉, 辽宁美术出版社. Compact modern RTW course: block → sleeves → collars → torso → skirt/trouser blocks → applications → knits → industrial patterns. Filename prefix "世界2011" is a catalogue tag, not the title |
 | 世界经典服装设计与纸样__三__女装篇__（上集）(1).pdf | 321 | printed = pdf − 17 | candidate | sampled | ⭐ 熊能, 江西美术出版社 2007, ISBN 978-7-80749-232-0; 序 by 张文斌 (东华大学). Vol. 3 of an 8-volume set. The densest drafting data in the collection — ~90 fully-worked women's garments (20 skirts, 19 trousers, 8 culottes, 19 blouses, dresses, ~20 jackets, 8 vests), each with formulas, seam allowance and lay plan |
 | 世界经典服装设计与纸样基础原理篇(上).pdf | 217 | printed = pdf − 14 (front matter − 2) | candidate | sampled | ⭐⭐ **Vol. 1 — the foundation volume of the set.** 熊能, 江西美术出版社, 序 by 张文斌 (东华大学) 2007-09, which states the whole 8-volume set is built on 原型法 because that method "is not systematically taught in China". Ch.6 women's block pp.108–120 and men's block pp.121–123; Ch.7 pp.124–139 is a **muslin-fitting chapter** that empirically re-derives the dart amounts from toiles rather than asserting them; Ch.8 dart theory pp.140–166; Ch.9 block correction for 6 body types pp.167–194; Ch.4 pp.44–92 tabulates **five national sizing systems** (GB1335-91, JIS, US, UK, German). ⚠ The block takes only **two** inputs — B and 背长 — everything else proportional. Offset constant over 8 checkpoints. Bookmarks map 1:1 to PDF pages |
-| 世界经典服装设计与纸样__2__基础原理篇__下集(1).pdf | 304 | printed = pdf − 18 | candidate | sampled | 熊能 Vol. 2 — a *components* volume: 8 collarless necklines, 30+ collars (incl. 中式立领 Chinese stand collars), set-in and kimono sleeves by garment class, and hoods. No whole-garment blocks. Its companion Vol. 1 (基础原理篇 上集), which would hold the foundation bodice block, is **not** in the collection |
+| 世界经典服装设计与纸样__2__基础原理篇__下集(1).pdf | 304 | printed = pdf − 18 | candidate | sampled | 熊能 Vol. 2 — a *components* volume: 8 collarless necklines, 30+ collars (incl. 中式立领 Chinese stand collars), set-in and kimono sleeves by garment class, and hoods. No whole-garment blocks. Its companion Vol. 1 (基础原理篇 上集), which holds the foundation bodice block, is the row above |
 | 唐装旗袍款式与制作.pdf | 173 | printed = pdf **+ 1** | candidate | sampled | ⭐ **The Qipao/Tang-suit source.** 110–111 numbered garments: a photo section, then one 裁剪图 per garment, each carrying drafting formulas (`B/4`, `W/4+2.5`, `0.15B+4.5`, `N/2`, `S/2`) **and** a 成品规格 finished-spec table in cm. Styles supplied by 沈阳市旗袍厂, 编后记 dated 2004-01-05. ⚠ No publisher or ISBN anywhere in the scan. Drafted directly from B/W/H/N/S — no foundation block |
 
 **Series note.** `世界经典服装设计与纸样` is an 8-volume set by 熊能 (江西美术出版社): Vols 1–2 基础原理篇 (上/下), 3–4 女装篇 (上/下), 5 男装篇, 6 童装篇, 7 针织篇, 8 工业篇. The collection holds **Vols 1–4** (Vol. 1 added 2026-08-03 after the first scan). The 女装篇 pair is complete: the file named `…女装篇（上集）` proved to be a second scan of Vol. 3, and `…女装篇（下集）` is the genuine Vol. 4. Still missing: Vol. 5 男装篇, Vol. 6 童装篇, Vol. 7 针织篇, Vol. 8 工业篇. With Vol. 1 present the set is self-sufficient for women's wear — blocks, components and garments all from one consistent 原型法 system.
