@@ -1,4 +1,4 @@
-# Change log for: @freesewing/qun
+# Change log for: @freesewing/skirtblock
 
 
 ## 3.0.0 (2023-09-30)

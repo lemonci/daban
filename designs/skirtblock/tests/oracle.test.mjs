@@ -1,9 +1,9 @@
 import { expect } from 'chai'
-import { Qun } from '../src/index.mjs'
+import { SkirtBlock } from '../src/index.mjs'
 
 /*
  * Numeric oracle against the book's worked example.
- * Source: docs/patterns/qun.md §Worked example (英国经典服装纸样设计基础篇, pp.145-150)
+ * Source: docs/patterns/skirtblock.md §Worked example (英国经典服装纸样设计基础篇, pp.145-150)
  * Book values: hip 98cm, waist 70cm, waist-to-hip 22cm, knee 52cm, length 65cm.
  * All values mm. Tolerance ±2mm (spec success criterion #2).
  */
@@ -17,7 +17,7 @@ const measurements = {
 
 const TOL = 2 // mm
 
-// Derived book arithmetic (qun.md worked example table)
+// Derived book arithmetic (skirtblock.md worked example table)
 const expected = {
   depth: 220, // row 4: waist->hip on center edge
   length: 650, // row 3: CB/CF waist->hem (waistToKnee * 1.25)
@@ -32,8 +32,8 @@ const expected = {
   backDartGuide2: 145, // row 14
 }
 
-describe('Qun numeric oracle (book worked example)', () => {
-  const pattern = new Qun({ measurements })
+describe('SkirtBlock numeric oracle (book worked example)', () => {
+  const pattern = new SkirtBlock({ measurements })
   pattern.draft()
 
   it('drafts without errors', () => {
@@ -41,8 +41,8 @@ describe('Qun numeric oracle (book worked example)', () => {
   })
 
   const parts = pattern.parts[0]
-  const back = () => parts['qun.back'].points
-  const front = () => parts['qun.front'].points
+  const back = () => parts['skirtblock.back'].points
+  const front = () => parts['skirtblock.front'].points
 
   describe('back part', () => {
     it('waist-to-hip depth on CB matches the book', () => {
@@ -117,7 +117,7 @@ describe('Qun numeric oracle (book worked example)', () => {
     })
   })
 
-  describe('fit sanity (smoothing latitude ±6mm, see qun.md model note)', () => {
+  describe('fit sanity (smoothing latitude ±6mm, see skirtblock.md model note)', () => {
     it('net waist of both parts sums to waist/2', () => {
       const backNet =
         back().cbWaist.dist(back().sideWaist) -

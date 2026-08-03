@@ -46,7 +46,6 @@ import { i18n as paco } from '@freesewing/paco'
 import { i18n as penelope } from '@freesewing/penelope'
 import { i18n as percy } from '@freesewing/percy'
 import { i18n as polly } from '@freesewing/polly'
-import { i18n as qun } from '@freesewing/qun'
 import { i18n as sabrina } from '@freesewing/sabrina'
 import { i18n as sandy } from '@freesewing/sandy'
 import { i18n as sarah } from '@freesewing/sarah'
@@ -56,6 +55,7 @@ import { i18n as shelly } from '@freesewing/shelly'
 import { i18n as shin } from '@freesewing/shin'
 import { i18n as simon } from '@freesewing/simon'
 import { i18n as simone } from '@freesewing/simone'
+import { i18n as skirtblock } from '@freesewing/skirtblock'
 import { i18n as skully } from '@freesewing/skully'
 import { i18n as sophie } from '@freesewing/sophie'
 import { i18n as sunny } from '@freesewing/sunny'
@@ -126,7 +126,6 @@ export const i18n = {
   penelope,
   percy,
   polly,
-  qun,
   sabrina,
   sandy,
   sarah,
@@ -136,6 +135,7 @@ export const i18n = {
   shin,
   simon,
   simone,
+  skirtblock,
   skully,
   sophie,
   sunny,

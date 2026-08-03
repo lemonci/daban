@@ -46,7 +46,6 @@ import { Paco as paco } from '@freesewing/paco'
 import { Penelope as penelope } from '@freesewing/penelope'
 import { Percy as percy } from '@freesewing/percy'
 import { Polly as polly } from '@freesewing/polly'
-import { Qun as qun } from '@freesewing/qun'
 import { Sabrina as sabrina } from '@freesewing/sabrina'
 import { Sandy as sandy } from '@freesewing/sandy'
 import { Sarah as sarah } from '@freesewing/sarah'
@@ -56,6 +55,7 @@ import { Shelly as shelly } from '@freesewing/shelly'
 import { Shin as shin } from '@freesewing/shin'
 import { Simon as simon } from '@freesewing/simon'
 import { Simone as simone } from '@freesewing/simone'
+import { Skirtblock as skirtblock } from '@freesewing/skirtblock'
 import { Skully as skully } from '@freesewing/skully'
 import { Sophie as sophie } from '@freesewing/sophie'
 import { Sunny as sunny } from '@freesewing/sunny'
@@ -128,7 +128,6 @@ export const designs = {
   penelope,
   percy,
   polly,
-  qun,
   sabrina,
   sandy,
   sarah,
@@ -138,6 +137,7 @@ export const designs = {
   shin,
   simon,
   simone,
+  skirtblock,
   skully,
   sophie,
   sunny,

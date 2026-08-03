@@ -1,7 +1,7 @@
 Unreleased:
   Added:
-    qun:
-      - Initial release of Qun, a standard skirt block from classic British pattern cutting
+    skirtblock:
+      - Initial release of Standard Skirt Block, a skirt block from classic British pattern cutting
 
   Fixed:
     carlton:

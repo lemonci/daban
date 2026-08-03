@@ -1,12 +1,12 @@
 <p align='center'><a
-  href="https://www.npmjs.com/package/@freesewing/qun"
-  title="@freesewing/qun on NPM"
-  ><img src="https://img.shields.io/npm/v/@freesewing/qun.svg"
-  alt="@freesewing/qun on NPM"/>
+  href="https://www.npmjs.com/package/@freesewing/skirtblock"
+  title="@freesewing/skirtblock on NPM"
+  ><img src="https://img.shields.io/npm/v/@freesewing/skirtblock.svg"
+  alt="@freesewing/skirtblock on NPM"/>
   </a><a
   href="https://opensource.org/licenses/MIT"
   title="License: MIT"
-  ><img src="https://img.shields.io/npm/l/@freesewing/qun.svg?label=License"
+  ><img src="https://img.shields.io/npm/l/@freesewing/skirtblock.svg?label=License"
   alt="License: MIT"/>
   </a><a
   href="#contributors-"
@@ -30,7 +30,7 @@
   alt="Become a FreeSewing Patron"/>
   </a></p>
 
-# @freesewing/qun
+# @freesewing/skirtblock
 
 A standard skirt block (skirt sloper) drafted with the classic British Bray method
 
@@ -50,7 +50,7 @@ hardship, then you should [join us and become a patron](https://freesewing.eu/pa
 
 This repository is the FreeSewing *monorepo* holding all FreeSewing's websites, documentation, designs, plugins, and other NPM packages.
 
-This folder holds: @freesewing/qun
+This folder holds: @freesewing/skirtblock
 
 If you're not entirely sure what to do or how to start, type this command:
 

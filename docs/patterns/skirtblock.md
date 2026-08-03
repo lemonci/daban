@@ -1,4 +1,4 @@
-# qun — standard skirt block (标准裙原型)
+# skirtblock — standard skirt block (标准裙原型)
 
 ## Source
 
@@ -7,7 +7,7 @@
   (国际服装丛书 ②, "英国经典服装纸样设计 基础篇")
 - Printed pages: 140–150 (chapter 第十一章 裙子; block construction 第三节 标准裙原型
   pp. 145–150). PDF pages 158–168, offset +18 (printed = PDF − 18).
-- INDEX.md row: qun
+- INDEX.md row: skirtblock
 
 The 标准裙原型 (standard skirt block) is one of the book's three primary blocks
 (衣片, 直袖, 标准裙 — printed p.7). Its silhouette is the "natural outline" of the
