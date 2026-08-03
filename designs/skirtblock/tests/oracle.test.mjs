@@ -1,5 +1,5 @@
 import { expect } from 'chai'
-import { SkirtBlock } from '../src/index.mjs'
+import { Skirtblock } from '../src/index.mjs'
 
 /*
  * Numeric oracle against the book's worked example.
@@ -32,8 +32,8 @@ const expected = {
   backDartGuide2: 145, // row 14
 }
 
-describe('SkirtBlock numeric oracle (book worked example)', () => {
-  const pattern = new SkirtBlock({ measurements })
+describe('Skirtblock numeric oracle (book worked example)', () => {
+  const pattern = new Skirtblock({ measurements })
   pattern.draft()
 
   it('drafts without errors', () => {

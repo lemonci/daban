@@ -19,7 +19,7 @@ const outline =
   'M 0,0 C 70.39,0 140.82,-0.97 211.1,-4.96 C 215.31,69.25 255.53,138.44 259.74,212.64 L 284.09,641.95 C 189.51,647.31 94.73,650 0,650'
 
 /**
- * A linedrawing component for SkirtBlock
+ * A linedrawing component for Skirtblock
  *
  * @component
  * @param {object} props - All component props
@@ -27,7 +27,7 @@ const outline =
  * @param {number} props.stroke - The stroke width to apply
  * @returns {JSX.Element}
  */
-export const SkirtBlock = ({ className, stroke = 1 }) => (
+export const Skirtblock = ({ className, stroke = 1 }) => (
   <LineDrawingWrapper {...{ viewBox, className, stroke: stroke * strokeScale }}>
     <Front stroke={stroke * strokeScale} />
     <Back stroke={stroke * strokeScale} />
@@ -35,7 +35,7 @@ export const SkirtBlock = ({ className, stroke = 1 }) => (
 )
 
 /**
- * A linedrawing component for the front of SkirtBlock
+ * A linedrawing component for the front of Skirtblock
  *
  * @component
  * @param {object} props - All component props
@@ -43,14 +43,14 @@ export const SkirtBlock = ({ className, stroke = 1 }) => (
  * @param {number} props.stroke - The stroke width to apply
  * @returns {JSX.Element}
  */
-export const SkirtBlockFront = ({ className, stroke = 1 }) => (
+export const SkirtblockFront = ({ className, stroke = 1 }) => (
   <LineDrawingWrapper {...{ viewBox, className, stroke: stroke * strokeScale }}>
     <Front stroke={stroke * strokeScale} />
   </LineDrawingWrapper>
 )
 
 /**
- * A linedrawing component for the back of SkirtBlock
+ * A linedrawing component for the back of Skirtblock
  *
  * @component
  * @param {object} props - All component props
@@ -58,7 +58,7 @@ export const SkirtBlockFront = ({ className, stroke = 1 }) => (
  * @param {number} props.stroke - The stroke width to apply
  * @returns {JSX.Element}
  */
-export const SkirtBlockBack = ({ className, stroke = 1 }) => (
+export const SkirtblockBack = ({ className, stroke = 1 }) => (
   <LineDrawingWrapper {...{ viewBox, className, stroke: stroke * strokeScale }}>
     <Back stroke={stroke * strokeScale} />
   </LineDrawingWrapper>

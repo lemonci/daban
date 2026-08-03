@@ -48,7 +48,7 @@ import { Simon, SimonFront, SimonBack } from './simon.mjs'
 import { Simone, SimoneFront } from './simone.mjs'
 import { Shale, ShaleFront, ShaleBack } from './shale.mjs'
 import { Shin, ShinFront } from './shin.mjs'
-import { SkirtBlock, SkirtBlockFront, SkirtBlockBack } from './skirtblock.mjs'
+import { Skirtblock, SkirtblockFront, SkirtblockBack } from './skirtblock.mjs'
 import { Skully, SkullyFront /*, SkullyBack*/ } from './skully.mjs'
 import { Sophie, SophieFront, SophieBack } from './sophie.mjs'
 import { Sven, SvenFront } from './sven.mjs'
@@ -121,7 +121,7 @@ export const lineDrawingsFront = {
   shin: ShinFront,
   simon: SimonFront,
   simone: SimoneFront,
-  skirtblock: SkirtBlockFront,
+  skirtblock: SkirtblockFront,
   skully: SkullyFront,
   sven: SvenFront,
   sophie: SophieFront,
@@ -179,7 +179,7 @@ export const lineDrawingsBack = {
   shale: ShaleBack,
   simon: SimonBack,
   simone: SimonBack,
-  skirtblock: SkirtBlockBack,
+  skirtblock: SkirtblockBack,
   /* skully: SkullyBack, */
   sophie: SophieBack,
   teagan: TeaganBack,
@@ -248,7 +248,7 @@ export const lineDrawings = {
   sandy: Sandy,
   shale: Shale,
   shelly: Shelly,
-  skirtblock: SkirtBlock,
+  skirtblock: Skirtblock,
   skully: Skully,
   simon: Simon,
   simone: Simone,
@@ -442,10 +442,10 @@ export {
   //Shin
   Shin,
   ShinFront,
-  // SkirtBlock
-  SkirtBlock,
-  SkirtBlockFront,
-  SkirtBlockBack,
+  // Skirtblock
+  Skirtblock,
+  SkirtblockFront,
+  SkirtblockBack,
   // Simon
   Simon,
   SimonFront,
