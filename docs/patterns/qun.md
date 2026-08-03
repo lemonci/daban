@@ -98,7 +98,9 @@ average height, structure lines may shift for extreme heights, p.147), knee line
 | 9 | Side-seam removal (total / per part) | 6.63 / 3.315 | 66.3 / 33.15 |
 | 10 | Back dart intake (each of two) | 2.21 | 22.1 |
 | 11 | Front dart intake | 2.21 | 22.1 |
-| 12 | Net waist per part after shaping | 17.5 | 175 |
+| 12a | Net back waist after shaping (24.13 − 3.315 − 2×2.21) | 16.39 | 163.9 |
+| 12b | Net front waist after shaping (24.13 − 3.315 − 2.21) | 18.61 | 186.1 |
+| 12c | Net waist, both parts (= waist/2) | 35 | 350 |
 | 13 | Yoke line depth (dart tip line) | 15 | 150 |
 | 14 | Back dart guide lines from CB | 8 and 14.5 | 80 / 145 |
 | 15 | Knee half-width | 57.1 | 571 |
@@ -106,7 +108,14 @@ average height, structure lines may shift for extreme heights, p.147), knee line
 
 Checks against the book's own statements: finished hip 98+6=104 (p.146) ✓ (2×52);
 WR within "13~14 cm" (p.150) ✓; side 6.63 within 6–7 ✓; back darts 2.21 within
-2–2.5 ✓; front 2.21 within 2–3 ✓.
+2–2.5 ✓; front 2.21 within 2–3 ✓. Note the asymmetry: the back quarter is
+suppressed more than the front (two darts vs one — Fig 11-6), so net back waist <
+net front waist; only the sum equals waist/2.
+
+Model note: rows 6–8 use the book's own chord arithmetic (overlap = depth × θ).
+The drawn waist line is a smoothed curve (as the book's tracing-wheel step
+produces); dart intakes and removals are applied from the arithmetic, so the
+smoothing latitude (~a few mm of curve length) does not touch rows 1–16.
 
 ## Construction notes
 

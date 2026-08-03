@@ -7571,6 +7571,15 @@ export const designs = {
       }
     }
   },
+  "qun": {
+    "t": "Qun Skirt Block",
+    "d": "A standard skirt block (skirt sloper) drafted with the classic British Bray method",
+    "p": {
+      "box": "Box"
+    },
+    "s": {},
+    "o": {}
+  },
   "rendertest": {
     "t": "Render Test",
     "d": "A FreeSewing pattern to showcase how various elements are rendered/themed",
