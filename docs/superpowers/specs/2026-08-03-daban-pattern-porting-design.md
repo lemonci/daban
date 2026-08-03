@@ -26,7 +26,9 @@ scanned images.
 | Pilot source | 英国经典服装纸样设计 (基础篇) — Aldrich-lineage systematic drafting |
 | Language | English only; zh i18n deferred |
 | Scale | 3–10 patterns, quality-first, lightweight pipeline |
-| Order of work | Write the two project skills first, then the pilot |
+| Order of work | Write the project skills first, then the pilot |
+| Pattern paperwork | All agent-authored pattern markdown in one directory (`docs/patterns/`), every file traceable to book + pages |
+| Quality gate | A `pattern-making-principles` skill distilled from the books, used to exclude improper patterns |
 | Where designs live | **Approach A**: inside the fork's `designs/` tree, as collection members |
 | Categorization | Flat `designs/` folder; hierarchy expressed via `about.json` metadata (tags), not subdirectories |
 
@@ -61,10 +63,30 @@ catalog UI to present these tags as a hierarchical browse tree.
 | Artifact | Location |
 |---|---|
 | Ported designs | `daban/designs/<name>/` (normal collection members) |
-| Drafting specs (one per pattern) | `daban/porting/specs/<name>.md` |
-| CN↔EN glossary | `daban/porting/glossary.md` |
-| Project skills | `pattern_making/.claude/skills/{pattern-book-extraction,freesewing-design-dev}/` |
+| Pattern ledger (triage catalog) | `daban/docs/patterns/INDEX.md` |
+| Drafting specs (one per pattern) | `daban/docs/patterns/<name>.md` |
+| CN↔EN glossary | `daban/docs/patterns/glossary.md` |
+| Project skills | `pattern_making/.claude/skills/{pattern-book-extraction,freesewing-design-dev,pattern-making-principles}/` |
 | Toolchain | conda env `daban` (python 3.11, tesseract+chi_sim, poppler, pymupdf, node 20) — already built |
+
+All agent-authored pattern markdown lives in this **single `docs/patterns/` directory** —
+no scattered notes. Process documents (this spec, implementation plans) stay under
+`docs/superpowers/` per the superpowers conventions.
+
+### Traceability ledger: `docs/patterns/INDEX.md`
+
+The ledger is the single source of truth for coverage. Rules:
+
+- **Every book** in `clothing_books` gets a row — including "no paper patterns —
+  excluded" rows — so nothing is silently omitted.
+- **Every pattern** considered gets a row with: source book file, pages, status
+  (`excluded` / `candidate` / `specified` / `implemented` / `merged`), and for
+  exclusions the recorded reason (e.g. the violated pattern-making principle).
+- **Every drafting spec** opens with a mandatory source header (book filename,
+  edition, exact pages) matching its INDEX row — no spec without a ledger entry.
+- **Duplicates across books** (several books draft the same garment) are resolved in
+  the ledger: one primary source is chosen, the others cross-referenced on the same
+  row — so the same pattern is never ported twice.
 
 ### Design naming
 
@@ -84,8 +106,9 @@ Input: a book PDF + chapter/page range. Process:
 2. Claude reads the drafting diagrams visually (primary source of truth); OCR
    (`chi_sim`, spaces between adjacent CJK codepoints stripped) provides supporting
    text.
-3. Output a **drafting spec** at `porting/specs/<name>.md` containing:
-   - Source: book, edition, pages
+3. Output a **drafting spec** at `docs/patterns/<name>.md` and update its INDEX.md
+   row. The spec contains:
+   - Mandatory source header: book filename, edition, exact pages (must match INDEX)
    - Measurements required, each mapped to a FreeSewing measurement name
      (e.g. 腰围→waist, 臀围→seat); unmappable inputs become design options
    - Drafting steps as explicit formulas (point positions as functions of
@@ -107,14 +130,40 @@ i18n `en.json` shape (`t/d/p/s/o`); the manual LineDrawing SVG component +
 registration in `packages/react/components/LineDrawing/`; shared test suites; the
 `npm run studio` verification loop.
 
+### Skill 3: `pattern-making-principles`
+
+A distilled domain-knowledge skill: the principles of pattern construction abstracted
+from the books' own text — ease allowances, armhole ↔ sleeve-cap relationships
+(袖窿/袖山), bodice balance (衣身平衡) and dart mechanics, proportion systems, fit
+constraints — each principle cited back to book + pages.
+
+**Provenance pipeline (per project CLAUDE.md):** Sonnet subagents read and extract the
+relevant text — notably including the theory-only books and academic papers that
+contain no paper patterns (they are prime sources here, not skipped material); Fable
+abstracts and synthesizes the principles, with Opus subagents assisting where volume
+demands; Fable reviews the final skill content.
+
+**Used as a quality gate at three points:**
+1. **Triage** — a candidate pattern that violates sound construction or is clearly
+   impractical is `excluded` in INDEX.md with the violated principle as the reason,
+   so it never reaches the website.
+2. **Spec review** — extracted formulas are sanity-checked against the principles
+   before implementation.
+3. **Drafted-output review** — the rendered pattern is checked for principle
+   violations (e.g. impossible sleeve-cap/armhole ratios) alongside the numeric
+   oracle.
+
 ### Drafting spec → design data flow
 
 ```
-book PDF ──rasterize──> page images ──vision+OCR──> porting/specs/<name>.md
-    (spec reviewed; ambiguities resolved with user)
+books ──Sonnet reads──> INDEX.md triage rows
+    (principles gate: improper patterns excluded with recorded reason)
+book PDF ──rasterize──> page images ──vision+OCR──> docs/patterns/<name>.md
+    (spec reviewed against principles; ambiguities resolved with user)
 spec ──implement (Opus subagent, Fable reviews)──> designs/<name>/
     ──npm run reconfigure──> collection wiring
-    ──tests + numeric oracle + studio render──> merge design/<name> → develop
+    ──tests + numeric oracle + principles check + studio render──>
+    merge design/<name> → develop; INDEX.md row → merged
 ```
 
 ### Roles (per project CLAUDE.md)
@@ -137,8 +186,8 @@ features can be minimal in v1.
 3. Visual: studio render compared against the book's diagram (screenshot review).
 4. Code review by Fable before merging to `develop`.
 
-The pilot exercises both skills end-to-end; lessons learned are folded back into the
-skills before pattern #2.
+The pilot exercises all three skills end-to-end (extraction, design-dev, and the
+principles gate); lessons learned are folded back into the skills before pattern #2.
 
 ## Phases
 
@@ -148,13 +197,17 @@ skills before pattern #2.
   `package.json` engines requires ≥20 — if kickstart fails on version grounds,
   resolve then.)
 - **Phase 1 — Skills:** write `pattern-book-extraction` and `freesewing-design-dev`
-  from the verified repo/toolchain facts above.
+  from the verified repo/toolchain facts above; seed `pattern-making-principles`
+  from the theory-heavy sources (the academic papers and the foundational chapters
+  of the systematic books), Sonnet reading → Fable/Opus abstracting.
 - **Phase 2 — Pilot:** extract skirt-block spec → implement → verify (4 layers) →
   merge. Refine skills with lessons learned.
-- **Phase 3 — Portfolio:** port remaining patterns one at a time through the same
-  loop. Suggested order: bodice block + sleeve (they underpin most garments), then
-  distinctive garments (旗袍 as flagship), then further picks from the triage
-  catalog (built during this phase from the books that actually contain patterns).
+- **Phase 3 — Portfolio:** complete the INDEX.md ledger across all books (every book
+  gets a row, pattern-less ones marked excluded), then port remaining patterns one
+  at a time through the same loop. Suggested order: bodice block + sleeve (they
+  underpin most garments), then distinctive garments (旗袍 as flagship), then
+  further candidates from the ledger. The principles skill keeps growing as more
+  books are read.
 
 ## Error handling
 
