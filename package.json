@@ -68,7 +68,7 @@
     "@nx/eslint": "20.2.1",
     "all-contributors-cli": "^6.26.1",
     "axios": "^1.5.1",
-    "chalk": "^4.1.0",
+    "chalk": "^6.0.0",
     "cross-env": "^7.0.2",
     "eslint": "^9.27.0",
     "eslint-plugin-jsonc": "^2.4.0",
