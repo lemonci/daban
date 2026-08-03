@@ -22,8 +22,8 @@ Terms encountered while extracting; FreeSewing measurement names in `code`.
 | 前中心线 (CF) | center front | |
 | 后中心线 (CB) | center back | |
 | 侧缝(线) | side seam | |
-| 标准裙原型 | standard skirt block | design `qun` |
-| 直裙(原型) | straight skirt (block) | qun `silhouette: straight` |
+| 标准裙原型 | standard skirt block | design `skirtblock` |
+| 直裙(原型) | straight skirt (block) | skirtblock `silhouette: straight` |
 | 全圆型裙 | full-circle skirt | |
 | 西服裙 | tailored skirt | side seam 2 cm forward of center crease |
 | 礼服裙 | dress skirt (attached to bodice) | waist +4–5 cm; side seam 1 cm back |

@@ -40,7 +40,6 @@ import { Octoplushy, OctoplushyFront /*, OctoplushyBack*/ } from './octoplushy.m
 import { Otis, OtisFront /*, OtisBack*/ } from './otis.mjs'
 import { Onyx, OnyxFront } from './onyx.mjs'
 import { Penelope, PenelopeFront /*, PenelopeBack*/ } from './penelope.mjs'
-import { Qun, QunFront, QunBack } from './qun.mjs'
 import { Sabrina, SabrinaFront, SabrinaBack } from './sabrina.mjs'
 import { Sandy, SandyFront } from './sandy.mjs'
 import { Sarah, SarahFront, SarahBack } from './sarah.mjs'
@@ -49,6 +48,7 @@ import { Simon, SimonFront, SimonBack } from './simon.mjs'
 import { Simone, SimoneFront } from './simone.mjs'
 import { Shale, ShaleFront, ShaleBack } from './shale.mjs'
 import { Shin, ShinFront } from './shin.mjs'
+import { SkirtBlock, SkirtBlockFront, SkirtBlockBack } from './skirtblock.mjs'
 import { Skully, SkullyFront /*, SkullyBack*/ } from './skully.mjs'
 import { Sophie, SophieFront, SophieBack } from './sophie.mjs'
 import { Sven, SvenFront } from './sven.mjs'
@@ -113,7 +113,6 @@ export const lineDrawingsFront = {
   onyx: OnyxFront,
   otis: OtisFront,
   penelope: PenelopeFront,
-  qun: QunFront,
   sabrina: SabrinaFront,
   sandy: SandyFront,
   sarah: SarahFront,
@@ -122,6 +121,7 @@ export const lineDrawingsFront = {
   shin: ShinFront,
   simon: SimonFront,
   simone: SimoneFront,
+  skirtblock: SkirtBlockFront,
   skully: SkullyFront,
   sven: SvenFront,
   sophie: SophieFront,
@@ -174,12 +174,12 @@ export const lineDrawingsBack = {
   /*octoplushy: OctoplushyBack,*/
   /*otis: OtisBack,*/
   /*penelope: PenelopeBack,*/
-  qun: QunBack,
   sabrina: SabrinaBack,
   sarah: SarahBack,
   shale: ShaleBack,
   simon: SimonBack,
   simone: SimonBack,
+  skirtblock: SkirtBlockBack,
   /* skully: SkullyBack, */
   sophie: SophieBack,
   teagan: TeaganBack,
@@ -242,13 +242,13 @@ export const lineDrawings = {
   onyx: Onyx,
   otis: Otis,
   penelope: Penelope,
-  qun: Qun,
   sarah: Sarah,
   shin: Shin,
   sabrina: Sabrina,
   sandy: Sandy,
   shale: Shale,
   shelly: Shelly,
+  skirtblock: SkirtBlock,
   skully: Skully,
   simon: Simon,
   simone: Simone,
@@ -425,10 +425,6 @@ export {
   Penelope,
   PenelopeFront,
   /*PenelopeBack,*/
-  // Qun
-  Qun,
-  QunFront,
-  QunBack,
   //Sandy
   Sandy,
   SandyFront,
@@ -446,6 +442,10 @@ export {
   //Shin
   Shin,
   ShinFront,
+  // SkirtBlock
+  SkirtBlock,
+  SkirtBlockFront,
+  SkirtBlockBack,
   // Simon
   Simon,
   SimonFront,

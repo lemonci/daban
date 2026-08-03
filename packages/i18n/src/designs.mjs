@@ -7571,37 +7571,6 @@ export const designs = {
       }
     }
   },
-  "qun": {
-    "t": "Qun Skirt Block",
-    "d": "A standard skirt block (skirt sloper) drafted with the classic British Bray method",
-    "p": {
-      "back": "Back",
-      "front": "Front"
-    },
-    "s": {},
-    "o": {
-      "seatEase": {
-        "t": "Seat ease",
-        "d": "How much ease to add at the hip line. The book drafts 6 cm, and allows trimming it back to 4 cm for a tight fashion fit"
-      },
-      "lengthBonus": {
-        "t": "Length bonus",
-        "d": "How much longer than the knee measurement the skirt should be, measured on the center edge"
-      },
-      "silhouette": {
-        "t": "Silhouette",
-        "d": "How much the skirt flares below the hip line"
-      },
-      "silhouette.standard": {
-        "t": "Standard skirt",
-        "d": "The standard block, with 1.7 cm of spread at each knee-line boundary"
-      },
-      "silhouette.straight": {
-        "t": "Straight skirt",
-        "d": "The straight variant, with 1.2 cm of spread at each knee-line boundary"
-      }
-    }
-  },
   "rendertest": {
     "t": "Render Test",
     "d": "A FreeSewing pattern to showcase how various elements are rendered/themed",
@@ -9518,6 +9487,37 @@ export const designs = {
       "frontDartLength": {
         "t": "Front dart length",
         "d": "Controls how close the front dart approaches the bust point"
+      }
+    }
+  },
+  "skirtblock": {
+    "t": "Standard Skirt Block",
+    "d": "A standard skirt block (skirt sloper) drafted with the classic British Bray method",
+    "p": {
+      "back": "Back",
+      "front": "Front"
+    },
+    "s": {},
+    "o": {
+      "seatEase": {
+        "t": "Seat ease",
+        "d": "How much ease to add at the hip line. The book drafts 6 cm, and allows trimming it back to 4 cm for a tight fashion fit"
+      },
+      "lengthBonus": {
+        "t": "Length bonus",
+        "d": "How much longer than the knee measurement the skirt should be, measured on the center edge"
+      },
+      "silhouette": {
+        "t": "Silhouette",
+        "d": "How much the skirt flares below the hip line"
+      },
+      "silhouette.standard": {
+        "t": "Standard skirt",
+        "d": "The standard block, with 1.7 cm of spread at each knee-line boundary"
+      },
+      "silhouette.straight": {
+        "t": "Straight skirt",
+        "d": "The straight variant, with 1.2 cm of spread at each knee-line boundary"
       }
     }
   },

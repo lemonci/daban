@@ -1,5 +1,5 @@
 /*
- * The qun front and back outlines are congruent -- they only differ in their darts.
+ * The skirt block front and back outlines are congruent -- they only differ in their darts.
  * So the block geometry lives here, and both parts call into it.
  */
 

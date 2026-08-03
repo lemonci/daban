@@ -9,17 +9,17 @@
 
  - Get sleevecapEase in topSleeve from library's twoPartSleeve part
 
-### qun
-
-#### Added
-
- - Initial release of Qun, a standard skirt block from classic British pattern cutting
-
 ### sasha
 
 #### Fixed
 
  - Fixed incorrect translation order causing the wrong translation to be used
+
+### skirtblock
+
+#### Added
+
+ - Initial release of Standard Skirt Block, a skirt block from classic British pattern cutting
 
 
 ## 4.10.0 (2026-06-19)

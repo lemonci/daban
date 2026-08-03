@@ -1,9 +1,9 @@
 {
-  "id": "qun",
+  "id": "skirtblock",
   "code": "lemonci",
   "design": "Natalie Bray (英国经典服装纸样设计 基础篇)",
   "description": "A standard skirt block (skirt sloper) drafted with the classic British Bray method",
-  "name": "Qun Skirt Block",
+  "name": "Standard Skirt Block",
   "difficulty": 2,
   "tags": [
     "women",
@@ -13,6 +13,6 @@
     "darts"
   ],
   "version": "4.10.0",
-  "pkg": "@freesewing/qun",
+  "pkg": "@freesewing/skirtblock",
   "collection": true
 }
