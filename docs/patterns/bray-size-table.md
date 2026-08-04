@@ -75,24 +75,31 @@ Checked against the shipped designs on 2026-08-04:
 |---|---|---|
 | 省道 (bust dart) | `60mm + (chest_mm−800)×0.125` | ✅ reproduces **all ten rows** exactly |
 | 后领宽 (back neck width) | `chest/16 + 12.5` | ✅ reproduces all ten rows, including the `−` marks (e.g. 800→6.25 against the table's `6.5−`) |
-| 袖窿深 (bust line depth) | `215 + (chest_mm−920)×0.125` | ✅ exact for sizes III–X; 5 mm low at sizes I–II, where the table flattens out |
+| 袖窿深 (bust line depth) | `215 + (chest_mm−920)×0.125` | ✅ exact for sizes II–X (nine consecutive rows); 5 mm low at size I alone, where the table flattens out |
 | 胸围/臀围 ease | 10 cm / 6 cm | ✅ confirmed by row I's `80 + 10` / `86 + 6` |
 | XB 后背宽 | `backWidthPct` 39.13% → 36 cm at chest 92 | ✅ matches size IV's first value |
 | CH 胸宽 | `chestWidthPct` 41.30% → 38 cm at chest 92 | ✅ matches size IV |
 
 ## What this unblocks
 
-- **`bodiceblock` Ambiguity 14** (`shoulderToShoulder` → S). SH is tabulated:
-  12−, 12, 12.5−, 12.5, 13−, 13, 13.5, 13.5, 14, 14.5. It is **not** a clean
-  linear function of chest — the steps are 0.25, 0.25, 0.25, 0.25, 0.25, 0.5, 0,
-  0.5, 0.5 — so implementing it means interpolating this column rather than
-  fitting a formula. Doing so would let `shoulderToShoulder` drop out of the
-  geometry entirely and become a pure QC log.
-- **`bodiceblock` Ambiguity 4** (O point depth, currently pinned at 30 mm). O点
-  is tabulated: 2, 2.5, 3, 3, 3.5, 3.5, 4, 4, 4.5, 4.5. Also stepped, not
-  linear.
-- **后窿门宽**, the back UP addend, currently a fixed 55 mm: tabulated as 5, 5,
-  5, 5.5, 6, 6, 6.5, 7, 7, 7.
+Implemented in `designs/bodiceblock` on 2026-08-04: 后窿门宽, O点, XB, CH and 省道
+are now read off these columns by piecewise-linear interpolation in the net bust,
+clamped to rows I and X. `designs/bodiceblock/tests/grading.test.mjs` pins the
+result against an independent transcription of the table.
+
+- ✅ **`bodiceblock` Ambiguity 4** (O point depth, was pinned at 30 mm). O点 is
+  tabulated: 2, 2.5, 3, 3, 3.5, 3.5, 4, 4, 4.5, 4.5. Stepped, not linear — now
+  interpolated. Row IV's 3 cm is exactly the value that was pinned.
+- ✅ **后窿门宽**, the back UP addend, was a fixed 55 mm: tabulated as 5, 5, 5,
+  5.5, 6, 6, 6.5, 7, 7, 7. Row IV's 5.5 cm is exactly the value that was pinned.
+- ⚠ **`bodiceblock` Ambiguity 14** (`shoulderToShoulder` → S) — **still open.** SH
+  is tabulated: 12−, 12, 12.5−, 12.5, 13−, 13, 13.5, 13.5, 14, 14.5. It is
+  **not** a clean linear function of chest — the steps are 0.25, 0.25, 0.25,
+  0.25, 0.25, 0.5, 0, 0.5, 0.5 — so implementing it means interpolating this
+  column rather than fitting a formula. But it would not close the ambiguity:
+  the proxy's fault is a ~12 mm level offset, not a missing grade, and taking S
+  from the table would decouple the front shoulder from the wearer's own
+  measurement. Recorded, not acted on.
 
 ## What it does *not* settle
 

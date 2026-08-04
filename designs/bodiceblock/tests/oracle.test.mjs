@@ -6,6 +6,8 @@ import {
   structure,
   frontArmholeRegion,
   armholePath,
+  graded,
+  BACK_WIDTH_PCT,
   ARMHOLE_EASE_MIN,
   ARMHOLE_EASE_MAX,
 } from '../src/shared.mjs'
@@ -266,7 +268,17 @@ describe('Bodiceblock numeric oracle (book worked example)', () => {
       expect(S).to.be.below(142)
     })
     it('fires the shoulder check and lands on the ideal 17.5mm surplus', () => {
-      const drafted = Math.sqrt(((model.chest * 0.3913) / 2 + 20 - neckWidth) ** 2 + (60 - 10) ** 2)
+      /*
+       * The back width here must be the one Table 1-2 grades for THIS model's chest,
+       * not the row-IV proportion. cisFemaleAdult34 is chest 925, between rows IV and
+       * V, so the graded fraction is 39.056% and not the 39.13% default. `graded` is
+       * pinned against an independently transcribed copy of the table in
+       * grading.test.mjs, so reading it here still terminates at the book.
+       */
+      const backPct = graded(model.chest, BACK_WIDTH_PCT)
+      const drafted = Math.sqrt(
+        ((model.chest * backPct) / 2 + 20 - neckWidth) ** 2 + (60 - 10) ** 2
+      )
       expect(drafted).to.be.below(S + 10)
       near(stock.np.dist(stock.sp) - S, 17.5)
     })
