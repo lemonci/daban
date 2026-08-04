@@ -38,8 +38,8 @@ entry. Both are modeled as **design options** (pct of chest) instead:
 
 | Book term | CN | Worked example | Proposed option | Notes |
 |---|---|---|---|---|
-| Back width | 背宽 (XB) | 36 cm | `backWidthPct` (39.13% of chest) | independently measured on the body in the book; posture-sensitive (round vs erect shoulders shift XB/CH oppositely, p.24) — see Ambiguity 11 |
-| Chest/bust width | 胸宽 (CH) | 38 cm | `chestWidthPct` (41.30% of chest) | same caveat |
+| Back width | 背宽 (XB) | 36 cm | `backWidthPct` (39.13% of chest) | independently measured on the body in the book; **graded from Table 1-2** (41.25% of bust at size I falling to 36.21% at size X), the option being a departure from that grade; posture-sensitive (round vs erect shoulders shift XB/CH oppositely, p.24) — see Ambiguity 11 |
+| Chest/bust width | 胸宽 (CH) | 38 cm | `chestWidthPct` (41.30% of chest) | same, graded 43.75% → 39.66% |
 
 One further book input is used **only as a quality-control check** in this
 chapter, not to place any drafted point:
@@ -57,13 +57,13 @@ never make a draft fail: emit its checks as non-fatal `store.log` notes.
 
 | Option | Type | Default | Range | Source |
 |---|---|---|---|---|
-| `chestEase` | pct (of `chest`) | 10.87% (→10cm at chest 92) | **10.87–14.66%.** Ceiling from Ch.3 §7 (below); floor from the §D.0 calibration | total bust ease "for general fit" (p.22); after shaping, the *finished* actual bust is only 6–7cm over net when there's no waist suppression (p.23) |
+| `chestEase` | pct (of `chest`) | 10.87% (→10cm at chest 92) | **10.87–14.66%.** Ceiling from Ch.3 §7 (below); floor is the book's own 10cm — after grading the §D.0 calibration would allow ~9.7%, but spending it puts the worst option cell back within 1mm of the drop bracket | total bust ease "for general fit" (p.22); after shaping, the *finished* actual bust is only 6–7cm over net when there's no waist suppression (p.23) |
 | `seatEase` | pct (of `seat`) | 6.12% (→6cm at seat 98) | not stated (occasionally trimmed at the side seam for other garment types, p.25) | hip ease, applied **entirely to the front** (p.25/32) |
 | `waistEase` | pct (of `waist`) | 2.86% (→2cm/half at waist 70) | 2.14–4.29% (half-pattern addend 1.5–3cm, i.e. total pattern ease 3–6cm) | half-pattern waist-edge addend before dart shaping (p.19) |
 | `waistFit` | bool | `true` | — | `true` = full §2 waist-dart fitting (CB/CF slant + side intake + darts, this spec's oracle); `false` = leave the §1 basic block's simple side-seam taper only (back −2cm / front −1.5cm at the waist point, no darts) |
-| `backWidthPct` | pct (of `chest`) | 39.13% (→36cm at chest 92) | **37.5–39.5%.** Not stated by the book; set by the §D.0 calibration (below) | see Measurements table above |
-| `chestWidthPct` | pct (of `chest`) | 41.30% (→38cm at chest 92) | **39.5–41.5%.** Not stated by the book; set by the §D.0 calibration (below) | see Measurements table above |
-| `bustDartWidth` | pct (of `chest`) | 8.15% (→7.5cm at chest 92) | book's own size-table: 6.0cm at chest 80 → 10.5cm at chest 116, i.e. formula `60mm + (chest_mm−800)×0.125` | front shoulder/bust dart intake (p.17); cross-validated against the `pattern-making-principles` Ch.1 table (6cm@80 → 10.5cm@116) |
+| `backWidthPct` | pct (of `chest`) | 39.13% (→36cm at chest 92) | **38.04–40.22%**, a departure from the graded XB of ±10mm at chest 92. Table 1-2 prints XB as a pair 1cm apart in every one of its ten rows, and that 1cm is the range's magnitude; applying it downward as well as upward is ours, since the table names only the larger figure | see Measurements table above |
+| `chestWidthPct` | pct (of `chest`) | 41.30% (→38cm at chest 92) | **40.21–42.39%**, the same ±10mm. CH has no printed pair; p.24 pairs it with XB (round shoulders take XB up and CH down), so it is given XB's allowance. Magnitude sourced, transfer inferred | see Measurements table above |
+| `bustDartWidth` | pct (of `chest`) | 8.15% (→7.5cm at chest 92) | **7.61–8.69%**, one step of the 省道 column's own grade (5mm at chest 92) either way. The column itself is now graded: 6.0cm at chest 80 → 10.5cm at chest 116 | front shoulder/bust dart intake (p.17); cross-validated against the `pattern-making-principles` Ch.1 table (6cm@80 → 10.5cm@116) |
 
 **Not an option:** an earlier draft of this spec exposed a
 `shoulderSlopeMethod` (`guideline` vs `fixedDrop`) on the belief that §1 and
@@ -71,6 +71,51 @@ Fig 2-8 gave competing shoulder constructions. They do not — once the back
 肩线 is placed correctly, Fig 2-8's "back 5cm / front 4.5cm below NP level" is
 just a restatement of the two 肩线 guide depths (back 10+50=60 ✓, front
 0+45=45 ✓). One construction, no option. See Ambiguity 3.
+
+## Grading — Ch.1's 表1-2 (printed p.12)
+
+Transcribed in full at [`bray-size-table.md`](bray-size-table.md). It grades ten
+bust sizes, 80–116 cm in 4 cm steps, and the block's worked example is its
+**row IV** (chest 92). Five of the block's control values are read off it:
+
+| Column | Where it lands | I (80) → X (116) |
+|---|---|---|
+| 后窿门宽 | back UP addend, §A.5 | 50 → 70 mm |
+| O点 | back O depth `yO_back`, §0.4 | 20 → 45 mm |
+| 后背宽 XB | `backWidthPct` | 41.25% → 36.21% of bust |
+| 胸宽 CH | `chestWidthPct` | 43.75% → 39.66% |
+| 省道 | `bustDartWidth` | 7.50% → 9.05% |
+
+**Method.** The columns step rather than run straight (50, 50, 50, 55, 60, …),
+so each is read by **piecewise-linear interpolation in the net body bust**,
+clamped to the end row outside 80–116 cm. That reproduces the table exactly at
+all ten sizes, so grading is a **no-op at the worked size** and the point oracle
+below is untouched. `B` is the net bust, not bust-plus-ease: row I prints it as
+`80 + 10`, the 10 cm being `chestEase`'s own default.
+
+The three width columns are interpolated **as fractions of the bust**, not as
+millimetres — clamping millimetres would hand a chest-132 body the same 42 cm
+back width the table gives chest 116. Each option then carries the wearer's
+departure from the grade, so at its default the block drafts the table.
+
+**Two columns are deliberately not re-read from the table**, because the
+formulas in §0 already reproduce it and reproduce more of it than the nominal
+column carries:
+
+- **后领宽** — `chest/16 + 12.5` hits all ten rows *including* the five the book
+  marks `−` ("a little under"): it lands exactly 2.5 mm below the nominal on
+  rows I, III, V, VII, IX and exactly on the nominal on the others. The nominal
+  column loses that.
+- **袖窿深** — `215 + (chest−920)×0.125` is exact on rows II–X, nine consecutive
+  sizes, and runs 5 mm under on row I alone, where the table flattens; p.19
+  declares 0.5 cm ignorable. Replacing it with a clamped column would truncate a
+  rate the table confirms nine times over as soon as the chest passes 116 cm,
+  which measurably *undoes* the grading's benefit at the top of the adult range.
+
+**What clamping costs.** The largest adult stock model (cisMale 50, chest
+131.6 cm) sits 15.6 cm above row X, so it is drafted on row X's proportions.
+That is still worth 13.4 mm of underarm-drop bracket: at pure defaults it solved
+`upDrop` 55.8 mm of a 60 mm bracket before grading and 42.4 mm after.
 
 ## Drafting steps
 
@@ -87,16 +132,24 @@ offset described below.
 
 1. Bust/armhole-depth line (袖窿深线 = 胸围线): `yBust = 215 + (C_mm−920)×0.125`
    — worked: **215** at C=920. (Book's own proportional table: 210@880,
-   215@920, 220@960, 225@1000 — formula fit to those four points.)
+   215@920, 220@960, 225@1000 — formula fit to those four points, and since
+   confirmed against all ten rows of Table 1-2: exact on II–X, 5 mm under on I.
+   Left on the formula rather than graded — see the Grading section.)
 2. Waist line: `yWaist = LW` — worked: **400**.
 3. Hip line: `yWaist + WS` — worked: **620** (=400+220).
-4. Back-only: O point depth `yO_back = 30` (fixed, mid-size band; sizes I/II:
-   20–25, V/VI: 35, VII/VIII: 40, IX/X: 45 — no formula available without
-   Ch.1's Table 1-2, see Ambiguity 4). Back-width line: `yBackWidth = round(yBust/2 to nearest 10)` — book explicitly rounds 215→220 then halves — worked: **110**.
+4. Back-only: O point depth `yO_back` = **graded from Table 1-2's O点 column**
+   (20, 25, 30, 30, 35, 35, 40, 40, 45, 45 mm across sizes I–X) — worked: **30**
+   at row IV. Back-width line: `yBackWidth = round(yBust/2 to nearest 10)` — book explicitly rounds 215→220 then halves — worked: **110**.
    **Back shoulder line (后肩线)**: `yShoulder_back = yO_back + 30` — worked:
    **60**.
 5. Front-only: O point depth `yO_front = yO_back − 30` — worked: **0** (front O
-   sits ~30mm above back O "略高3cm左右，大号尺寸中还要略大", p.16). Chest-width
+   sits ~30mm above back O "略高3cm左右，大号尺寸中还要略大", p.16). The 30mm
+   offset stays **fixed** although `yO_back` now grades: Table 1-2 has no column
+   for it, and holding it fixed is what keeps the book's balance rule (p.30,
+   front 1 cm longer than back) at every size — the front NP stays exactly 10 mm
+   above the back NP throughout. Letting the offset grade with O点 instead would
+   collapse that surplus to 0 mm at size I and open it to 25 mm at size X.
+   Chest-width
    line: `yBust − 40` — worked: **175**. Front shoulder line (前肩线):
    `yO_front + 45` — worked: **45**.
 
@@ -117,12 +170,11 @@ offset described below.
 3. Back neckline: smooth curve NP(70,10) → O(0,30).
 4. **Back-width point** = (XB/2, 110) = **(180, 110)** — vertical guide line
    through it, parallel to CB.
-5. **UP** (armhole base) = (XB/2 + 55, yBust + `upDrop`) = **(235, 215)** before
-   calibration. `upDrop` is solved in §D.0 and is **0 only if the wearer's
+5. **UP** (armhole base) = (XB/2 + 后窿门宽, yBust + `upDrop`) = **(235, 215)**
+   before calibration. `upDrop` is solved in §D.0 and is **0 only if the wearer's
    biceps happens to match the drafted armhole**; the *x* is never changed.
-   (Addend 55mm
-   is the mid-size value; book's table runs 50mm smallest → 65mm largest —
-   Ambiguity 4.)
+   The addend is **graded from Table 1-2's 后窿门宽 column** (50, 50, 50, 55, 60,
+   60, 65, 70, 70, 70 mm across sizes I–X) — worked: **55** at row IV.
 6. **SP** (raw shoulder point) = (XB/2 + 20, yShoulder_back) = **(200, 60)** —
    on the 后肩线, per p.16 "在肩线上量取1/2背宽+2cm，并在端点标注肩点SP".
 7. Shoulder guide line: straight NP(70,10) → SP(200,60). Length
@@ -574,18 +626,26 @@ Front dart 40mm is *consistent with* (not an exact restatement of) "3cm或
    肩线 was mislocated. With 肩线 at y=60, Fig 2-8 is simply restating the two
    guide depths relative to each panel's NP: back 10+50=60 ✓, front 0+45=45 ✓.
    The `shoulderSlopeMethod` option has been removed accordingly.
-4. **Missing Ch.1 size-grading table**: several constants are given only as
-   size-band steps for the mid-size (chest 92, Bray's "Size IV" in a
-   4cm-step 80–116 sequence) with vague "large size" alternates, not a
-   continuous formula: back O-point depth (30mm; bands 20–25/30/35/40/45mm
-   across sizes I–X), back UP addend (55mm; bands 50mm smallest → 65mm
-   largest), front-O offset from back-O (30mm, "略高3cm左右，大号尺寸中还要略
-   大"), front shoulder-guide depth (45mm vs 40mm large), front neck-depth
-   (75mm vs 80–85mm large). Table 1-1/1-2 referenced for these lives in
-   Ch.1 (printed pp.1–12), outside this extraction's page range. **Chosen:**
-   fixed at the chest-92 mid-size value for all of these, matching
-   `skirtblock.md`'s precedent of fixing structure-line constants at the
-   average-figure value.
+4. **Missing Ch.1 size-grading table — MOSTLY CLOSED.** 表1-2 was never outside
+   the extraction's reach: it sits at printed p.12, one page before this
+   chapter, and is now transcribed at [`bray-size-table.md`](bray-size-table.md).
+   Of the constants this entry listed:
+
+   - **back O-point depth** and **back UP addend** — now graded from the table's
+     O点 and 后窿门宽 columns. Closed. Row IV corroborates the pinned values
+     exactly: 后窿门宽 5.5 cm = the code's 55, O点 3 cm = the code's 30.
+   - **front-O offset from back-O** (30mm, "略高3cm左右，大号尺寸中还要略大"),
+     **front shoulder-guide depth** (45mm vs 40mm large) and **front neck-depth**
+     (75mm vs 80–85mm large) — **still open.** The table has no column for any of
+     them; the "large size" alternates remain the only statement. All three stay
+     pinned at the chest-92 value. For the front-O offset that is not merely the
+     fallback but the reading that preserves the p.30 balance rule at every
+     size — see §0.5.
+
+   Note also that 后领宽 and 袖窿深, which this spec already carried as formulas,
+   are confirmed by the table rather than replaced by it (see the Grading
+   section), and that the table's own note 2 records that small sizes stop
+   obeying strict grading and are fixed at the shoulder, not at UP.
 5. **Front waist-dart intake and dart length are not book-pinned for this
    exact worked example.** Front dart = 40mm is *derived* from this spec's
    own WR bookkeeping (which independently reproduces the book's *stated*
@@ -626,14 +686,17 @@ Front dart 40mm is *consistent with* (not an exact restatement of) "3cm或
     project-wide (`designs/titan/drafting-instructions.md` row 13) — carried
     forward here without a better alternative in the current measurement
     list.
-11. **No FreeSewing measurement for 背宽/胸宽**: modeled as `backWidthPct` /
-    `chestWidthPct` (both pct-of-chest design options) rather than
-    independent inputs. The book itself notes these two vary independently
-    with *posture* (round-shouldered vs erect figures shift backWidth down
-    and chestWidth up, or vice versa, p.24) — collapsing them to a fixed
-    fraction of chest loses this degree of freedom. If a future design
-    wants posture-driven fit, these should become independent options
-    rather than a single derived pct.
+11. **No FreeSewing measurement for 背宽/胸宽 — narrowed, still open.** Modeled as
+    `backWidthPct` / `chestWidthPct` (both pct-of-chest design options) rather
+    than independent inputs. They are no longer a *fixed* fraction of chest:
+    Table 1-2 grades both, and the fraction falls with size (XB 41.25% → 36.21%,
+    CH 43.75% → 39.66%), so the size half of this entry is closed. What remains
+    open is the *posture* half — the book notes the two shift oppositely with
+    round-shouldered vs erect figures (p.24) but never says by how much. The
+    options now carry exactly that residual departure from the grade, and the
+    ±10mm they span is the magnitude of the table's own within-size XB pair, not
+    a posture figure. A measured posture signal would still be better than a
+    knob, and the two options remain independent so it can be added.
 12. **Neither S nor TA is QC-only — an earlier draft of this spec called both
     QC-only and was wrong twice over.** §B.9 places the front SP at
     `S + bustDartWidth` from NP, so S is load-bearing on the front. And p.19
@@ -693,11 +756,25 @@ Front dart 40mm is *consistent with* (not an exact restatement of) "3cm或
     *minimum* (10mm) rather than its stated ideal (15–20mm). The block had
     quietly stopped being proportional at the shoulder without saying so.
 
-    **What would settle it** is Ch.1's Table 1-2 — the grading table that gives
-    S per size — which is outside the extracted page range (see Ambiguity 4).
-    Bray measures both S and XB on the body, so a measurement-driven shoulder is
-    not unfaithful in principle; the problem is that our *proxy* for S is on a
-    different scale from the book's, and we have no page that pins the true one.
+    **Table 1-2 does not settle it — still ⚠ OPEN.** The table has since been
+    transcribed and it does tabulate 肩宽: 12−, 12, 12.5−, 12.5, 13−, 13, 13.5,
+    13.5, 14, 14.5 cm across sizes I–X, i.e. 15.00% of bust at size I falling to
+    12.50% at size X. That gives the book's own S at every size, and comparing it
+    against the proxy confirms the diagnosis above rather than fixing it: at
+    chest 920 the table says S = 125 while the proxy reads 137.2 on the nearest
+    stock model, and the table's grade (12.5 mm per 4 cm step) against the
+    proxy's (~4.6 mm) is the secondary modulation already described. The gap is a
+    **level offset in `shoulderToShoulder`**, not a missing grade, so grading S
+    from the table would not close it — it would only re-express it.
+
+    Deliberately not acted on here. Feeding the table's S into the front SP
+    (§B.9) would decouple the front shoulder from the wearer's own measurement
+    and make the block proportional where the book is measurement-driven; that is
+    a design decision, not a transcription. Recorded so the next pass has the
+    numbers. What the table *does* add is note 2, which sanctions lengthening the
+    shoulder line as the small-size remedy — exactly what the implemented
+    adjustment does — so the interim position below is now book-backed rather
+    than merely pragmatic.
 
     **Interim position, implemented** (not a resolution): keep the adjustment,
     since removing it makes the back shoulder *shorter* than the closed front

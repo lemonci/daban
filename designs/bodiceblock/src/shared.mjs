@@ -19,13 +19,23 @@ export const blockMeasurements = [
 ]
 
 /*
- * Every default is the book's own figure. `waistEase` is the only band the book states
- * (a 3 to 6cm addend on the full pattern). `seatEase` and `bustDartWidth` are chosen,
- * because a percentage option needs a minimum and a maximum and nothing constrains these.
+ * Every default is the book's own figure for its worked size, which is Table 1-2's row IV
+ * (chest 92). `waistEase` is the only band the book states outright (a 3 to 6cm addend on
+ * the full pattern); `seatEase` is chosen, because a percentage option needs a minimum and
+ * a maximum and nothing constrains it.
  *
- * The three that move an underarm or a pitch point are not chosen. They are as wide as
- * the armhole calibration below can actually close across the twenty adult stock models,
- * and no wider; `tests/ranges.test.mjs` sweeps them and holds them there.
+ * The other three are bands around a value the block now grades, so they measure a
+ * departure from the table rather than a size. Their widths come from the table itself:
+ *
+ *  - `backWidthPct`: 表1-2 prints XB as a pair per size, and the second figure is exactly
+ *    1cm above the first in all ten rows. That 1cm is the book's own within-size back-width
+ *    variant, and 10mm at chest 920 is 1.087 percentage points. Applied either way, because
+ *    the table names the larger figure but not a smaller one.
+ *  - `chestWidthPct`: the same 1.087 points. CH has no printed pair; p.24 pairs it with XB
+ *    (round shoulders take back width up and chest width down, erect ones the reverse), so
+ *    it is given the same allowance. The magnitude is the table's, the transfer is ours.
+ *  - `bustDartWidth`: one step of the 省道 column's own grade, 5mm at chest 920, or 0.543
+ *    percentage points. One size step of dart either way.
  *
  * `chestEase` is the only knob that enlarges the block at the side seam -- it moves the
  * front underarm point outward and nothing else. Ch.3 section 7 (pp.45-47) caps that
@@ -33,57 +43,85 @@ export const blockMeasurements = [
  * and loose tops, and past 3 to 5cm sends the drafter to the shoulder instead, a route
  * this block does not implement. 14.66% puts the largest adult stock model (cisMale 50,
  * chest 1316mm) 24.9mm out from where its own default draft puts that point: the
- * loose-garment ceiling, not over it. The floor is the book's own figure, and that is the
- * calibration's doing rather than the chapter's -- at the book's ease and the book's
- * widths cisMale 50 already spends 55.8mm of the 60mm underarm drop the bracket allows,
- * so any less ease leaves an armhole too short for the sleeve that has to go in it.
+ * loose-garment ceiling, not over it. The floor stays at the book's own 10cm. Grading did
+ * buy room to lower it -- the sweep closes down to about 9.7% -- but spending it there
+ * would put the worst cell of the option grid back within a millimetre of the drop
+ * bracket, which is the state this work was done to get out of.
  *
- * `backWidthPct` and `chestWidthPct` enlarge nothing: they move the underarm and pitch
- * points fore and aft inside the armhole bridge and leave the half-block where it was, so
- * section 7 does not govern them. The calibration does. The bridge is
- * `halfChestPlusEase - backWidth/2 - chestWidth/2`; widening it lengthens the armhole and
- * narrowing it shortens it, and two percentage points is as far as either can travel --
- * placed low against the book's figure, because a bridge that is too wide only breaks the
- * small cisFemale sizes while one that is too narrow breaks the large cisMale ones, which
- * have the least drop left to spend.
- *
- * ⚠ PROVISIONAL -- the three narrowed ranges below are a symptom fix, not the answer.
- * They are squeezed because the block has no drop-bracket room left at large sizes, and
- * it has none because the fixed millimetre constants below are pinned at the chest-92
- * value and do not scale. Table 1-2 grades them (后窿门宽 50->70mm, O点 20->45mm, and
- * more) and is transcribed in full at `docs/patterns/bray-size-table.md`. Once those
- * constants are graded, re-derive `backWidthPct` and `chestWidthPct` from the table's own
- * XB and CH columns rather than from a sweep, and retest whether `chestEase` can open
- * downward again. Only `chestEase`'s ceiling is sourced (Ch.3 section 7); the other five
- * bounds here are fitted numbers awaiting that work.
+ * `tests/ranges.test.mjs` sweeps all four across the twenty adult stock models and holds
+ * them: at these bounds the solved drop spans -25.8 to 55.8mm inside a [-30, 60] bracket.
  */
 export const blockOptions = {
   chestEase: { pct: 10.87, min: 10.87, max: 14.66, menu: 'fit' },
   seatEase: { pct: 6.12, min: 3, max: 10, menu: 'fit' },
   waistEase: { pct: 2.86, min: 2.14, max: 4.29, menu: 'fit' },
   waistFit: { bool: true, menu: 'style' },
-  backWidthPct: { pct: 39.13, min: 37.5, max: 39.5, menu: 'fit' },
-  chestWidthPct: { pct: 41.3, min: 39.5, max: 41.5, menu: 'fit' },
-  bustDartWidth: { pct: 8.15, min: 6, max: 11, menu: 'fit' },
+  backWidthPct: { pct: 39.13, min: 38.04, max: 40.22, menu: 'fit' },
+  chestWidthPct: { pct: 41.3, min: 40.21, max: 42.39, menu: 'fit' },
+  bustDartWidth: { pct: 8.15, min: 7.61, max: 8.69, menu: 'fit' },
 }
 
 /*
- * Fixed millimetre values the book states for its own average size (chest 92).
+ * 表1-2 主要控制尺寸及比例表, printed p.12, transcribed in full at
+ * `docs/patterns/bray-size-table.md`. This is the grading table for the whole volume.
  *
- * ⚠ The reason recorded here for pinning them -- that chapter 1's grading table was
- * "outside the extracted page range" -- is STALE and was never quite true. 表1-2 sits at
- * printed p.12, one page before the bodice chapter, and is now transcribed in full at
- * `docs/patterns/bray-size-table.md`: 后窿门宽 (the `+55` below) graded 50, 50, 50, 55, 60,
- * 60, 65, 70, 70, 70mm and O点 (the 30) graded 20, 25, 30, 30, 35, 35, 40, 40, 45, 45mm,
- * plus 袖窿深, 后领宽, 省道, XB, CH and SH. The columns are stepped, not linear, so they
- * want interpolation rather than a formula.
+ * `BUST` is the table's own 胸围 B column, and it is the NET body bust rather than
+ * bust-plus-ease: row I prints it as `80 + 10`, the 10cm being the standard ease that
+ * `chestEase` adds on top, and 臀围 as `86 + 6` alongside `seatEase`'s 6cm. `chest` is the
+ * same net measurement, so the columns are read against it directly.
  *
- * Consequences of leaving them pinned, both live: the block does not scale far below
- * adult size -- doll models draft without errors but the shape is meaningless -- and, less
- * obviously, it strains at the TOP of the adult range too. A chest-92 bridge on a chest-132
- * body drafts an armhole too short, and the calibration makes up the difference by dropping
- * UP, which is why cisMale 50 spends 55.8mm of a 60mm bracket at pure defaults and why the
- * option ranges above had to be squeezed. Grading these is the root fix.
+ * The columns step rather than run straight (50, 50, 50, 55, 60, ...), so they are read by
+ * piecewise-linear interpolation in `chest`, clamped to the end row outside the table's 80
+ * to 116cm range. That reproduces the table exactly at all ten sizes, which makes grading a
+ * no-op at row IV, the block's own worked size.
+ */
+export const BUST = [800, 840, 880, 920, 960, 1000, 1040, 1080, 1120, 1160]
+export const BACK_UP_ADDEND = [50, 50, 50, 55, 60, 60, 65, 70, 70, 70] // 后窿门宽
+export const O_POINT = [20, 25, 30, 30, 35, 35, 40, 40, 45, 45] // O点
+
+/*
+ * The three width columns are graded as fractions of the bust rather than as millimetres.
+ * That is the quantity the options carry, and it is what the clamp has to preserve: outside
+ * the table a body keeps the end row's proportion, where clamping millimetres would hand a
+ * chest-132 body the same 42cm back width the table gives chest 116.
+ */
+const fractions = (column) => column.map((mm, i) => mm / BUST[i])
+export const BACK_WIDTH_PCT = fractions([330, 340, 350, 360, 370, 380, 390, 400, 410, 420]) // 后背宽 XB
+export const CHEST_WIDTH_PCT = fractions([350, 360, 370, 380, 390, 400, 420, 430, 445, 460]) // 胸宽 CH
+export const BUST_DART_PCT = fractions([60, 65, 70, 75, 80, 85, 90, 95, 100, 105]) // 省道
+
+export function graded(chest, column) {
+  if (chest <= BUST[0]) return column[0]
+  if (chest >= BUST[BUST.length - 1]) return column[column.length - 1]
+  let i = 0
+  while (chest > BUST[i + 1]) i++
+
+  return column[i] + ((column[i + 1] - column[i]) * (chest - BUST[i])) / (BUST[i + 1] - BUST[i])
+}
+
+/*
+ * A graded width the wearer can depart from, in mm. The option's distance from its own
+ * default -- which is the book's row IV figure -- is carried across every size, so at its
+ * default the option contributes nothing and the block drafts the table exactly.
+ */
+const gradedWidth = (chest, column, options, key) =>
+  chest * (graded(chest, column) + options[key] - blockOptions[key].pct / 100)
+
+/*
+ * Fixed millimetre values the book states for its own average size (chest 92), and which
+ * Table 1-2 does NOT grade. They stay pinned: every one of them is a waist or curve
+ * constant, none appears as a column of the table, and no other page in the extraction
+ * gives them per size.
+ *
+ * The constants the table does grade no longer live here -- 后窿门宽, O点, XB, CH and 省道
+ * are read off the columns above. Two more were already graded and are left alone, because
+ * the formulas in `structure()` below reproduce the table rather than approximate it:
+ * 后领宽's `chest/16 + 12.5` hits all ten rows including the ones the book marks `−`
+ * ("a little under"), which the nominal column loses; and 袖窿深's
+ * `215 + (chest - 920) x 0.125` is exact on rows II to X, nine consecutive sizes, and runs
+ * 5mm under on row I alone, where the table flattens -- inside the 0.5cm the book itself
+ * declares ignorable (p.19). Reading either off the nominal column instead would replace a
+ * rate the table confirms nine times over with a clamp above chest 116cm.
  */
 export const CB_SLANT = 20 // section 2: center back taken in at the waist
 export const CF_SLANT = 10 // section 2: center front taken in at the waist
@@ -143,12 +181,13 @@ export const FRONT_PITCH_CLEARANCE = FRONT_BISECTOR * Math.cos(Math.PI / 4)
 /*
  * CHOSEN, NOT SOURCED -- neither number is in Bray.
  *
- * The block's fixed millimetre constants above are stated for chest 92cm, and the note on
- * them says outright that the shape stops meaning anything far below adult size. So a
- * draft the calibration cannot close is a real failure on an adult body and a curiosity on
- * a doll, and the reports in `solveUpDrop` pick their severity accordingly. Measurements
- * are all the design sees at runtime, and `chest` is the one that drives every constant
- * here, so the test is a window on it.
+ * Table 1-2 runs from chest 80 to 116cm, and the grading above clamps to its end rows
+ * outside that. A doll or a giant is therefore drafted on the nearest tabulated
+ * proportions rather than on its own, which is a guess the book never makes. So a draft
+ * the calibration cannot close is a real failure on an adult body and a curiosity off it,
+ * and the reports in `solveUpDrop` pick their severity accordingly. Measurements are all
+ * the design sees at runtime, and `chest` is the one that drives every graded value here,
+ * so the test is a window on it.
  *
  * The bounds are round numbers placed in the gaps between FreeSewing's stock groups:
  * adult chests run 762mm (cisFemale 28) to 1316mm (cisMale 50), the largest doll is 600mm
@@ -169,10 +208,10 @@ export const ADULT_CHEST_MAX = 1350
 export function structure({ measurements, options }, upDrop = 0) {
   const chest = measurements.chest
   const seat = measurements.seat
-  const backWidth = chest * options.backWidthPct
-  const chestWidth = chest * options.chestWidthPct
+  const backWidth = gradedWidth(chest, BACK_WIDTH_PCT, options, 'backWidthPct')
+  const chestWidth = gradedWidth(chest, CHEST_WIDTH_PCT, options, 'chestWidthPct')
   const neckWidth = chest / 16 + 12.5
-  const dartWidth = chest * options.bustDartWidth
+  const dartWidth = gradedWidth(chest, BUST_DART_PCT, options, 'bustDartWidth')
 
   /*
    * `S` is the book's 肩宽: the length of the shoulder seam from NP to SP, 12.5 cm at
@@ -185,9 +224,11 @@ export function structure({ measurements, options }, upDrop = 0) {
    * nearest the book's own chest carries `shoulderToShoulder` 415, giving S = 137.2
    * against the book's 125 -- and the two scales grade differently, so the shoulder
    * check below fires on most sizes. That is an open question, written up with the
-   * measured evidence as ambiguity 14 in docs/patterns/bodiceblock.md; settling it
-   * needs chapter 1's grading table, which is outside the extracted pages. Whatever it
-   * does, it never fails a draft.
+   * measured evidence as ambiguity 14 in docs/patterns/bodiceblock.md. Table 1-2 does
+   * tabulate 肩宽 (12- to 14.5cm across the ten sizes) but it does not settle this: the
+   * mismatch is a level offset in the proxy, not a missing grade, and the table's own
+   * note 2 sanctions lengthening the shoulder line as the small-size remedy, which is
+   * what the adjustment below already does. Whatever it does, it never fails a draft.
    */
   const shoulderSeam = measurements.shoulderToShoulder / 2 - neckWidth
 
@@ -197,9 +238,18 @@ export function structure({ measurements, options }, upDrop = 0) {
   const yBust = 215 + (chest - 920) * 0.125
   const yWaist = measurements.hpsToWaistBack
   const yHip = yWaist + measurements.waistToSeat
-  const yOBack = 30
+  const yOBack = graded(chest, O_POINT)
   const yBackWidth = Math.round(yBust / 2 / 10) * 10 // the book rounds 21.5 to 22 cm, then halves
   const yShoulderBack = yOBack + 30 // measured from O, not from the top line
+  /*
+   * The front O sits above the back O by a fixed 30mm even though the back O now grades.
+   * Table 1-2 has no column for the offset; p.16 gives it as "略高3cm左右，大号尺寸中还要
+   * 略大", a bit more in large sizes but no figure. Keeping it fixed is what holds the
+   * book's balance rule (p.30, front 1cm longer than back) at every size -- the front NP
+   * stays 10mm above the back NP throughout. Letting the offset grade with O点 instead
+   * would collapse that surplus to zero at the smallest size and open it to 25mm at the
+   * largest, so the un-graded reading is the one that keeps a stated rule.
+   */
   const yOFront = yOBack - 30
   const yChestWidth = yBust - 40
   const yShoulderFront = yOFront + 45 // measured from O, as on the back
@@ -211,7 +261,7 @@ export function structure({ measurements, options }, upDrop = 0) {
    * The underarm drop never touches these, so the finished bust girth comes out the same
    * whatever `upDrop` turns out to be.
    */
-  const backUpX = backWidth / 2 + 55
+  const backUpX = backWidth / 2 + graded(chest, BACK_UP_ADDEND)
   const frontUpX = (chest * (1 + options.chestEase)) / 2 - backUpX
   const backHpX = seat / 4
   const frontHpX = seat / 4 + (seat * options.seatEase) / 2

@@ -25,15 +25,15 @@
     },
     "backWidthPct": {
       "t": "Back width",
-      "d": "The across-back width, as a fraction of the chest measurement. Round-shouldered figures need more, erect figures less"
+      "d": "How far the across-back width departs from the book's own grade for this bust size. Round-shouldered figures need more, erect figures less"
     },
     "chestWidthPct": {
       "t": "Chest width",
-      "d": "The across-chest width, as a fraction of the chest measurement. It moves opposite to the back width as posture changes"
+      "d": "How far the across-chest width departs from the book's own grade for this bust size. It moves opposite to the back width as posture changes"
     },
     "bustDartWidth": {
       "t": "Bust dart width",
-      "d": "How wide the shoulder/bust dart is where it opens on the shoulder seam, as a fraction of the chest measurement"
+      "d": "How far the shoulder/bust dart, where it opens on the shoulder seam, departs from the book's own grade for this bust size"
     }
   }
 }
