@@ -92,12 +92,13 @@ average height, structure lines may shift for extreme heights, p.147), knee line
    (350) along the **drawn waist edge**; the remainder is WR. The traced edge per
    part is the polyline from center-waist along the fixed strip's top to where the
    rotated strip's top edge crosses it (x ≈ 123.8), then along that rotated edge
-   to the side-waist corner: ≈ **247.5 per part**, so WR = 2×247.5 − 350 ≈
-   **145.1**. (The book's commentary "13~14 cm" uses a rougher chord estimate,
-   482.6−350 ≈ 132.6 — see Ambiguity 5.) Distribute (modern rule, p.150): **half
-   at the side seam** (72.5 total → 36.27 removed at each part's side-waist
-   corner along the rotated top edge), **remainder 2/3 into the two back darts**
-   (24.18 each), **1/3 into the front dart** (24.18). Book ranges: side 6–7 cm
+   to the side-waist corner: ≈ **241.24 per part**, so WR = 2×241.24 − 350 ≈
+   **132.49** — which is step 4's own derived half-pattern waist edge (482.6,
+   i.e. 241.3 per part) to within 0.06 mm, and lands inside the book's own
+   "13~14 cm" commentary. Distribute (modern rule, p.150): **half at the side
+   seam** (66.2 total → 33.12 removed at each part's side-waist corner along the
+   rotated top edge), **remainder 2/3 into the two back darts** (22.10 each),
+   **1/3 into the front dart** (22.10). Book ranges: side 6–7 cm
    nominal, max 8, min ~4 → 7.25 ✓; back darts 2–2.5 each → 2.42 ✓; front 2–3 →
    2.42 ✓ (Fig 11-6 p.149, p.150).
 7. **Back darts**: guide lines parallel to CB at **80 mm** from CB and **65 mm**
@@ -123,15 +124,14 @@ average height, structure lines may shift for extreme heights, p.147), knee line
 | 3 | CB/CF length (waist→hem) | 65 | 650 |
 | 4 | Waist→hip depth on center edge | 22 | 220 |
 | 5 | Knee gap per boundary (at knee line) | 1.7 | 17 |
-| 6 | Rotated side-waist corner (x, y from center/waist origin) | (24.73, −0.70) | (247.3, −7.0) |
-| 7 | Traced waist edge per part (polyline, before shaping) | 24.75 | 247.5 |
-| 8 | Waist reduction WR (2×247.5 − 350) | 14.51 | 145.1 |
-| 9 | Side-seam removal (total / per part) | 7.25 / 3.63 | 72.5 / 36.27 |
-| 10 | Back dart intake (each of two) | 2.42 | 24.18 |
-| 11 | Front dart intake | 2.42 | 24.18 |
-| 12a | Net back waist after shaping (247.5 − 36.3 − 2×24.2) | 16.28 | 162.8 |
-| 12b | Net front waist after shaping (247.5 − 36.3 − 24.2) | 18.70 | 187.0 |
-| 12c | Net waist, both parts (= waist/2) | 35 | 349.8 ≈ 350 |
+| 7 | Traced waist edge per part (polyline, before shaping) | 24.124 | 241.24 |
+| 8 | Waist reduction WR (2×241.24 − 350) | 13.25 | 132.49 |
+| 9 | Side-seam removal (total / per part) | 6.62 / 3.31 | 66.2 / 33.12 |
+| 10 | Back dart intake (each of two) | 2.21 | 22.10 |
+| 11 | Front dart intake | 2.21 | 22.10 |
+| 12a | Net back waist after shaping | 16.37 | 163.7 |
+| 12b | Net front waist after shaping | 18.58 | 185.8 |
+| 12c | Net waist, both parts (= waist/2) | 35 | 350 |
 | 13 | Yoke line depth (dart tip line) | 15 | 150 |
 | 14 | Back dart guide lines from CB | 8 and 14.5 | 80 / 145 |
 | 15 | Knee half-width | 57.1 | 571 |
@@ -157,9 +157,10 @@ curve; the ~1 mm smoothing latitude does not touch the oracle rows.
 
 ## Ambiguities
 
-All chosen readings below are documented defaults, none affects the oracle
-dimensions (rows 1–16 all derive from explicit book numbers); flagged for user
-confirmation:
+All chosen readings below are documented defaults; flagged for user
+confirmation. (The claim that none of them affects the oracle dimensions was
+removed on 2026-08-04 — Ambiguity 5 turned out to be a construction error in
+this spec, not a reading choice, and it moved eight oracle rows.)
 
 1. **Hem-width prose**: p.142 states the standard block's hem as "1⅕/1½ 臀围宽"
    (glyph unclear in scan; OCR garbled). The §4 construction (knee gaps) is
@@ -176,12 +177,20 @@ confirmation:
 4. **Front dart position**: no numeric position in text; Fig 11-6 shows it about
    a third of the way from the side seam toward CF. **Chosen: guide line at 1/3
    of side→CF distance from the side seam** (tip x = 2/3 × side-waist x ≈ 141).
-5. **WR arithmetic**: the book's commentary says WR is typically "13~14 cm"
-   (chord estimate 482.6−350 = 13.26), but its procedure (p.149: measure 35 cm
-   along the drawn waist line, the remainder is WR) yields 14.51 on the traced
-   polyline edge. **Chosen: the procedural measure** — it makes the finished
-   waist equal waist/2 exactly, and all resulting intakes stay within the book's
-   own ranges.
+5. ~~**WR arithmetic**~~ — **DISSOLVED 2026-08-04.** This recorded that the
+   book's "13~14 cm" commentary disagreed with its own procedure, which traced
+   out at 14.51. Both were right; the draft was wrong. The half-wedge missing
+   from step 5 (see the ⚠ there) shortened the waist edge as well as the hem,
+   and correcting it brings the traced measure to **13.25 cm** — the commentary's
+   own figure, and step 4's derived 482.6 for the pair to within 0.06 mm.
+
+   Worth recording as method: this ambiguity was never an ambiguity in the book.
+   It was a symptom of a construction error elsewhere in this spec, and it sat
+   here for a week wearing the costume of a source problem. **A "the book
+   contradicts itself" note is a hypothesis, not a finding** — before recording
+   one, check whether some other part of your own draft would explain both
+   readings at once. Here, one missing half-wedge explained the hem, the knee,
+   the waist edge and the WR simultaneously.
 
 ## Review
 
