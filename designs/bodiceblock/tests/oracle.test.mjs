@@ -2,7 +2,13 @@ import { expect } from 'chai'
 import { Path, Point, beamIntersectsX } from '@freesewing/core'
 import { cisFemaleAdult34 } from '@freesewing/models'
 import { Bodiceblock } from '../src/index.mjs'
-import { structure, frontArmholeRegion, armholePath } from '../src/shared.mjs'
+import {
+  structure,
+  frontArmholeRegion,
+  armholePath,
+  ARMHOLE_EASE_MIN,
+  ARMHOLE_EASE_MAX,
+} from '../src/shared.mjs'
 
 /*
  * Numeric oracle against the book's worked example.
@@ -263,7 +269,11 @@ describe('Bodiceblock numeric oracle (book worked example)', () => {
     it('says so in the log rather than failing', () => {
       const store = pattern.setStores[0]
       expect(store.logs.error.length).to.equal(0)
-      expect(store.logs.info.filter((l) => `${l}`.includes('backWidthPct')).length).to.equal(1)
+      // the calibration note names `backWidthPct` too, so match on the shoulder note itself
+      expect(
+        store.logs.info.filter((l) => `${l}`.includes('shoulder seam drafted from backWidthPct'))
+          .length
+      ).to.equal(1)
     })
   })
 
@@ -281,6 +291,16 @@ describe('Bodiceblock numeric oracle (book worked example)', () => {
         store.get('library.sleeve.frontArmholeLength')
       expect(Math.abs(drafted - (measurements.biceps + 125))).to.be.at.most(1)
       expect(Math.abs(store.get('bodiceblock.armholeCalibrated') - drafted)).to.be.at.most(0.001)
+    })
+    it('lands inside the accepted band of biceps + 100 to 130mm (p.29)', () => {
+      const drafted = store.get('bodiceblock.armholeCalibrated')
+      expect(drafted).to.be.at.least(measurements.biceps + ARMHOLE_EASE_MIN)
+      expect(drafted).to.be.at.most(measurements.biceps + ARMHOLE_EASE_MAX)
+    })
+    it('names the two remedies the user can reach for and the block cannot', () => {
+      const notes = store.logs.info.filter((l) => `${l}`.includes('armhole bridge'))
+      expect(notes.length).to.equal(1)
+      expect(`${notes[0]}`).to.include(`drop of ${Math.round(upDrop)}mm`)
     })
     it('row 36: the uncalibrated armhole is 375-385mm, the shortfall the loop closes', () => {
       const uncalibrated = store.get('bodiceblock.armholeUncalibrated')

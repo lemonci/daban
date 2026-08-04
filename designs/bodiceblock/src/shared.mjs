@@ -68,8 +68,19 @@ export const FRONT_DIG = 0.55
 
 /*
  * Section D.0 armhole calibration
+ *
+ * The accepted band and the solve target are two different numbers, deliberately.
+ * Chapter 2 section 3 (p.29) states the band as TA + 10 to 13cm, and that is what a
+ * finished armhole is judged against. The target is pinned tighter, and independently,
+ * by the sleeve: the straight sleeve's cap arc is 447.92mm at biceps 300, and the book
+ * wants 20 to 25mm of sleevecap ease over the armhole, which leaves only 422.9 to
+ * 427.9mm. TA + 12.5cm sits inside both. Retargeting the solver at the band's midpoint
+ * or its lower edge would still satisfy chapter 2 and break the sleeve by up to 23mm --
+ * designs/sleeveblock/tests/armhole.test.mjs asserts the intersection, so it fails.
  */
-export const ARMHOLE_EASE = 125 // book: armhole = TA + 120..130mm; midpoint
+export const ARMHOLE_EASE = 125 // solve target, pinned by the sleeve -- not the band's midpoint
+export const ARMHOLE_EASE_MIN = 100 // p.29: accepted band, TA + 10cm
+export const ARMHOLE_EASE_MAX = 130 // p.29: accepted band, TA + 13cm
 export const UPDROP_MIN = -30
 export const UPDROP_MAX = 60
 export const UPDROP_TOLERANCE = 1 // mm of armhole length; the book ignores up to 5
@@ -336,7 +347,7 @@ export function armholeLength(sh, st, upDrop) {
 /*
  * Section D.0: Bray does not treat the drafted armhole as final. He measures it with a
  * tape, raises or lowers UP, redraws, and measures again, until the armhole comes out
- * at TA + 12..13cm; half a centimetre of residual error is declared ignorable (p.19).
+ * inside the accepted band above; half a centimetre of residual error is ignorable (p.19).
  * We close that loop by bisection instead of by hand.
  *
  * `upDrop` shifts UP's y only. The bust line, and with it the block's finished bust
@@ -382,6 +393,24 @@ export function solveUpDrop(sh, st) {
         `${Math.round(calibrated)}mm against a target of ${Math.round(target)}mm.`
     )
   }
+
+  /*
+   * p.29 ranks three remedies for a short armhole and warns against reaching for this
+   * one first. The block cannot use the other two -- raising SP is scoped to square
+   * shoulders, which the book never defines numerically, and widening the bridge spends
+   * the wearer's chest ease or narrows their back -- but the user can, so say so. Said
+   * on every draft, because the book gives no threshold at which the drop becomes too
+   * much, and a threshold we invented would be a number nothing supports. The early
+   * return above keeps it to once per draft rather than once per panel.
+   */
+  store.log.info(
+    `bodiceblock: the armhole was calibrated to ${Math.round(calibrated)}mm by an underarm ` +
+      `drop of ${Math.round(drop)}mm, the last of the three remedies the book ranks for a ` +
+      `short armhole (p.29). It prefers raising SP -- square-shouldered figures only -- or ` +
+      `widening the armhole bridge where a wider armhole is obtainable. Both are yours to ` +
+      `make and not the block's: the bridge is set by chestEase, backWidthPct and ` +
+      `chestWidthPct. Accepted band: biceps + ${ARMHOLE_EASE_MIN} to ${ARMHOLE_EASE_MAX}mm.`
+  )
 
   store.set('bodiceblock.upDrop', drop)
   store.set('bodiceblock.armholeTarget', target)

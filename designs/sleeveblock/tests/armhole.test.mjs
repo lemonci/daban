@@ -1,6 +1,7 @@
 import { expect } from 'chai'
 import { Sleeveblock } from '../src/index.mjs'
 import { Bodiceblock } from '../../bodiceblock/src/index.mjs'
+import { ARMHOLE_EASE_MIN, ARMHOLE_EASE_MAX } from '../../bodiceblock/src/shared.mjs'
 
 /*
  * The cross-design closure check of docs/patterns/sleeveblock.md, "Armhole dependency".
@@ -73,5 +74,20 @@ describe('Sleeveblock cap against the Bodiceblock armhole', () => {
   it('leaves 20-25mm of sleevecap ease, the band the book asks for', () => {
     expect(ease).to.be.at.least(20)
     expect(ease).to.be.at.most(25)
+  })
+
+  /*
+   * Two chapters constrain the armhole at once, and the bodice's solve target is only
+   * defensible because it sits in their intersection: chapter 2 section 3 accepts
+   * TA + 10 to 13cm (400 to 430mm here), the cap arc less the sleevecap ease admits
+   * 422.9 to 427.9mm, and the overlap is the narrower window. This is the assertion that
+   * stops anyone retargeting the bodice solver at the accepted band's midpoint or its
+   * lower edge -- either would still satisfy chapter 2 and break the sleeve here.
+   */
+  it('the armhole sits in the intersection of the chapter 2 band and the cap arc', () => {
+    expect(armhole).to.be.at.least(sleeveMeasurements.biceps + ARMHOLE_EASE_MIN)
+    expect(armhole).to.be.at.most(sleeveMeasurements.biceps + ARMHOLE_EASE_MAX)
+    expect(armhole).to.be.at.least(cap - 25)
+    expect(armhole).to.be.at.most(cap - 20)
   })
 })
