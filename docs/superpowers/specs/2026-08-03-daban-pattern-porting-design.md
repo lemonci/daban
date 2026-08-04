@@ -204,10 +204,74 @@ principles gate); lessons learned are folded back into the skills before pattern
   merge. Refine skills with lessons learned.
 - **Phase 3 — Portfolio:** complete the INDEX.md ledger across all books (every book
   gets a row, pattern-less ones marked excluded), then port remaining patterns one
-  at a time through the same loop. Suggested order: bodice block + sleeve (they
+  at a time through the same loop. ~~Suggested order: bodice block + sleeve (they
   underpin most garments), then distinctive garments (旗袍 as flagship), then
-  further candidates from the ledger. The principles skill keeps growing as more
-  books are read.
+  further candidates from the ledger.~~ **Ordering superseded 2026-08-04 — see
+  Phase 3 ordering below.** The principles skill keeps growing as more books are
+  read.
+
+### Phase 3 ordering: system-sequential reading (amended 2026-08-04, user direction)
+
+Work one **drafting system** at a time and read its books **in chapter order**,
+start to finish. This replaces the original portability-ranked order.
+
+**Why.** Both defects this project has shipped trace to one cause: extracting a
+drafting chapter without its predecessors.
+
+- Bray Ch.2 §2's terse armhole restatement produced an armhole 5 cm short. Ch.2 §3
+  p.29 carries the governing rule — a wider accepted band and three remedies in a
+  stated preference order, including a warning against the one we had used.
+- The 熊能 原型法 spec invented a measurement-driven residual to source its
+  body-type correction amounts. Vol.1 Ch.7 (pp.124–139) re-derives those amounts
+  empirically from toiles, which speaks directly to the premise the spec had to
+  invent an answer for.
+
+In both cases the governing chapter came **earlier in the book** than the chapter
+we extracted. Cherry-picking by portability selects against exactly the chapters
+that constrain the draft.
+
+**The rule.** Read every chapter in sequence. Each yields exactly one of four
+things, and the ledger records which:
+
+1. a design;
+2. an option or variant on an existing design;
+3. `pattern-making-principles` content;
+4. reference data — or nothing at all.
+
+**"Nothing but a ledger note" is a legitimate outcome.** Forcing a design out of a
+chapter that does not contain one (a "fullness treatment" design) is the failure
+this rule exists to prevent. An unread chapter must be *visibly* unread in the
+ledger, not merely absent from it.
+
+**Scope.** The rule governs *systematic textbooks* — books with an argument
+running through them. It does not govern *catalogues*: 唐装旗袍款式与制作 is 110
+numbered garments drafted straight from B/W/H/N/S with no foundation block and no
+through-line. A catalogue has no sequence to read. It is entered when its turn
+arrives and cherry-picked internally.
+
+**Back-checking.** Five designs were ported out of order before this rule existed.
+Every newly-read chapter is checked against them, and that check is part of the
+chapter's work — not a deferred pass.
+
+**System order.**
+
+1. **British.** Bray 基础篇 (in progress — 7 of 16 chapters never opened) → Bray
+   提高篇 (builds explicitly on 基础篇 and shares its conventions, so it costs less
+   than restarting elsewhere) → Aldrich *Metric Pattern Cutting*. Aldrich's blocks
+   are **separate designs, never options on Bray's** — different formula family,
+   the same rule the ledger already applies to 熊能's men's block.
+2. **熊能 原型法.** Vol.1 (foundation) → Vol.2 (components) → Vols 3–4 (women's
+   garments). The parked 原型法 correction spec is re-derived here, in order, not
+   patched before then.
+3. Remaining systems and catalogues, per the ledger.
+
+**旗袍 waits** (user decision, 2026-08-04). It was named a near-term flagship in
+the original plan; under strict sequence it is entered when its book's turn
+arrives. No exception was taken for it.
+
+Cross-system duplicates are a verification asset, not waste. Two independent
+British fitted-bodice blocks check each other the way `sleeveblock`'s cap arc
+checked `bodiceblock`'s armhole — the strongest evidence this project has found.
 
 ## Error handling
 

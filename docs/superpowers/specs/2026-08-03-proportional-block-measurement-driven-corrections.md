@@ -1,9 +1,39 @@
 # Proportional block with measurement-driven body-type corrections
 
 **Date:** 2026-08-03
-**Status:** Drafted, deferred — implementation begins after the Bray bodice/sleeve family
+**Status:** ⛔ **PARKED 2026-08-04 (user decision) — do not implement or patch.**
 **Repo:** github.com/lemonci/daban (fork of FreeSewing v4.10.0, branch `develop`)
 **Parent spec:** `2026-08-03-daban-pattern-porting-design.md` (Phase 3, portfolio)
+
+> ### ⛔ Parked — read before touching this spec
+>
+> This spec was written from 熊能 Vol.1 **Ch.9 alone** (body-type corrections,
+> pp.167–194), cherry-picked out of its book. Under the Phase 3 ordering amendment
+> of 2026-08-04, that is exactly the practice the project has stopped: read a
+> system's books **in chapter sequence**, because the chapter that governs a method
+> generally comes *earlier* than the chapter that applies it.
+>
+> **Do not patch the broken detector.** The 平肩体 row is marked ❌ BROKEN below —
+> it is built on `shoulderSlope`, which is a hardcoded 13° for every FreeSewing
+> stock model and therefore carries no information about the wearer. The other
+> three detectors are unaudited. But the defect is not one row: the
+> measurement-driven residual is this spec's **central claim**, and verification
+> gate 5 (the zero-residual identity at the standard body) is passed *trivially* by
+> a constant column — the gate designed to prove the corrections sound would have
+> certified a detector that can never fire correctly.
+>
+> **What is likely to change the premise.** Vol.1 **Ch.7, pp.124–139, is a
+> muslin-fitting chapter that re-derives the dart amounts empirically from toiles**
+> rather than asserting them. This spec's founding question was "where does the
+> correction amount come from?", and it answered by inventing a measurement-driven
+> residual. Ch.7 addresses that question directly and was never read. (To be
+> precise about what Ch.7 would and would not have caught: it speaks to whether a
+> measurement can supply the number at all; it would *not* have revealed that
+> FreeSewing's `shoulderSlope` is constant, which is a data-side fact.)
+>
+> **Resume condition.** When the 熊能 system's turn arrives in the Phase 3 system
+> order, re-derive this spec from Vol.1 Ch.1 → Ch.9 **in sequence**. Treat
+> everything below as a prior attempt to argue with, not a baseline to extend.
 
 ## Goal
 

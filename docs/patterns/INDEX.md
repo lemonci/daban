@@ -66,30 +66,47 @@ where the garment's name is itself a loanword in English (Qipao).
 | `circleskirt` | Circle skirt block (圆裙纸样) | 英国经典服装纸样设计基础篇 (Bray) | 189–198 (Ch.16; Ch.11 §6 pp.153–154 is a different, slash-and-spread method) | **merged** | Radial construction, genuinely distinct from `skirtblock`. Ch.16 圆裙纸样 (pp.189–198) is the fuller treatment of the same geometry |
 | — | Supplementary skirt block (附加裙原型) | 英国经典服装纸样设计基础篇 (Bray) | 151 | candidate | Assess against `skirtblock` — may fold in as an option rather than a design |
 
-#### Bray 基础篇 — full chapter map (TOC read 2026-08-04)
+#### Bray 基础篇 — full chapter map and read-state (TOC read 2026-08-04)
 
-Printed = PDF(1-based) − 18 throughout. Ports so far have used Ch.2, Ch.7 and
-Ch.11 §3; this map is so future sessions can pick without re-reading the TOC.
+Printed = PDF(1-based) − 18 throughout.
 
-| Ch. | Title | pp. | Portability |
-|---|---|---|---|
-| 1 | 人体测量与原型纸样 | 1 | Reference — **表1-2 主要控制尺寸及比例表 on p.12** grades B/H/W/LW/XB/CH/SH/TA/O点/后领宽/袖窿深/后窿门宽/省道/袖窿 across 10 sizes. Settles several open ambiguities; see `bodiceblock.md` §14 |
-| 2 | 衣片原型 | 13 | ✅ `bodiceblock` |
-| 3 | 衣片原型的使用 | 36 | Manipulation techniques (腋下省 p.41, 中心肩缝 p.47, 增大围度 p.45) — options/variants on `bodiceblock`, not new designs |
-| 4 | 简单纸样设计 | 51 | Symbols + worked style examples |
-| 5 | 育克设计 | 65 | Yoke designs — candidate, derives from `bodiceblock` |
-| 6 | 省道转移 | 78 | Dart manipulation theory — belongs in `pattern-making-principles`, not a design |
-| 7 | 袖子 | 92 | ✅ `sleeveblock` |
-| 8 | 袖子的款式变化及样板设计 | 101 | Sleeve style variants — candidates once `sleeveblock` is settled |
-| 9 | 衣领的基本原理 | 112 | ⭐ Collar fundamentals + 基础领型 p.116 — a genuine new block family |
-| 10 | 翻领、驳领、披肩领 | 124 | Turn-down / lapel / cape collars — derives from Ch.9 |
-| 11 | 裙子 | 140 | ✅ `skirtblock` (§3 p.145); §4 附加 p.151, §5 直裙 p.152, §6 全圆型 p.153 (slash-and-spread, distinct from Ch.16 — unimplemented), §7/§8 bodice↔skirt matching pp.155–156 |
-| 12 | 连衣裙服装的基本型 | 157 | ✅ `dressblock` — a join of Ch.2 + Ch.11, not a new draft |
-| 13 | 裙子纸样的设计 | 163 | 分片裙/多片裙 — panelled skirts, candidates |
-| 14 | 裙子的宽松度 | 173 | 裙裥/折叠/碎褶 — fullness treatments, options rather than designs |
-| 15 | 喇叭形裙子 | 183 | Flared skirt, 标准法(裁切法) slash-and-spread — candidate |
-| 16 | 圆裙纸样 | 189 | ✅ `circleskirt` — compass construction (画样法). ⚠ **Not** the same method as Ch.11 §6, which is slash-and-spread and never computes a radius |
-| 附录 | 简单衣片原型 / 袖子的调整 / 款式变化 | 199 | Simplified block + sleeve adjustments |
+**This book is now worked in chapter sequence**, per the Phase 3 ordering amendment
+in `docs/superpowers/specs/2026-08-03-daban-pattern-porting-design.md` (2026-08-04,
+user direction). The first five designs were ported by cherry-picking, which is how
+the armhole defect reached `develop`. This table is the ledger for the sequential
+pass: a chapter that has never been opened must be *visibly* unread here.
+
+**State** — `✅ done` (read and its yield shipped) · `📖 read` (read, yield not yet
+built) · `⬜ unread` (never opened) · `◐ partial` (some sections only).
+
+**Yield** — every chapter produces exactly one of: a **design**, an **option** on an
+existing design, **principles** content, or **reference**/nothing. "Nothing but a
+ledger note" is a legitimate outcome; forcing a design out of a chapter that has
+none is the failure the sequential rule exists to prevent.
+
+| Ch. | Title | pp. | State | Yield | Notes |
+|---|---|---|---|---|---|
+| 1 | 人体测量与原型纸样 | 1–12 | ✅ done | reference | **表1-2 主要控制尺寸及比例表, p.12** grades B/H/W/LW/XB/CH/SH/TA/O点/后领宽/袖窿深/后窿门宽/省道/袖窿 across 10 sizes. Transcribed in full at `bray-size-table.md`. Settles several open ambiguities; see `bodiceblock.md` §14 |
+| 2 | 衣片原型 | 13–35 | ✅ done | design | `bodiceblock`. §3 pp.21–35 (structural analysis) read as theory 2026-08-04 — it is the source of the ordered armhole remedies |
+| 3 | 衣片原型的使用 | 36–50 | 📖 read | **option** | ⚠ **Next in sequence.** Theory digested (`bray-theory-notes.md` §3, all 12 sections) but never applied. Owes: a back-check of `bodiceblock`, and a decision on 腋下省 p.41 / 增大围度 p.45 / 中心肩缝 p.47 as options. References 尖点式育克 without giving the method — Ch.5 has it |
+| 4 | 简单纸样设计 | 51–64 | ⬜ unread | ? | Symbols + worked style examples. Expected principles/notation, unconfirmed |
+| 5 | 育克设计 | 65–77 | ⬜ unread | ? | Yokes. The one Tier-2 theory chapter the digest pass did not reach; supplies the 尖点式育克 method Ch.3 assumes |
+| 6 | 省道转移 | 78–91 | ✅ done | principles | Dart-transfer theory, fully digested (`bray-theory-notes.md` §1). Correctly yields no design |
+| 7 | 袖子 | 92–100 | ✅ done | design | `sleeveblock` |
+| 8 | 袖子的款式变化及样板设计 | 101–111 | ⬜ unread | ? | Sleeve style variants — expected options on `sleeveblock` |
+| 9 | 衣领的基本原理 | 112–123 | 📖 read | **design** | ⭐ Fully digested (`bray-theory-notes.md` §2) but **unbuilt** — a genuine new design family. One governing law: the inner edge length is fixed, the outer edge is the only free variable. 基础领型 p.116 |
+| 10 | 翻领、驳领、披肩领 | 124–139 | ⬜ unread | ? | Turn-down / lapel / cape collars — derives from Ch.9 |
+| 11 | 裙子 | 140–156 | ◐ partial | design + option | `skirtblock` from §3 p.145. **Unread/unported:** §4 附加裙原型 p.151, §6 全圆型 p.153 (slash-and-spread, distinct from Ch.16). §5 直裙 p.152 is the `silhouette` option; §7/§8 pp.155–156 fed `dressblock` |
+| 12 | 连衣裙服装的基本型 | 157–162 | ✅ done | design | `dressblock` — a join of Ch.2 + Ch.11, not a new draft |
+| 13 | 裙子纸样的设计 | 163–172 | ⬜ unread | ? | 分片裙/多片裙 — panelled skirts |
+| 14 | 裙子的宽松度 | 173–182 | ⬜ unread | ? | 裙裥/折叠/碎褶 — fullness treatments, likely options rather than designs |
+| 15 | 喇叭形裙子 | 183–188 | ◐ partial | ? | §1 标准法(裁切法) slash-and-spread digested (`bray-theory-notes.md` §4.1); remaining sections unread |
+| 16 | 圆裙纸样 | 189–198 | ✅ done | design | `circleskirt` — compass construction (画样法). ⚠ **Not** the same method as Ch.11 §6, which is slash-and-spread and never computes a radius |
+| 附录 | 简单衣片原型 / 袖子的调整 / 款式变化 | 199– | ⬜ unread | ? | Simplified block + sleeve adjustments |
+
+**Tally: 7 of 16 chapters never opened** (4, 5, 8, 10, 13, 14, 附录), 2 partial
+(11, 15), 2 read-but-unbuilt (3, 9). Five designs were shipped from a book under
+half of which had been read.
 
 ### Foundation blocks — Aldrich system (independent second system)
 
