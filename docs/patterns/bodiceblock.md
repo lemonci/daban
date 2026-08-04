@@ -57,12 +57,12 @@ never make a draft fail: emit its checks as non-fatal `store.log` notes.
 
 | Option | Type | Default | Range | Source |
 |---|---|---|---|---|
-| `chestEase` | pct (of `chest`) | 10.87% (→10cm at chest 92) | not stated beyond the default | total bust ease "for general fit" (p.22); after shaping, the *finished* actual bust is only 6–7cm over net when there's no waist suppression (p.23) |
+| `chestEase` | pct (of `chest`) | 10.87% (→10cm at chest 92) | **10.87–14.66%.** Ceiling from Ch.3 §7 (below); floor from the §D.0 calibration | total bust ease "for general fit" (p.22); after shaping, the *finished* actual bust is only 6–7cm over net when there's no waist suppression (p.23) |
 | `seatEase` | pct (of `seat`) | 6.12% (→6cm at seat 98) | not stated (occasionally trimmed at the side seam for other garment types, p.25) | hip ease, applied **entirely to the front** (p.25/32) |
 | `waistEase` | pct (of `waist`) | 2.86% (→2cm/half at waist 70) | 2.14–4.29% (half-pattern addend 1.5–3cm, i.e. total pattern ease 3–6cm) | half-pattern waist-edge addend before dart shaping (p.19) |
 | `waistFit` | bool | `true` | — | `true` = full §2 waist-dart fitting (CB/CF slant + side intake + darts, this spec's oracle); `false` = leave the §1 basic block's simple side-seam taper only (back −2cm / front −1.5cm at the waist point, no darts) |
-| `backWidthPct` | pct (of `chest`) | 39.13% (→36cm at chest 92) | not stated | see Measurements table above |
-| `chestWidthPct` | pct (of `chest`) | 41.30% (→38cm at chest 92) | not stated | see Measurements table above |
+| `backWidthPct` | pct (of `chest`) | 39.13% (→36cm at chest 92) | **37.5–39.5%.** Not stated by the book; set by the §D.0 calibration (below) | see Measurements table above |
+| `chestWidthPct` | pct (of `chest`) | 41.30% (→38cm at chest 92) | **39.5–41.5%.** Not stated by the book; set by the §D.0 calibration (below) | see Measurements table above |
 | `bustDartWidth` | pct (of `chest`) | 8.15% (→7.5cm at chest 92) | book's own size-table: 6.0cm at chest 80 → 10.5cm at chest 116, i.e. formula `60mm + (chest_mm−800)×0.125` | front shoulder/bust dart intake (p.17); cross-validated against the `pattern-making-principles` Ch.1 table (6cm@80 → 10.5cm@116) |
 
 **Not an option:** an earlier draft of this spec exposed a
@@ -319,6 +319,20 @@ Remedy 3 is the only unconditional one, which is presumably why Bray describes
 it as what drafters actually reach for. The block therefore applies it, and
 **surfaces remedies 1–2 to the user**, who *can* act on them.
 
+**Remedy 2 is guidance, not a knob — and there is no `armholeBridgeBonus`.**
+An implementation of this spec once shipped one, and it did not do what the
+paragraph above describes. It added `bonus/2` to *both* underarm points, so
+`backUpX + frontUpX = halfChestPlusEase + bonus`: at chest 92.5cm a 5% bonus
+widened the bridge from 140.8mm to 187.0mm by adding **46.25mm to the half-block
+and 92.5mm to the finished bust girth**, rather than by spending ease already
+granted. Net armhole gain: under 1.3mm, because §D.0 drives the armhole to
+`biceps + 125` whatever the bridge did — the bonus only made the armhole
+shallower and the wearer's block a size looser. Widening the bridge is a
+*re-allocation*, so the only honest way to expose it is the three options that
+already decide the allocation: raise `chestEase` (paid for in bust girth), or
+lower `backWidthPct` / `chestWidthPct` (paid for in a narrower back or chest).
+The draft log names all three.
+
 **Target.** `armholeTarget = biceps_mm + 125`. Worked example: 300 + 125 =
 **425mm**. Note this is *not* the midpoint of the widened band (which would be
 115) — it is pinned independently by the sleeve:
@@ -352,8 +366,55 @@ strictly increasing in `upDrop`, so bisection on the bracket below is sufficient
   standard figure, so this bracket is generous on both sides.
 - Cap iterations at 40; bisection over a 90mm bracket reaches sub-0.01mm.
 - If the solution lies outside the bracket, **clamp** to the nearer bound, draft
-  anyway, and emit a `store.log.warn` naming the achieved armhole vs the target.
-  A block that drafts with a warning beats a block that throws.
+  anyway, and report the achieved armhole against the target and against the
+  `TA + (10–13cm)` band. A block that drafts with a complaint beats a block that
+  throws — but a clamped block's sleeve will not set in, so on an adult-sized
+  body the report is `store.log.error`, which fails CI, and only off it a
+  `store.log.warn`. "Adult-sized" is `chest ∈ [700, 1350]mm`: **both numbers are
+  chosen, not sourced.** The block's fixed millimetre constants are stated for
+  chest 92cm (Ambiguity 4) and stop meaning anything far from it, and `chest` is
+  the only adult-size signal a design sees at runtime. The bounds sit in the gaps
+  between FreeSewing's stock groups — adult chests run 762 to 1316mm, the largest
+  doll is 600mm, the smallest giant 1387.5mm.
+
+**Geometric invariant (no book page — this one is physics).** §B.12 places the
+front armhole hollow at `armholePitch.shift(45, 15)`, i.e. `15·cos45° =
+10.607mm` **outboard** of the front pitch point. So the pitch point has to stay
+at least that far *inboard* of the front underarm point:
+
+```
+frontUpX − (chestWidth/2 + 20) ≥ FRONT_BISECTOR · cos45°
+```
+
+Equivalently, since both sides reduce to the bridge, `bridge ≥ 85.61mm`. Below
+that the front armhole is wider at the underarm than at the pitch — it opens as
+it descends, which no armhole does — and its lower stretch runs outside the
+panel's own side-seam line. The shipped ranges once allowed it: at cisFemale/28
+with `chestEase` 6%, `backWidthPct` 42%, `chestWidthPct` 45% the pitch landed
+2.61mm *outboard* of UP and the curve swung 14.16mm past the side seam, on 5 of
+the 20 adult stock models — while the armhole *length* check passed, because
+length was the only property checked. Violation is reported at the same severity
+as a clamp.
+
+**Where the option ranges come from.** `chestEase` is the only option that
+enlarges the block at the side seam (it moves the front UP and nothing else), so
+Ch.3 §7 pp.45–47 governs its ceiling: side-seam enlargement is limited to
+0.5–1cm for shirts and tailored garments and 2–2.5cm for workwear and loose
+tops, and past 3–5cm the book requires enlarging at the shoulder instead — a
+route this spec does not draft. 14.66% displaces the front UP of the largest
+adult stock model (cisMale 50, chest 1316mm) by 24.9mm from its own default
+draft: §7's loose ceiling, not over it. (The chapter does not settle whether its
+centimetres are counted per piece, per half-block or on girth; the most
+permissive reading — one side-seam line on one piece — is used deliberately, so
+an unresolved point in the source does not over-restrict the user.)
+`backWidthPct` and `chestWidthPct` enlarge nothing; they move points fore and
+aft inside the bridge. All three floors and the two width ceilings are set by
+this section instead: they are the widest bands under which all 20 adult stock
+models, at every combination of {min, default, max}, calibrate without clamping,
+land inside `TA + (10–13cm)`, and satisfy the invariant above. The sweep is
+committed as `designs/bodiceblock/tests/ranges.test.mjs`. `chestEase` cannot go
+below the book's own 10.87% because cisMale 50 already spends 55.8mm of the
+60mm bracket at the book's own figures.
 
 **Where it runs.** All of `L`'s inputs are pure functions of measurements and
 options, so the solve is a **pre-pass in `shared.mjs`**, not something either
