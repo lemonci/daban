@@ -98,9 +98,11 @@ average height, structure lines may shift for extreme heights, p.147), knee line
    "13~14 cm" commentary. Distribute (modern rule, p.150): **half at the side
    seam** (66.2 total → 33.12 removed at each part's side-waist corner along the
    rotated top edge), **remainder 2/3 into the two back darts** (22.10 each),
-   **1/3 into the front dart** (22.10). Book ranges: side 6–7 cm
-   nominal, max 8, min ~4 → 7.25 ✓; back darts 2–2.5 each → 2.42 ✓; front 2–3 →
-   2.42 ✓ (Fig 11-6 p.149, p.150).
+   **1/3 into the front dart** (22.10). Book ranges: side 6–7 cm nominal, max 8,
+   min ~4 → **6.62 ✓**; back darts 2–2.5 each → **2.21 ✓**; front 2–3 →
+   **2.21 ✓** (Fig 11-6 p.149, p.150). Note all three now sit mid-range rather
+   than pressed against the ceiling, as they were before the step 5 correction
+   (7.25 / 2.42 / 2.42) — another quiet symptom of the same missing half-wedge.
 7. **Back darts**: guide lines parallel to CB at **80 mm** from CB and **65 mm**
    further (6–7 cm; p.150), from waist to the yoke line; darts centered on the
    guide lines, tips on the yoke line (see Ambiguity 3). Straight legs.
