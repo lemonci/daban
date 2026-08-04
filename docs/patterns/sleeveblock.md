@@ -204,14 +204,27 @@ flat "−1 cm" constant, p.95; see Ambiguity 3).
 12. **Elbow notches**: on both side seams, mark `y_E − 75` and `y_E + 50` —
     worked **232.8** and **357.8** (7.5 cm above and 5 cm below the elbow
     line, p.96).
-13. **Cuff/hem shaping**: base hem runs at `y = rectLength` (590) across the
-    full width. Raise the front quarter line's hem point by **25 mm** (2.5 cm)
-    to `y = rectLength − 25` (worked **565**); connect it to the back quarter
-    line's hem point (unchanged, worked **590**) and trim away the corner
-    below that line (p.96, 图7-6) — the hem sits lower/longer at the back,
-    higher/shorter at the front. May be redrawn as a shallow curve instead of
-    a straight cut (p.96). Exact treatment of the two outer seam corners is
-    not fully specified — see Ambiguity 6.
+13. **Cuff/hem shaping** (p.96, 图7-6 + 图7-7): the hem is cut **through the
+    folded sleeve**, so on the unrolled rectangle it is a chevron, not a
+    straight diagonal.
+
+    Base hem at `y = rectLength` (590). Raise the front quarter line's hem
+    point by **25 mm** to `rectLength − 25` (worked **565**) and connect it to
+    the back quarter line's hem point (unchanged, worked **590**) — the hem
+    sits lower/longer at the back, higher/shorter at the front. Beyond each
+    quarter line the cut line **mirrors**, because the quarter lines are the
+    fold lines (图7-6 is captioned 对折的袖片, "the folded sleeve piece", and
+    shows one straight hem cut across it). Both seam edges therefore land at
+    the mid value `rectLength − 12.5` (worked **577.5**).
+
+    Hem polyline, worked: (0, **577.5**) → (87.5, **590**) → (262.5, **565**)
+    → (350, **577.5**). 图7-7 rounds the two corners; that is drawing latitude.
+
+    Two checks this passes and a straight diagonal extended to the seam edges
+    does not: the two seam edges come out **equal**, so the underarm seam
+    closes flush instead of stepping 50 mm; and no part of the hem falls below
+    `rectLength`, so the piece still fits the rectangle it is cut from. See
+    Ambiguity 6 — an earlier review of this spec got this wrong.
 14. **Notch/set-in matching against the bodice armhole** (第三节, p.99–100):
     match T to the bodice shoulder point (sole primary notch); match B to the
     back armhole, banking ~0.5 cm ease by nudging the bodice point up 0.5 cm;
@@ -253,21 +266,32 @@ documented under Options but not carried further here (Ambiguity 1).
 **Cap-arc closure check — the strongest available test of the whole cap
 construction.** The four chords measure
 
-| Chord | Length (mm) | Bulge h | Curved ≈ chord·(1 + 8h²/3c²) |
-|---|---|---|---|
-| `U_back–B` | 115.2 | 10 | 117.5 |
-| `B–T` | 103.3 | 10 | 105.9 |
-| `T–F` | 106.1 | 12 | 109.7 |
-| `F–U_front` | 112.1 | 20 | 121.6 |
-| **total** | **436.7** | | **≈ 455** |
+⚠ The bulges the book states (1, 1, 1.2, 2 cm) are measured **straight down the
+page**, but the parabolic arc-length formula wants the sagitta measured
+**square to the chord**, and these chords sit at 32–41°. Use
+`h⊥ = h·cos θ`, or the estimate over-reads by ~7 mm.
 
-against the book's independently-stated cap-arc target of **445–455 mm**
-(total armhole 420–430 + 20–25 ease). The construction closes on its own
-target from the top of the range — **this is the test the implementation must
-reproduce**, and it is what exposed the B/F misplacement: placing B/F from the
-diagonal crossing gives a 477 mm polyline and a ≈490 mm curve, overshooting
-the target by ~8% and implying ~5 cm of cap ease on a block the book calls
-loose and comfortable.
+| Chord | Length c | Angle θ | Bulge h | h⊥ = h·cos θ | Curved ≈ c·(1 + 8h⊥²/3c²) |
+|---|---|---|---|---|---|
+| `U_back–B` | 115.2 | 40.6° | 10 | 7.59 | 116.5 |
+| `B–T` | 103.3 | 32.2° | 10 | 8.46 | 105.2 |
+| `T–F` | 106.1 | 34.4° | 12 | 9.90 | 108.6 |
+| `F–U_front` | 112.1 | 38.7° | 20 | 15.60 | 117.9 |
+| **total** | **436.7** | | | | **≈ 448** |
+
+against the book's independently-stated cap-arc target of **445–455 mm** (total
+armhole 420–430 + 20–25 ease). The construction closes inside its own target —
+**this is the test the implementation must reproduce**, and it is what exposed
+the B/F misplacement: placing B/F from the diagonal crossing gives a 477 mm
+polyline and a ≈490 mm curve, overshooting the target by ~8% and implying ~5 cm
+of cap ease on a block the book calls loose and comfortable.
+
+The implementation measures **447.92 mm** on the actual drawn curve, which
+matches this corrected estimate to 0.3 mm. Against the calibrated bodice
+armhole of 425.26 mm that is **22.66 mm** of sleevecap ease — inside the book's
+20–25 mm band. An earlier version of this table used the unprojected bulges,
+reported ≈455 mm, and made the ease look like ~30 mm; the geometry was never
+wrong, only the estimate of it.
 
 Other checks against the book's own statements: total armhole 42–43 cm at
 biceps 30 matches both Ch.2 (p.14) and Ch.7 (p.94) independently, and matches
@@ -328,17 +352,31 @@ ease (~0.5 cm) ✓ matches the book's stated asymmetric distribution (p.99).
    (p.94–95). The 35 cm root-width / 13 cm cap-height arithmetic is only clean
    with biceps = 30 (31 would give a non-round 13.25 cm cap height per the
    ±2 cm/±0.5 cm sensitivity rule). **Chosen: 30 cm is the oracle value.**
-6. **Cuff/hem shaping's exact endpoints are unclear.** The book states the
-   front quarter-line hem point rises 2.5 cm and connects by a cut line to the
-   back quarter-line's hem point (p.96), but does not say whether the two
-   outer seam edges (x=0 and x=rootWidth) continue this diagonal past the
-   quarter lines or return to the base hem line. **Chosen reading: the whole
-   corner below the connecting line is trimmed away** (the text says "沿该线
-   剪去下端" — cut away the lower end along this line), extending the
-   diagonal out to both seam edges. **Resolved on review:** 图7-7 (直袖的完成
-   效果) draws the finished hem as a single line running from the 外袖缝 up to
-   the 内袖缝, i.e. the diagonal does extend past both quarter lines to the
-   seam edges. Reading confirmed; no longer open.
+6. **Cuff/hem shaping past the quarter lines — RESOLVED, after one wrong
+   resolution.** The book states the front quarter-line hem point rises 2.5 cm
+   and connects by a cut line to the back quarter-line's hem point (p.96), but
+   does not spell out what happens between each quarter line and its seam edge.
+
+   ❌ **The first review of this spec resolved it wrongly**, reading 图7-7 as
+   "a single line running from 外袖缝 to 内袖缝" and extending the diagonal
+   straight out to both seam edges. That gives seam edges at 602.5 and 552.5 —
+   a **50 mm step** at the closed underarm seam, and a back edge 12.5 mm below
+   the rectangle the piece is cut from. Both are impossible, and either one
+   should have refuted the reading without needing the page.
+
+   ✅ **Correct reading: the cut line mirrors at each quarter line**, because
+   the quarter lines are the *fold* lines. 图7-6 is captioned 对折的袖片 ("the
+   folded sleeve piece") and shows a single straight hem cut across the folded
+   piece; unfolding a straight cut through a fold necessarily mirrors it. Both
+   seam edges land at 577.5, the seam closes flush, and nothing extends past
+   the rectangle. Confirmed against 图7-7 at 260 dpi, whose hem visibly rises
+   from 后袖线 toward 外袖缝 and falls from 前袖线 toward 内袖缝 — the opposite
+   of what the straight extension predicts at both ends.
+
+   The lesson, for the extraction skill: "the line runs right across" is a
+   claim about the line's *extent*, and it was used to settle a question about
+   the line's *shape*. Confirming the wrong property reads exactly like
+   confirming the right one.
 7. **No front-armhole/back-armhole split is ever stated** — only the *total*
    armhole circumference (biceps+12–13 cm) and *total* cap-arc ease
    (armhole+2–2.5 cm). Unlike some Chinese proportional systems (前AH/后AH),
@@ -400,8 +438,11 @@ p.96) read directly at 260 dpi against the extracted geometry:
 - **Elbow point corrected.** 图7-5/图7-7 draw 袖肘高 as a diagonal from T to E
   on the 后袖线, so the elbow line sits at ≈307.8 mm, not 320 mm (Ambiguity 9
   closed).
-- **Hem treatment confirmed** — 图7-7 runs the cut line right across from
-  外袖缝 to 内袖缝 (Ambiguity 6 closed).
+- ❌ **Hem treatment "confirmed" here was wrong** — 图7-7 does run the cut line
+  right across from 外袖缝 to 内袖缝, but that settles the line's *extent*, not
+  its *shape*, and it was used to settle the shape. The cut mirrors at each
+  quarter line (they are fold lines, 图7-6 对折的袖片). Corrected in step 13 and
+  Ambiguity 6 on 2026-08-04.
 - **`capEase` and `silhouette` removed as options** — neither is consumed by
   the draft; see the Options section.
 
