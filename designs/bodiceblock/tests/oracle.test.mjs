@@ -1,5 +1,7 @@
 import { expect } from 'chai'
+import { Path, Point, beamIntersectsX } from '@freesewing/core'
 import { Bodiceblock } from '../src/index.mjs'
+import { structure, frontArmholeRegion, armholePath } from '../src/shared.mjs'
 
 /*
  * Numeric oracle against the book's worked example.
@@ -7,20 +9,17 @@ import { Bodiceblock } from '../src/index.mjs'
  * (英国经典服装纸样设计基础篇, pp.13-35, chest 92 average size).
  *
  * Book values: chest 92cm, hip 98cm, waist 70cm, back waist length 40cm,
- * waist-to-hip 22cm, shoulder length S 12.5cm.
+ * waist-to-hip 22cm, shoulder length S 12.5cm, upper arm TA 30cm.
  *
  * `shoulderToShoulder` stands in for the book's 肩宽 S: the draft uses
  * shoulderToShoulder/2 minus the back neck width, so 39cm gives S = 19.5 - 7 = 12.5cm,
  * the book's own figure.
  *
- * All values mm. Tolerance +/-2mm.
- *
- * NOT asserted: worked-example row 35 (armhole size QC, 420-430mm). The point set in
- * rows 1-34 yields a 374mm armhole; the book's `TA + 12..13cm` check cannot be met by
- * the geometry the spec extracts. Reported as a deviation, see the implementation notes.
+ * All values mm. Tolerance +/-2mm unless a row states otherwise.
  */
 
 const measurements = {
+  biceps: 300,
   chest: 920,
   seat: 980,
   waist: 700,
@@ -53,15 +52,18 @@ describe('Bodiceblock numeric oracle (book worked example)', () => {
   const plain = draft({ options: { waistFit: false } })
   const back = fitted.back
   const front = fitted.front
+  const store = fitted.pattern.setStores[0]
+  // Section D.0 drops UP below the bust line; rows 1, 9 and 22 are pre-calibration
+  const upDrop = store.get('bodiceblock.upDrop')
 
   it('drafts without errors', () => {
-    expect(fitted.pattern.setStores[0].logs.error.length).to.equal(0)
+    expect(store.logs.error.length).to.equal(0)
   })
 
   describe('structure lines', () => {
     it('row 1: bust/armhole-depth line sits 215mm below the top line', () => {
-      near(back.up.y, 215)
-      near(front.up.y, 215)
+      near(back.up.y - upDrop, 215)
+      near(front.up.y - upDrop, 215)
     })
     it('row 2: waist line sits 400mm below the top line', () => {
       near(back.sideWaist.y, 400)
@@ -109,8 +111,9 @@ describe('Bodiceblock numeric oracle (book worked example)', () => {
     it('row 8: the back-width point is 180mm from the center back', () => {
       near(back.armholePitch.x, 180)
     })
-    it('row 9: UP is at (235, 215)', () => {
-      nearPoint(back.up, 235, 215)
+    it('row 9: UP is at (235, 215) before calibration', () => {
+      near(back.up.x, 235)
+      near(back.up.y - upDrop, 215)
     })
     it('row 10: SP is at (200, 60)', () => {
       nearPoint(back.sp, 200, 60)
@@ -139,8 +142,9 @@ describe('Bodiceblock numeric oracle (book worked example)', () => {
     it('row 21: CHP is 210mm from the center front', () => {
       near(front.armholePitch.x, 210)
     })
-    it('row 22: UP is at (275, 215)', () => {
-      nearPoint(front.up, 275, 215)
+    it('row 22: UP is at (275, 215) before calibration', () => {
+      near(front.up.x, 275)
+      near(front.up.y - upDrop, 215)
     })
     it('row 23: HP is at (275, 620)', () => {
       nearPoint(front.hp, 275, 620)
@@ -230,11 +234,64 @@ describe('Bodiceblock numeric oracle (book worked example)', () => {
   })
 
   /*
+   * Section D.0 armhole calibration. Row 35 is the book's own check, now satisfied by
+   * construction. Rows 36 and 37 are bracket assertions on the measured consequence of
+   * the section A and B geometry -- row 36 in particular is what tells a working
+   * solver apart from a solver quietly papering over a geometry bug, so it has to fail
+   * loudly if anyone changes a point.
+   */
+  describe('armhole calibration', () => {
+    it('row 35: the calibrated armhole measures biceps + 125mm', () => {
+      const drafted =
+        store.get('library.sleeve.backArmholeLength') +
+        store.get('library.sleeve.frontArmholeLength')
+      expect(Math.abs(drafted - (measurements.biceps + 125))).to.be.at.most(1)
+      expect(Math.abs(store.get('bodiceblock.armholeCalibrated') - drafted)).to.be.at.most(0.001)
+    })
+    it('row 36: the uncalibrated armhole is 375-385mm, the shortfall the loop closes', () => {
+      const uncalibrated = store.get('bodiceblock.armholeUncalibrated')
+      expect(uncalibrated).to.be.at.least(375)
+      expect(uncalibrated).to.be.at.most(385)
+    })
+    it('row 37: the solved underarm drop is 20-30mm', () => {
+      expect(upDrop).to.be.at.least(20)
+      expect(upDrop).to.be.at.most(30)
+    })
+    it('the calibration leaves the bust girth and chest ease alone', () => {
+      // UP's x is never touched, so half the finished bust is still chest + ease over 2
+      near(back.up.x + front.up.x, (measurements.chest * (1 + 0.1087)) / 2)
+      near(back.up.x, 235)
+      near(front.up.x, 275)
+    })
+    it('both panels drop UP by the same amount', () => {
+      expect(Math.abs(back.up.y - front.up.y)).to.be.at.most(0.001)
+    })
+    it('the front armhole digs below the bust line before UP, uncalibrated', () => {
+      const sh = {
+        Point,
+        Path,
+        utils: { beamIntersectsX },
+        measurements,
+        options: fitted.pattern.settings[0].options,
+      }
+      const st = structure(sh)
+      const region = frontArmholeRegion(sh, st, 0)
+      const path = armholePath(region, Path)
+      let deepest = -Infinity
+      for (let i = 0; i <= 100; i++) {
+        const at = path.shiftFractionAlong(i / 100)
+        if (at.x > region.armholeHollow.x && at.y > deepest) deepest = at.y
+      }
+      expect(deepest).to.be.above(st.yBust + 1)
+      // and it still arrives at UP tangent to the bust line
+      expect(region.upCp.y).to.equal(region.up.y)
+    })
+  })
+
+  /*
    * The sleeve contract, see the bottom of designs/library/src/index.mjs
    */
   describe('sleeve contract', () => {
-    const store = fitted.pattern.setStores[0]
-
     it('stores measured armhole lengths for every library sleeve', () => {
       for (const type of ['sleeve', 'twoPartSleeve', 'topsleeve', 'undersleeve']) {
         for (const side of ['back', 'front']) {

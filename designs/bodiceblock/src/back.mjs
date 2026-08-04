@@ -2,7 +2,9 @@ import {
   blockMeasurements,
   blockOptions,
   structure,
-  armholeControlPoints,
+  solveUpDrop,
+  backShoulderCheck,
+  backArmholeRegion,
   armholePath,
   storeArmhole,
   verticalCurve,
@@ -17,39 +19,36 @@ export const back = {
   options: blockOptions,
   draft: (sh) => {
     const { Point, Path, points, paths, options, macro, store, sa, part } = sh
-    const st = structure(sh)
+
+    /*
+     * Section D.0: solve the underarm drop before anything that starts at UP is drawn.
+     * The structure is then rebuilt with it, because the section 1 side seam runs from
+     * UP to HP and its waist point is an interpolation along that line.
+     */
+    const upDrop = solveUpDrop(sh, structure(sh))
+    const st = structure(sh, upDrop)
 
     /*
      * Structure points (bodiceblock.md section A). Origin is center back on the top line.
      */
     points.o = new Point(0, st.yOBack)
-    points.np = new Point(st.neckWidth, st.yOBack - 20)
-    points.armholePitch = new Point(st.backWidth / 2, st.yBackWidth)
-    points.up = new Point(st.backUpX, st.yBust)
-    points.sp = new Point(st.backWidth / 2 + 20, st.yShoulderBack)
+    const region = backArmholeRegion(sh, st, upDrop)
+    for (const key in region) points[key] = region[key]
     points.hp = new Point(st.backHpX, st.yHip)
 
     /*
-     * Shoulder length check (book p.16): the drafted shoulder seam has to be at least
-     * S + 1 cm, ideally S + 1.5 to 2 cm. If it comes up short the shoulder is lengthened
-     * outward, and SP keeps the height it was drafted at:
-     * "无论加长或缩短肩宽，SP点都必须在原有高度上不变".
+     * Shoulder length check (book p.16). The mapping from `shoulderToShoulder` to the
+     * book's S is a horizontal projection standing in for a slanted seam, so it reads
+     * short by roughly a centimetre; note it, never fail on it.
      */
-    const minShoulder = st.shoulderSeam + 10
-    if (points.np.dist(points.sp) < minShoulder) {
-      const rise = points.sp.y - points.np.y
-      points.sp = new Point(points.np.x + Math.sqrt(minShoulder ** 2 - rise ** 2), points.sp.y)
-    }
-
-    /*
-     * Armhole: square to the bust line at the underarm point, square to the back-width
-     * guide at the pitch point, smoothed 3 cm off the corner in between.
-     */
-    armholeControlPoints(sh, 30)
-    const shoulderAngle = points.np.angle(points.sp)
-    const toPitch = points.sp.dist(points.armholePitch) / 3
-    points.pitchCp1 = points.armholePitch.shift(90, toPitch)
-    points.spCp = points.sp.shift(shoulderAngle - 90, toPitch)
+    const shoulder = backShoulderCheck(Point, st)
+    if (shoulder.adjusted)
+      store.log.info(
+        `bodiceblock: the drafted shoulder seam measures ${Math.round(shoulder.length)}mm ` +
+          `against a minimum of ${Math.round(shoulder.minimum)}mm, so SP was moved out along ` +
+          `the shoulder line at unchanged height. The minimum is derived from ` +
+          `shoulderToShoulder, which under-reads the seam by about 10mm by construction.`
+      )
 
     /*
      * Back neckline: square to the center back, running into the shoulder at NP.
@@ -105,7 +104,7 @@ export const back = {
     if (sa) paths.sa = paths.seam.offset(sa).addClass('fabric sa')
 
     /*
-     * The sleeve contract: real measured curve lengths, not formulas.
+     * The sleeve contract, off the calibrated curves.
      */
     storeArmhole(store, points, Path, 'back')
 

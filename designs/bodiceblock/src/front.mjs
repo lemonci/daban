@@ -2,7 +2,8 @@ import {
   blockMeasurements,
   blockOptions,
   structure,
-  armholeControlPoints,
+  solveUpDrop,
+  frontArmholeRegion,
   armholePath,
   storeArmhole,
   verticalCurve,
@@ -11,61 +12,30 @@ import {
   SIDE_EXTRA,
 } from './shared.mjs'
 
-/*
- * The book fixes the front shoulder slope by drawing a ray from NP through a point on
- * the front shoulder guide line, 16.5 cm out from the center front (p.16). Like the
- * other structure constants it is stated for the average size only.
- */
-const SHOULDER_GUIDE_X = 165
-
 export const front = {
   name: 'bodiceblock.front',
   measurements: blockMeasurements,
   options: blockOptions,
   draft: (sh) => {
-    const { Point, Path, points, paths, options, macro, store, utils, sa, part } = sh
-    const st = structure(sh)
+    const { Point, Path, points, paths, options, macro, store, sa, part } = sh
+
+    /*
+     * Section D.0: solve the underarm drop before anything that starts at UP is drawn.
+     * Both panels take the same value -- front and back UP are one point once the side
+     * seam is sewn -- so this reads the answer the back part already cached, or solves
+     * it if the front happens to draft first.
+     */
+    const upDrop = solveUpDrop(sh, structure(sh))
+    const st = structure(sh, upDrop)
 
     /*
      * Structure points (bodiceblock.md section B). Origin is center front on the top line.
      */
     points.o = new Point(0, st.yOFront)
-    points.np = new Point(st.neckWidth, st.yOFront)
     points.cfNeck = new Point(0, st.yNeckDepthFront)
-    points.shoulderGuide = new Point(SHOULDER_GUIDE_X, st.yShoulderFront)
-    points.chestWidthPoint = new Point(st.chestWidth / 2, st.yChestWidth)
-    // The armhole passes 2 cm outside the chest-width guide point (figure 2-2)
-    points.armholePitch = new Point(st.chestWidth / 2 + 20, st.yChestWidth)
-    points.up = new Point(st.frontUpX, st.yBust)
+    const region = frontArmholeRegion(sh, st, upDrop)
+    for (const key in region) points[key] = region[key]
     points.hp = new Point(st.frontHpX, st.yHip)
-
-    /*
-     * Shoulder ray, and the shoulder/bust dart that sits on it. The dart's apex is a
-     * quarter of the chest width out from the center front and 2 cm below the bust
-     * line; its inner leg starts 2 cm back along the ray from the point directly above
-     * the apex, and the outer leg is a dart width further out.
-     */
-    const rayAngle = points.np.angle(points.shoulderGuide)
-    points.sp = points.np.shift(rayAngle, st.shoulderSeam + st.dartWidth)
-    points.bustApex = new Point(st.chestWidth / 4, st.yBust + 20)
-    points.dartOnRay = utils.beamIntersectsX(points.np, points.sp, points.bustApex.x)
-    points.dartInner = points.dartOnRay.shiftTowards(points.np, 20)
-    points.dartOuter = points.dartInner.shift(rayAngle, st.dartWidth)
-
-    /*
-     * Armhole. Below the chest-width point it mirrors the back: square to the bust line
-     * at the underarm point, square to the chest-width guide at the pitch point, and
-     * smoothed 1.5 cm off the corner between them. Above it, the straight shoulder-point
-     * to pitch-point line is hollowed by 1 cm at its midpoint.
-     */
-    armholeControlPoints(sh, 15)
-    const chord = points.sp.angle(points.armholePitch)
-    // The armhole hollows toward the center front, which is to the left of the chord
-    const inward = chord - 90
-    points.spCp = points.sp.shiftFractionTowards(points.armholePitch, 1 / 3).shift(inward, 40 / 3)
-    points.pitchCp1 = points.sp
-      .shiftFractionTowards(points.armholePitch, 2 / 3)
-      .shift(inward, 40 / 3)
 
     /*
      * Front neckline: square to the center front, running into the shoulder at NP.
@@ -122,7 +92,7 @@ export const front = {
     if (sa) paths.sa = paths.seam.offset(sa).addClass('fabric sa')
 
     /*
-     * The sleeve contract: real measured curve lengths, not formulas.
+     * The sleeve contract, off the calibrated curves.
      */
     storeArmhole(store, points, Path, 'front')
 
