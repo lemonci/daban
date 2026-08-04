@@ -285,8 +285,55 @@ itself does **not** move, so the block's finished bust girth and `chestEase` are
 unaffected; only the underarm gets deeper and the side seam correspondingly
 shorter. This is exactly what the book's remedy does.
 
-**Target.** `armholeTarget = biceps_mm + 125` (midpoint of the book's
-`TA + 120–130mm` band). Worked example: 300 + 125 = **425mm**.
+**The check, and Bray's ordered remedies (Ch.2 §3, p.29 — the general principle).**
+This spec first extracted the armhole rule from Ch.2 §2's terse restatement.
+Ch.2 §3 is the primary statement and gives more:
+
+- The band is **`TA + (10–13cm)`** — the lower bound is 10, not 12.
+- When the drafted armhole is short there are **three remedies, in Bray's stated
+  preference order**:
+  1. **Raise SP** — valid *only* for a square-shouldered figure.
+  2. **Widen the armhole bridge** (隆门宽, the a–d span) — *if a wider armhole is
+     obtainable*.
+  3. **Lower the armhole-depth line** (drop a and d).
+- ⚠ And an explicit caution against 3 as a first resort: deepening shortens the
+  armhole's own lower edge and risks under-arm drag as upper-arm girth grows.
+  *Prefer 1–2; use deepening carefully, only if no better option exists,
+  minimising loss at the armhole's bottom.*
+
+**Why §D.0 nonetheless implements remedy 3.** Both preferred remedies are
+*conditional on information or permission a drafter does not have*:
+
+- Remedy 1 is scoped to square shoulders, and the book states no numeric
+  threshold for "square". Applying it to a general figure would be using it
+  outside its stated scope.
+- Remedy 2 widens the bridge, which in Bray's own construction is
+  `halfChestPlusEase − backWidth/2 − chestWidth/2` — worked: 510 − 180 − 190 =
+  **140mm**. It is *determined* by chest ease and the two width measurements.
+  Widening it means either spending more chest ease or narrowing the wearer's
+  back and chest, so it is a design decision, not a correction a draft can make
+  for itself. `chestEase`, `backWidthPct` and `chestWidthPct` are the user's to
+  set; the block must not quietly override them.
+
+Remedy 3 is the only unconditional one, which is presumably why Bray describes
+it as what drafters actually reach for. The block therefore applies it, and
+**surfaces remedies 1–2 to the user**, who *can* act on them.
+
+**Target.** `armholeTarget = biceps_mm + 125`. Worked example: 300 + 125 =
+**425mm**. Note this is *not* the midpoint of the widened band (which would be
+115) — it is pinned independently by the sleeve:
+
+| constraint | source | acceptable armhole at biceps 300 |
+|---|---|---|
+| `TA + (10–13cm)` | Ch.2 §3 p.29 | 400–430 mm |
+| cap arc 447.92 − sleevecap ease 20–25mm | `sleeveblock.md`, Ch.7 | 422.9–427.9 mm |
+| **intersection** | | **422.9–427.9 mm** |
+
+425 sits inside both. Widening the band per Ch.2 therefore does *not* move the
+target — the sleeve is the binding constraint, and two independently extracted
+chapters agreeing on it is the strongest evidence available that it is right.
+Targeting the band's lower edge (400) would satisfy Ch.2 and break the sleeve by
+23mm of surplus cap ease.
 
 **Measured quantity.** `L(upDrop)` = back armhole curve length (SP → back-width
 point → 3mm-bisector point → UP) **plus** front armhole curve length (SP → 10mm
