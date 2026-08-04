@@ -62,8 +62,8 @@ where the garment's name is itself a loanword in English (Qipao).
 | `skirtblock` | Standard skirt block | 英国经典服装纸样设计基础篇 (Bray) | 140–150 | **merged** | Shipped. Straight variant (p.152) is the `silhouette` option. Spec: `skirtblock.md` |
 | `bodiceblock` | Bodice block | 英国经典服装纸样设计基础篇 (Bray) | 13–35 | **merged** | ⭐ Underpins nearly everything else. Armhole is calibrated to `biceps` by the book's own draft→measure→move-UP loop (spec §D.0). Cross-check against Aldrich's fitted block below — two independent systems for the same garment is a strong verification asset. Spec: `bodiceblock.md` |
 | `sleeveblock` | Straight sleeve block | 英国经典服装纸样设计基础篇 (Bray) | 92–100 | **merged** | ⭐ Drafted from biceps/shoulderToWrist/shoulderToElbow, not the armhole directly; cap arc cross-checked against the bodice's calibrated armhole (measured 22.66 mm of sleevecap ease against the book's 20–25 mm). Fitted/semi-fitted variants (弯袖) documented but not implemented (need elbow circumference, no FreeSewing measurement). Spec: `sleeveblock.md` |
-| — | Dress block (连衣裙服装的基本型) | 英国经典服装纸样设计基础篇 (Bray) | 157–162 | candidate | ⭐ **Now unblocked** — Ch.12 joins the bodice and skirt blocks, both shipped. Ch.11 §7/§8 (pp.155–156) give the side-seam and waist-dart matching rules it depends on |
-| — | Full-circle skirt block (全圆型裙原型) | 英国经典服装纸样设计基础篇 (Bray) | 153–154 | candidate | Radial construction, genuinely distinct from `skirtblock`. Ch.16 圆裙纸样 (pp.189–198) is the fuller treatment of the same geometry |
+| `dressblock` | Dress block (连衣裙服装的基本型) | 英国经典服装纸样设计基础篇 (Bray) | 157–162 | **specified** | ⭐ **Now unblocked** — Ch.12 joins the bodice and skirt blocks, both shipped. Ch.11 §7/§8 (pp.155–156) give the side-seam and waist-dart matching rules it depends on |
+| `circleskirt` | Circle skirt block (圆裙纸样) | 英国经典服装纸样设计基础篇 (Bray) | 189–198 (Ch.16; Ch.11 §6 pp.153–154 is a different, slash-and-spread method) | **specified** | Radial construction, genuinely distinct from `skirtblock`. Ch.16 圆裙纸样 (pp.189–198) is the fuller treatment of the same geometry |
 | — | Supplementary skirt block (附加裙原型) | 英国经典服装纸样设计基础篇 (Bray) | 151 | candidate | Assess against `skirtblock` — may fold in as an option rather than a design |
 
 #### Bray 基础篇 — full chapter map (TOC read 2026-08-04)
@@ -83,12 +83,12 @@ Ch.11 §3; this map is so future sessions can pick without re-reading the TOC.
 | 8 | 袖子的款式变化及样板设计 | 101 | Sleeve style variants — candidates once `sleeveblock` is settled |
 | 9 | 衣领的基本原理 | 112 | ⭐ Collar fundamentals + 基础领型 p.116 — a genuine new block family |
 | 10 | 翻领、驳领、披肩领 | 124 | Turn-down / lapel / cape collars — derives from Ch.9 |
-| 11 | 裙子 | 140 | ✅ `skirtblock` (§3 p.145); §4 附加 p.151, §5 直裙 p.152, §6 全圆型 p.153, §7/§8 bodice↔skirt matching pp.155–156 |
-| 12 | 连衣裙服装的基本型 | 157 | ⭐ Dress block — now unblocked by Ch.2 + Ch.11 |
+| 11 | 裙子 | 140 | ✅ `skirtblock` (§3 p.145); §4 附加 p.151, §5 直裙 p.152, §6 全圆型 p.153 (slash-and-spread, distinct from Ch.16 — unimplemented), §7/§8 bodice↔skirt matching pp.155–156 |
+| 12 | 连衣裙服装的基本型 | 157 | 📝 `dressblock` specified — a join of Ch.2 + Ch.11, not a new draft |
 | 13 | 裙子纸样的设计 | 163 | 分片裙/多片裙 — panelled skirts, candidates |
 | 14 | 裙子的宽松度 | 173 | 裙裥/折叠/碎褶 — fullness treatments, options rather than designs |
 | 15 | 喇叭形裙子 | 183 | Flared skirt, 标准法(裁切法) slash-and-spread — candidate |
-| 16 | 圆裙纸样 | 189 | Circle skirt, 画样法 — candidate, same geometry as Ch.11 §6 |
+| 16 | 圆裙纸样 | 189 | 📝 `circleskirt` specified — compass construction (画样法). ⚠ **Not** the same method as Ch.11 §6, which is slash-and-spread and never computes a radius |
 | 附录 | 简单衣片原型 / 袖子的调整 / 款式变化 | 199 | Simplified block + sleeve adjustments |
 
 ### Foundation blocks — Aldrich system (independent second system)
