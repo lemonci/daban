@@ -15,6 +15,12 @@
 
  - Get sleevecapEase in topSleeve from library's twoPartSleeve part
 
+### circleskirt
+
+#### Added
+
+ - Initial release of Circle Skirt, a circle skirt block from classic British pattern cutting
+
 ### dressblock
 
 #### Added

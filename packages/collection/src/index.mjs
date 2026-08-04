@@ -16,6 +16,7 @@ import { Carlita as carlita } from '@freesewing/carlita'
 import { Carlton as carlton } from '@freesewing/carlton'
 import { Cathrin as cathrin } from '@freesewing/cathrin'
 import { Charlie as charlie } from '@freesewing/charlie'
+import { Circleskirt as circleskirt } from '@freesewing/circleskirt'
 import { Cornelius as cornelius } from '@freesewing/cornelius'
 import { Crux as crux } from '@freesewing/crux'
 import { Devon as devon } from '@freesewing/devon'
@@ -101,6 +102,7 @@ export const designs = {
   carlton,
   cathrin,
   charlie,
+  circleskirt,
   cornelius,
   crux,
   devon,

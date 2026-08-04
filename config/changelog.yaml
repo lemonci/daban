@@ -2,6 +2,8 @@ Unreleased:
   Added:
     bodiceblock:
       - Initial release of Bodice Block, a bodice block from classic British pattern cutting
+    circleskirt:
+      - Initial release of Circle Skirt, a circle skirt block from classic British pattern cutting
     dressblock:
       - Initial release of Dress Block, a dress block from classic British pattern cutting
     skirtblock:
