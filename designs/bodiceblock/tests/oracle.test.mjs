@@ -302,10 +302,16 @@ describe('Bodiceblock numeric oracle (book worked example)', () => {
       expect(drafted).to.be.at.most(measurements.biceps + ARMHOLE_EASE_MAX)
     })
     it('reports the cascade once, with the bridge left alone here', () => {
-      const notes = store.logs.info.filter((l) => `${l}`.includes("Bray's remedies"))
+      const notes = store.logs.info.filter((l) => `${l}`.includes("Bray's three remedies"))
       expect(notes.length).to.equal(1)
       expect(`${notes[0]}`).to.include('[2] widen the armhole bridge, no change')
       expect(`${notes[0]}`).to.include(`[3] lower UP, +${Math.round(425 - 375)}mm`)
+    })
+    it('still names remedy 1, which only the wearer can apply', () => {
+      // the block cannot detect posture, but a wearer who knows they are square can act
+      const note = store.logs.info.filter((l) => `${l}`.includes("Bray's three remedies"))[0]
+      expect(`${note}`).to.include('[1] raise SP')
+      expect(`${note}`).to.include('square-shouldered')
     })
     it('accounts for the whole gain across the remedies', () => {
       const base = store.get('bodiceblock.armholeUncalibrated')
@@ -393,7 +399,7 @@ describe('Bodiceblock numeric oracle (book worked example)', () => {
       ).to.be.at.most(1)
     })
     it('says in the log that it fired, and by how much', () => {
-      const note = wideStore.logs.info.filter((l) => `${l}`.includes("Bray's remedies"))[0]
+      const note = wideStore.logs.info.filter((l) => `${l}`.includes("Bray's three remedies"))[0]
       expect(`${note}`).to.include('[2] widen the armhole bridge, +')
       expect(`${note}`).to.include(`spent ${Math.round(widened)}mm`)
     })

@@ -441,7 +441,9 @@ export function solveUpDrop(sh, st) {
   store.log.info(
     `bodiceblock: the armhole drafted at ${mm(uncalibrated)}mm against a target of ` +
       `${mm(target)}mm (accepted band biceps + ${ARMHOLE_EASE_MIN} to ${ARMHOLE_EASE_MAX}mm). ` +
-      `Bray's remedies, in her order (p.29): [2] widen the armhole bridge, ` +
+      `Bray's three remedies, in her order (p.29): [1] raise SP, her first preference and ` +
+      `yours to make if you know yourself to be square-shouldered, since the block cannot ` +
+      `detect posture; [2] widen the armhole bridge, ` +
       (st.bridgeBonus > 0
         ? `+${mm(afterBridge - uncalibrated)}mm -- armholeBridgeBonus spent ${mm(st.bridgeBonus)}mm of it; `
         : `no change -- armholeBridgeBonus is 0, so raise it if a wider armhole is obtainable, ` +
