@@ -30,6 +30,7 @@ from Ch.1 — see Ambiguity 13.
 | Waist | 腰围 (W) | `waist` | 70 cm | measured snug, like a waistband |
 | Waist-to-hip depth | (臀围线位置) | `waistToSeat` | 22 cm | positions the block's hip reference line; same value/role as in `skirtblock.md` |
 | Back waist length | 背长 (LW) | `hpsToWaistBack` (approx.) | 40 cm | book measures nape (~C7) to waist along CB; FreeSewing's HPS reference is the shoulder point, not the nape — same approximation already flagged in `designs/titan/drafting-instructions.md`. See Ambiguity 10 |
+| Upper arm/bicep | 上臂围 (TA) | `biceps` | 30 cm | **drives the armhole calibration in §D.0** — the drafted armhole is solved to `TA + 12.5cm`. Was QC-only in the first draft of this spec; promoted to a real input on review (see §D.0) |
 
 Two more book inputs have **no FreeSewing measurement equivalent** — the valid
 list (`packages/config/src/measurements.mjs`) has no back-width or chest-width
@@ -40,14 +41,19 @@ entry. Both are modeled as **design options** (pct of chest) instead:
 | Back width | 背宽 (XB) | 36 cm | `backWidthPct` (39.13% of chest) | independently measured on the body in the book; posture-sensitive (round vs erect shoulders shift XB/CH oppositely, p.24) — see Ambiguity 11 |
 | Chest/bust width | 胸宽 (CH) | 38 cm | `chestWidthPct` (41.30% of chest) | same caveat |
 
-Two further book inputs are used **only as quality-control checks** in this
-chapter, not to place any drafted point — listed here for completeness, not
-formula inputs:
+One further book input is used **only as a quality-control check** in this
+chapter, not to place any drafted point:
 
 | Book term | CN | FreeSewing name | Worked example | Used for |
 |---|---|---|---|---|
-| Shoulder (seam) length | 肩宽 (S) | no exact equivalent (≈ `shoulderToShoulder`/2) | 12.5 cm | checks drafted shoulder-line length ≥ S+1cm, ideally S+1.5–2cm (p.16) |
-| Upper arm/bicep | 上臂围 (TA) | `biceps` | 30 cm | checks drafted armhole size ≈ TA+12–13cm = 42–43cm (p.19) |
+| Shoulder (seam) length | 肩宽 (S) | no exact equivalent (≈ `shoulderToShoulder`/2 − backNeckWidth) | 12.5 cm | checks drafted shoulder-line length ≥ S+1cm, ideally S+1.5–2cm (p.16) |
+
+The `shoulderToShoulder` mapping conflates a horizontal across-back projection
+with a slanted seam length, and lands ~10mm short of the seam by construction
+(worked example: 130mm projected vs 139.3mm drafted). It reproduces the book's
+numbers closely enough to be useful as a sanity check, but it is **not**
+accurate enough to gate a draft: emit it as a non-fatal `store.log` note, never
+as a hard failure. No stock model should be undraftable because of it.
 
 ## Options
 
@@ -113,7 +119,10 @@ offset described below.
 3. Back neckline: smooth curve NP(70,10) → O(0,30).
 4. **Back-width point** = (XB/2, 110) = **(180, 110)** — vertical guide line
    through it, parallel to CB.
-5. **UP** (armhole base) = (XB/2 + 55, yBust) = **(235, 215)**. (Addend 55mm
+5. **UP** (armhole base) = (XB/2 + 55, yBust + `upDrop`) = **(235, 215)** before
+   calibration. `upDrop` is solved in §D.0 and is **0 only if the wearer's
+   biceps happens to match the drafted armhole**; the *x* is never changed.
+   (Addend 55mm
    is the mid-size value; book's table runs 50mm smallest → 65mm largest —
    Ambiguity 4.)
 6. **SP** (raw shoulder point) = (XB/2 + 20, yShoulder_back) = **(200, 60)** —
@@ -180,14 +189,29 @@ offset described below.
     Ambiguity 1; this spec uses **210mm** from CF (the figure-drawn value)
     for the SP–CHP–UP curve. Straight line SP → CHP; vertical guide line
     from CHP down to the bust line.
-11. **UP** = `(C_mm/2+50) − backUP_x` = 510−235 = **(275, 215)**. (Book's own
-    arithmetic: half-chest-plus-ease-basis 510mm minus the back's UP x
-    (235mm) gives the front's UP x directly — p.17.)
+11. **UP** = `((C_mm/2+50) − backUP_x, yBust + upDrop)` = (510−235, 215+drop) =
+    **(275, 215)** before calibration. (Book's own arithmetic:
+    half-chest-plus-ease-basis 510mm minus the back's UP x (235mm) gives the
+    front's UP x directly — p.17.) The front and back UP **must share the same
+    `upDrop`** — they are one point once the side seam is sewn.
 12. Front armhole curve: SP → CHP, control point 10mm **inward** at the
     SP–CHP midpoint; CHP → UP, control point 15mm out along the bisector of
-    the right angle at (CHP-vertical-guide) ∩ (bust line); the curve should
-    dip slightly below the bust line just before UP, then meet UP tangent
-    to the bust line.
+    the right angle at (CHP-vertical-guide) ∩ (bust line); the curve dips
+    below the bust line before reaching UP, then meets UP tangent to the
+    bust line.
+
+    ⚠ **This dip is not cosmetic — it lengthens the armhole, and §D.0's solve
+    is only valid with it in place.** The book is explicit (p.17):
+
+    > 在前SP点与CHP点连接直线的一半处，向内作一条垂直辅助线，长为1cm，用曲线通过
+    > 该点圆顺连接SP点与CHP点，下端应圆顺向外画弧，并且曲线应通过CHP点与胸围线相交
+    > 垂直角处的辅助点，该点为直角平分角处线段端点，长度为1.5cm。最后要做到：**袖窿
+    > 线在到达UP点前应当在胸围线处略微向下挖，然后再与UP点圆顺相交。**
+
+    So the curve must satisfy all four conditions: pass through the 10mm
+    inward auxiliary at the SP–CHP midpoint; pass through the 15mm
+    bisector auxiliary at the CHP-vertical ∩ bust-line right angle; dig
+    below the bust line before UP; arrive at UP tangent to horizontal.
 13. **HP** = (St_mm/4 + 30, 620) = **(275, 620)** (1/4 seat + 30mm; book
     states a 25–30mm range, p.17 — this spec uses the round 30mm figure that
     matches both §4's overview and the Fig 2-2 labels).
@@ -240,10 +264,83 @@ Only meaningful once both panels' §1 (unfitted) waist points exist.
     **after** the darts are finalized; the two panels' side-seam edges must
     end up equal in length (p.20).
 
+### D.0 Armhole calibration — solving `upDrop` (p.19)
+
+**Drafting the points above and stopping does not produce the book's block.**
+Every point in §A/§B has been verified against the book's text and Fig 2-2, and
+the resulting armhole still measures ~375–385mm against the book's own stated
+420–430mm. That is not a transcription error on either side: the book does not
+treat the drafted armhole as final. p.19 gives the missing step —
+
+> 总的袖窿尺寸应当比上臂(TA)尺寸略大12~13cm … 用皮尺沿着前后袖窿弧线弯度进行测量 …
+> 为了增大或减小袖窿尺寸，通常采用的办法是按要求提高或降低UP点的位置，比如每降低UP点
+> 0.5~1cm时，袖窿尺寸就会增大1.5cm … 要求通过新点，重新绘制袖窿线，并且应重新测量和检查 …
+> 如果有0.5cm出入，可以忽略不计
+
+Bray's workflow is **draft → tape-measure the armhole → move UP → redraw →
+re-measure**. The 21.5cm armhole-depth line is a *starting* value, not a result;
+0.5cm of residual error is declared ignorable. We close that loop numerically.
+
+**Definition.** `upDrop` (mm, may be negative) shifts both panels' UP point
+**downward only** — `UP.y = yBust + upDrop`, `UP.x` unchanged. The bust line
+itself does **not** move, so the block's finished bust girth and `chestEase` are
+unaffected; only the underarm gets deeper and the side seam correspondingly
+shorter. This is exactly what the book's remedy does.
+
+**Target.** `armholeTarget = biceps_mm + 125` (midpoint of the book's
+`TA + 120–130mm` band). Worked example: 300 + 125 = **425mm**.
+
+**Measured quantity.** `L(upDrop)` = back armhole curve length (SP → back-width
+point → 3mm-bisector point → UP) **plus** front armhole curve length (SP → 10mm
+midpoint auxiliary → CHP → 15mm bisector auxiliary → dip → UP), both measured
+along the *curves* (`Path.length()`), matching the book's 皮尺 instruction.
+§B.12's dip must be implemented before solving — solving around a missing
+feature would bake the omission into `upDrop`.
+
+**Solve.** Find `upDrop` such that `|L(upDrop) − armholeTarget| ≤ 1mm`
+(comfortably inside the book's 5mm ignorable tolerance). `L` is smooth and
+strictly increasing in `upDrop`, so bisection on the bracket below is sufficient
+— no need for anything cleverer.
+
+- Bracket: `upDrop ∈ [−30, +60]` mm. The book's own rate (+15mm armhole per
+  5–10mm of drop) puts a realistic solution at roughly +20 to +30mm for a
+  standard figure, so this bracket is generous on both sides.
+- Cap iterations at 40; bisection over a 90mm bracket reaches sub-0.01mm.
+- If the solution lies outside the bracket, **clamp** to the nearer bound, draft
+  anyway, and emit a `store.log.warn` naming the achieved armhole vs the target.
+  A block that drafts with a warning beats a block that throws.
+
+**Where it runs.** All of `L`'s inputs are pure functions of measurements and
+options, so the solve is a **pre-pass in `shared.mjs`**, not something either
+panel discovers mid-draft. Back and front must consume the same solved value —
+they are one point once the side seam is sewn. Compute it once, store it on
+`store`, read it from both parts.
+
+**Ordering.** `upDrop` is solved *before* §A.10 and §B.14 draw the raw side
+seams, since those start at UP.
+
+**What this does not change.** §A.1–A.9, §B.1–B.13, and all of §C are untouched:
+the same construction, the same numbers. `upDrop` moves exactly one point.
+
+**Independent corroboration from the sleeve.** `sleeveblock.md` drafts Bray's
+straight sleeve from `biceps` alone and lands a cap arc of ≈455mm, and the book
+wants the cap arc to exceed the armhole by 20–25mm of sleevecap ease. Against
+the *uncalibrated* armhole (~375mm) that surplus is 80mm — nonsense. Against the
+calibrated 425mm it is 30mm, within a few mm of the book's stated band. Two
+independently-extracted chapters agreeing only after §D.0 is applied is the
+strongest evidence available that the calibration loop, not the point geometry,
+was the missing piece.
+
 ### D. Finishing / QC
 
 - Armhole tape-measure check: total front+back armhole curve length should
   be `TA_mm + 120–130mm` — worked: 300+125=**425mm** (book: 420–430mm).
+  With §D.0 in place this is **satisfied by construction**; keep it as a
+  regression assertion, not a warning, and additionally assert that the
+  *uncalibrated* (`upDrop = 0`) armhole is the ~375–385mm shortfall the
+  calibration exists to close. That second assertion is what distinguishes
+  "the solver is doing real work" from "the solver is masking a geometry bug",
+  and it must fail loudly if someone later changes §A/§B geometry.
 - Shoulder length check: NP–SP straight distance should be ≥ `S_mm+10mm`,
   ideally `S_mm+15..20mm`.
 - Front/back balance check: front NP (y=0) sits **10mm** above back NP
@@ -297,7 +394,14 @@ Only meaningful once both panels' §1 (unfitted) waist points exist.
 | 32 | Front dart centerline (legs) | 9.5 (7.5–11.5) | 95 (75–115) |
 | 33 | Back final side-waist x | 20.96 | 209.6 |
 | 34 | Front final side-waist x | 25.0 | 250.0 |
-| 35 | Armhole size (QC) | 42–43 | 420–430 |
+| 35 | Armhole size, **calibrated** (§D.0) | 42.5 ±0.1 | 425 ±1 |
+| 36 | Armhole size, uncalibrated (`upDrop`=0) | ~37.5–38.5 | 375–385 (record actual) |
+| 37 | Solved `upDrop` | ~2–3 | 20–30 (record actual) |
+
+Rows 36–37 are **bracket assertions, not exact oracles** — unlike every other
+row they are not read off the book, they are the measured consequence of the
+book's own construction. Record the actual solved figures here once the
+implementation runs, so any later geometry change that shifts them is caught.
 
 Checks against the book's own statements: back WR-dart 20mm matches "后腰省
 2cm" exactly (row 30 back / row 8 of step-C list); WR split 50/60mm matches
@@ -424,10 +528,13 @@ Front dart 40mm is *consistent with* (not an exact restatement of) "3cm或
     fraction of chest loses this degree of freedom. If a future design
     wants posture-driven fit, these should become independent options
     rather than a single derived pct.
-12. **S (shoulder length) and TA (upper arm) are QC-only** in this chapter
-    — they check the drafted shoulder line and armhole size but never
-    directly place a point in the primary construction. Listed in
-    Measurements for completeness; not consumed by any formula in §A/§B/§C.
+12. **S (shoulder length) is QC-only** in this chapter — it checks the drafted
+    shoulder line but never directly places a point. **TA (upper arm) is not**:
+    the first draft of this spec listed it as QC-only, which is what left the
+    drafted armhole ~5cm short of the book's own check. p.19 makes TA the
+    *driver* of the UP point via the draft-measure-adjust loop, now specified
+    in §D.0. The distinction matters: a check you can fail is a check the book
+    expects you to act on.
 13. **This chapter's own "average size" (chest 92, Ch.1's Bray Size IV in
     the 80–116 four-size-step run) differs from the Ch.1 "Size III" table
     (chest 88) cited by the `pattern-making-principles` skill.** Both are
