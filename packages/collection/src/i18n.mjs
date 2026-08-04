@@ -58,6 +58,7 @@ import { i18n as simon } from '@freesewing/simon'
 import { i18n as simone } from '@freesewing/simone'
 import { i18n as skirtblock } from '@freesewing/skirtblock'
 import { i18n as skully } from '@freesewing/skully'
+import { i18n as sleeveblock } from '@freesewing/sleeveblock'
 import { i18n as sophie } from '@freesewing/sophie'
 import { i18n as sunny } from '@freesewing/sunny'
 import { i18n as sven } from '@freesewing/sven'
@@ -139,6 +140,7 @@ export const i18n = {
   simone,
   skirtblock,
   skully,
+  sleeveblock,
   sophie,
   sunny,
   sven,

@@ -27,6 +27,12 @@
 
  - Initial release of Standard Skirt Block, a skirt block from classic British pattern cutting
 
+### sleeveblock
+
+#### Added
+
+ - Initial release of Straight Sleeve Block, a sleeve block from classic British pattern cutting
+
 
 ## 4.10.0 (2026-06-19)
 

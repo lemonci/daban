@@ -1,0 +1,18 @@
+{
+  "t": "Straight Sleeve Block",
+  "d": "A straight sleeve block (sleeve sloper) drafted with the classic British Bray method",
+  "p": {
+    "sleeve": "Sleeve"
+  },
+  "s": {},
+  "o": {
+    "bicepEase": {
+      "t": "Sleeve root ease",
+      "d": "How much ease to add to the upper arm to get the width of the sleeve root. The book allows 5 cm for skirts and blouses, 6 to 7 cm for shirts and jackets, and 8 cm for coats and eveningwear"
+    },
+    "capHeight": {
+      "t": "Sleeve cap height",
+      "d": "How deep the sleeve cap is, as a fraction of the sleeve root width. The book draws it at about a third or a little more; a higher cap gives a narrower, less comfortable sleeve"
+    }
+  }
+}

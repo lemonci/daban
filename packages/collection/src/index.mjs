@@ -58,6 +58,7 @@ import { Simon as simon } from '@freesewing/simon'
 import { Simone as simone } from '@freesewing/simone'
 import { Skirtblock as skirtblock } from '@freesewing/skirtblock'
 import { Skully as skully } from '@freesewing/skully'
+import { Sleeveblock as sleeveblock } from '@freesewing/sleeveblock'
 import { Sophie as sophie } from '@freesewing/sophie'
 import { Sunny as sunny } from '@freesewing/sunny'
 import { Sven as sven } from '@freesewing/sven'
@@ -141,6 +142,7 @@ export const designs = {
   simone,
   skirtblock,
   skully,
+  sleeveblock,
   sophie,
   sunny,
   sven,
