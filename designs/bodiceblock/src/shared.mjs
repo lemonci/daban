@@ -13,6 +13,7 @@ export const blockMeasurements = [
   'chest',
   'hpsToWaistBack',
   'seat',
+  'shoulderSlope',
   'shoulderToShoulder',
   'waist',
   'waistToSeat',
@@ -31,6 +32,17 @@ export const blockOptions = {
   backWidthPct: { pct: 39.13, min: 36, max: 42, menu: 'fit' },
   chestWidthPct: { pct: 41.3, min: 38, max: 45, menu: 'fit' },
   bustDartWidth: { pct: 8.15, min: 6, max: 11, menu: 'fit' },
+  /*
+   * Remedy 2 of p.29, the armhole bridge (隆门宽): the span left between the back-width
+   * and chest-width lines, `halfChestPlusEase - backWidth/2 - chestWidth/2`, 140mm at the
+   * book's own size. Widening it is the only way to get a bigger armhole without either
+   * dropping UP or narrowing the wearer, and it necessarily spends chest ease.
+   *
+   * The default is 0, and that is Bray's own condition rather than a dodge: the remedy
+   * reads 如果能够获得一个较宽的袖窿 -- *if* a wider armhole is obtainable. Only the wearer
+   * knows whether it is, so a non-zero default would spend ease nobody granted.
+   */
+  armholeBridgeBonus: { pct: 0, min: 0, max: 5, menu: 'fit' },
 }
 
 /*
@@ -135,13 +147,44 @@ export function structure({ measurements, options }, upDrop = 0) {
   const yNeckDepthFront = yOFront + 75
 
   /*
+   * Remedy 1 of p.29: on a square-shouldered figure, raise SP. The book states no number
+   * for "square", and it does not need to -- the block drafts a shoulder of its own, NP
+   * to SP, 21.0 degrees at the book's size, and a wearer flatter than that is exactly the
+   * 方肩 the remedy is scoped to. So the threshold is the draft's own slope, and SP is
+   * raised until the drafted slope equals the wearer's. The x is untouched here.
+   *
+   * A wearer with a *more* sloped shoulder gets nothing: Bray offers raising SP only, and
+   * lowering it would shrink an armhole she is trying to enlarge. Sloped shoulders are
+   * therefore not fitted by this step at all -- a real gap, and a possible improvement,
+   * but not one the chapter supports.
+   *
+   * This is the back SP. The front's shoulder point comes off its own ray through the
+   * 165mm guide point, at 25.3 degrees against the back's 21.0 at the book's size, so the
+   * two panels already disagree in the book's own draft, and the chapter never says how a
+   * measured slope should re-aim the front ray. The front is left as drafted.
+   */
+  const npBackY = yOBack - 20
+  const shoulderRun = backWidth / 2 + 20 - neckWidth
+  const draftedSlope = (Math.atan2(yShoulderBack - npBackY, shoulderRun) * 180) / Math.PI
+  const wearerSlope = measurements.shoulderSlope
+  const ySp =
+    wearerSlope < draftedSlope
+      ? npBackY + shoulderRun * Math.tan((wearerSlope * Math.PI) / 180)
+      : yShoulderBack
+
+  /*
    * Horizontal structure. The book gets the front underarm point by subtracting the
    * back one from half the chest-plus-ease, and puts all the hip ease on the front.
-   * The calibration never touches these, so the finished bust girth comes out the same
-   * whatever `upDrop` turns out to be.
+   * The underarm drop never touches these, so the finished bust girth comes out the same
+   * whatever `upDrop` turns out to be. The bridge bonus does: it pushes both underarm
+   * points out by half of itself, which is the whole of remedy 2 -- the bridge widens by
+   * the bonus, the assembled armhole with it, and the half bust by the same amount. The
+   * width lines themselves, and everything hanging off them, stay where they were.
    */
-  const backUpX = backWidth / 2 + 55
-  const frontUpX = (chest * (1 + options.chestEase)) / 2 - backUpX
+  const bridgeBonus = chest * options.armholeBridgeBonus
+  const backUpXPlain = backWidth / 2 + 55
+  const backUpX = backUpXPlain + bridgeBonus / 2
+  const frontUpX = (chest * (1 + options.chestEase)) / 2 - backUpXPlain + bridgeBonus / 2
   const backHpX = seat / 4
   const frontHpX = seat / 4 + (seat * options.seatEase) / 2
 
@@ -182,6 +225,10 @@ export function structure({ measurements, options }, upDrop = 0) {
     yChestWidth,
     yShoulderFront,
     yNeckDepthFront,
+    draftedSlope,
+    wearerSlope,
+    ySp,
+    bridgeBonus,
     backUpX,
     frontUpX,
     backHpX,
@@ -211,10 +258,14 @@ export function structure({ measurements, options }, upDrop = 0) {
  *
  * Returns the check as data; the caller decides what to say about it. Nothing here
  * throws or fails -- see the note on the `shoulderToShoulder` mapping in `structure()`.
+ *
+ * SP starts at the height remedy 1 left it at, not on the drafted shoulder line, and the
+ * order is not optional: this adjustment moves SP sideways and is required to keep its
+ * height, so the height has to be settled first.
  */
 export function backShoulderCheck(Point, st) {
   const np = new Point(st.neckWidth, st.yOBack - 20)
-  const drafted = new Point(st.backWidth / 2 + 20, st.yShoulderBack)
+  const drafted = new Point(st.backWidth / 2 + 20, st.ySp)
   const minimum = st.shoulderSeam + SHOULDER_FLOOR
   const target = st.shoulderSeam + SHOULDER_IDEAL
   const length = np.dist(drafted)
@@ -356,14 +407,27 @@ export function armholeLength(sh, st, upDrop) {
  * This is a pre-pass: both panels must use the same value, since front and back UP are
  * one point once the side seam is sewn. It is cached on the set store, so the second
  * part to draft reads the answer rather than solving it again.
+ *
+ * `st` arrives with remedies 1 and 2 already in it -- they are structure, not search, and
+ * both are applied once and measured rather than solved for. All this has to find is the
+ * deficit they leave. To say how much each one actually contributed, it re-measures the
+ * armhole against a structure with the wearer's shoulder squared off to the drafted slope
+ * and the bridge bonus spent back down to zero, which is the block Bray starts from.
  */
 export function solveUpDrop(sh, st) {
-  const { store, measurements } = sh
+  const { store, measurements, options } = sh
   const cached = store.get('bodiceblock.upDrop', false)
   if (cached !== false) return cached
 
   const target = measurements.biceps + ARMHOLE_EASE
-  const uncalibrated = armholeLength(sh, st, 0)
+  const noRemedies = structure({
+    measurements: { ...measurements, shoulderSlope: st.draftedSlope },
+    options: { ...options, armholeBridgeBonus: 0 },
+  })
+  const slopeOnly = structure({ measurements, options: { ...options, armholeBridgeBonus: 0 } })
+  const uncalibrated = armholeLength(sh, noRemedies, 0)
+  const afterSlope = armholeLength(sh, slopeOnly, 0)
+  const afterBridge = armholeLength(sh, st, 0)
 
   /*
    * The armhole grows monotonically with the drop, so plain bisection is enough.
@@ -395,26 +459,38 @@ export function solveUpDrop(sh, st) {
   }
 
   /*
-   * p.29 ranks three remedies for a short armhole and warns against reaching for this
-   * one first. The block cannot use the other two -- raising SP is scoped to square
-   * shoulders, which the book never defines numerically, and widening the bridge spends
-   * the wearer's chest ease or narrows their back -- but the user can, so say so. Said
-   * on every draft, because the book gives no threshold at which the drop becomes too
-   * much, and a threshold we invented would be a number nothing supports. The early
-   * return above keeps it to once per draft rather than once per panel.
+   * Report the cascade: p.29 ranks the three remedies, the block now works through them
+   * in that order, and the only thing worth saying afterwards is which of them did the
+   * work. Said on every draft rather than past some threshold -- the book gives no
+   * threshold, and one we invented would be a number nothing supports. The early return
+   * above keeps it to once per draft rather than once per panel.
    */
+  const mm = (x) => Math.round(x)
+  const deg = (x) => Math.round(x * 10) / 10
   store.log.info(
-    `bodiceblock: the armhole was calibrated to ${Math.round(calibrated)}mm by an underarm ` +
-      `drop of ${Math.round(drop)}mm, the last of the three remedies the book ranks for a ` +
-      `short armhole (p.29). It prefers raising SP -- square-shouldered figures only -- or ` +
-      `widening the armhole bridge where a wider armhole is obtainable. Both are yours to ` +
-      `make and not the block's: the bridge is set by chestEase, backWidthPct and ` +
-      `chestWidthPct. Accepted band: biceps + ${ARMHOLE_EASE_MIN} to ${ARMHOLE_EASE_MAX}mm.`
+    `bodiceblock: the armhole drafted at ${mm(uncalibrated)}mm against a target of ` +
+      `${mm(target)}mm (accepted band biceps + ${ARMHOLE_EASE_MIN} to ${ARMHOLE_EASE_MAX}mm). ` +
+      `Bray's three remedies, in her order (p.29): [1] raise SP, ` +
+      (st.ySp < st.yShoulderBack
+        ? `+${mm(afterSlope - uncalibrated)}mm -- shoulderSlope ${deg(st.wearerSlope)} degrees is ` +
+          `squarer than the drafted ${deg(st.draftedSlope)}, so SP rose ${mm(st.yShoulderBack - st.ySp)}mm; `
+        : `no change -- shoulderSlope ${deg(st.wearerSlope)} degrees is not squarer than the ` +
+          `drafted ${deg(st.draftedSlope)}, and Bray only ever raises SP; `) +
+      `[2] widen the armhole bridge, ` +
+      (st.bridgeBonus > 0
+        ? `+${mm(afterBridge - afterSlope)}mm -- armholeBridgeBonus spent ${mm(st.bridgeBonus)}mm of it; `
+        : `no change -- armholeBridgeBonus is 0, so raise it if a wider armhole is obtainable, ` +
+          `bearing in mind it spends chest ease; `) +
+      `[3] lower UP, +${mm(calibrated - afterBridge)}mm at a ${mm(drop)}mm drop. ` +
+      `Final armhole ${mm(calibrated)}mm.`
   )
 
   store.set('bodiceblock.upDrop', drop)
+  store.set('bodiceblock.draftedSlope', st.draftedSlope)
   store.set('bodiceblock.armholeTarget', target)
   store.set('bodiceblock.armholeUncalibrated', uncalibrated)
+  store.set('bodiceblock.armholeAfterSlope', afterSlope)
+  store.set('bodiceblock.armholeAfterBridge', afterBridge)
   store.set('bodiceblock.armholeCalibrated', calibrated)
 
   return drop
