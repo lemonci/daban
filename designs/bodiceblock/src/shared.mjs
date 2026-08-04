@@ -31,6 +31,17 @@ export const blockOptions = {
   backWidthPct: { pct: 39.13, min: 36, max: 42, menu: 'fit' },
   chestWidthPct: { pct: 41.3, min: 38, max: 45, menu: 'fit' },
   bustDartWidth: { pct: 8.15, min: 6, max: 11, menu: 'fit' },
+  /*
+   * Remedy 2 of p.29, the armhole bridge (隆门宽): the span left between the back-width
+   * and chest-width lines, `halfChestPlusEase - backWidth/2 - chestWidth/2`, 140mm at the
+   * book's own size. Widening it is the only way to get a bigger armhole without either
+   * dropping UP or narrowing the wearer, and it necessarily spends chest ease.
+   *
+   * The default is 0, and that is Bray's own condition rather than a dodge: the remedy
+   * reads 如果能够获得一个较宽的袖窿 -- *if* a wider armhole is obtainable. Only the wearer
+   * knows whether it is, so a non-zero default would spend ease nobody granted.
+   */
+  armholeBridgeBonus: { pct: 0, min: 0, max: 5, menu: 'fit' },
 }
 
 /*
@@ -68,8 +79,19 @@ export const FRONT_DIG = 0.55
 
 /*
  * Section D.0 armhole calibration
+ *
+ * The accepted band and the solve target are two different numbers, deliberately.
+ * Chapter 2 section 3 (p.29) states the band as TA + 10 to 13cm, and that is what a
+ * finished armhole is judged against. The target is pinned tighter, and independently,
+ * by the sleeve: the straight sleeve's cap arc is 447.92mm at biceps 300, and the book
+ * wants 20 to 25mm of sleevecap ease over the armhole, which leaves only 422.9 to
+ * 427.9mm. TA + 12.5cm sits inside both. Retargeting the solver at the band's midpoint
+ * or its lower edge would still satisfy chapter 2 and break the sleeve by up to 23mm --
+ * designs/sleeveblock/tests/armhole.test.mjs asserts the intersection, so it fails.
  */
-export const ARMHOLE_EASE = 125 // book: armhole = TA + 120..130mm; midpoint
+export const ARMHOLE_EASE = 125 // solve target, pinned by the sleeve -- not the band's midpoint
+export const ARMHOLE_EASE_MIN = 100 // p.29: accepted band, TA + 10cm
+export const ARMHOLE_EASE_MAX = 130 // p.29: accepted band, TA + 13cm
 export const UPDROP_MIN = -30
 export const UPDROP_MAX = 60
 export const UPDROP_TOLERANCE = 1 // mm of armhole length; the book ignores up to 5
@@ -126,11 +148,16 @@ export function structure({ measurements, options }, upDrop = 0) {
   /*
    * Horizontal structure. The book gets the front underarm point by subtracting the
    * back one from half the chest-plus-ease, and puts all the hip ease on the front.
-   * The calibration never touches these, so the finished bust girth comes out the same
-   * whatever `upDrop` turns out to be.
+   * The underarm drop never touches these, so the finished bust girth comes out the same
+   * whatever `upDrop` turns out to be. The bridge bonus does: it pushes both underarm
+   * points out by half of itself, which is the whole of remedy 2 -- the bridge widens by
+   * the bonus, the assembled armhole with it, and the half bust by the same amount. The
+   * width lines themselves, and everything hanging off them, stay where they were.
    */
-  const backUpX = backWidth / 2 + 55
-  const frontUpX = (chest * (1 + options.chestEase)) / 2 - backUpX
+  const bridgeBonus = chest * options.armholeBridgeBonus
+  const backUpXPlain = backWidth / 2 + 55
+  const backUpX = backUpXPlain + bridgeBonus / 2
+  const frontUpX = (chest * (1 + options.chestEase)) / 2 - backUpXPlain + bridgeBonus / 2
   const backHpX = seat / 4
   const frontHpX = seat / 4 + (seat * options.seatEase) / 2
 
@@ -171,6 +198,7 @@ export function structure({ measurements, options }, upDrop = 0) {
     yChestWidth,
     yShoulderFront,
     yNeckDepthFront,
+    bridgeBonus,
     backUpX,
     frontUpX,
     backHpX,
@@ -336,7 +364,7 @@ export function armholeLength(sh, st, upDrop) {
 /*
  * Section D.0: Bray does not treat the drafted armhole as final. He measures it with a
  * tape, raises or lowers UP, redraws, and measures again, until the armhole comes out
- * at TA + 12..13cm; half a centimetre of residual error is declared ignorable (p.19).
+ * inside the accepted band above; half a centimetre of residual error is ignorable (p.19).
  * We close that loop by bisection instead of by hand.
  *
  * `upDrop` shifts UP's y only. The bust line, and with it the block's finished bust
@@ -345,14 +373,33 @@ export function armholeLength(sh, st, upDrop) {
  * This is a pre-pass: both panels must use the same value, since front and back UP are
  * one point once the side seam is sewn. It is cached on the set store, so the second
  * part to draft reads the answer rather than solving it again.
+ *
+ * `st` arrives with remedy 2 already in it -- the bridge bonus is structure, not search,
+ * spent once and measured rather than solved for. All this has to find is the deficit it
+ * leaves. To say how much it contributed, the armhole is re-measured against a structure
+ * with the bonus spent back down to zero, which is the block Bray starts from.
+ *
+ * Remedy 1, raising SP, is the one p.29 puts first, and it is deliberately not here.
+ * Bray scopes it to square-shouldered figures, which is a judgement about posture, and
+ * FreeSewing has no posture signal to make it with: `shoulderSlope` is a hardcoded 13
+ * degrees for every stock model, every size and both genders -- `neckstimate.mjs` reads
+ * `shoulderSlope: [13, 13]` and returns it unchanged -- so it carries no information
+ * about this wearer. Tried against the block's own drafted slope it declares 34 of 40
+ * stock models square and hands the armhole 9 to 23mm that remedy 3 then takes back off,
+ * driving `upDrop` negative on six cisFemale sizes: the cascade working against itself.
+ * Leaving a scoped remedy inactive for want of its input is following the chapter;
+ * applying it to everyone is not. It becomes available the day a real measured shoulder
+ * angle can be relied on, and not before.
  */
 export function solveUpDrop(sh, st) {
-  const { store, measurements } = sh
+  const { store, measurements, options } = sh
   const cached = store.get('bodiceblock.upDrop', false)
   if (cached !== false) return cached
 
   const target = measurements.biceps + ARMHOLE_EASE
-  const uncalibrated = armholeLength(sh, st, 0)
+  const noBridge = structure({ measurements, options: { ...options, armholeBridgeBonus: 0 } })
+  const uncalibrated = armholeLength(sh, noBridge, 0)
+  const afterBridge = armholeLength(sh, st, 0)
 
   /*
    * The armhole grows monotonically with the drop, so plain bisection is enough.
@@ -383,9 +430,32 @@ export function solveUpDrop(sh, st) {
     )
   }
 
+  /*
+   * Report the cascade: p.29 ranks the remedies, the block works through the two it can
+   * use, and the only thing worth saying afterwards is which of them did the work. Said
+   * on every draft rather than past some threshold -- the book gives no threshold, and
+   * one we invented would be a number nothing supports. The early return above keeps it
+   * to once per draft rather than once per panel.
+   */
+  const mm = (x) => Math.round(x)
+  store.log.info(
+    `bodiceblock: the armhole drafted at ${mm(uncalibrated)}mm against a target of ` +
+      `${mm(target)}mm (accepted band biceps + ${ARMHOLE_EASE_MIN} to ${ARMHOLE_EASE_MAX}mm). ` +
+      `Bray's three remedies, in her order (p.29): [1] raise SP, her first preference and ` +
+      `yours to make if you know yourself to be square-shouldered, since the block cannot ` +
+      `detect posture; [2] widen the armhole bridge, ` +
+      (st.bridgeBonus > 0
+        ? `+${mm(afterBridge - uncalibrated)}mm -- armholeBridgeBonus spent ${mm(st.bridgeBonus)}mm of it; `
+        : `no change -- armholeBridgeBonus is 0, so raise it if a wider armhole is obtainable, ` +
+          `bearing in mind it spends chest ease; `) +
+      `[3] lower UP, +${mm(calibrated - afterBridge)}mm at a ${mm(drop)}mm drop. ` +
+      `Final armhole ${mm(calibrated)}mm.`
+  )
+
   store.set('bodiceblock.upDrop', drop)
   store.set('bodiceblock.armholeTarget', target)
   store.set('bodiceblock.armholeUncalibrated', uncalibrated)
+  store.set('bodiceblock.armholeAfterBridge', afterBridge)
   store.set('bodiceblock.armholeCalibrated', calibrated)
 
   return drop
