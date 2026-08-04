@@ -80,7 +80,7 @@ Two consequences make this testable rather than merely plausible:
 |---|---|---|---|
 | 挺胸体 erect/protruding chest | 169–170 | `hpsToWaistFront` − drafted front waist length (positive) | **high** — the book names 前腰节长/后腰节长 as the driving quantities |
 | 驼背体 stooped back | 171–172 | same pair, opposite sign | **high** — same mechanism in reverse per the book |
-| 平肩体 square shoulders | 177–178 | `shoulderSlope` − drafted shoulder angle (negative) | **high** — single-axis, unambiguous |
+| 平肩体 square shoulders | 177–178 | `shoulderSlope` − drafted shoulder angle (negative) | ❌ **BROKEN — see the warning below** (was: high) |
 | 溜肩体 sloping shoulders | 179–180 | same, positive | **high** |
 | 瘦体 thin | 173–174 | girth residuals: `waist`, and bust prominence `chest − highBust` | **low — needs page extraction** |
 | 胖体 heavy | 175–176 | same, opposite sign | **low — needs page extraction** |
@@ -104,6 +104,37 @@ correction ships on a summary.
 | Bust girth | 胸围 B | `chest` | primary driver | Net body bust. Worked example 84 cm. The block's `B/2+5` half-width bakes in 10 cm total ease — exposed as an option, so `chest` maps directly and no rescaling is needed |
 | Back waist length | 背长 | `hpsToWaistBack` | vertical driver | ⚠ **Not identical.** 背长 is measured nape (后颈点) → waist; `hpsToWaistBack` is HPS → waist. The offset must be measured off the book's own body diagram (第四章第一节 人体测量, printed 45–58) and applied as a constant, or the whole draft sits wrong vertically |
 | Front waist length | 前腰节长 | `hpsToWaistFront` | correction only | Unused by the base draft; drives the balance correction |
+
+> ## ❌ 2026-08-04: the `shoulderSlope` detector cannot work
+>
+> **`shoulderSlope` is a hardcoded constant 13° in FreeSewing** — every stock
+> model, female and male, sizes 28–50, dolls and giants alike.
+> `neckstimate.mjs` reads `shoulderSlope: [13, 13]` and returns it unchanged.
+> It is a placeholder, not anthropometry, so the residual
+> `shoulderSlope − drafted shoulder angle` is not a measurement of the wearer —
+> it is a measurement of the *block*, and it fires identically for everybody.
+>
+> This was found the expensive way. Bray's own armhole remedy ① (raise SP,
+> square-shouldered figures only) was implemented in `bodiceblock` on exactly
+> this residual. It declared **34 of 40** stock models square-shouldered, handed
+> the armhole 9–23 mm, which the next remedy then removed again, and drove six
+> sizes to a negative underarm drop. Reverted; see `bodiceblock/src/shared.mjs`
+> `solveUpDrop`'s docblock and commit `a5a18215ce4`.
+>
+> **This is not a one-row patch.** The residual architecture is this spec's
+> central claim — that a body-type correction can be *computed* from the gap
+> between a wearer's measurement and what the proportional formula predicts.
+> That claim is only as good as the measurements' information content, and one
+> of the four detectors turns out to carry none. Before this spec is picked up,
+> **probe every detector's actual spread across the stock models first**, and
+> treat verification gate 5 (the zero-residual identity) as necessary but far
+> from sufficient — a constant column passes it trivially, which is precisely
+> why this went unnoticed at spec time.
+>
+> The other three detectors are unaudited as of this note. `hpsToWaistFront` /
+> `hpsToWaistBack` and `chest`/`highBust` are graded in the stock data, so they
+> are likely fine, but *likely* is not the standard this spec set for itself.
+
 | Shoulder slope | 肩斜 | `shoulderSlope` | correction only | Degrees, not mm (`degreeMeasurements` in `packages/config/src/measurements.mjs`) |
 | Shoulder width | 总肩宽 | `shoulderToShoulder` | correction only | Applied after balance |
 | High bust | — | `highBust` | correction only | With `chest`, gives bust prominence for 瘦体/胖体 |
