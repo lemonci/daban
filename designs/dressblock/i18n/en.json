@@ -1,0 +1,15 @@
+{
+  "t": "Dress Block",
+  "d": "A one-piece dress block (dress sloper) drafted with the classic British Bray method",
+  "p": {
+    "back": "Back",
+    "front": "Front"
+  },
+  "s": {},
+  "o": {
+    "hemTighten": {
+      "t": "Hem tightening",
+      "d": "How much to take off each panel's hem width for a closer-fitting hem, as a fraction of the width the skirt block gives. The book takes 2 to 4 cm off"
+    }
+  }
+}

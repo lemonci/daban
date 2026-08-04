@@ -15,6 +15,12 @@
 
  - Get sleevecapEase in topSleeve from library's twoPartSleeve part
 
+### dressblock
+
+#### Added
+
+ - Initial release of Dress Block, a dress block from classic British pattern cutting
+
 ### sasha
 
 #### Fixed
