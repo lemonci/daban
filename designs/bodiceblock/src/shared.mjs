@@ -46,6 +46,16 @@ export const blockMeasurements = [
  * placed low against the book's figure, because a bridge that is too wide only breaks the
  * small cisFemale sizes while one that is too narrow breaks the large cisMale ones, which
  * have the least drop left to spend.
+ *
+ * ⚠ PROVISIONAL -- the three narrowed ranges below are a symptom fix, not the answer.
+ * They are squeezed because the block has no drop-bracket room left at large sizes, and
+ * it has none because the fixed millimetre constants below are pinned at the chest-92
+ * value and do not scale. Table 1-2 grades them (后窿门宽 50->70mm, O点 20->45mm, and
+ * more) and is transcribed in full at `docs/patterns/bray-size-table.md`. Once those
+ * constants are graded, re-derive `backWidthPct` and `chestWidthPct` from the table's own
+ * XB and CH columns rather than from a sweep, and retest whether `chestEase` can open
+ * downward again. Only `chestEase`'s ceiling is sourced (Ch.3 section 7); the other five
+ * bounds here are fitted numbers awaiting that work.
  */
 export const blockOptions = {
   chestEase: { pct: 10.87, min: 10.87, max: 14.66, menu: 'fit' },
@@ -59,11 +69,21 @@ export const blockOptions = {
 
 /*
  * Fixed millimetre values the book states for its own average size (chest 92).
- * The chapter grades them in bands but the grading table lives in chapter 1, which is
- * outside the extracted page range, so the spec pins them at the average-figure value
- * (bodiceblock.md ambiguity 4). A consequence worth knowing: the block does not scale
- * far below adult size -- doll models draft without errors, but the shape they give is
- * meaningless because these constants stay put while everything else shrinks.
+ *
+ * ⚠ The reason recorded here for pinning them -- that chapter 1's grading table was
+ * "outside the extracted page range" -- is STALE and was never quite true. 表1-2 sits at
+ * printed p.12, one page before the bodice chapter, and is now transcribed in full at
+ * `docs/patterns/bray-size-table.md`: 后窿门宽 (the `+55` below) graded 50, 50, 50, 55, 60,
+ * 60, 65, 70, 70, 70mm and O点 (the 30) graded 20, 25, 30, 30, 35, 35, 40, 40, 45, 45mm,
+ * plus 袖窿深, 后领宽, 省道, XB, CH and SH. The columns are stepped, not linear, so they
+ * want interpolation rather than a formula.
+ *
+ * Consequences of leaving them pinned, both live: the block does not scale far below
+ * adult size -- doll models draft without errors but the shape is meaningless -- and, less
+ * obviously, it strains at the TOP of the adult range too. A chest-92 bridge on a chest-132
+ * body drafts an armhole too short, and the calibration makes up the difference by dropping
+ * UP, which is why cisMale 50 spends 55.8mm of a 60mm bracket at pure defaults and why the
+ * option ranges above had to be squeezed. Grading these is the root fix.
  */
 export const CB_SLANT = 20 // section 2: center back taken in at the waist
 export const CF_SLANT = 10 // section 2: center front taken in at the waist
