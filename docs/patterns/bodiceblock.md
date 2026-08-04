@@ -543,13 +543,30 @@ Front dart 40mm is *consistent with* (not an exact restatement of) "3cm或
     value back-solved to match the book, not a measurement.
 
     The consequence is structural, not cosmetic. The front SP is placed from S
-    (measurement-derived) while the back SP is placed from `backWidthPct`
-    (proportional). Those two scales disagree, and FreeSewing's
-    `shoulderToShoulder` grades ~16mm per size against the back-width
-    construction's ~10mm, so the back shoulder comes out shorter than the book's
-    `S + 10mm` floor on most sizes and gets pushed out to meet it. Measured
-    across the stock range (back seam vs the `S + 10` floor, and the resulting
-    front/back surplus):
+    (measurement-derived) while the back SP comes out of the `backWidthPct`
+    construction (proportional), and the book reconciles them with a designed
+    surplus: back seam 139.3 − S 125 = **14.3mm**, the ease the back shoulder
+    absorbs over the shoulder blade.
+
+    **The mechanism is a level offset, not a grading mismatch.** The back
+    construction is faithful — it drafts 140.0mm at chest 925 against the book's
+    139.3mm at 920. Only S is inflated, by ~12mm, and that alone consumes almost
+    the whole designed surplus:
+
+        surplus = 140.0 − 137.2 = 2.8mm, against a 10mm floor → the check fires.
+
+    A secondary grading difference modulates it — the drafted seam grows ~7.2mm
+    per size step while the proxy S grows only ~4.6mm — which makes the shortfall
+    worse at small sizes and better at large ones, and is why the largest sizes
+    escape. But the 12mm offset is what does the damage.
+
+    (An earlier version of this note explained it as a grading-rate mismatch,
+    comparing `shoulderToShoulder`'s ~16mm per step against the back width's
+    ~10mm. Those are not like-for-like — s2s must be halved before it is
+    comparable — and that reading pointed at the wrong cause.)
+
+    Measured across the stock range (back seam vs the `S + 10` floor, and the
+    resulting front/back surplus):
 
     | model | chest | s2s | S | back seam | surplus | upDrop | armhole vs target |
     |---|---|---|---|---|---|---|---|
