@@ -1,5 +1,6 @@
 import { expect } from 'chai'
 import { Path, Point, beamIntersectsX } from '@freesewing/core'
+import { cisFemaleAdult34 } from '@freesewing/models'
 import { Bodiceblock } from '../src/index.mjs'
 import { structure, frontArmholeRegion, armholePath } from '../src/shared.mjs'
 
@@ -13,7 +14,10 @@ import { structure, frontArmholeRegion, armholePath } from '../src/shared.mjs'
  *
  * `shoulderToShoulder` stands in for the book's 肩宽 S: the draft uses
  * shoulderToShoulder/2 minus the back neck width, so 39cm gives S = 19.5 - 7 = 12.5cm,
- * the book's own figure.
+ * the book's own figure. Note that 39cm is a synthetic value, back-solved to reproduce
+ * the book's S -- it is not a FreeSewing measurement. The stock model nearest this
+ * chest carries 41.5cm, which gives S = 13.7cm. See ambiguity 14 in
+ * docs/patterns/bodiceblock.md, and the real-model case at the bottom of this file.
  *
  * All values mm. Tolerance +/-2mm unless a row states otherwise.
  */
@@ -219,17 +223,47 @@ describe('Bodiceblock numeric oracle (book worked example)', () => {
   })
 
   /*
-   * Shoulder-length adjustment (spec section A.7): a wider shoulder pushes SP out along
-   * the shoulder line, and SP keeps the height it was drafted at.
+   * Shoulder-length adjustment (spec section A.7, ambiguity 14): a short drafted
+   * shoulder is pushed out along the shoulder line to the middle of the book's ideal
+   * band, not onto its floor, and SP keeps the height it was drafted at.
    */
   describe('shoulder-length adjustment', () => {
     const wide = draft({ measurements: { ...measurements, shoulderToShoulder: 500 } })
 
-    it('lengthens the shoulder to S + 10mm when the draft comes up short', () => {
-      near(wide.back.np.dist(wide.back.sp), 500 / 2 - 70 + 10)
+    it('lengthens the shoulder to S + 17.5mm when the draft comes up short', () => {
+      near(wide.back.np.dist(wide.back.sp), 500 / 2 - 70 + 17.5)
     })
     it('leaves SP at its drafted height', () => {
       near(wide.back.sp.y, 60)
+    })
+  })
+
+  /*
+   * Ambiguity 14: on real stock models the `shoulderToShoulder` proxy over-reads the
+   * book's S, so the adjustment above is the normal case rather than the exception.
+   * Pinned here so the divergence shows up in CI, not only in the spec.
+   */
+  describe('real stock model (cisFemaleAdult34)', () => {
+    const model = { ...cisFemaleAdult34 }
+    const pattern = new Bodiceblock({ measurements: model })
+    pattern.draft()
+    const stock = pattern.parts[0]['bodiceblock.back'].points
+    const neckWidth = model.chest / 16 + 12.5
+    const S = model.shoulderToShoulder / 2 - neckWidth
+
+    it('over-reads the book S of 125mm', () => {
+      expect(S).to.be.above(133)
+      expect(S).to.be.below(142)
+    })
+    it('fires the shoulder check and lands on the ideal 17.5mm surplus', () => {
+      const drafted = Math.sqrt(((model.chest * 0.3913) / 2 + 20 - neckWidth) ** 2 + (60 - 10) ** 2)
+      expect(drafted).to.be.below(S + 10)
+      near(stock.np.dist(stock.sp) - S, 17.5)
+    })
+    it('says so in the log rather than failing', () => {
+      const store = pattern.setStores[0]
+      expect(store.logs.error.length).to.equal(0)
+      expect(store.logs.info.filter((l) => `${l}`.includes('backWidthPct')).length).to.equal(1)
     })
   })
 

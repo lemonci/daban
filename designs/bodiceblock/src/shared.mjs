@@ -52,6 +52,8 @@ export const BACK_BISECTOR = 30 // section A.9: armhole smoothing off the undera
 export const FRONT_BISECTOR = 15 // section B.12: same, front
 export const FRONT_MIDPOINT_AUX = 10 // section B.12: hollowing of the SP-CHP line
 export const SHOULDER_GUIDE_X = 165 // section B.5: fixes the front shoulder slope
+export const SHOULDER_FLOOR = 10 // p.16: the drafted shoulder seam must reach S + 1cm
+export const SHOULDER_IDEAL = 17.5 // p.16: and should ideally reach S + 1.5 to 2cm
 
 /*
  * Section B.12 also requires the front armhole to dig below the bust line before it
@@ -97,11 +99,13 @@ export function structure({ measurements, options }, upDrop = 0) {
    * runs from the center back to SP; taking off the neck width leaves the run from NP
    * to SP, which is the closest stand-in the measurement list offers.
    *
-   * It is a horizontal projection standing in for a slanted seam, so it reads about
-   * 10mm short by construction (worked example: 130mm projected against 139.3mm
-   * drafted). Close enough to be worth checking, not close enough to gate a draft: the
-   * check in `backShoulderCheck()` never fails and never throws, and no measurement can
-   * make the block undraftable through it.
+   * On real stock models the proxy over-reads the book's S by roughly 12mm -- the size
+   * nearest the book's own chest carries `shoulderToShoulder` 415, giving S = 137.2
+   * against the book's 125 -- and the two scales grade differently, so the shoulder
+   * check below fires on most sizes. That is an open question, written up with the
+   * measured evidence as ambiguity 14 in docs/patterns/bodiceblock.md; settling it
+   * needs chapter 1's grading table, which is outside the extracted pages. Whatever it
+   * does, it never fails a draft.
    */
   const shoulderSeam = measurements.shoulderToShoulder / 2 - neckWidth
 
@@ -188,23 +192,31 @@ export function structure({ measurements, options }, upDrop = 0) {
  * 2cm, and a short one is lengthened outward with SP keeping the height it was drafted
  * at ("无论加长或缩短肩宽，SP点都必须在原有高度上不变").
  *
+ * A short shoulder is taken to the middle of the ideal band rather than parked on the
+ * floor. That matters because the check fires on most stock sizes (ambiguity 14): where
+ * it does, `backWidthPct` stops controlling the shoulder, and leaving those drafts on
+ * the bare minimum would mean the block never reaches the fit the book asks for. There
+ * is deliberately no branch for an over-long shoulder -- no stock model produces one.
+ *
  * Returns the check as data; the caller decides what to say about it. Nothing here
  * throws or fails -- see the note on the `shoulderToShoulder` mapping in `structure()`.
  */
 export function backShoulderCheck(Point, st) {
   const np = new Point(st.neckWidth, st.yOBack - 20)
   const drafted = new Point(st.backWidth / 2 + 20, st.yShoulderBack)
-  const minimum = st.shoulderSeam + 10
+  const minimum = st.shoulderSeam + SHOULDER_FLOOR
+  const target = st.shoulderSeam + SHOULDER_IDEAL
   const length = np.dist(drafted)
-  if (length >= minimum) return { np, sp: drafted, length, minimum, adjusted: false }
+  if (length >= minimum) return { np, sp: drafted, length, minimum, target, adjusted: false }
 
   const rise = drafted.y - np.y
 
   return {
     np,
-    sp: new Point(np.x + Math.sqrt(minimum ** 2 - rise ** 2), drafted.y),
+    sp: new Point(np.x + Math.sqrt(target ** 2 - rise ** 2), drafted.y),
     length,
     minimum,
+    target,
     adjusted: true,
   }
 }

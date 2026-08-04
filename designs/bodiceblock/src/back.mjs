@@ -37,17 +37,21 @@ export const back = {
     points.hp = new Point(st.backHpX, st.yHip)
 
     /*
-     * Shoulder length check (book p.16). The mapping from `shoulderToShoulder` to the
-     * book's S is a horizontal projection standing in for a slanted seam, so it reads
-     * short by roughly a centimetre; note it, never fail on it.
+     * Shoulder length check (book p.16). This fires on most stock sizes rather than
+     * rarely, so say so out loud when it does: it means the shoulder is coming from
+     * `shoulderToShoulder` and not from `backWidthPct`. See ambiguity 14 in
+     * docs/patterns/bodiceblock.md. It is a note, never a failure.
      */
     const shoulder = backShoulderCheck(Point, st)
     if (shoulder.adjusted)
       store.log.info(
-        `bodiceblock: the drafted shoulder seam measures ${Math.round(shoulder.length)}mm ` +
-          `against a minimum of ${Math.round(shoulder.minimum)}mm, so SP was moved out along ` +
-          `the shoulder line at unchanged height. The minimum is derived from ` +
-          `shoulderToShoulder, which under-reads the seam by about 10mm by construction.`
+        `bodiceblock: the shoulder seam drafted from backWidthPct measures ` +
+          `${Math.round(shoulder.length)}mm, short of the book's ${Math.round(
+            shoulder.minimum
+          )}mm floor, so SP was moved out along the shoulder line at unchanged height to ` +
+          `${Math.round(shoulder.target)}mm (the middle of the book's ideal band). ` +
+          `backWidthPct is not controlling the shoulder in this draft; shoulderToShoulder ` +
+          `is. See ambiguity 14 in docs/patterns/bodiceblock.md.`
       )
 
     /*
