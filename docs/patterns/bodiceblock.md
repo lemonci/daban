@@ -48,12 +48,10 @@ chapter, not to place any drafted point:
 |---|---|---|---|---|
 | Shoulder (seam) length | 肩宽 (S) | no exact equivalent (≈ `shoulderToShoulder`/2 − backNeckWidth) | 12.5 cm | checks drafted shoulder-line length ≥ S+1cm, ideally S+1.5–2cm (p.16) |
 
-The `shoulderToShoulder` mapping conflates a horizontal across-back projection
-with a slanted seam length, and lands ~10mm short of the seam by construction
-(worked example: 130mm projected vs 139.3mm drafted). It reproduces the book's
-numbers closely enough to be useful as a sanity check, but it is **not**
-accurate enough to gate a draft: emit it as a non-fatal `store.log` note, never
-as a hard failure. No stock model should be undraftable because of it.
+⚠ This mapping is **not** QC-only and **not** settled — it places the front SP
+(§B.9) and it over-reads the book's S by ~12mm on real stock models. See
+**Ambiguity 14**, which carries the measured evidence. Whatever it does, it must
+never make a draft fail: emit its checks as non-fatal `store.log` notes.
 
 ## Options
 
@@ -528,13 +526,63 @@ Front dart 40mm is *consistent with* (not an exact restatement of) "3cm或
     fraction of chest loses this degree of freedom. If a future design
     wants posture-driven fit, these should become independent options
     rather than a single derived pct.
-12. **S (shoulder length) is QC-only** in this chapter — it checks the drafted
-    shoulder line but never directly places a point. **TA (upper arm) is not**:
-    the first draft of this spec listed it as QC-only, which is what left the
-    drafted armhole ~5cm short of the book's own check. p.19 makes TA the
-    *driver* of the UP point via the draft-measure-adjust loop, now specified
-    in §D.0. The distinction matters: a check you can fail is a check the book
-    expects you to act on.
+12. **Neither S nor TA is QC-only — an earlier draft of this spec called both
+    QC-only and was wrong twice over.** §B.9 places the front SP at
+    `S + bustDartWidth` from NP, so S is load-bearing on the front. And p.19
+    makes TA the *driver* of the UP point via the draft-measure-adjust loop
+    (§D.0); filing it as a check is what left the drafted armhole ~5cm short of
+    the book's own figure. The distinction matters: a check the book tells you
+    how to act on is not a check, it is an input.
+
+14. **⚠ OPEN — the `shoulderToShoulder` → S mapping over-reads by ~12mm on real
+    models, and the resulting shoulder adjustment fires on 16 of 20 FreeSewing
+    stock sizes.** `S = shoulderToShoulder/2 − backNeckWidth` reproduces the
+    book's S=125mm only at `shoulderToShoulder = 390mm`, which is *not* a real
+    FreeSewing value: the stock model nearest the book's chest (cisFemaleAdult34,
+    chest 925) carries 415mm, giving S = 137.2mm. The oracle's 390 is a synthetic
+    value back-solved to match the book, not a measurement.
+
+    The consequence is structural, not cosmetic. The front SP is placed from S
+    (measurement-derived) while the back SP is placed from `backWidthPct`
+    (proportional). Those two scales disagree, and FreeSewing's
+    `shoulderToShoulder` grades ~16mm per size against the back-width
+    construction's ~10mm, so the back shoulder comes out shorter than the book's
+    `S + 10mm` floor on most sizes and gets pushed out to meet it. Measured
+    across the stock range (back seam vs the `S + 10` floor, and the resulting
+    front/back surplus):
+
+    | model | chest | s2s | S | back seam | surplus | upDrop | armhole vs target |
+    |---|---|---|---|---|---|---|---|
+    | cisFemale 28 | 762 | 367 | 123.4 | 133.4 (floor) | 10.0 | 3.8 | 348 / 347 |
+    | cisFemale 34 | 925 | 415 | 137.2 | 147.2 (floor) | 10.0 | 6.6 | 394 / 395 |
+    | cisFemale 40 | 1088 | 463 | 151.0 | 161.0 (floor) | 10.0 | 10.8 | 442 / 443 |
+    | cisFemale 42 | 1143 | 478 | 155.1 | 167.3 (natural) | 12.3 | 12.2 | 459 / 459 |
+    | cisFemale 46 | 1251 | 510 | 164.3 | 181.1 (natural) | 16.8 | 15.0 | 490 / 490 |
+    | cisMale 32 | 842 | 404 | 136.9 | 146.9 (floor) | 10.0 | 26.3 | 421 / 420 |
+    | cisMale 50 | 1316 | 542 | 176.3 | 189.4 (natural) | 13.2 | 55.8 | 587 / 586 |
+
+    Only the four largest sizes in each range draft their shoulder naturally;
+    everywhere else `backWidthPct` contributes nothing to the shoulder and the
+    surplus is pinned at the book's bare *minimum* (10mm) rather than its stated
+    ideal (15–20mm). The block has quietly stopped being proportional at the
+    shoulder without saying so.
+
+    **What would settle it** is Ch.1's Table 1-2 — the grading table that gives
+    S per size — which is outside the extracted page range (see Ambiguity 4).
+    Bray measures both S and XB on the body, so a measurement-driven shoulder is
+    not unfaithful in principle; the problem is that our *proxy* for S is on a
+    different scale from the book's, and we have no page that pins the true one.
+
+    **Interim position** (not a resolution): keep the adjustment, since removing
+    it makes the back shoulder *shorter* than the closed front shoulder on small
+    sizes — a genuinely broken pattern, which the book's floor exists to
+    prevent — but adjust into the book's stated band rather than onto its floor,
+    and log whenever it fires so the divergence is visible. Revisit when Ch.1 is
+    extracted.
+
+    Note also that the armhole calibration is unaffected and holds across the
+    whole range (last column): whatever the shoulder does, §D.0 re-solves the
+    underarm to the wearer's biceps.
 13. **This chapter's own "average size" (chest 92, Ch.1's Bray Size IV in
     the 80–116 four-size-step run) differs from the Ch.1 "Size III" table
     (chest 88) cited by the `pattern-making-principles` skill.** Both are
