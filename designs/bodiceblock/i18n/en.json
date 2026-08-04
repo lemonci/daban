@@ -34,10 +34,6 @@
     "bustDartWidth": {
       "t": "Bust dart width",
       "d": "How wide the shoulder/bust dart is where it opens on the shoulder seam, as a fraction of the chest measurement"
-    },
-    "armholeBridgeBonus": {
-      "t": "Armhole bridge bonus",
-      "d": "How much wider to make the armhole bridge, the span between the back-width and chest-width lines, as a fraction of the chest measurement. The book's preferred way to enlarge a small armhole, but only where a wider armhole is obtainable: it spends chest ease. Leave it at zero and the underarm is deepened instead"
     }
   }
 }

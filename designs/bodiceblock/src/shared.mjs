@@ -19,38 +19,71 @@ export const blockMeasurements = [
 ]
 
 /*
- * The book states none of these ranges -- only `waistEase` has a stated band (a 3 to
- * 6cm addend on the full pattern). The rest are chosen, because a percentage option
- * needs a minimum and a maximum; every default is the book's own figure.
+ * Every default is the book's own figure. `waistEase` is the only band the book states
+ * (a 3 to 6cm addend on the full pattern). `seatEase` and `bustDartWidth` are chosen,
+ * because a percentage option needs a minimum and a maximum and nothing constrains these.
+ *
+ * The three that move an underarm or a pitch point are not chosen. They are as wide as
+ * the armhole calibration below can actually close across the twenty adult stock models,
+ * and no wider; `tests/ranges.test.mjs` sweeps them and holds them there.
+ *
+ * `chestEase` is the only knob that enlarges the block at the side seam -- it moves the
+ * front underarm point outward and nothing else. Ch.3 section 7 (pp.45-47) caps that
+ * enlargement at 0.5 to 1cm for shirts and tailored garments and 2 to 2.5cm for workwear
+ * and loose tops, and past 3 to 5cm sends the drafter to the shoulder instead, a route
+ * this block does not implement. 14.66% puts the largest adult stock model (cisMale 50,
+ * chest 1316mm) 24.9mm out from where its own default draft puts that point: the
+ * loose-garment ceiling, not over it. The floor is the book's own figure, and that is the
+ * calibration's doing rather than the chapter's -- at the book's ease and the book's
+ * widths cisMale 50 already spends 55.8mm of the 60mm underarm drop the bracket allows,
+ * so any less ease leaves an armhole too short for the sleeve that has to go in it.
+ *
+ * `backWidthPct` and `chestWidthPct` enlarge nothing: they move the underarm and pitch
+ * points fore and aft inside the armhole bridge and leave the half-block where it was, so
+ * section 7 does not govern them. The calibration does. The bridge is
+ * `halfChestPlusEase - backWidth/2 - chestWidth/2`; widening it lengthens the armhole and
+ * narrowing it shortens it, and two percentage points is as far as either can travel --
+ * placed low against the book's figure, because a bridge that is too wide only breaks the
+ * small cisFemale sizes while one that is too narrow breaks the large cisMale ones, which
+ * have the least drop left to spend.
+ *
+ * ⚠ PROVISIONAL -- the three narrowed ranges below are a symptom fix, not the answer.
+ * They are squeezed because the block has no drop-bracket room left at large sizes, and
+ * it has none because the fixed millimetre constants below are pinned at the chest-92
+ * value and do not scale. Table 1-2 grades them (后窿门宽 50->70mm, O点 20->45mm, and
+ * more) and is transcribed in full at `docs/patterns/bray-size-table.md`. Once those
+ * constants are graded, re-derive `backWidthPct` and `chestWidthPct` from the table's own
+ * XB and CH columns rather than from a sweep, and retest whether `chestEase` can open
+ * downward again. Only `chestEase`'s ceiling is sourced (Ch.3 section 7); the other five
+ * bounds here are fitted numbers awaiting that work.
  */
 export const blockOptions = {
-  chestEase: { pct: 10.87, min: 6, max: 16, menu: 'fit' },
+  chestEase: { pct: 10.87, min: 10.87, max: 14.66, menu: 'fit' },
   seatEase: { pct: 6.12, min: 3, max: 10, menu: 'fit' },
   waistEase: { pct: 2.86, min: 2.14, max: 4.29, menu: 'fit' },
   waistFit: { bool: true, menu: 'style' },
-  backWidthPct: { pct: 39.13, min: 36, max: 42, menu: 'fit' },
-  chestWidthPct: { pct: 41.3, min: 38, max: 45, menu: 'fit' },
+  backWidthPct: { pct: 39.13, min: 37.5, max: 39.5, menu: 'fit' },
+  chestWidthPct: { pct: 41.3, min: 39.5, max: 41.5, menu: 'fit' },
   bustDartWidth: { pct: 8.15, min: 6, max: 11, menu: 'fit' },
-  /*
-   * Remedy 2 of p.29, the armhole bridge (隆门宽): the span left between the back-width
-   * and chest-width lines, `halfChestPlusEase - backWidth/2 - chestWidth/2`, 140mm at the
-   * book's own size. Widening it is the only way to get a bigger armhole without either
-   * dropping UP or narrowing the wearer, and it necessarily spends chest ease.
-   *
-   * The default is 0, and that is Bray's own condition rather than a dodge: the remedy
-   * reads 如果能够获得一个较宽的袖窿 -- *if* a wider armhole is obtainable. Only the wearer
-   * knows whether it is, so a non-zero default would spend ease nobody granted.
-   */
-  armholeBridgeBonus: { pct: 0, min: 0, max: 5, menu: 'fit' },
 }
 
 /*
  * Fixed millimetre values the book states for its own average size (chest 92).
- * The chapter grades them in bands but the grading table lives in chapter 1, which is
- * outside the extracted page range, so the spec pins them at the average-figure value
- * (bodiceblock.md ambiguity 4). A consequence worth knowing: the block does not scale
- * far below adult size -- doll models draft without errors, but the shape they give is
- * meaningless because these constants stay put while everything else shrinks.
+ *
+ * ⚠ The reason recorded here for pinning them -- that chapter 1's grading table was
+ * "outside the extracted page range" -- is STALE and was never quite true. 表1-2 sits at
+ * printed p.12, one page before the bodice chapter, and is now transcribed in full at
+ * `docs/patterns/bray-size-table.md`: 后窿门宽 (the `+55` below) graded 50, 50, 50, 55, 60,
+ * 60, 65, 70, 70, 70mm and O点 (the 30) graded 20, 25, 30, 30, 35, 35, 40, 40, 45, 45mm,
+ * plus 袖窿深, 后领宽, 省道, XB, CH and SH. The columns are stepped, not linear, so they
+ * want interpolation rather than a formula.
+ *
+ * Consequences of leaving them pinned, both live: the block does not scale far below
+ * adult size -- doll models draft without errors but the shape is meaningless -- and, less
+ * obviously, it strains at the TOP of the adult range too. A chest-92 bridge on a chest-132
+ * body drafts an armhole too short, and the calibration makes up the difference by dropping
+ * UP, which is why cisMale 50 spends 55.8mm of a 60mm bracket at pure defaults and why the
+ * option ranges above had to be squeezed. Grading these is the root fix.
  */
 export const CB_SLANT = 20 // section 2: center back taken in at the waist
 export const CF_SLANT = 10 // section 2: center front taken in at the waist
@@ -96,6 +129,33 @@ export const UPDROP_MIN = -30
 export const UPDROP_MAX = 60
 export const UPDROP_TOLERANCE = 1 // mm of armhole length; the book ignores up to 5
 export const UPDROP_ITERATIONS = 40
+
+/*
+ * Geometry, not a book figure, so it carries no page: section B.12 puts the front armhole
+ * hollow at `armholePitch.shift(45, FRONT_BISECTOR)`, which is `FRONT_BISECTOR * cos45`
+ * outboard of the front pitch point. The pitch point therefore has to stay at least that
+ * far inboard of the front underarm point. Any closer and the armhole is wider at the
+ * underarm than at the pitch -- it opens as it descends, which no armhole does -- and its
+ * lower stretch runs outside the panel's own side-seam line.
+ */
+export const FRONT_PITCH_CLEARANCE = FRONT_BISECTOR * Math.cos(Math.PI / 4)
+
+/*
+ * CHOSEN, NOT SOURCED -- neither number is in Bray.
+ *
+ * The block's fixed millimetre constants above are stated for chest 92cm, and the note on
+ * them says outright that the shape stops meaning anything far below adult size. So a
+ * draft the calibration cannot close is a real failure on an adult body and a curiosity on
+ * a doll, and the reports in `solveUpDrop` pick their severity accordingly. Measurements
+ * are all the design sees at runtime, and `chest` is the one that drives every constant
+ * here, so the test is a window on it.
+ *
+ * The bounds are round numbers placed in the gaps between FreeSewing's stock groups:
+ * adult chests run 762mm (cisFemale 28) to 1316mm (cisMale 50), the largest doll is 600mm
+ * (cisMale 60) and the smallest giant 1387.5mm (cisFemale 150).
+ */
+export const ADULT_CHEST_MIN = 700
+export const ADULT_CHEST_MAX = 1350
 
 /*
  * Everything both panels need. Note that the waist bookkeeping needs both panels'
@@ -149,15 +209,10 @@ export function structure({ measurements, options }, upDrop = 0) {
    * Horizontal structure. The book gets the front underarm point by subtracting the
    * back one from half the chest-plus-ease, and puts all the hip ease on the front.
    * The underarm drop never touches these, so the finished bust girth comes out the same
-   * whatever `upDrop` turns out to be. The bridge bonus does: it pushes both underarm
-   * points out by half of itself, which is the whole of remedy 2 -- the bridge widens by
-   * the bonus, the assembled armhole with it, and the half bust by the same amount. The
-   * width lines themselves, and everything hanging off them, stay where they were.
+   * whatever `upDrop` turns out to be.
    */
-  const bridgeBonus = chest * options.armholeBridgeBonus
-  const backUpXPlain = backWidth / 2 + 55
-  const backUpX = backUpXPlain + bridgeBonus / 2
-  const frontUpX = (chest * (1 + options.chestEase)) / 2 - backUpXPlain + bridgeBonus / 2
+  const backUpX = backWidth / 2 + 55
+  const frontUpX = (chest * (1 + options.chestEase)) / 2 - backUpX
   const backHpX = seat / 4
   const frontHpX = seat / 4 + (seat * options.seatEase) / 2
 
@@ -198,7 +253,6 @@ export function structure({ measurements, options }, upDrop = 0) {
     yChestWidth,
     yShoulderFront,
     yNeckDepthFront,
-    bridgeBonus,
     backUpX,
     frontUpX,
     backHpX,
@@ -374,11 +428,6 @@ export function armholeLength(sh, st, upDrop) {
  * one point once the side seam is sewn. It is cached on the set store, so the second
  * part to draft reads the answer rather than solving it again.
  *
- * `st` arrives with remedy 2 already in it -- the bridge bonus is structure, not search,
- * spent once and measured rather than solved for. All this has to find is the deficit it
- * leaves. To say how much it contributed, the armhole is re-measured against a structure
- * with the bonus spent back down to zero, which is the block Bray starts from.
- *
  * Remedy 1, raising SP, is the one p.29 puts first, and it is deliberately not here.
  * Bray scopes it to square-shouldered figures, which is a judgement about posture, and
  * FreeSewing has no posture signal to make it with: `shoulderSlope` is a hardcoded 13
@@ -392,18 +441,39 @@ export function armholeLength(sh, st, upDrop) {
  * angle can be relied on, and not before.
  */
 export function solveUpDrop(sh, st) {
-  const { store, measurements, options } = sh
+  const { store, measurements } = sh
   const cached = store.get('bodiceblock.upDrop', false)
   if (cached !== false) return cached
 
+  const mm = (x) => Math.round(x)
+
+  /*
+   * Anything the block cannot draft its way out of is reported here, at a severity set by
+   * the adult window above: on an adult body the pattern is wrong and CI has to say so,
+   * off it the constants were never going to hold and a note is all that is honest.
+   */
+  const adult = measurements.chest >= ADULT_CHEST_MIN && measurements.chest <= ADULT_CHEST_MAX
+  const report = (msg) => (adult ? store.log.error(msg) : store.log.warn(msg))
+
+  /*
+   * The section B.12 clearance, checked before anything is drawn from these points.
+   */
+  const clearance = st.frontUpX - (st.chestWidth / 2 + 20)
+  if (clearance < FRONT_PITCH_CLEARANCE)
+    report(
+      `bodiceblock: the front pitch point sits only ${mm(clearance)}mm inboard of the front ` +
+        `underarm point, where the section B.12 armhole hollow needs at least ` +
+        `${Math.round(FRONT_PITCH_CLEARANCE * 10) / 10}mm. The front armhole opens as it ` +
+        `descends and its lower stretch crosses the panel's own side seam. Widen the armhole ` +
+        `bridge -- more chestEase, or less backWidthPct or chestWidthPct.`
+    )
+
   const target = measurements.biceps + ARMHOLE_EASE
-  const noBridge = structure({ measurements, options: { ...options, armholeBridgeBonus: 0 } })
-  const uncalibrated = armholeLength(sh, noBridge, 0)
-  const afterBridge = armholeLength(sh, st, 0)
+  const uncalibrated = armholeLength(sh, st, 0)
 
   /*
    * The armhole grows monotonically with the drop, so plain bisection is enough.
-   * Outside the bracket we clamp and warn: a block that drafts with a warning beats a
+   * Outside the bracket we clamp and report: a block that drafts with a complaint beats a
    * block that throws.
    */
   let low = UPDROP_MIN
@@ -422,11 +492,16 @@ export function solveUpDrop(sh, st) {
   }
 
   const calibrated = armholeLength(sh, st, drop)
+  const band = [measurements.biceps + ARMHOLE_EASE_MIN, measurements.biceps + ARMHOLE_EASE_MAX]
   if (Math.abs(calibrated - target) > UPDROP_TOLERANCE) {
-    store.log.warn(
+    report(
       `bodiceblock: could not calibrate the armhole inside the [${UPDROP_MIN}, ${UPDROP_MAX}]mm ` +
-        `underarm-drop bracket. Clamped to ${Math.round(drop)}mm, which gives an armhole of ` +
-        `${Math.round(calibrated)}mm against a target of ${Math.round(target)}mm.`
+        `underarm-drop bracket. Clamped to ${mm(drop)}mm, which gives an armhole of ` +
+        `${mm(calibrated)}mm against a target of ${mm(target)}mm. ` +
+        (calibrated < band[0] || calibrated > band[1]
+          ? `That is outside p.29's accepted band of ${mm(band[0])} to ${mm(band[1])}mm, so no ` +
+            `sleeve drafted to this armhole will set in.`
+          : `It is still inside p.29's accepted band of ${mm(band[0])} to ${mm(band[1])}mm.`)
     )
   }
 
@@ -437,25 +512,23 @@ export function solveUpDrop(sh, st) {
    * one we invented would be a number nothing supports. The early return above keeps it
    * to once per draft rather than once per panel.
    */
-  const mm = (x) => Math.round(x)
+  const bridge = st.backUpX + st.frontUpX - st.backWidth / 2 - st.chestWidth / 2
   store.log.info(
     `bodiceblock: the armhole drafted at ${mm(uncalibrated)}mm against a target of ` +
       `${mm(target)}mm (accepted band biceps + ${ARMHOLE_EASE_MIN} to ${ARMHOLE_EASE_MAX}mm). ` +
       `Bray's three remedies, in her order (p.29): [1] raise SP, her first preference and ` +
       `yours to make if you know yourself to be square-shouldered, since the block cannot ` +
-      `detect posture; [2] widen the armhole bridge, ` +
-      (st.bridgeBonus > 0
-        ? `+${mm(afterBridge - uncalibrated)}mm -- armholeBridgeBonus spent ${mm(st.bridgeBonus)}mm of it; `
-        : `no change -- armholeBridgeBonus is 0, so raise it if a wider armhole is obtainable, ` +
-          `bearing in mind it spends chest ease; `) +
-      `[3] lower UP, +${mm(calibrated - afterBridge)}mm at a ${mm(drop)}mm drop. ` +
+      `detect posture; [2] widen the armhole bridge, ${mm(bridge)}mm here -- it is ` +
+      `halfChestPlusEase - backWidth/2 - chestWidth/2, so the only ways to widen it are more ` +
+      `chestEase, paid for in bust girth, or less backWidthPct or chestWidthPct, paid for in a ` +
+      `narrower back or chest; all three are yours to set and the block will not spend them ` +
+      `for you; [3] lower UP, +${mm(calibrated - uncalibrated)}mm at a ${mm(drop)}mm drop. ` +
       `Final armhole ${mm(calibrated)}mm.`
   )
 
   store.set('bodiceblock.upDrop', drop)
   store.set('bodiceblock.armholeTarget', target)
   store.set('bodiceblock.armholeUncalibrated', uncalibrated)
-  store.set('bodiceblock.armholeAfterBridge', afterBridge)
   store.set('bodiceblock.armholeCalibrated', calibrated)
 
   return drop

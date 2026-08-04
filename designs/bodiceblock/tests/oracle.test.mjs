@@ -25,9 +25,9 @@ import {
  * chest carries 41.5cm, which gives S = 13.7cm. See ambiguity 14 in
  * docs/patterns/bodiceblock.md, and the real-model case at the bottom of this file.
  *
- * With `armholeBridgeBonus` at its 0 default, section D.0's remedy 2 is a no-op here, so
- * the worked example exercises remedy 3 alone, exactly as the book does. Remedy 2 is
- * exercised on its own at the bottom of this file.
+ * Section D.0's remedy 2 is not a knob -- widening the bridge means re-allocating chest
+ * ease or width, which only the wearer can grant -- so the worked example exercises
+ * remedy 3 alone, exactly as the book does.
  *
  * All values mm. Tolerance +/-2mm unless a row states otherwise.
  */
@@ -301,10 +301,14 @@ describe('Bodiceblock numeric oracle (book worked example)', () => {
       expect(drafted).to.be.at.least(measurements.biceps + ARMHOLE_EASE_MIN)
       expect(drafted).to.be.at.most(measurements.biceps + ARMHOLE_EASE_MAX)
     })
-    it('reports the cascade once, with the bridge left alone here', () => {
+    it('reports the cascade once, and names who can widen the bridge', () => {
       const notes = store.logs.info.filter((l) => `${l}`.includes("Bray's three remedies"))
       expect(notes.length).to.equal(1)
-      expect(`${notes[0]}`).to.include('[2] widen the armhole bridge, no change')
+      // the book's own bridge at this size: 510 - 180 - 190 (spec section D.0)
+      expect(`${notes[0]}`).to.include('[2] widen the armhole bridge, 140mm here')
+      for (const option of ['chestEase', 'backWidthPct', 'chestWidthPct'])
+        expect(`${notes[0]}`).to.include(option)
+      expect(`${notes[0]}`).to.not.include('spends chest ease')
       expect(`${notes[0]}`).to.include(`[3] lower UP, +${Math.round(425 - 375)}mm`)
     })
     it('still names remedy 1, which only the wearer can apply', () => {
@@ -315,11 +319,9 @@ describe('Bodiceblock numeric oracle (book worked example)', () => {
     })
     it('accounts for the whole gain across the remedies', () => {
       const base = store.get('bodiceblock.armholeUncalibrated')
-      const afterBridge = store.get('bodiceblock.armholeAfterBridge')
       const calibrated = store.get('bodiceblock.armholeCalibrated')
-      // remedy 2 is a no-op at the book's own figure, so 3 does all of it
-      expect(afterBridge - base).to.equal(0)
-      expect(calibrated - afterBridge).to.be.above(40)
+      // remedies 1 and 2 are the wearer's, so 3 does all of it
+      expect(calibrated - base).to.be.above(40)
     })
     it('row 36: the uncalibrated armhole is 375-385mm, the shortfall the loop closes', () => {
       const uncalibrated = store.get('bodiceblock.armholeUncalibrated')
@@ -358,50 +360,6 @@ describe('Bodiceblock numeric oracle (book worked example)', () => {
       expect(deepest).to.be.above(st.yBust + 1)
       // and it still arrives at UP tangent to the bust line
       expect(region.upCp.y).to.equal(region.up.y)
-    })
-  })
-
-  /*
-   * The one remedy the book puts ahead of dropping UP that the block can actually use,
-   * against the worked example above where it is a no-op. It is not solved for: it spends
-   * what the wearer granted, and the armhole it gains is a consequence. What is asserted
-   * here is that it does what the book says it does, that it leaves the rest of the draft
-   * alone, and that remedy 3 is left with less to do. Remedy 1 is not implemented, and
-   * `solveUpDrop` carries the reasoning.
-   */
-  describe('remedy 2: widening the armhole bridge', () => {
-    const bonus = 0.02 // 2% of chest = 18.4mm
-    const wide = draft({ options: { armholeBridgeBonus: bonus } })
-    const wideStore = wide.pattern.setStores[0]
-    const widened = measurements.chest * bonus
-
-    it('pushes both underarm points out by half the bonus each', () => {
-      near(wide.back.up.x, 235 + widened / 2)
-      near(wide.front.up.x, 275 + widened / 2)
-    })
-    it('spends chest ease: the half bust grows by the whole bonus', () => {
-      near(wide.back.up.x + wide.front.up.x, (measurements.chest * (1 + 0.1087)) / 2 + widened)
-    })
-    it('leaves the width lines, and so SP and the pitch points, alone', () => {
-      near(wide.back.armholePitch.x, 180)
-      near(wide.front.armholePitch.x, 210)
-      nearPoint(wide.back.sp, 200, 60)
-    })
-    it('lengthens the armhole, so the underarm drop has less to do', () => {
-      expect(wideStore.get('bodiceblock.armholeAfterBridge')).to.be.above(
-        wideStore.get('bodiceblock.armholeUncalibrated')
-      )
-      expect(wideStore.get('bodiceblock.upDrop')).to.be.below(upDrop)
-    })
-    it('still lands the calibrated armhole on the target', () => {
-      expect(
-        Math.abs(wideStore.get('bodiceblock.armholeCalibrated') - (measurements.biceps + 125))
-      ).to.be.at.most(1)
-    })
-    it('says in the log that it fired, and by how much', () => {
-      const note = wideStore.logs.info.filter((l) => `${l}`.includes("Bray's three remedies"))[0]
-      expect(`${note}`).to.include('[2] widen the armhole bridge, +')
-      expect(`${note}`).to.include(`spent ${Math.round(widened)}mm`)
     })
   })
 
