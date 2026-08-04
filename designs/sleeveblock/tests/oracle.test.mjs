@@ -104,14 +104,10 @@ describe('Sleeveblock numeric oracle (book worked example)', () => {
   })
 
   /*
-   * The cap-arc closure check, the spec's own strongest test of the whole construction.
-   * The chord polyline is quoted exactly (436.7mm); the curved length is quoted as
-   * "approximately 455mm" from a parabolic arc-length estimate. That estimate treats the
-   * four midpoint offsets as sagittas square to their chords, but the book measures them
-   * straight down the page, so the true perpendicular sagitta is the offset times the
-   * cosine of the chord's slope, and the drawn curve is correspondingly shorter than the
-   * estimate. It lands at 448mm, inside the book's own 445-455mm target band -- which is
-   * what the check is really about, and is asserted as such.
+   * The cap-arc closure check, the spec's own strongest test of the whole construction:
+   * a chord polyline of 436.7mm carrying four bulges, against the book's independently
+   * stated 445-455mm target. The drawn curve measures 447.92mm, matching the spec's
+   * corrected parabolic estimate of ~448mm to 0.3mm.
    */
   describe('cap arc', () => {
     const chords = [
@@ -141,23 +137,28 @@ describe('Sleeveblock numeric oracle (book worked example)', () => {
   })
 
   /*
-   * Ambiguity 6, resolved in the spec against figure 7-7: the hem is cut as a single
-   * straight line all the way from one seam edge to the other, through the back quarter
-   * line's unchanged hem point and the front quarter line's raised one. Extending it that
-   * far leaves the two seam edges 50mm apart in length, so the finished hem steps by 50mm
-   * where the underarm seam closes. That is what the spec's reading produces; it is
-   * pinned here rather than smoothed over, and reported for adjudication against the
-   * source pages.
+   * Ambiguity 6: the hem is cut through the folded sleeve and the quarter lines are the
+   * folds, so unrolled it is a chevron, (0, 577.5) -> (87.5, 590) -> (262.5, 565) ->
+   * (350, 577.5). The last two assertions here are the two facts that refute the straight
+   * diagonal run out to the seam edges, which is what an earlier reading of the spec had:
+   * that one lands the seam edges at 602.5 and 552.5, stepping the closed underarm seam by
+   * 50mm and hanging the back edge 12.5mm below the rectangle the piece is cut from. They
+   * are cheap, and either would have caught it.
    */
-  describe('hem, extended to the seam edges (ambiguity 6)', () => {
-    it('puts the back seam edge 12.5mm below the cutting rectangle', () => {
-      near(points.backHem.y, 602.5)
+  describe('hem chevron (ambiguity 6)', () => {
+    const hem = [points.backHem, points.backQuarterHem, points.frontQuarterHem, points.frontHem]
+
+    it('runs (0, 577.5) -> (87.5, 590) -> (262.5, 565) -> (350, 577.5)', () => {
+      nearPoint(hem[0], 0, 577.5)
+      nearPoint(hem[1], 87.5, 590)
+      nearPoint(hem[2], 262.5, 565)
+      nearPoint(hem[3], 350, 577.5)
     })
-    it('puts the front seam edge 37.5mm above it', () => {
-      near(points.frontHem.y, 552.5)
+    it('leaves both seam edges at the same height, so the seam closes flush', () => {
+      near(points.backHem.y - points.frontHem.y, 0)
     })
-    it('so the two seam edges differ by 50mm in length', () => {
-      near(points.backHem.y - points.frontHem.y, 50)
+    it('keeps every hem point inside the cutting rectangle', () => {
+      for (const point of hem) expect(point.y).to.be.at.most(points.backQuarterHem.y + TOL)
     })
   })
 })

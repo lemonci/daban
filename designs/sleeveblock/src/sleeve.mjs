@@ -79,7 +79,7 @@ export const sleeve = {
   },
   draft: (sh) => {
     const { Point, Path, Snippet, points, paths, snippets, measurements, options } = sh
-    const { macro, store, utils, sa, part } = sh
+    const { macro, store, sa, part } = sh
 
     /*
      * The cutting rectangle (step 1) and the lines that divide it up. The quarter lines
@@ -128,21 +128,19 @@ export const sleeve = {
     ]).hide()
 
     /*
-     * Step 13: the hem. The front quarter line's hem point rises 2.5 cm, the back
-     * quarter line's stays on the base hem, and the line through the two is cut right
-     * across from one seam edge to the other (sleeveblock.md ambiguity 6, resolved
-     * against figure 7-7). Extending it that far puts the back seam edge 12.5 mm below
-     * the rectangle and the front one 37.5 mm above it -- see the note in
-     * tests/oracle.test.mjs, this is the spec's reading, reproduced as written.
+     * Step 13: the hem. The front quarter line's hem point rises 2.5 cm and the back
+     * quarter line's stays on the base hem, so the hem runs lower and longer at the back.
+     * The cut is made through the folded sleeve (figure 7-6, 对折的袖片), and the quarter
+     * lines are the folds, so beyond each of them the cut line mirrors: unrolled, the hem
+     * is a chevron, and both seam edges land on the middle of the sloped segment. That
+     * closes the underarm seam flush and keeps the whole hem inside the cutting rectangle,
+     * which is what tells this reading apart from a straight diagonal run out to the seam
+     * edges -- see sleeveblock.md ambiguity 6, and the two checks in tests/oracle.test.mjs.
      */
     points.backQuarterHem = new Point(quarter, rectLength)
     points.frontQuarterHem = new Point(3 * quarter, rectLength - HEM_RISE)
-    points.backHem = utils.beamIntersectsX(points.backQuarterHem, points.frontQuarterHem, 0)
-    points.frontHem = utils.beamIntersectsX(
-      points.backQuarterHem,
-      points.frontQuarterHem,
-      rootWidth
-    )
+    points.backHem = new Point(0, rectLength - HEM_RISE / 2)
+    points.frontHem = new Point(rootWidth, rectLength - HEM_RISE / 2)
 
     /*
      * Step 11: the elbow height is stepped off as a diagonal from T to the back quarter
@@ -160,13 +158,16 @@ export const sleeve = {
 
     /*
      * Step 10: the two straight seam edges, and the outline they close with the cap and
-     * the hem.
+     * the hem. Figure 7-7 rounds the two chevron corners; that is drawing latitude, so
+     * the hem stays a three-segment polyline.
      */
     paths.seam = new Path()
       .move(points.backHem)
       .line(points.backUnderarm)
       .join(paths.cap)
       .line(points.frontHem)
+      .line(points.frontQuarterHem)
+      .line(points.backQuarterHem)
       .line(points.backHem)
       .close()
       .addClass('fabric')
