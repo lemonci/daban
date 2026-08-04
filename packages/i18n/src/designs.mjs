@@ -3398,6 +3398,65 @@ export const designs = {
       }
     }
   },
+  "dressblock": {
+    "t": "Dress Block",
+    "d": "A one-piece dress block (dress sloper) drafted with the classic British Bray method",
+    "s": {},
+    "p": {
+      "back": "Back",
+      "front": "Front"
+    },
+    "o": {
+      "seatEase": {
+        "t": "Hip ease",
+        "d": "How much ease to add at the hip line. The book drafts 6 cm, and puts all of it on the front panel"
+      },
+      "lengthBonus": {
+        "t": "Length bonus",
+        "d": "How much longer than the knee measurement the skirt should be, measured on the center edge"
+      },
+      "silhouette": {
+        "t": "Silhouette",
+        "d": "How much the skirt flares below the hip line"
+      },
+      "silhouette.standard": {
+        "t": "Standard skirt",
+        "d": "The standard block, with 1.7 cm of spread at each knee-line boundary"
+      },
+      "silhouette.straight": {
+        "t": "Straight skirt",
+        "d": "The straight variant, with 1.2 cm of spread at each knee-line boundary"
+      },
+      "chestEase": {
+        "t": "Chest ease",
+        "d": "How much ease to add at the bust line. The book drafts 10 cm, of which shaping the waist takes back a few centimetres"
+      },
+      "waistEase": {
+        "t": "Waist ease",
+        "d": "How much ease to leave at the waist before the darts are shaped. The book allows 3 to 6 cm on the full pattern"
+      },
+      "waistFit": {
+        "t": "Waist shaping",
+        "d": "Whether to shape the waist with center-line slant, side-seam intake and darts, or to leave the plain block with its simple side-seam taper"
+      },
+      "backWidthPct": {
+        "t": "Back width",
+        "d": "The across-back width, as a fraction of the chest measurement. Round-shouldered figures need more, erect figures less"
+      },
+      "chestWidthPct": {
+        "t": "Chest width",
+        "d": "The across-chest width, as a fraction of the chest measurement. It moves opposite to the back width as posture changes"
+      },
+      "bustDartWidth": {
+        "t": "Bust dart width",
+        "d": "How wide the shoulder/bust dart is where it opens on the shoulder seam, as a fraction of the chest measurement"
+      },
+      "hemTighten": {
+        "t": "Hem tightening",
+        "d": "How much to take off each panel's hem width for a closer-fitting hem, as a fraction of the width the skirt block gives. The book takes 2 to 4 cm off"
+      }
+    }
+  },
   "examples": {
     "t": "Examples",
     "d": "A FreeSewing pattern with examples used throughout our documentation",

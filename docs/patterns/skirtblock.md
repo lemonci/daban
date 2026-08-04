@@ -60,21 +60,49 @@ average height, structure lines may shift for extreme heights, p.147), knee line
    **593.1**.
 5. **Split at the side seam** (boundary 2). Standard block: side seam ON the center
    crease (p.149; tailored 西服裙 2 cm forward, dress 礼服裙 1 cm back — not in v1).
-   Front and back outlines are congruent; they differ in darts only. Each part:
-   center edge (CB/CF) straight and vertical, one hinge at 130 from center, outer
-   strip rotated θ.
+   Front and back outlines are congruent; they differ in darts only.
+
+   ⚠ **The split is a fold of the finished 4-strip fan, not a re-draft of each
+   panel as its own 2-strip fan.** An earlier version of this step said "each
+   part: one hinge at 130 from center, outer strip rotated θ", which
+   contradicted step 4 and is what `designs/skirtblock` implemented — leaving
+   each panel half a wedge (12.45 mm at the hem, 8.5 mm at the knee) narrower
+   than step 4's derived widths. The book is explicit on both counts:
+
+   > 要算出在**四个条形**之间的**三个间隙**应添加的尺寸大小…把该值算成以毫米为单位
+   > 的值52mm，再除以3得到17mm(舍去余数)…也就是说，要对剪开的条形在膝围线位置上，
+   > 加**三个**1.7cm的间隙。 (p.148)
+
+   Three gaps between four strips, across the **half-pattern**, pinned
+   cumulatively — "用大头针把第一个条形与…纸样固定在一起，再将第二个条形的下端向外
+   移，与前者距离1.7cm…再移第三个纸条…继续对第四个纸条如此固定" (strip 1 fixed,
+   each successive strip's lower end moved 1.7 cm out). Only then, p.149 §五:
+
+   > 纵向对折纸样(半身纸样)…以折痕为中央线，大部分式样的裙子的侧缝线就在该中央线上。
+
+   Fold the half-pattern lengthwise; the crease is the centre line and, for
+   most skirts, the side seam sits on it. 图11-6 draws it that way — a single
+   fanned piece with 后中心线 at the left, 前中心线 at the right, and the side-seam
+   options marked down the middle.
+
+   So each panel carries **1.5 wedges**: its own internal hinge plus half of
+   boundary 2's, which the fold cuts through. Per-panel widths are therefore
+   step 4's figures halved — knee **285.5**, hem **296.55** — not 277 / 284.4.
 6. **Waist reduction (WR)**: per the book's procedure (p.149), measure `waist/2`
    (350) along the **drawn waist edge**; the remainder is WR. The traced edge per
    part is the polyline from center-waist along the fixed strip's top to where the
    rotated strip's top edge crosses it (x ≈ 123.8), then along that rotated edge
-   to the side-waist corner: ≈ **247.5 per part**, so WR = 2×247.5 − 350 ≈
-   **145.1**. (The book's commentary "13~14 cm" uses a rougher chord estimate,
-   482.6−350 ≈ 132.6 — see Ambiguity 5.) Distribute (modern rule, p.150): **half
-   at the side seam** (72.5 total → 36.27 removed at each part's side-waist
-   corner along the rotated top edge), **remainder 2/3 into the two back darts**
-   (24.18 each), **1/3 into the front dart** (24.18). Book ranges: side 6–7 cm
-   nominal, max 8, min ~4 → 7.25 ✓; back darts 2–2.5 each → 2.42 ✓; front 2–3 →
-   2.42 ✓ (Fig 11-6 p.149, p.150).
+   to the side-waist corner: ≈ **241.24 per part**, so WR = 2×241.24 − 350 ≈
+   **132.49** — which is step 4's own derived half-pattern waist edge (482.6,
+   i.e. 241.3 per part) to within 0.06 mm, and lands inside the book's own
+   "13~14 cm" commentary. Distribute (modern rule, p.150): **half at the side
+   seam** (66.2 total → 33.12 removed at each part's side-waist corner along the
+   rotated top edge), **remainder 2/3 into the two back darts** (22.10 each),
+   **1/3 into the front dart** (22.10). Book ranges: side 6–7 cm nominal, max 8,
+   min ~4 → **6.62 ✓**; back darts 2–2.5 each → **2.21 ✓**; front 2–3 →
+   **2.21 ✓** (Fig 11-6 p.149, p.150). Note all three now sit mid-range rather
+   than pressed against the ceiling, as they were before the step 5 correction
+   (7.25 / 2.42 / 2.42) — another quiet symptom of the same missing half-wedge.
 7. **Back darts**: guide lines parallel to CB at **80 mm** from CB and **65 mm**
    further (6–7 cm; p.150), from waist to the yoke line; darts centered on the
    guide lines, tips on the yoke line (see Ambiguity 3). Straight legs.
@@ -98,15 +126,14 @@ average height, structure lines may shift for extreme heights, p.147), knee line
 | 3 | CB/CF length (waist→hem) | 65 | 650 |
 | 4 | Waist→hip depth on center edge | 22 | 220 |
 | 5 | Knee gap per boundary (at knee line) | 1.7 | 17 |
-| 6 | Rotated side-waist corner (x, y from center/waist origin) | (24.73, −0.70) | (247.3, −7.0) |
-| 7 | Traced waist edge per part (polyline, before shaping) | 24.75 | 247.5 |
-| 8 | Waist reduction WR (2×247.5 − 350) | 14.51 | 145.1 |
-| 9 | Side-seam removal (total / per part) | 7.25 / 3.63 | 72.5 / 36.27 |
-| 10 | Back dart intake (each of two) | 2.42 | 24.18 |
-| 11 | Front dart intake | 2.42 | 24.18 |
-| 12a | Net back waist after shaping (247.5 − 36.3 − 2×24.2) | 16.28 | 162.8 |
-| 12b | Net front waist after shaping (247.5 − 36.3 − 24.2) | 18.70 | 187.0 |
-| 12c | Net waist, both parts (= waist/2) | 35 | 349.8 ≈ 350 |
+| 7 | Traced waist edge per part (polyline, before shaping) | 24.124 | 241.24 |
+| 8 | Waist reduction WR (2×241.24 − 350) | 13.25 | 132.49 |
+| 9 | Side-seam removal (total / per part) | 6.62 / 3.31 | 66.2 / 33.12 |
+| 10 | Back dart intake (each of two) | 2.21 | 22.10 |
+| 11 | Front dart intake | 2.21 | 22.10 |
+| 12a | Net back waist after shaping | 16.37 | 163.7 |
+| 12b | Net front waist after shaping | 18.58 | 185.8 |
+| 12c | Net waist, both parts (= waist/2) | 35 | 350 |
 | 13 | Yoke line depth (dart tip line) | 15 | 150 |
 | 14 | Back dart guide lines from CB | 8 and 14.5 | 80 / 145 |
 | 15 | Knee half-width | 57.1 | 571 |
@@ -132,9 +159,10 @@ curve; the ~1 mm smoothing latitude does not touch the oracle rows.
 
 ## Ambiguities
 
-All chosen readings below are documented defaults, none affects the oracle
-dimensions (rows 1–16 all derive from explicit book numbers); flagged for user
-confirmation:
+All chosen readings below are documented defaults; flagged for user
+confirmation. (The claim that none of them affects the oracle dimensions was
+removed on 2026-08-04 — Ambiguity 5 turned out to be a construction error in
+this spec, not a reading choice, and it moved eight oracle rows.)
 
 1. **Hem-width prose**: p.142 states the standard block's hem as "1⅕/1½ 臀围宽"
    (glyph unclear in scan; OCR garbled). The §4 construction (knee gaps) is
@@ -151,12 +179,20 @@ confirmation:
 4. **Front dart position**: no numeric position in text; Fig 11-6 shows it about
    a third of the way from the side seam toward CF. **Chosen: guide line at 1/3
    of side→CF distance from the side seam** (tip x = 2/3 × side-waist x ≈ 141).
-5. **WR arithmetic**: the book's commentary says WR is typically "13~14 cm"
-   (chord estimate 482.6−350 = 13.26), but its procedure (p.149: measure 35 cm
-   along the drawn waist line, the remainder is WR) yields 14.51 on the traced
-   polyline edge. **Chosen: the procedural measure** — it makes the finished
-   waist equal waist/2 exactly, and all resulting intakes stay within the book's
-   own ranges.
+5. ~~**WR arithmetic**~~ — **DISSOLVED 2026-08-04.** This recorded that the
+   book's "13~14 cm" commentary disagreed with its own procedure, which traced
+   out at 14.51. Both were right; the draft was wrong. The half-wedge missing
+   from step 5 (see the ⚠ there) shortened the waist edge as well as the hem,
+   and correcting it brings the traced measure to **13.25 cm** — the commentary's
+   own figure, and step 4's derived 482.6 for the pair to within 0.06 mm.
+
+   Worth recording as method: this ambiguity was never an ambiguity in the book.
+   It was a symptom of a construction error elsewhere in this spec, and it sat
+   here for a week wearing the costume of a source problem. **A "the book
+   contradicts itself" note is a hypothesis, not a finding** — before recording
+   one, check whether some other part of your own draft would explain both
+   readings at once. Here, one missing half-wedge explained the hem, the knee,
+   the waist edge and the WR simultaneously.
 
 ## Review
 

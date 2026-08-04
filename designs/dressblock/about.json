@@ -1,0 +1,18 @@
+{
+  "id": "dressblock",
+  "code": "lemonci",
+  "design": "纳塔莉·布雷 (Natalie Bray)",
+  "description": "A one-piece dress block (dress sloper) drafted with the classic British Bray method",
+  "name": "Dress Block",
+  "difficulty": 3,
+  "tags": [
+    "women",
+    "dresses"
+  ],
+  "techniques": [
+    "darts"
+  ],
+  "version": "4.10.0",
+  "pkg": "@freesewing/dressblock",
+  "collection": true
+}

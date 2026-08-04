@@ -39,10 +39,27 @@ export function draftBlock({ Point, points, measurements, options }, c) {
   points.hinge = new Point(stripW, seatDepth)
 
   points.topInner = new Point(stripW, 0).rotate(angle, points.hinge)
-  points.sideWaistRaw = new Point(partWidth, 0).rotate(angle, points.hinge)
   points.sideSeat = new Point(partWidth, seatDepth).rotate(angle, points.hinge)
-  points.sideKnee = new Point(partWidth, kneeDepth).rotate(angle, points.hinge)
-  points.sideHem = new Point(partWidth, length).rotate(angle, points.hinge)
+
+  /*
+   * The side seam is not the outer strip's own edge. The book spreads all three
+   * boundaries of the four-strip half pattern at once (p.148), and only then folds that
+   * fan lengthwise, putting the side seam on the crease (p.149 section 5, figure 11-6).
+   * The fan is symmetric about that crease, which therefore bisects the middle
+   * boundary's wedge: each part carries one and a half wedges, its own hinge plus half
+   * of the one the fold runs through. So the outer edge swings a further half angle
+   * about the hip-line point it pivots on. See step 5 in docs/patterns/skirtblock.md.
+   */
+  const fold = angle / 2
+  points.sideWaistRaw = new Point(partWidth, 0)
+    .rotate(angle, points.hinge)
+    .rotate(fold, points.sideSeat)
+  points.sideKnee = new Point(partWidth, kneeDepth)
+    .rotate(angle, points.hinge)
+    .rotate(fold, points.sideSeat)
+  points.sideHem = new Point(partWidth, length)
+    .rotate(angle, points.hinge)
+    .rotate(fold, points.sideSeat)
 
   /*
    * Waist reduction: the book measures waist/2 along the drawn waist edge and takes

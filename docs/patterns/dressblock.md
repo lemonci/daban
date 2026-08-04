@@ -208,6 +208,12 @@ its own side seam, its knee/yoke lines) is drafted here.
    p.158: "尾端稍稍向上弯曲0.5~1cm" — this spec uses the range midpoint, chosen,
    not stated — Ambiguity 1).
 
+   ⚠ So `yHem = 1050` is the **baseline depth at CB/CF**, and the marked hem
+   point at the outer end sits on the curled tail at **1042.5**. An earlier
+   version of this spec gave both as 1050, which cannot both hold — if the
+   tail curls up 7.5mm, the point it carries is 7.5mm higher. Oracle rows 6a/7/8
+   now separate the two.
+
 ### 3. Mark the hem width, apply `hemTighten`
 
 Mark each baseline, from CB/CF, at `hemHalfWidthPerPanel − hemTighten` —
@@ -254,8 +260,9 @@ procedure to those two oracles (marked "derived").
 | 4 | Skirt hem half-width, total (both panels) | 59.31 | 593.1 | = skirtblock row 16 |
 | 5 | Skirt hem half-width, per panel | 29.655 | 296.55 | derived (row 4 / 2, congruent panels) |
 | 6 | Dress hem depth (`yWaist + skirtLength`) | 105.0 | 1050 | derived |
-| 7 | Back hem point (x,y) | (29.655, 105.0) | (296.55, 1050) | derived |
-| 8 | Front hem point (x,y) | (29.655, 105.0) | (296.55, 1050) | derived |
+| 6a | Hem **baseline** depth at CB/CF | 105.0 | 1050 | derived — the perpendicular baseline of step 2.2 |
+| 7 | Back hem point (x,y) | (29.655, 104.25) | (296.55, **1042.5**) | derived |
+| 8 | Front hem point (x,y) | (29.655, 104.25) | (296.55, **1042.5**) | derived |
 | 9 | Back flare (HP→hem), Δx / angle | 5.155 / 6.85° | 51.55 / 6.85° | derived |
 | 10 | Front flare (HP→hem), Δx / angle | 2.155 / 2.87° | 21.55 / 2.87° | derived |
 | 11 | Hem-baseline curl (chosen, Ambiguity 1) | 0.75 | 7.5 | chosen, book range 0.5–1cm |

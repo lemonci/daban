@@ -20,6 +20,7 @@ import { Cornelius as cornelius } from '@freesewing/cornelius'
 import { Crux as crux } from '@freesewing/crux'
 import { Devon as devon } from '@freesewing/devon'
 import { Diana as diana } from '@freesewing/diana'
+import { Dressblock as dressblock } from '@freesewing/dressblock'
 import { Florence as florence } from '@freesewing/florence'
 import { Florent as florent } from '@freesewing/florent'
 import { Gozer as gozer } from '@freesewing/gozer'
@@ -104,6 +105,7 @@ export const designs = {
   crux,
   devon,
   diana,
+  dressblock,
   florence,
   florent,
   gozer,
