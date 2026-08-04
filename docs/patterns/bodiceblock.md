@@ -535,7 +535,7 @@ Front dart 40mm is *consistent with* (not an exact restatement of) "3cm或
     how to act on is not a check, it is an input.
 
 14. **⚠ OPEN — the `shoulderToShoulder` → S mapping over-reads by ~12mm on real
-    models, and the resulting shoulder adjustment fires on 16 of 20 FreeSewing
+    models, and the resulting shoulder adjustment fires on 15 of 20 FreeSewing
     stock sizes.** `S = shoulderToShoulder/2 − backNeckWidth` reproduces the
     book's S=125mm only at `shoulderToShoulder = 390mm`, which is *not* a real
     FreeSewing value: the stock model nearest the book's chest (cisFemaleAdult34,
@@ -561,11 +561,12 @@ Front dart 40mm is *consistent with* (not an exact restatement of) "3cm或
     | cisMale 32 | 842 | 404 | 136.9 | 146.9 (floor) | 10.0 | 26.3 | 421 / 420 |
     | cisMale 50 | 1316 | 542 | 176.3 | 189.4 (natural) | 13.2 | 55.8 | 587 / 586 |
 
-    Only the four largest sizes in each range draft their shoulder naturally;
-    everywhere else `backWidthPct` contributes nothing to the shoulder and the
-    surplus is pinned at the book's bare *minimum* (10mm) rather than its stated
-    ideal (15–20mm). The block has quietly stopped being proportional at the
-    shoulder without saying so.
+    (Table measured *before* the fix below, since it is the evidence for the
+    diagnosis.) Only the largest sizes — cisFemale 42/44/46 and cisMale 48/50 —
+    draft their shoulder naturally; on the other 15 `backWidthPct` contributes
+    nothing to the shoulder and the surplus was pinned at the book's bare
+    *minimum* (10mm) rather than its stated ideal (15–20mm). The block had
+    quietly stopped being proportional at the shoulder without saying so.
 
     **What would settle it** is Ch.1's Table 1-2 — the grading table that gives
     S per size — which is outside the extracted page range (see Ambiguity 4).
@@ -573,12 +574,20 @@ Front dart 40mm is *consistent with* (not an exact restatement of) "3cm或
     not unfaithful in principle; the problem is that our *proxy* for S is on a
     different scale from the book's, and we have no page that pins the true one.
 
-    **Interim position** (not a resolution): keep the adjustment, since removing
-    it makes the back shoulder *shorter* than the closed front shoulder on small
-    sizes — a genuinely broken pattern, which the book's floor exists to
-    prevent — but adjust into the book's stated band rather than onto its floor,
-    and log whenever it fires so the divergence is visible. Revisit when Ch.1 is
-    extracted.
+    **Interim position, implemented** (not a resolution): keep the adjustment,
+    since removing it makes the back shoulder *shorter* than the closed front
+    shoulder on small sizes — a genuinely broken pattern, which the book's floor
+    exists to prevent. But the trigger stays at the book's floor (`< S + 10`)
+    while the *destination* becomes the ideal band's midpoint `S + 17.5`, and
+    firing emits a `store.log.info` naming the drafted length, the target, and
+    the fact that `backWidthPct` is not controlling that draft's shoulder. After
+    the change the surplus is a consistent 17.5mm where it fires and 10.6–16.8mm
+    where it does not — everywhere inside the book's stated band, instead of
+    sitting on its floor. Revisit when Ch.1 is extracted.
+
+    The book's own worked size is unaffected: it drafts 139.28mm against a
+    135mm floor, so the branch never runs there and oracle rows 1–37 are
+    bit-identical across this change.
 
     Note also that the armhole calibration is unaffected and holds across the
     whole range (last column): whatever the shoulder does, §D.0 re-solves the
