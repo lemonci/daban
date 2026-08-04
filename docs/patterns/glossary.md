@@ -61,3 +61,7 @@ Terms encountered while extracting; FreeSewing measurement names in `code`.
 | 袖中线 | sleeve center line | runs through T and the elbow point E |
 | 外袖缝 / 内袖缝 | outer (back) / inner (front) sleeve seam | the sleeve's only two cut side seams |
 | 后袖线 / 前袖线 | back / front cap reference line | internal quarter lines locating B and F, not seams |
+| 连衣裙 | dress | one-piece bodice+skirt garment; design `dressblock` |
+| 连衣裙基本型 / 连衣裙服装的基本型 | dress block | Ch.12; 图12-1 labels the drafted piece 一片式礼服原型 ("one-piece dress/gown prototype") |
+| 长方形法 | rectangle method | Ch.12's simplest (undetailed) way to build a dress block: skirt-length rectangle below the bodice's hip line |
+| 对合 | match / mate (seams, darts) | Ch.11 §7 侧缝对合 (side-seam matching), §8 腰省对合 (waist-dart matching) — the rules for joining independently-drafted bodice and skirt pieces at a waist seam |
