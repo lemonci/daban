@@ -60,9 +60,34 @@ average height, structure lines may shift for extreme heights, p.147), knee line
    **593.1**.
 5. **Split at the side seam** (boundary 2). Standard block: side seam ON the center
    crease (p.149; tailored 西服裙 2 cm forward, dress 礼服裙 1 cm back — not in v1).
-   Front and back outlines are congruent; they differ in darts only. Each part:
-   center edge (CB/CF) straight and vertical, one hinge at 130 from center, outer
-   strip rotated θ.
+   Front and back outlines are congruent; they differ in darts only.
+
+   ⚠ **The split is a fold of the finished 4-strip fan, not a re-draft of each
+   panel as its own 2-strip fan.** An earlier version of this step said "each
+   part: one hinge at 130 from center, outer strip rotated θ", which
+   contradicted step 4 and is what `designs/skirtblock` implemented — leaving
+   each panel half a wedge (12.45 mm at the hem, 8.5 mm at the knee) narrower
+   than step 4's derived widths. The book is explicit on both counts:
+
+   > 要算出在**四个条形**之间的**三个间隙**应添加的尺寸大小…把该值算成以毫米为单位
+   > 的值52mm，再除以3得到17mm(舍去余数)…也就是说，要对剪开的条形在膝围线位置上，
+   > 加**三个**1.7cm的间隙。 (p.148)
+
+   Three gaps between four strips, across the **half-pattern**, pinned
+   cumulatively — "用大头针把第一个条形与…纸样固定在一起，再将第二个条形的下端向外
+   移，与前者距离1.7cm…再移第三个纸条…继续对第四个纸条如此固定" (strip 1 fixed,
+   each successive strip's lower end moved 1.7 cm out). Only then, p.149 §五:
+
+   > 纵向对折纸样(半身纸样)…以折痕为中央线，大部分式样的裙子的侧缝线就在该中央线上。
+
+   Fold the half-pattern lengthwise; the crease is the centre line and, for
+   most skirts, the side seam sits on it. 图11-6 draws it that way — a single
+   fanned piece with 后中心线 at the left, 前中心线 at the right, and the side-seam
+   options marked down the middle.
+
+   So each panel carries **1.5 wedges**: its own internal hinge plus half of
+   boundary 2's, which the fold cuts through. Per-panel widths are therefore
+   step 4's figures halved — knee **285.5**, hem **296.55** — not 277 / 284.4.
 6. **Waist reduction (WR)**: per the book's procedure (p.149), measure `waist/2`
    (350) along the **drawn waist edge**; the remainder is WR. The traced edge per
    part is the polyline from center-waist along the fixed strip's top to where the
