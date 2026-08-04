@@ -60,11 +60,36 @@ where the garment's name is itself a loanword in English (Qipao).
 | Design | Garment | Primary source | Printed pp. | Status | Notes |
 |---|---|---|---|---|---|
 | `skirtblock` | Standard skirt block | 英国经典服装纸样设计基础篇 (Bray) | 140–150 | **merged** | Shipped. Straight variant (p.152) is the `silhouette` option. Spec: `skirtblock.md` |
-| `bodiceblock` | Bodice block | 英国经典服装纸样设计基础篇 (Bray) | 13–35 | **implemented** | ⭐ Underpins nearly everything else. Cross-check against Aldrich's fitted block below — two independent systems for the same garment is a strong verification asset. Spec: `bodiceblock.md` |
-| `sleeveblock` | Straight sleeve block | 英国经典服装纸样设计基础篇 (Bray) | 92–100 | **implemented** | ⭐ Drafted from biceps/shoulderToWrist/shoulderToElbow, not the armhole directly; cap arc is cross-checked against the bodice's total armhole curve (+2–2.5 cm ease) after both blocks are drafted. Fitted/semi-fitted variants (弯袖) documented but not implemented (need elbow circumference, no FreeSewing measurement). Spec: `sleeveblock.md` |
-| — | Dress block | 英国经典服装纸样设计基础篇 (Bray) | 157+ | candidate | Depends on bodice + skirt blocks |
-| — | Supplementary skirt block | 英国经典服装纸样设计基础篇 (Bray) | 151 | candidate | Assess against `skirtblock` — may fold in as an option rather than a design |
-| — | Full-circle skirt block | 英国经典服装纸样设计基础篇 (Bray) | 153–154 | candidate | Radial construction, genuinely distinct from `skirtblock` |
+| `bodiceblock` | Bodice block | 英国经典服装纸样设计基础篇 (Bray) | 13–35 | **merged** | ⭐ Underpins nearly everything else. Armhole is calibrated to `biceps` by the book's own draft→measure→move-UP loop (spec §D.0). Cross-check against Aldrich's fitted block below — two independent systems for the same garment is a strong verification asset. Spec: `bodiceblock.md` |
+| `sleeveblock` | Straight sleeve block | 英国经典服装纸样设计基础篇 (Bray) | 92–100 | **merged** | ⭐ Drafted from biceps/shoulderToWrist/shoulderToElbow, not the armhole directly; cap arc cross-checked against the bodice's calibrated armhole (measured 22.66 mm of sleevecap ease against the book's 20–25 mm). Fitted/semi-fitted variants (弯袖) documented but not implemented (need elbow circumference, no FreeSewing measurement). Spec: `sleeveblock.md` |
+| — | Dress block (连衣裙服装的基本型) | 英国经典服装纸样设计基础篇 (Bray) | 157–162 | candidate | ⭐ **Now unblocked** — Ch.12 joins the bodice and skirt blocks, both shipped. Ch.11 §7/§8 (pp.155–156) give the side-seam and waist-dart matching rules it depends on |
+| — | Full-circle skirt block (全圆型裙原型) | 英国经典服装纸样设计基础篇 (Bray) | 153–154 | candidate | Radial construction, genuinely distinct from `skirtblock`. Ch.16 圆裙纸样 (pp.189–198) is the fuller treatment of the same geometry |
+| — | Supplementary skirt block (附加裙原型) | 英国经典服装纸样设计基础篇 (Bray) | 151 | candidate | Assess against `skirtblock` — may fold in as an option rather than a design |
+
+#### Bray 基础篇 — full chapter map (TOC read 2026-08-04)
+
+Printed = PDF(1-based) − 18 throughout. Ports so far have used Ch.2, Ch.7 and
+Ch.11 §3; this map is so future sessions can pick without re-reading the TOC.
+
+| Ch. | Title | pp. | Portability |
+|---|---|---|---|
+| 1 | 人体测量与原型纸样 | 1 | Reference — **表1-2 主要控制尺寸及比例表 on p.12** grades B/H/W/LW/XB/CH/SH/TA/O点/后领宽/袖窿深/后窿门宽/省道/袖窿 across 10 sizes. Settles several open ambiguities; see `bodiceblock.md` §14 |
+| 2 | 衣片原型 | 13 | ✅ `bodiceblock` |
+| 3 | 衣片原型的使用 | 36 | Manipulation techniques (腋下省 p.41, 中心肩缝 p.47, 增大围度 p.45) — options/variants on `bodiceblock`, not new designs |
+| 4 | 简单纸样设计 | 51 | Symbols + worked style examples |
+| 5 | 育克设计 | 65 | Yoke designs — candidate, derives from `bodiceblock` |
+| 6 | 省道转移 | 78 | Dart manipulation theory — belongs in `pattern-making-principles`, not a design |
+| 7 | 袖子 | 92 | ✅ `sleeveblock` |
+| 8 | 袖子的款式变化及样板设计 | 101 | Sleeve style variants — candidates once `sleeveblock` is settled |
+| 9 | 衣领的基本原理 | 112 | ⭐ Collar fundamentals + 基础领型 p.116 — a genuine new block family |
+| 10 | 翻领、驳领、披肩领 | 124 | Turn-down / lapel / cape collars — derives from Ch.9 |
+| 11 | 裙子 | 140 | ✅ `skirtblock` (§3 p.145); §4 附加 p.151, §5 直裙 p.152, §6 全圆型 p.153, §7/§8 bodice↔skirt matching pp.155–156 |
+| 12 | 连衣裙服装的基本型 | 157 | ⭐ Dress block — now unblocked by Ch.2 + Ch.11 |
+| 13 | 裙子纸样的设计 | 163 | 分片裙/多片裙 — panelled skirts, candidates |
+| 14 | 裙子的宽松度 | 173 | 裙裥/折叠/碎褶 — fullness treatments, options rather than designs |
+| 15 | 喇叭形裙子 | 183 | Flared skirt, 标准法(裁切法) slash-and-spread — candidate |
+| 16 | 圆裙纸样 | 189 | Circle skirt, 画样法 — candidate, same geometry as Ch.11 §6 |
+| 附录 | 简单衣片原型 / 袖子的调整 / 款式变化 | 199 | Simplified block + sleeve adjustments |
 
 ### Foundation blocks — Aldrich system (independent second system)
 
@@ -203,7 +228,7 @@ Every source in `clothing_books`, grouped by what it actually is.
 
 | File | Pages | Offset | Status | Basis | Notes |
 |---|---|---|---|---|---|
-| 英国经典服装纸样设计基础篇.pdf | 266 | printed = pdf − 18 | in progress | sampled | **Natalie Bray**, 国际服装丛书, 中国纺织出版社. Source of the shipped `skirtblock`. Bodice block pp.13–35, sleeve pp.92–100 are the next ports |
+| 英国经典服装纸样设计基础篇.pdf | 266 | printed = pdf − 18 | in progress | **full TOC read** | **Natalie Bray**, 国际服装丛书, 中国纺织出版社. All three primary blocks now shipped (`skirtblock`, `bodiceblock`, `sleeveblock`). Full chapter map below |
 | 英国经典服装纸样设计提高篇.pdf | 309 | printed = pdf − 9 | candidate | sampled | Bray **advanced** volume (国际服装丛书③, 译 刘驰/袁燕, 西北纺织工学院). Builds on the basics volume: panelled/princess block, kimono & raglan sleeves, drop shoulder, drape, underwear, tailoring, childrenswear block |
 | 英国经典服装板型_11196724.pdf | 190 | printed = pdf **+ 1** | candidate | sampled | ⭐ **Winifred Aldrich, *Metric Pattern Cutting* 3rd ed.**, 国际服装丛书⑯, 译 刘莉, 中国纺织出版社 2003, ISBN 7-5064-2338-3 (licensed from Blackwell). The generic Chinese title hides a major English-language classic. Gives a *second* complete British block system alongside Bray — incl. fitted/loose/jacket/coat/shirt/sleeveless/dress bodice blocks and stretch-fabric blocks |
 | 世界2011.现代工业化成衣制板-高国利.pdf | 154 | printed = pdf − 1 | candidate | sampled | 现代成衣制板, 高国利、吴继辉, 辽宁美术出版社. Compact modern RTW course: block → sleeves → collars → torso → skirt/trouser blocks → applications → knits → industrial patterns. Filename prefix "世界2011" is a catalogue tag, not the title |
