@@ -68,8 +68,8 @@ All lengths mm unless noted. Point labels follow the book's own O/A/a/B/b
 
 1. **Effective waist arc.** `waistEff = waist + hipSafetyMargin` — worked:
    700 + 45 = **745**.
-2. **Quarter arc Aa.** The drafted piece is *always* a 90° sector — the
-   base pattern (基础纸样). What changes with `fullness` is how many times it is
+2. **Quarter arc Aa.** In the **book's** terms the base pattern (基础纸样) is
+   always a 90° sector, and what changes with `fullness` is how many times it is
    used, and therefore what fraction of the waist its arc must carry (p.192:
    "如果其长度等于腰围全长，那么纸样就用了一次；如果是腰围的一半，那么纸样就用了两次；
    如果是腰围的四分之一，那么纸样就用了四次，成为一个全圆"; Fig 16-5 p.194 confirms
@@ -89,6 +89,33 @@ All lengths mm unless noted. Point labels follow the book's own O/A/a/B/b
    is exactly the relationship Fig 16-3 prints as "11, 22+, 44~45" — the
    figure's three labelled cases are these three `fullness` values at waist 70,
    not three different formulas.
+
+   ⚠ **What this design actually drafts is the half-panel, not the book's 90°
+   base pattern**, and an earlier version of this step asserted "always a 90°
+   sector" while steps 7/8 described mirroring one piece into two on-the-fold
+   panels. Those cannot both describe the same drafted object at any `fullness`
+   but `full`. The two models produce the **identical garment**:
+
+   | | book | this design |
+   |---|---|---|
+   | drafted piece | 90° sector, used `n` times | `22.5n°` sector, mirrored |
+   | panels | 2 | 2 |
+   | side seams | 2 | 2 |
+   | total sweep | `90n°` | `4 × 22.5n° = 90n°` |
+   | total waist arc | `n × Aa = waistEff` | `waistEff` |
+
+   At the default `full` they coincide exactly (22.5×4 = 90°), which is where
+   the book's entire worked example lives. Away from it the only difference is
+   how the piece is *presented* — cut on the fold from a 45° piece rather than
+   flat from a 90° one for `half` — not what gets sewn. Drafting the half-panel
+   keeps one cutting instruction across all four values instead of switching
+   between on-the-fold and flat, and needs no dart rule for seam counts the book
+   never states.
+
+   Verified in the implementation: the drafted waist arc measures 745.115 /
+   745.029 / 745.012 / 745.010 mm against `waistEff` = 745 for
+   `full`/`threeQuarter`/`half`/`quarter` respectively, the residual being the
+   Bézier arc approximation.
 3. **Waist radius r (= OA = Oa).** Aa is by definition the arc length of a 90°
    sector of radius r, so `Aa = (π/2) × r` exactly, giving **`r = (2/π) × Aa`**.
    Worked: (2/3.14159265)×186.25 ≈ **118.57**. This is the exact circle
