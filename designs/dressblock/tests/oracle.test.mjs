@@ -11,21 +11,19 @@ import { Dressblock } from '../src/index.mjs'
  * arithmetic over the bodice block's and the skirt block's already-verified oracles, so
  * this file is regression protection, not verification against the book.
  *
- * ⚠⚠ Seven of the fourteen rows do not come out at the number the spec predicted, and
- * they all trace back to one thing: what "the skirt block's hem width" is. The spec's
- * rows 4 and 5 take it from skirtblock.md's *step 4*, which measures the half pattern as
- * one spread fan -- 520 + 3 x 24.37 = 593.1mm, halved to 296.55 per panel. But
- * skirtblock.md's *step 5*, which is what `@freesewing/skirtblock` actually drafts, builds
- * each panel as two strips with one spread between them, which gives 284.4mm per panel
- * and 568.8mm for the pair. The two readings differ by half a hem spread (12.2mm per
- * panel) because step 5 gives neither panel a share of the spread at the side seam.
+ * The hem width is not computed here. p.158 does not compute one either: it sends you to
+ * the standard skirt block and has you measure, separately, from its back centre and from
+ * its front centre to its side seam. So `skirtHemLength()` drafts the skirt block and
+ * measures the hem edge it draws, once per panel, and rows 4/5/7/8/9/10/12 below are
+ * whatever that gives. They land on the spec's published figures because the skirt block
+ * draws its side seam on the fold of its four-strip fan, so each panel carries one and a
+ * half spread wedges (skirtblock.md step 5). If that ever changes, these rows move with
+ * it -- which is the point: the dress follows the skirt block rather than restating it.
  *
- * That disagreement is inside the skirt block's own spec, and dressblock.md inherited it
- * by citing "= skirtblock row 16". This design follows the drafted skirt block, because
- * p.158 does not compute a hem: it tells you to measure one off the standard skirt block.
- * Taking the number from anywhere else would give a dress whose hem does not match the
- * skirt block it was supposedly read from -- here, 4.9cm wider all round. Every affected
- * row below carries the spec's prediction next to what the construction gives.
+ * Row 7/8's y is the one place this file departs from the spec's table. The spec puts the
+ * hem point at y=1050 while also curling the hem baseline's tail up 7.5mm (step 2.3, row
+ * 11); both cannot hold. 1050 is read here as the baseline depth (row 6) and the point
+ * sits 7.5mm above it, at 1042.5.
  *
  * All values mm. Tolerance +/-2mm unless a row states otherwise.
  */
@@ -91,37 +89,37 @@ describe('Dressblock numeric oracle (spec worked example)', () => {
       near(back.centerHem.y - measurements.hpsToWaistBack, 650)
       near(front.centerHem.y - measurements.hpsToWaistBack, 650)
     })
-    it('row 4: the skirt block gives 568.8mm of hem for the pair (spec predicted 593.1)', () => {
-      near(hemLine(back).length() + hemLine(front).length(), 568.81)
+    it('row 4: the skirt block gives 593.1mm of hem for the pair', () => {
+      near(hemLine(back).length() + hemLine(front).length(), 593.1)
     })
-    it('row 5: which is 284.4mm per panel (spec predicted 296.55)', () => {
-      near(hemLine(back).length(), 284.4)
-      near(hemLine(front).length(), 284.4)
+    it('row 5: which is 296.55mm per panel', () => {
+      near(hemLine(back).length(), 296.55)
+      near(hemLine(front).length(), 296.55)
     })
     it('row 6: the hem baseline sits 1050mm below the top line', () => {
       near(back.centerHem.y, 1050)
       near(front.centerHem.y, 1050)
     })
-    it('row 7: the back hem point is at (284.29, 1042.5) (spec predicted (296.55, 1050))', () => {
-      nearPoint(back.sideHem, 284.29, 1042.5)
+    it('row 7: the back hem point is at (296.55, 1042.5), 7.5mm above the baseline', () => {
+      nearPoint(back.sideHem, 296.55, 1042.5)
     })
-    it('row 8: the front hem point is at (284.29, 1042.5) (spec predicted (296.55, 1050))', () => {
-      nearPoint(front.sideHem, 284.29, 1042.5)
+    it('row 8: the front hem point is at (296.55, 1042.5), 7.5mm above the baseline', () => {
+      nearPoint(front.sideHem, 296.55, 1042.5)
     })
-    it('row 9: the back flares 39.3mm over 5.31 degrees (spec predicted 51.55mm / 6.85)', () => {
-      near(flare(back).dx, 39.29)
-      expect(Math.abs(flare(back).deg - 5.31)).to.be.at.most(DEG_TOL)
+    it('row 9: the back flares 51.55mm over 6.85 degrees', () => {
+      near(flare(back).dx, 51.55)
+      expect(Math.abs(flare(back).deg - 6.85)).to.be.at.most(DEG_TOL)
     })
-    it('row 10: the front flares 9.3mm over 1.26 degrees (spec predicted 21.55mm / 2.87)', () => {
-      near(flare(front).dx, 9.3)
-      expect(Math.abs(flare(front).deg - 1.26)).to.be.at.most(DEG_TOL)
+    it('row 10: the front flares 21.55mm over 2.87 degrees', () => {
+      near(flare(front).dx, 21.55)
+      expect(Math.abs(flare(front).deg - 2.87)).to.be.at.most(DEG_TOL)
     })
     it('row 11: the hem baseline curls up 7.5mm at its outer end', () => {
       near(back.centerHem.y - back.sideHem.y, 7.5)
       near(front.centerHem.y - front.sideHem.y, 7.5)
     })
-    it('row 12: the finished hem measures 1137.6mm round (spec predicted 1186.2)', () => {
-      near(2 * (hemLine(back).length() + hemLine(front).length()), 1137.61)
+    it('row 12: the finished hem measures 1186.2mm round', () => {
+      near(2 * (hemLine(back).length() + hemLine(front).length()), 1186.2)
     })
     it('row 13: the front is 1050mm from NP to hem and the back 1040mm', () => {
       near(front.centerHem.y - front.np.y, 1050)
@@ -165,10 +163,9 @@ describe('Dressblock numeric oracle (spec worked example)', () => {
     }
 
     it('the back and front side seams stay within easing distance of each other', () => {
-      // 2.06mm apart here; the spec predicted 2.6mm off its own wider hem
       const gap = Math.abs(sideSeam(back).length() - sideSeam(front).length())
       expect(gap).to.be.at.most(6)
-      near(gap, 2.06)
+      near(gap, 2.6) // the spec's own figure
     })
 
     it('the finished hem is wider than the finished hip line', () => {

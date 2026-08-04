@@ -123,9 +123,11 @@ export function extend(sh, c) {
 
   /*
    * Annotations. The bodice block's own grainline and fold marker stopped at the hip
-   * line, so they are redrawn here for the finished length, and its cutting instructions
-   * arrive here already copied in by the cutlist plugin -- hence `setCut`, not `addCut`.
+   * line, so they are redrawn here for the finished length.
    */
+  // `setCut`, never `addCut`: the cutlist plugin's prePartDraft hook has already copied the
+  // inherited part's cutlist onto this one by shallow spread, so `materials` is the very
+  // same object -- adding to it appends a second entry AND corrupts the parent's.
   if (options.waistFit) store.cutlist.setCut({ cut: 2, from: 'fabric' })
   else {
     store.cutlist.setCut({ cut: 1, from: 'fabric', onFold: true })
