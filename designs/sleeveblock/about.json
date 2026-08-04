@@ -1,0 +1,18 @@
+{
+  "id": "sleeveblock",
+  "code": "lemonci",
+  "design": "纳塔莉·布雷 (Natalie Bray)",
+  "description": "A straight sleeve block (sleeve sloper) drafted with the classic British Bray method",
+  "name": "Straight Sleeve Block",
+  "difficulty": 2,
+  "tags": [
+    "women",
+    "tops"
+  ],
+  "techniques": [
+    "set-sleeve"
+  ],
+  "version": "4.10.0",
+  "pkg": "@freesewing/sleeveblock",
+  "collection": true
+}

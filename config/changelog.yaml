@@ -4,6 +4,8 @@ Unreleased:
       - Initial release of Bodice Block, a bodice block from classic British pattern cutting
     skirtblock:
       - Initial release of Standard Skirt Block, a skirt block from classic British pattern cutting
+    sleeveblock:
+      - Initial release of Straight Sleeve Block, a sleeve block from classic British pattern cutting
 
   Fixed:
     carlton:
