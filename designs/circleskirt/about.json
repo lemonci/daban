@@ -1,0 +1,18 @@
+{
+  "id": "circleskirt",
+  "code": "lemonci",
+  "design": "纳塔莉·布雷 (Natalie Bray)",
+  "description": "A circle skirt block drafted with the compass method from classic British pattern cutting",
+  "name": "Circle Skirt",
+  "difficulty": 1,
+  "tags": [
+    "women",
+    "skirts"
+  ],
+  "techniques": [
+    "darts"
+  ],
+  "version": "4.10.0",
+  "pkg": "@freesewing/circleskirt",
+  "collection": true
+}

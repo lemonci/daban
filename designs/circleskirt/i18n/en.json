@@ -1,0 +1,39 @@
+{
+  "t": "Circle Skirt",
+  "d": "A circle skirt block drafted with the compass method from classic British pattern cutting",
+  "p": {
+    "back": "Back",
+    "front": "Front"
+  },
+  "s": {},
+  "o": {
+    "lengthBonus": {
+      "t": "Length bonus",
+      "d": "How much longer than the knee measurement the skirt should be, measured on the fold edge. The book's own table runs from a 70 cm short skirt to a 105 cm evening skirt"
+    },
+    "fullness": {
+      "t": "Fullness",
+      "d": "How much of a circle the skirt sweeps. The same quarter-circle base pattern serves them all, used one to four times"
+    },
+    "fullness.full": {
+      "t": "Full circle",
+      "d": "The quarter-circle base pattern used four times, for the widest hem the book gives"
+    },
+    "fullness.threeQuarter": {
+      "t": "Three-quarter circle",
+      "d": "The quarter-circle base pattern used three times"
+    },
+    "fullness.half": {
+      "t": "Half circle",
+      "d": "The quarter-circle base pattern used twice, for about 60% of the full circle's hem"
+    },
+    "fullness.quarter": {
+      "t": "Quarter circle",
+      "d": "The quarter-circle base pattern used once, the least full of the family"
+    },
+    "hipSafetyMargin": {
+      "t": "Hip safety margin",
+      "d": "How much to add to the waist before drafting, so the hip does not come out tight on a block that is sized from the waist alone. It is taken back out as a waist dart at each side seam. The book adds 4 to 5 cm"
+    }
+  }
+}
